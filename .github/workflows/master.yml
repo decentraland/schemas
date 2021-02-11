@@ -26,6 +26,9 @@ jobs:
         run: npm run test
       - name: npm run check-api
         run: npm run check-api
+      - name: print diff if failed
+        if: ${{ failure() }}
+        run: git diff
 
       - name: Publish
         uses: menduz/oddish-action@master
