@@ -25,4 +25,4 @@ jobs:
         run: npm run check-api
       - name: print diff if failed
         if: ${{ failure() }}
-        run: git diff
+        run: cp temp/schemas.api.md report/schemas.api.md && git diff
