@@ -57,8 +57,7 @@
    * local files for library1.
    */
   "bundledPackages": [
-    "fp-future",
-    "bignumber.js"
+    // "ajv"
   ],
   /**
    * Determines how the TypeScript compiler engine will be invoked by API Extractor.

@@ -1,20 +1,18 @@
-import { JSONSchemaType } from "ajv"
-import Ajv, { ValidateFunction } from "ajv"
-
-export { ValidateFunction }
+import Ajv, { JSONSchemaType, ValidateFunction } from "ajv"
+export { ValidateFunction, Ajv }
 
 /**
- * Alias of AJV's JSONSchemaType to prevent imports to AJV directly.
+ * This type alias exist only to avoid accidental refactors involving names of ajv
  * @public
  */
-export type Schema<T> = JSONSchemaType<T>
+export type JSONSchema<T> = JSONSchemaType<T>
 
 /**
  * Common structure to use types as values in TS.
  * @public
  */
 export type AbstractTypedSchema<T> = {
-  schema: Schema<T>
+  schema: JSONSchema<T>
   validate: ValidateFunction<T>
 }
 
@@ -22,7 +20,7 @@ export type AbstractTypedSchema<T> = {
  * Generates a validator for a specific JSON schema of a type T
  * @public
  */
-export function generateValidator<T>(schema: Schema<T>): ValidateFunction<T> {
+export function generateValidator<T>(schema: JSONSchema<T>): ValidateFunction<T> {
   const ajv = new Ajv()
   return ajv.compile<T>(schema)
 }

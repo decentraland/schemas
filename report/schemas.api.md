@@ -4,17 +4,23 @@
 
 ```ts
 
+import Ajv from 'ajv';
 import { JSONSchemaType } from 'ajv';
 import { ValidateFunction } from 'ajv';
 
 // @public
 export type AbstractTypedSchema<T> = {
-    schema: Schema<T>;
+    schema: JSONSchema<T>;
     validate: ValidateFunction<T>;
 };
 
+export { Ajv }
+
 // @public
-export function generateValidator<T>(schema: Schema<T>): ValidateFunction<T>;
+export function generateValidator<T>(schema: JSONSchema<T>): ValidateFunction<T>;
+
+// @public
+export type JSONSchema<T> = JSONSchemaType<T>;
 
 // @alpha
 export type MetaTransaction = {
@@ -25,13 +31,10 @@ export type MetaTransaction = {
 // @alpha (undocumented)
 export namespace MetaTransaction {
     const // (undocumented)
-    schema: Schema<MetaTransaction>;
+    schema: JSONSchema<MetaTransaction>;
     const // (undocumented)
     validate: ValidateFunction<MetaTransaction>;
 }
-
-// @public
-export type Schema<T> = JSONSchemaType<T>;
 
 export { ValidateFunction }
 
