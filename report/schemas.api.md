@@ -7,21 +7,22 @@
 import { JSONSchemaType } from 'ajv';
 import { ValidateFunction } from 'ajv';
 
-// Warning: (ae-missing-release-tag) "generateValidator" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @public
+export type AbstractTypedSchema<T> = {
+    schema: Schema<T>;
+    validate: ValidateFunction<T>;
+};
+
+// @public
 export function generateValidator<T>(schema: Schema<T>): ValidateFunction<T>;
 
-// Warning: (ae-missing-release-tag) "MetaTransaction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "MetaTransaction" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @alpha
 export type MetaTransaction = {
     from: string;
     params: [string, string];
 };
 
-// @public (undocumented)
+// @alpha (undocumented)
 export namespace MetaTransaction {
     const // (undocumented)
     schema: Schema<MetaTransaction>;
@@ -29,12 +30,13 @@ export namespace MetaTransaction {
     validate: ValidateFunction<MetaTransaction>;
 }
 
-// Warning: (ae-missing-release-tag) "Schema" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @public
 export type Schema<T> = JSONSchemaType<T>;
 
 export { ValidateFunction }
+
+// @public
+export function validateType<T>(theType: Pick<AbstractTypedSchema<T>, "validate">, value: T): boolean;
 
 
 // (No @packageDocumentation comment for this package)
