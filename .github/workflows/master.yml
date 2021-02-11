@@ -17,12 +17,16 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - name: install
+
+      - name: npm ci
         run:  npm ci
-      - name: build
+      - name: npm run build
         run:  npm run build
-      - name: test
+      - name: npm run test
         run: npm run test
+      - name: npm run check-api
+        run: npm run check-api
+
       - name: Publish
         uses: menduz/oddish-action@master
         env:

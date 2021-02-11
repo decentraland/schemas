@@ -1,16 +1,18 @@
 import expect from "expect"
 import { MetaTransaction } from "../src"
+import { testTypeSignature } from "./test-utils"
 
 describe("MetaTransaction tests", () => {
-  it("static tests must pass", () => {
-    const metaTx: MetaTransaction = {
-      from: "0x1",
-      params: ["0x2", "0x3"],
-    }
+  const metaTx: MetaTransaction = {
+    from: "0x1",
+    params: ["0x2", "0x3"],
+  }
 
+  testTypeSignature(MetaTransaction, metaTx)
+
+  it("static tests must pass", () => {
     expect(MetaTransaction.validate(metaTx)).toEqual(true)
-  })
-  it("schema must be object", () => {
-    expect(typeof MetaTransaction.schema).toEqual("object")
+    expect(MetaTransaction.validate(null)).toEqual(false)
+    expect(MetaTransaction.validate({})).toEqual(false)
   })
 })

@@ -1,3 +1,5 @@
+// export the utils
 export * from './validation'
 
-export { MetaTransaction } from './meta-transactions'
+// export all the types
+export { MetaTransaction } from './dapps/meta-transactions'

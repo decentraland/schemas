@@ -1,1 +1,7 @@
-report/* @menduz
+# https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+
+src/report/* @decentraland/core-developers
+
+# team-specific types and schemas
+
+src/dapps/* @decentraland/dapps

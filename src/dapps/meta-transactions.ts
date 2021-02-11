@@ -1,10 +1,17 @@
-import { generateValidator, Schema } from "./validation"
+import { generateValidator, Schema, ValidateFunction } from "../validation"
 
+/**
+ * Meta-transaction to be relayed
+ * @alpha
+ */
 export type MetaTransaction = {
   from: string
   params: [string, string] // manaAddress, txData
 }
 
+/**
+ * @alpha
+ */
 export namespace MetaTransaction {
   export const schema: Schema<MetaTransaction> = {
     type: "object",
@@ -21,5 +28,5 @@ export namespace MetaTransaction {
     required: ["from", "params"],
   }
 
-  export const validate = generateValidator<MetaTransaction>(schema)
+  export const validate: ValidateFunction<MetaTransaction> = generateValidator(schema)
 }

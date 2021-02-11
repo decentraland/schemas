@@ -5,7 +5,9 @@
   "license": "Apache-2.0",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "mocha"
+    "test": "mocha",
+    "check-api": "api-extractor run --typescript-compiler-folder ./node_modules/typescript",
+    "refresh-api": "api-extractor run --local --verbose --diagnostics --typescript-compiler-folder ./node_modules/typescript"
   },
   "devDependencies": {
     "@types/mocha": "^8.2.0",
@@ -16,6 +18,7 @@
     "typescript": "^4.1.5"
   },
   "dependencies": {
+    "@microsoft/api-extractor": "^7.13.1",
     "ajv": "^7.1.0"
   },
   "files": [
