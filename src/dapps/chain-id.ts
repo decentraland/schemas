@@ -1,10 +1,10 @@
-import { generateValidator, JSONSchema, ValidateFunction } from "../validation";
+import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * Different supported chain ids
  * @alpha
  */
-export declare enum ChainId {
+export enum ChainId {
   ETHEREUM_MAINNET = 1,
   ETHEREUM_ROPSTEN = 3,
   ETHEREUM_RINKEBY = 4,
@@ -19,9 +19,9 @@ export declare enum ChainId {
  */
 export namespace ChainId {
   export const schema: JSONSchema<ChainId> = {
-    type: "number",
+    type: 'number',
     enum: Object.values(ChainId),
-  };
+  }
 
-  export const validate: ValidateFunction<ChainId> = generateValidator(schema);
+  export const validate: ValidateFunction<ChainId> = generateValidator(schema)
 }

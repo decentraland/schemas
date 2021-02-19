@@ -1,12 +1,12 @@
-import { generateValidator, JSONSchema, ValidateFunction } from "../validation";
+import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * Different supported networks
  * @alpha
  */
-export declare enum Network {
-  ETHEREUM = "ETHEREUM",
-  MATIC = "MATIC",
+export enum Network {
+  ETHEREUM = 'ETHEREUM',
+  MATIC = 'MATIC',
 }
 
 /**
@@ -14,9 +14,9 @@ export declare enum Network {
  */
 export namespace Network {
   export const schema: JSONSchema<Network> = {
-    type: "string",
+    type: 'string',
     enum: Object.values(Network),
-  };
+  }
 
-  export const validate: ValidateFunction<Network> = generateValidator(schema);
+  export const validate: ValidateFunction<Network> = generateValidator(schema)
 }

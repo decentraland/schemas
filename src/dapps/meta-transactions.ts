@@ -1,4 +1,4 @@
-import { generateValidator, JSONSchema, ValidateFunction } from "../validation"
+import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * Meta-transaction to be relayed
@@ -14,19 +14,21 @@ export type MetaTransaction = {
  */
 export namespace MetaTransaction {
   export const schema: JSONSchema<MetaTransaction> = {
-    type: "object",
+    type: 'object',
     properties: {
-      from: { type: "string" },
+      from: { type: 'string' },
       params: {
-        type: "array",
-        items: [{ type: "string" }, { type: "string" }],
+        type: 'array',
+        items: [{ type: 'string' }, { type: 'string' }],
         additionalItems: false,
         minItems: 2,
       },
     },
     additionalProperties: false,
-    required: ["from", "params"],
+    required: ['from', 'params'],
   }
 
-  export const validate: ValidateFunction<MetaTransaction> = generateValidator(schema)
+  export const validate: ValidateFunction<MetaTransaction> = generateValidator(
+    schema
+  )
 }
