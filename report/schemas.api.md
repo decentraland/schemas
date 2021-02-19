@@ -16,6 +16,32 @@ export type AbstractTypedSchema<T> = {
 
 export { Ajv }
 
+// @alpha
+export enum ChainId {
+    // (undocumented)
+    ETHEREUM_GOERLI = 5,
+    // (undocumented)
+    ETHEREUM_KOVAN = 42,
+    // (undocumented)
+    ETHEREUM_MAINNET = 1,
+    // (undocumented)
+    ETHEREUM_RINKEBY = 4,
+    // (undocumented)
+    ETHEREUM_ROPSTEN = 3,
+    // (undocumented)
+    MATIC_MAINNET = 89,
+    // (undocumented)
+    MATIC_MUMBAI = 13881
+}
+
+// @alpha (undocumented)
+export namespace ChainId {
+    const // (undocumented)
+    schema: JSONSchema<ChainId>;
+    const // (undocumented)
+    validate: ValidateFunction<ChainId>;
+}
+
 // @public
 export function generateValidator<T>(schema: JSONSchema<T>): ValidateFunction<T>;
 
@@ -34,6 +60,22 @@ export namespace MetaTransaction {
     schema: JSONSchema<MetaTransaction>;
     const // (undocumented)
     validate: ValidateFunction<MetaTransaction>;
+}
+
+// @alpha
+export enum Network {
+    // (undocumented)
+    ETHEREUM = "ETHEREUM",
+    // (undocumented)
+    MATIC = "MATIC"
+}
+
+// @alpha (undocumented)
+export namespace Network {
+    const // (undocumented)
+    schema: JSONSchema<Network>;
+    const // (undocumented)
+    validate: ValidateFunction<Network>;
 }
 
 export { ValidateFunction }
