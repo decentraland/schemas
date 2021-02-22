@@ -1,6 +1,6 @@
 # common-schemas
 
-```
+```bash
 npm i @dcl/schemas
 ```
 
@@ -18,8 +18,8 @@ We will export types that also act as values. We do that using the "namespaces" 
 ```ts
 // Declare type
 export type MyType = {
-  value: number
-}
+  value: number;
+};
 
 // Declare namespace for the type
 export namespace MyType {
@@ -30,9 +30,9 @@ export namespace MyType {
     },
     additionalProperties: false,
     required: ["value"],
-  }
+  };
 
-  export const validate = generateValidator<MyType>(schema)
+  export const validate = generateValidator<MyType>(schema);
 }
 ```
 
