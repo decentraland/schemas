@@ -29,9 +29,9 @@ export enum ChainId {
     // (undocumented)
     ETHEREUM_ROPSTEN = 3,
     // (undocumented)
-    MATIC_MAINNET = 89,
+    MATIC_MAINNET = 137,
     // (undocumented)
-    MATIC_MUMBAI = 13881
+    MATIC_MUMBAI = 80001
 }
 
 // @alpha (undocumented)
