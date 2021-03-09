@@ -1,7 +1,7 @@
 import { ChainId } from './chain-id'
 
 /**
- * Different supported chain ids
+ * Different supported chain names
  * @alpha
  */
 export const ChainNames = {
