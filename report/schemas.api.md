@@ -42,8 +42,40 @@ export namespace ChainId {
     validate: ValidateFunction<ChainId>;
 }
 
+// @alpha
+export enum ChainName {
+    // (undocumented)
+    ETHEREUM_GOERLI = "GOERLI",
+    // (undocumented)
+    ETHEREUM_KOVAN = "KOVAN",
+    // (undocumented)
+    ETHEREUM_MAINNET = "MAINNET",
+    // (undocumented)
+    ETHEREUM_RINKEBY = "RINKEBY",
+    // (undocumented)
+    ETHEREUM_ROPSTEN = "ROPSTEN",
+    // (undocumented)
+    MATIC_MAINNET = "MATIC",
+    // (undocumented)
+    MATIC_MUMBAI = "MUMBAI"
+}
+
+// @alpha (undocumented)
+export namespace ChainName {
+    const // (undocumented)
+    schema: JSONSchema<ChainName>;
+    const // (undocumented)
+    validate: ValidateFunction<ChainName>;
+}
+
 // @public
 export function generateValidator<T>(schema: JSONSchema<T>): ValidateFunction<T>;
+
+// @alpha
+export function getChainId(chainId: ChainName): ChainId | null;
+
+// @alpha
+export function getChainName(chainId: ChainId): ChainName | null;
 
 // @public
 export type JSONSchema<T> = JSONSchemaType<T>;

@@ -1,5 +1,7 @@
 import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 
+import { ChainName } from './chain-name'
+
 /**
  * Different supported chain ids
  * @alpha
@@ -12,6 +14,31 @@ export enum ChainId {
   ETHEREUM_KOVAN = 42,
   MATIC_MAINNET = 137,
   MATIC_MUMBAI = 80001,
+}
+
+/**
+ * Get the chain name by chain id
+ * @alpha
+ */
+export function getChainName(chainId: ChainId): ChainName | null {
+  switch (chainId) {
+    case ChainId.ETHEREUM_MAINNET:
+      return ChainName.ETHEREUM_MAINNET
+    case ChainId.ETHEREUM_ROPSTEN:
+      return ChainName.ETHEREUM_ROPSTEN
+    case ChainId.ETHEREUM_RINKEBY:
+      return ChainName.ETHEREUM_RINKEBY
+    case ChainId.ETHEREUM_GOERLI:
+      return ChainName.ETHEREUM_GOERLI
+    case ChainId.ETHEREUM_KOVAN:
+      return ChainName.ETHEREUM_KOVAN
+    case ChainId.MATIC_MAINNET:
+      return ChainName.MATIC_MAINNET
+    case ChainId.MATIC_MUMBAI:
+      return ChainName.MATIC_MUMBAI
+    default:
+      return null
+  }
 }
 
 /**

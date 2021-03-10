@@ -1,5 +1,5 @@
 import expect from 'expect'
-import { ChainId } from '../src'
+import { ChainId, ChainName, getChainName } from '../src'
 import { testTypeSignature } from './test-utils'
 
 describe('ChainId tests', () => {
@@ -11,5 +11,13 @@ describe('ChainId tests', () => {
     expect(ChainId.validate(chainId)).toEqual(true)
     expect(ChainId.validate(null)).toEqual(false)
     expect(ChainId.validate({})).toEqual(false)
+  })
+
+  it('Should get a valid chain name', () => {
+    expect(getChainName(ChainId.ETHEREUM_MAINNET)).toEqual(ChainName.ETHEREUM_MAINNET)
+  })
+
+  it('Should get null if the chain id is not valid', () => {
+    expect(getChainName(-1 as ChainId)).toEqual(null)
   })
 })
