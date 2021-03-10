@@ -72,7 +72,7 @@ export namespace ChainName {
 export function generateValidator<T>(schema: JSONSchema<T>): ValidateFunction<T>;
 
 // @alpha
-export function getChainId(chainId: ChainName): ChainId | null;
+export function getChainId(chainName: ChainName): ChainId | null;
 
 // @alpha
 export function getChainName(chainId: ChainId): ChainName | null;

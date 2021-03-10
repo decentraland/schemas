@@ -19,8 +19,8 @@ export enum ChainName {
  * Get chain id by chain name
  * @alpha
  */
-export function getChainId(chainId: ChainName): ChainId | null {
-  switch (chainId) {
+export function getChainId(chainName: ChainName): ChainId | null {
+  switch (chainName) {
     case ChainName.ETHEREUM_MAINNET:
       return ChainId.ETHEREUM_MAINNET
     case ChainName.ETHEREUM_ROPSTEN:
