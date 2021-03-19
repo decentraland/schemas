@@ -1,5 +1,16 @@
-import Ajv, { JSONSchemaType, ValidateFunction } from "ajv"
-export { ValidateFunction, Ajv }
+import Ajv, { ErrorObject, JSONSchemaType } from "ajv"
+export { Ajv }
+
+/**
+ * This type is a subset of AJV's ValidateFunction, it exists to make
+ * .d.ts bundles smaller and to not expose all of AJV context to the
+ * world.
+ * @public
+ */
+export interface ValidateFunction<T = unknown> {
+  (this: any, data: any, dataCxt?: any): data is T
+  errors?: null | ErrorObject[]
+}
 
 /**
  * This type alias exist only to avoid accidental refactors involving names of ajv
