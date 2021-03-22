@@ -5,8 +5,8 @@
 ```ts
 
 import Ajv from 'ajv';
+import { ErrorObject } from 'ajv';
 import { JSONSchemaType } from 'ajv';
-import { ValidateFunction } from 'ajv';
 
 // @public
 export type AbstractTypedSchema<T> = {
@@ -110,7 +110,13 @@ export namespace Network {
     validate: ValidateFunction<Network>;
 }
 
-export { ValidateFunction }
+// @public
+export interface ValidateFunction<T = unknown> {
+    // (undocumented)
+    (this: any, data: any, dataCxt?: any): data is T;
+    // (undocumented)
+    errors?: null | ErrorObject[];
+}
 
 // @public
 export function validateType<T>(theType: Pick<AbstractTypedSchema<T>, "validate">, value: T): boolean;
