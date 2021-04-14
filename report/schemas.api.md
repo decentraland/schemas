@@ -77,6 +77,12 @@ export function getChainId(chainName: ChainName): ChainId | null;
 // @alpha
 export function getChainName(chainId: ChainId): ChainName | null;
 
+// @alpha
+export function getWorld(): World;
+
+// @alpha
+export function isInsideWorldLimits(x: number, y: number): boolean;
+
 // @public
 export type JSONSchema<T> = JSONSchemaType<T>;
 
@@ -120,6 +126,27 @@ export interface ValidateFunction<T = unknown> {
 
 // @public
 export function validateType<T>(theType: Pick<AbstractTypedSchema<T>, "validate">, value: T): boolean;
+
+// @alpha
+export type ValidWorldRange = {
+    xMin: number;
+    yMin: number;
+    xMax: number;
+    yMax: number;
+};
+
+// @alpha
+export type World = {
+    validWorldRanges: Array<ValidWorldRange>;
+};
+
+// @alpha (undocumented)
+export namespace World {
+    const // (undocumented)
+    schema: JSONSchema<World>;
+    const // (undocumented)
+    validate: ValidateFunction<World>;
+}
 
 
 // (No @packageDocumentation comment for this package)
