@@ -172,9 +172,11 @@ export namespace NFT {
       },
       issuedId: {
         type: 'string',
+        nullable: true,
       },
       itemId: {
         type: 'string',
+        nullable: true,
       },
       category: NFTCategory.schema,
       network: Network.schema,
