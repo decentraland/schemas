@@ -28,7 +28,35 @@ export namespace Rarity {
     [Rarity.COMMON]: 1000000,
   }
 
+  const lightColorByRarity: Record<Rarity, string> = {
+    [Rarity.UNIQUE]: '#FFE617',
+    [Rarity.MYTHIC]: '#FB7DE3',
+    [Rarity.LEGENDARY]: '#A657ED',
+    [Rarity.EPIC]: '#6397F2',
+    [Rarity.RARE]: '#3AD682',
+    [Rarity.UNCOMMON]: '#FF8563',
+    [Rarity.COMMON]: '#D4E0E0',
+  }
+
+  const colorByRarity: Record<Rarity, string> = {
+    [Rarity.UNIQUE]: '#FFB626',
+    [Rarity.MYTHIC]: '#FF63E1',
+    [Rarity.LEGENDARY]: '#842DDA',
+    [Rarity.EPIC]: '#3D85E6',
+    [Rarity.RARE]: '#36CF75',
+    [Rarity.UNCOMMON]: '#ED6D4F',
+    [Rarity.COMMON]: '#ABC1C1',
+  }
+
   export function getMaxSupply(rarity: Rarity): number {
     return maxSupplyByRarity[rarity]
+  }
+
+  export function getColor(rarity: Rarity): string {
+    return colorByRarity[rarity]
+  }
+
+  export function getGradient(rarity: Rarity): [string, string] {
+    return [lightColorByRarity[rarity], colorByRarity[rarity]]
   }
 }
