@@ -16,6 +16,55 @@ export type AbstractTypedSchema<T> = {
 
 export { Ajv }
 
+// Warning: (ae-missing-release-tag) "Bid" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Bid" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Bid = {
+    id: string;
+    bidder: string;
+    seller: string;
+    price: string;
+    fingerprint: string;
+    status: ListingStatus;
+    blockchainId: string;
+    blockNumber: string;
+    expiresAt: number;
+    createdAt: number;
+    updatedAt: number;
+    contractAddress: string;
+    tokenId: string;
+    network: Network;
+    chainId: ChainId;
+};
+
+// @public (undocumented)
+export namespace Bid {
+    const // (undocumented)
+    schema: JSONSchema<Bid>;
+    const // (undocumented)
+    validate: ValidateFunction<Bid>;
+}
+
+// Warning: (ae-missing-release-tag) "BodyShape" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "BodyShape" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum BodyShape {
+    // (undocumented)
+    FEMALE = "BaseFemale",
+    // (undocumented)
+    MALE = "BaseMale"
+}
+
+// @public (undocumented)
+export namespace BodyShape {
+    const // (undocumented)
+    schema: JSONSchema<BodyShape>;
+    const // (undocumented)
+    validate: ValidateFunction<BodyShape>;
+}
+
 // @alpha
 export enum ChainId {
     // (undocumented)
@@ -68,6 +117,26 @@ export namespace ChainName {
     validate: ValidateFunction<ChainName>;
 }
 
+// Warning: (ae-missing-release-tag) "Contract" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Contract" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Contract = {
+    name: string;
+    address: string;
+    category: NFTCategory;
+    network: Network;
+    chainId: ChainId;
+};
+
+// @public (undocumented)
+export namespace Contract {
+    const // (undocumented)
+    schema: JSONSchema<Contract>;
+    const // (undocumented)
+    validate: ValidateFunction<Contract>;
+}
+
 // @public
 export function generateValidator<T>(schema: JSONSchema<T>): ValidateFunction<T>;
 
@@ -83,8 +152,60 @@ export function getWorld(): World;
 // @alpha
 export function isInsideWorldLimits(x: number, y: number): boolean;
 
+// Warning: (ae-missing-release-tag) "Item" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Item" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Item = {
+    id: string;
+    name: string;
+    thumbnail: string;
+    url: string;
+    category: NFTCategory;
+    contractAddress: string;
+    itemId: string;
+    rarity: Rarity;
+    price: string;
+    available: number;
+    creator: string;
+    createdAt: number;
+    updatedAt: number;
+    data: NFT['data'];
+    network: Network;
+    chainId: ChainId;
+};
+
+// @public (undocumented)
+export namespace Item {
+    const // (undocumented)
+    schema: JSONSchema<Item>;
+    const // (undocumented)
+    validate: ValidateFunction<Item>;
+}
+
 // @public
 export type JSONSchema<T> = JSONSchemaType<T>;
+
+// Warning: (ae-missing-release-tag) "ListingStatus" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ListingStatus" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum ListingStatus {
+    // (undocumented)
+    CANCELLED = "cancelled",
+    // (undocumented)
+    OPEN = "open",
+    // (undocumented)
+    SOLD = "sold"
+}
+
+// @public (undocumented)
+export namespace ListingStatus {
+    const // (undocumented)
+    schema: JSONSchema<ListingStatus>;
+    const // (undocumented)
+    validate: ValidateFunction<ListingStatus>;
+}
 
 // @alpha
 export type MetaTransaction = {
@@ -116,6 +237,149 @@ export namespace Network {
     validate: ValidateFunction<Network>;
 }
 
+// Warning: (ae-missing-release-tag) "NFT" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "NFT" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type NFT = {
+    id: string;
+    contractAddress: string;
+    tokenId: string;
+    activeOrderId: string | null;
+    owner: string;
+    name: string;
+    category: NFTCategory;
+    image: string;
+    url: string;
+    issuedId: string | null;
+    itemId: string | null;
+    data: {
+        parcel?: {
+            x: string;
+            y: string;
+            description: string | null;
+            estate: {
+                tokenId: string;
+                name: string;
+            } | null;
+        };
+        estate?: {
+            size: number;
+            parcels: {
+                x: number;
+                y: number;
+            }[];
+            description: string | null;
+        };
+        wearable?: {
+            description: string;
+            category: WearableCategory;
+            rarity: Rarity;
+            bodyShapes: BodyShape[];
+        };
+        ens?: {
+            subdomain: string;
+        };
+    };
+    network: Network;
+    chainId: ChainId;
+    createdAt: number;
+    updatedAt: number;
+};
+
+// @public (undocumented)
+export namespace NFT {
+    const // (undocumented)
+    schema: JSONSchema<NFT>;
+    const // (undocumented)
+    validate: ValidateFunction<NFT>;
+}
+
+// Warning: (ae-missing-release-tag) "NFTCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "NFTCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum NFTCategory {
+    // (undocumented)
+    ENS = "ens",
+    // (undocumented)
+    ESTATE = "estate",
+    // (undocumented)
+    PARCEL = "parcel",
+    // (undocumented)
+    WEARABLE = "wearable"
+}
+
+// @public (undocumented)
+export namespace NFTCategory {
+    const // (undocumented)
+    schema: JSONSchema<NFTCategory>;
+    const // (undocumented)
+    validate: ValidateFunction<NFTCategory>;
+}
+
+// Warning: (ae-missing-release-tag) "Order" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Order" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Order = {
+    id: string;
+    contractAddress: string;
+    tokenId: string;
+    owner: string;
+    buyer: string | null;
+    price: string;
+    status: ListingStatus;
+    expiresAt: number;
+    createdAt: number;
+    updatedAt: number;
+    network: Network;
+    chainId: ChainId;
+};
+
+// @public (undocumented)
+export namespace Order {
+    const // (undocumented)
+    schema: JSONSchema<Order>;
+    const // (undocumented)
+    validate: ValidateFunction<Order>;
+}
+
+// Warning: (ae-missing-release-tag) "Rarity" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Rarity" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum Rarity {
+    // (undocumented)
+    COMMON = "common",
+    // (undocumented)
+    EPIC = "epic",
+    // (undocumented)
+    LEGENDARY = "legendary",
+    // (undocumented)
+    MYTHIC = "mythic",
+    // (undocumented)
+    RARE = "rare",
+    // (undocumented)
+    UNCOMMON = "uncommon",
+    // (undocumented)
+    UNIQUE = "unique"
+}
+
+// @public (undocumented)
+export namespace Rarity {
+    const // (undocumented)
+    schema: JSONSchema<Rarity>;
+    const // (undocumented)
+    validate: ValidateFunction<Rarity>;
+    // (undocumented)
+    export function getColor(rarity: Rarity): string;
+    // (undocumented)
+    export function getGradient(rarity: Rarity): [string, string];
+    // (undocumented)
+    export function getMaxSupply(rarity: Rarity): number;
+}
+
 // @public
 export interface ValidateFunction<T = unknown> {
     // (undocumented)
@@ -135,6 +399,51 @@ export type ValidWorldRange = {
     yMax: number;
 };
 
+// Warning: (ae-missing-release-tag) "WearableCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WearableCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum WearableCategory {
+    // (undocumented)
+    EARRING = "earring",
+    // (undocumented)
+    EYEBROWS = "eyebrows",
+    // (undocumented)
+    EYES = "eyes",
+    // (undocumented)
+    EYEWEAR = "eyewear",
+    // (undocumented)
+    FACIAL_HAIR = "facial_hair",
+    // (undocumented)
+    FEET = "feet",
+    // (undocumented)
+    HAIR = "hair",
+    // (undocumented)
+    HAT = "hat",
+    // (undocumented)
+    HELMET = "helmet",
+    // (undocumented)
+    LOWER_BODY = "lower_body",
+    // (undocumented)
+    MASK = "mask",
+    // (undocumented)
+    MOUTH = "mouth",
+    // (undocumented)
+    TIARA = "tiara",
+    // (undocumented)
+    TOP_HEAD = "top_head",
+    // (undocumented)
+    UPPER_BODY = "upper_body"
+}
+
+// @public (undocumented)
+export namespace WearableCategory {
+    const // (undocumented)
+    schema: JSONSchema<WearableCategory>;
+    const // (undocumented)
+    validate: ValidateFunction<WearableCategory>;
+}
+
 // @alpha
 export type World = {
     validWorldRanges: Array<ValidWorldRange>;
@@ -148,6 +457,19 @@ export namespace World {
     validate: ValidateFunction<World>;
 }
 
+
+// Warnings were encountered during analysis:
+//
+// src/dapps/bid.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/bid.ts:21:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/contract.ts:10:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/contract.ts:11:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/item.ts:24:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/item.ts:25:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/nft.ts:46:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:47:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/order.ts:17:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/order.ts:18:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 
 // (No @packageDocumentation comment for this package)
 
