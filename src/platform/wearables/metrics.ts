@@ -1,5 +1,6 @@
 import { generateValidator, JSONSchema, ValidateFunction } from '../../validation'
 
+/** @alpha */
 export type Metrics = {
   triangles: number
   materials: number
@@ -9,6 +10,7 @@ export type Metrics = {
   entities: number
 }
 
+/** @alpha */
 export namespace Metrics {
   export const schema: JSONSchema<Metrics> = {
     type: 'object',

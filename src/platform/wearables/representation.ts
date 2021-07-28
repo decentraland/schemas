@@ -2,6 +2,7 @@ import { WearableCategory } from '../../dapps/wearable-category'
 import { generateValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { WearableBodyShape } from './wearable-body-shape'
 
+/** @alpha */
 export type WearableRepresentation = {
   bodyShapes: WearableBodyShape[],
   mainFile: string,
@@ -10,6 +11,7 @@ export type WearableRepresentation = {
   overrideReplaces: WearableCategory[]
 }
 
+/** @alpha */
 export namespace WearableRepresentation {
   export const schema: JSONSchema<WearableRepresentation> = {
     type: 'object',

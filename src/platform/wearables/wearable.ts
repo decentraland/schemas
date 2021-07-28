@@ -5,6 +5,7 @@ import { I18N } from './i18n'
 import { WearableRepresentation } from './representation'
 import { Metrics } from './metrics'
 
+/** @alpha */
 export type Wearable = {
   id: string
   description: I18N[]
@@ -23,6 +24,7 @@ export type Wearable = {
   metrics?: Metrics
 }
 
+/** @alpha */
 export namespace Wearable {
   export const schema: JSONSchema<Wearable> = {
     type: 'object',

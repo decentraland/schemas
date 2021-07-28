@@ -149,16 +149,13 @@ export function getChainName(chainId: ChainId): ChainName | null;
 // @alpha
 export function getWorld(): World;
 
-// Warning: (ae-missing-release-tag) "I18N" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "I18N" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @alpha (undocumented)
 export type I18N = {
     code: Locale;
     text: string;
 };
 
-// @public (undocumented)
+// @alpha (undocumented)
 export namespace I18N {
     const // (undocumented)
     schema: JSONSchema<I18N>;
@@ -224,10 +221,7 @@ export namespace ListingStatus {
     validate: ValidateFunction<ListingStatus>;
 }
 
-// Warning: (ae-missing-release-tag) "Locale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Locale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @alpha (undocumented)
 export enum Locale {
     // (undocumented)
     EN = "en",
@@ -235,7 +229,7 @@ export enum Locale {
     ES = "es"
 }
 
-// @public (undocumented)
+// @alpha (undocumented)
 export namespace Locale {
     const // (undocumented)
     schema: JSONSchema<Locale>;
@@ -257,10 +251,7 @@ export namespace MetaTransaction {
     validate: ValidateFunction<MetaTransaction>;
 }
 
-// Warning: (ae-missing-release-tag) "Metrics" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Metrics" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @alpha (undocumented)
 export type Metrics = {
     triangles: number;
     materials: number;
@@ -270,7 +261,7 @@ export type Metrics = {
     entities: number;
 };
 
-// @public (undocumented)
+// @alpha (undocumented)
 export namespace Metrics {
     const // (undocumented)
     schema: JSONSchema<Metrics>;
@@ -456,16 +447,13 @@ export type ValidWorldRange = {
     yMax: number;
 };
 
-// Warning: (ae-missing-release-tag) "Wearable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Wearable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @alpha (undocumented)
 export type Wearable = {
     id: string;
-    description: string;
+    description: I18N[];
     collectionAddress: string;
     rarity: Rarity;
-    i18n: I18N;
+    name: I18N[];
     data: {
         replaces: WearableCategory[];
         hides: WearableCategory[];
@@ -478,7 +466,7 @@ export type Wearable = {
     metrics?: Metrics;
 };
 
-// @public (undocumented)
+// @alpha (undocumented)
 export namespace Wearable {
     const // (undocumented)
     schema: JSONSchema<Wearable>;
@@ -486,10 +474,7 @@ export namespace Wearable {
     validate: ValidateFunction<Wearable>;
 }
 
-// Warning: (ae-missing-release-tag) "WearableBodyShape" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "WearableBodyShape" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @alpha (undocumented)
 export enum WearableBodyShape {
     // (undocumented)
     FEMALE = "urn:decentraland:off-chain:base-avatars:BaseFemale",
@@ -497,7 +482,7 @@ export enum WearableBodyShape {
     MALE = "urn:decentraland:off-chain:base-avatars:BaseMale"
 }
 
-// @public (undocumented)
+// @alpha (undocumented)
 export namespace WearableBodyShape {
     const // (undocumented)
     schema: JSONSchema<WearableBodyShape>;
@@ -550,10 +535,7 @@ export namespace WearableCategory {
     validate: ValidateFunction<WearableCategory>;
 }
 
-// Warning: (ae-missing-release-tag) "WearableRepresentation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "WearableRepresentation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @alpha (undocumented)
 export type WearableRepresentation = {
     bodyShapes: WearableBodyShape[];
     mainFile: string;
@@ -562,7 +544,7 @@ export type WearableRepresentation = {
     overrideReplaces: WearableCategory[];
 };
 
-// @public (undocumented)
+// @alpha (undocumented)
 export namespace WearableRepresentation {
     const // (undocumented)
     schema: JSONSchema<WearableRepresentation>;
