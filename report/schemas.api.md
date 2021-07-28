@@ -450,10 +450,10 @@ export type ValidWorldRange = {
 // @alpha (undocumented)
 export type Wearable = {
     id: string;
-    description: I18N[];
+    descriptions: I18N[];
     collectionAddress: string;
     rarity: Rarity;
-    name: I18N[];
+    names: I18N[];
     data: {
         replaces: WearableCategory[];
         hides: WearableCategory[];
