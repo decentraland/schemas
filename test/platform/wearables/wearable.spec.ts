@@ -14,13 +14,16 @@ describe('Representation tests', () => {
 
   const wearable: Wearable = {
     id: 'some id',
-    description: 'some description',
+    description: [{
+      code: Locale.EN,
+      text: 'some description'
+    }],
     collectionAddress: '0x...',
     rarity: Rarity.LEGENDARY,
-    i18n: {
+    name: [{
       code: Locale.EN,
       text: 'name'
-    },
+    }],
     data: {
       replaces: [],
       hides: [],
@@ -48,6 +51,20 @@ describe('Representation tests', () => {
         ...wearable.data,
         representations: []
       }
+    })).toEqual(false)
+  })
+
+  it('wearable without name fails', () => {
+    expect(WearableRepresentation.validate({
+      ...wearable,
+      name: []
+    })).toEqual(false)
+  })
+
+  it('wearable without description fails', () => {
+    expect(WearableRepresentation.validate({
+      ...wearable,
+      description: []
     })).toEqual(false)
   })
 
