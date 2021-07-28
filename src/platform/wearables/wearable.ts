@@ -8,10 +8,10 @@ import { Metrics } from './metrics'
 /** @alpha */
 export type Wearable = {
   id: string
-  description: I18N[]
+  descriptions: I18N[]
   collectionAddress: string
   rarity: Rarity
-  name: I18N[],
+  names: I18N[],
   data: {
     replaces: WearableCategory[]
     hides: WearableCategory[]
@@ -32,7 +32,7 @@ export namespace Wearable {
       id: {
         type: 'string',
       },
-      description: {
+      descriptions: {
         type: 'array',
         items: I18N.schema,
         minItems: 1
@@ -41,7 +41,7 @@ export namespace Wearable {
         type: 'string',
       },
       rarity: Rarity.schema,
-      name: {
+      names: {
         type: 'array',
         items: I18N.schema,
         minItems: 1
@@ -88,10 +88,10 @@ export namespace Wearable {
     additionalProperties: false,
     required: [
       'id',
-      'description',
+      'descriptions',
       'collectionAddress',
       'rarity',
-      'name',
+      'names',
       'data',
       'thumbnail',
       'image',

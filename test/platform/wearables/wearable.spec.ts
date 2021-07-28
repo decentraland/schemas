@@ -14,13 +14,17 @@ describe('Representation tests', () => {
 
   const wearable: Wearable = {
     id: 'some id',
-    description: [{
+    descriptions: [{
       code: Locale.EN,
       text: 'some description'
+    },
+    {
+      code: Locale.ES,
+      text: 'una descripcion'
     }],
     collectionAddress: '0x...',
     rarity: Rarity.LEGENDARY,
-    name: [{
+    names: [{
       code: Locale.EN,
       text: 'name'
     }],
@@ -42,6 +46,20 @@ describe('Representation tests', () => {
     expect(Wearable.validate(wearable)).toEqual(true)
     expect(Wearable.validate(null)).toEqual(false)
     expect(Wearable.validate({})).toEqual(false)
+  })
+
+  it('wearable two names with same locale fails', () => {
+    expect(WearableRepresentation.validate({
+      ...wearable,
+      names: [{ code: Locale.ES, text: 'texto' }, { code: Locale.ES, text: 'texto' }]
+    })).toEqual(false)
+  })
+
+  it('wearable two descriptions with same locale fails', () => {
+    expect(WearableRepresentation.validate({
+      ...wearable,
+      descriptions: [{ code: Locale.ES, text: 'texto' }, { code: Locale.ES, text: 'texto' }]
+    })).toEqual(false)
   })
 
   it('wearable without representation fails', () => {
