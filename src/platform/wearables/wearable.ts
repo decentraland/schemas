@@ -98,5 +98,13 @@ export namespace Wearable {
     ],
   }
 
-  export const validate: ValidateFunction<Wearable> = generateValidator(schema)
+  const schemaValidator: ValidateFunction<Wearable> = generateValidator(schema);
+  export const validate: ValidateFunction<Wearable> = (wearable: any): wearable is Wearable =>
+    schemaValidator(wearable) &&
+    validateDuplicatedLocales(wearable.descriptions) &&
+    validateDuplicatedLocales(wearable.names);
+
+  // Returns true only if there are no entries with the same locale
+  const validateDuplicatedLocales = (i18ns: I18N[]) =>
+    i18ns.every(({ code }, index) => i18ns.findIndex((i18n) => i18n.code === code) === index);
 }
