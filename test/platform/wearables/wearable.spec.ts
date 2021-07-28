@@ -48,17 +48,17 @@ describe('Representation tests', () => {
     expect(Wearable.validate({})).toEqual(false)
   })
 
-  it('wearable two names with same locale fails', () => {
+  it('wearable with two names with same locale fails', () => {
     expect(Wearable.validate({
       ...wearable,
-      names: [{ code: Locale.ES, text: 'texto' }, { code: Locale.ES, text: 'texto' }]
+      names: [{ code: Locale.ES, text: 'texto' }, { code: Locale.ES, text: 'otro texto' }]
     })).toEqual(false)
   })
 
-  it('wearable two descriptions with same locale fails', () => {
+  it('wearable with two descriptions with same locale fails', () => {
     expect(Wearable.validate({
       ...wearable,
-      descriptions: [{ code: Locale.ES, text: 'texto' }, { code: Locale.ES, text: 'texto' }]
+      descriptions: [{ code: Locale.ES, text: 'texto' }, { code: Locale.ES, text: 'otro texto' }]
     })).toEqual(false)
   })
 
