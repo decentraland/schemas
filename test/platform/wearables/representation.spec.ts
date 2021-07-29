@@ -46,4 +46,12 @@ describe('Representation tests', () => {
       contents: ['file1', 'file1']
     })).toEqual(false)
   })
+
+  it('main file not in contents fails', () => {
+    expect(WearableRepresentation.validate({
+      ...representation,
+      mainFile: ['file1'],
+      contents: ['file2', 'file3']
+    })).toEqual(false)
+  })
 })

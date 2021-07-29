@@ -48,7 +48,11 @@ export namespace WearableRepresentation {
 
   }
 
-  export const validate: ValidateFunction<WearableRepresentation> = generateValidator(schema)
+  const schemaValidator: ValidateFunction<WearableRepresentation> = generateValidator(schema)
+  export const validate: ValidateFunction<WearableRepresentation> = (representation: any): representation is WearableRepresentation =>
+    schemaValidator(representation) &&
+    representation.contents.includes(representation.mainFile)
+
 }
 
 
