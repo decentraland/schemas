@@ -2,7 +2,7 @@ import expect from "expect";
 import { Scene } from "../../../src";
 import { testTypeSignature } from "../../test-utils";
 
-describe("Source tests", () => {
+describe("Scene tests", () => {
   const scene: Scene = {
     main: "bin/main.js",
     scene: {
