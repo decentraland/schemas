@@ -2,8 +2,8 @@ import expect from "expect";
 import { SpawnPoint } from "../../../src";
 import { testTypeSignature } from "../../test-utils";
 
-describe("Swap point tests", () => {
-  const swapPoint: SpawnPoint = {
+describe("Spawn point tests", () => {
+  const spawnPoint: SpawnPoint = {
     name: "spawn1",
     default: true,
     position: {
@@ -18,19 +18,19 @@ describe("Swap point tests", () => {
     },
   };
 
-  testTypeSignature(SpawnPoint, swapPoint);
+  testTypeSignature(SpawnPoint, spawnPoint);
 
   it("static tests must pass", () => {
-    expect(SpawnPoint.validate(swapPoint)).toEqual(true);
+    expect(SpawnPoint.validate(spawnPoint)).toEqual(true);
     expect(SpawnPoint.validate(null)).toEqual(false);
     expect(SpawnPoint.validate({})).toEqual(false);
   });
 
   it('position with empty array fails', () => {
     expect(SpawnPoint.validate({
-      ...swapPoint,
+      ...spawnPoint,
       position: {
-        ...swapPoint.position,
+        ...spawnPoint.position,
         x: []
       }
     })).toEqual(false)
@@ -38,9 +38,9 @@ describe("Swap point tests", () => {
 
   it('position with string fails', () => {
     expect(SpawnPoint.validate({
-      ...swapPoint,
+      ...spawnPoint,
       position: {
-        ...swapPoint.position,
+        ...spawnPoint.position,
         x: 'text'
       }
     })).toEqual(false)
