@@ -137,6 +137,17 @@ export namespace Contract {
     validate: ValidateFunction<Contract>;
 }
 
+// @alpha (undocumented)
+export type FeatureToggles = Record<string, "enabled" | "disabled">;
+
+// @alpha (undocumented)
+export namespace FeatureToggles {
+    const // (undocumented)
+    schema: JSONSchema<FeatureToggles>;
+    const // (undocumented)
+    validate: ValidateFunction<FeatureToggles>;
+}
+
 // @public
 export function generateValidator<T>(schema: JSONSchema<T>): ValidateFunction<T>;
 
@@ -428,6 +439,95 @@ export namespace Rarity {
     export function getMaxSupply(rarity: Rarity): number;
 }
 
+// @alpha (undocumented)
+export type Scene = {
+    main: string;
+    scene: SceneParcels;
+    display?: {
+        title?: string;
+        favicon?: string;
+        description?: string;
+        navmapThumbnail?: string;
+    };
+    owner?: string;
+    contact?: {
+        name?: string;
+        email?: string;
+        im?: string;
+        url?: string;
+    };
+    tags?: string[];
+    source?: Source;
+    spawnPoints?: SpawnPoint[];
+    requiredPermissions?: string[];
+    featureToggles?: FeatureToggles;
+};
+
+// @alpha (undocumented)
+export namespace Scene {
+    const // (undocumented)
+    schema: JSONSchema<Scene>;
+    const // (undocumented)
+    validate: ValidateFunction<Scene>;
+}
+
+// @alpha (undocumented)
+export type SceneParcels = {
+    base: string;
+    parcels: string[];
+};
+
+// @alpha (undocumented)
+export namespace SceneParcels {
+    const // (undocumented)
+    schema: JSONSchema<SceneParcels>;
+    const // (undocumented)
+    schemaValidator: ValidateFunction<SceneParcels>;
+    const // (undocumented)
+    validate: ValidateFunction<SceneParcels>;
+}
+
+// @alpha (undocumented)
+export type Source = {
+    version?: number;
+    origin: string;
+    projectId: string;
+    point?: {
+        x: number;
+        y: number;
+    };
+    rotation?: "north" | "east" | "south" | "west";
+    layout?: {
+        rows: number;
+        cols: number;
+    };
+    isEmpty?: boolean;
+};
+
+// @alpha (undocumented)
+export namespace Source {
+    const // (undocumented)
+    schema: JSONSchema<Source>;
+    const // (undocumented)
+    validate: ValidateFunction<Source>;
+}
+
+// @alpha (undocumented)
+export type SpawnPoint = {
+    name?: string;
+    position: SinglePosition | MultiPosition;
+    default?: boolean;
+    cameraTarget?: SinglePosition;
+};
+
+// @alpha (undocumented)
+export namespace SpawnPoint {
+    const // (undocumented)
+    schema: JSONSchema<SpawnPoint>;
+    const // (undocumented)
+    validate: ValidateFunction<SpawnPoint>;
+}
+
 // @public
 export interface ValidateFunction<T = unknown> {
     // (undocumented)
@@ -578,6 +678,8 @@ export namespace World {
 // src/dapps/nft.ts:47:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:17:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:18:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
+// src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "MultiPosition" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 
