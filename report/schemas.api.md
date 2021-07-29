@@ -149,6 +149,20 @@ export function getChainName(chainId: ChainId): ChainName | null;
 // @alpha
 export function getWorld(): World;
 
+// @alpha (undocumented)
+export type I18N = {
+    code: Locale;
+    text: string;
+};
+
+// @alpha (undocumented)
+export namespace I18N {
+    const // (undocumented)
+    schema: JSONSchema<I18N>;
+    const // (undocumented)
+    validate: ValidateFunction<I18N>;
+}
+
 // @alpha
 export function isInsideWorldLimits(x: number, y: number): boolean;
 
@@ -207,6 +221,22 @@ export namespace ListingStatus {
     validate: ValidateFunction<ListingStatus>;
 }
 
+// @alpha (undocumented)
+export enum Locale {
+    // (undocumented)
+    EN = "en",
+    // (undocumented)
+    ES = "es"
+}
+
+// @alpha (undocumented)
+export namespace Locale {
+    const // (undocumented)
+    schema: JSONSchema<Locale>;
+    const // (undocumented)
+    validate: ValidateFunction<Locale>;
+}
+
 // @alpha
 export type MetaTransaction = {
     from: string;
@@ -219,6 +249,24 @@ export namespace MetaTransaction {
     schema: JSONSchema<MetaTransaction>;
     const // (undocumented)
     validate: ValidateFunction<MetaTransaction>;
+}
+
+// @alpha (undocumented)
+export type Metrics = {
+    triangles: number;
+    materials: number;
+    textures: number;
+    meshes: number;
+    bodies: number;
+    entities: number;
+};
+
+// @alpha (undocumented)
+export namespace Metrics {
+    const // (undocumented)
+    schema: JSONSchema<Metrics>;
+    const // (undocumented)
+    validate: ValidateFunction<Metrics>;
 }
 
 // @alpha
@@ -399,6 +447,49 @@ export type ValidWorldRange = {
     yMax: number;
 };
 
+// @alpha (undocumented)
+export type Wearable = {
+    id: string;
+    descriptions: I18N[];
+    collectionAddress: string;
+    rarity: Rarity;
+    names: I18N[];
+    data: {
+        replaces: WearableCategory[];
+        hides: WearableCategory[];
+        tags: string[];
+        representations: WearableRepresentation[];
+        category: WearableCategory;
+    };
+    thumbnail: string;
+    image: string;
+    metrics?: Metrics;
+};
+
+// @alpha (undocumented)
+export namespace Wearable {
+    const // (undocumented)
+    schema: JSONSchema<Wearable>;
+    const // (undocumented)
+    validate: ValidateFunction<Wearable>;
+}
+
+// @alpha (undocumented)
+export enum WearableBodyShape {
+    // (undocumented)
+    FEMALE = "urn:decentraland:off-chain:base-avatars:BaseFemale",
+    // (undocumented)
+    MALE = "urn:decentraland:off-chain:base-avatars:BaseMale"
+}
+
+// @alpha (undocumented)
+export namespace WearableBodyShape {
+    const // (undocumented)
+    schema: JSONSchema<WearableBodyShape>;
+    const // (undocumented)
+    validate: ValidateFunction<WearableBodyShape>;
+}
+
 // Warning: (ae-missing-release-tag) "WearableCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "WearableCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -442,6 +533,23 @@ export namespace WearableCategory {
     schema: JSONSchema<WearableCategory>;
     const // (undocumented)
     validate: ValidateFunction<WearableCategory>;
+}
+
+// @alpha (undocumented)
+export type WearableRepresentation = {
+    bodyShapes: WearableBodyShape[];
+    mainFile: string;
+    contents: string[];
+    overrideHides: WearableCategory[];
+    overrideReplaces: WearableCategory[];
+};
+
+// @alpha (undocumented)
+export namespace WearableRepresentation {
+    const // (undocumented)
+    schema: JSONSchema<WearableRepresentation>;
+    const // (undocumented)
+    validate: ValidateFunction<WearableRepresentation>;
 }
 
 // @alpha

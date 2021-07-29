@@ -22,3 +22,5 @@ export {
   getWorld,
   isInsideWorldLimits,
 } from './dapps/world'
+
+export * from './platform'

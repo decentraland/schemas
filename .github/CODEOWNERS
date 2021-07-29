@@ -5,3 +5,4 @@ src/report/* @decentraland/core-developers
 # team-specific types and schemas
 
 src/dapps/* @decentraland/dapps
+src/platform/* @decentraland/platform
