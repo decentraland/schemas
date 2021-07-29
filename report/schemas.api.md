@@ -137,6 +137,17 @@ export namespace Contract {
     validate: ValidateFunction<Contract>;
 }
 
+// @alpha (undocumented)
+export type FeatureToggles = Record<string, "enabled" | "disabled">;
+
+// @alpha (undocumented)
+export namespace FeatureToggles {
+    const // (undocumented)
+    schema: JSONSchema<FeatureToggles>;
+    const // (undocumented)
+    validate: ValidateFunction<FeatureToggles>;
+}
+
 // @public
 export function generateValidator<T>(schema: JSONSchema<T>): ValidateFunction<T>;
 
@@ -426,6 +437,103 @@ export namespace Rarity {
     export function getGradient(rarity: Rarity): [string, string];
     // (undocumented)
     export function getMaxSupply(rarity: Rarity): number;
+}
+
+// @alpha (undocumented)
+export type Scene = {
+    main: string;
+    scene: SceneParcels;
+    display?: {
+        title?: string;
+        favicon?: string;
+        description?: string;
+        navmapThumbnail?: string;
+    };
+    owner?: string;
+    contact?: {
+        name?: string;
+        email?: string;
+        im?: string;
+        url?: string;
+    };
+    tags?: string[];
+    source?: Source;
+    spawnPoints?: SpawnPoint[];
+    requiredPermissions?: string[];
+    featureToggles?: FeatureToggles;
+};
+
+// @alpha (undocumented)
+export namespace Scene {
+    const // (undocumented)
+    schema: JSONSchema<Scene>;
+    const // (undocumented)
+    validate: ValidateFunction<Scene>;
+}
+
+// @alpha (undocumented)
+export type SceneParcels = {
+    base: string;
+    parcels: string[];
+};
+
+// @alpha (undocumented)
+export namespace SceneParcels {
+    const // (undocumented)
+    schema: JSONSchema<SceneParcels>;
+    const // (undocumented)
+    schemaValidator: ValidateFunction<SceneParcels>;
+    const // (undocumented)
+    validate: ValidateFunction<SceneParcels>;
+}
+
+// @alpha (undocumented)
+export type Source = {
+    version?: number;
+    origin: string;
+    projectId: string;
+    point?: {
+        x: number;
+        y: number;
+    };
+    rotation?: "north" | "east" | "south" | "west";
+    layout?: {
+        rows: number;
+        cols: number;
+    };
+    isEmpty?: boolean;
+};
+
+// @alpha (undocumented)
+export namespace Source {
+    const // (undocumented)
+    schema: JSONSchema<Source>;
+    const // (undocumented)
+    validate: ValidateFunction<Source>;
+}
+
+// @alpha (undocumented)
+export type SpawnPoint = {
+    name?: string;
+    position: {
+        x: number | number[];
+        y: number | number[];
+        z: number | number[];
+    };
+    default?: boolean;
+    cameraTarget?: {
+        x: number;
+        y: number;
+        z: number;
+    };
+};
+
+// @alpha (undocumented)
+export namespace SpawnPoint {
+    const // (undocumented)
+    schema: JSONSchema<SpawnPoint>;
+    const // (undocumented)
+    validate: ValidateFunction<SpawnPoint>;
 }
 
 // @public
