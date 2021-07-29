@@ -515,17 +515,9 @@ export namespace Source {
 // @alpha (undocumented)
 export type SpawnPoint = {
     name?: string;
-    position: {
-        x: number | number[];
-        y: number | number[];
-        z: number | number[];
-    };
+    position: SinglePosition | MultiPosition;
     default?: boolean;
-    cameraTarget?: {
-        x: number;
-        y: number;
-        z: number;
-    };
+    cameraTarget?: SinglePosition;
 };
 
 // @alpha (undocumented)
@@ -686,6 +678,8 @@ export namespace World {
 // src/dapps/nft.ts:47:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:17:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:18:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
+// src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "MultiPosition" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 
