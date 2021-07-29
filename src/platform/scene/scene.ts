@@ -25,7 +25,7 @@ export type Scene = {
   source?: Source;
   spawnPoints?: SpawnPoint[];
   requiredPermissions?: string[];
-  featureToggles?: FeatureToggles
+  featureToggles?: FeatureToggles;
 };
 
 /** @alpha */
@@ -34,66 +34,87 @@ export namespace Scene {
     type: "object",
     properties: {
       main: {
+        description: "File that contains the entry point of the scene's code",
         type: "string",
-        minLength: 1
+        minLength: 1,
       },
       scene: SceneParcels.schema,
       display: {
-        type: 'object',
+        description:
+          "Information related to how should this land be displayed apart from the normal rendering of the scene",
+        type: "object",
         properties: {
-          title: { type: 'string', nullable: true },
-          favicon: { type: 'string', nullable: true },
-          description: { type: 'string', nullable: true },
-          navmapThumbnail: { type: 'string', nullable: true }
+          title: {
+            description:
+              "A name so other users can identify what the contents of this land should be",
+            type: "string",
+            nullable: true,
+          },
+          favicon: {
+            description: "Allow the land owner to set up a favicon to this land",
+            type: "string",
+            nullable: true,
+          },
+          description: {
+            description:
+              "A description that will be shown on client's nav map when the scene is selected",
+            type: "string",
+            nullable: true,
+          },
+          navmapThumbnail: {
+            type: "string",
+            nullable: true,
+          },
         },
         nullable: true,
         additionalProperties: false,
-        required: []
+        required: [],
       },
       owner: {
         type: "string",
         nullable: true,
       },
       contact: {
-        type: 'object',
+        description: "Describe different ways of contacting the land owner",
+        type: "object",
         properties: {
-          name: { type: 'string', nullable: true },
-          email: { type: 'string', nullable: true },
-          im: { type: 'string', nullable: true },
-          url: { type: 'string', nullable: true }
+          name: { type: "string", nullable: true },
+          email: { type: "string", nullable: true },
+          im: { type: "string", nullable: true },
+          url: { type: "string", nullable: true },
         },
         nullable: true,
         additionalProperties: false,
-        required: []
+        required: [],
       },
       tags: {
         type: "array",
         items: {
-          type: 'string',
-          minLength: 1
+          type: "string",
+          minLength: 1,
         },
-        nullable: true
+        nullable: true,
       },
       source: {
         ...Source.schema,
-        nullable: true
+        nullable: true,
       },
       spawnPoints: {
-        type: 'array',
+        type: "array",
         items: SpawnPoint.schema,
-        nullable: true
+        nullable: true,
       },
       requiredPermissions: {
-        type: 'array',
+        type: "array",
         items: {
-          type: 'string'
+          type: "string",
         },
-        nullable: true
+        nullable: true,
       },
       featureToggles: {
         ...FeatureToggles.schema,
-        nullable: true
-      }
+        nullable: true,
+      },
     },
     additionalProperties: false,
     required: ["main", "scene"],

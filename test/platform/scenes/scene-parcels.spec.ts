@@ -24,4 +24,8 @@ describe("Scene parcels tests", () => {
     expect(SceneParcels.validate({ ...parcels, base: ['2,0'] } )).toEqual(false)
   })
 
+  it('empty parcels fails', () => {
+    expect(SceneParcels.validate({ ...parcels, parcels: [] } )).toEqual(false)
+  })
+
 });
