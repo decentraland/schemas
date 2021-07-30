@@ -25,6 +25,7 @@ describe('Item tests', () => {
       rarity: Rarity.MYTHIC,
       price: '808000000000000000000',
       available: 0,
+      isOnSale: false,
       creator: '0xfe705ead02e849e78278c50de3d939be23448f1a',
       data: {
         wearable: {

@@ -17,6 +17,7 @@ export type Item = {
   rarity: Rarity
   price: string
   available: number
+  isOnSale: boolean
   creator: string
   createdAt: number
   updatedAt: number
@@ -57,6 +58,9 @@ export namespace Item {
       available: {
         type: 'integer',
       },
+      isOnSale: {
+        type: 'boolean',
+      },
       creator: {
         type: 'string',
       },
@@ -81,6 +85,7 @@ export namespace Item {
       'rarity',
       'price',
       'available',
+      'isOnSale',
       'creator',
       'data',
       'network',
