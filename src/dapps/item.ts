@@ -21,6 +21,7 @@ export type Item = {
   creator: string
   createdAt: number
   updatedAt: number
+  reviewedAt: number
   data: NFT['data']
   network: Network
   chainId: ChainId
@@ -71,6 +72,9 @@ export namespace Item {
         type: 'integer',
       },
       updatedAt: {
+        type: 'integer',
+      },
+      reviewedAt: {
         type: 'integer',
       },
     },
