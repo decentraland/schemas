@@ -23,9 +23,9 @@ export namespace Rarity {
     [Rarity.MYTHIC]: 10,
     [Rarity.LEGENDARY]: 100,
     [Rarity.EPIC]: 1000,
-    [Rarity.RARE]: 10000,
-    [Rarity.UNCOMMON]: 100000,
-    [Rarity.COMMON]: 1000000,
+    [Rarity.RARE]: 5000,
+    [Rarity.UNCOMMON]: 10000,
+    [Rarity.COMMON]: 100000,
   }
 
   const lightColorByRarity: Record<Rarity, string> = {
