@@ -94,19 +94,19 @@ export namespace ChainId {
 // @alpha
 export enum ChainName {
     // (undocumented)
-    ETHEREUM_GOERLI = "GOERLI",
+    ETHEREUM_GOERLI = "Goerli",
     // (undocumented)
-    ETHEREUM_KOVAN = "KOVAN",
+    ETHEREUM_KOVAN = "Kovan",
     // (undocumented)
-    ETHEREUM_MAINNET = "MAINNET",
+    ETHEREUM_MAINNET = "Ethereum",
     // (undocumented)
-    ETHEREUM_RINKEBY = "RINKEBY",
+    ETHEREUM_RINKEBY = "Rinkeby",
     // (undocumented)
-    ETHEREUM_ROPSTEN = "ROPSTEN",
+    ETHEREUM_ROPSTEN = "Ropsten",
     // (undocumented)
-    MATIC_MAINNET = "MATIC",
+    MATIC_MAINNET = "Polygon",
     // (undocumented)
-    MATIC_MUMBAI = "MUMBAI"
+    MATIC_MUMBAI = "Mumbai"
 }
 
 // @alpha (undocumented)
