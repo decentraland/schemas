@@ -98,7 +98,7 @@ export enum ChainName {
     // (undocumented)
     ETHEREUM_KOVAN = "Kovan",
     // (undocumented)
-    ETHEREUM_MAINNET = "Ethereum",
+    ETHEREUM_MAINNET = "Ethereum Mainnet",
     // (undocumented)
     ETHEREUM_RINKEBY = "Rinkeby",
     // (undocumented)
