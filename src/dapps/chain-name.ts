@@ -6,7 +6,7 @@ import { ChainId } from './chain-id'
  * @alpha
  */
 export enum ChainName {
-  ETHEREUM_MAINNET = 'Ethereum',
+  ETHEREUM_MAINNET = 'Ethereum Mainnet',
   ETHEREUM_ROPSTEN = 'Ropsten',
   ETHEREUM_RINKEBY = 'Rinkeby',
   ETHEREUM_GOERLI = 'Goerli',
