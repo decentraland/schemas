@@ -22,6 +22,7 @@ describe('ChainId tests', () => {
   it('Should get null if the chain id is not valid', () => {
     expect(getChainName(-1 as ChainId)).toEqual(null)
   })
+
   it('Should get a valid URN protocol', () => {
     expect(getURNProtocol(ChainId.MATIC_MAINNET)).toEqual('matic')
   })
