@@ -42,6 +42,29 @@ export function getChainName(chainId: ChainId): ChainName | null {
 }
 
 /**
+ * Get the chain name by chain id
+ * @alpha
+ */
+export function getURNProtocol(chainId: ChainId): string {
+  switch (chainId) {
+    case ChainId.ETHEREUM_MAINNET:
+      return 'mainnet'
+    case ChainId.ETHEREUM_ROPSTEN:
+      return 'ropsten'
+    case ChainId.ETHEREUM_RINKEBY:
+      return 'rinkeby'
+    case ChainId.ETHEREUM_GOERLI:
+      return 'goerli'
+    case ChainId.ETHEREUM_KOVAN:
+      return 'kovan'
+    case ChainId.MATIC_MAINNET:
+      return 'matic'
+    case ChainId.MATIC_MUMBAI:
+      return 'mumbai'
+  }
+}
+
+/**
  * @alpha
  */
 export namespace ChainId {

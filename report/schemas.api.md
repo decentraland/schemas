@@ -158,6 +158,9 @@ export function getChainId(chainName: ChainName): ChainId | null;
 export function getChainName(chainId: ChainId): ChainName | null;
 
 // @alpha
+export function getURNProtocol(chainId: ChainId): string;
+
+// @alpha
 export function getWorld(): World;
 
 // @alpha (undocumented)
