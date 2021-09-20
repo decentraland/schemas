@@ -1,5 +1,9 @@
 import { generateValidator, JSONSchema, ValidateFunction } from ".."
 
+/**
+ * Color3 is a data type that describes a color using R, G and B components
+ * @alpha 
+ */
 export type Color3 = { r: number; g: number; b: number }
 export namespace Color3 {
   export const schema: JSONSchema<Color3> = {
@@ -27,10 +31,21 @@ export namespace Color3 {
   export const validate: ValidateFunction<Color3> = (color: any): color is Color3 =>
     schemaValidator(color)
 }
-
+/**
+ * @alpha 
+ */
 export type WearableId = string
 
+/**
+ * EthAddress is a data type that describes an Ethereum address
+ * @alpha 
+ */
 export type EthAddress = string
+
+/**
+ * EthAddress
+ * @alpha 
+ */
 export namespace EthAddress {
   export const schema: JSONSchema<EthAddress> = {
     type: 'string',

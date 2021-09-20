@@ -16,6 +16,54 @@ export type AbstractTypedSchema<T> = {
 
 export { Ajv }
 
+// @alpha
+export type Avatar = {
+    userId: string;
+    name: string;
+    description: string;
+    ethAddress: EthAddress;
+    version: number;
+    tutorialStep: number;
+    email?: string;
+    blocked?: string[];
+    muted?: string[];
+    interests?: string[];
+    hasClaimedName: boolean;
+    avatar: AvatarInfo;
+};
+
+// @alpha
+export namespace Avatar {
+    const // (undocumented)
+    schema: JSONSchema<Avatar>;
+    const // (undocumented)
+    validate: ValidateFunction<Avatar>;
+}
+
+// @alpha
+export type AvatarInfo = {
+    bodyShape: WearableId;
+    eyes: {
+        color: Color3;
+    };
+    hair: {
+        color: Color3;
+    };
+    skin: {
+        color: Color3;
+    };
+    wearables: WearableId[];
+    snapshots: Snapshots;
+};
+
+// @alpha
+export namespace AvatarInfo {
+    const // (undocumented)
+    schema: JSONSchema<AvatarInfo>;
+    const // (undocumented)
+    validate: ValidateFunction<AvatarInfo>;
+}
+
 // Warning: (ae-missing-release-tag) "Bid" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Bid" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -117,6 +165,24 @@ export namespace ChainName {
     validate: ValidateFunction<ChainName>;
 }
 
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-missing-release-tag) "Color3" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @alpha
+export type Color3 = {
+    r: number;
+    g: number;
+    b: number;
+};
+
+// @public (undocumented)
+export namespace Color3 {
+    const // (undocumented)
+    schema: JSONSchema<Color3>;
+    const // (undocumented)
+    validate: ValidateFunction<Color3>;
+}
+
 // Warning: (ae-missing-release-tag) "Contract" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Contract" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -135,6 +201,17 @@ export namespace Contract {
     schema: JSONSchema<Contract>;
     const // (undocumented)
     validate: ValidateFunction<Contract>;
+}
+
+// @alpha
+export type EthAddress = string;
+
+// @alpha
+export namespace EthAddress {
+    const // (undocumented)
+    schema: JSONSchema<EthAddress>;
+    const // (undocumented)
+    validate: ValidateFunction<EthAddress>;
 }
 
 // @alpha (undocumented)
@@ -409,6 +486,19 @@ export namespace Order {
     validate: ValidateFunction<Order>;
 }
 
+// @alpha
+export type Profile = {
+    avatars: Avatar[];
+};
+
+// @alpha
+export namespace Profile {
+    const // (undocumented)
+    schema: JSONSchema<Profile>;
+    const // (undocumented)
+    validate: ValidateFunction<Profile>;
+}
+
 // Warning: (ae-missing-release-tag) "Rarity" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Rarity" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -490,6 +580,22 @@ export namespace SceneParcels {
     schemaValidator: ValidateFunction<SceneParcels>;
     const // (undocumented)
     validate: ValidateFunction<SceneParcels>;
+}
+
+// @alpha
+export type Snapshots = {
+    face: string;
+    face256: string;
+    face128: string;
+    body: string;
+};
+
+// @alpha
+export namespace Snapshots {
+    const // (undocumented)
+    schema: JSONSchema<Snapshots>;
+    const // (undocumented)
+    validate: ValidateFunction<Snapshots>;
 }
 
 // @alpha (undocumented)
@@ -639,6 +745,9 @@ export namespace WearableCategory {
     const // (undocumented)
     validate: ValidateFunction<WearableCategory>;
 }
+
+// @alpha (undocumented)
+export type WearableId = string;
 
 // @alpha (undocumented)
 export type WearableRepresentation = {

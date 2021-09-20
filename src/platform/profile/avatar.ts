@@ -1,6 +1,10 @@
 import { Color3, EthAddress, WearableId } from "../../misc"
 import { generateValidator, JSONSchema, ValidateFunction } from "../../validation"
 
+/**
+ * Snapshots
+ * @alpha 
+ */
 export type Snapshots = {
   face: string
   face256: string
@@ -8,6 +12,10 @@ export type Snapshots = {
   body: string
 }
 
+/**
+ * Snapshots
+ * @alpha 
+ */
 export namespace Snapshots {
   export const schema: JSONSchema<Snapshots> = {
     type: 'object',
@@ -32,6 +40,10 @@ export namespace Snapshots {
     schemaValidator(snapshots)
 }
 
+/**
+ * AvatarInfo
+ * @alpha 
+ */
 export type AvatarInfo = {
   bodyShape: WearableId
   eyes: { color: Color3 }
@@ -41,6 +53,10 @@ export type AvatarInfo = {
   snapshots: Snapshots
 }
 
+/**
+ * AvatarInfo
+ * @alpha 
+ */
 export namespace AvatarInfo { 
   export const schema: JSONSchema<AvatarInfo> = {
     type: 'object',
@@ -85,6 +101,10 @@ export namespace AvatarInfo {
     schemaValidator(avatarInfo)
 }
 
+/**
+ * Avatar represents a profile avatar
+ * @alpha 
+ */
 export type Avatar = {
   userId: string,
   name: string
@@ -100,6 +120,10 @@ export type Avatar = {
   avatar: AvatarInfo
 }
 
+/**
+ * Avatar
+ * @alpha 
+ */
 export namespace Avatar {
   export const schema: JSONSchema<Avatar> = {
     type: 'object',

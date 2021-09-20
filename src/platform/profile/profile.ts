@@ -1,11 +1,18 @@
 import { generateValidator, JSONSchema, ValidateFunction } from "../../validation"
 import { Avatar } from "./avatar";
 
+/**
+ * Profile containing one or multiple avatars
+ * @alpha 
+ */
 export type Profile = {
   avatars: Avatar[]
 }
 
-
+/**
+ * Profile
+ * @alpha 
+ */
 export namespace Profile {
   export const schema: JSONSchema<Profile> = {
     type: 'object',
