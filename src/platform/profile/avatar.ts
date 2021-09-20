@@ -1,0 +1,160 @@
+import { Color3, EthAddress, WearableId } from "../../misc"
+import { generateValidator, JSONSchema, ValidateFunction } from "../../validation"
+
+export type Snapshots = {
+  face: string
+  face256: string
+  face128: string
+  body: string
+}
+
+export namespace Snapshots {
+  export const schema: JSONSchema<Snapshots> = {
+    type: 'object',
+    required: ['face', 'face128', 'face256', 'body'],
+    properties: {
+      face: {
+        type: 'string'
+      },
+      face256: {
+        type: 'string'
+      },
+      face128: {
+        type: 'string'
+      },
+      body: {
+        type: 'string'
+      }
+    }
+  }
+  const schemaValidator: ValidateFunction<Snapshots> = generateValidator(schema);
+  export const validate: ValidateFunction<Snapshots> = (snapshots: any): snapshots is Snapshots =>
+    schemaValidator(snapshots)
+}
+
+export type AvatarInfo = {
+  bodyShape: WearableId
+  eyes: { color: Color3 }
+  hair: { color: Color3 }
+  skin: { color: Color3 }
+  wearables: WearableId[]
+  snapshots: Snapshots
+}
+
+export namespace AvatarInfo { 
+  export const schema: JSONSchema<AvatarInfo> = {
+    type: 'object',
+    required: ['bodyShape', 'eyes', 'hair', 'skin'],
+    properties: {
+      bodyShape: {
+        type: 'string'
+      },
+      eyes: {
+        type: 'object',
+        required: ['color'],
+        properties: {
+          color: Color3.schema
+        }
+      },
+      hair: {
+        type: 'object',
+        required: ['color'],
+        properties: {
+          color: Color3.schema
+        }
+      },
+      skin: {
+        type: 'object',
+        required: ['color'],
+        properties: {
+          color: Color3.schema
+        }
+      },
+      wearables: {
+        type: 'array',
+        items: {
+          type: 'string'
+        }
+      },
+      snapshots: Snapshots.schema
+    },
+    additionalProperties: true
+  }
+  const schemaValidator: ValidateFunction<AvatarInfo> = generateValidator(schema);
+  export const validate: ValidateFunction<AvatarInfo> = (avatarInfo: any): avatarInfo is AvatarInfo =>
+    schemaValidator(avatarInfo)
+}
+
+export type Avatar = {
+  userId: string,
+  name: string
+  description: string
+  ethAddress: EthAddress
+  version: number
+  tutorialStep: number
+  email?: string
+  blocked?: string[]
+  muted?: string[]
+  interests?: string[]
+  hasClaimedName: boolean
+  avatar: AvatarInfo
+}
+
+export namespace Avatar {
+  export const schema: JSONSchema<Avatar> = {
+    type: 'object',
+    required: ['name', 'description', 'ethAddress', 'version', 'tutorialStep', 'avatar'],
+    properties: {
+      userId: {
+        type: 'string'
+      },
+      name: {
+        type: 'string'
+      },
+      description: {
+        type: 'string'
+      },
+      ethAddress: EthAddress.schema,
+      version: {
+        type: 'number'
+      },
+      tutorialStep: {
+        type: 'number'
+      },
+      email: {
+        type: 'string',
+        nullable: true
+      },
+      blocked: {
+        type: 'array',
+        items: {
+          type: 'string'
+        },
+        nullable: true
+      },
+      muted: {
+        type: 'array',
+        items: {
+          type: 'string'
+        },
+        nullable: true
+      },
+      interests: {
+        type: 'array',
+        items: {
+          type: 'string'
+        },
+        nullable: true
+      },
+      hasClaimedName: {
+        type: 'boolean',
+        nullable: true
+      },
+      avatar: AvatarInfo.schema,
+    },
+    additionalProperties: true,
+  }
+  const schemaValidator: ValidateFunction<Avatar> = generateValidator(schema);
+  export const validate: ValidateFunction<Avatar> = (avatar: any): avatar is Avatar =>
+    schemaValidator(avatar)
+}
