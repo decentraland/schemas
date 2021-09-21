@@ -24,3 +24,4 @@ export {
 } from './dapps/world'
 
 export * from './platform'
+export * from './misc'
