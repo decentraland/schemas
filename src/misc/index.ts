@@ -5,6 +5,11 @@ import { generateValidator, JSONSchema, ValidateFunction } from ".."
  * @alpha 
  */
 export type Color3 = { r: number; g: number; b: number }
+
+/**
+ * Color3
+ * @alpha 
+ */
 export namespace Color3 {
   export const schema: JSONSchema<Color3> = {
     type: 'object',

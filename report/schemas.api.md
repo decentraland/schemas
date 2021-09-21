@@ -165,9 +165,6 @@ export namespace ChainName {
     validate: ValidateFunction<ChainName>;
 }
 
-// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
-// Warning: (ae-missing-release-tag) "Color3" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
 // @alpha
 export type Color3 = {
     r: number;
@@ -175,7 +172,7 @@ export type Color3 = {
     b: number;
 };
 
-// @public (undocumented)
+// @alpha
 export namespace Color3 {
     const // (undocumented)
     schema: JSONSchema<Color3>;
