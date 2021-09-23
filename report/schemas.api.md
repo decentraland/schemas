@@ -592,10 +592,10 @@ export namespace SceneParcels {
 
 // @alpha
 export type Snapshots = {
-    face: string;
-    face256: string;
-    face128: string;
-    body: string;
+    face: IPFSv2;
+    face256: IPFSv2;
+    face128: IPFSv2;
+    body: IPFSv2;
 };
 
 // @alpha
