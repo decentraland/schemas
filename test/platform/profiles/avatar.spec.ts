@@ -5,12 +5,12 @@ import { testTypeSignature } from '../../test-utils'
 const AVATAR_INFO = {
   bodyShape: 'urn:decentraland:off-chain:base-avatars:BaseMale',
   snapshots: {
-    face: 'https://peer.decentraland.org/content/contents/QmZdwrWnF2kLghFJ9kSj2brFEmywfAiqssr2LCqFj9HVWi',
+    face: 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5q',
     face128:
-      'https://peer.decentraland.org/content/contents/QmefLJryuN2Zyv44iHALWsGghAF3MsAthauoAnHAbFi5Mv',
+      'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5r',
     face256:
-      'https://peer.decentraland.org/content/contents/QmNj97kkczscWiJKax44hZQq9ahfBdA5nNKTs9s9AYidh9',
-    body: 'https://peer.decentraland.org/content/contents/QmWDjKPd9oac2KwzUvWdqHefjvcm66CrNM393QFwkS7Dhu',
+      'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5s',
+    body: 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5t',
   },
   eyes: { color: { r: 0.23046875, g: 0.625, b: 0.3125 } },
   hair: { color: { r: 0.35546875, g: 0.19140625, b: 0.05859375 } },
