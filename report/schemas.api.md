@@ -252,6 +252,17 @@ export namespace I18N {
 }
 
 // @alpha
+export type IPFSv2 = string;
+
+// @alpha
+export namespace IPFSv2 {
+    const // (undocumented)
+    schema: JSONSchema<IPFSv2>;
+    const // (undocumented)
+    validate: ValidateFunction<IPFSv2>;
+}
+
+// @alpha
 export function isInsideWorldLimits(x: number, y: number): boolean;
 
 // Warning: (ae-missing-release-tag) "Item" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
