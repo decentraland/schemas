@@ -60,3 +60,23 @@ export namespace EthAddress {
   export const validate: ValidateFunction<EthAddress> = (ethAddress: any): ethAddress is EthAddress =>
     schemaValidator(ethAddress)
 }
+
+/**
+ * IPFSv2 is a data type that describes an IPFS v2 hash
+ * @alpha 
+ */
+export type IPFSv2 = string
+
+/**
+ * IPFSv2
+ * @alpha 
+ */
+export namespace IPFSv2 {
+  export const schema: JSONSchema<IPFSv2> = {
+    type: 'string',
+    pattern: '^(bafy)[a-zA-Z0-9]{55}$'
+  }
+  const schemaValidator: ValidateFunction<IPFSv2> = generateValidator(schema);
+  export const validate: ValidateFunction<IPFSv2> = (hash: any): hash is IPFSv2 =>
+    schemaValidator(hash)
+}
