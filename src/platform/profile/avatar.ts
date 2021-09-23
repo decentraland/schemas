@@ -1,4 +1,4 @@
-import { Color3, EthAddress, WearableId } from "../../misc"
+import { Color3, EthAddress, IPFSv2, WearableId } from "../../misc"
 import { generateValidator, JSONSchema, ValidateFunction } from "../../validation"
 
 /**
@@ -6,10 +6,10 @@ import { generateValidator, JSONSchema, ValidateFunction } from "../../validatio
  * @alpha 
  */
 export type Snapshots = {
-  face: string
-  face256: string
-  face128: string
-  body: string
+  face: IPFSv2
+  face256: IPFSv2
+  face128: IPFSv2
+  body: IPFSv2
 }
 
 /**
@@ -21,18 +21,10 @@ export namespace Snapshots {
     type: 'object',
     required: ['face', 'face128', 'face256', 'body'],
     properties: {
-      face: {
-        type: 'string'
-      },
-      face256: {
-        type: 'string'
-      },
-      face128: {
-        type: 'string'
-      },
-      body: {
-        type: 'string'
-      }
+      face: IPFSv2.schema,
+      face256: IPFSv2.schema,
+      face128: IPFSv2.schema,
+      body: IPFSv2.schema
     }
   }
   const schemaValidator: ValidateFunction<Snapshots> = generateValidator(schema);
