@@ -2,20 +2,29 @@
 export * from './validation'
 
 // export all the types
-export { Bid } from './dapps/bid'
+export { Bid, BidFilters, BidSortBy } from './dapps/bid'
 export { BodyShape } from './dapps/body-shape'
 export { ChainId, getChainName, getURNProtocol } from './dapps/chain-id'
 export { ChainName, getChainId } from './dapps/chain-name'
-export { Contract } from './dapps/contract'
-export { Item } from './dapps/item'
+export {
+  Collection,
+  CollectionFilters,
+  CollectionSortBy,
+} from './dapps/collection'
+export { Contract, ContractFilters, ContractSortBy } from './dapps/contract'
+export { Item, ItemFilters, ItemSortBy } from './dapps/item'
 export { ListingStatus } from './dapps/listing-status'
 export { MetaTransaction } from './dapps/meta-transactions'
+export { Mint, MintFilters, MintSortBy } from './dapps/mint'
 export { Network } from './dapps/network'
 export { NFTCategory } from './dapps/nft-category'
-export { NFT } from './dapps/nft'
-export { Order } from './dapps/order'
+export { NFT, NFTFilters, NFTSortBy } from './dapps/nft'
+export { Order, OrderFilters, OrderSortBy } from './dapps/order'
 export { Rarity } from './dapps/rarity'
+export { SaleType } from './dapps/sale-type'
+export { Sale, SaleFilters, SaleSortBy } from './dapps/sale'
 export { WearableCategory } from './dapps/wearable-category'
+export { WearableGender } from './dapps/wearable-gender'
 export {
   World,
   ValidWorldRange,

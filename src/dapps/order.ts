@@ -18,6 +18,24 @@ export type Order = {
   chainId: ChainId
 }
 
+export type OrderFilters = {
+  first?: number
+  skip?: number
+  sortBy?: OrderSortBy
+  owner?: string
+  buyer?: string
+  contractAddress?: string
+  tokenId?: string
+  status?: ListingStatus
+  network?: Network
+}
+
+export enum OrderSortBy {
+  RECENTLY_LISTED = 'recently_listed',
+  RECENTLY_UPDATED = 'recently_updated',
+  CHEAPEST = 'cheapest',
+}
+
 export namespace Order {
   export const schema: JSONSchema<Order> = {
     type: 'object',
