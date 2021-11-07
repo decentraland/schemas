@@ -11,6 +11,15 @@ export type Contract = {
   chainId: ChainId
 }
 
+export type ContractFilters = {
+  category?: NFTCategory
+  network?: Network
+}
+
+export enum ContractSortBy {
+  NAME = 'name',
+}
+
 export namespace Contract {
   export const schema: JSONSchema<Contract> = {
     type: 'object',

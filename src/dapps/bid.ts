@@ -21,6 +21,24 @@ export type Bid = {
   chainId: ChainId
 }
 
+export enum BidSortBy {
+  RECENTLY_OFFERED = 'recently_offered',
+  RECENTLY_UPDATED = 'recently_updated',
+  MOST_EXPENSIVE = 'most_expensive',
+}
+
+export type BidFilters = {
+  first?: number
+  skip?: number
+  sortBy?: BidSortBy
+  bidder?: string
+  seller?: string
+  contractAddress?: string
+  tokenId?: string
+  status?: ListingStatus
+  network?: Network
+}
+
 export namespace Bid {
   export const schema: JSONSchema<Bid> = {
     type: 'object',

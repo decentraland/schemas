@@ -5,6 +5,8 @@ import { Network } from './network'
 import { NFT } from './nft'
 import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'
+import { WearableCategory } from './wearable-category'
+import { WearableGender } from './wearable-gender'
 
 export type Item = {
   id: string
@@ -22,9 +24,36 @@ export type Item = {
   createdAt: number
   updatedAt: number
   reviewedAt: number
+  soldAt: number
   data: NFT['data']
   network: Network
   chainId: ChainId
+}
+
+export type ItemFilters = {
+  first?: number
+  skip?: number
+  sortBy?: ItemSortBy
+  creator?: string
+  rarities?: Rarity[]
+  isSoldOut?: boolean
+  isOnSale?: boolean
+  search?: string
+  isWearableHead?: boolean
+  isWearableAccessory?: boolean
+  wearableCategory?: WearableCategory
+  wearableGenders?: WearableGender[]
+  contractAddress?: string
+  itemId?: string
+  network?: Network
+}
+
+export enum ItemSortBy {
+  NAME = 'name',
+  NEWEST = 'newest',
+  RECENTLY_REVIEWED = 'recently_reviewed',
+  RECENTLY_SOLD = 'recently_sold',
+  CHEAPEST = 'cheapest',
 }
 
 export namespace Item {
@@ -77,6 +106,9 @@ export namespace Item {
       reviewedAt: {
         type: 'integer',
       },
+      soldAt: {
+        type: 'integer',
+      },
     },
     required: [
       'id',
@@ -96,6 +128,7 @@ export namespace Item {
       'chainId',
       'createdAt',
       'updatedAt',
+      'soldAt',
     ],
   }
 

@@ -39,7 +39,8 @@ describe('Item tests', () => {
       chainId: ChainId.MATIC_MAINNET,
       createdAt: 1625731369000,
       updatedAt: 1626088534000,
-      reviewedAt: 1626088534000
+      reviewedAt: 1626088534000,
+      soldAt: 1626088534000,
     }
 
     testTypeSignature(Item, wearable)
