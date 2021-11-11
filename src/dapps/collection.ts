@@ -27,6 +27,7 @@ export type CollectionFilters = {
   first?: number
   skip?: number
   sortBy?: CollectionSortBy
+  name?: string
   creator?: string
   contractAddress?: string
   urn?: string
