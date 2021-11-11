@@ -225,6 +225,7 @@ export type CollectionFilters = {
     first?: number;
     skip?: number;
     sortBy?: CollectionSortBy;
+    name?: string;
     creator?: string;
     contractAddress?: string;
     urn?: string;
@@ -1150,7 +1151,7 @@ export namespace World {
 // src/dapps/bid.ts:39:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/collection.ts:15:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/collection.ts:16:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/collection.ts:34:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/collection.ts:35:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/contract.ts:10:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/contract.ts:11:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/contract.ts:16:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
