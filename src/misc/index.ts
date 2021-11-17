@@ -74,7 +74,7 @@ export type IPFSv2 = string
 export namespace IPFSv2 {
   export const schema: JSONSchema<IPFSv2> = {
     type: 'string',
-    pattern: '^(bafy)[a-zA-Z0-9]{55}$'
+    pattern: '^(ba)[a-zA-Z0-9]{57}$'
   }
   const schemaValidator: ValidateFunction<IPFSv2> = generateValidator(schema);
   export const validate: ValidateFunction<IPFSv2> = (hash: any): hash is IPFSv2 =>
