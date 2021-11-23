@@ -928,6 +928,11 @@ export namespace SceneParcels {
     validate: ValidateFunction<SceneParcels>;
 }
 
+// @public (undocumented)
+export namespace sdk {
+    { Messages, Actions, SceneUpdate, SCENE_UPDATE, UPDATE, Update };
+}
+
 // @alpha
 export type Snapshots = {
     face: IPFSv2;

@@ -1,14 +1,14 @@
 import { generateValidator, JSONSchema, ValidateFunction } from "../../validation";
 
-/** @public @deprecated */
-export const UPDATE = 'update'
+/** @internal @deprecated */
+export const UPDATE = "update"
 
-/** @public @deprecated */
+/** @internal @deprecated */
 export type Update = {
   type: typeof UPDATE;
 };
 
-/** @public @deprecated */
+/** @internal @deprecated */
 export namespace Update {
   export const schema: JSONSchema<Update> = {
     type: "object",
@@ -18,7 +18,7 @@ export namespace Update {
         enum: [UPDATE]
       },
     },
-    required: ['type']
+    required: ["type"]
   };
 
   export const validate: ValidateFunction<Update> = generateValidator(schema);

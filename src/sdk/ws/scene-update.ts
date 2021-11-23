@@ -1,9 +1,9 @@
 import { generateValidator, JSONSchema, ValidateFunction } from "../../validation";
 
-/** @public */
-export const SCENE_UPDATE = 'SCENE_UPDATE'
+/** @internal */
+export const SCENE_UPDATE = "SCENE_UPDATE"
 
-/** @public */
+/** @internal */
 export type SceneUpdate = {
   type: typeof SCENE_UPDATE;
   payload: {
@@ -12,7 +12,7 @@ export type SceneUpdate = {
   }
 };
 
-/** @public */
+/** @internal */
 export namespace SceneUpdate {
   export const schema: JSONSchema<SceneUpdate> = {
     type: "object",
@@ -35,7 +35,7 @@ export namespace SceneUpdate {
         required: ["sceneId", "sceneType"],
       },
     },
-    required: ['payload', 'type']
+    required: ["payload", "type"]
   };
 
   export const validate: ValidateFunction<SceneUpdate> = generateValidator(schema);
