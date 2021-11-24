@@ -14,6 +14,9 @@ export type AbstractTypedSchema<T> = {
     validate: ValidateFunction<T>;
 };
 
+// @internal (undocumented)
+type Actions = typeof SCENE_UPDATE | typeof UPDATE;
+
 export { Ajv }
 
 // @alpha
@@ -475,6 +478,9 @@ export namespace Locale {
     validate: ValidateFunction<Locale>;
 }
 
+// @internal (undocumented)
+type Messages = SceneUpdate | Update;
+
 // @alpha
 export type MetaTransaction = {
     from: string;
@@ -766,6 +772,27 @@ export namespace Profile {
     validate: ValidateFunction<Profile>;
 }
 
+// Warning: (ae-missing-release-tag) "ProjectType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ProjectType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+enum ProjectType {
+    // (undocumented)
+    PORTABLE_EXPERIENCE = "portable-experience",
+    // (undocumented)
+    SCENE = "scene",
+    // (undocumented)
+    SMART_ITEM = "smart-item"
+}
+
+// @public (undocumented)
+namespace ProjectType {
+    const // (undocumented)
+    schema: JSONSchema<ProjectType>;
+    const // (undocumented)
+    validate: ValidateFunction<ProjectType>;
+}
+
 // Warning: (ae-missing-release-tag) "Rarity" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Rarity" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -912,6 +939,9 @@ export namespace Scene {
     validate: ValidateFunction<Scene>;
 }
 
+// @internal (undocumented)
+const SCENE_UPDATE = "SCENE_UPDATE";
+
 // @alpha (undocumented)
 export type SceneParcels = {
     base: string;
@@ -928,10 +958,35 @@ export namespace SceneParcels {
     validate: ValidateFunction<SceneParcels>;
 }
 
-// @public (undocumented)
-export namespace sdk {
-    { Messages, Actions, SceneUpdate, SCENE_UPDATE, UPDATE, Update };
+// @internal (undocumented)
+type SceneUpdate = {
+    type: typeof SCENE_UPDATE;
+    payload: {
+        sceneId: string;
+        sceneType: string;
+    };
+};
+
+// @internal (undocumented)
+namespace SceneUpdate {
+    const // (undocumented)
+    schema: JSONSchema<SceneUpdate>;
+    const // (undocumented)
+    validate: ValidateFunction<SceneUpdate>;
 }
+
+declare namespace sdk {
+    export {
+        Actions,
+        Messages,
+        SCENE_UPDATE,
+        SceneUpdate,
+        UPDATE,
+        Update,
+        ProjectType
+    }
+}
+export { sdk }
 
 // @alpha
 export type Snapshots = {
@@ -988,6 +1043,28 @@ export namespace SpawnPoint {
     schema: JSONSchema<SpawnPoint>;
     const // (undocumented)
     validate: ValidateFunction<SpawnPoint>;
+}
+
+// Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
+//
+// @internal @deprecated (undocumented)
+const UPDATE = "update";
+
+// Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
+//
+// @internal @deprecated (undocumented)
+type Update = {
+    type: typeof UPDATE;
+};
+
+// Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
+//
+// @internal @deprecated (undocumented)
+namespace Update {
+    const // (undocumented)
+    schema: JSONSchema<Update>;
+    const // (undocumented)
+    validate: ValidateFunction<Update>;
 }
 
 // @public
@@ -1148,7 +1225,6 @@ export namespace World {
     const // (undocumented)
     validate: ValidateFunction<World>;
 }
-
 
 // Warnings were encountered during analysis:
 //
