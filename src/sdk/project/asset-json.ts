@@ -5,7 +5,7 @@ import {
   JSONSchema,
   ValidateFunction,
 } from "../../validation";
-import { Rarity } from "../..";
+import { Rarity } from "./../../dapps/rarity";
 import { AssetWearableGender } from "./asset-wearable-gender";
 
 /** @alpha */

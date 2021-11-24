@@ -5,15 +5,21 @@ import {
   ValidateFunction,
 } from "../../validation";
 
-enum AssetWearableBothGender {
-  BOTH = "both",
+export enum AssetWearableGender {
+  MALE = 'male',
+  FEMALE = 'female',
+  BOTH = 'both',
 }
 
-export type AssetWearableGender = AssetWearableBothGender | WearableGender;
+// export enum AssetWearableGenderBoth {
+//   BOTH = "both",
+// }
+
+// export type AssetWearableGender = AssetWearableGenderBoth | WearableGender
 
 export namespace AssetWearableGender {
   export const schema: JSONSchema<AssetWearableGender> = {
-    type: "string",
+    type: 'string',
     enum: Object.values(AssetWearableGender),
   };
 
