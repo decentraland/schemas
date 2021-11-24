@@ -1,3 +1,5 @@
+import * as sdk from './sdk'
+
 // export the utils
 export * from './validation'
 
@@ -34,4 +36,4 @@ export {
 
 export * from './platform'
 export * from './misc'
-export * from './sdk'
+export { sdk }
