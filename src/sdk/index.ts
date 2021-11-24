@@ -1,3 +1,4 @@
+import { AssetJson } from "./scene/asset-json"
 import { Messages, Actions } from "./ws"
 import { SceneUpdate, SCENE_UPDATE } from "./ws/scene-update"
 import { Update, UPDATE } from "./ws/update"
@@ -10,6 +11,7 @@ export declare namespace sdk {
     SceneUpdate,
     SCENE_UPDATE,
     UPDATE,
-    Update
-  }
+    Update,
+    AssetJson,
+  };
 }
