@@ -1,3 +1,4 @@
+import { ProjectType } from './../project/type';
 import { WearableCategory } from "./../../dapps/wearable-category";
 import {
   generateValidator,
@@ -5,7 +6,6 @@ import {
   ValidateFunction,
 } from "../../validation";
 import { Rarity } from "../..";
-import { AssetType } from "./asset-type";
 import { AssetWearableGender } from "./asset-wearable-gender";
 
 /** @alpha */
@@ -34,7 +34,7 @@ export namespace AssetJson {
           "The ID that you will replace in your collection. Also this ID is used for develop purpose, to identify in the kernel.",
         type: "string",
       },
-      assetType: AssetType.schema,
+      assetType: ProjectType.schema,
       name: {
         description: "",
         type: "string",
