@@ -18,7 +18,7 @@ describe('Sale tests', () => {
       txHash:
         '0x2bfc1458d1ec631bfcd9782e001d93fe0cf95a6e4fede3222e9e5bde7fb47e36',
       network: Network.MATIC,
-      chainId: ChainId.MATIC_MAINNET,
+      chainId: ChainId.MATIC_MAINNET
     }
 
     testTypeSignature(Sale, sale)

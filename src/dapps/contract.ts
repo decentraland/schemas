@@ -17,7 +17,7 @@ export type ContractFilters = {
 }
 
 export enum ContractSortBy {
-  NAME = 'name',
+  NAME = 'name'
 }
 
 export namespace Contract {
@@ -25,16 +25,16 @@ export namespace Contract {
     type: 'object',
     properties: {
       name: {
-        type: 'string',
+        type: 'string'
       },
       address: {
-        type: 'string',
+        type: 'string'
       },
       category: NFTCategory.schema,
       network: Network.schema,
-      chainId: ChainId.schema,
+      chainId: ChainId.schema
     },
-    required: ['name', 'address', 'category', 'network', 'chainId'],
+    required: ['name', 'address', 'category', 'network', 'chainId']
   }
 
   export const validate: ValidateFunction<Contract> = generateValidator(schema)

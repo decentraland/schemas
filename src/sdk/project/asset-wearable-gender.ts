@@ -1,14 +1,13 @@
-import { WearableGender } from "../../dapps/wearable-gender";
 import {
   generateValidator,
   JSONSchema,
-  ValidateFunction,
-} from "../../validation";
+  ValidateFunction
+} from '../../validation'
 
 export enum AssetWearableGender {
   MALE = 'male',
   FEMALE = 'female',
-  BOTH = 'both',
+  BOTH = 'both'
 }
 
 // export enum AssetWearableGenderBoth {
@@ -20,9 +19,9 @@ export enum AssetWearableGender {
 export namespace AssetWearableGender {
   export const schema: JSONSchema<AssetWearableGender> = {
     type: 'string',
-    enum: Object.values(AssetWearableGender),
-  };
+    enum: Object.values(AssetWearableGender)
+  }
 
   export const validate: ValidateFunction<AssetWearableGender> =
-    generateValidator(schema);
+    generateValidator(schema)
 }

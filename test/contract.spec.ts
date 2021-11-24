@@ -8,7 +8,7 @@ describe('Contract tests', () => {
     address: '0x1286dad1da5233a63a5d55fcf9e834feb14e1d6d',
     category: NFTCategory.WEARABLE,
     network: Network.MATIC,
-    chainId: ChainId.MATIC_MAINNET,
+    chainId: ChainId.MATIC_MAINNET
   }
 
   testTypeSignature(Contract, contract)

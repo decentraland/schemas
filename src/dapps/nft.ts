@@ -76,7 +76,7 @@ export enum NFTSortBy {
   NEWEST = 'newest',
   RECENTLY_LISTED = 'recently_listed',
   RECENTLY_SOLD = 'recently_sold',
-  CHEAPEST = 'cheapest',
+  CHEAPEST = 'cheapest'
 }
 
 export namespace NFT {
@@ -84,29 +84,29 @@ export namespace NFT {
     type: 'object',
     properties: {
       id: {
-        type: 'string',
+        type: 'string'
       },
       tokenId: {
-        type: 'string',
+        type: 'string'
       },
       contractAddress: {
-        type: 'string',
+        type: 'string'
       },
       activeOrderId: {
         type: ['string'],
-        nullable: true,
+        nullable: true
       },
       owner: {
-        type: 'string',
+        type: 'string'
       },
       name: {
-        type: 'string',
+        type: 'string'
       },
       image: {
-        type: 'string',
+        type: 'string'
       },
       url: {
-        type: 'string',
+        type: 'string'
       },
       data: {
         type: 'object',
@@ -117,40 +117,40 @@ export namespace NFT {
             properties: {
               description: {
                 type: ['string'],
-                nullable: true,
+                nullable: true
               },
               x: {
-                type: 'string',
+                type: 'string'
               },
               y: {
-                type: 'string',
+                type: 'string'
               },
               estate: {
                 type: 'object',
                 properties: {
                   tokenId: {
-                    type: 'string',
+                    type: 'string'
                   },
                   name: {
-                    type: 'string',
-                  },
+                    type: 'string'
+                  }
                 },
                 required: ['tokenId', 'name'],
-                nullable: true,
-              },
+                nullable: true
+              }
             },
             required: ['description', 'x', 'y', 'estate'],
-            nullable: true,
+            nullable: true
           },
           estate: {
             type: 'object',
             properties: {
               description: {
                 type: ['string'],
-                nullable: true,
+                nullable: true
               },
               size: {
-                type: 'integer',
+                type: 'integer'
               },
               parcels: {
                 type: 'array',
@@ -158,68 +158,68 @@ export namespace NFT {
                   type: 'object',
                   properties: {
                     x: {
-                      type: 'number',
+                      type: 'number'
                     },
                     y: {
-                      type: 'number',
-                    },
+                      type: 'number'
+                    }
                   },
-                  required: ['x', 'y'],
-                },
-              },
+                  required: ['x', 'y']
+                }
+              }
             },
             required: ['description', 'size', 'parcels'],
-            nullable: true,
+            nullable: true
           },
           wearable: {
             type: 'object',
             properties: {
               bodyShapes: {
                 type: 'array',
-                items: BodyShape.schema,
+                items: BodyShape.schema
               },
               category: WearableCategory.schema,
               description: {
-                type: 'string',
+                type: 'string'
               },
-              rarity: Rarity.schema,
+              rarity: Rarity.schema
             },
             required: ['bodyShapes', 'category', 'description', 'rarity'],
-            nullable: true,
+            nullable: true
           },
           ens: {
             type: 'object',
             properties: {
               subdomain: {
-                type: 'string',
-              },
+                type: 'string'
+              }
             },
             required: ['subdomain'],
-            nullable: true,
-          },
+            nullable: true
+          }
         },
-        required: [],
+        required: []
       },
       issuedId: {
         type: 'string',
-        nullable: true,
+        nullable: true
       },
       itemId: {
         type: 'string',
-        nullable: true,
+        nullable: true
       },
       category: NFTCategory.schema,
       network: Network.schema,
       chainId: ChainId.schema,
       createdAt: {
-        type: 'integer',
+        type: 'integer'
       },
       updatedAt: {
-        type: 'integer',
+        type: 'integer'
       },
       soldAt: {
-        type: 'integer',
-      },
+        type: 'integer'
+      }
     },
     required: [
       'id',
@@ -238,8 +238,8 @@ export namespace NFT {
       'chainId',
       'createdAt',
       'updatedAt',
-      'soldAt',
-    ],
+      'soldAt'
+    ]
   }
 
   export const validate: ValidateFunction<NFT> = generateValidator(schema)

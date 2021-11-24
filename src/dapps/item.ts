@@ -1,5 +1,4 @@
 import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
-import { BodyShape } from './body-shape'
 import { ChainId } from './chain-id'
 import { Network } from './network'
 import { NFT } from './nft'
@@ -53,7 +52,7 @@ export enum ItemSortBy {
   NEWEST = 'newest',
   RECENTLY_REVIEWED = 'recently_reviewed',
   RECENTLY_SOLD = 'recently_sold',
-  CHEAPEST = 'cheapest',
+  CHEAPEST = 'cheapest'
 }
 
 export namespace Item {
@@ -61,54 +60,54 @@ export namespace Item {
     type: 'object',
     properties: {
       id: {
-        type: 'string',
+        type: 'string'
       },
       name: {
-        type: 'string',
+        type: 'string'
       },
       thumbnail: {
-        type: 'string',
+        type: 'string'
       },
       url: {
-        type: 'string',
+        type: 'string'
       },
       category: NFTCategory.schema,
       contractAddress: {
-        type: 'string',
+        type: 'string'
       },
       itemId: {
-        type: 'string',
+        type: 'string'
       },
       rarity: {
-        type: 'string',
+        type: 'string'
       },
       price: {
-        type: 'string',
+        type: 'string'
       },
       available: {
-        type: 'integer',
+        type: 'integer'
       },
       isOnSale: {
-        type: 'boolean',
+        type: 'boolean'
       },
       creator: {
-        type: 'string',
+        type: 'string'
       },
       data: NFT.schema.properties!.data,
       network: Network.schema,
       chainId: ChainId.schema,
       createdAt: {
-        type: 'integer',
+        type: 'integer'
       },
       updatedAt: {
-        type: 'integer',
+        type: 'integer'
       },
       reviewedAt: {
-        type: 'integer',
+        type: 'integer'
       },
       soldAt: {
-        type: 'integer',
-      },
+        type: 'integer'
+      }
     },
     required: [
       'id',
@@ -128,8 +127,8 @@ export namespace Item {
       'chainId',
       'createdAt',
       'updatedAt',
-      'soldAt',
-    ],
+      'soldAt'
+    ]
   }
 
   export const validate: ValidateFunction<Item> = generateValidator(schema)

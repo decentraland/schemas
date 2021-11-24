@@ -1,0 +1,13 @@
+{
+  "extends": "@dcl/eslint-config",
+  "parserOptions": {
+    "project": [
+      "tsconfig.json",
+      "test/tsconfig.json"
+    ]
+  },
+  "rules": {
+    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
+  }
+}

@@ -1,23 +1,23 @@
-import { generateValidator, JSONSchema, ValidateFunction } from "../validation";
+import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * World Range
  * @alpha
  */
 export type ValidWorldRange = {
-  xMin: number;
-  yMin: number;
-  xMax: number;
-  yMax: number;
-};
+  xMin: number
+  yMin: number
+  xMax: number
+  yMax: number
+}
 
 /**
  * World
  * @alpha
  */
 export type World = {
-  validWorldRanges: Array<ValidWorldRange>;
-};
+  validWorldRanges: Array<ValidWorldRange>
+}
 
 /**
  * Get World
@@ -30,28 +30,28 @@ export function getWorld(): World {
         xMin: -150,
         yMin: -150,
         xMax: 150,
-        yMax: 150,
+        yMax: 150
       },
       {
         xMin: 62,
         yMin: 151,
         xMax: 162,
-        yMax: 158,
+        yMax: 158
       },
       {
         xMin: 151,
         yMin: 144,
         xMax: 162,
-        yMax: 150,
+        yMax: 150
       },
       {
         xMin: 151,
         yMin: 59,
         xMax: 163,
-        yMax: 143,
-      },
-    ],
-  };
+        yMax: 143
+      }
+    ]
+  }
 }
 
 /**
@@ -59,18 +59,18 @@ export function getWorld(): World {
  * @alpha
  */
 export function isInsideWorldLimits(x: number, y: number) {
-  const validWorldRanges = getWorld().validWorldRanges;
-  for (var range of validWorldRanges) {
+  const validWorldRanges = getWorld().validWorldRanges
+  for (const range of validWorldRanges) {
     if (
       x >= range.xMin &&
       x <= range.xMax &&
       y >= range.yMin &&
       y <= range.yMax
     ) {
-      return true;
+      return true
     }
   }
-  return false;
+  return false
 }
 
 /**
@@ -78,41 +78,41 @@ export function isInsideWorldLimits(x: number, y: number) {
  */
 export namespace World {
   export const schema: JSONSchema<World> = {
-    type: "object",
-    required: ["validWorldRanges"],
+    type: 'object',
+    required: ['validWorldRanges'],
     properties: {
       validWorldRanges: {
-        type: "array",
+        type: 'array',
         default: [
           {
             xMin: -150,
             yMin: -150,
             xMax: 150,
-            yMax: 150,
-          },
+            yMax: 150
+          }
         ],
         items: {
-          type: "object",
-          required: ["xMin", "yMin", "xMax", "yMax"],
+          type: 'object',
+          required: ['xMin', 'yMin', 'xMax', 'yMax'],
           properties: {
             xMin: {
-              type: "integer",
+              type: 'integer'
             },
             yMin: {
-              type: "integer",
+              type: 'integer'
             },
             xMax: {
-              type: "integer",
+              type: 'integer'
             },
             yMax: {
-              type: "integer",
-            },
-          },
-        },
-      },
+              type: 'integer'
+            }
+          }
+        }
+      }
     },
     additionalProperties: false
-  };
+  }
 
-  export const validate: ValidateFunction<World> = generateValidator(schema);
+  export const validate: ValidateFunction<World> = generateValidator(schema)
 }

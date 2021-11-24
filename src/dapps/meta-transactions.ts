@@ -21,14 +21,13 @@ export namespace MetaTransaction {
         type: 'array',
         items: [{ type: 'string' }, { type: 'string' }],
         additionalItems: false,
-        minItems: 2,
-      },
+        minItems: 2
+      }
     },
     additionalProperties: false,
-    required: ['from', 'params'],
+    required: ['from', 'params']
   }
 
-  export const validate: ValidateFunction<MetaTransaction> = generateValidator(
-    schema
-  )
+  export const validate: ValidateFunction<MetaTransaction> =
+    generateValidator(schema)
 }

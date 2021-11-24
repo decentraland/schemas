@@ -33,7 +33,7 @@ export type OrderFilters = {
 export enum OrderSortBy {
   RECENTLY_LISTED = 'recently_listed',
   RECENTLY_UPDATED = 'recently_updated',
-  CHEAPEST = 'cheapest',
+  CHEAPEST = 'cheapest'
 }
 
 export namespace Order {
@@ -41,36 +41,36 @@ export namespace Order {
     type: 'object',
     properties: {
       id: {
-        type: 'string',
+        type: 'string'
       },
       contractAddress: {
-        type: 'string',
+        type: 'string'
       },
       tokenId: {
-        type: 'string',
+        type: 'string'
       },
       owner: {
-        type: 'string',
+        type: 'string'
       },
       buyer: {
         type: ['string'],
-        nullable: true,
+        nullable: true
       },
       price: {
-        type: 'string',
+        type: 'string'
       },
       status: ListingStatus.schema,
       network: Network.schema,
       chainId: ChainId.schema,
       expiresAt: {
-        type: 'integer',
+        type: 'integer'
       },
       createdAt: {
-        type: 'integer',
+        type: 'integer'
       },
       updatedAt: {
-        type: 'integer',
-      },
+        type: 'integer'
+      }
     },
     required: [
       'id',
@@ -84,8 +84,8 @@ export namespace Order {
       'chainId',
       'expiresAt',
       'createdAt',
-      'updatedAt',
-    ],
+      'updatedAt'
+    ]
   }
 
   export const validate: ValidateFunction<Order> = generateValidator(schema)

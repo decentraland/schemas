@@ -1,4 +1,8 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '../../validation'
+import {
+  generateValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../../validation'
 import { Rarity } from '../../dapps/rarity'
 import { WearableCategory } from '../../dapps/wearable-category'
 import { I18N } from './i18n'
@@ -11,7 +15,7 @@ export type Wearable = {
   descriptions: I18N[]
   collectionAddress: string
   rarity: Rarity
-  names: I18N[],
+  names: I18N[]
   data: {
     replaces: WearableCategory[]
     hides: WearableCategory[]
@@ -30,7 +34,7 @@ export namespace Wearable {
     type: 'object',
     properties: {
       id: {
-        type: 'string',
+        type: 'string'
       },
       descriptions: {
         type: 'array',
@@ -38,7 +42,7 @@ export namespace Wearable {
         minItems: 1
       },
       collectionAddress: {
-        type: 'string',
+        type: 'string'
       },
       rarity: Rarity.schema,
       names: {
@@ -75,10 +79,10 @@ export namespace Wearable {
         required: ['replaces', 'hides', 'tags', 'representations', 'category']
       },
       thumbnail: {
-        type: 'string',
+        type: 'string'
       },
       image: {
-        type: 'string',
+        type: 'string'
       },
       metrics: {
         ...Metrics.schema,
@@ -94,17 +98,22 @@ export namespace Wearable {
       'names',
       'data',
       'thumbnail',
-      'image',
-    ],
+      'image'
+    ]
   }
 
-  const schemaValidator: ValidateFunction<Wearable> = generateValidator(schema);
-  export const validate: ValidateFunction<Wearable> = (wearable: any): wearable is Wearable =>
+  const schemaValidator: ValidateFunction<Wearable> = generateValidator(schema)
+  export const validate: ValidateFunction<Wearable> = (
+    wearable: any
+  ): wearable is Wearable =>
     schemaValidator(wearable) &&
     validateDuplicatedLocales(wearable.descriptions) &&
-    validateDuplicatedLocales(wearable.names);
+    validateDuplicatedLocales(wearable.names)
 
   // Returns true only if there are no entries with the same locale
   const validateDuplicatedLocales = (i18ns: I18N[]) =>
-    i18ns.every(({ code }, index) => i18ns.findIndex((i18n) => i18n.code === code) === index);
+    i18ns.every(
+      ({ code }, index) =>
+        i18ns.findIndex((i18n) => i18n.code === code) === index
+    )
 }

@@ -6,11 +6,9 @@ const AVATAR_INFO = {
   bodyShape: 'urn:decentraland:off-chain:base-avatars:BaseMale',
   snapshots: {
     face: 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5q',
-    face128:
-      'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5r',
-    face256:
-      'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5s',
-    body: 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5t',
+    face128: 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5r',
+    face256: 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5s',
+    body: 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5t'
   },
   eyes: { color: { r: 0.23046875, g: 0.625, b: 0.3125 } },
   hair: { color: { r: 0.35546875, g: 0.19140625, b: 0.05859375 } },
@@ -23,8 +21,8 @@ const AVATAR_INFO = {
     'urn:decentraland:matic:collections-v2:0xf6f601efee04e74cecac02c8c5bdc8cc0fc1c721:0',
     'urn:decentraland:off-chain:base-avatars:classic_shoes',
     'urn:decentraland:off-chain:base-avatars:red_tshirt',
-    'urn:decentraland:off-chain:base-avatars:trash_jean',
-  ],
+    'urn:decentraland:off-chain:base-avatars:trash_jean'
+  ]
 }
 
 export const AVATAR: Avatar = {
@@ -37,12 +35,11 @@ export const AVATAR: Avatar = {
   version: 44,
   avatar: AVATAR_INFO,
   tutorialStep: 355,
-  interests: [],
+  interests: []
 }
 
 describe('Avatar tests', () => {
-  
-  testTypeSignature(Avatar, AVATAR);
+  testTypeSignature(Avatar, AVATAR)
 
   it('static tests must pass', () => {
     expect(Avatar.validate(AVATAR)).toEqual(true)
@@ -51,8 +48,7 @@ describe('Avatar tests', () => {
   })
 
   it('given an invalid ETH address when validating Avatar then result is false', () => {
-    const avatar: Avatar = {...AVATAR, ethAddress: 'someInvalidAddress' }
+    const avatar: Avatar = { ...AVATAR, ethAddress: 'someInvalidAddress' }
     expect(Avatar.validate(avatar)).toEqual(false)
   })
-
 })

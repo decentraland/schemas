@@ -20,7 +20,7 @@ export enum CollectionSortBy {
   NEWEST = 'newest',
   NAME = 'name',
   RECENTLY_REVIEWED = 'recently_reviewed',
-  SIZE = 'size',
+  SIZE = 'size'
 }
 
 export type CollectionFilters = {
@@ -41,34 +41,34 @@ export namespace Collection {
     type: 'object',
     properties: {
       urn: {
-        type: 'string',
+        type: 'string'
       },
       creator: {
-        type: 'string',
+        type: 'string'
       },
       name: {
-        type: 'string',
+        type: 'string'
       },
       contractAddress: {
-        type: 'string',
+        type: 'string'
       },
       size: {
-        type: 'integer',
+        type: 'integer'
       },
       isOnSale: {
-        type: 'boolean',
+        type: 'boolean'
       },
       createdAt: {
-        type: 'integer',
+        type: 'integer'
       },
       updatedAt: {
-        type: 'integer',
+        type: 'integer'
       },
       reviewedAt: {
-        type: 'integer',
+        type: 'integer'
       },
       network: Network.schema,
-      chainId: ChainId.schema,
+      chainId: ChainId.schema
     },
     required: [
       'urn',
@@ -81,8 +81,8 @@ export namespace Collection {
       'updatedAt',
       'reviewedAt',
       'network',
-      'chainId',
-    ],
+      'chainId'
+    ]
   }
 
   export const validate: ValidateFunction<Collection> =

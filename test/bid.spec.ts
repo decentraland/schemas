@@ -19,7 +19,7 @@ describe('Bid tests', () => {
     chainId: ChainId.ETHEREUM_MAINNET,
     expiresAt: 1627689634000,
     createdAt: 1626316584000,
-    updatedAt: 1626316584000,
+    updatedAt: 1626316584000
   }
 
   testTypeSignature(Bid, bid)

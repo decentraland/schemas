@@ -1,4 +1,8 @@
-import { generateValidator, JSONSchema, ValidateFunction } from "../../validation";
+import {
+  generateValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../../validation'
 
 /* @internal */
 export enum ProjectType {
@@ -10,9 +14,10 @@ export enum ProjectType {
 /* @internal */
 export namespace ProjectType {
   export const schema: JSONSchema<ProjectType> = {
-    type: "string",
+    type: 'string',
     enum: [ProjectType]
-  };
+  }
 
-  export const validate: ValidateFunction<ProjectType> = generateValidator(schema);
+  export const validate: ValidateFunction<ProjectType> =
+    generateValidator(schema)
 }

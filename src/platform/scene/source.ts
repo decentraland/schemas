@@ -1,68 +1,72 @@
-import { generateValidator, JSONSchema, ValidateFunction } from "../../validation";
+import {
+  generateValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../../validation'
 
 /** @alpha */
 export type Source = {
-  version?: number;
-  origin: string;
-  projectId: string;
-  point?: { x: number; y: number };
-  rotation?: "north" | "east" | "south" | "west";
-  layout?: { rows: number; cols: number };
-  isEmpty?: boolean;
-};
+  version?: number
+  origin: string
+  projectId: string
+  point?: { x: number; y: number }
+  rotation?: 'north' | 'east' | 'south' | 'west'
+  layout?: { rows: number; cols: number }
+  isEmpty?: boolean
+}
 
 /** @alpha */
 export namespace Source {
   export const schema: JSONSchema<Source> = {
-    type: "object",
+    type: 'object',
     properties: {
       version: {
-        type: "number",
-        nullable: true,
+        type: 'number',
+        nullable: true
       },
       origin: {
-        type: "string",
+        type: 'string'
       },
       projectId: {
-        type: "string",
+        type: 'string'
       },
       point: {
-        type: "object",
+        type: 'object',
         properties: {
-          x: { type: "integer" },
-          y: { type: "integer" },
+          x: { type: 'integer' },
+          y: { type: 'integer' }
         },
         additionalProperties: false,
         nullable: true,
-        required: ["x", "y"],
+        required: ['x', 'y']
       },
       rotation: {
-        type: "string",
-        enum: ["north", "east", "south", "west"],
-        nullable: true,
+        type: 'string',
+        enum: ['north', 'east', 'south', 'west'],
+        nullable: true
       },
       layout: {
-        type: "object",
+        type: 'object',
         properties: {
           rows: {
-            type: "integer",
+            type: 'integer'
           },
           cols: {
-            type: "integer",
-          },
+            type: 'integer'
+          }
         },
         nullable: true,
         additionalProperties: false,
-        required: ["rows", "cols"],
+        required: ['rows', 'cols']
       },
       isEmpty: {
-        type: "boolean",
-        nullable: true,
-      },
+        type: 'boolean',
+        nullable: true
+      }
     },
     additionalProperties: false,
-    required: ["origin", "projectId"],
-  };
+    required: ['origin', 'projectId']
+  }
 
-  export const validate: ValidateFunction<Source> = generateValidator(schema);
+  export const validate: ValidateFunction<Source> = generateValidator(schema)
 }

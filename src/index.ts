@@ -11,7 +11,7 @@ export { ChainName, getChainId } from './dapps/chain-name'
 export {
   Collection,
   CollectionFilters,
-  CollectionSortBy,
+  CollectionSortBy
 } from './dapps/collection'
 export { Contract, ContractFilters, ContractSortBy } from './dapps/contract'
 export { Item, ItemFilters, ItemSortBy } from './dapps/item'
@@ -31,7 +31,7 @@ export {
   World,
   ValidWorldRange,
   getWorld,
-  isInsideWorldLimits,
+  isInsideWorldLimits
 } from './dapps/world'
 
 export * from './platform'
