@@ -10,12 +10,6 @@ export enum AssetWearableGender {
   BOTH = 'both'
 }
 
-// export enum AssetWearableGenderBoth {
-//   BOTH = "both",
-// }
-
-// export type AssetWearableGender = AssetWearableGenderBoth | WearableGender
-
 export namespace AssetWearableGender {
   export const schema: JSONSchema<AssetWearableGender> = {
     type: 'string',
