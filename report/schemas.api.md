@@ -1067,6 +1067,33 @@ export namespace SpawnPoint {
     validate: ValidateFunction<SpawnPoint>;
 }
 
+// Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Store = {
+    id: string;
+    owner: string;
+    description: string;
+    links: {
+        name: string;
+        url: string;
+    }[];
+    images: {
+        name: string;
+        file: string;
+    }[];
+    version: number;
+};
+
+// @public (undocumented)
+export namespace Store {
+    const // (undocumented)
+    schema: JSONSchema<Store>;
+    const // (undocumented)
+    validate: ValidateFunction<Store>;
+}
+
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
 // @internal @deprecated (undocumented)

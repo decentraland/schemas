@@ -11,7 +11,7 @@ export { ChainName, getChainId } from './dapps/chain-name'
 export {
   Collection,
   CollectionFilters,
-  CollectionSortBy
+  CollectionSortBy,
 } from './dapps/collection'
 export { Contract, ContractFilters, ContractSortBy } from './dapps/contract'
 export { Item, ItemFilters, ItemSortBy } from './dapps/item'
@@ -25,13 +25,14 @@ export { Order, OrderFilters, OrderSortBy } from './dapps/order'
 export { Rarity } from './dapps/rarity'
 export { SaleType } from './dapps/sale-type'
 export { Sale, SaleFilters, SaleSortBy } from './dapps/sale'
+export { Store } from './dapps/store'
 export { WearableCategory } from './dapps/wearable-category'
 export { WearableGender } from './dapps/wearable-gender'
 export {
   World,
   ValidWorldRange,
   getWorld,
-  isInsideWorldLimits
+  isInsideWorldLimits,
 } from './dapps/world'
 
 export * from './platform'

@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "check-api": "api-extractor run --typescript-compiler-folder ./node_modules/typescript",
-    "refresh-api": "api-extractor run --local --verbose --diagnostics --typescript-compiler-folder ./node_modules/typescript"
+    "refresh-api": "npm run build && api-extractor run --local --verbose --diagnostics --typescript-compiler-folder ./node_modules/typescript"
   },
   "devDependencies": {
     "@dcl/eslint-config": "^1.0.0",
