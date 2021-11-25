@@ -3,7 +3,8 @@ import { IPFSv2 } from '../src'
 import { testTypeSignature } from './test-utils'
 
 describe('Hashing tests', () => {
-  const hash: IPFSv2 = 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5q'
+  const hash: IPFSv2 =
+    'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5q'
 
   testTypeSignature(IPFSv2, hash)
 

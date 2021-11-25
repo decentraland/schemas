@@ -1,4 +1,8 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '../../validation'
+import {
+  generateValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../../validation'
 
 /** @alpha */
 export enum Locale {
@@ -10,7 +14,7 @@ export enum Locale {
 export namespace Locale {
   export const schema: JSONSchema<Locale> = {
     type: 'string',
-    enum: Object.values(Locale),
+    enum: Object.values(Locale)
   }
 
   export const validate: ValidateFunction<Locale> = generateValidator(schema)

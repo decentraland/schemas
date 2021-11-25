@@ -21,7 +21,7 @@ export type Sale = {
 
 export enum SaleSortBy {
   RECENTLY_SOLD = 'recently_sold',
-  MOST_EXPENSIVE = 'most_expensive',
+  MOST_EXPENSIVE = 'most_expensive'
 }
 
 export type SaleFilters = {
@@ -47,35 +47,35 @@ export namespace Sale {
     type: 'object',
     properties: {
       id: {
-        type: 'string',
+        type: 'string'
       },
       type: SaleType.schema,
       buyer: {
-        type: 'string',
+        type: 'string'
       },
       seller: {
-        type: 'string',
+        type: 'string'
       },
       price: {
-        type: 'string',
+        type: 'string'
       },
       contractAddress: {
-        type: 'string',
+        type: 'string'
       },
       tokenId: {
-        type: 'string',
+        type: 'string'
       },
       itemId: {
-        type: 'string',
+        type: 'string'
       },
       txHash: {
-        type: 'string',
+        type: 'string'
       },
       timestamp: {
-        type: 'integer',
+        type: 'integer'
       },
       network: Network.schema,
-      chainId: ChainId.schema,
+      chainId: ChainId.schema
     },
     required: [
       'id',
@@ -88,8 +88,8 @@ export namespace Sale {
       'timestamp',
       'txHash',
       'network',
-      'chainId',
-    ],
+      'chainId'
+    ]
   }
 
   export const validate: ValidateFunction<Sale> = generateValidator(schema)

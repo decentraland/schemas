@@ -12,7 +12,7 @@ export enum ChainName {
   ETHEREUM_GOERLI = 'Goerli',
   ETHEREUM_KOVAN = 'Kovan',
   MATIC_MAINNET = 'Polygon',
-  MATIC_MUMBAI = 'Mumbai',
+  MATIC_MUMBAI = 'Mumbai'
 }
 
 /**
@@ -46,7 +46,7 @@ export function getChainId(chainName: ChainName): ChainId | null {
 export namespace ChainName {
   export const schema: JSONSchema<ChainName> = {
     type: 'string',
-    enum: Object.values(ChainName),
+    enum: Object.values(ChainName)
   }
 
   export const validate: ValidateFunction<ChainName> = generateValidator(schema)

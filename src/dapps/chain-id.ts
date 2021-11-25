@@ -13,7 +13,7 @@ export enum ChainId {
   ETHEREUM_GOERLI = 5,
   ETHEREUM_KOVAN = 42,
   MATIC_MAINNET = 137,
-  MATIC_MUMBAI = 80001,
+  MATIC_MUMBAI = 80001
 }
 
 /**
@@ -70,7 +70,7 @@ export function getURNProtocol(chainId: ChainId): string {
 export namespace ChainId {
   export const schema: JSONSchema<ChainId> = {
     type: 'number',
-    enum: Object.values(ChainId),
+    enum: Object.values(ChainId)
   }
 
   export const validate: ValidateFunction<ChainId> = generateValidator(schema)

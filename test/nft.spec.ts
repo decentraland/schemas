@@ -6,7 +6,7 @@ import {
   NFT,
   NFTCategory,
   Rarity,
-  WearableCategory,
+  WearableCategory
 } from '../src'
 import { testTypeSignature } from './test-utils'
 
@@ -28,8 +28,8 @@ describe('NFT tests', () => {
           description: 'Get Your Smoke On',
           x: '-63',
           y: '-115',
-          estate: null,
-        },
+          estate: null
+        }
       },
       issuedId: null,
       itemId: null,
@@ -38,7 +38,7 @@ describe('NFT tests', () => {
       chainId: ChainId.ETHEREUM_MAINNET,
       createdAt: 1545579159000,
       updatedAt: 1619273260000,
-      soldAt: 1619273260000,
+      soldAt: 1619273260000
     }
 
     testTypeSignature(NFT, parcel)
@@ -68,30 +68,30 @@ describe('NFT tests', () => {
           parcels: [
             {
               x: -140,
-              y: -43,
+              y: -43
             },
             {
               x: -140,
-              y: -42,
+              y: -42
             },
             {
               x: -139,
-              y: -43,
+              y: -43
             },
             {
               x: -139,
-              y: -42,
+              y: -42
             },
             {
               x: -138,
-              y: -43,
+              y: -43
             },
             {
               x: -138,
-              y: -42,
-            },
-          ],
-        },
+              y: -42
+            }
+          ]
+        }
       },
       issuedId: null,
       itemId: null,
@@ -100,7 +100,7 @@ describe('NFT tests', () => {
       chainId: ChainId.ETHEREUM_MAINNET,
       createdAt: 1626182617000,
       updatedAt: 1626246391000,
-      soldAt: 1626246391000,
+      soldAt: 1626246391000
     }
 
     testTypeSignature(NFT, estate)
@@ -129,8 +129,8 @@ describe('NFT tests', () => {
           description: 'Wearable by DaddyChang',
           category: WearableCategory.HELMET,
           bodyShapes: [BodyShape.MALE, BodyShape.FEMALE],
-          rarity: Rarity.MYTHIC,
-        },
+          rarity: Rarity.MYTHIC
+        }
       },
       issuedId: '16',
       itemId: '0',
@@ -139,7 +139,7 @@ describe('NFT tests', () => {
       chainId: ChainId.ETHEREUM_MAINNET,
       createdAt: 1626182617000,
       updatedAt: 1626246391000,
-      soldAt: 1626246391000,
+      soldAt: 1626246391000
     }
 
     testTypeSignature(NFT, wearable)
@@ -165,8 +165,8 @@ describe('NFT tests', () => {
       url: '/contracts/0x2a187453064356c898cae034eaed119e1663acb8/tokens/20267204986233636871295784595277786190248304170965188964447216591051155494561',
       data: {
         ens: {
-          subdomain: 'Rumors',
-        },
+          subdomain: 'Rumors'
+        }
       },
       issuedId: null,
       itemId: null,
@@ -175,7 +175,7 @@ describe('NFT tests', () => {
       chainId: ChainId.ETHEREUM_MAINNET,
       createdAt: 1626182617000,
       updatedAt: 1626246391000,
-      soldAt: 1626246391000,
+      soldAt: 1626246391000
     }
 
     testTypeSignature(NFT, ens)

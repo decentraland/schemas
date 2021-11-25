@@ -15,7 +15,7 @@ describe('Order tests', () => {
     chainId: ChainId.ETHEREUM_MAINNET,
     expiresAt: 1640908800000,
     createdAt: 1626308259000,
-    updatedAt: 1626310162000,
+    updatedAt: 1626310162000
   }
 
   testTypeSignature(Order, order)

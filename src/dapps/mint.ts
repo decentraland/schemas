@@ -19,7 +19,7 @@ export type Mint = {
 
 export enum MintSortBy {
   RECENTLY_MINTED = 'recently_minted',
-  MOST_EXPENSIVE = 'most_expensive',
+  MOST_EXPENSIVE = 'most_expensive'
 }
 
 export type MintFilters = {
@@ -42,38 +42,38 @@ export namespace Mint {
     type: 'object',
     properties: {
       id: {
-        type: 'string',
+        type: 'string'
       },
       creator: {
-        type: 'string',
+        type: 'string'
       },
       beneficiary: {
-        type: 'string',
+        type: 'string'
       },
       minter: {
-        type: 'string',
+        type: 'string'
       },
       price: {
         type: 'string',
-        nullable: true,
+        nullable: true
       },
       contractAddress: {
-        type: 'string',
+        type: 'string'
       },
       tokenId: {
-        type: 'string',
+        type: 'string'
       },
       itemId: {
-        type: 'string',
+        type: 'string'
       },
       issuedId: {
-        type: 'string',
+        type: 'string'
       },
       timestamp: {
-        type: 'integer',
+        type: 'integer'
       },
       network: Network.schema,
-      chainId: ChainId.schema,
+      chainId: ChainId.schema
     },
     required: [
       'id',
@@ -87,8 +87,8 @@ export namespace Mint {
       'price',
       'timestamp',
       'network',
-      'chainId',
-    ],
+      'chainId'
+    ]
   }
 
   export const validate: ValidateFunction<Mint> = generateValidator(schema)

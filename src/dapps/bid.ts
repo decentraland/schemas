@@ -24,7 +24,7 @@ export type Bid = {
 export enum BidSortBy {
   RECENTLY_OFFERED = 'recently_offered',
   RECENTLY_UPDATED = 'recently_updated',
-  MOST_EXPENSIVE = 'most_expensive',
+  MOST_EXPENSIVE = 'most_expensive'
 }
 
 export type BidFilters = {
@@ -44,44 +44,44 @@ export namespace Bid {
     type: 'object',
     properties: {
       id: {
-        type: 'string',
+        type: 'string'
       },
       bidder: {
-        type: 'string',
+        type: 'string'
       },
       seller: {
-        type: 'string',
+        type: 'string'
       },
       price: {
-        type: 'string',
+        type: 'string'
       },
       fingerprint: {
-        type: 'string',
+        type: 'string'
       },
       status: ListingStatus.schema,
       blockchainId: {
-        type: 'string',
+        type: 'string'
       },
       blockNumber: {
-        type: 'string',
+        type: 'string'
       },
       contractAddress: {
-        type: 'string',
+        type: 'string'
       },
       tokenId: {
-        type: 'string',
+        type: 'string'
       },
       network: Network.schema,
       chainId: ChainId.schema,
       expiresAt: {
-        type: 'integer',
+        type: 'integer'
       },
       createdAt: {
-        type: 'integer',
+        type: 'integer'
       },
       updatedAt: {
-        type: 'integer',
-      },
+        type: 'integer'
+      }
     },
     required: [
       'id',
@@ -98,8 +98,8 @@ export namespace Bid {
       'chainId',
       'expiresAt',
       'createdAt',
-      'updatedAt',
-    ],
+      'updatedAt'
+    ]
   }
 
   export const validate: ValidateFunction<Bid> = generateValidator(schema)

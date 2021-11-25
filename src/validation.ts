@@ -1,4 +1,4 @@
-import Ajv, { ErrorObject, JSONSchemaType } from "ajv"
+import Ajv, { ErrorObject, JSONSchemaType } from 'ajv'
 export { Ajv }
 
 /**
@@ -31,7 +31,9 @@ export type AbstractTypedSchema<T> = {
  * Generates a validator for a specific JSON schema of a type T
  * @public
  */
-export function generateValidator<T>(schema: JSONSchema<T>): ValidateFunction<T> {
+export function generateValidator<T>(
+  schema: JSONSchema<T>
+): ValidateFunction<T> {
   const ajv = new Ajv()
   return ajv.compile<T>(schema)
 }
@@ -40,6 +42,9 @@ export function generateValidator<T>(schema: JSONSchema<T>): ValidateFunction<T>
  * Validates a type with a schema in a functional way.
  * @public
  */
-export function validateType<T>(theType: Pick<AbstractTypedSchema<T>, "validate">, value: T) {
+export function validateType<T>(
+  theType: Pick<AbstractTypedSchema<T>, 'validate'>,
+  value: T
+) {
   return theType.validate(value)
 }

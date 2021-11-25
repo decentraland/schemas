@@ -1,4 +1,8 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '../../validation'
+import {
+  generateValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../../validation'
 
 /** @alpha */
 export type Metrics = {
@@ -16,29 +20,34 @@ export namespace Metrics {
     type: 'object',
     properties: {
       triangles: {
-        type: 'number',
+        type: 'number'
       },
       materials: {
-        type: 'number',
+        type: 'number'
       },
       textures: {
-        type: 'number',
+        type: 'number'
       },
       meshes: {
-        type: 'number',
+        type: 'number'
       },
       bodies: {
-        type: 'number',
+        type: 'number'
       },
       entities: {
-        type: 'number',
-      },
+        type: 'number'
+      }
     },
     additionalProperties: false,
-    required: ['triangles', 'materials', 'textures', 'meshes', 'bodies', 'entities'],
+    required: [
+      'triangles',
+      'materials',
+      'textures',
+      'meshes',
+      'bodies',
+      'entities'
+    ]
   }
 
   export const validate: ValidateFunction<Metrics> = generateValidator(schema)
 }
-
-

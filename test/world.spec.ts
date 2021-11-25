@@ -12,6 +12,6 @@ describe('World tests', () => {
     expect(World.validate(world)).toEqual(true)
     expect(World.validate(null)).toEqual(false)
     expect(World.validate({})).toEqual(false)
-    expect(isInsideWorldLimits(63,80)).toEqual(true)
+    expect(isInsideWorldLimits(63, 80)).toEqual(true)
   })
 })

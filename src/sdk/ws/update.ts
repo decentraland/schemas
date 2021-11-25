@@ -1,25 +1,29 @@
-import { generateValidator, JSONSchema, ValidateFunction } from "../../validation";
+import {
+  generateValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../../validation'
 
 /** @internal @deprecated */
-export const UPDATE = "update"
+export const UPDATE = 'update'
 
 /** @internal @deprecated */
 export type Update = {
-  type: typeof UPDATE;
-};
+  type: typeof UPDATE
+}
 
 /** @internal @deprecated */
 export namespace Update {
   export const schema: JSONSchema<Update> = {
-    type: "object",
+    type: 'object',
     properties: {
       type: {
-        type: "string",
+        type: 'string',
         enum: [UPDATE]
-      },
+      }
     },
-    required: ["type"]
-  };
+    required: ['type']
+  }
 
-  export const validate: ValidateFunction<Update> = generateValidator(schema);
+  export const validate: ValidateFunction<Update> = generateValidator(schema)
 }

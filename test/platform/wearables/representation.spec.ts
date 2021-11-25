@@ -20,38 +20,48 @@ describe('Representation tests', () => {
   })
 
   it('representation without body shape fails', () => {
-    expect(WearableRepresentation.validate({
-      ...representation,
-      bodyShapes: []
-    })).toEqual(false)
+    expect(
+      WearableRepresentation.validate({
+        ...representation,
+        bodyShapes: []
+      })
+    ).toEqual(false)
   })
 
   it('representation with repeated body shapes fails', () => {
-    expect(WearableRepresentation.validate({
-      ...representation,
-      bodyShapes: [WearableBodyShape.FEMALE, WearableBodyShape.FEMALE]
-    })).toEqual(false)
+    expect(
+      WearableRepresentation.validate({
+        ...representation,
+        bodyShapes: [WearableBodyShape.FEMALE, WearableBodyShape.FEMALE]
+      })
+    ).toEqual(false)
   })
 
   it('representation without content fails', () => {
-    expect(WearableRepresentation.validate({
-      ...representation,
-      contents: []
-    })).toEqual(false)
+    expect(
+      WearableRepresentation.validate({
+        ...representation,
+        contents: []
+      })
+    ).toEqual(false)
   })
 
   it('representation with repeated content fails', () => {
-    expect(WearableRepresentation.validate({
-      ...representation,
-      contents: ['file1', 'file1']
-    })).toEqual(false)
+    expect(
+      WearableRepresentation.validate({
+        ...representation,
+        contents: ['file1', 'file1']
+      })
+    ).toEqual(false)
   })
 
   it('main file not in contents fails', () => {
-    expect(WearableRepresentation.validate({
-      ...representation,
-      mainFile: ['file1'],
-      contents: ['file2', 'file3']
-    })).toEqual(false)
+    expect(
+      WearableRepresentation.validate({
+        ...representation,
+        mainFile: ['file1'],
+        contents: ['file2', 'file3']
+      })
+    ).toEqual(false)
   })
 })

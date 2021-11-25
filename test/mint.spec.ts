@@ -17,7 +17,7 @@ describe('Mint tests', () => {
       price: '0',
       timestamp: 1636057380000,
       network: Network.MATIC,
-      chainId: ChainId.MATIC_MAINNET,
+      chainId: ChainId.MATIC_MAINNET
     }
 
     testTypeSignature(Mint, mint)

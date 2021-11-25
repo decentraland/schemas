@@ -1,9 +1,13 @@
-import { Color3, EthAddress, IPFSv2, WearableId } from "../../misc"
-import { generateValidator, JSONSchema, ValidateFunction } from "../../validation"
+import { Color3, EthAddress, IPFSv2, WearableId } from '../../misc'
+import {
+  generateValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../../validation'
 
 /**
  * Snapshots
- * @alpha 
+ * @alpha
  */
 export type Snapshots = {
   face: IPFSv2
@@ -14,7 +18,7 @@ export type Snapshots = {
 
 /**
  * Snapshots
- * @alpha 
+ * @alpha
  */
 export namespace Snapshots {
   export const schema: JSONSchema<Snapshots> = {
@@ -27,14 +31,15 @@ export namespace Snapshots {
       body: IPFSv2.schema
     }
   }
-  const schemaValidator: ValidateFunction<Snapshots> = generateValidator(schema);
-  export const validate: ValidateFunction<Snapshots> = (snapshots: any): snapshots is Snapshots =>
-    schemaValidator(snapshots)
+  const schemaValidator: ValidateFunction<Snapshots> = generateValidator(schema)
+  export const validate: ValidateFunction<Snapshots> = (
+    snapshots: any
+  ): snapshots is Snapshots => schemaValidator(snapshots)
 }
 
 /**
  * AvatarInfo
- * @alpha 
+ * @alpha
  */
 export type AvatarInfo = {
   bodyShape: WearableId
@@ -47,9 +52,9 @@ export type AvatarInfo = {
 
 /**
  * AvatarInfo
- * @alpha 
+ * @alpha
  */
-export namespace AvatarInfo { 
+export namespace AvatarInfo {
   export const schema: JSONSchema<AvatarInfo> = {
     type: 'object',
     required: ['bodyShape', 'eyes', 'hair', 'skin'],
@@ -88,17 +93,19 @@ export namespace AvatarInfo {
     },
     additionalProperties: true
   }
-  const schemaValidator: ValidateFunction<AvatarInfo> = generateValidator(schema);
-  export const validate: ValidateFunction<AvatarInfo> = (avatarInfo: any): avatarInfo is AvatarInfo =>
-    schemaValidator(avatarInfo)
+  const schemaValidator: ValidateFunction<AvatarInfo> =
+    generateValidator(schema)
+  export const validate: ValidateFunction<AvatarInfo> = (
+    avatarInfo: any
+  ): avatarInfo is AvatarInfo => schemaValidator(avatarInfo)
 }
 
 /**
  * Avatar represents a profile avatar
- * @alpha 
+ * @alpha
  */
 export type Avatar = {
-  userId: string,
+  userId: string
   name: string
   description: string
   ethAddress: EthAddress
@@ -114,12 +121,19 @@ export type Avatar = {
 
 /**
  * Avatar
- * @alpha 
+ * @alpha
  */
 export namespace Avatar {
   export const schema: JSONSchema<Avatar> = {
     type: 'object',
-    required: ['name', 'description', 'ethAddress', 'version', 'tutorialStep', 'avatar'],
+    required: [
+      'name',
+      'description',
+      'ethAddress',
+      'version',
+      'tutorialStep',
+      'avatar'
+    ],
     properties: {
       userId: {
         type: 'string'
@@ -166,11 +180,12 @@ export namespace Avatar {
         type: 'boolean',
         nullable: true
       },
-      avatar: AvatarInfo.schema,
+      avatar: AvatarInfo.schema
     },
-    additionalProperties: true,
+    additionalProperties: true
   }
-  const schemaValidator: ValidateFunction<Avatar> = generateValidator(schema);
-  export const validate: ValidateFunction<Avatar> = (avatar: any): avatar is Avatar =>
-    schemaValidator(avatar)
+  const schemaValidator: ValidateFunction<Avatar> = generateValidator(schema)
+  export const validate: ValidateFunction<Avatar> = (
+    avatar: any
+  ): avatar is Avatar => schemaValidator(avatar)
 }

@@ -1,12 +1,12 @@
 import expect from 'expect'
-import { Color3, EthAddress, generateValidator, ValidateFunction } from '../src'
+import { Color3, EthAddress } from '../src'
 import { testTypeSignature } from './test-utils'
 
 describe('EthAddress tests', () => {
   const ethAddress = '0x87956abC4078a0Cc3b89b419928b857B8AF826ed'
   testTypeSignature(EthAddress, ethAddress)
 
-  it("static tests must pass", () => {
+  it('static tests must pass', () => {
     expect(EthAddress.validate(ethAddress)).toEqual(true)
     expect(EthAddress.validate(null)).toEqual(false)
     expect(EthAddress.validate({})).toEqual(false)
@@ -19,7 +19,7 @@ describe('Color3 tests', () => {
 
   testTypeSignature(Color3, color)
 
-  it("static tests must pass", () => {
+  it('static tests must pass', () => {
     expect(Color3.validate(color)).toEqual(true)
     expect(Color3.validate(null)).toEqual(false)
     expect(Color3.validate({})).toEqual(false)

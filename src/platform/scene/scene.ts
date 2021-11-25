@@ -1,124 +1,129 @@
-import { generateValidator, JSONSchema, ValidateFunction } from "../../validation";
-import { FeatureToggles } from "./feature-toggles";
-import { SceneParcels } from "./scene-parcels";
-import { Source } from "./source";
-import { SpawnPoint } from "./spawn-point";
+import {
+  generateValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../../validation'
+import { FeatureToggles } from './feature-toggles'
+import { SceneParcels } from './scene-parcels'
+import { Source } from './source'
+import { SpawnPoint } from './spawn-point'
 
 /** @alpha */
 export type Scene = {
-  main: string;
-  scene: SceneParcels;
+  main: string
+  scene: SceneParcels
   display?: {
-    title?: string;
-    favicon?: string;
-    description?: string;
-    navmapThumbnail?: string;
-  };
-  owner?: string;
+    title?: string
+    favicon?: string
+    description?: string
+    navmapThumbnail?: string
+  }
+  owner?: string
   contact?: {
-    name?: string;
-    email?: string;
-    im?: string;
-    url?: string;
-  };
-  tags?: string[];
-  source?: Source;
-  spawnPoints?: SpawnPoint[];
-  requiredPermissions?: string[];
-  featureToggles?: FeatureToggles;
-};
+    name?: string
+    email?: string
+    im?: string
+    url?: string
+  }
+  tags?: string[]
+  source?: Source
+  spawnPoints?: SpawnPoint[]
+  requiredPermissions?: string[]
+  featureToggles?: FeatureToggles
+}
 
 /** @alpha */
 export namespace Scene {
   export const schema: JSONSchema<Scene> = {
-    type: "object",
+    type: 'object',
     properties: {
       main: {
         description: "File that contains the entry point of the scene's code",
-        type: "string",
-        minLength: 1,
+        type: 'string',
+        minLength: 1
       },
       scene: SceneParcels.schema,
       display: {
         description:
-          "Information related to how should this land be displayed apart from the normal rendering of the scene",
-        type: "object",
+          'Information related to how should this land be displayed apart from the normal rendering of the scene',
+        type: 'object',
         properties: {
           title: {
             description:
-              "A name so other users can identify what the contents of this land should be",
-            type: "string",
-            nullable: true,
+              'A name so other users can identify what the contents of this land should be',
+            type: 'string',
+            nullable: true
           },
           favicon: {
-            description: "Allow the land owner to set up a favicon to this land",
-            type: "string",
-            nullable: true,
+            description:
+              'Allow the land owner to set up a favicon to this land',
+            type: 'string',
+            nullable: true
           },
           description: {
             description:
               "A description that will be shown on client's nav map when the scene is selected",
-            type: "string",
-            nullable: true,
+            type: 'string',
+            nullable: true
           },
           navmapThumbnail: {
-            type: "string",
-            nullable: true,
-          },
+            type: 'string',
+            nullable: true
+          }
         },
         nullable: true,
         additionalProperties: false,
-        required: [],
+        required: []
       },
       owner: {
-        type: "string",
-        nullable: true,
+        type: 'string',
+        nullable: true
       },
       contact: {
-        description: "Describe different ways of contacting the land owner",
-        type: "object",
+        description: 'Describe different ways of contacting the land owner',
+        type: 'object',
         properties: {
-          name: { type: "string", nullable: true },
-          email: { type: "string", nullable: true },
-          im: { type: "string", nullable: true },
-          url: { type: "string", nullable: true },
+          name: { type: 'string', nullable: true },
+          email: { type: 'string', nullable: true },
+          im: { type: 'string', nullable: true },
+          url: { type: 'string', nullable: true }
         },
         nullable: true,
         additionalProperties: false,
-        required: [],
+        required: []
       },
       tags: {
-        type: "array",
+        type: 'array',
         items: {
-          type: "string",
-          minLength: 1,
+          type: 'string',
+          minLength: 1
         },
-        nullable: true,
+        nullable: true
       },
       source: {
         ...Source.schema,
-        nullable: true,
+        nullable: true
       },
       spawnPoints: {
-        type: "array",
+        type: 'array',
         items: SpawnPoint.schema,
-        nullable: true,
+        nullable: true
       },
       requiredPermissions: {
-        type: "array",
+        type: 'array',
         items: {
-          type: "string",
+          type: 'string'
         },
-        nullable: true,
+        nullable: true
       },
       featureToggles: {
         ...FeatureToggles.schema,
-        nullable: true,
-      },
+        nullable: true
+      }
     },
     additionalProperties: false,
-    required: ["main", "scene"],
-  };
+    required: ['main', 'scene']
+  }
 
-  export const validate: ValidateFunction<Scene> = generateValidator(schema);
+  export const validate: ValidateFunction<Scene> = generateValidator(schema)
 }

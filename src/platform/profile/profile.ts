@@ -1,9 +1,13 @@
-import { generateValidator, JSONSchema, ValidateFunction } from "../../validation"
-import { Avatar } from "./avatar";
+import {
+  generateValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../../validation'
+import { Avatar } from './avatar'
 
 /**
  * Profile containing one or multiple avatars
- * @alpha 
+ * @alpha
  */
 export type Profile = {
   avatars: Avatar[]
@@ -11,7 +15,7 @@ export type Profile = {
 
 /**
  * Profile
- * @alpha 
+ * @alpha
  */
 export namespace Profile {
   export const schema: JSONSchema<Profile> = {
@@ -25,7 +29,8 @@ export namespace Profile {
     },
     additionalProperties: true
   }
-  const schemaValidator: ValidateFunction<Profile> = generateValidator(schema);
-  export const validate: ValidateFunction<Profile> = (profile: any): profile is Profile =>
-    schemaValidator(profile)
+  const schemaValidator: ValidateFunction<Profile> = generateValidator(schema)
+  export const validate: ValidateFunction<Profile> = (
+    profile: any
+  ): profile is Profile => schemaValidator(profile)
 }

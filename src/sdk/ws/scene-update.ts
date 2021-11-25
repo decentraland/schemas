@@ -1,42 +1,47 @@
-import { generateValidator, JSONSchema, ValidateFunction } from "../../validation";
+import {
+  generateValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../../validation'
 
 /** @internal */
-export const SCENE_UPDATE = "SCENE_UPDATE"
+export const SCENE_UPDATE = 'SCENE_UPDATE'
 
 /** @internal */
 export type SceneUpdate = {
-  type: typeof SCENE_UPDATE;
+  type: typeof SCENE_UPDATE
   payload: {
-    sceneId: string;
-    sceneType: string;
+    sceneId: string
+    sceneType: string
   }
-};
+}
 
 /** @internal */
 export namespace SceneUpdate {
   export const schema: JSONSchema<SceneUpdate> = {
-    type: "object",
+    type: 'object',
     properties: {
       type: {
-        type: "string",
+        type: 'string',
         enum: [SCENE_UPDATE]
       },
       payload: {
-        type: "object",
+        type: 'object',
         properties: {
           sceneId: {
-            type: "string"
+            type: 'string'
           },
           sceneType: {
-            type: "string"
-          },
+            type: 'string'
+          }
         },
         additionalProperties: false,
-        required: ["sceneId", "sceneType"],
-      },
+        required: ['sceneId', 'sceneType']
+      }
     },
-    required: ["payload", "type"]
-  };
+    required: ['payload', 'type']
+  }
 
-  export const validate: ValidateFunction<SceneUpdate> = generateValidator(schema);
+  export const validate: ValidateFunction<SceneUpdate> =
+    generateValidator(schema)
 }

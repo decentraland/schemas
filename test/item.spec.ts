@@ -2,12 +2,11 @@ import expect from 'expect'
 import {
   BodyShape,
   ChainId,
-  Contract,
   Item,
   Network,
   NFTCategory,
   Rarity,
-  WearableCategory,
+  WearableCategory
 } from '../src'
 import { testTypeSignature } from './test-utils'
 
@@ -32,15 +31,15 @@ describe('Item tests', () => {
           description: 'Wearable by DaddyChang',
           category: WearableCategory.HELMET,
           bodyShapes: [BodyShape.MALE, BodyShape.FEMALE],
-          rarity: Rarity.MYTHIC,
-        },
+          rarity: Rarity.MYTHIC
+        }
       },
       network: Network.MATIC,
       chainId: ChainId.MATIC_MAINNET,
       createdAt: 1625731369000,
       updatedAt: 1626088534000,
       reviewedAt: 1626088534000,
-      soldAt: 1626088534000,
+      soldAt: 1626088534000
     }
 
     testTypeSignature(Item, wearable)
