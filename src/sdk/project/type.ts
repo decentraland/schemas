@@ -15,7 +15,7 @@ export enum ProjectType {
 export namespace ProjectType {
   export const schema: JSONSchema<ProjectType> = {
     type: 'string',
-    enum: [ProjectType]
+    enum: Object.values(ProjectType)
   }
 
   export const validate: ValidateFunction<ProjectType> =
