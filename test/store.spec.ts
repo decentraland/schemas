@@ -10,16 +10,16 @@ describe('Contract tests', () => {
     links: [
       {
         name: 'Discord',
-        url: 'discord.com/some-store',
-      },
+        url: 'discord.com/some-store'
+      }
     ],
     images: [
       {
         name: 'banner',
-        file: 'banner.png',
-      },
+        file: 'banner.png'
+      }
     ],
-    version: 1,
+    version: 1
   }
 
   testTypeSignature(Store, store)
