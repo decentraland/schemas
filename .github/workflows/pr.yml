@@ -21,6 +21,8 @@ jobs:
         run:  npm run build
       - name: npm run test
         run: npm run test
+      - name: npm run lint
+        run: npm run lint
       - name: npm run check-api
         run: npm run check-api
       - name: print diff if failed

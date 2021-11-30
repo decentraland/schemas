@@ -20,16 +20,16 @@ export namespace Store {
     type: 'object',
     properties: {
       id: {
-        type: 'string',
+        type: 'string'
       },
       version: {
-        type: 'number',
+        type: 'number'
       },
       owner: {
-        type: 'string',
+        type: 'string'
       },
       description: {
-        type: 'string',
+        type: 'string'
       },
       links: {
         type: 'array',
@@ -37,14 +37,14 @@ export namespace Store {
           type: 'object',
           properties: {
             name: {
-              type: 'string',
+              type: 'string'
             },
             url: {
-              type: 'string',
-            },
+              type: 'string'
+            }
           },
-          required: ['name', 'url'],
-        },
+          required: ['name', 'url']
+        }
       },
       images: {
         type: 'array',
@@ -52,17 +52,17 @@ export namespace Store {
           type: 'object',
           properties: {
             name: {
-              type: 'string',
+              type: 'string'
             },
             file: {
-              type: 'string',
-            },
+              type: 'string'
+            }
           },
-          required: ['name', 'file'],
-        },
-      },
+          required: ['name', 'file']
+        }
+      }
     },
-    required: ['id', 'version', 'owner', 'description', 'links', 'images'],
+    required: ['id', 'version', 'owner', 'description', 'links', 'images']
   }
 
   export const validate: ValidateFunction<Store> = generateValidator(schema)
