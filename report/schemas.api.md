@@ -94,6 +94,7 @@ export namespace AvatarInfo {
 // @public (undocumented)
 export type Bid = {
     id: string;
+    bidAddress: string;
     bidder: string;
     seller: string;
     price: string;
@@ -125,6 +126,7 @@ export type BidFilters = {
     first?: number;
     skip?: number;
     sortBy?: BidSortBy;
+    bidAddress?: string;
     bidder?: string;
     seller?: string;
     contractAddress?: string;
@@ -732,6 +734,7 @@ export enum NFTSortBy {
 // @public (undocumented)
 export type Order = {
     id: string;
+    marketplaceAddress: string;
     contractAddress: string;
     tokenId: string;
     owner: string;
@@ -760,6 +763,7 @@ export type OrderFilters = {
     first?: number;
     skip?: number;
     sortBy?: OrderSortBy;
+    marketplaceAddress?: string;
     owner?: string;
     buyer?: string;
     contractAddress?: string;
@@ -1277,9 +1281,9 @@ export namespace World {
 
 // Warnings were encountered during analysis:
 //
-// src/dapps/bid.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/bid.ts:21:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/bid.ts:39:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/bid.ts:21:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/bid.ts:22:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/bid.ts:41:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/collection.ts:15:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/collection.ts:16:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/collection.ts:36:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
@@ -1295,9 +1299,9 @@ export namespace World {
 // src/dapps/nft.ts:47:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/nft.ts:48:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/nft.ts:71:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/order.ts:17:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/order.ts:18:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/order.ts:30:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/order.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/order.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/order.ts:32:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha

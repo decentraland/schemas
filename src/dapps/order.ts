@@ -5,6 +5,7 @@ import { Network } from './network'
 
 export type Order = {
   id: string
+  marketplaceAddress: string
   contractAddress: string
   tokenId: string
   owner: string
@@ -22,6 +23,7 @@ export type OrderFilters = {
   first?: number
   skip?: number
   sortBy?: OrderSortBy
+  marketplaceAddress?: string
   owner?: string
   buyer?: string
   contractAddress?: string
@@ -41,6 +43,9 @@ export namespace Order {
     type: 'object',
     properties: {
       id: {
+        type: 'string'
+      },
+      marketplaceAddress: {
         type: 'string'
       },
       contractAddress: {
@@ -74,6 +79,7 @@ export namespace Order {
     },
     required: [
       'id',
+      'marketplaceAddress',
       'contractAddress',
       'tokenId',
       'owner',

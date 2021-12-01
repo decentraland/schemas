@@ -5,6 +5,7 @@ import { Network } from './network'
 
 export type Bid = {
   id: string
+  bidAddress: string
   bidder: string
   seller: string
   price: string
@@ -31,6 +32,7 @@ export type BidFilters = {
   first?: number
   skip?: number
   sortBy?: BidSortBy
+  bidAddress?: string
   bidder?: string
   seller?: string
   contractAddress?: string
@@ -44,6 +46,9 @@ export namespace Bid {
     type: 'object',
     properties: {
       id: {
+        type: 'string'
+      },
+      bidAddress: {
         type: 'string'
       },
       bidder: {
@@ -85,6 +90,7 @@ export namespace Bid {
     },
     required: [
       'id',
+      'bidAddress',
       'bidder',
       'seller',
       'price',
