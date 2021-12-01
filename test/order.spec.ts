@@ -5,6 +5,7 @@ import { testTypeSignature } from './test-utils'
 describe('Order tests', () => {
   const order: Order = {
     id: '0x4b20989f296d2a357fe903d155d4302da25e36c91d164d98a85a6ee9a1c88e43',
+    marketplaceAddress: '0x3041694201525630780780247644590609268596',
     contractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
     tokenId: '2041694201525630780780247644590609268596',
     owner: '0x09217b071268aa902f7287f78b16fe84cccbbc43',

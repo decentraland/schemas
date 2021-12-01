@@ -5,6 +5,7 @@ import { testTypeSignature } from './test-utils'
 describe('Bid tests', () => {
   const bid: Bid = {
     id: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d-2041694201525630780780247644590609268611-0xc3e43a67c0b9505a690dd80491cf7bf6a3dc26e6',
+    bidAddress: '2041694201525630780780247644590609268611',
     bidder: '0xc3e43a67c0b9505a690dd80491cf7bf6a3dc26e6',
     seller: '0x81e4fb0c64bf49f89b57f6648562fc9a791b2e92',
     price: '5000000000000000000000',
