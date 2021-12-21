@@ -818,6 +818,26 @@ namespace ProjectType {
     validate: ValidateFunction<ProjectType>;
 }
 
+// @alpha
+export enum ProviderType {
+    // (undocumented)
+    FORTMATIC = "formatic",
+    // (undocumented)
+    INJECTED = "injected",
+    // (undocumented)
+    NETWORK = "network",
+    // (undocumented)
+    WALLET_CONNECT = "wallet_connect"
+}
+
+// @alpha (undocumented)
+export namespace ProviderType {
+    const // (undocumented)
+    schema: JSONSchema<ProviderType>;
+    const // (undocumented)
+    validate: ValidateFunction<ProviderType>;
+}
+
 // Warning: (ae-missing-release-tag) "Rarity" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Rarity" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
