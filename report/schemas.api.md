@@ -14,6 +14,55 @@ export type AbstractTypedSchema<T> = {
     validate: ValidateFunction<T>;
 };
 
+// Warning: (ae-missing-release-tag) "Account" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Account" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Account = {
+    id: string;
+    address: string;
+    sales: number;
+    purchases: number;
+    spent: string;
+    earned: string;
+    royalties: string;
+};
+
+// @public (undocumented)
+export namespace Account {
+    const // (undocumented)
+    schema: JSONSchema<Account>;
+    const // (undocumented)
+    validate: ValidateFunction<Account>;
+}
+
+// Warning: (ae-missing-release-tag) "AccountFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type AccountFilters = {
+    first?: number;
+    skip?: number;
+    sortBy?: AccountSortBy;
+    id?: string;
+    address?: string;
+};
+
+// Warning: (ae-missing-release-tag) "AccountSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum AccountSortBy {
+    // (undocumented)
+    MOST_EARNED = "most_earned",
+    // (undocumented)
+    MOST_PURCHASES = "most_purchases",
+    // (undocumented)
+    MOST_ROYALTIES = "most_royalties",
+    // (undocumented)
+    MOST_SALES = "most_sales",
+    // (undocumented)
+    MOST_SPENT = "most_spent"
+}
+
 // @internal (undocumented)
 type Actions = typeof SCENE_UPDATE | typeof UPDATE;
 
