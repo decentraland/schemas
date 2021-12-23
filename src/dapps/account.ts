@@ -1,3 +1,4 @@
+import { Network } from '..'
 import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 
 export type Account = {
@@ -24,6 +25,7 @@ export type AccountFilters = {
   sortBy?: AccountSortBy
   id?: string
   address?: string
+  network?: Network
 }
 
 export namespace Account {

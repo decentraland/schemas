@@ -45,6 +45,7 @@ export type AccountFilters = {
     sortBy?: AccountSortBy;
     id?: string;
     address?: string;
+    network?: Network;
 };
 
 // Warning: (ae-missing-release-tag) "AccountSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1350,6 +1351,7 @@ export namespace World {
 
 // Warnings were encountered during analysis:
 //
+// src/dapps/account.ts:28:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/bid.ts:21:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/bid.ts:22:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/bid.ts:41:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
