@@ -1,6 +1,5 @@
 import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
-import { ItemType } from './item-type'
 import { Network } from './network'
 import { NFT } from './nft'
 import { NFTCategory } from './nft-category'
@@ -11,7 +10,6 @@ import { WearableGender } from './wearable-gender'
 export type Item = {
   id: string
   name: string
-  type: ItemType
   thumbnail: string
   url: string
   category: NFTCategory
@@ -42,11 +40,11 @@ export type ItemFilters = {
   search?: string
   isWearableHead?: boolean
   isWearableAccessory?: boolean
+  isWearableSmart?: boolean
   wearableCategory?: WearableCategory
   wearableGenders?: WearableGender[]
   contractAddress?: string
   itemId?: string
-  itemType?: ItemType
   network?: Network
 }
 
@@ -65,7 +63,6 @@ export namespace Item {
       id: {
         type: 'string'
       },
-      type: ItemType.schema,
       name: {
         type: 'string'
       },
