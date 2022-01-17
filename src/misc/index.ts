@@ -40,7 +40,7 @@ export namespace Color3 {
 /**
  * @alpha
  */
-export type WearableId = string // `urn:decentraland:${string}`
+export type WearableId = string // `urn:${string}`
 
 /**
  * EthAddress is a data type that describes an Ethereum address
