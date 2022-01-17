@@ -8,9 +8,10 @@ import { WearableCategory } from '../../dapps/wearable-category'
 import { I18N } from './i18n'
 import { WearableRepresentation } from './representation'
 import { Metrics } from './metrics'
+import { DisplayableDeployment, displayableProperties } from '../shared/displayable'
 
 /** @alpha */
-export type Wearable = {
+export type Wearable = DisplayableDeployment & {
   id: string
   descriptions: I18N[]
   collectionAddress: string
@@ -33,6 +34,7 @@ export namespace Wearable {
   export const schema: JSONSchema<Wearable> = {
     type: 'object',
     properties: {
+      ...displayableProperties,
       id: {
         type: 'string'
       },
