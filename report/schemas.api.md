@@ -64,6 +64,9 @@ export enum AccountSortBy {
     MOST_SPENT = "most_spent"
 }
 
+// @public (undocumented)
+type Actions = typeof SCENE_UPDATE | typeof UPDATE;
+
 export { Ajv }
 
 // @alpha (undocumented)
@@ -553,6 +556,9 @@ export namespace Locale {
     validate: ValidateFunction<Locale>;
 }
 
+// @public (undocumented)
+type Messages = SceneUpdate | Update;
+
 // @alpha
 export type MetaTransaction = {
     from: string;
@@ -846,6 +852,24 @@ export namespace Profile {
     validate: ValidateFunction<Profile>;
 }
 
+// @public (undocumented)
+enum ProjectType {
+    // (undocumented)
+    PORTABLE_EXPERIENCE = "portable-experience",
+    // (undocumented)
+    SCENE = "scene",
+    // (undocumented)
+    SMART_ITEM = "smart-item"
+}
+
+// @public (undocumented)
+namespace ProjectType {
+    const // (undocumented)
+    schema: JSONSchema<ProjectType>;
+    const // (undocumented)
+    validate: ValidateFunction<ProjectType>;
+}
+
 // @alpha
 export enum ProviderType {
     // (undocumented)
@@ -1012,6 +1036,9 @@ export namespace Scene {
     validate: ValidateFunction<Scene>;
 }
 
+// @public (undocumented)
+const SCENE_UPDATE = "SCENE_UPDATE";
+
 // @alpha (undocumented)
 export type SceneParcels = {
     base: string;
@@ -1028,8 +1055,32 @@ export namespace SceneParcels {
     validate: ValidateFunction<SceneParcels>;
 }
 
+// @public (undocumented)
+type SceneUpdate = {
+    type: typeof SCENE_UPDATE;
+    payload: {
+        sceneId: string;
+        sceneType: string;
+    };
+};
+
+// @public (undocumented)
+namespace SceneUpdate {
+    const // (undocumented)
+    schema: JSONSchema<SceneUpdate>;
+    const // (undocumented)
+    validate: ValidateFunction<SceneUpdate>;
+}
+
 declare namespace sdk {
     export {
+        Actions,
+        Messages,
+        SCENE_UPDATE,
+        SceneUpdate,
+        UPDATE,
+        Update,
+        ProjectType,
         AssetJson
     }
 }
@@ -1117,6 +1168,28 @@ export namespace Store {
     schema: JSONSchema<Store>;
     const // (undocumented)
     validate: ValidateFunction<Store>;
+}
+
+// Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
+//
+// @public @deprecated (undocumented)
+const UPDATE = "update";
+
+// Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
+//
+// @public @deprecated (undocumented)
+type Update = {
+    type: typeof UPDATE;
+};
+
+// Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
+//
+// @public @deprecated (undocumented)
+namespace Update {
+    const // (undocumented)
+    schema: JSONSchema<Update>;
+    const // (undocumented)
+    validate: ValidateFunction<Update>;
 }
 
 // @public

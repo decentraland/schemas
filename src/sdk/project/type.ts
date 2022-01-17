@@ -4,14 +4,14 @@ import {
   ValidateFunction
 } from '../../validation'
 
-/* @internal */
+/** @public */
 export enum ProjectType {
   SCENE = 'scene',
   SMART_ITEM = 'smart-item',
   PORTABLE_EXPERIENCE = 'portable-experience'
 }
 
-/* @internal */
+/** @public */
 export namespace ProjectType {
   export const schema: JSONSchema<ProjectType> = {
     type: 'string',
