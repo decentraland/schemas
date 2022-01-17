@@ -3,7 +3,10 @@ import {
   JSONSchema,
   ValidateFunction
 } from '../../validation'
-import { DisplayableDeployment, displayableProperties } from '../shared/displayable'
+import {
+  DisplayableDeployment,
+  displayableProperties
+} from '../shared/displayable'
 import { FeatureToggles } from './feature-toggles'
 import { SceneParcels } from './scene-parcels'
 import { Source } from './source'

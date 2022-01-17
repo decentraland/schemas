@@ -11,8 +11,8 @@ export type DisplayableDeployment = {
 // @internal
 export const displayableProperties = {
   menuBarIcon: {
-    description: "Name of the file used as icon for the MenuBar",
-    type: "string",
-    nullable: true,
-  },
+    description: 'Name of the file used as icon for the MenuBar',
+    type: 'string',
+    nullable: true
+  }
 } as const
