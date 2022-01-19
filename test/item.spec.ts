@@ -31,7 +31,8 @@ describe('Item tests', () => {
           description: 'Wearable by DaddyChang',
           category: WearableCategory.HELMET,
           bodyShapes: [BodyShape.MALE, BodyShape.FEMALE],
-          rarity: Rarity.MYTHIC
+          rarity: Rarity.MYTHIC,
+          isSmart: false
         }
       },
       network: Network.MATIC,

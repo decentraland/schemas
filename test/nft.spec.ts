@@ -129,7 +129,8 @@ describe('NFT tests', () => {
           description: 'Wearable by DaddyChang',
           category: WearableCategory.HELMET,
           bodyShapes: [BodyShape.MALE, BodyShape.FEMALE],
-          rarity: Rarity.MYTHIC
+          rarity: Rarity.MYTHIC,
+          isSmart: false
         }
       },
       issuedId: '16',
