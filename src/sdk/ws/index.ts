@@ -4,8 +4,8 @@ import { UPDATE, Update } from './update'
 export * from './scene-update'
 export * from './update'
 
-/** @internal */
+/** @public */
 export type Actions = typeof SCENE_UPDATE | typeof UPDATE
 
-/** @internal */
+/** @public */
 export type Messages = SceneUpdate | Update

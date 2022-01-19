@@ -64,7 +64,7 @@ export enum AccountSortBy {
     MOST_SPENT = "most_spent"
 }
 
-// @internal (undocumented)
+// @public (undocumented)
 type Actions = typeof SCENE_UPDATE | typeof UPDATE;
 
 export { Ajv }
@@ -375,6 +375,11 @@ export enum ContractSortBy {
     NAME = "name"
 }
 
+// @public
+export type DisplayableDeployment = {
+    menuBarIcon?: string;
+};
+
 // @alpha
 export type EthAddress = string;
 
@@ -552,7 +557,7 @@ export namespace Locale {
     validate: ValidateFunction<Locale>;
 }
 
-// @internal (undocumented)
+// @public (undocumented)
 type Messages = SceneUpdate | Update;
 
 // @alpha
@@ -850,9 +855,6 @@ export namespace Profile {
     validate: ValidateFunction<Profile>;
 }
 
-// Warning: (ae-missing-release-tag) "ProjectType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "ProjectType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
 // @public (undocumented)
 enum ProjectType {
     // (undocumented)
@@ -1006,7 +1008,7 @@ export namespace SaleType {
 }
 
 // @alpha (undocumented)
-export type Scene = {
+export type Scene = DisplayableDeployment & {
     main: string;
     scene: SceneParcels;
     display?: {
@@ -1037,7 +1039,7 @@ export namespace Scene {
     validate: ValidateFunction<Scene>;
 }
 
-// @internal (undocumented)
+// @public (undocumented)
 const SCENE_UPDATE = "SCENE_UPDATE";
 
 // @alpha (undocumented)
@@ -1056,7 +1058,7 @@ export namespace SceneParcels {
     validate: ValidateFunction<SceneParcels>;
 }
 
-// @internal (undocumented)
+// @public (undocumented)
 type SceneUpdate = {
     type: typeof SCENE_UPDATE;
     payload: {
@@ -1065,7 +1067,7 @@ type SceneUpdate = {
     };
 };
 
-// @internal (undocumented)
+// @public (undocumented)
 namespace SceneUpdate {
     const // (undocumented)
     schema: JSONSchema<SceneUpdate>;
@@ -1173,19 +1175,19 @@ export namespace Store {
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
-// @internal @deprecated (undocumented)
+// @public @deprecated (undocumented)
 const UPDATE = "update";
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
-// @internal @deprecated (undocumented)
+// @public @deprecated (undocumented)
 type Update = {
     type: typeof UPDATE;
 };
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
-// @internal @deprecated (undocumented)
+// @public @deprecated (undocumented)
 namespace Update {
     const // (undocumented)
     schema: JSONSchema<Update>;
@@ -1213,7 +1215,7 @@ export type ValidWorldRange = {
 };
 
 // @alpha (undocumented)
-export type Wearable = {
+export type Wearable = DisplayableDeployment & {
     id: string;
     descriptions: I18N[];
     collectionAddress: string;
