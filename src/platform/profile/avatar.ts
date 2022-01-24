@@ -25,9 +25,7 @@ export namespace Snapshots {
     type: 'object',
     required: ['face', 'face128', 'face256', 'body'],
     properties: {
-      face: IPFSv2.schema,
       face256: IPFSv2.schema,
-      face128: IPFSv2.schema,
       body: IPFSv2.schema
     }
   }
