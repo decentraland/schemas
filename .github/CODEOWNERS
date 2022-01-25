@@ -11,4 +11,4 @@ CODEOWNERS @decentraland/core-developers @decentraland/dapps @decentraland/platf
 
 /src/report/ @decentraland/core-developers
 /src/dapps/ @decentraland/dapps
-/src/platform/ @decentraland/platform
+/src/platform/ @platform
