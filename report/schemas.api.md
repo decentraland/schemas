@@ -1287,6 +1287,8 @@ export enum WearableCategory {
     // (undocumented)
     MOUTH = "mouth",
     // (undocumented)
+    SKIN = "skin",
+    // (undocumented)
     TIARA = "tiara",
     // (undocumented)
     TOP_HEAD = "top_head",
