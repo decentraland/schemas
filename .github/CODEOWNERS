@@ -4,8 +4,11 @@
 @decentraland/dapps
 
 
+## Code owners file
+CODEOWNERS @decentraland/core-developers @decentraland/dapps @decentraland/platform
+
 # team-specific types and schemas
 
-src/report/ @decentraland/core-developers
-src/dapps/ @decentraland/dapps
-src/platform/ @decentraland/platform
+/src/report/ @decentraland/core-developers
+/src/dapps/ @decentraland/dapps
+/src/platform/ @decentraland/platform
