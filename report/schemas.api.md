@@ -898,7 +898,9 @@ export enum ProviderType {
     // (undocumented)
     NETWORK = "network",
     // (undocumented)
-    WALLET_CONNECT = "wallet_connect"
+    WALLET_CONNECT = "wallet_connect",
+    // (undocumented)
+    WALLET_LINK = "wallet_link"
 }
 
 // @alpha (undocumented)
