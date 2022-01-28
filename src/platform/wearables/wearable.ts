@@ -5,7 +5,7 @@ import {
 } from '../../validation'
 import { Rarity } from '../../dapps/rarity'
 import { WearableCategory } from '../../dapps/wearable-category'
-import { I18N } from './i18n'
+import { I18N } from '../common'
 import { WearableRepresentation } from './representation'
 import { Metrics } from './metrics'
 import {

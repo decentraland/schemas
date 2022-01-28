@@ -380,6 +380,57 @@ export type DisplayableDeployment = {
     menuBarIcon?: string;
 };
 
+// @alpha (undocumented)
+export type Emote = DisplayableDeployment & {
+    id: string;
+    version: string;
+    names: I18N[];
+    descriptions: I18N[];
+    collectionAddress: string;
+    rarity: Rarity;
+    tags: string[];
+    contents: string[];
+    data: EmoteData;
+    representations: EmoteRepresentation[];
+};
+
+// @alpha (undocumented)
+export namespace Emote {
+    const // (undocumented)
+    schema: JSONSchema<Emote>;
+    const // (undocumented)
+    validate: ValidateFunction<Emote>;
+}
+
+// @alpha (undocumented)
+export type EmoteData = {
+    loop: boolean;
+    thumbnail: string;
+};
+
+// @alpha (undocumented)
+export namespace EmoteData {
+    const // (undocumented)
+    schema: JSONSchema<EmoteData>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteData>;
+}
+
+// @alpha (undocumented)
+export type EmoteRepresentation = {
+    bodyShapes: WearableBodyShape[];
+    mainFile: string;
+    data: EmoteData;
+};
+
+// @alpha (undocumented)
+export namespace EmoteRepresentation {
+    const // (undocumented)
+    schema: JSONSchema<EmoteRepresentation>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteRepresentation>;
+}
+
 // @alpha
 export type EthAddress = string;
 
