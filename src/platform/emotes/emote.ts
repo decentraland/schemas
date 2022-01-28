@@ -55,7 +55,7 @@ export namespace Emote {
           type: 'string',
           minLength: 1
         }
-      }, 
+      },
       contents: {
         type: 'array',
         items: {
@@ -69,7 +69,7 @@ export namespace Emote {
         type: 'array',
         items: EmoteRepresentation.schema,
         minItems: 1
-      },
+      }
     },
     additionalProperties: false,
     required: [
@@ -101,6 +101,11 @@ export namespace Emote {
         i18ns.findIndex((i18n) => i18n.code === code) === index
     )
 
-  const validateRepresentationFiles = (representations: EmoteRepresentation[], contents: string[]) => 
-    representations.every((representation) => contents.includes(representation.mainFile))
+  const validateRepresentationFiles = (
+    representations: EmoteRepresentation[],
+    contents: string[]
+  ) =>
+    representations.every((representation) =>
+      contents.includes(representation.mainFile)
+    )
 }

@@ -16,7 +16,7 @@ export namespace EmoteData {
     type: 'object',
     properties: {
       loop: {
-        type: 'boolean',
+        type: 'boolean'
       },
       thumbnail: {
         type: 'string',
@@ -24,16 +24,11 @@ export namespace EmoteData {
       }
     },
     additionalProperties: false,
-    required: [
-      'loop',
-      'thumbnail'
-    ]
+    required: ['loop', 'thumbnail']
   }
 
-  const schemaValidator: ValidateFunction<EmoteData> =
-    generateValidator(schema)
+  const schemaValidator: ValidateFunction<EmoteData> = generateValidator(schema)
   export const validate: ValidateFunction<EmoteData> = (
     data: any
-  ): data is EmoteData =>
-    schemaValidator(data)
+  ): data is EmoteData => schemaValidator(data)
 }

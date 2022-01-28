@@ -4,7 +4,7 @@ import {
   ValidateFunction
 } from '../../validation'
 import { WearableBodyShape } from '../wearables'
-import { EmoteData } from "./data";
+import { EmoteData } from './data'
 
 /** @alpha */
 export type EmoteRepresentation = {
@@ -28,19 +28,15 @@ export namespace EmoteRepresentation {
         type: 'string',
         minLength: 1
       },
-      data : EmoteData.schema
+      data: EmoteData.schema
     },
     additionalProperties: false,
-    required: [
-      'bodyShapes',
-      'mainFile',
-    ]
+    required: ['bodyShapes', 'mainFile']
   }
 
   const schemaValidator: ValidateFunction<EmoteRepresentation> =
     generateValidator(schema)
   export const validate: ValidateFunction<EmoteRepresentation> = (
     representation: any
-  ): representation is EmoteRepresentation =>
-    schemaValidator(representation)
+  ): representation is EmoteRepresentation => schemaValidator(representation)
 }
