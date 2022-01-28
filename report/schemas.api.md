@@ -381,7 +381,7 @@ export type DisplayableDeployment = {
 };
 
 // @alpha (undocumented)
-export type Emote = DisplayableDeployment & {
+export type Emote = {
     id: string;
     version: string;
     names: I18N[];
