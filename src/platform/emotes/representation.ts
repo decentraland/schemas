@@ -10,7 +10,7 @@ import { EmoteData } from './data'
 export type EmoteRepresentation = {
   bodyShapes: WearableBodyShape[]
   mainFile: string
-  data: EmoteData
+  data: EmoteData | null
 }
 
 /** @alpha */
@@ -28,7 +28,7 @@ export namespace EmoteRepresentation {
         type: 'string',
         minLength: 1
       },
-      data: EmoteData.schema
+      data: EmoteData.nullableSchema
     },
     additionalProperties: false,
     required: ['bodyShapes', 'mainFile']

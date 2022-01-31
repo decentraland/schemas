@@ -33,6 +33,7 @@ export namespace Emote {
       },
       version: {
         type: 'string',
+        minLength: 1,
         nullable: false
       },
       names: {

@@ -27,6 +27,22 @@ export namespace EmoteData {
     required: ['loop', 'thumbnail']
   }
 
+  export const nullableSchema: JSONSchema<EmoteData> = {
+    type: 'object',
+    properties: {
+      loop: {
+        type: 'boolean'
+      },
+      thumbnail: {
+        type: 'string',
+        minLength: 1
+      }
+    },
+    nullable: true,
+    additionalProperties: false,
+    required: ['loop', 'thumbnail']
+  }
+
   const schemaValidator: ValidateFunction<EmoteData> = generateValidator(schema)
   export const validate: ValidateFunction<EmoteData> = (
     data: any
