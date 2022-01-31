@@ -413,6 +413,8 @@ export namespace EmoteData {
     const // (undocumented)
     schema: JSONSchema<EmoteData>;
     const // (undocumented)
+    nullableSchema: JSONSchema<EmoteData>;
+    const // (undocumented)
     validate: ValidateFunction<EmoteData>;
 }
 
@@ -420,7 +422,7 @@ export namespace EmoteData {
 export type EmoteRepresentation = {
     bodyShapes: WearableBodyShape[];
     mainFile: string;
-    data: EmoteData;
+    data: EmoteData | null;
 };
 
 // @alpha (undocumented)
