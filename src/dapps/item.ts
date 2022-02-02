@@ -20,6 +20,7 @@ export type Item = {
   available: number
   isOnSale: boolean
   creator: string
+  beneficiary: string | null
   createdAt: number
   updatedAt: number
   reviewedAt: number
@@ -93,6 +94,10 @@ export namespace Item {
       },
       creator: {
         type: 'string'
+      },
+      beneficiary: {
+        type: 'string',
+        nullable: true
       },
       data: NFT.schema.properties!.data,
       network: Network.schema,
