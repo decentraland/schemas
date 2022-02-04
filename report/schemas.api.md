@@ -1092,9 +1092,7 @@ export { sdk }
 
 // @alpha
 export type Snapshots = {
-    face: IPFSv2;
     face256: IPFSv2;
-    face128: IPFSv2;
     body: IPFSv2;
 };
 
