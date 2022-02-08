@@ -39,6 +39,7 @@ export type NFT = {
       category: WearableCategory
       rarity: Rarity
       bodyShapes: BodyShape[]
+      isSmart: boolean
     }
     ens?: {
       subdomain: string
@@ -63,6 +64,7 @@ export type NFTFilters = {
   isLand?: boolean
   isWearableHead?: boolean
   isWearableAccessory?: boolean
+  isWearableSmart?: boolean
   wearableCategory?: WearableCategory
   wearableGenders?: WearableGender[]
   contractAddresses?: string[]
@@ -182,7 +184,10 @@ export namespace NFT {
               description: {
                 type: 'string'
               },
-              rarity: Rarity.schema
+              rarity: Rarity.schema,
+              isSmart: {
+                type: 'boolean'
+              }
             },
             required: ['bodyShapes', 'category', 'description', 'rarity'],
             nullable: true

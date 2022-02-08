@@ -8,7 +8,6 @@ import {
   Rarity,
   WearableCategory
 } from '../src'
-import { ItemType } from '../src/dapps/item-type'
 import { testTypeSignature } from './test-utils'
 
 describe('Item tests', () => {
@@ -16,7 +15,6 @@ describe('Item tests', () => {
     const wearable: Item = {
       id: '0x0699189ac32c8e404d900786317c93c23fe6f209-0',
       name: 'Moon Boys Helmet',
-      type: ItemType.WEARABLE,
       thumbnail:
         'https://peer.decentraland.org/lambdas/collections/contents/urn:decentraland:matic:collections-v2:0x0699189ac32c8e404d900786317c93c23fe6f209:0/thumbnail',
       url: '/contracts/0x0699189ac32c8e404d900786317c93c23fe6f209/items/0',
@@ -28,12 +26,14 @@ describe('Item tests', () => {
       available: 0,
       isOnSale: false,
       creator: '0xfe705ead02e849e78278c50de3d939be23448f1a',
+      beneficiary: '0xfe705ead02e849e78278c50de3d939be23448f1a',
       data: {
         wearable: {
           description: 'Wearable by DaddyChang',
           category: WearableCategory.HELMET,
           bodyShapes: [BodyShape.MALE, BodyShape.FEMALE],
-          rarity: Rarity.MYTHIC
+          rarity: Rarity.MYTHIC,
+          isSmart: false
         }
       },
       network: Network.MATIC,

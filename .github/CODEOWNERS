@@ -1,8 +1,14 @@
 # https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
 
-src/report/* @decentraland/core-developers
+# Default owner
+@decentraland/dapps
+
+
+## Code owners file
+CODEOWNERS @decentraland/core-developers @decentraland/dapps @decentraland/platform
 
 # team-specific types and schemas
 
-src/dapps/* @decentraland/dapps
-src/platform/* @decentraland/platform
+/src/report/ @decentraland/core-developers
+/src/dapps/ @decentraland/dapps
+/src/platform/ @decentraland/platform

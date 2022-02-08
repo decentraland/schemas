@@ -3,17 +3,22 @@ import {
   JSONSchema,
   ValidateFunction
 } from '../../validation'
+import {
+  DisplayableDeployment,
+  displayableProperties
+} from '../shared/displayable'
 import { FeatureToggles } from './feature-toggles'
 import { SceneParcels } from './scene-parcels'
 import { Source } from './source'
 import { SpawnPoint } from './spawn-point'
 
 /** @alpha */
-export type Scene = {
+export type Scene = DisplayableDeployment & {
   main: string
   scene: SceneParcels
   display?: {
     title?: string
+    /** @deprecated use menuBarIcon instead */
     favicon?: string
     description?: string
     navmapThumbnail?: string
@@ -43,6 +48,7 @@ export namespace Scene {
         minLength: 1
       },
       scene: SceneParcels.schema,
+      ...displayableProperties,
       display: {
         description:
           'Information related to how should this land be displayed apart from the normal rendering of the scene',
@@ -56,7 +62,7 @@ export namespace Scene {
           },
           favicon: {
             description:
-              'Allow the land owner to set up a favicon to this land',
+              'DEPRECATED. Allow the land owner to set up a favicon to this land',
             type: 'string',
             nullable: true
           },

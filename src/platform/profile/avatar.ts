@@ -10,9 +10,7 @@ import {
  * @alpha
  */
 export type Snapshots = {
-  face: IPFSv2
   face256: IPFSv2
-  face128: IPFSv2
   body: IPFSv2
 }
 
@@ -23,11 +21,9 @@ export type Snapshots = {
 export namespace Snapshots {
   export const schema: JSONSchema<Snapshots> = {
     type: 'object',
-    required: ['face', 'face128', 'face256', 'body'],
+    required: ['face256', 'body'],
     properties: {
-      face: IPFSv2.schema,
       face256: IPFSv2.schema,
-      face128: IPFSv2.schema,
       body: IPFSv2.schema
     }
   }

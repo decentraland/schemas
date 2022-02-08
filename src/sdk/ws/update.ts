@@ -4,15 +4,15 @@ import {
   ValidateFunction
 } from '../../validation'
 
-/** @internal @deprecated */
+/** @public @deprecated */
 export const UPDATE = 'update'
 
-/** @internal @deprecated */
+/** @public @deprecated */
 export type Update = {
   type: typeof UPDATE
 }
 
-/** @internal @deprecated */
+/** @public @deprecated */
 export namespace Update {
   export const schema: JSONSchema<Update> = {
     type: 'object',

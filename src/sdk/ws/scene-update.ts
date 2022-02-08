@@ -4,10 +4,10 @@ import {
   ValidateFunction
 } from '../../validation'
 
-/** @internal */
+/** @public */
 export const SCENE_UPDATE = 'SCENE_UPDATE'
 
-/** @internal */
+/** @public */
 export type SceneUpdate = {
   type: typeof SCENE_UPDATE
   payload: {
@@ -16,7 +16,7 @@ export type SceneUpdate = {
   }
 }
 
-/** @internal */
+/** @public */
 export namespace SceneUpdate {
   export const schema: JSONSchema<SceneUpdate> = {
     type: 'object',
