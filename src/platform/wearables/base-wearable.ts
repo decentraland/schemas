@@ -89,24 +89,18 @@ export namespace BaseWearable {
       }
     },
     additionalProperties: false,
-    required: [
-      'id',
-      'descriptions',
-      'names',
-      'data',
-      'thumbnail',
-      'image'
-    ]
+    required: ['id', 'descriptions', 'names', 'data', 'thumbnail', 'image']
   }
 
   // Returns true only if there are no entries with the same locale
   export const validateDuplicatedLocales = (i18ns: I18N[]) =>
-  i18ns.every(
-    ({ code }, index) =>
-      i18ns.findIndex((i18n) => i18n.code === code) === index
-  )
+    i18ns.every(
+      ({ code }, index) =>
+        i18ns.findIndex((i18n) => i18n.code === code) === index
+    )
 
-  const schemaValidator: ValidateFunction<BaseWearable> = generateValidator(schema)
+  const schemaValidator: ValidateFunction<BaseWearable> =
+    generateValidator(schema)
   export const validate: ValidateFunction<BaseWearable> = (
     wearable: any
   ): wearable is BaseWearable =>

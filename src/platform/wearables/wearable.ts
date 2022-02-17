@@ -21,13 +21,9 @@ export namespace Wearable {
       collectionAddress: {
         type: 'string'
       },
-      rarity: Rarity.schema,
+      rarity: Rarity.schema
     },
-    required: [
-      ...BaseWearable.schema.required,
-      'collectionAddress',
-      'rarity',
-    ]
+    required: [...BaseWearable.schema.required, 'collectionAddress', 'rarity']
   }
 
   const schemaValidator: ValidateFunction<Wearable> = generateValidator(schema)

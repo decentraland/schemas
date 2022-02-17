@@ -5,4 +5,3 @@ export { WearableRepresentation } from './representation'
 export { WearableBodyShape } from './wearable-body-shape'
 export { Wearable } from './wearable'
 export { TPWearable } from './tp-wearable'
-

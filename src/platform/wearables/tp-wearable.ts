@@ -3,7 +3,7 @@ import {
   JSONSchema,
   ValidateFunction
 } from '../../validation'
-import { BaseWearable } from "./base-wearable";
+import { BaseWearable } from './base-wearable'
 
 /** @alpha */
 export type TPWearable = BaseWearable & {
@@ -32,18 +32,14 @@ export namespace TPWearable {
             }
           }
         },
-        required: [
-          'index', 'hashes'
-        ]
+        required: ['index', 'hashes']
       }
     },
-    required: [
-      ...BaseWearable.schema.required,
-      'merkleTreeProof'
-    ]
+    required: [...BaseWearable.schema.required, 'merkleTreeProof']
   }
 
-  const schemaValidator: ValidateFunction<TPWearable> = generateValidator(schema)
+  const schemaValidator: ValidateFunction<TPWearable> =
+    generateValidator(schema)
   export const validate: ValidateFunction<TPWearable> = (
     wearable: any
   ): wearable is TPWearable =>
@@ -51,4 +47,3 @@ export namespace TPWearable {
     BaseWearable.validateDuplicatedLocales(wearable.descriptions) &&
     BaseWearable.validateDuplicatedLocales(wearable.names)
 }
-
