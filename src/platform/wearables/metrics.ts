@@ -38,7 +38,6 @@ export namespace Metrics {
         type: 'number'
       }
     },
-    additionalProperties: false,
     required: [
       'triangles',
       'materials',

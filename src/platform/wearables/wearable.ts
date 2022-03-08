@@ -80,7 +80,6 @@ export namespace Wearable {
           },
           category: WearableCategory.schema
         },
-        additionalProperties: false,
         required: ['replaces', 'hides', 'tags', 'representations', 'category']
       },
       thumbnail: {

@@ -21,7 +21,6 @@ export namespace I18N {
         type: 'string'
       }
     },
-    additionalProperties: false,
     required: ['code', 'text']
   }
 
