@@ -6,36 +6,12 @@ import {
 import { BaseWearable } from './base-wearable'
 
 /** @alpha */
-export type TPWearable = BaseWearable & {
-  merkleTreeProof: {
-    index: number
-    hashes: string[]
-  }
-}
+export type TPWearable = BaseWearable
 
 /** @alpha */
 export namespace TPWearable {
   export const schema: JSONSchema<TPWearable> = {
-    ...BaseWearable.schema,
-    properties: {
-      ...BaseWearable.schema.properties!,
-      merkleTreeProof: {
-        type: 'object',
-        properties: {
-          index: {
-            type: 'number'
-          },
-          hashes: {
-            type: 'array',
-            items: {
-              type: 'string'
-            }
-          }
-        },
-        required: ['index', 'hashes']
-      }
-    },
-    required: [...BaseWearable.schema.required, 'merkleTreeProof']
+    ...BaseWearable.schema
   }
 
   const schemaValidator: ValidateFunction<TPWearable> =
