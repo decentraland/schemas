@@ -176,7 +176,8 @@ export namespace Avatar {
         nullable: true
       },
       avatar: AvatarInfo.schema
-    }
+    },
+    additionalProperties: true
   }
   const schemaValidator: ValidateFunction<Avatar> = generateValidator(schema)
   export const validate: ValidateFunction<Avatar> = (

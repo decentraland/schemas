@@ -56,7 +56,6 @@ export namespace Source {
           }
         },
         nullable: true,
-        additionalProperties: false,
         required: ['rows', 'cols']
       },
       isEmpty: {
@@ -64,7 +63,6 @@ export namespace Source {
         nullable: true
       }
     },
-    additionalProperties: false,
     required: ['origin', 'projectId']
   }
 

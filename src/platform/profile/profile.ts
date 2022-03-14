@@ -26,7 +26,8 @@ export namespace Profile {
         type: 'array',
         items: Avatar.schema
       }
-    }
+    },
+    additionalProperties: true
   }
   const schemaValidator: ValidateFunction<Profile> = generateValidator(schema)
   export const validate: ValidateFunction<Profile> = (

@@ -45,7 +45,8 @@ export namespace Metrics {
       'meshes',
       'bodies',
       'entities'
-    ]
+    ],
+    additionalProperties: true
   }
 
   export const validate: ValidateFunction<Metrics> = generateValidator(schema)

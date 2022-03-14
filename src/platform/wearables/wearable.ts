@@ -93,7 +93,7 @@ export namespace Wearable {
         nullable: true
       }
     },
-    additionalProperties: false,
+    additionalProperties: true,
     required: [
       'id',
       'descriptions',
