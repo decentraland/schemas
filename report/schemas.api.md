@@ -859,6 +859,8 @@ export namespace Profile {
 // @public (undocumented)
 enum ProjectType {
     // (undocumented)
+    LIBRARY = "library",
+    // (undocumented)
     PORTABLE_EXPERIENCE = "portable-experience",
     // (undocumented)
     SCENE = "scene",
