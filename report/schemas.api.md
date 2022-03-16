@@ -558,6 +558,22 @@ export namespace Locale {
     validate: ValidateFunction<Locale>;
 }
 
+// @alpha
+export type MerkleProof = {
+    proof: string[];
+    index: number;
+    hashingKeys: string[];
+    entityHash: string;
+};
+
+// @alpha
+export namespace MerkleProof {
+    const // (undocumented)
+    schema: JSONSchema<MerkleProof>;
+    const // (undocumented)
+    validate: ValidateFunction<MerkleProof>;
+}
+
 // @public (undocumented)
 type Messages = SceneUpdate | Update;
 
