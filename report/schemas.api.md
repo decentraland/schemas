@@ -1195,7 +1195,10 @@ export namespace Store {
 // Warning: (ae-forgotten-export) The symbol "BaseWearable" needs to be exported by the entry point index.d.ts
 //
 // @alpha (undocumented)
-export type TPWearable = BaseWearable;
+export type TPWearable = BaseWearable & {
+    content: Record<string, string>;
+    merkleProof: MerkleProof;
+};
 
 // @alpha (undocumented)
 export namespace TPWearable {
