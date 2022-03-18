@@ -1,6 +1,7 @@
 import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 import { BodyShape } from './body-shape'
 import { ChainId } from './chain-id'
+import { EmoteCategory } from './emote-category'
 import { Network } from './network'
 import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'
@@ -43,6 +44,12 @@ export type NFT = {
     }
     ens?: {
       subdomain: string
+    }
+    emote?: {
+      description: string
+      category: EmoteCategory
+      rarity: Rarity
+      bodyShapes: BodyShape[]
     }
   }
   network: Network
@@ -189,7 +196,13 @@ export namespace NFT {
                 type: 'boolean'
               }
             },
-            required: ['bodyShapes', 'category', 'description', 'rarity'],
+            required: [
+              'bodyShapes',
+              'category',
+              'description',
+              'rarity',
+              'isSmart'
+            ],
             nullable: true
           },
           ens: {
@@ -200,6 +213,22 @@ export namespace NFT {
               }
             },
             required: ['subdomain'],
+            nullable: true
+          },
+          emote: {
+            type: 'object',
+            properties: {
+              bodyShapes: {
+                type: 'array',
+                items: BodyShape.schema
+              },
+              category: EmoteCategory.schema,
+              description: {
+                type: 'string'
+              },
+              rarity: Rarity.schema
+            },
+            required: ['bodyShapes', 'category', 'description', 'rarity'],
             nullable: true
           }
         },

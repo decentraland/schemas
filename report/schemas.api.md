@@ -380,6 +380,25 @@ export type DisplayableDeployment = {
     menuBarIcon?: string;
 };
 
+// Warning: (ae-missing-release-tag) "EmoteCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum EmoteCategory {
+    // (undocumented)
+    LOOP = "loop",
+    // (undocumented)
+    SIMPLE = "simple"
+}
+
+// @public (undocumented)
+export namespace EmoteCategory {
+    const // (undocumented)
+    schema: JSONSchema<EmoteCategory>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteCategory>;
+}
+
 // @alpha
 export type EthAddress = string;
 
@@ -724,6 +743,12 @@ export type NFT = {
         ens?: {
             subdomain: string;
         };
+        emote?: {
+            description: string;
+            category: EmoteCategory;
+            rarity: Rarity;
+            bodyShapes: BodyShape[];
+        };
     };
     network: Network;
     chainId: ChainId;
@@ -745,6 +770,8 @@ export namespace NFT {
 //
 // @public (undocumented)
 export enum NFTCategory {
+    // (undocumented)
+    EMOTE = "emote",
     // (undocumented)
     ENS = "ens",
     // (undocumented)
@@ -1396,9 +1423,9 @@ export namespace World {
 // src/dapps/mint.ts:16:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:17:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/mint.ts:37:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/nft.ts:48:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/nft.ts:49:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/nft.ts:73:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:55:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:56:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/nft.ts:80:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:32:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
