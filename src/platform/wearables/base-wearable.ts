@@ -3,7 +3,6 @@ import {
   JSONSchema,
   ValidateFunction
 } from '../../validation'
-// import { Rarity } from '../../dapps/rarity'
 import { WearableCategory } from '../../dapps/wearable-category'
 import { I18N } from './i18n'
 import { WearableRepresentation } from './representation'
