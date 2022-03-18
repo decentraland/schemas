@@ -1192,6 +1192,22 @@ export namespace Store {
     validate: ValidateFunction<Store>;
 }
 
+// Warning: (ae-forgotten-export) The symbol "BaseWearable" needs to be exported by the entry point index.d.ts
+//
+// @alpha (undocumented)
+export type TPWearable = BaseWearable & {
+    content: Record<string, string>;
+    merkleProof: MerkleProof;
+};
+
+// @alpha (undocumented)
+export namespace TPWearable {
+    const // (undocumented)
+    schema: JSONSchema<TPWearable>;
+    const // (undocumented)
+    validate: ValidateFunction<TPWearable>;
+}
+
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
 // @public @deprecated (undocumented)
@@ -1234,22 +1250,9 @@ export type ValidWorldRange = {
 };
 
 // @alpha (undocumented)
-export type Wearable = DisplayableDeployment & {
-    id: string;
-    descriptions: I18N[];
-    collectionAddress: string;
+export type Wearable = BaseWearable & {
     rarity: Rarity;
-    names: I18N[];
-    data: {
-        replaces: WearableCategory[];
-        hides: WearableCategory[];
-        tags: string[];
-        representations: WearableRepresentation[];
-        category: WearableCategory;
-    };
-    thumbnail: string;
-    image: string;
-    metrics?: Metrics;
+    collectionAddress: string;
 };
 
 // @alpha (undocumented)
