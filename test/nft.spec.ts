@@ -8,6 +8,7 @@ import {
   Rarity,
   WearableCategory
 } from '../src'
+import { EmoteCategory } from '../src/dapps/emote-category'
 import { testTypeSignature } from './test-utils'
 
 describe('NFT tests', () => {
@@ -183,6 +184,45 @@ describe('NFT tests', () => {
 
     it('static tests must pass', () => {
       expect(NFT.validate(ens)).toEqual(true)
+      expect(NFT.validate(null)).toEqual(false)
+      expect(NFT.validate({})).toEqual(false)
+    })
+  })
+
+  describe('emote', () => {
+    const emote: NFT = {
+      id: '0xabb0ca6ee85825f6d7f549ef36bf571484c157c5-16',
+      tokenId: '16',
+      contractAddress: '0xabb0ca6ee85825f6d7f549ef36bf571484c157c5',
+      activeOrderId:
+        '0x606a55e3aaa112d90a9474d73d8293dc8496d491eff32431b762a7ca46160fc0',
+      owner: '0x3bec652537ebf756d9c5f471f33b28278b1dd26d',
+      name: 'Head Explode',
+      image:
+        'https://peer.decentraland.org/lambdas/collections/contents/urn:decentraland:matic:collections-v2:0xabb0ca6ee85825f6d7f549ef36bf571484c157c5:0/thumbnail',
+      url: '/contracts/0xabb0ca6ee85825f6d7f549ef36bf571484c157c5/tokens/16',
+      data: {
+        emote: {
+          description: 'Some Description',
+          category: EmoteCategory.SIMPLE,
+          bodyShapes: [BodyShape.MALE, BodyShape.FEMALE],
+          rarity: Rarity.MYTHIC
+        }
+      },
+      issuedId: '16',
+      itemId: '0',
+      category: NFTCategory.ESTATE,
+      network: Network.ETHEREUM,
+      chainId: ChainId.ETHEREUM_MAINNET,
+      createdAt: 1626182617000,
+      updatedAt: 1626246391000,
+      soldAt: 1626246391000
+    }
+
+    testTypeSignature(NFT, emote)
+
+    it('static tests must pass', () => {
+      expect(NFT.validate(emote)).toEqual(true)
       expect(NFT.validate(null)).toEqual(false)
       expect(NFT.validate({})).toEqual(false)
     })
