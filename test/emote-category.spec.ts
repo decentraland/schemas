@@ -3,12 +3,12 @@ import { EmoteCategory } from '../src'
 import { testTypeSignature } from './test-utils'
 
 describe('EmoteCategory tests', () => {
-  const wearableCategory: EmoteCategory = EmoteCategory.SIMPLE
+  const emoteCategory: EmoteCategory = EmoteCategory.SIMPLE
 
-  testTypeSignature(EmoteCategory, wearableCategory)
+  testTypeSignature(EmoteCategory, emoteCategory)
 
   it('static tests must pass', () => {
-    expect(EmoteCategory.validate(wearableCategory)).toEqual(true)
+    expect(EmoteCategory.validate(emoteCategory)).toEqual(true)
     expect(EmoteCategory.validate(null)).toEqual(false)
     expect(EmoteCategory.validate({})).toEqual(false)
   })
