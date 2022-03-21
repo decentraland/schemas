@@ -156,9 +156,12 @@ export namespace Wearable {
     schemaValidator(wearable) &&
     validateDuplicatedLocales(wearable.descriptions) &&
     validateDuplicatedLocales(wearable.names) &&
-    (validateStandardWearable(wearable.rarity, wearable.collectionAddress) ||
-      validateThirdParty(wearable))
+    XOR(
+      validateStandardWearable(wearable.rarity, wearable.collectionAddress),
+      validateThirdParty(wearable)
+    )
 
+  const XOR = (b1: boolean, b2: boolean) => (b1 && !b2) || (b2 && !b1)
   // Returns true only if there are no entries with the same locale
   const validateDuplicatedLocales = (i18ns: I18N[]) =>
     i18ns.every(
