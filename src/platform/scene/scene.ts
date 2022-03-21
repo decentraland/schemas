@@ -125,7 +125,7 @@ export namespace Scene {
         nullable: true
       }
     },
-    additionalProperties: true,
+    additionalProperties: false,
     required: ['main', 'scene']
   }
 
