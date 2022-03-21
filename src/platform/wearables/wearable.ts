@@ -152,6 +152,16 @@ export namespace Wearable {
   }
 
   const schemaValidator: ValidateFunction<Wearable> = generateValidator(schema)
+
+  /**
+   * Validates that the wearable metadata complies with the standard or third party wearable, and doesn't have repeated locales.
+   * Some fields are defined as optional but those are validated to be present as standard XOR third party:
+   *  Standard Wearables should contain:
+   *    - collectionAddress
+   *    - rarity
+   *  Third Party Wearables should contain:
+   *    - merkleProof
+   */
   export const validate: ValidateFunction<Wearable> = (
     wearable: any
   ): wearable is Wearable =>
@@ -164,6 +174,7 @@ export namespace Wearable {
     )
 
   const XOR = (b1: boolean, b2: boolean) => (b1 && !b2) || (b2 && !b1)
+
   // Returns true only if there are no entries with the same locale
   const validateDuplicatedLocales = (i18ns: I18N[]) =>
     i18ns.every(
