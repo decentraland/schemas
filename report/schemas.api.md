@@ -1299,8 +1299,7 @@ export type Wearable = DisplayableDeployment & {
 export namespace Wearable {
     const // (undocumented)
     schema: JSONSchema<Wearable>;
-    const // (undocumented)
-    validate: ValidateFunction<Wearable>;
+    const validate: ValidateFunction<Wearable>;
 }
 
 // @alpha (undocumented)
