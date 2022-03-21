@@ -78,7 +78,6 @@ export namespace Scene {
           }
         },
         nullable: true,
-        additionalProperties: false,
         required: []
       },
       owner: {
@@ -95,7 +94,6 @@ export namespace Scene {
           url: { type: 'string', nullable: true }
         },
         nullable: true,
-        additionalProperties: false,
         required: []
       },
       tags: {
@@ -127,7 +125,7 @@ export namespace Scene {
         nullable: true
       }
     },
-    additionalProperties: false,
+    additionalProperties: true,
     required: ['main', 'scene']
   }
 

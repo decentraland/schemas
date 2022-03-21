@@ -12,13 +12,15 @@ import {
   DisplayableDeployment,
   displayableProperties
 } from '../shared/displayable'
+import { MerkleProof } from '../merkle-tree'
+import { WithRequired } from '../../misc'
 
 /** @alpha */
 export type Wearable = DisplayableDeployment & {
   id: string
   descriptions: I18N[]
-  collectionAddress: string
-  rarity: Rarity
+  collectionAddress?: string
+  rarity?: Rarity
   names: I18N[]
   data: {
     replaces: WearableCategory[]
@@ -30,7 +32,44 @@ export type Wearable = DisplayableDeployment & {
   thumbnail: string
   image: string
   metrics?: Metrics
+  content?: any
+  merkleProof?: MerkleProof
 }
+
+/** @alpha */
+export type StandardWearable = Omit<
+  WithRequired<Wearable, 'collectionAddress' | 'rarity'>,
+  'merkleProof'
+>
+
+export type ThirdPartyWearable = Omit<
+  WithRequired<Wearable, 'merkleProof'>,
+  'rarity' | 'collectionAddress'
+>
+
+const validateThirdParty = (wearable: Wearable) => {
+  if (!MerkleProof.validate(wearable.merkleProof)) return false
+  if (wearable.merkleProof.hashingKeys.length === 0) return false
+  const containsAllKeys = wearable.merkleProof.hashingKeys.every((key) =>
+    wearable.hasOwnProperty(key)
+  )
+
+  const proofIsNotEmpty = wearable.merkleProof.proof.length > 0
+
+  return containsAllKeys && proofIsNotEmpty
+}
+
+const validateStandardWearable = (
+  rarity?: Rarity,
+  collectionAddress?: string
+) => Rarity.validate(rarity) && !!collectionAddress
+
+export const isStandard = (wearable: Wearable): wearable is StandardWearable =>
+  validateStandardWearable(wearable.rarity, wearable.collectionAddress)
+
+export const isThirdParty = (
+  wearable: Wearable
+): wearable is ThirdPartyWearable => validateThirdParty(wearable)
 
 /** @alpha */
 export namespace Wearable {
@@ -47,9 +86,13 @@ export namespace Wearable {
         minItems: 1
       },
       collectionAddress: {
-        type: 'string'
+        type: 'string',
+        nullable: true
       },
-      rarity: Rarity.schema,
+      rarity: {
+        ...Rarity.schema,
+        nullable: true
+      },
       names: {
         type: 'array',
         items: I18N.schema,
@@ -92,19 +135,18 @@ export namespace Wearable {
       metrics: {
         ...Metrics.schema,
         nullable: true
+      },
+      merkleProof: {
+        ...MerkleProof.schema,
+        nullable: true
+      },
+      content: {
+        type: 'object',
+        nullable: true
       }
     },
-    additionalProperties: false,
-    required: [
-      'id',
-      'descriptions',
-      'collectionAddress',
-      'rarity',
-      'names',
-      'data',
-      'thumbnail',
-      'image'
-    ]
+    additionalProperties: true,
+    required: ['id', 'descriptions', 'names', 'data', 'thumbnail', 'image']
   }
 
   const schemaValidator: ValidateFunction<Wearable> = generateValidator(schema)
@@ -113,7 +155,9 @@ export namespace Wearable {
   ): wearable is Wearable =>
     schemaValidator(wearable) &&
     validateDuplicatedLocales(wearable.descriptions) &&
-    validateDuplicatedLocales(wearable.names)
+    validateDuplicatedLocales(wearable.names) &&
+    (validateStandardWearable(wearable.rarity, wearable.collectionAddress) ||
+      validateThirdParty(wearable))
 
   // Returns true only if there are no entries with the same locale
   const validateDuplicatedLocales = (i18ns: I18N[]) =>

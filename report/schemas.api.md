@@ -1197,6 +1197,9 @@ export namespace SpawnPoint {
     validate: ValidateFunction<SpawnPoint>;
 }
 
+// @alpha (undocumented)
+export type StandardWearable = Omit<WithRequired<Wearable, 'collectionAddress' | 'rarity'>, 'merkleProof'>;
+
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1223,6 +1226,12 @@ export namespace Store {
     const // (undocumented)
     validate: ValidateFunction<Store>;
 }
+
+// Warning: (ae-incompatible-release-tags) The symbol "ThirdPartyWearable" is marked as @public, but its signature references "Wearable" which is marked as @alpha
+// Warning: (ae-missing-release-tag) "ThirdPartyWearable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ThirdPartyWearable = Omit<WithRequired<Wearable, 'merkleProof'>, 'rarity' | 'collectionAddress'>;
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
@@ -1269,8 +1278,8 @@ export type ValidWorldRange = {
 export type Wearable = DisplayableDeployment & {
     id: string;
     descriptions: I18N[];
-    collectionAddress: string;
-    rarity: Rarity;
+    collectionAddress?: string;
+    rarity?: Rarity;
     names: I18N[];
     data: {
         replaces: WearableCategory[];
@@ -1282,6 +1291,8 @@ export type Wearable = DisplayableDeployment & {
     thumbnail: string;
     image: string;
     metrics?: Metrics;
+    content?: any;
+    merkleProof?: MerkleProof;
 };
 
 // @alpha (undocumented)
@@ -1393,6 +1404,13 @@ export namespace WearableRepresentation {
     const // (undocumented)
     validate: ValidateFunction<WearableRepresentation>;
 }
+
+// Warning: (ae-missing-release-tag) "WithRequired" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WithRequired<T, K extends keyof T> = T & {
+    [P in K]-?: T[P];
+};
 
 // @alpha
 export type World = {
