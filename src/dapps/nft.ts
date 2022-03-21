@@ -74,6 +74,8 @@ export type NFTFilters = {
   isWearableSmart?: boolean
   wearableCategory?: WearableCategory
   wearableGenders?: WearableGender[]
+  emoteCategory?: EmoteCategory
+  emoteGenders?: WearableGender[]
   contractAddresses?: string[]
   tokenId?: string
   itemId?: string
