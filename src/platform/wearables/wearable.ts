@@ -4,26 +4,107 @@ import {
   ValidateFunction
 } from '../../validation'
 import { Rarity } from '../../dapps/rarity'
-import { BaseWearable } from './base-wearable'
+import { WearableCategory } from '../../dapps/wearable-category'
+import { I18N } from './i18n'
+import { WearableRepresentation } from './representation'
+import { Metrics } from './metrics'
+import {
+  DisplayableDeployment,
+  displayableProperties
+} from '../shared/displayable'
 
 /** @alpha */
-export type Wearable = BaseWearable & {
-  rarity: Rarity
+export type Wearable = DisplayableDeployment & {
+  id: string
+  descriptions: I18N[]
   collectionAddress: string
+  rarity: Rarity
+  names: I18N[]
+  data: {
+    replaces: WearableCategory[]
+    hides: WearableCategory[]
+    tags: string[]
+    representations: WearableRepresentation[]
+    category: WearableCategory
+  }
+  thumbnail: string
+  image: string
+  metrics?: Metrics
 }
 
 /** @alpha */
 export namespace Wearable {
   export const schema: JSONSchema<Wearable> = {
-    ...BaseWearable.schema,
+    type: 'object',
     properties: {
-      ...BaseWearable.schema.properties!,
+      ...displayableProperties,
+      id: {
+        type: 'string'
+      },
+      descriptions: {
+        type: 'array',
+        items: I18N.schema,
+        minItems: 1
+      },
       collectionAddress: {
         type: 'string'
       },
-      rarity: Rarity.schema
+      rarity: Rarity.schema,
+      names: {
+        type: 'array',
+        items: I18N.schema,
+        minItems: 1
+      },
+      data: {
+        type: 'object',
+        properties: {
+          replaces: {
+            type: 'array',
+            items: WearableCategory.schema
+          },
+          hides: {
+            type: 'array',
+            items: WearableCategory.schema
+          },
+          tags: {
+            type: 'array',
+            items: {
+              type: 'string',
+              minLength: 1
+            }
+          },
+          representations: {
+            type: 'array',
+            items: WearableRepresentation.schema,
+            minItems: 1
+          },
+          category: WearableCategory.schema
+        },
+        additionalProperties: false,
+        required: ['replaces', 'hides', 'tags', 'representations', 'category']
+      },
+      thumbnail: {
+        type: 'string'
+      },
+      image: {
+        type: 'string'
+      },
+      metrics: {
+        ...Metrics.schema,
+        nullable: true
+      }
     },
-    required: [...BaseWearable.schema.required, 'collectionAddress', 'rarity']
+    additionalProperties: false,
+    required: [
+      'id',
+      'descriptions',
+      'collectionAddress',
+      'rarity',
+      'names',
+      'data',
+      'thumbnail',
+      'image'
+    ]
   }
 
   const schemaValidator: ValidateFunction<Wearable> = generateValidator(schema)
@@ -31,6 +112,13 @@ export namespace Wearable {
     wearable: any
   ): wearable is Wearable =>
     schemaValidator(wearable) &&
-    BaseWearable.validateDuplicatedLocales(wearable.descriptions) &&
-    BaseWearable.validateDuplicatedLocales(wearable.names)
+    validateDuplicatedLocales(wearable.descriptions) &&
+    validateDuplicatedLocales(wearable.names)
+
+  // Returns true only if there are no entries with the same locale
+  const validateDuplicatedLocales = (i18ns: I18N[]) =>
+    i18ns.every(
+      ({ code }, index) =>
+        i18ns.findIndex((i18n) => i18n.code === code) === index
+    )
 }
