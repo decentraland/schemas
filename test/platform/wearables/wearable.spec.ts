@@ -2,7 +2,6 @@ import expect from 'expect'
 import {
   Locale,
   Rarity,
-  ThirdPartyWearable,
   Wearable,
   WearableBodyShape,
   WearableCategory,
