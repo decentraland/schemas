@@ -32,7 +32,7 @@ export type Wearable = DisplayableDeployment & {
   thumbnail: string
   image: string
   metrics?: Metrics
-  content?: any
+  content?: Record<string, string>
   merkleProof?: MerkleProof
 }
 
