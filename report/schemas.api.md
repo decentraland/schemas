@@ -1198,7 +1198,7 @@ export namespace SpawnPoint {
 }
 
 // @alpha (undocumented)
-export type StandardWearable = Omit<WithRequired<Wearable, 'collectionAddress' | 'rarity'>, 'merkleProof'>;
+export type StandardWearable = Omit<WithRequired<Wearable, 'collectionAddress' | 'rarity'>, 'merkleProof' | 'content'>;
 
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1291,7 +1291,7 @@ export type Wearable = DisplayableDeployment & {
     thumbnail: string;
     image: string;
     metrics?: Metrics;
-    content?: any;
+    content?: Record<string, string>;
     merkleProof?: MerkleProof;
 };
 
