@@ -1197,6 +1197,9 @@ export namespace SpawnPoint {
     validate: ValidateFunction<SpawnPoint>;
 }
 
+// @alpha (undocumented)
+export type StandardWearable = Omit<WithRequired<Wearable, 'collectionAddress' | 'rarity'>, 'merkleProof' | 'content'>;
+
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1224,21 +1227,11 @@ export namespace Store {
     validate: ValidateFunction<Store>;
 }
 
-// Warning: (ae-forgotten-export) The symbol "BaseWearable" needs to be exported by the entry point index.d.ts
+// Warning: (ae-incompatible-release-tags) The symbol "ThirdPartyWearable" is marked as @public, but its signature references "Wearable" which is marked as @alpha
+// Warning: (ae-missing-release-tag) "ThirdPartyWearable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
-// @alpha (undocumented)
-export type TPWearable = BaseWearable & {
-    content: Record<string, string>;
-    merkleProof: MerkleProof;
-};
-
-// @alpha (undocumented)
-export namespace TPWearable {
-    const // (undocumented)
-    schema: JSONSchema<TPWearable>;
-    const // (undocumented)
-    validate: ValidateFunction<TPWearable>;
-}
+// @public (undocumented)
+export type ThirdPartyWearable = Omit<WithRequired<Wearable, 'merkleProof'>, 'rarity' | 'collectionAddress'>;
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
@@ -1282,17 +1275,31 @@ export type ValidWorldRange = {
 };
 
 // @alpha (undocumented)
-export type Wearable = BaseWearable & {
-    rarity: Rarity;
-    collectionAddress: string;
+export type Wearable = DisplayableDeployment & {
+    id: string;
+    descriptions: I18N[];
+    collectionAddress?: string;
+    rarity?: Rarity;
+    names: I18N[];
+    data: {
+        replaces: WearableCategory[];
+        hides: WearableCategory[];
+        tags: string[];
+        representations: WearableRepresentation[];
+        category: WearableCategory;
+    };
+    thumbnail: string;
+    image: string;
+    metrics?: Metrics;
+    content?: Record<string, string>;
+    merkleProof?: MerkleProof;
 };
 
 // @alpha (undocumented)
 export namespace Wearable {
     const // (undocumented)
     schema: JSONSchema<Wearable>;
-    const // (undocumented)
-    validate: ValidateFunction<Wearable>;
+    const validate: ValidateFunction<Wearable>;
 }
 
 // @alpha (undocumented)
@@ -1396,6 +1403,13 @@ export namespace WearableRepresentation {
     const // (undocumented)
     validate: ValidateFunction<WearableRepresentation>;
 }
+
+// Warning: (ae-missing-release-tag) "WithRequired" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WithRequired<T, K extends keyof T> = T & {
+    [P in K]-?: T[P];
+};
 
 // @alpha
 export type World = {
