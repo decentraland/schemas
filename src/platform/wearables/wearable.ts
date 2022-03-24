@@ -39,7 +39,7 @@ export type Wearable = DisplayableDeployment & {
 /** @alpha */
 export type StandardWearable = Omit<
   WithRequired<Wearable, 'collectionAddress' | 'rarity'>,
-  'merkleProof'
+  'merkleProof' | 'content'
 >
 
 export type ThirdPartyWearable = Omit<
