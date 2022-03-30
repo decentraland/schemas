@@ -20,22 +20,8 @@ describe('Representation tests', () => {
 
   const baseWearable = {
     id: 'some id',
-    descriptions: [
-      {
-        code: Locale.EN,
-        text: 'some description'
-      },
-      {
-        code: Locale.ES,
-        text: 'una descripcion'
-      }
-    ],
-    names: [
-      {
-        code: Locale.EN,
-        text: 'name'
-      }
-    ],
+    name: 'name',
+    description: 'some description',
     data: {
       replaces: [],
       hides: [],
@@ -43,6 +29,12 @@ describe('Representation tests', () => {
       representations: [representation],
       category: WearableCategory.UPPER_BODY
     },
+    i18n: [
+      {
+        code: Locale.EN,
+        text: 'some id'
+      }
+    ],
     thumbnail: 'thumbnail.png',
     image: 'image.png'
   }
@@ -80,8 +72,9 @@ describe('Representation tests', () => {
       ],
       hashingKeys: [
         'id',
-        'names',
-        'descriptions',
+        'name',
+        'description',
+        'i18n',
         'image',
         'thumbnail',
         'data',
@@ -104,23 +97,11 @@ describe('Representation tests', () => {
     expect(Wearable.validate({})).toEqual(false)
   })
 
-  it('wearable with two names with same locale fails', () => {
+  it('wearable with two i18n with same locale fails', () => {
     expect(
       Wearable.validate({
         ...wearable,
-        names: [
-          { code: Locale.ES, text: 'texto' },
-          { code: Locale.ES, text: 'otro texto' }
-        ]
-      })
-    ).toEqual(false)
-  })
-
-  it('wearable with two descriptions with same locale fails', () => {
-    expect(
-      Wearable.validate({
-        ...wearable,
-        descriptions: [
+        i18n: [
           { code: Locale.ES, text: 'texto' },
           { code: Locale.ES, text: 'otro texto' }
         ]
@@ -136,24 +117,6 @@ describe('Representation tests', () => {
           ...wearable.data,
           representations: []
         }
-      })
-    ).toEqual(false)
-  })
-
-  it('wearable without names fails', () => {
-    expect(
-      Wearable.validate({
-        ...wearable,
-        names: []
-      })
-    ).toEqual(false)
-  })
-
-  it('wearable without descriptions fails', () => {
-    expect(
-      Wearable.validate({
-        ...wearable,
-        descriptions: []
       })
     ).toEqual(false)
   })

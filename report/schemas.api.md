@@ -1277,10 +1277,8 @@ export type ValidWorldRange = {
 // @alpha (undocumented)
 export type Wearable = DisplayableDeployment & {
     id: string;
-    descriptions: I18N[];
-    collectionAddress?: string;
-    rarity?: Rarity;
-    names: I18N[];
+    name: string;
+    description: string;
     data: {
         replaces: WearableCategory[];
         hides: WearableCategory[];
@@ -1288,8 +1286,11 @@ export type Wearable = DisplayableDeployment & {
         representations: WearableRepresentation[];
         category: WearableCategory;
     };
+    i18n: I18N[];
     thumbnail: string;
     image: string;
+    rarity?: Rarity;
+    collectionAddress?: string;
     metrics?: Metrics;
     content?: Record<string, string>;
     merkleProof?: MerkleProof;
