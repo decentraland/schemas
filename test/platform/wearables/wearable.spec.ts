@@ -36,9 +36,7 @@ describe('Representation tests', () => {
       }
     ],
     thumbnail: 'thumbnail.png',
-    image: 'image.png',
-    createdAt: 1111,
-    updatedAt: 1112
+    image: 'image.png'
   }
 
   const standard = {
@@ -80,9 +78,7 @@ describe('Representation tests', () => {
         'image',
         'thumbnail',
         'data',
-        'content',
-        'createdAt',
-        'updatedAt'
+        'content'
       ],
       entityHash:
         '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'

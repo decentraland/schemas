@@ -30,8 +30,6 @@ export type Wearable = DisplayableDeployment & {
   i18n: I18N[]
   thumbnail: string
   image: string
-  createdAt: number
-  updatedAt: number
   rarity?: Rarity
   collectionAddress?: string
   metrics?: Metrics
@@ -136,12 +134,6 @@ export namespace Wearable {
       image: {
         type: 'string'
       },
-      createdAt: {
-        type: 'number'
-      },
-      updatedAt: {
-        type: 'number'
-      },
       metrics: {
         ...Metrics.schema,
         nullable: true
@@ -165,9 +157,7 @@ export namespace Wearable {
       'data',
       'thumbnail',
       'image',
-      'i18n',
-      'createdAt',
-      'updatedAt'
+      'i18n'
     ]
   }
 
