@@ -18,10 +18,8 @@ import { WithRequired } from '../../misc'
 /** @alpha */
 export type Wearable = DisplayableDeployment & {
   id: string
-  descriptions: I18N[]
-  collectionAddress?: string
-  rarity?: Rarity
-  names: I18N[]
+  name: string
+  description: string
   data: {
     replaces: WearableCategory[]
     hides: WearableCategory[]
@@ -29,8 +27,13 @@ export type Wearable = DisplayableDeployment & {
     representations: WearableRepresentation[]
     category: WearableCategory
   }
+  i18n: I18N[]
   thumbnail: string
   image: string
+  createdAt: number
+  updatedAt: number
+  rarity?: Rarity
+  collectionAddress?: string
   metrics?: Metrics
   content?: Record<string, string>
   merkleProof?: MerkleProof
@@ -80,10 +83,8 @@ export namespace Wearable {
       id: {
         type: 'string'
       },
-      descriptions: {
-        type: 'array',
-        items: I18N.schema,
-        minItems: 1
+      description: {
+        type: 'string'
       },
       collectionAddress: {
         type: 'string',
@@ -93,7 +94,10 @@ export namespace Wearable {
         ...Rarity.schema,
         nullable: true
       },
-      names: {
+      name: {
+        type: 'string'
+      },
+      i18n: {
         type: 'array',
         items: I18N.schema,
         minItems: 1
@@ -132,6 +136,12 @@ export namespace Wearable {
       image: {
         type: 'string'
       },
+      createdAt: {
+        type: 'number'
+      },
+      updatedAt: {
+        type: 'number'
+      },
       metrics: {
         ...Metrics.schema,
         nullable: true
@@ -148,7 +158,17 @@ export namespace Wearable {
       }
     },
     additionalProperties: true,
-    required: ['id', 'descriptions', 'names', 'data', 'thumbnail', 'image']
+    required: [
+      'id',
+      'description',
+      'name',
+      'data',
+      'thumbnail',
+      'image',
+      'i18n',
+      'createdAt',
+      'updatedAt'
+    ]
   }
 
   const schemaValidator: ValidateFunction<Wearable> = generateValidator(schema)
@@ -166,8 +186,7 @@ export namespace Wearable {
     wearable: any
   ): wearable is Wearable =>
     schemaValidator(wearable) &&
-    validateDuplicatedLocales(wearable.descriptions) &&
-    validateDuplicatedLocales(wearable.names) &&
+    validateDuplicatedLocales(wearable.i18n) &&
     XOR(
       validateStandardWearable(wearable.rarity, wearable.collectionAddress),
       validateThirdParty(wearable)
