@@ -8,7 +8,8 @@ export enum ProviderType {
   INJECTED = 'injected',
   FORTMATIC = 'formatic',
   NETWORK = 'network',
-  WALLET_CONNECT = 'wallet_connect'
+  WALLET_CONNECT = 'wallet_connect',
+  WALLET_LINK = 'wallet_link'
 }
 
 /**

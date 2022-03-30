@@ -12,14 +12,14 @@ import {
   DisplayableDeployment,
   displayableProperties
 } from '../shared/displayable'
+import { MerkleProof } from '../merkle-tree'
+import { WithRequired } from '../../misc'
 
 /** @alpha */
 export type Wearable = DisplayableDeployment & {
   id: string
-  descriptions: I18N[]
-  collectionAddress: string
-  rarity: Rarity
-  names: I18N[]
+  name: string
+  description: string
   data: {
     replaces: WearableCategory[]
     hides: WearableCategory[]
@@ -27,10 +27,50 @@ export type Wearable = DisplayableDeployment & {
     representations: WearableRepresentation[]
     category: WearableCategory
   }
+  i18n: I18N[]
   thumbnail: string
   image: string
+  rarity?: Rarity
+  collectionAddress?: string
   metrics?: Metrics
+  content?: Record<string, string>
+  merkleProof?: MerkleProof
 }
+
+/** @alpha */
+export type StandardWearable = Omit<
+  WithRequired<Wearable, 'collectionAddress' | 'rarity'>,
+  'merkleProof' | 'content'
+>
+
+export type ThirdPartyWearable = Omit<
+  WithRequired<Wearable, 'merkleProof'>,
+  'rarity' | 'collectionAddress'
+>
+
+const validateThirdParty = (wearable: Wearable) => {
+  if (!MerkleProof.validate(wearable.merkleProof)) return false
+  if (wearable.merkleProof.hashingKeys.length === 0) return false
+  const containsAllKeys = wearable.merkleProof.hashingKeys.every((key) =>
+    wearable.hasOwnProperty(key)
+  )
+
+  const proofIsNotEmpty = wearable.merkleProof.proof.length > 0
+
+  return containsAllKeys && proofIsNotEmpty
+}
+
+const validateStandardWearable = (
+  rarity?: Rarity,
+  collectionAddress?: string
+) => Rarity.validate(rarity) && !!collectionAddress
+
+export const isStandard = (wearable: Wearable): wearable is StandardWearable =>
+  validateStandardWearable(wearable.rarity, wearable.collectionAddress)
+
+export const isThirdParty = (
+  wearable: Wearable
+): wearable is ThirdPartyWearable => validateThirdParty(wearable)
 
 /** @alpha */
 export namespace Wearable {
@@ -41,16 +81,21 @@ export namespace Wearable {
       id: {
         type: 'string'
       },
-      descriptions: {
-        type: 'array',
-        items: I18N.schema,
-        minItems: 1
-      },
-      collectionAddress: {
+      description: {
         type: 'string'
       },
-      rarity: Rarity.schema,
-      names: {
+      collectionAddress: {
+        type: 'string',
+        nullable: true
+      },
+      rarity: {
+        ...Rarity.schema,
+        nullable: true
+      },
+      name: {
+        type: 'string'
+      },
+      i18n: {
         type: 'array',
         items: I18N.schema,
         minItems: 1
@@ -92,28 +137,52 @@ export namespace Wearable {
       metrics: {
         ...Metrics.schema,
         nullable: true
+      },
+      merkleProof: {
+        ...MerkleProof.schema,
+        nullable: true
+      },
+      content: {
+        type: 'object',
+        nullable: true,
+        additionalProperties: { type: 'string' },
+        required: []
       }
     },
-    additionalProperties: false,
+    additionalProperties: true,
     required: [
       'id',
-      'descriptions',
-      'collectionAddress',
-      'rarity',
-      'names',
+      'description',
+      'name',
       'data',
       'thumbnail',
-      'image'
+      'image',
+      'i18n'
     ]
   }
 
   const schemaValidator: ValidateFunction<Wearable> = generateValidator(schema)
+
+  /**
+   * Validates that the wearable metadata complies with the standard or third party wearable, and doesn't have repeated locales.
+   * Some fields are defined as optional but those are validated to be present as standard XOR third party:
+   *  Standard Wearables should contain:
+   *    - collectionAddress
+   *    - rarity
+   *  Third Party Wearables should contain:
+   *    - merkleProof
+   */
   export const validate: ValidateFunction<Wearable> = (
     wearable: any
   ): wearable is Wearable =>
     schemaValidator(wearable) &&
-    validateDuplicatedLocales(wearable.descriptions) &&
-    validateDuplicatedLocales(wearable.names)
+    validateDuplicatedLocales(wearable.i18n) &&
+    XOR(
+      validateStandardWearable(wearable.rarity, wearable.collectionAddress),
+      validateThirdParty(wearable)
+    )
+
+  const XOR = (b1: boolean, b2: boolean) => (b1 && !b2) || (b2 && !b1)
 
   // Returns true only if there are no entries with the same locale
   const validateDuplicatedLocales = (i18ns: I18N[]) =>

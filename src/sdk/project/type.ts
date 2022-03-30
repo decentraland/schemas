@@ -8,7 +8,8 @@ import {
 export enum ProjectType {
   SCENE = 'scene',
   SMART_ITEM = 'smart-item',
-  PORTABLE_EXPERIENCE = 'portable-experience'
+  PORTABLE_EXPERIENCE = 'portable-experience',
+  LIBRARY = 'library'
 }
 
 /** @public */

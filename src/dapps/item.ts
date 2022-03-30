@@ -1,5 +1,6 @@
 import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
+import { EmoteCategory } from './emote-category'
 import { Network } from './network'
 import { NFT } from './nft'
 import { NFTCategory } from './nft-category'
@@ -34,6 +35,7 @@ export type ItemFilters = {
   first?: number
   skip?: number
   sortBy?: ItemSortBy
+  category?: NFTCategory
   creator?: string
   rarities?: Rarity[]
   isSoldOut?: boolean
@@ -44,6 +46,8 @@ export type ItemFilters = {
   isWearableSmart?: boolean
   wearableCategory?: WearableCategory
   wearableGenders?: WearableGender[]
+  emoteCategory?: EmoteCategory
+  emoteGenders?: WearableGender[]
   contractAddress?: string
   itemId?: string
   network?: Network

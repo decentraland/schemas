@@ -380,6 +380,25 @@ export type DisplayableDeployment = {
     menuBarIcon?: string;
 };
 
+// Warning: (ae-missing-release-tag) "EmoteCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum EmoteCategory {
+    // (undocumented)
+    LOOP = "loop",
+    // (undocumented)
+    SIMPLE = "simple"
+}
+
+// @public (undocumented)
+export namespace EmoteCategory {
+    const // (undocumented)
+    schema: JSONSchema<EmoteCategory>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteCategory>;
+}
+
 // @alpha
 export type EthAddress = string;
 
@@ -487,6 +506,7 @@ export type ItemFilters = {
     first?: number;
     skip?: number;
     sortBy?: ItemSortBy;
+    category?: NFTCategory;
     creator?: string;
     rarities?: Rarity[];
     isSoldOut?: boolean;
@@ -497,6 +517,8 @@ export type ItemFilters = {
     isWearableSmart?: boolean;
     wearableCategory?: WearableCategory;
     wearableGenders?: WearableGender[];
+    emoteCategory?: EmoteCategory;
+    emoteGenders?: WearableGender[];
     contractAddress?: string;
     itemId?: string;
     network?: Network;
@@ -556,6 +578,22 @@ export namespace Locale {
     schema: JSONSchema<Locale>;
     const // (undocumented)
     validate: ValidateFunction<Locale>;
+}
+
+// @alpha
+export type MerkleProof = {
+    proof: string[];
+    index: number;
+    hashingKeys: string[];
+    entityHash: string;
+};
+
+// @alpha
+export namespace MerkleProof {
+    const // (undocumented)
+    schema: JSONSchema<MerkleProof>;
+    const // (undocumented)
+    validate: ValidateFunction<MerkleProof>;
 }
 
 // @public (undocumented)
@@ -708,6 +746,12 @@ export type NFT = {
         ens?: {
             subdomain: string;
         };
+        emote?: {
+            description: string;
+            category: EmoteCategory;
+            rarity: Rarity;
+            bodyShapes: BodyShape[];
+        };
     };
     network: Network;
     chainId: ChainId;
@@ -729,6 +773,8 @@ export namespace NFT {
 //
 // @public (undocumented)
 export enum NFTCategory {
+    // (undocumented)
+    EMOTE = "emote",
     // (undocumented)
     ENS = "ens",
     // (undocumented)
@@ -765,6 +811,8 @@ export type NFTFilters = {
     isWearableSmart?: boolean;
     wearableCategory?: WearableCategory;
     wearableGenders?: WearableGender[];
+    emoteCategory?: EmoteCategory;
+    emoteGenders?: WearableGender[];
     contractAddresses?: string[];
     tokenId?: string;
     itemId?: string;
@@ -859,6 +907,8 @@ export namespace Profile {
 // @public (undocumented)
 enum ProjectType {
     // (undocumented)
+    LIBRARY = "library",
+    // (undocumented)
     PORTABLE_EXPERIENCE = "portable-experience",
     // (undocumented)
     SCENE = "scene",
@@ -883,7 +933,9 @@ export enum ProviderType {
     // (undocumented)
     NETWORK = "network",
     // (undocumented)
-    WALLET_CONNECT = "wallet_connect"
+    WALLET_CONNECT = "wallet_connect",
+    // (undocumented)
+    WALLET_LINK = "wallet_link"
 }
 
 // @alpha (undocumented)
@@ -1145,6 +1197,9 @@ export namespace SpawnPoint {
     validate: ValidateFunction<SpawnPoint>;
 }
 
+// @alpha (undocumented)
+export type StandardWearable = Omit<WithRequired<Wearable, 'collectionAddress' | 'rarity'>, 'merkleProof' | 'content'>;
+
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1171,6 +1226,12 @@ export namespace Store {
     const // (undocumented)
     validate: ValidateFunction<Store>;
 }
+
+// Warning: (ae-incompatible-release-tags) The symbol "ThirdPartyWearable" is marked as @public, but its signature references "Wearable" which is marked as @alpha
+// Warning: (ae-missing-release-tag) "ThirdPartyWearable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ThirdPartyWearable = Omit<WithRequired<Wearable, 'merkleProof'>, 'rarity' | 'collectionAddress'>;
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
@@ -1216,10 +1277,8 @@ export type ValidWorldRange = {
 // @alpha (undocumented)
 export type Wearable = DisplayableDeployment & {
     id: string;
-    descriptions: I18N[];
-    collectionAddress: string;
-    rarity: Rarity;
-    names: I18N[];
+    name: string;
+    description: string;
     data: {
         replaces: WearableCategory[];
         hides: WearableCategory[];
@@ -1227,17 +1286,21 @@ export type Wearable = DisplayableDeployment & {
         representations: WearableRepresentation[];
         category: WearableCategory;
     };
+    i18n: I18N[];
     thumbnail: string;
     image: string;
+    rarity?: Rarity;
+    collectionAddress?: string;
     metrics?: Metrics;
+    content?: Record<string, string>;
+    merkleProof?: MerkleProof;
 };
 
 // @alpha (undocumented)
 export namespace Wearable {
     const // (undocumented)
     schema: JSONSchema<Wearable>;
-    const // (undocumented)
-    validate: ValidateFunction<Wearable>;
+    const validate: ValidateFunction<Wearable>;
 }
 
 // @alpha (undocumented)
@@ -1342,6 +1405,13 @@ export namespace WearableRepresentation {
     validate: ValidateFunction<WearableRepresentation>;
 }
 
+// Warning: (ae-missing-release-tag) "WithRequired" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WithRequired<T, K extends keyof T> = T & {
+    [P in K]-?: T[P];
+};
+
 // @alpha
 export type World = {
     validWorldRanges: Array<ValidWorldRange>;
@@ -1367,15 +1437,15 @@ export namespace World {
 // src/dapps/contract.ts:10:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/contract.ts:11:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/contract.ts:16:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/item.ts:29:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/item.ts:30:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/item.ts:49:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/item.ts:30:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/item.ts:31:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/item.ts:53:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:16:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:17:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/mint.ts:37:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/nft.ts:48:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/nft.ts:49:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/nft.ts:73:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:55:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:56:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/nft.ts:82:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:32:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
