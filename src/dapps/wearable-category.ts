@@ -5,6 +5,8 @@ export enum WearableCategory {
   EYES = 'eyes',
   FACIAL_HAIR = 'facial_hair',
   HAIR = 'hair',
+  HEAD = 'head',
+  BODY_SHAPE = 'body_shape',
   MOUTH = 'mouth',
   UPPER_BODY = 'upper_body',
   LOWER_BODY = 'lower_body',
