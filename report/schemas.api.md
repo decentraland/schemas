@@ -1325,6 +1325,8 @@ export namespace WearableBodyShape {
 // @public (undocumented)
 export enum WearableCategory {
     // (undocumented)
+    BODY_SHAPE = "body_shape",
+    // (undocumented)
     EARRING = "earring",
     // (undocumented)
     EYEBROWS = "eyebrows",
