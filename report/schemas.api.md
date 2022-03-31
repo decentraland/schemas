@@ -1341,6 +1341,8 @@ export enum WearableCategory {
     // (undocumented)
     HAT = "hat",
     // (undocumented)
+    HEAD = "head",
+    // (undocumented)
     HELMET = "helmet",
     // (undocumented)
     LOWER_BODY = "lower_body",
