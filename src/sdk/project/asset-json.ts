@@ -22,6 +22,8 @@ export type AssetJson = {
   category: WearableCategory
   rarity: Rarity
   bodyShape: AssetWearableGender
+
+  collectionId: string
 }
 
 /** @alpha */
@@ -53,7 +55,11 @@ export namespace AssetJson {
       },
       category: WearableCategory.schema,
       rarity: Rarity.schema,
-      bodyShape: AssetWearableGender.schema
+      bodyShape: AssetWearableGender.schema,
+      collectionId: {
+        description: 'The collection where the wearable is placed.',
+        type: 'string'
+      }
     },
     additionalProperties: false,
     required: ['category', 'rarity', 'bodyShape', 'thumbnail', 'model']
