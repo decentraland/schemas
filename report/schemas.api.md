@@ -80,6 +80,7 @@ type AssetJson = {
     category: WearableCategory;
     rarity: Rarity;
     bodyShape: AssetWearableGender;
+    collectionId: string;
 };
 
 // @alpha (undocumented)
