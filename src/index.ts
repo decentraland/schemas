@@ -37,7 +37,7 @@ export {
   getWorld,
   isInsideWorldLimits
 } from './dapps/world'
-
+export * from './dapps/preview'
 export * from './platform'
 export * from './misc'
 export { sdk }
