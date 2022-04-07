@@ -1,4 +1,5 @@
-import { RepresentationDefinition, Wearable } from '../..'
+import { Wearable } from '../../platform/wearables/wearable'
+import { RepresentationDefinition } from './representation-definition'
 
 /** @alpha */
 export type WearableDefinition = Omit<Wearable, 'data'> & {

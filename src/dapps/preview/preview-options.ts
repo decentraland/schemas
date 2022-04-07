@@ -1,9 +1,7 @@
-import {
-  PreviewCamera,
-  PreviewEmote,
-  PreviewEnv,
-  WearableBodyShape
-} from '../..'
+import { WearableBodyShape } from '../../platform/wearables/wearable-body-shape'
+import { PreviewCamera } from './preview-camera'
+import { PreviewEmote } from './preview-emote'
+import { PreviewEnv } from './preview-env'
 
 /** @alpha */
 export type PreviewOptions = {
