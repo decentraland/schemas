@@ -23,7 +23,7 @@ export type AssetJson = {
   rarity: Rarity
   bodyShape: AssetWearableGender
 
-  collectionId: string
+  collectionId?: string
 }
 
 /** @alpha */
@@ -58,7 +58,9 @@ export namespace AssetJson {
       bodyShape: AssetWearableGender.schema,
       collectionId: {
         description: 'The collection where the wearable is placed.',
-        type: 'string'
+        type: 'string',
+        format: 'uuid',
+        nullable: true
       }
     },
     additionalProperties: false,
