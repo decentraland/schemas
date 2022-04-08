@@ -59,7 +59,6 @@ export namespace AssetJson {
       collectionId: {
         description: 'The collection where the wearable is placed.',
         type: 'string',
-        format: 'uuid',
         nullable: true
       }
     },
