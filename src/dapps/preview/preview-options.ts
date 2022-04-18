@@ -14,6 +14,7 @@ export type PreviewOptions = {
   hair?: string | null
   eyes?: string | null
   urns?: string[] | null
+  urls?: string[] | null
   zoom?: number | null
   emote?: PreviewEmote | null
   camera?: PreviewCamera | null
