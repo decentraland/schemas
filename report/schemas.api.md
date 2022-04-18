@@ -985,6 +985,27 @@ export namespace PreviewEnv {
     validate: ValidateFunction<PreviewEnv>;
 }
 
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-missing-release-tag) "PreviewMessageType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum PreviewMessageType {
+    // (undocumented)
+    ERROR = "error",
+    // (undocumented)
+    LOAD = "load",
+    // (undocumented)
+    UPDATE = "update"
+}
+
+// @alpha (undocumented)
+export namespace PreviewMessageType {
+    const // (undocumented)
+    schema: JSONSchema<PreviewMessageType>;
+    const // (undocumented)
+    validate: ValidateFunction<PreviewMessageType>;
+}
+
 // @alpha (undocumented)
 export type PreviewOptions = {
     contractAddress?: string | null;
@@ -996,6 +1017,7 @@ export type PreviewOptions = {
     hair?: string | null;
     eyes?: string | null;
     urns?: string[] | null;
+    urls?: string[] | null;
     zoom?: number | null;
     emote?: PreviewEmote | null;
     camera?: PreviewCamera | null;
