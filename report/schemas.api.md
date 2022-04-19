@@ -985,6 +985,36 @@ export namespace PreviewEnv {
     validate: ValidateFunction<PreviewEnv>;
 }
 
+// Warning: (ae-missing-release-tag) "PreviewMessagePayload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PreviewMessagePayload<T extends PreviewMessageType> = T extends PreviewMessageType.LOAD ? null : T extends PreviewMessageType.ERROR ? {
+    message: string;
+} : T extends PreviewMessageType.UPDATE ? {
+    options: PreviewOptions;
+} : unknown;
+
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-missing-release-tag) "PreviewMessageType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum PreviewMessageType {
+    // (undocumented)
+    ERROR = "error",
+    // (undocumented)
+    LOAD = "load",
+    // (undocumented)
+    UPDATE = "update"
+}
+
+// @alpha (undocumented)
+export namespace PreviewMessageType {
+    const // (undocumented)
+    schema: JSONSchema<PreviewMessageType>;
+    const // (undocumented)
+    validate: ValidateFunction<PreviewMessageType>;
+}
+
 // @alpha (undocumented)
 export type PreviewOptions = {
     contractAddress?: string | null;
@@ -996,6 +1026,7 @@ export type PreviewOptions = {
     hair?: string | null;
     eyes?: string | null;
     urns?: string[] | null;
+    urls?: string[] | null;
     zoom?: number | null;
     emote?: PreviewEmote | null;
     camera?: PreviewCamera | null;
@@ -1283,6 +1314,11 @@ declare namespace sdk {
     }
 }
 export { sdk }
+
+// Warning: (ae-missing-release-tag) "sendMessage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const sendMessage: <T extends PreviewMessageType>(window: Window, type: T, payload: PreviewMessagePayload<T>, targetOrigin?: string) => void;
 
 // @alpha
 export type Snapshots = {
@@ -1609,6 +1645,7 @@ export namespace World {
 // src/dapps/preview/preview-config.ts:9:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "WearableBodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:15:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
+// src/dapps/preview/preview-message.ts:31:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
