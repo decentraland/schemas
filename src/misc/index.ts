@@ -1,4 +1,4 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '..'
+import { generateValidator, JSONSchema, ValidateFunction } from "../validation";
 
 /**
  * Color3 is a data type that describes a color using R, G and B components
