@@ -15,6 +15,7 @@ export type PreviewOptions = {
   eyes?: string | null
   urns?: string[] | null
   urls?: string[] | null
+  base64s?: string[] | null
   zoom?: number | null
   emote?: PreviewEmote | null
   camera?: PreviewCamera | null
