@@ -3,17 +3,39 @@ import { EthAddress, IPFSv2, Color3 } from '../../src/misc'
 
 describe('Misc tests', () => {
   it('EthAddress static tests must pass', () => {
-    expect(EthAddress.validate('0x00000000000000000000000000000000000000000')).toEqual(false)
-    expect(EthAddress.validate('0x0000000000000000000000000000000000000000')).toEqual(true)
-    expect(EthAddress.validate('0x000000000000000000000000000000000000000')).toEqual(false)
+    expect(
+      EthAddress.validate('0x00000000000000000000000000000000000000000')
+    ).toEqual(false)
+    expect(
+      EthAddress.validate('0x0000000000000000000000000000000000000000')
+    ).toEqual(true)
+    expect(
+      EthAddress.validate('0x000000000000000000000000000000000000000')
+    ).toEqual(false)
     expect(EthAddress.validate(null)).toEqual(false)
     expect(EthAddress.validate({})).toEqual(false)
   })
   it('IPFSv2 static tests must pass', () => {
-    expect(IPFSv2.validate('ba0000000000000000000000000000000000000000000000000000000000')).toEqual(false)
-    expect(IPFSv2.validate('ba000000000000000000000000000000000000000000000000000000000')).toEqual(true)
-    expect(IPFSv2.validate('00000000000000000000000000000000000000000000000000000000000')).toEqual(false)
-    expect(IPFSv2.validate('ab00000000000000000000000000000000000000000000000000000000')).toEqual(false)
+    expect(
+      IPFSv2.validate(
+        'ba0000000000000000000000000000000000000000000000000000000000'
+      )
+    ).toEqual(false)
+    expect(
+      IPFSv2.validate(
+        'ba000000000000000000000000000000000000000000000000000000000'
+      )
+    ).toEqual(true)
+    expect(
+      IPFSv2.validate(
+        '00000000000000000000000000000000000000000000000000000000000'
+      )
+    ).toEqual(false)
+    expect(
+      IPFSv2.validate(
+        'ab00000000000000000000000000000000000000000000000000000000'
+      )
+    ).toEqual(false)
     expect(IPFSv2.validate(null)).toEqual(false)
     expect(IPFSv2.validate({})).toEqual(false)
   })
