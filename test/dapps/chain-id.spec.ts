@@ -1,5 +1,12 @@
 import expect from 'expect'
-import { ChainId, ChainName, getChainName, getURNProtocol } from '../../src'
+import {
+  ChainId,
+  ChainName,
+  getChainName,
+  getURNProtocol,
+  Network
+} from '../../src'
+import { getNetwork, getNetworkMapping } from '../../src/dapps/chain-id'
 import { testTypeSignature } from '../test-utils'
 
 describe('ChainId tests', () => {
@@ -25,5 +32,16 @@ describe('ChainId tests', () => {
 
   it('Should get a valid URN protocol', () => {
     expect(getURNProtocol(ChainId.MATIC_MAINNET)).toEqual('matic')
+  })
+
+  it('Should get a valid network mapping', () => {
+    expect(getNetworkMapping(ChainId.ETHEREUM_KOVAN)).toEqual({
+      [Network.ETHEREUM]: ChainId.ETHEREUM_KOVAN,
+      [Network.MATIC]: ChainId.MATIC_MUMBAI
+    })
+  })
+
+  it('Should get a valid network', () => {
+    expect(getNetwork(ChainId.MATIC_MUMBAI)).toEqual(Network.MATIC)
   })
 })
