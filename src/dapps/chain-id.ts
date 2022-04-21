@@ -1,7 +1,7 @@
-import { generateValidator, JSONSchema, ValidateFunction } from "../validation";
+import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 
-import { ChainName } from "./chain-name";
-import { Network } from "./network";
+import { ChainName } from './chain-name'
+import { Network } from './network'
 
 /**
  * Different supported chain ids
@@ -14,7 +14,7 @@ export enum ChainId {
   ETHEREUM_GOERLI = 5,
   ETHEREUM_KOVAN = 42,
   MATIC_MAINNET = 137,
-  MATIC_MUMBAI = 80001,
+  MATIC_MUMBAI = 80001
 }
 
 /**
@@ -24,21 +24,21 @@ export enum ChainId {
 export function getChainName(chainId: ChainId): ChainName | null {
   switch (chainId) {
     case ChainId.ETHEREUM_MAINNET:
-      return ChainName.ETHEREUM_MAINNET;
+      return ChainName.ETHEREUM_MAINNET
     case ChainId.ETHEREUM_ROPSTEN:
-      return ChainName.ETHEREUM_ROPSTEN;
+      return ChainName.ETHEREUM_ROPSTEN
     case ChainId.ETHEREUM_RINKEBY:
-      return ChainName.ETHEREUM_RINKEBY;
+      return ChainName.ETHEREUM_RINKEBY
     case ChainId.ETHEREUM_GOERLI:
-      return ChainName.ETHEREUM_GOERLI;
+      return ChainName.ETHEREUM_GOERLI
     case ChainId.ETHEREUM_KOVAN:
-      return ChainName.ETHEREUM_KOVAN;
+      return ChainName.ETHEREUM_KOVAN
     case ChainId.MATIC_MAINNET:
-      return ChainName.MATIC_MAINNET;
+      return ChainName.MATIC_MAINNET
     case ChainId.MATIC_MUMBAI:
-      return ChainName.MATIC_MUMBAI;
+      return ChainName.MATIC_MUMBAI
     default:
-      return null;
+      return null
   }
 }
 
@@ -49,19 +49,19 @@ export function getChainName(chainId: ChainId): ChainName | null {
 export function getURNProtocol(chainId: ChainId): string {
   switch (chainId) {
     case ChainId.ETHEREUM_MAINNET:
-      return "mainnet";
+      return 'mainnet'
     case ChainId.ETHEREUM_ROPSTEN:
-      return "ropsten";
+      return 'ropsten'
     case ChainId.ETHEREUM_RINKEBY:
-      return "rinkeby";
+      return 'rinkeby'
     case ChainId.ETHEREUM_GOERLI:
-      return "goerli";
+      return 'goerli'
     case ChainId.ETHEREUM_KOVAN:
-      return "kovan";
+      return 'kovan'
     case ChainId.MATIC_MAINNET:
-      return "matic";
+      return 'matic'
     case ChainId.MATIC_MUMBAI:
-      return "mumbai";
+      return 'mumbai'
   }
 }
 
@@ -72,45 +72,45 @@ export function getURNProtocol(chainId: ChainId): string {
  * @alpha
  */
 export function getNetworkMapping(chainId: ChainId): {
-  [Network.ETHEREUM]: ChainId;
-  [Network.MATIC]: ChainId;
+  [Network.ETHEREUM]: ChainId
+  [Network.MATIC]: ChainId
 } {
   switch (chainId) {
     case ChainId.ETHEREUM_MAINNET:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_MAINNET,
-        [Network.MATIC]: ChainId.MATIC_MAINNET,
-      };
+        [Network.MATIC]: ChainId.MATIC_MAINNET
+      }
     case ChainId.ETHEREUM_ROPSTEN:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_ROPSTEN,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI,
-      };
+        [Network.MATIC]: ChainId.MATIC_MUMBAI
+      }
     case ChainId.ETHEREUM_RINKEBY:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_RINKEBY,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI,
-      };
+        [Network.MATIC]: ChainId.MATIC_MUMBAI
+      }
     case ChainId.ETHEREUM_GOERLI:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_GOERLI,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI,
-      };
+        [Network.MATIC]: ChainId.MATIC_MUMBAI
+      }
     case ChainId.ETHEREUM_KOVAN:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_KOVAN,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI,
-      };
+        [Network.MATIC]: ChainId.MATIC_MUMBAI
+      }
     case ChainId.MATIC_MAINNET:
       return {
         [Network.ETHEREUM]: ChainId.MATIC_MAINNET,
-        [Network.MATIC]: ChainId.MATIC_MAINNET,
-      };
+        [Network.MATIC]: ChainId.MATIC_MAINNET
+      }
     case ChainId.MATIC_MUMBAI:
       return {
         [Network.ETHEREUM]: ChainId.MATIC_MUMBAI,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI,
-      };
+        [Network.MATIC]: ChainId.MATIC_MUMBAI
+      }
   }
 }
 
@@ -125,10 +125,10 @@ export function getNetwork(chainId: ChainId): Network {
     case ChainId.ETHEREUM_GOERLI:
     case ChainId.ETHEREUM_KOVAN:
     case ChainId.ETHEREUM_RINKEBY:
-      return Network.ETHEREUM;
+      return Network.ETHEREUM
     case ChainId.MATIC_MAINNET:
     case ChainId.MATIC_MUMBAI:
-      return Network.MATIC;
+      return Network.MATIC
   }
 }
 
@@ -137,9 +137,9 @@ export function getNetwork(chainId: ChainId): Network {
  */
 export namespace ChainId {
   export const schema: JSONSchema<ChainId> = {
-    type: "number",
-    enum: Object.values(ChainId),
-  };
+    type: 'number',
+    enum: Object.values(ChainId)
+  }
 
-  export const validate: ValidateFunction<ChainId> = generateValidator(schema);
+  export const validate: ValidateFunction<ChainId> = generateValidator(schema)
 }
