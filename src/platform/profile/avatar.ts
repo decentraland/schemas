@@ -113,6 +113,11 @@ export type Avatar = {
   interests?: string[]
   hasClaimedName: boolean
   avatar: AvatarInfo
+  /**
+   * Whether or no the player has connected web3. This is
+   * alyways true for deployed profiles.
+   */
+  hasConnectedWeb3?: boolean
 }
 
 /**
@@ -173,6 +178,10 @@ export namespace Avatar {
         nullable: true
       },
       hasClaimedName: {
+        type: 'boolean',
+        nullable: true
+      },
+      hasConnectedWeb3: {
         type: 'boolean',
         nullable: true
       },
