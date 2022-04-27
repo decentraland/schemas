@@ -104,6 +104,7 @@ export type Avatar = {
     interests?: string[];
     hasClaimedName: boolean;
     avatar: AvatarInfo;
+    hasConnectedWeb3?: boolean;
 };
 
 // @alpha
