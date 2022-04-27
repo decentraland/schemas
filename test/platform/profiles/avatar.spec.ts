@@ -33,7 +33,8 @@ export const AVATAR: Avatar = {
   version: 44,
   avatar: AVATAR_INFO,
   tutorialStep: 355,
-  interests: []
+  interests: [],
+  hasConnectedWeb3: true
 }
 
 describe('Avatar tests', () => {

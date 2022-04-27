@@ -97,7 +97,8 @@ export namespace AvatarInfo {
 }
 
 /**
- * Avatar represents a profile avatar
+ * Avatar represents a profile avatar. Used both for comms, internal state of the
+ * explorer and the deployed profiles.
  * @alpha
  */
 export type Avatar = {
@@ -113,6 +114,11 @@ export type Avatar = {
   interests?: string[]
   hasClaimedName: boolean
   avatar: AvatarInfo
+  /**
+   * Whether or not the player has connected web3 wallet or is a guest user.
+   * This is always true for deployed profiles.
+   */
+  hasConnectedWeb3?: boolean
 }
 
 /**
@@ -173,6 +179,10 @@ export namespace Avatar {
         nullable: true
       },
       hasClaimedName: {
+        type: 'boolean',
+        nullable: true
+      },
+      hasConnectedWeb3: {
         type: 'boolean',
         nullable: true
       },
