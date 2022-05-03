@@ -43,7 +43,7 @@ export namespace MerkleProof {
       }
     },
     required: ['entityHash', 'hashingKeys', 'index', 'proof'],
-    additionalProperties: false
+    additionalProperties: true
   }
 
   export const validate: ValidateFunction<MerkleProof> =
