@@ -47,7 +47,6 @@ export namespace WearableRepresentation {
         items: WearableCategory.schema
       }
     },
-    additionalProperties: false,
     required: [
       'bodyShapes',
       'mainFile',

@@ -30,7 +30,7 @@ export namespace SceneParcels {
         minItems: 1
       }
     },
-    additionalProperties: false,
+    additionalProperties: true,
     required: ['base', 'parcels']
   }
 
