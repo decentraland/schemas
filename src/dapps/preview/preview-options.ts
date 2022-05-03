@@ -20,6 +20,7 @@ export type PreviewOptions = {
   emote?: PreviewEmote | null
   camera?: PreviewCamera | null
   autoRotateSpeed?: number | null
+  centerBoundingBox?: boolean | null
   offsetX?: number | null
   offsetY?: number | null
   offsetZ?: number | null

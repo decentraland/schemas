@@ -930,6 +930,7 @@ export type PreviewConfig = {
     emote: PreviewEmote;
     camera: PreviewCamera;
     autoRotateSpeed: number;
+    centerBoundingBox: boolean;
     offsetX: number;
     offsetY: number;
     offsetZ: number;
@@ -954,6 +955,10 @@ export enum PreviewEmote {
     FASHION_3 = "fashion-3",
     // (undocumented)
     FASHION_4 = "fashion-4",
+    // (undocumented)
+    FIST_PUMP = "fist-pump",
+    // (undocumented)
+    HEAD_EXPLODE = "head-explode",
     // (undocumented)
     IDLE = "idle",
     // (undocumented)
@@ -1005,6 +1010,8 @@ export enum PreviewMessageType {
     // (undocumented)
     LOAD = "load",
     // (undocumented)
+    READY = "ready",
+    // (undocumented)
     UPDATE = "update"
 }
 
@@ -1033,6 +1040,7 @@ export type PreviewOptions = {
     emote?: PreviewEmote | null;
     camera?: PreviewCamera | null;
     autoRotateSpeed?: number | null;
+    centerBoundingBox?: boolean | null;
     offsetX?: number | null;
     offsetY?: number | null;
     offsetZ?: number | null;
@@ -1647,7 +1655,7 @@ export namespace World {
 // src/dapps/preview/preview-config.ts:9:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "WearableBodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:15:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:31:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
+// src/dapps/preview/preview-message.ts:32:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha

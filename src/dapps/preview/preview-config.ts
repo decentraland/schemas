@@ -20,6 +20,7 @@ export type PreviewConfig = {
   emote: PreviewEmote
   camera: PreviewCamera
   autoRotateSpeed: number
+  centerBoundingBox: boolean
   offsetX: number
   offsetY: number
   offsetZ: number

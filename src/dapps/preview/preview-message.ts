@@ -6,6 +6,7 @@ import {
 import { PreviewOptions } from './preview-options'
 
 export enum PreviewMessageType {
+  READY = 'ready',
   LOAD = 'load',
   ERROR = 'error',
   UPDATE = 'update'
