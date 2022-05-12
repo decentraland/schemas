@@ -11,7 +11,6 @@ export type FeatureToggles = Record<string, 'enabled' | 'disabled'>
 export namespace FeatureToggles {
   export const schema: JSONSchema<FeatureToggles> = {
     type: 'object',
-    additionalProperties: { type: 'string', enum: ['disabled', 'enabled'] },
     required: []
   }
 

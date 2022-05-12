@@ -144,7 +144,6 @@ export namespace Wearable {
       content: {
         type: 'object',
         nullable: true,
-        additionalProperties: { type: 'string' },
         required: []
       }
     },
