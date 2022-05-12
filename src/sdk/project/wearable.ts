@@ -7,26 +7,17 @@ import {
 } from '../../validation'
 import { Rarity } from './../../dapps/rarity'
 import { AssetWearableGender } from './asset-wearable-gender'
+import { Wearable } from '../../platform'
 
 /** @alpha */
-export type AssetJson = {
-  id: string
-  assetType: string
-
-  name: string
-  description: string
-
-  thumbnail: string
-  model: string
-
-  category: WearableCategory
-  rarity: Rarity
-  bodyShape: AssetWearableGender
-}
+export type SmartWearableJson = Pick<
+  Wearable,
+  'id' | 'name' | 'description' | 'thumbnail' | 'rarity' | 'data'
+>
 
 /** @alpha */
 export namespace AssetJson {
-  export const schema: JSONSchema<AssetJson> = {
+  export const schema: JSONSchema<SmartWearableJson> = {
     type: 'object',
     properties: {
       id: {
@@ -55,7 +46,7 @@ export namespace AssetJson {
       rarity: Rarity.schema,
       bodyShape: AssetWearableGender.schema
     },
-    additionalProperties: false,
+    additionalProperties: true,
     required: ['category', 'rarity', 'bodyShape', 'thumbnail', 'model']
   }
 
