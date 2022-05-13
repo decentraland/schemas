@@ -7,7 +7,7 @@ import {
 /** @alpha */
 export type SpawnPoint = {
   name?: string
-  position: SinglePosition | MultiPosition
+  position: MultiPosition
   default?: boolean
   cameraTarget?: SinglePosition
 }
@@ -18,9 +18,9 @@ type SinglePosition = {
   z: number
 }
 type MultiPosition = {
-  x: number[]
-  y: number[]
-  z: number[]
+  x: number | number[]
+  y: number | number[]
+  z: number | number[]
 }
 
 /** @alpha */

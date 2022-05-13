@@ -1372,7 +1372,7 @@ export namespace Source {
 // @alpha (undocumented)
 export type SpawnPoint = {
     name?: string;
-    position: SinglePosition | MultiPosition;
+    position: MultiPosition;
     default?: boolean;
     cameraTarget?: SinglePosition;
 };
@@ -1659,8 +1659,8 @@ export namespace World {
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/platform/scene/spawn-point.ts:10:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:10:3 - (ae-forgotten-export) The symbol "MultiPosition" needs to be exported by the entry point index.d.ts
+// src/platform/scene/spawn-point.ts:12:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
 // src/sdk/project/asset-json.ts:24:3 - (ae-forgotten-export) The symbol "AssetWearableGender" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
