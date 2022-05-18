@@ -24,6 +24,9 @@ export type PreviewOptions = {
   offsetX?: number | null
   offsetY?: number | null
   offsetZ?: number | null
+  wheelZoom?: number | null
+  wheelPrecision?: number | null
+  wheelStart?: number | null
   transparentBackground?: boolean
   env?: PreviewEnv | null
 }

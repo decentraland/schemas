@@ -934,6 +934,9 @@ export type PreviewConfig = {
     offsetX: number;
     offsetY: number;
     offsetZ: number;
+    wheelZoom: number;
+    wheelPrecision: number;
+    wheelStart: number;
 };
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
@@ -1044,6 +1047,9 @@ export type PreviewOptions = {
     offsetX?: number | null;
     offsetY?: number | null;
     offsetZ?: number | null;
+    wheelZoom?: number | null;
+    wheelPrecision?: number | null;
+    wheelStart?: number | null;
     transparentBackground?: boolean;
     env?: PreviewEnv | null;
 };
