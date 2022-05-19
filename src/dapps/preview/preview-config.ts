@@ -24,4 +24,7 @@ export type PreviewConfig = {
   offsetX: number
   offsetY: number
   offsetZ: number
+  wheelZoom: number
+  wheelPrecision: number
+  wheelStart: number
 }
