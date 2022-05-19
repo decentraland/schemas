@@ -171,15 +171,20 @@ export namespace Wearable {
    *  Third Party Wearables should contain:
    *    - merkleProof
    */
+
   export const validate: ValidateFunction<Wearable> = (
     wearable: any
-  ): wearable is Wearable =>
-    schemaValidator(wearable) &&
-    validateDuplicatedLocales(wearable.i18n) &&
-    XOR(
-      validateStandardWearable(wearable.rarity, wearable.collectionAddress),
-      validateThirdParty(wearable)
-    )
+  ): wearable is Wearable => {
+    const validationResult =
+      schemaValidator(wearable) &&
+      validateDuplicatedLocales(wearable.i18n) &&
+      XOR(
+        validateStandardWearable(wearable.rarity, wearable.collectionAddress),
+        validateThirdParty(wearable)
+      )
+    validate.errors = schemaValidator.errors
+    return validationResult
+  }
 
   const XOR = (b1: boolean, b2: boolean) => (b1 && !b2) || (b2 && !b1)
 

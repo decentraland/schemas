@@ -29,8 +29,5 @@ export namespace Profile {
     },
     additionalProperties: true
   }
-  const schemaValidator: ValidateFunction<Profile> = generateValidator(schema)
-  export const validate: ValidateFunction<Profile> = (
-    profile: any
-  ): profile is Profile => schemaValidator(profile)
+  export const validate: ValidateFunction<Profile> = generateValidator(schema)
 }
