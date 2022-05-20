@@ -28,11 +28,3 @@ jobs:
       - name: print diff if failed
         if: ${{ failure() }}
         run: cp temp/schemas.api.md report/schemas.api.md && git diff
-
-      - name: Publish
-        uses: menduz/oddish-action@master
-        with:
-          registry-url: "https://registry.npmjs.org"
-          access: public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
