@@ -40,4 +40,5 @@ export {
 export * from './dapps/preview'
 export * from './platform'
 export * from './misc'
+export * from './misc/auth-chain'
 export { sdk }
