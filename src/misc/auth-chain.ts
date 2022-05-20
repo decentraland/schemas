@@ -1,4 +1,4 @@
-import { JSONSchema, generateValidator, ValidateFunction } from "../validation"
+import { JSONSchema, generateValidator, ValidateFunction } from '../validation'
 
 /**
  * @public
@@ -13,17 +13,17 @@ export type AuthLink = {
  * @public
  */
 export enum AuthLinkType {
-  "SIGNER" = "SIGNER",
-  "ECDSA_PERSONAL_EPHEMERAL" = "ECDSA_PERSONAL_EPHEMERAL",
-  "ECDSA_PERSONAL_SIGNED_ENTITY" = "ECDSA_PERSONAL_SIGNED_ENTITY",
+  'SIGNER' = 'SIGNER',
+  'ECDSA_PERSONAL_EPHEMERAL' = 'ECDSA_PERSONAL_EPHEMERAL',
+  'ECDSA_PERSONAL_SIGNED_ENTITY' = 'ECDSA_PERSONAL_SIGNED_ENTITY',
   /**
    * See https://github.com/ethereum/EIPs/issues/1654
    */
-  "ECDSA_EIP_1654_EPHEMERAL" = "ECDSA_EIP_1654_EPHEMERAL",
+  'ECDSA_EIP_1654_EPHEMERAL' = 'ECDSA_EIP_1654_EPHEMERAL',
   /**
    * See https://github.com/ethereum/EIPs/issues/1654
    */
-  "ECDSA_EIP_1654_SIGNED_ENTITY" = "ECDSA_EIP_1654_SIGNED_ENTITY",
+  'ECDSA_EIP_1654_SIGNED_ENTITY' = 'ECDSA_EIP_1654_SIGNED_ENTITY'
 }
 
 /**
@@ -31,16 +31,16 @@ export enum AuthLinkType {
  */
 export namespace AuthLink {
   export const schema: JSONSchema<AuthLink> = {
-    type: "object",
+    type: 'object',
     properties: {
       type: {
-        type: "string",
-        enum: Object.values(AuthLinkType),
+        type: 'string',
+        enum: Object.values(AuthLinkType)
       },
-      payload: { type: "string" },
-      signature: { type: "string" },
+      payload: { type: 'string' },
+      signature: { type: 'string' }
     },
-    required: ["payload", "signature", "type"],
+    required: ['payload', 'signature', 'type']
   }
 
   export const validate: ValidateFunction<AuthLink> = generateValidator(schema)
@@ -57,7 +57,7 @@ export type AuthChain = AuthLink[]
 /** @public */
 export namespace AuthChain {
   export const schema: JSONSchema<AuthChain> = {
-    type: "array",
+    type: 'array',
     items: AuthLink.schema,
     minItems: 1
   }

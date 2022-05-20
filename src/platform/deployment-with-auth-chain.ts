@@ -1,5 +1,5 @@
-import { AuthChain } from "../misc/auth-chain"
-import { generateValidator, JSONSchema, ValidateFunction } from "../validation"
+import { AuthChain } from '../misc/auth-chain'
+import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * This type describes the minimum deployment + AuthChain needed to synchronize
@@ -19,16 +19,23 @@ export type DeploymentWithAuthChain = {
  */
 export namespace DeploymentWithAuthChain {
   export const schema: JSONSchema<DeploymentWithAuthChain> = {
-    type: "object",
+    type: 'object',
     properties: {
-      entityId: { type: "string" },
-      entityType: { type: "string" },
-      pointers: { type: "array", items: { type: "string" }, minItems: 1 },
-      localTimestamp: { type: "number", minimum: 0 },
-      authChain: AuthChain.schema,
+      entityId: { type: 'string' },
+      entityType: { type: 'string' },
+      pointers: { type: 'array', items: { type: 'string' }, minItems: 1 },
+      localTimestamp: { type: 'number', minimum: 0 },
+      authChain: AuthChain.schema
     },
-    required: ["entityId", "entityType", "pointers", "localTimestamp", "authChain"],
+    required: [
+      'entityId',
+      'entityType',
+      'pointers',
+      'localTimestamp',
+      'authChain'
+    ]
   }
 
-  export const validate: ValidateFunction<DeploymentWithAuthChain> = generateValidator(schema)
+  export const validate: ValidateFunction<DeploymentWithAuthChain> =
+    generateValidator(schema)
 }
