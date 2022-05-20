@@ -65,13 +65,13 @@ export namespace EthAddress {
 
 /**
  * IPFSv2 is a data type that describes an IPFS v2 hash
- * @alpha
+ * @public
  */
 export type IPFSv2 = string
 
 /**
  * IPFSv2
- * @alpha
+ * @public
  */
 export namespace IPFSv2 {
   export const schema: JSONSchema<IPFSv2> = {
@@ -82,6 +82,26 @@ export namespace IPFSv2 {
   export const validate: ValidateFunction<IPFSv2> = (
     hash: any
   ): hash is IPFSv2 => regexp.test(hash)
+}
+
+/**
+ * @public
+ */
+export type IPFSv1 = string
+
+/**
+ * IPFSv1
+ * @public
+ */
+export namespace IPFSv1 {
+  export const schema: JSONSchema<IPFSv1> = {
+    type: 'string',
+    pattern: '^(Qm)[a-zA-Z0-9]{44}$'
+  }
+  const regexp = new RegExp(schema.pattern!)
+  export const validate: ValidateFunction<IPFSv1> = (
+    hash: any
+  ): hash is IPFSv1 => regexp.test(hash)
 }
 
 export type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] }
