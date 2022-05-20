@@ -90,6 +90,44 @@ namespace AssetJson {
     validate: ValidateFunction<AssetJson>;
 }
 
+// @public
+export type AuthChain = AuthLink[];
+
+// @public (undocumented)
+export namespace AuthChain {
+    const // (undocumented)
+    schema: JSONSchema<AuthChain>;
+    const // (undocumented)
+    validate: ValidateFunction<AuthChain>;
+}
+
+// @public (undocumented)
+export type AuthLink = {
+    type: AuthLinkType;
+    payload: string;
+    signature: string;
+};
+
+// @public (undocumented)
+export namespace AuthLink {
+    const // (undocumented)
+    schema: JSONSchema<AuthLink>;
+    const // (undocumented)
+    validate: ValidateFunction<AuthLink>;
+}
+
+// @public (undocumented)
+export enum AuthLinkType {
+    "ECDSA_EIP_1654_EPHEMERAL" = "ECDSA_EIP_1654_EPHEMERAL",
+    "ECDSA_EIP_1654_SIGNED_ENTITY" = "ECDSA_EIP_1654_SIGNED_ENTITY",
+    // (undocumented)
+    "ECDSA_PERSONAL_EPHEMERAL" = "ECDSA_PERSONAL_EPHEMERAL",
+    // (undocumented)
+    "ECDSA_PERSONAL_SIGNED_ENTITY" = "ECDSA_PERSONAL_SIGNED_ENTITY",
+    // (undocumented)
+    "SIGNER" = "SIGNER"
+}
+
 // @alpha
 export type Avatar = {
     userId: string;
@@ -374,6 +412,23 @@ export type ContractFilters = {
 export enum ContractSortBy {
     // (undocumented)
     NAME = "name"
+}
+
+// @public
+export type DeploymentWithAuthChain = {
+    entityId: string;
+    entityType: string;
+    pointers: string[];
+    localTimestamp: number;
+    authChain: AuthChain;
+};
+
+// @public (undocumented)
+export namespace DeploymentWithAuthChain {
+    const // (undocumented)
+    schema: JSONSchema<DeploymentWithAuthChain>;
+    const // (undocumented)
+    validate: ValidateFunction<DeploymentWithAuthChain>;
 }
 
 // @public
