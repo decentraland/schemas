@@ -1,8 +1,11 @@
 on:
   push:
+    tags:
+      - '*'
     branches:
       - master
       - main
+  pull_request:
   release:
     types:
       - created
