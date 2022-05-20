@@ -86,7 +86,8 @@ export namespace AvatarInfo {
         }
       },
       snapshots: Snapshots.schema
-    }
+    },
+    additionalProperties: true
   }
   const schemaValidator: ValidateFunction<AvatarInfo> =
     generateValidator(schema)
