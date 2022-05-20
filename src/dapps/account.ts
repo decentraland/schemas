@@ -1,5 +1,5 @@
-import { Network } from '..'
 import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import { Network } from './network'
 
 export type Account = {
   id: string

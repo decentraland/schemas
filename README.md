@@ -50,7 +50,7 @@ It is recommended that if you are a stakeholder of the interoperable parts of De
 
 ## Making changes
 
-To make sure everybody is aware of changes in types, we have a process of api-extraction using https://api-extractor.com. It creates [a report file](report/schemas.api.md) that should be reviewed upon every change and commited as part of the PR.
+To make sure everybody is aware of changes in types, we have a process of api-extraction using https://api-extractor.com. It creates [a report file](report/schemas.api.md) that should be reviewed upon every change and committed as part of the PR.
 
 To generate the file with your changes run `npm run build && npm run refresh-api`.
 

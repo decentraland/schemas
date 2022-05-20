@@ -1,4 +1,4 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '..'
+import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * Color3 is a data type that describes a color using R, G and B components
@@ -57,11 +57,10 @@ export namespace EthAddress {
     type: 'string',
     pattern: '^0x[a-fA-F0-9]{40}$'
   }
-  const schemaValidator: ValidateFunction<EthAddress> =
-    generateValidator(schema)
+  const regexp = new RegExp(schema.pattern!)
   export const validate: ValidateFunction<EthAddress> = (
     ethAddress: any
-  ): ethAddress is EthAddress => schemaValidator(ethAddress)
+  ): ethAddress is EthAddress => regexp.test(ethAddress)
 }
 
 /**
@@ -79,8 +78,10 @@ export namespace IPFSv2 {
     type: 'string',
     pattern: '^(ba)[a-zA-Z0-9]{57}$'
   }
-  const schemaValidator: ValidateFunction<IPFSv2> = generateValidator(schema)
+  const regexp = new RegExp(schema.pattern!)
   export const validate: ValidateFunction<IPFSv2> = (
     hash: any
-  ): hash is IPFSv2 => schemaValidator(hash)
+  ): hash is IPFSv2 => regexp.test(hash)
 }
+
+export type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] }

@@ -5,8 +5,6 @@ import { testTypeSignature } from '../../test-utils'
 const AVATAR_INFO = {
   bodyShape: 'urn:decentraland:off-chain:base-avatars:BaseMale',
   snapshots: {
-    face: 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5q',
-    face128: 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5r',
     face256: 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5s',
     body: 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5t'
   },
@@ -35,7 +33,8 @@ export const AVATAR: Avatar = {
   version: 44,
   avatar: AVATAR_INFO,
   tutorialStep: 355,
-  interests: []
+  interests: [],
+  hasConnectedWeb3: true
 }
 
 describe('Avatar tests', () => {

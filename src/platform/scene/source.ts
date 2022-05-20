@@ -36,7 +36,6 @@ export namespace Source {
           x: { type: 'integer' },
           y: { type: 'integer' }
         },
-        additionalProperties: false,
         nullable: true,
         required: ['x', 'y']
       },
@@ -63,6 +62,7 @@ export namespace Source {
         nullable: true
       }
     },
+    additionalProperties: true,
     required: ['origin', 'projectId']
   }
 

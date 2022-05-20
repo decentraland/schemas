@@ -104,6 +104,7 @@ export type Avatar = {
     interests?: string[];
     hasClaimedName: boolean;
     avatar: AvatarInfo;
+    hasConnectedWeb3?: boolean;
 };
 
 // @alpha
@@ -380,6 +381,25 @@ export type DisplayableDeployment = {
     menuBarIcon?: string;
 };
 
+// Warning: (ae-missing-release-tag) "EmoteCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum EmoteCategory {
+    // (undocumented)
+    LOOP = "loop",
+    // (undocumented)
+    SIMPLE = "simple"
+}
+
+// @public (undocumented)
+export namespace EmoteCategory {
+    const // (undocumented)
+    schema: JSONSchema<EmoteCategory>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteCategory>;
+}
+
 // @alpha
 export type EthAddress = string;
 
@@ -487,6 +507,7 @@ export type ItemFilters = {
     first?: number;
     skip?: number;
     sortBy?: ItemSortBy;
+    category?: NFTCategory;
     creator?: string;
     rarities?: Rarity[];
     isSoldOut?: boolean;
@@ -497,6 +518,8 @@ export type ItemFilters = {
     isWearableSmart?: boolean;
     wearableCategory?: WearableCategory;
     wearableGenders?: WearableGender[];
+    emoteCategory?: EmoteCategory;
+    emoteGenders?: WearableGender[];
     contractAddress?: string;
     itemId?: string;
     network?: Network;
@@ -556,6 +579,22 @@ export namespace Locale {
     schema: JSONSchema<Locale>;
     const // (undocumented)
     validate: ValidateFunction<Locale>;
+}
+
+// @alpha
+export type MerkleProof = {
+    proof: string[];
+    index: number;
+    hashingKeys: string[];
+    entityHash: string;
+};
+
+// @alpha
+export namespace MerkleProof {
+    const // (undocumented)
+    schema: JSONSchema<MerkleProof>;
+    const // (undocumented)
+    validate: ValidateFunction<MerkleProof>;
 }
 
 // @public (undocumented)
@@ -708,6 +747,12 @@ export type NFT = {
         ens?: {
             subdomain: string;
         };
+        emote?: {
+            description: string;
+            category: EmoteCategory;
+            rarity: Rarity;
+            bodyShapes: BodyShape[];
+        };
     };
     network: Network;
     chainId: ChainId;
@@ -729,6 +774,8 @@ export namespace NFT {
 //
 // @public (undocumented)
 export enum NFTCategory {
+    // (undocumented)
+    EMOTE = "emote",
     // (undocumented)
     ENS = "ens",
     // (undocumented)
@@ -765,6 +812,8 @@ export type NFTFilters = {
     isWearableSmart?: boolean;
     wearableCategory?: WearableCategory;
     wearableGenders?: WearableGender[];
+    emoteCategory?: EmoteCategory;
+    emoteGenders?: WearableGender[];
     contractAddresses?: string[];
     tokenId?: string;
     itemId?: string;
@@ -843,6 +892,186 @@ export enum OrderSortBy {
     RECENTLY_UPDATED = "recently_updated"
 }
 
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-missing-release-tag) "PreviewCamera" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum PreviewCamera {
+    // (undocumented)
+    INTERACTIVE = "interactive",
+    // (undocumented)
+    STATIC = "static"
+}
+
+// @alpha (undocumented)
+export namespace PreviewCamera {
+    const // (undocumented)
+    schema: JSONSchema<PreviewCamera>;
+    const // (undocumented)
+    validate: ValidateFunction<PreviewCamera>;
+}
+
+// Warning: (ae-missing-release-tag) "PreviewConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PreviewConfig = {
+    wearable?: WearableDefinition;
+    wearables: WearableDefinition[];
+    bodyShape: WearableBodyShape;
+    skin: string;
+    hair: string;
+    eyes: string;
+    zoom: number;
+    type: PreviewType;
+    background: {
+        image?: string;
+        gradient?: string;
+    };
+    emote: PreviewEmote;
+    camera: PreviewCamera;
+    autoRotateSpeed: number;
+    centerBoundingBox: boolean;
+    offsetX: number;
+    offsetY: number;
+    offsetZ: number;
+    wheelZoom: number;
+    wheelPrecision: number;
+    wheelStart: number;
+};
+
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-missing-release-tag) "PreviewEmote" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum PreviewEmote {
+    // (undocumented)
+    CLAP = "clap",
+    // (undocumented)
+    DAB = "dab",
+    // (undocumented)
+    DANCE = "dance",
+    // (undocumented)
+    FASHION = "fashion",
+    // (undocumented)
+    FASHION_2 = "fashion-2",
+    // (undocumented)
+    FASHION_3 = "fashion-3",
+    // (undocumented)
+    FASHION_4 = "fashion-4",
+    // (undocumented)
+    FIST_PUMP = "fist-pump",
+    // (undocumented)
+    HEAD_EXPLODE = "head-explode",
+    // (undocumented)
+    IDLE = "idle",
+    // (undocumented)
+    LOVE = "love",
+    // (undocumented)
+    MONEY = "money"
+}
+
+// @alpha (undocumented)
+export namespace PreviewEmote {
+    const // (undocumented)
+    schema: JSONSchema<PreviewEmote>;
+    const // (undocumented)
+    validate: ValidateFunction<PreviewEmote>;
+}
+
+// @alpha (undocumented)
+export enum PreviewEnv {
+    // (undocumented)
+    DEV = "dev",
+    // (undocumented)
+    PROD = "prod"
+}
+
+// @alpha (undocumented)
+export namespace PreviewEnv {
+    const // (undocumented)
+    schema: JSONSchema<PreviewEnv>;
+    const // (undocumented)
+    validate: ValidateFunction<PreviewEnv>;
+}
+
+// Warning: (ae-missing-release-tag) "PreviewMessagePayload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PreviewMessagePayload<T extends PreviewMessageType> = T extends PreviewMessageType.LOAD ? null : T extends PreviewMessageType.ERROR ? {
+    message: string;
+} : T extends PreviewMessageType.UPDATE ? {
+    options: PreviewOptions;
+} : unknown;
+
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-missing-release-tag) "PreviewMessageType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum PreviewMessageType {
+    // (undocumented)
+    ERROR = "error",
+    // (undocumented)
+    LOAD = "load",
+    // (undocumented)
+    READY = "ready",
+    // (undocumented)
+    UPDATE = "update"
+}
+
+// @alpha (undocumented)
+export namespace PreviewMessageType {
+    const // (undocumented)
+    schema: JSONSchema<PreviewMessageType>;
+    const // (undocumented)
+    validate: ValidateFunction<PreviewMessageType>;
+}
+
+// @alpha (undocumented)
+export type PreviewOptions = {
+    contractAddress?: string | null;
+    tokenId?: string | null;
+    itemId?: string | null;
+    profile?: string | null;
+    bodyShape?: WearableBodyShape | null;
+    skin?: string | null;
+    hair?: string | null;
+    eyes?: string | null;
+    urns?: string[] | null;
+    urls?: string[] | null;
+    base64s?: string[] | null;
+    zoom?: number | null;
+    emote?: PreviewEmote | null;
+    camera?: PreviewCamera | null;
+    autoRotateSpeed?: number | null;
+    centerBoundingBox?: boolean | null;
+    offsetX?: number | null;
+    offsetY?: number | null;
+    offsetZ?: number | null;
+    wheelZoom?: number | null;
+    wheelPrecision?: number | null;
+    wheelStart?: number | null;
+    transparentBackground?: boolean;
+    env?: PreviewEnv | null;
+};
+
+// @alpha (undocumented)
+export enum PreviewType {
+    // (undocumented)
+    AVATAR = "avatar",
+    // (undocumented)
+    TEXTURE = "texture",
+    // (undocumented)
+    WEARABLE = "wearable"
+}
+
+// @alpha (undocumented)
+export namespace PreviewType {
+    const // (undocumented)
+    schema: JSONSchema<PreviewType>;
+    const // (undocumented)
+    validate: ValidateFunction<PreviewType>;
+}
+
 // @alpha
 export type Profile = {
     avatars: Avatar[];
@@ -858,6 +1087,8 @@ export namespace Profile {
 
 // @public (undocumented)
 enum ProjectType {
+    // (undocumented)
+    LIBRARY = "library",
     // (undocumented)
     PORTABLE_EXPERIENCE = "portable-experience",
     // (undocumented)
@@ -930,6 +1161,14 @@ export namespace Rarity {
     // (undocumented)
     export function getMaxSupply(rarity: Rarity): number;
 }
+
+// @alpha (undocumented)
+export type RepresentationDefinition = Omit<WearableRepresentation, 'contents'> & {
+    contents: {
+        key: string;
+        url: string;
+    }[];
+};
 
 // Warning: (ae-missing-release-tag) "Sale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Sale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1092,6 +1331,11 @@ declare namespace sdk {
 }
 export { sdk }
 
+// Warning: (ae-missing-release-tag) "sendMessage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const sendMessage: <T extends PreviewMessageType>(window: Window, type: T, payload: PreviewMessagePayload<T>, targetOrigin?: string) => void;
+
 // @alpha
 export type Snapshots = {
     face256: IPFSv2;
@@ -1147,6 +1391,9 @@ export namespace SpawnPoint {
     validate: ValidateFunction<SpawnPoint>;
 }
 
+// @alpha (undocumented)
+export type StandardWearable = Omit<WithRequired<Wearable, 'collectionAddress' | 'rarity'>, 'merkleProof' | 'content'>;
+
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1173,6 +1420,12 @@ export namespace Store {
     const // (undocumented)
     validate: ValidateFunction<Store>;
 }
+
+// Warning: (ae-incompatible-release-tags) The symbol "ThirdPartyWearable" is marked as @public, but its signature references "Wearable" which is marked as @alpha
+// Warning: (ae-missing-release-tag) "ThirdPartyWearable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ThirdPartyWearable = Omit<WithRequired<Wearable, 'merkleProof'>, 'rarity' | 'collectionAddress'>;
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
@@ -1218,10 +1471,8 @@ export type ValidWorldRange = {
 // @alpha (undocumented)
 export type Wearable = DisplayableDeployment & {
     id: string;
-    descriptions: I18N[];
-    collectionAddress: string;
-    rarity: Rarity;
-    names: I18N[];
+    name: string;
+    description: string;
     data: {
         replaces: WearableCategory[];
         hides: WearableCategory[];
@@ -1229,17 +1480,21 @@ export type Wearable = DisplayableDeployment & {
         representations: WearableRepresentation[];
         category: WearableCategory;
     };
+    i18n: I18N[];
     thumbnail: string;
     image: string;
+    rarity?: Rarity;
+    collectionAddress?: string;
     metrics?: Metrics;
+    content?: Record<string, string>;
+    merkleProof?: MerkleProof;
 };
 
 // @alpha (undocumented)
 export namespace Wearable {
     const // (undocumented)
     schema: JSONSchema<Wearable>;
-    const // (undocumented)
-    validate: ValidateFunction<Wearable>;
+    const validate: ValidateFunction<Wearable>;
 }
 
 // @alpha (undocumented)
@@ -1264,6 +1519,8 @@ export namespace WearableBodyShape {
 // @public (undocumented)
 export enum WearableCategory {
     // (undocumented)
+    BODY_SHAPE = "body_shape",
+    // (undocumented)
     EARRING = "earring",
     // (undocumented)
     EYEBROWS = "eyebrows",
@@ -1279,6 +1536,8 @@ export enum WearableCategory {
     HAIR = "hair",
     // (undocumented)
     HAT = "hat",
+    // (undocumented)
+    HEAD = "head",
     // (undocumented)
     HELMET = "helmet",
     // (undocumented)
@@ -1304,6 +1563,16 @@ export namespace WearableCategory {
     const // (undocumented)
     validate: ValidateFunction<WearableCategory>;
 }
+
+// @alpha (undocumented)
+export type WearableDefinition = Omit<Wearable, 'data'> & {
+    data: Omit<Wearable['data'], 'representations'> & {
+        representations: RepresentationDefinition[];
+    };
+    emoteDataV0?: {
+        loop: boolean;
+    };
+};
 
 // Warning: (ae-missing-release-tag) "WearableGender" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "WearableGender" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1344,6 +1613,13 @@ export namespace WearableRepresentation {
     validate: ValidateFunction<WearableRepresentation>;
 }
 
+// Warning: (ae-missing-release-tag) "WithRequired" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WithRequired<T, K extends keyof T> = T & {
+    [P in K]-?: T[P];
+};
+
 // @alpha
 export type World = {
     validWorldRanges: Array<ValidWorldRange>;
@@ -1369,18 +1645,23 @@ export namespace World {
 // src/dapps/contract.ts:10:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/contract.ts:11:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/contract.ts:16:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/item.ts:29:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/item.ts:30:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/item.ts:49:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/item.ts:30:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/item.ts:31:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/item.ts:53:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:16:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:17:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/mint.ts:37:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/nft.ts:48:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/nft.ts:49:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/nft.ts:73:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:55:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:56:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/nft.ts:82:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:32:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/preview/preview-config.ts:8:3 - (ae-incompatible-release-tags) The symbol "wearable" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
+// src/dapps/preview/preview-config.ts:9:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
+// src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "WearableBodyShape" which is marked as @alpha
+// src/dapps/preview/preview-config.ts:15:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
+// src/dapps/preview/preview-message.ts:32:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha

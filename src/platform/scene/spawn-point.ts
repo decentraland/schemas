@@ -48,12 +48,10 @@ export namespace SpawnPoint {
           y: { type: 'number' },
           z: { type: 'number' }
         },
-        additionalProperties: false,
         required: ['x', 'y', 'z'],
         nullable: true
       }
     },
-    additionalProperties: false,
     required: ['position'],
     definitions: {
       'single-position': {
@@ -64,7 +62,6 @@ export namespace SpawnPoint {
           y: { type: 'number' },
           z: { type: 'number' }
         },
-        additionalProperties: false,
         required: ['x', 'y', 'z']
       },
       'multi-position': {
@@ -75,7 +72,6 @@ export namespace SpawnPoint {
           y: { type: 'array', items: { type: 'number' }, minItems: 1 },
           z: { type: 'array', items: { type: 'number' }, minItems: 1 }
         },
-        additionalProperties: false,
         required: ['x', 'y', 'z']
       }
     }
