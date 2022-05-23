@@ -97,6 +97,35 @@ describe('Representation tests', () => {
     expect(Wearable.validate({})).toEqual(false)
   })
 
+  it('static tests must return the correct error when missing id', () => {
+    const validate = Wearable.validate
+    expect(validate({})).toEqual(false)
+    expect(validate.errors).toHaveLength(1)
+    expect(validate.errors![0].message).toEqual(
+      "should have required property 'id'"
+    )
+  })
+
+  it('static tests must return the correct error when missing description', () => {
+    const validate = Wearable.validate
+    expect(validate({ id: 'the-id' })).toEqual(false)
+    expect(validate.errors).toHaveLength(1)
+    expect(validate.errors![0].message).toEqual(
+      "should have required property 'description'"
+    )
+  })
+
+  it('static tests must return the correct error when missing name', () => {
+    const validate = Wearable.validate
+    expect(validate({ id: 'the-id', description: 'description' })).toEqual(
+      false
+    )
+    expect(validate.errors).toHaveLength(1)
+    expect(validate.errors![0].message).toEqual(
+      "should have required property 'name'"
+    )
+  })
+
   it('wearable with two i18n with same locale fails', () => {
     expect(
       Wearable.validate({
