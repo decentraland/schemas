@@ -51,13 +51,9 @@ export type ThirdPartyWearable = Omit<
 const validateThirdParty = (wearable: Wearable) => {
   if (!MerkleProof.validate(wearable.merkleProof)) return false
   if (wearable.merkleProof.hashingKeys.length === 0) return false
-  const containsAllKeys = wearable.merkleProof.hashingKeys.every((key) =>
+  return wearable.merkleProof.hashingKeys.every((key) =>
     wearable.hasOwnProperty(key)
   )
-
-  const proofIsNotEmpty = wearable.merkleProof.proof.length > 0
-
-  return containsAllKeys && proofIsNotEmpty
 }
 
 const validateStandardWearable = (
