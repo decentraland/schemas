@@ -136,6 +136,10 @@ describe('Representation tests', () => {
         ]
       })
     ).toEqual(false)
+    expect(Wearable.validate.errors).toHaveLength(1)
+    expect(Wearable.validate.errors![0].message).toEqual(
+      '"i18n" array should not have duplicates for "code"'
+    )
   })
 
   it('wearable without representation fails', () => {

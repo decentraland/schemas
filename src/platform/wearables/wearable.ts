@@ -98,7 +98,9 @@ export namespace Wearable {
       i18n: {
         type: 'array',
         items: I18N.schema,
-        minItems: 1
+        minItems: 1,
+        uniqueItemProperties: ['code'],
+        errorMessage: '${0#} array should not have duplicates for "code"'
       },
       data: {
         type: 'object',
@@ -175,23 +177,30 @@ export namespace Wearable {
   export const validate: ValidateFunction<Wearable> = (
     wearable: any
   ): wearable is Wearable => {
-    const validationResult =
-      schemaValidator(wearable) &&
-      validateDuplicatedLocales(wearable.i18n) &&
-      XOR(
-        validateStandardWearable(wearable.rarity, wearable.collectionAddress),
-        validateThirdParty(wearable)
-      )
-    validate.errors = schemaValidator.errors
-    return validationResult
+    const schemaValidationResult = schemaValidator(wearable)
+    if (!schemaValidationResult) {
+      validate.errors = schemaValidator.errors
+      return schemaValidationResult
+    }
+
+    const xorResult = XOR(
+      validateStandardWearable(wearable.rarity, wearable.collectionAddress),
+      validateThirdParty(wearable)
+    )
+    if (!xorResult) {
+      validate.errors = [
+        {
+          keyword: 'i18n',
+          dataPath: '',
+          schemaPath: '',
+          params: {},
+          message: 'there are duplicate locales'
+        }
+      ]
+    }
+
+    return true
   }
 
   const XOR = (b1: boolean, b2: boolean) => (b1 && !b2) || (b2 && !b1)
-
-  // Returns true only if there are no entries with the same locale
-  const validateDuplicatedLocales = (i18ns: I18N[]) =>
-    i18ns.every(
-      ({ code }, index) =>
-        i18ns.findIndex((i18n) => i18n.code === code) === index
-    )
 }
