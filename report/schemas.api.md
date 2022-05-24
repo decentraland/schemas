@@ -408,6 +408,20 @@ export namespace Color3 {
     validate: ValidateFunction<Color3>;
 }
 
+// @public
+export type ContentMapping = {
+    file: string;
+    hash: IPFSv1 | IPFSv2;
+};
+
+// @public (undocumented)
+export namespace ContentMapping {
+    const // (undocumented)
+    schema: JSONSchema<ContentMapping>;
+    const // (undocumented)
+    validate: ValidateFunction<ContentMapping>;
+}
+
 // Warning: (ae-missing-release-tag) "Contract" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Contract" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -485,6 +499,37 @@ export namespace EmoteCategory {
     validate: ValidateFunction<EmoteCategory>;
 }
 
+// @public
+export type Entity = {
+    version: string;
+    id: IPFSv1 | IPFSv2;
+    type: EntityType;
+    pointers: string[];
+    timestamp: number;
+    content: ContentMapping[];
+    metadata?: any;
+};
+
+// @public (undocumented)
+export namespace Entity {
+    const // (undocumented)
+    schema: JSONSchema<Entity>;
+    const // (undocumented)
+    validate: ValidateFunction<Entity>;
+}
+
+// @public
+export enum EntityType {
+    // (undocumented)
+    PROFILE = "profile",
+    // (undocumented)
+    SCENE = "scene",
+    // (undocumented)
+    STORE = "store",
+    // (undocumented)
+    WEARABLE = "wearable"
+}
+
 // @alpha
 export type EthAddress = string;
 
@@ -536,10 +581,21 @@ export namespace I18N {
     validate: ValidateFunction<I18N>;
 }
 
-// @alpha
+// @public (undocumented)
+export type IPFSv1 = string;
+
+// @public
+export namespace IPFSv1 {
+    const // (undocumented)
+    schema: JSONSchema<IPFSv1>;
+    const // (undocumented)
+    validate: ValidateFunction<IPFSv1>;
+}
+
+// @public
 export type IPFSv2 = string;
 
-// @alpha
+// @public
 export namespace IPFSv2 {
     const // (undocumented)
     schema: JSONSchema<IPFSv2>;
