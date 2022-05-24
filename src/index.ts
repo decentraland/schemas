@@ -28,6 +28,11 @@ export { ProviderType } from './dapps/provider-type'
 export { Rarity } from './dapps/rarity'
 export { SaleType } from './dapps/sale-type'
 export { Sale, SaleFilters, SaleSortBy } from './dapps/sale'
+export {
+  AnalyticsDayData,
+  AnalyticsDayDataFilters,
+  AnalyticsDayDataSortBy
+} from './dapps/analyticsDayData'
 export { Store } from './dapps/store'
 export { WearableCategory } from './dapps/wearable-category'
 export { WearableGender } from './dapps/wearable-gender'
