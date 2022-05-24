@@ -156,18 +156,20 @@ export namespace Wearable {
       'image',
       'i18n'
     ],
-    "anyOf": [
+    anyOf: [
       {
-        required: ["collectionAddress", "rarity"],
-        prohibited: ["merkleProof", "content"],
-        errorMessage: 'for standard wearables "merkleProof" and "content" are not allowed'
+        required: ['collectionAddress', 'rarity'],
+        prohibited: ['merkleProof', 'content'],
+        errorMessage:
+          'for standard wearables "merkleProof" and "content" are not allowed'
       },
       {
-        required: ["merkleProof", "content"],
-        prohibited: ["collectionAddress", "rarity"],
-        errorMessage: 'for third party wearables "collectionAddress" and "rarity" are not allowed',
+        required: ['merkleProof', 'content'],
+        prohibited: ['collectionAddress', 'rarity'],
+        errorMessage:
+          'for third party wearables "collectionAddress" and "rarity" are not allowed'
       }
-    ],
+    ]
   }
 
   /**

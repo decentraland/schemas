@@ -139,7 +139,11 @@ describe('Representation tests', () => {
       Wearable.validate({ ...baseWearable, ...standard, ...thirdParty })
     ).toEqual(false)
     const messages = Wearable.validate.errors!.map((e) => e.message)
-    expect(messages).toContain('for standard wearables "merkleProof" and "content" are not allowed')
-    expect(messages).toContain('for third party wearables "collectionAddress" and "rarity" are not allowed')
+    expect(messages).toContain(
+      'for standard wearables "merkleProof" and "content" are not allowed'
+    )
+    expect(messages).toContain(
+      'for third party wearables "collectionAddress" and "rarity" are not allowed'
+    )
   })
 })
