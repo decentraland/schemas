@@ -1,4 +1,7 @@
 import Ajv, { ErrorObject, JSONSchemaType } from 'ajv'
+import ajv_keywords from 'ajv-keywords'
+import ajv_errors from 'ajv-errors'
+
 export { Ajv }
 
 /**
@@ -34,7 +37,10 @@ export type AbstractTypedSchema<T> = {
 export function generateValidator<T>(
   schema: JSONSchema<T>
 ): ValidateFunction<T> {
-  const ajv = new Ajv()
+  const ajv = new Ajv({ allErrors: true })
+  ajv_keywords(ajv)
+  ajv_errors(ajv)
+
   return ajv.compile<T>(schema)
 }
 

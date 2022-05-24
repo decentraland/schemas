@@ -13,4 +13,13 @@ describe('Profile tests', () => {
     expect(Profile.validate(null)).toEqual(false)
     expect(Profile.validate({})).toEqual(false)
   })
+
+  it('static tests must return the correct error when missing name', () => {
+    const validate = Profile.validate
+    expect(validate({})).toEqual(false)
+    expect(validate.errors).toHaveLength(1)
+    expect(validate.errors![0].message).toEqual(
+      "should have required property 'avatars'"
+    )
+  })
 })

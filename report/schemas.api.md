@@ -69,6 +69,36 @@ type Actions = typeof SCENE_UPDATE | typeof UPDATE;
 
 export { Ajv }
 
+// Warning: (ae-missing-release-tag) "AnalyticsDayData" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type AnalyticsDayData = {
+    id: string;
+    date: number;
+    sales: number;
+    volume: string;
+    creatorsEarnings: string;
+    daoEarnings: string;
+};
+
+// Warning: (ae-missing-release-tag) "AnalyticsDayDataFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type AnalyticsDayDataFilters = {
+    from?: number;
+    network?: Network;
+};
+
+// Warning: (ae-missing-release-tag) "AnalyticsDayDataSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum AnalyticsDayDataSortBy {
+    // (undocumented)
+    DATE = "date",
+    // (undocumented)
+    MOST_SALES = "most_sales"
+}
+
 // @alpha (undocumented)
 type AssetJson = {
     id: string;
@@ -1747,6 +1777,7 @@ export namespace World {
 // Warnings were encountered during analysis:
 //
 // src/dapps/account.ts:28:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/analyticsDayData.ts:14:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/bid.ts:21:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/bid.ts:22:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/bid.ts:41:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
