@@ -159,10 +159,20 @@ export namespace Wearable {
       'thumbnail',
       'image',
       'i18n'
-    ]
+    ],
+    "anyOf": [
+      {
+        required: ["collectionAddress", "rarity"],
+        prohibited: ["merkleProof", "content"],
+        errorMessage: 'for standard wearables "merkleProof" and "content" are not allowed'
+      },
+      {
+        required: ["merkleProof", "content"],
+        prohibited: ["collectionAddress", "rarity"],
+        errorMessage: 'for third party wearables "collectionAddress" and "rarity" are not allowed',
+      }
+    ],
   }
-
-  const schemaValidator: ValidateFunction<Wearable> = generateValidator(schema)
 
   /**
    * Validates that the wearable metadata complies with the standard or third party wearable, and doesn't have repeated locales.
@@ -172,35 +182,7 @@ export namespace Wearable {
    *    - rarity
    *  Third Party Wearables should contain:
    *    - merkleProof
+   *    - content
    */
-
-  export const validate: ValidateFunction<Wearable> = (
-    wearable: any
-  ): wearable is Wearable => {
-    const schemaValidationResult = schemaValidator(wearable)
-    if (!schemaValidationResult) {
-      validate.errors = schemaValidator.errors
-      return schemaValidationResult
-    }
-
-    const xorResult = XOR(
-      validateStandardWearable(wearable.rarity, wearable.collectionAddress),
-      validateThirdParty(wearable)
-    )
-    if (!xorResult) {
-      validate.errors = [
-        {
-          keyword: 'i18n',
-          dataPath: '',
-          schemaPath: '',
-          params: {},
-          message: 'there are duplicate locales'
-        }
-      ]
-    }
-
-    return true
-  }
-
-  const XOR = (b1: boolean, b2: boolean) => (b1 && !b2) || (b2 && !b1)
+  export const validate: ValidateFunction<Wearable> = generateValidator(schema)
 }

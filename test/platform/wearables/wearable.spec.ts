@@ -97,33 +97,13 @@ describe('Representation tests', () => {
     expect(Wearable.validate({})).toEqual(false)
   })
 
-  it('static tests must return the correct error when missing id', () => {
+  it('static tests must return the correct errors when missing properties', () => {
     const validate = Wearable.validate
     expect(validate({})).toEqual(false)
-    expect(validate.errors).toHaveLength(1)
-    expect(validate.errors![0].message).toEqual(
-      "should have required property 'id'"
-    )
-  })
-
-  it('static tests must return the correct error when missing description', () => {
-    const validate = Wearable.validate
-    expect(validate({ id: 'the-id' })).toEqual(false)
-    expect(validate.errors).toHaveLength(1)
-    expect(validate.errors![0].message).toEqual(
-      "should have required property 'description'"
-    )
-  })
-
-  it('static tests must return the correct error when missing name', () => {
-    const validate = Wearable.validate
-    expect(validate({ id: 'the-id', description: 'description' })).toEqual(
-      false
-    )
-    expect(validate.errors).toHaveLength(1)
-    expect(validate.errors![0].message).toEqual(
-      "should have required property 'name'"
-    )
+    const messages = validate.errors!.map((e) => e.message)
+    expect(messages).toContain("should have required property 'id'")
+    expect(messages).toContain("should have required property 'description'")
+    expect(messages).toContain("should have required property 'name'")
   })
 
   it('wearable with two i18n with same locale fails', () => {
@@ -136,7 +116,7 @@ describe('Representation tests', () => {
         ]
       })
     ).toEqual(false)
-    expect(Wearable.validate.errors).toHaveLength(1)
+    expect(Wearable.validate.errors!).toHaveLength(1)
     expect(Wearable.validate.errors![0].message).toEqual(
       '"i18n" array should not have duplicates for "code"'
     )
@@ -158,5 +138,8 @@ describe('Representation tests', () => {
     expect(
       Wearable.validate({ ...baseWearable, ...standard, ...thirdParty })
     ).toEqual(false)
+    const messages = Wearable.validate.errors!.map((e) => e.message)
+    expect(messages).toContain('for standard wearables "merkleProof" and "content" are not allowed')
+    expect(messages).toContain('for third party wearables "collectionAddress" and "rarity" are not allowed')
   })
 })
