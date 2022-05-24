@@ -38,6 +38,17 @@ export namespace MyType {
 
 In that sense, MyType can be both used as type `const a: MyType` and as object `MyType.validate(a)`.
 
+Beware that `validate` has type `ValidateFunction<T>` which `ajv` creates automatically. When writing new
+validations always try to implement it as an ajv validation, even if custom code is needed. See [here](https://ajv.js.org/keywords.html#define-keyword-with-code-generation-function). 
+
+In particular, don't fall in the trap of doing this:
+```ts
+  const validator = generateValidator<MyType>(schema)
+  export const validate = (mt: MyType) => validator.validate(mt) && otherValidations(mt);
+```
+By doing this, all the errors reported by the `validator.validate` function are lost and never returned
+to the caller.
+
 ## Type ownership
 
 Please add types and schemas of your domain into the `src/<team>` folder, also add your team to the [CODEOWNERS](.github/CODEOWNERS) repository to make sure nobody accidentally changes it without your team noticing it.
