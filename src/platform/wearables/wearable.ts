@@ -156,7 +156,7 @@ export namespace Wearable {
       'image',
       'i18n'
     ],
-    anyOf: [
+    oneOf: [
       {
         required: ['collectionAddress', 'rarity'],
         prohibited: ['merkleProof', 'content'],
