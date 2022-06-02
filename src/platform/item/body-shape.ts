@@ -2,7 +2,7 @@ import {
   generateValidator,
   JSONSchema,
   ValidateFunction
-} from '../../../validation'
+} from '../../validation'
 
 /** @alpha */
 export enum WearableBodyShape {

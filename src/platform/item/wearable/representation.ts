@@ -4,7 +4,7 @@ import {
   JSONSchema,
   ValidateFunction
 } from '../../../validation'
-import { WearableBodyShape } from './wearable-body-shape'
+import { WearableBodyShape } from '../body-shape'
 
 /** @alpha */
 export type WearableRepresentation = {
