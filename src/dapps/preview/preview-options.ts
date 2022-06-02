@@ -1,4 +1,4 @@
-import { WearableBodyShape } from '../../platform/item/wearable'
+import { BodyShape } from '../../platform/item'
 import { PreviewCamera } from './preview-camera'
 import { PreviewEmote } from './preview-emote'
 import { PreviewEnv } from './preview-env'
@@ -9,7 +9,7 @@ export type PreviewOptions = {
   tokenId?: string | null
   itemId?: string | null
   profile?: string | null
-  bodyShape?: WearableBodyShape | null
+  bodyShape?: BodyShape | null
   skin?: string | null
   hair?: string | null
   eyes?: string | null

@@ -8,18 +8,14 @@ import { WearableCategory } from '../../../dapps/wearable-category'
 import { I18N } from '../i18n'
 import { WearableRepresentation } from './representation'
 import { Metrics } from '../metrics'
-import {
-  DisplayableDeployment,
-  displayableProperties
-} from '../../shared/displayable'
+import { displayableProperties } from '../../shared/displayable'
 import { MerkleProof } from '../../merkle-tree'
-import { WithRequired } from '../../../misc'
+import { BaseItem } from '../base-item'
+import { StandardProps } from '../standard-props'
+import { ThirdPartyProps } from '../third-party-props'
 
 /** @alpha */
-export type Wearable = DisplayableDeployment & {
-  id: string
-  name: string
-  description: string
+export type Wearable = BaseItem & {
   data: {
     replaces: WearableCategory[]
     hides: WearableCategory[]
@@ -27,46 +23,7 @@ export type Wearable = DisplayableDeployment & {
     representations: WearableRepresentation[]
     category: WearableCategory
   }
-  i18n: I18N[]
-  thumbnail: string
-  image: string
-  rarity?: Rarity
-  collectionAddress?: string
-  metrics?: Metrics
-  content?: Record<string, string>
-  merkleProof?: MerkleProof
-}
-
-/** @alpha */
-export type StandardWearable = Omit<
-  WithRequired<Wearable, 'collectionAddress' | 'rarity'>,
-  'merkleProof' | 'content'
->
-
-export type ThirdPartyWearable = Omit<
-  WithRequired<Wearable, 'merkleProof'>,
-  'rarity' | 'collectionAddress'
->
-
-const validateThirdParty = (wearable: Wearable) => {
-  if (!MerkleProof.validate(wearable.merkleProof)) return false
-  if (wearable.merkleProof.hashingKeys.length === 0) return false
-  return wearable.merkleProof.hashingKeys.every((key) =>
-    wearable.hasOwnProperty(key)
-  )
-}
-
-const validateStandardWearable = (
-  rarity?: Rarity,
-  collectionAddress?: string
-) => Rarity.validate(rarity) && !!collectionAddress
-
-export const isStandard = (wearable: Wearable): wearable is StandardWearable =>
-  validateStandardWearable(wearable.rarity, wearable.collectionAddress)
-
-export const isThirdParty = (
-  wearable: Wearable
-): wearable is ThirdPartyWearable => validateThirdParty(wearable)
+} & (StandardProps | ThirdPartyProps)
 
 /** @alpha */
 export namespace Wearable {

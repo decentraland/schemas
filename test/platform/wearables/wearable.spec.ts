@@ -1,17 +1,16 @@
 import expect from 'expect'
+import { Rarity, WearableCategory } from '../../../src'
 import {
-  Locale,
-  Rarity,
+  BodyShape,
   Wearable,
-  WearableBodyShape,
-  WearableCategory,
-  WearableRepresentation
-} from '../../../src'
+  WearableRepresentation,
+  Locale
+} from '../../../src/platform'
 import { testTypeSignature } from '../../test-utils'
 
 describe('Representation tests', () => {
   const representation: WearableRepresentation = {
-    bodyShapes: [WearableBodyShape.FEMALE],
+    bodyShapes: [BodyShape.FEMALE],
     mainFile: 'file1',
     contents: ['file1', 'file2'],
     overrideHides: [],

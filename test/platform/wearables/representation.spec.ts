@@ -1,10 +1,10 @@
 import expect from 'expect'
-import { WearableBodyShape, WearableRepresentation } from '../../../src'
+import { BodyShape, WearableRepresentation } from '../../../src/platform/item'
 import { testTypeSignature } from '../../test-utils'
 
 describe('Representation tests', () => {
   const representation: WearableRepresentation = {
-    bodyShapes: [WearableBodyShape.FEMALE],
+    bodyShapes: [BodyShape.FEMALE],
     mainFile: 'file1',
     contents: ['file1', 'file2'],
     overrideHides: [],
@@ -32,7 +32,7 @@ describe('Representation tests', () => {
     expect(
       WearableRepresentation.validate({
         ...representation,
-        bodyShapes: [WearableBodyShape.FEMALE, WearableBodyShape.FEMALE]
+        bodyShapes: [BodyShape.FEMALE, BodyShape.FEMALE]
       })
     ).toEqual(false)
   })

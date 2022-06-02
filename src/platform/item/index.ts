@@ -1,1 +1,5 @@
+export { I18N } from './i18n'
+export { Locale } from './locale'
+export { Metrics } from './metrics'
+export { BodyShape } from './body-shape'
 export * from './wearable'

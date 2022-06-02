@@ -4,11 +4,11 @@ import {
   JSONSchema,
   ValidateFunction
 } from '../../../validation'
-import { WearableBodyShape } from '../body-shape'
+import { BodyShape } from '../body-shape'
 
 /** @alpha */
 export type WearableRepresentation = {
-  bodyShapes: WearableBodyShape[]
+  bodyShapes: BodyShape[]
   mainFile: string
   contents: string[]
   overrideHides: WearableCategory[]
@@ -22,7 +22,7 @@ export namespace WearableRepresentation {
     properties: {
       bodyShapes: {
         type: 'array',
-        items: WearableBodyShape.schema,
+        items: BodyShape.schema,
         minItems: 1,
         uniqueItems: true
       },

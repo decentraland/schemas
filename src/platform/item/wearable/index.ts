@@ -1,6 +1,2 @@
-export { I18N } from '../i18n'
-export { Locale } from '../locale'
-export { Metrics } from '../metrics'
 export { WearableRepresentation } from './representation'
-export { WearableBodyShape } from '../body-shape'
-export { Wearable, ThirdPartyWearable, StandardWearable } from './wearable'
+export { Wearable } from './wearable'

@@ -1,15 +1,15 @@
 import expect from 'expect'
-import { WearableBodyShape } from '../../../src'
+import { BodyShape } from '../../../src/platform'
 import { testTypeSignature } from '../../test-utils'
 
 describe('BodyShape tests', () => {
-  const bodyShape: WearableBodyShape = WearableBodyShape.FEMALE
+  const bodyShape: BodyShape = BodyShape.FEMALE
 
-  testTypeSignature(WearableBodyShape, bodyShape)
+  testTypeSignature(BodyShape, bodyShape)
 
   it('static tests must pass', () => {
-    expect(WearableBodyShape.validate(bodyShape)).toEqual(true)
-    expect(WearableBodyShape.validate(null)).toEqual(false)
-    expect(WearableBodyShape.validate({})).toEqual(false)
+    expect(BodyShape.validate(bodyShape)).toEqual(true)
+    expect(BodyShape.validate(null)).toEqual(false)
+    expect(BodyShape.validate({})).toEqual(false)
   })
 })

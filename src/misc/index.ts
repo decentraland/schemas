@@ -103,5 +103,3 @@ export namespace IPFSv1 {
     hash: any
   ): hash is IPFSv1 => regexp.test(hash)
 }
-
-export type WithRequired<T, K extends keyof T> = T & { [P in K]-?: T[P] }
