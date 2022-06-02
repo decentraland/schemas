@@ -1,9 +1,9 @@
-import { WearableCategory } from '../../dapps/wearable-category'
+import { WearableCategory } from '../../../dapps/wearable-category'
 import {
   generateValidator,
   JSONSchema,
   ValidateFunction
-} from '../../validation'
+} from '../../../validation'
 import { WearableBodyShape } from './wearable-body-shape'
 
 /** @alpha */

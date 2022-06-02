@@ -2,18 +2,18 @@ import {
   generateValidator,
   JSONSchema,
   ValidateFunction
-} from '../../validation'
-import { Rarity } from '../../dapps/rarity'
-import { WearableCategory } from '../../dapps/wearable-category'
-import { I18N } from './i18n'
+} from '../../../validation'
+import { Rarity } from '../../../dapps/rarity'
+import { WearableCategory } from '../../../dapps/wearable-category'
+import { I18N } from '../i18n'
 import { WearableRepresentation } from './representation'
-import { Metrics } from './metrics'
+import { Metrics } from '../metrics'
 import {
   DisplayableDeployment,
   displayableProperties
-} from '../shared/displayable'
-import { MerkleProof } from '../merkle-tree'
-import { WithRequired } from '../../misc'
+} from '../../shared/displayable'
+import { MerkleProof } from '../../merkle-tree'
+import { WithRequired } from '../../../misc'
 
 /** @alpha */
 export type Wearable = DisplayableDeployment & {

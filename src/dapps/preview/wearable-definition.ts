@@ -1,4 +1,4 @@
-import { Wearable } from '../../platform/wearables/wearable'
+import { Wearable } from '../../platform/item/wearable'
 import { RepresentationDefinition } from './representation-definition'
 
 /** @alpha */
