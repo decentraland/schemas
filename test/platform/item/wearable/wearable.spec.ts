@@ -1,12 +1,12 @@
 import expect from 'expect'
-import { Rarity, WearableCategory } from '../../../src'
+import { Rarity, WearableCategory } from '../../../../src'
 import {
   BodyShape,
   Wearable,
   WearableRepresentation,
   Locale
-} from '../../../src/platform'
-import { testTypeSignature } from '../../test-utils'
+} from '../../../../src/platform'
+import { testTypeSignature } from '../../../test-utils'
 
 describe('Representation tests', () => {
   const representation: WearableRepresentation = {

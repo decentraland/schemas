@@ -1,6 +1,9 @@
 import expect from 'expect'
-import { BodyShape, WearableRepresentation } from '../../../src/platform/item'
-import { testTypeSignature } from '../../test-utils'
+import {
+  BodyShape,
+  WearableRepresentation
+} from '../../../../src/platform/item'
+import { testTypeSignature } from '../../../test-utils'
 
 describe('Representation tests', () => {
   const representation: WearableRepresentation = {
@@ -59,7 +62,7 @@ describe('Representation tests', () => {
     expect(
       WearableRepresentation.validate({
         ...representation,
-        mainFile: ['file1'],
+        mainFile: 'file1',
         contents: ['file2', 'file3']
       })
     ).toEqual(false)

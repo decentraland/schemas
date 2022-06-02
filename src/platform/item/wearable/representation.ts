@@ -36,7 +36,10 @@ export namespace WearableRepresentation {
           type: 'string'
         },
         minItems: 1,
-        uniqueItems: true
+        uniqueItems: true,
+        contains: {
+          const: { $data: '2/mainFile' }
+        }
       },
       overrideHides: {
         type: 'array',
@@ -56,11 +59,6 @@ export namespace WearableRepresentation {
     ]
   }
 
-  const schemaValidator: ValidateFunction<WearableRepresentation> =
+  export const validate: ValidateFunction<WearableRepresentation> =
     generateValidator(schema)
-  export const validate: ValidateFunction<WearableRepresentation> = (
-    representation: any
-  ): representation is WearableRepresentation =>
-    schemaValidator(representation) &&
-    representation.contents.includes(representation.mainFile)
 }

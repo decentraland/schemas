@@ -37,7 +37,7 @@ export type AbstractTypedSchema<T> = {
 export function generateValidator<T>(
   schema: JSONSchema<T>
 ): ValidateFunction<T> {
-  const ajv = new Ajv({ allErrors: true })
+  const ajv = new Ajv({ $data: true, allErrors: true })
   ajv_keywords(ajv)
   ajv_errors(ajv)
 
