@@ -165,4 +165,14 @@ describe('Representation tests', () => {
   it('wearable with thirdparty props is thirdParty', () => {
     expect(isThirdParty(thirdPartyWearable)).toEqual(true)
   })
+
+  it('group of properties must be complete, not partial', () => {
+    // misses 'rarity'
+    const notCompleteStandardProps = {
+      collectionAddress: '0x...'
+    }
+    expect(
+      Wearable.validate({ ...baseWearable, ...notCompleteStandardProps })
+    ).toEqual(false)
+  })
 })
