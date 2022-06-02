@@ -19,7 +19,7 @@ export type BaseItem = DisplayableDeployment & {
 }
 
 // @internal
-export const itemProperties = {
+export const baseItemProperties = {
   ...displayableProperties,
   id: {
     type: 'string'
@@ -34,7 +34,8 @@ export const itemProperties = {
     type: 'array',
     items: I18N.schema,
     minItems: 1,
-    uniqueItemProperties: ['code']
+    uniqueItemProperties: ['code'],
+    errorMessage: '${0#} array should not have duplicates for "code"'
   },
   thumbnail: {
     type: 'string'
@@ -48,7 +49,7 @@ export const itemProperties = {
   }
 } as const
 
-export const requiredItemProps = [
+export const requiredBaseItemProps = [
   'id',
   'name',
   'description',

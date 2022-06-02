@@ -3,16 +3,15 @@ import {
   JSONSchema,
   ValidateFunction
 } from '../../../validation'
-import { Rarity } from '../../../dapps/rarity'
 import { WearableCategory } from '../../../dapps/wearable-category'
-import { I18N } from '../i18n'
 import { WearableRepresentation } from './representation'
-import { Metrics } from '../metrics'
-import { displayableProperties } from '../../shared/displayable'
-import { MerkleProof } from '../../merkle-tree'
-import { BaseItem } from '../base-item'
-import { StandardProps } from '../standard-props'
-import { ThirdPartyProps } from '../third-party-props'
+import {
+  BaseItem,
+  baseItemProperties,
+  requiredBaseItemProps
+} from '../base-item'
+import { StandardProps, standardProperties } from '../standard-props'
+import { ThirdPartyProps, thirdPartyProps } from '../third-party-props'
 
 /** @alpha */
 export type Wearable = BaseItem & {
@@ -30,31 +29,9 @@ export namespace Wearable {
   export const schema: JSONSchema<Wearable> = {
     type: 'object',
     properties: {
-      ...displayableProperties,
-      id: {
-        type: 'string'
-      },
-      description: {
-        type: 'string'
-      },
-      collectionAddress: {
-        type: 'string',
-        nullable: true
-      },
-      rarity: {
-        ...Rarity.schema,
-        nullable: true
-      },
-      name: {
-        type: 'string'
-      },
-      i18n: {
-        type: 'array',
-        items: I18N.schema,
-        minItems: 1,
-        uniqueItemProperties: ['code'],
-        errorMessage: '${0#} array should not have duplicates for "code"'
-      },
+      ...baseItemProperties,
+      ...standardProperties,
+      ...thirdPartyProps,
       data: {
         type: 'object',
         properties: {
@@ -81,38 +58,10 @@ export namespace Wearable {
           category: WearableCategory.schema
         },
         required: ['replaces', 'hides', 'tags', 'representations', 'category']
-      },
-      thumbnail: {
-        type: 'string'
-      },
-      image: {
-        type: 'string'
-      },
-      metrics: {
-        ...Metrics.schema,
-        nullable: true
-      },
-      merkleProof: {
-        ...MerkleProof.schema,
-        nullable: true
-      },
-      content: {
-        type: 'object',
-        nullable: true,
-        additionalProperties: { type: 'string' },
-        required: []
       }
     },
     additionalProperties: true,
-    required: [
-      'id',
-      'description',
-      'name',
-      'data',
-      'thumbnail',
-      'image',
-      'i18n'
-    ],
+    required: [...requiredBaseItemProps, 'data'],
     oneOf: [
       {
         required: ['collectionAddress', 'rarity'],

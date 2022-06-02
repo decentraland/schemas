@@ -10,7 +10,7 @@ export const thirdPartyProps = {
   merkleProof: MerkleProof.schema,
   content: {
     type: 'object',
-    nullable: true,
+    nullable: false,
     additionalProperties: { type: 'string' },
     required: [] as any[]
   }
