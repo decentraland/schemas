@@ -6,6 +6,8 @@ import {
   WearableRepresentation,
   Locale
 } from '../../../../src/platform'
+import { isStandard } from '../../../../src/platform/item/standard-props'
+import { isThirdParty } from '../../../../src/platform/item/third-party-props'
 import { testTypeSignature } from '../../../test-utils'
 
 describe('Representation tests', () => {
@@ -144,5 +146,23 @@ describe('Representation tests', () => {
     expect(messages).toContain(
       'for third party wearables "collectionAddress" and "rarity" are not allowed'
     )
+  })
+
+  it('wearable should be standard and/or thirdparty', () => {
+    expect(Wearable.validate(baseWearable)).toEqual(false)
+  })
+
+  it('wearable cannot be both standard and thirdparty', () => {
+    expect(
+      Wearable.validate({ ...baseWearable, ...standard, ...thirdParty })
+    ).toEqual(false)
+  })
+
+  it('wearable with standard props is standard', () => {
+    expect(isStandard(wearable)).toEqual(true)
+  })
+
+  it('wearable with thirdparty props is thirdParty', () => {
+    expect(isThirdParty(thirdPartyWearable)).toEqual(true)
   })
 })

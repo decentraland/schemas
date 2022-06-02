@@ -1,3 +1,4 @@
+import { Wearable } from '.'
 import { Rarity } from '../../dapps/rarity'
 import { BaseItem } from './base-item'
 
@@ -14,8 +15,10 @@ export const standardProperties = {
   rarity: Rarity.schema
 } as const
 
-export function isStandard(item: BaseItem): item is BaseItem & StandardProps {
-  const itemAsStandard = item as BaseItem & StandardProps
+export function isStandard<T extends BaseItem>(
+  item: T
+): item is T & StandardProps {
+  const itemAsStandard = item as T & StandardProps
   return (
     !!itemAsStandard.collectionAddress &&
     itemAsStandard.rarity &&

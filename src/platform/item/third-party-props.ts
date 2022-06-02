@@ -16,10 +16,10 @@ export const thirdPartyProps = {
   }
 } as const
 
-export function isThirdParty(
-  item: BaseItem
-): item is BaseItem & ThirdPartyProps {
-  const itemAsThirdParty = item as BaseItem & ThirdPartyProps
+export function isThirdParty<T extends BaseItem>(
+  item: T
+): item is T & ThirdPartyProps {
+  const itemAsThirdParty = item as T & ThirdPartyProps
   if (!MerkleProof.validate(itemAsThirdParty.merkleProof)) return false
   if (!itemAsThirdParty.content) return false
   if (itemAsThirdParty.merkleProof.hashingKeys.length === 0) return false
