@@ -1,4 +1,4 @@
-import { EmoteCategory } from '../../../../dapps/emote-category'
+import { EmoteCategory } from '../emote-category'
 import {
   generateValidator,
   JSONSchema,

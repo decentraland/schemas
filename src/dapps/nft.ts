@@ -1,7 +1,7 @@
 import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 import { BodyShape } from './body-shape'
 import { ChainId } from './chain-id'
-import { EmoteCategory } from './emote-category'
+import { EmoteCategory } from '../platform'
 import { Network } from './network'
 import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'

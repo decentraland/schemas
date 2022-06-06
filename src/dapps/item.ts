@@ -1,6 +1,6 @@
 import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
-import { EmoteCategory } from './emote-category'
+import { EmoteCategory } from '../platform'
 import { Network } from './network'
 import { NFT } from './nft'
 import { NFTCategory } from './nft-category'
