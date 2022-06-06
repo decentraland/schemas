@@ -7,7 +7,7 @@ import {
 } from '../base-item'
 import { standardProperties, StandardProps } from '../standard-props'
 import { thirdPartyProps, ThirdPartyProps } from '../third-party-props'
-import { EmoteDataADR73 } from './adr95/emote-data-adr95'
+import { EmoteDataADR73 } from './adr73/emote-data-adr73'
 
 export type EmoteADR73 = BaseItem &
   (StandardProps | ThirdPartyProps) & { emoteDataADR73: EmoteDataADR73 }

@@ -4,7 +4,7 @@ import {
   JSONSchema,
   ValidateFunction
 } from '../../../../validation'
-import { EmoteRepresentationADR73 } from './representation-adr95'
+import { EmoteRepresentationADR73 } from './representation-adr73'
 
 export type EmoteDataADR73 = {
   category: EmoteCategory
