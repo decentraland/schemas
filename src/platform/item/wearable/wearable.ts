@@ -1,8 +1,4 @@
-import {
-  generateValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../../validation'
+import { generateValidator, JSONSchema } from '../../../validation'
 import { WearableCategory } from '../../../dapps/wearable-category'
 import { WearableRepresentation } from './representation'
 import {
@@ -11,7 +7,11 @@ import {
   requiredBaseItemProps
 } from '../base-item'
 import { StandardProps, standardProperties } from '../standard-props'
-import { isThirdParty, ThirdPartyProps, thirdPartyProps } from '../third-party-props'
+import {
+  isThirdParty,
+  ThirdPartyProps,
+  thirdPartyProps
+} from '../third-party-props'
 
 /** @alpha */
 export type Wearable = BaseItem & {
@@ -95,5 +95,5 @@ export namespace Wearable {
    *    - merkleProof
    *    - content
    */
-   export const validate = generateValidator(schema, [_isThirdPartyKeywordDef])
+  export const validate = generateValidator(schema, [_isThirdPartyKeywordDef])
 }
