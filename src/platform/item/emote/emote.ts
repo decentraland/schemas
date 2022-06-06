@@ -1,8 +1,5 @@
-import {
-  generateValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../../validation'
+import { isThirdParty } from '..'
+import { generateValidator, JSONSchema } from '../../../validation'
 import {
   BaseItem,
   baseItemProperties,
@@ -43,6 +40,7 @@ export namespace Emote {
           },
           {
             required: ['merkleProof', 'content'],
+            _isThirdParty: true,
             prohibited: ['collectionAddress', 'rarity'],
             errorMessage:
               'for third party emotes "collectionAddress" and "rarity" are not allowed'
@@ -52,5 +50,11 @@ export namespace Emote {
     ]
   }
 
-  export const validate: ValidateFunction<Emote> = generateValidator(schema)
+  const _isThirdPartyKeywordDef = {
+    keyword: '_isThirdParty',
+    validate: (schema: boolean, data: any) => !schema || isThirdParty(data),
+    errors: false
+  }
+
+  export const validate = generateValidator(schema, [_isThirdPartyKeywordDef])
 }

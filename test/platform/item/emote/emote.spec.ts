@@ -168,8 +168,7 @@ describe('ADR95Emote tests', () => {
   })
 
   it('emote with standard props is standard', () => {
-    const is = isStandard(standardEmote)
-    expect(is).toEqual(true)
+    expect(isStandard(standardEmote)).toEqual(true)
   })
 
   it('emote with thirdparty props is thirdParty', () => {
@@ -188,5 +187,42 @@ describe('ADR95Emote tests', () => {
         emoteDataADR95
       })
     ).toEqual(false)
+  })
+
+  it('thirdparty emote with not all hasing keys present fails', () => {
+    const notValidThirdPartyProps = {
+      content: {
+        'thumbnail.png': 'someHash',
+        'iamge.png': 'someOtherHash'
+      },
+      merkleProof: {
+        index: 61575,
+        proof: [
+          '0xc8ae2407cffddd38e3bcb6c6f021c9e7ac21fcc60be44e76e4afcb34f637d562',
+          '0x16123d205a70cdeff7643de64cdc69a0517335d9c843479e083fd444ea823172'
+        ],
+        hashingKeys: [
+          'id',
+          'name',
+          'description',
+          'i18n',
+          'image',
+          'thumbnail',
+          'emoteDataADR95',
+          'content',
+          'notPresentKey'
+        ],
+        entityHash:
+          '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
+      }
+    }
+
+    const notThirdPartyEmote = {
+      ...baseEmote,
+      ...notValidThirdPartyProps,
+      emoteDataADR95
+    }
+    expect(Emote.validate(notThirdPartyEmote)).toEqual(false)
+    expect(isThirdParty(notThirdPartyEmote)).toEqual(false)
   })
 })

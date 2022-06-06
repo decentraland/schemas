@@ -1,5 +1,10 @@
 import { Rarity } from '../../dapps/rarity'
 import { BaseItem } from './base-item'
+import {
+  generateValidator,
+  ValidateFunction,
+  JSONSchema
+} from '../../validation'
 
 export type StandardProps = {
   collectionAddress: string
@@ -14,13 +19,18 @@ export const standardProperties = {
   rarity: Rarity.schema
 } as const
 
+const schema: JSONSchema<StandardProps> = {
+  type: 'object',
+  properties: {
+    ...standardProperties
+  },
+  required: ['collectionAddress', 'rarity']
+}
+
+const validate: ValidateFunction<StandardProps> = generateValidator(schema)
+
 export function isStandard<T extends BaseItem>(
   item: T
 ): item is T & StandardProps {
-  const itemAsStandard = item as T & StandardProps
-  return (
-    !!itemAsStandard.collectionAddress &&
-    itemAsStandard.rarity &&
-    Rarity.validate(itemAsStandard.rarity)
-  )
+  return validate(item)
 }

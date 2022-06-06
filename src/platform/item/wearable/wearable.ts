@@ -11,7 +11,7 @@ import {
   requiredBaseItemProps
 } from '../base-item'
 import { StandardProps, standardProperties } from '../standard-props'
-import { ThirdPartyProps, thirdPartyProps } from '../third-party-props'
+import { isThirdParty, ThirdPartyProps, thirdPartyProps } from '../third-party-props'
 
 /** @alpha */
 export type Wearable = BaseItem & {
@@ -71,11 +71,18 @@ export namespace Wearable {
       },
       {
         required: ['merkleProof', 'content'],
+        _isThirdParty: true,
         prohibited: ['collectionAddress', 'rarity'],
         errorMessage:
           'for third party wearables "collectionAddress" and "rarity" are not allowed'
       }
     ]
+  }
+
+  const _isThirdPartyKeywordDef = {
+    keyword: '_isThirdParty',
+    validate: (schema: boolean, data: any) => !schema || isThirdParty(data),
+    errors: false
   }
 
   /**
@@ -88,5 +95,5 @@ export namespace Wearable {
    *    - merkleProof
    *    - content
    */
-  export const validate: ValidateFunction<Wearable> = generateValidator(schema)
+   export const validate = generateValidator(schema, [_isThirdPartyKeywordDef])
 }

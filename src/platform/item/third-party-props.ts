@@ -1,3 +1,8 @@
+import {
+  generateValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../../validation'
 import { MerkleProof } from '../merkle-tree/merkle-proof'
 import { BaseItem } from './base-item'
 
@@ -16,18 +21,26 @@ export const thirdPartyProps = {
   }
 } as const
 
+const schema: JSONSchema<ThirdPartyProps> = {
+  type: 'object',
+  properties: {
+    ...thirdPartyProps
+  },
+  required: ['merkleProof', 'content']
+}
+
+const validate: ValidateFunction<ThirdPartyProps> = generateValidator(schema)
+
 export function isThirdParty<T extends BaseItem>(
   item: T
 ): item is T & ThirdPartyProps {
+  const isValid = validate(item)
+  if (!isValid) {
+    return isValid
+  }
   const itemAsThirdParty = item as T & ThirdPartyProps
-  if (!MerkleProof.validate(itemAsThirdParty.merkleProof)) return false
-  if (!itemAsThirdParty.content) return false
-  if (itemAsThirdParty.merkleProof.hashingKeys.length === 0) return false
   const containsAllKeys = itemAsThirdParty.merkleProof.hashingKeys.every(
     (key) => itemAsThirdParty.hasOwnProperty(key)
   )
-
-  const proofIsNotEmpty = itemAsThirdParty.merkleProof.proof.length > 0
-
-  return containsAllKeys && proofIsNotEmpty
+  return containsAllKeys
 }
