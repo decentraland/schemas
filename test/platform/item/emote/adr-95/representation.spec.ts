@@ -1,30 +1,28 @@
 import expect from 'expect'
 import {
   BodyShape,
-  WearableRepresentation
-} from '../../../../src/platform/item'
-import { testTypeSignature } from '../../../test-utils'
+  EmoteRepresentationADR95
+} from '../../../../../src/platform/item'
+import { testTypeSignature } from '../../../../test-utils'
 
-describe('Wearable representation tests', () => {
-  const representation: WearableRepresentation = {
+describe('Emote representation tests', () => {
+  const representation: EmoteRepresentationADR95 = {
     bodyShapes: [BodyShape.FEMALE],
     mainFile: 'file1',
-    contents: ['file1', 'file2'],
-    overrideHides: [],
-    overrideReplaces: []
+    contents: ['file1', 'file2']
   }
 
-  testTypeSignature(WearableRepresentation, representation)
+  testTypeSignature(EmoteRepresentationADR95, representation)
 
   it('static tests must pass', () => {
-    expect(WearableRepresentation.validate(representation)).toEqual(true)
-    expect(WearableRepresentation.validate(null)).toEqual(false)
-    expect(WearableRepresentation.validate({})).toEqual(false)
+    expect(EmoteRepresentationADR95.validate(representation)).toEqual(true)
+    expect(EmoteRepresentationADR95.validate(null)).toEqual(false)
+    expect(EmoteRepresentationADR95.validate({})).toEqual(false)
   })
 
   it('representation without body shape fails', () => {
     expect(
-      WearableRepresentation.validate({
+      EmoteRepresentationADR95.validate({
         ...representation,
         bodyShapes: []
       })
@@ -33,7 +31,7 @@ describe('Wearable representation tests', () => {
 
   it('representation with repeated body shapes fails', () => {
     expect(
-      WearableRepresentation.validate({
+      EmoteRepresentationADR95.validate({
         ...representation,
         bodyShapes: [BodyShape.FEMALE, BodyShape.FEMALE]
       })
@@ -42,7 +40,7 @@ describe('Wearable representation tests', () => {
 
   it('representation without content fails', () => {
     expect(
-      WearableRepresentation.validate({
+      EmoteRepresentationADR95.validate({
         ...representation,
         contents: []
       })
@@ -51,7 +49,7 @@ describe('Wearable representation tests', () => {
 
   it('representation with repeated content fails', () => {
     expect(
-      WearableRepresentation.validate({
+      EmoteRepresentationADR95.validate({
         ...representation,
         contents: ['file1', 'file1']
       })
@@ -60,7 +58,7 @@ describe('Wearable representation tests', () => {
 
   it('main file not in contents fails', () => {
     expect(
-      WearableRepresentation.validate({
+      EmoteRepresentationADR95.validate({
         ...representation,
         mainFile: 'file1',
         contents: ['file2', 'file3']

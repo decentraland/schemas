@@ -1,4 +1,3 @@
-import { Wearable } from '.'
 import { Rarity } from '../../dapps/rarity'
 import { BaseItem } from './base-item'
 
