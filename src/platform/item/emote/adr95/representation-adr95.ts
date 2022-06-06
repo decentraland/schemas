@@ -6,15 +6,15 @@ import {
 import { BodyShape } from '../../body-shape'
 
 /** @alpha */
-export type EmoteRepresentationADR95 = {
+export type EmoteRepresentationADR73 = {
   bodyShapes: BodyShape[]
   mainFile: string
   contents: string[]
 }
 
 /** @alpha */
-export namespace EmoteRepresentationADR95 {
-  export const schema: JSONSchema<EmoteRepresentationADR95> = {
+export namespace EmoteRepresentationADR73 {
+  export const schema: JSONSchema<EmoteRepresentationADR73> = {
     type: 'object',
     properties: {
       bodyShapes: {
@@ -39,11 +39,11 @@ export namespace EmoteRepresentationADR95 {
     required: ['bodyShapes', 'mainFile', 'contents']
   }
 
-  const schemaValidator: ValidateFunction<EmoteRepresentationADR95> =
+  const schemaValidator: ValidateFunction<EmoteRepresentationADR73> =
     generateValidator(schema)
-  export const validate: ValidateFunction<EmoteRepresentationADR95> = (
+  export const validate: ValidateFunction<EmoteRepresentationADR73> = (
     representation: any
-  ): representation is EmoteRepresentationADR95 =>
+  ): representation is EmoteRepresentationADR73 =>
     schemaValidator(representation) &&
     representation.contents.includes(representation.mainFile)
 }
