@@ -7,13 +7,13 @@ import {
 } from '../base-item'
 import { standardProperties, StandardProps } from '../standard-props'
 import { thirdPartyProps, ThirdPartyProps } from '../third-party-props'
-import { EmoteDataADR73 } from './adr73/emote-data-adr73'
+import { EmoteDataADR74 } from './adr74/emote-data-adr74'
 
-export type EmoteADR73 = BaseItem &
-  (StandardProps | ThirdPartyProps) & { emoteDataADR73: EmoteDataADR73 }
+export type EmoteADR74 = BaseItem &
+  (StandardProps | ThirdPartyProps) & { emoteDataADR74: EmoteDataADR74 }
 
 /** @alpha */
-export type Emote = EmoteADR73
+export type Emote = EmoteADR74
 
 /** @alpha */
 export namespace Emote {
@@ -23,14 +23,14 @@ export namespace Emote {
       ...baseItemProperties,
       ...standardProperties,
       ...thirdPartyProps,
-      emoteDataADR73: EmoteDataADR73.schema
+      emoteDataADR74: EmoteDataADR74.schema
     },
     additionalProperties: true,
     required: [...requiredBaseItemProps],
     oneOf: [
       {
-        required: ['emoteDataADR73'],
-        // Emotes of ADR73 must be standard XOR thirdparty
+        required: ['emoteDataADR74'],
+        // Emotes of ADR74 must be standard XOR thirdparty
         oneOf: [
           {
             required: ['collectionAddress', 'rarity'],

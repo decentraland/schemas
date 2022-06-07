@@ -4,14 +4,14 @@ import {
   Locale,
   BodyShape,
   Emote,
-  EmoteRepresentationADR73,
+  EmoteRepresentationADR74,
   isStandard,
   isThirdParty
 } from '../../../../src/platform'
 import { testTypeSignature } from '../../../test-utils'
 
-describe('ADR73 Emote tests', () => {
-  const representation: EmoteRepresentationADR73 = {
+describe('Emote tests', () => {
+  const representation: EmoteRepresentationADR74 = {
     bodyShapes: [BodyShape.FEMALE],
     mainFile: 'file1',
     contents: ['file1', 'file2']
@@ -31,7 +31,7 @@ describe('ADR73 Emote tests', () => {
     image: 'image.png'
   }
 
-  const emoteDataADR73 = {
+  const emoteDataADR74 = {
     category: EmoteCategory.LOOP,
     representations: [representation],
     tags: ['tag1']
@@ -75,7 +75,7 @@ describe('ADR73 Emote tests', () => {
         'i18n',
         'image',
         'thumbnail',
-        'emoteDataADR73',
+        'emoteDataADR74',
         'content'
       ],
       entityHash:
@@ -86,12 +86,12 @@ describe('ADR73 Emote tests', () => {
   const standardEmote = {
     ...baseEmote,
     ...standardProps,
-    emoteDataADR73
+    emoteDataADR74
   }
   const thirdPartyEmote = {
     ...baseEmote,
     ...thirdPartyProps,
-    emoteDataADR73
+    emoteDataADR74
   }
 
   testTypeSignature(Emote, standardEmote)
@@ -133,8 +133,8 @@ describe('ADR73 Emote tests', () => {
     expect(
       Emote.validate({
         ...standardEmote,
-        emoteDataADR73: {
-          ...standardEmote.emoteDataADR73,
+        emoteDataADR74: {
+          ...standardEmote.emoteDataADR74,
           representations: []
         }
       })
@@ -146,7 +146,7 @@ describe('ADR73 Emote tests', () => {
       ...baseEmote,
       ...standardProps,
       ...thirdPartyProps,
-      emoteDataADR73
+      emoteDataADR74
     }
     expect(Emote.validate(invalidEmote)).toEqual(false)
     const messages = Emote.validate.errors!.map((e) => e.message)
@@ -162,7 +162,7 @@ describe('ADR73 Emote tests', () => {
     expect(
       Emote.validate({
         ...baseEmote,
-        emoteDataADR73
+        emoteDataADR74
       })
     ).toEqual(false)
   })
@@ -184,7 +184,7 @@ describe('ADR73 Emote tests', () => {
       Emote.validate({
         ...baseEmote,
         ...notCompleteStandardProps,
-        emoteDataADR73
+        emoteDataADR74
       })
     ).toEqual(false)
   })
@@ -208,7 +208,7 @@ describe('ADR73 Emote tests', () => {
           'i18n',
           'image',
           'thumbnail',
-          'emoteDataADR73',
+          'emoteDataADR74',
           'content',
           'notPresentKey'
         ],
@@ -220,7 +220,7 @@ describe('ADR73 Emote tests', () => {
     const notThirdPartyEmote = {
       ...baseEmote,
       ...notValidThirdPartyProps,
-      emoteDataADR73
+      emoteDataADR74
     }
     expect(Emote.validate(notThirdPartyEmote)).toEqual(false)
     expect(isThirdParty(notThirdPartyEmote)).toEqual(false)

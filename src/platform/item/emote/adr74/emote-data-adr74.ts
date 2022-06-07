@@ -4,16 +4,16 @@ import {
   JSONSchema,
   ValidateFunction
 } from '../../../../validation'
-import { EmoteRepresentationADR73 } from './representation-adr73'
+import { EmoteRepresentationADR74 } from './representation-adr74'
 
-export type EmoteDataADR73 = {
+export type EmoteDataADR74 = {
   category: EmoteCategory
-  representations: EmoteRepresentationADR73[]
+  representations: EmoteRepresentationADR74[]
   tags: string[]
 }
 
-export namespace EmoteDataADR73 {
-  export const schema: JSONSchema<EmoteDataADR73> = {
+export namespace EmoteDataADR74 {
+  export const schema: JSONSchema<EmoteDataADR74> = {
     type: 'object',
     properties: {
       tags: {
@@ -25,7 +25,7 @@ export namespace EmoteDataADR73 {
       },
       representations: {
         type: 'array',
-        items: EmoteRepresentationADR73.schema,
+        items: EmoteRepresentationADR74.schema,
         minItems: 1
       },
       category: EmoteCategory.schema
@@ -34,6 +34,6 @@ export namespace EmoteDataADR73 {
     additionalProperties: true
   }
 
-  export const validate: ValidateFunction<EmoteDataADR73> =
+  export const validate: ValidateFunction<EmoteDataADR74> =
     generateValidator(schema)
 }

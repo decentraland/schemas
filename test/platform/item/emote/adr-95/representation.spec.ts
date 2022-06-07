@@ -1,28 +1,28 @@
 import expect from 'expect'
 import {
   BodyShape,
-  EmoteRepresentationADR73
+  EmoteRepresentationADR74
 } from '../../../../../src/platform/item'
 import { testTypeSignature } from '../../../../test-utils'
 
 describe('Emote representation tests', () => {
-  const representation: EmoteRepresentationADR73 = {
+  const representation: EmoteRepresentationADR74 = {
     bodyShapes: [BodyShape.FEMALE],
     mainFile: 'file1',
     contents: ['file1', 'file2']
   }
 
-  testTypeSignature(EmoteRepresentationADR73, representation)
+  testTypeSignature(EmoteRepresentationADR74, representation)
 
   it('static tests must pass', () => {
-    expect(EmoteRepresentationADR73.validate(representation)).toEqual(true)
-    expect(EmoteRepresentationADR73.validate(null)).toEqual(false)
-    expect(EmoteRepresentationADR73.validate({})).toEqual(false)
+    expect(EmoteRepresentationADR74.validate(representation)).toEqual(true)
+    expect(EmoteRepresentationADR74.validate(null)).toEqual(false)
+    expect(EmoteRepresentationADR74.validate({})).toEqual(false)
   })
 
   it('representation without body shape fails', () => {
     expect(
-      EmoteRepresentationADR73.validate({
+      EmoteRepresentationADR74.validate({
         ...representation,
         bodyShapes: []
       })
@@ -31,7 +31,7 @@ describe('Emote representation tests', () => {
 
   it('representation with repeated body shapes fails', () => {
     expect(
-      EmoteRepresentationADR73.validate({
+      EmoteRepresentationADR74.validate({
         ...representation,
         bodyShapes: [BodyShape.FEMALE, BodyShape.FEMALE]
       })
@@ -40,7 +40,7 @@ describe('Emote representation tests', () => {
 
   it('representation without content fails', () => {
     expect(
-      EmoteRepresentationADR73.validate({
+      EmoteRepresentationADR74.validate({
         ...representation,
         contents: []
       })
@@ -49,7 +49,7 @@ describe('Emote representation tests', () => {
 
   it('representation with repeated content fails', () => {
     expect(
-      EmoteRepresentationADR73.validate({
+      EmoteRepresentationADR74.validate({
         ...representation,
         contents: ['file1', 'file1']
       })
@@ -58,7 +58,7 @@ describe('Emote representation tests', () => {
 
   it('main file not in contents fails', () => {
     expect(
-      EmoteRepresentationADR73.validate({
+      EmoteRepresentationADR74.validate({
         ...representation,
         mainFile: 'file1',
         contents: ['file2', 'file3']

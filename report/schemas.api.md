@@ -481,17 +481,17 @@ export type DisplayableDeployment = {
     menuBarIcon?: string;
 };
 
-// Warning: (ae-forgotten-export) The symbol "EmoteADR73" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "EmoteADR74" needs to be exported by the entry point index.d.ts
 //
 // @alpha (undocumented)
-export type Emote = EmoteADR73;
+export type Emote = EmoteADR74;
 
 // @alpha (undocumented)
 export namespace Emote {
     const // (undocumented)
     schema: JSONSchema<Emote>;
     const // (undocumented)
-    validate: ValidateFunction<EmoteADR73>;
+    validate: ValidateFunction<EmoteADR74>;
 }
 
 // Warning: (ae-missing-release-tag) "EmoteCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -513,37 +513,37 @@ export namespace EmoteCategory {
     validate: ValidateFunction<EmoteCategory>;
 }
 
-// Warning: (ae-missing-release-tag) "EmoteDataADR73" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "EmoteDataADR73" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteDataADR74" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteDataADR74" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type EmoteDataADR73 = {
+export type EmoteDataADR74 = {
     category: EmoteCategory;
-    representations: EmoteRepresentationADR73[];
+    representations: EmoteRepresentationADR74[];
     tags: string[];
 };
 
 // @public (undocumented)
-export namespace EmoteDataADR73 {
+export namespace EmoteDataADR74 {
     const // (undocumented)
-    schema: JSONSchema<EmoteDataADR73>;
+    schema: JSONSchema<EmoteDataADR74>;
     const // (undocumented)
-    validate: ValidateFunction<EmoteDataADR73>;
+    validate: ValidateFunction<EmoteDataADR74>;
 }
 
 // @alpha (undocumented)
-export type EmoteRepresentationADR73 = {
+export type EmoteRepresentationADR74 = {
     bodyShapes: BodyShape_2[];
     mainFile: string;
     contents: string[];
 };
 
 // @alpha (undocumented)
-export namespace EmoteRepresentationADR73 {
+export namespace EmoteRepresentationADR74 {
     const // (undocumented)
-    schema: JSONSchema<EmoteRepresentationADR73>;
+    schema: JSONSchema<EmoteRepresentationADR74>;
     const // (undocumented)
-    validate: ValidateFunction<EmoteRepresentationADR73>;
+    validate: ValidateFunction<EmoteRepresentationADR74>;
 }
 
 // @public
@@ -1837,8 +1837,8 @@ export namespace World {
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/platform/item/emote/adr73/emote-data-adr73.ts:11:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR73" which is marked as @alpha
-// src/platform/item/emote/adr73/representation-adr73.ts:10:3 - (ae-forgotten-export) The symbol "BodyShape" needs to be exported by the entry point index.d.ts
+// src/platform/item/emote/adr74/emote-data-adr74.ts:11:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
+// src/platform/item/emote/adr74/representation-adr74.ts:10:3 - (ae-forgotten-export) The symbol "BodyShape" needs to be exported by the entry point index.d.ts
 // src/platform/item/third-party-props.ts:10:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
 // src/platform/scene/spawn-point.ts:10:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:10:3 - (ae-forgotten-export) The symbol "MultiPosition" needs to be exported by the entry point index.d.ts
