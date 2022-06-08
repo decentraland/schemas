@@ -35,19 +35,23 @@ export namespace Emote {
           {
             required: ['collectionAddress', 'rarity'],
             prohibited: ['merkleProof', 'content'],
-            errorMessage:
-              'for standard emotes "merkleProof" and "content" are not allowed'
+            errorMessage: 'standard properties conditions are not met'
           },
           {
             required: ['merkleProof', 'content'],
             _isThirdParty: true,
             prohibited: ['collectionAddress', 'rarity'],
-            errorMessage:
-              'for third party emotes "collectionAddress" and "rarity" are not allowed'
+            errorMessage: 'thirdparty properties conditions are not met'
           }
-        ]
+        ],
+        errorMessage: {
+          oneOf: 'emote should have either standard or thirdparty properties'
+        }
       }
-    ]
+    ],
+    errorMessage: {
+      oneOf: 'emote should have "emoteDataADR74" and match its schema'
+    }
   }
 
   const _isThirdPartyKeywordDef = {

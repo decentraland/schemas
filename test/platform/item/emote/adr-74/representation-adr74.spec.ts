@@ -3,7 +3,10 @@ import {
   BodyShape,
   EmoteRepresentationADR74
 } from '../../../../../src/platform/item'
-import { testTypeSignature } from '../../../../test-utils'
+import {
+  expectValidationFailureWithErrors,
+  testTypeSignature
+} from '../../../../test-utils'
 
 describe('Emote representation tests', () => {
   const representation: EmoteRepresentationADR74 = {
@@ -21,48 +24,61 @@ describe('Emote representation tests', () => {
   })
 
   it('representation without body shape fails', () => {
-    expect(
-      EmoteRepresentationADR74.validate({
+    expectValidationFailureWithErrors(
+      EmoteRepresentationADR74.validate,
+      {
         ...representation,
         bodyShapes: []
-      })
-    ).toEqual(false)
+      },
+      ['should NOT have fewer than 1 items']
+    )
   })
 
   it('representation with repeated body shapes fails', () => {
-    expect(
-      EmoteRepresentationADR74.validate({
+    expectValidationFailureWithErrors(
+      EmoteRepresentationADR74.validate,
+      {
         ...representation,
         bodyShapes: [BodyShape.FEMALE, BodyShape.FEMALE]
-      })
-    ).toEqual(false)
+      },
+      ['should NOT have duplicate items (items ## 1 and 0 are identical)']
+    )
   })
 
   it('representation without content fails', () => {
-    expect(
-      EmoteRepresentationADR74.validate({
+    expectValidationFailureWithErrors(
+      EmoteRepresentationADR74.validate,
+      {
         ...representation,
         contents: []
-      })
-    ).toEqual(false)
+      },
+      [
+        'should NOT have fewer than 1 items',
+        'contents should contain mainFile: "file1"'
+      ]
+    )
   })
 
   it('representation with repeated content fails', () => {
-    expect(
-      EmoteRepresentationADR74.validate({
+    expectValidationFailureWithErrors(
+      EmoteRepresentationADR74.validate,
+      {
         ...representation,
         contents: ['file1', 'file1']
-      })
-    ).toEqual(false)
+      },
+      ['should NOT have duplicate items (items ## 1 and 0 are identical)']
+    )
   })
 
   it('main file not in contents fails', () => {
-    expect(
-      EmoteRepresentationADR74.validate({
+    expectValidationFailureWithErrors(
+      EmoteRepresentationADR74.validate,
+      {
         ...representation,
         mainFile: 'file1',
         contents: ['file2', 'file3']
-      })
-    ).toEqual(false)
+      },
+      ['contents should contain mainFile: "file1"']
+    )
   })
 })

@@ -40,7 +40,7 @@ export function generateValidator<T>(
 ): ValidateFunction<T> {
   const ajv = new Ajv({ $data: true, allErrors: true })
   ajv_keywords(ajv)
-  ajv_errors(ajv)
+  ajv_errors(ajv, { singleError: true })
   keywordDefinitions?.forEach((kw) => ajv.addKeyword(kw))
 
   return ajv.compile<T>(schema)

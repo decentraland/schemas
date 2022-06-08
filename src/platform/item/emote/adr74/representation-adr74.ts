@@ -33,17 +33,18 @@ export namespace EmoteRepresentationADR74 {
           type: 'string'
         },
         minItems: 1,
-        uniqueItems: true
+        uniqueItems: true,
+        contains: {
+          const: { $data: '2/mainFile' }
+        },
+        errorMessage: {
+          contains: 'contents should contain mainFile: ${1/mainFile}'
+        }
       }
     },
     required: ['bodyShapes', 'mainFile', 'contents']
   }
 
-  const schemaValidator: ValidateFunction<EmoteRepresentationADR74> =
+  export const validate: ValidateFunction<EmoteRepresentationADR74> =
     generateValidator(schema)
-  export const validate: ValidateFunction<EmoteRepresentationADR74> = (
-    representation: any
-  ): representation is EmoteRepresentationADR74 =>
-    schemaValidator(representation) &&
-    representation.contents.includes(representation.mainFile)
 }

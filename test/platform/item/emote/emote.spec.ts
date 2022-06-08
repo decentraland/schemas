@@ -8,7 +8,10 @@ import {
   isStandard,
   isThirdParty
 } from '../../../../src/platform'
-import { testTypeSignature } from '../../../test-utils'
+import {
+  expectValidationFailureWithErrors,
+  testTypeSignature
+} from '../../../test-utils'
 
 describe('Emote tests', () => {
   const representation: EmoteRepresentationADR74 = {
@@ -105,95 +108,109 @@ describe('Emote tests', () => {
   })
 
   it('static tests must return the correct errors when missing properties', () => {
-    const validate = Emote.validate
-    expect(validate({})).toEqual(false)
-    const messages = validate.errors!.map((e) => e.message)
-    expect(messages).toContain("should have required property 'id'")
-    expect(messages).toContain("should have required property 'description'")
-    expect(messages).toContain("should have required property 'name'")
+    expectValidationFailureWithErrors(Emote.validate, {}, [
+      "should have required property 'id'",
+      "should have required property 'description'",
+      "should have required property 'name'",
+      "should have required property 'i18n'",
+      "should have required property 'thumbnail'",
+      "should have required property 'image'",
+      "should have required property 'emoteDataADR74'"
+    ])
   })
 
   it('emote with two i18n with same locale fails', () => {
-    expect(
-      Emote.validate({
+    expectValidationFailureWithErrors(
+      Emote.validate,
+      {
         ...standardEmote,
         i18n: [
           { code: Locale.ES, text: 'texto' },
           { code: Locale.ES, text: 'otro texto' }
         ]
-      })
-    ).toEqual(false)
-    expect(Emote.validate.errors!).toHaveLength(1)
-    expect(Emote.validate.errors![0].message).toEqual(
-      '"i18n" array should not have duplicates for "code"'
+      },
+      ['"i18n" array should not have duplicates for "code"']
     )
   })
 
   it('emote without representation fails', () => {
-    expect(
-      Emote.validate({
+    expectValidationFailureWithErrors(
+      Emote.validate,
+      {
         ...standardEmote,
         emoteDataADR74: {
           ...standardEmote.emoteDataADR74,
           representations: []
         }
-      })
-    ).toEqual(false)
+      },
+      ['should NOT have fewer than 1 items']
+    )
   })
 
   it('emote with merkle proof and standard fields fails', () => {
-    const invalidEmote = {
-      ...baseEmote,
-      ...standardProps,
-      ...thirdPartyProps,
-      emoteDataADR74
-    }
-    expect(Emote.validate(invalidEmote)).toEqual(false)
-    const messages = Emote.validate.errors!.map((e) => e.message)
-    expect(messages).toContain(
-      'for standard emotes "merkleProof" and "content" are not allowed'
-    )
-    expect(messages).toContain(
-      'for third party emotes "collectionAddress" and "rarity" are not allowed'
+    expectValidationFailureWithErrors(
+      Emote.validate,
+      {
+        ...baseEmote,
+        ...standardProps,
+        ...thirdPartyProps,
+        emoteDataADR74
+      },
+      [
+        'standard properties conditions are not met',
+        'thirdparty properties conditions are not met',
+        'emote should have either standard or thirdparty properties',
+        'emote should have "emoteDataADR74" and match its schema'
+      ]
     )
   })
 
   it('emote should be standard and/or thirdparty', () => {
-    expect(
-      Emote.validate({
+    expectValidationFailureWithErrors(
+      Emote.validate,
+      {
         ...baseEmote,
         emoteDataADR74
-      })
-    ).toEqual(false)
+      },
+      [
+        'standard properties conditions are not met',
+        'thirdparty properties conditions are not met',
+        'emote should have either standard or thirdparty properties',
+        'emote should have "emoteDataADR74" and match its schema'
+      ]
+    )
   })
 
   it('emote with standard props is standard', () => {
-    expect(isStandard(standardEmote)).toEqual(true)
+    expect(isStandard(standardEmote)).toBeTruthy()
   })
 
   it('emote with thirdparty props is thirdParty', () => {
-    expect(isThirdParty(thirdPartyEmote)).toEqual(true)
+    expect(isThirdParty(thirdPartyEmote)).toBeTruthy()
   })
 
   it('group of properties must be complete, not partial', () => {
-    // misses 'rarity'
-    const notCompleteStandardProps = {
-      collectionAddress: '0x...'
-    }
-    expect(
-      Emote.validate({
+    // misses 'rarity' to complete standard properties
+    expectValidationFailureWithErrors(
+      Emote.validate,
+      {
         ...baseEmote,
-        ...notCompleteStandardProps,
+        collectionAddress: '0x...',
         emoteDataADR74
-      })
-    ).toEqual(false)
+      },
+      [
+        'standard properties conditions are not met',
+        'thirdparty properties conditions are not met',
+        'emote should have either standard or thirdparty properties',
+        'emote should have "emoteDataADR74" and match its schema'
+      ]
+    )
   })
 
   it('thirdparty emote with not all hasing keys present fails', () => {
     const notValidThirdPartyProps = {
       content: {
-        'thumbnail.png': 'someHash',
-        'iamge.png': 'someOtherHash'
+        'thumbnail.png': 'someHash'
       },
       merkleProof: {
         index: 61575,
@@ -216,13 +233,17 @@ describe('Emote tests', () => {
           '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
       }
     }
-
     const notThirdPartyEmote = {
       ...baseEmote,
       ...notValidThirdPartyProps,
       emoteDataADR74
     }
-    expect(Emote.validate(notThirdPartyEmote)).toEqual(false)
+    expectValidationFailureWithErrors(Emote.validate, notThirdPartyEmote, [
+      'standard properties conditions are not met',
+      'thirdparty properties conditions are not met',
+      'emote should have either standard or thirdparty properties',
+      'emote should have "emoteDataADR74" and match its schema'
+    ])
     expect(isThirdParty(notThirdPartyEmote)).toEqual(false)
   })
 })

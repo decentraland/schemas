@@ -8,7 +8,10 @@ import {
 } from '../../../../src/platform'
 import { isStandard } from '../../../../src/platform/item/standard-props'
 import { isThirdParty } from '../../../../src/platform/item/third-party-props'
-import { testTypeSignature } from '../../../test-utils'
+import {
+  expectValidationFailureWithErrors,
+  testTypeSignature
+} from '../../../test-utils'
 
 describe('Representation tests', () => {
   const representation: WearableRepresentation = {
@@ -99,80 +102,90 @@ describe('Representation tests', () => {
   })
 
   it('static tests must return the correct errors when missing properties', () => {
-    const validate = Wearable.validate
-    expect(validate({})).toEqual(false)
-    const messages = validate.errors!.map((e) => e.message)
-    expect(messages).toContain("should have required property 'id'")
-    expect(messages).toContain("should have required property 'description'")
-    expect(messages).toContain("should have required property 'name'")
+    expectValidationFailureWithErrors(Wearable.validate, {}, [
+      "should have required property 'id'",
+      "should have required property 'description'",
+      "should have required property 'name'",
+      "should have required property 'i18n'",
+      "should have required property 'thumbnail'",
+      "should have required property 'image'"
+    ])
   })
 
   it('wearable with two i18n with same locale fails', () => {
-    expect(
-      Wearable.validate({
+    expectValidationFailureWithErrors(
+      Wearable.validate,
+      {
         ...wearable,
         i18n: [
           { code: Locale.ES, text: 'texto' },
           { code: Locale.ES, text: 'otro texto' }
         ]
-      })
-    ).toEqual(false)
-    expect(Wearable.validate.errors!).toHaveLength(1)
-    expect(Wearable.validate.errors![0].message).toEqual(
-      '"i18n" array should not have duplicates for "code"'
+      },
+      ['"i18n" array should not have duplicates for "code"']
     )
   })
 
   it('wearable without representation fails', () => {
-    expect(
-      Wearable.validate({
+    expectValidationFailureWithErrors(
+      Wearable.validate,
+      {
         ...wearable,
         data: {
           ...wearable.data,
           representations: []
         }
-      })
-    ).toEqual(false)
+      },
+      ['should NOT have fewer than 1 items']
+    )
   })
 
   it('wearable with merkle proof and standard fields fails', () => {
-    expect(
-      Wearable.validate({ ...baseWearable, ...standard, ...thirdParty })
-    ).toEqual(false)
-    const messages = Wearable.validate.errors!.map((e) => e.message)
-    expect(messages).toContain(
-      'for standard wearables "merkleProof" and "content" are not allowed'
-    )
-    expect(messages).toContain(
-      'for third party wearables "collectionAddress" and "rarity" are not allowed'
+    expectValidationFailureWithErrors(
+      Wearable.validate,
+      { ...baseWearable, ...standard, ...thirdParty },
+      [
+        'for standard wearables "merkleProof" and "content" are not allowed',
+        'for third party wearables "collectionAddress" and "rarity" are not allowed'
+      ]
     )
   })
 
   it('wearable should be standard and/or thirdparty', () => {
-    expect(Wearable.validate(baseWearable)).toEqual(false)
+    expectValidationFailureWithErrors(Wearable.validate, baseWearable, [
+      'for standard wearables "merkleProof" and "content" are not allowed',
+      'for third party wearables "collectionAddress" and "rarity" are not allowed'
+    ])
   })
 
   it('wearable cannot be both standard and thirdparty', () => {
-    expect(
-      Wearable.validate({ ...baseWearable, ...standard, ...thirdParty })
-    ).toEqual(false)
+    expectValidationFailureWithErrors(
+      Wearable.validate,
+      { ...baseWearable, ...standard, ...thirdParty },
+      [
+        'for standard wearables "merkleProof" and "content" are not allowed',
+        'for third party wearables "collectionAddress" and "rarity" are not allowed'
+      ]
+    )
   })
 
   it('wearable with standard props is standard', () => {
-    expect(isStandard(wearable)).toEqual(true)
+    expect(isStandard(wearable)).toBeTruthy()
   })
 
   it('wearable with thirdparty props is thirdParty', () => {
-    expect(isThirdParty(thirdPartyWearable)).toEqual(true)
+    expect(isThirdParty(thirdPartyWearable)).toBeTruthy()
   })
 
   it('group of properties must be complete, not partial', () => {
-    // misses 'rarity'
-    const notCompleteStandardProps = {
-      collectionAddress: '0x...'
-    }
-    expect(
-      Wearable.validate({ ...baseWearable, ...notCompleteStandardProps })
-    ).toEqual(false)
+    // misses 'rarity' to complete standard properties
+    expectValidationFailureWithErrors(
+      Wearable.validate,
+      { ...baseWearable, collectionAddress: '0x...' },
+      [
+        'for standard wearables "merkleProof" and "content" are not allowed',
+        'for third party wearables "collectionAddress" and "rarity" are not allowed'
+      ]
+    )
   })
 })

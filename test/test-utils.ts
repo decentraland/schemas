@@ -1,5 +1,5 @@
 import expect from 'expect'
-import { AbstractTypedSchema, validateType } from '../src'
+import { AbstractTypedSchema, ValidateFunction, validateType } from '../src'
 
 export function testTypeSignature<T>(
   theType: AbstractTypedSchema<T>,
@@ -27,4 +27,19 @@ export function testTypeSignature<T>(
       ).toEqual(false)
     })
   })
+}
+
+export function expectValidationFailureWithErrors<T>(
+  validateFn: ValidateFunction<T>,
+  dataToValidate: any,
+  expectedErrorMessages: string[]
+) {
+  const validationResult = validateFn(dataToValidate)
+  expect(validationResult).toBe(false)
+  const messages = validateFn.errors
+    ? validateFn.errors.map((e) => e.message)
+    : []
+  for (const e of expectedErrorMessages) {
+    expect(messages).toContain(e)
+  }
 }
