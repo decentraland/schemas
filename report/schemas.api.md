@@ -568,6 +568,8 @@ export namespace Entity {
 // @public
 export enum EntityType {
     // (undocumented)
+    EMOTE = "emote",
+    // (undocumented)
     PROFILE = "profile",
     // (undocumented)
     SCENE = "scene",
