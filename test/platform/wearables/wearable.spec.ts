@@ -102,7 +102,7 @@ describe('Representation tests', () => {
     expect(validate({})).toEqual(false)
     expect(validate.errors).toHaveLength(1)
     expect(validate.errors![0].message).toEqual(
-      "should have required property 'id'"
+      "must have required property 'id'"
     )
   })
 
@@ -111,7 +111,7 @@ describe('Representation tests', () => {
     expect(validate({ id: 'the-id' })).toEqual(false)
     expect(validate.errors).toHaveLength(1)
     expect(validate.errors![0].message).toEqual(
-      "should have required property 'description'"
+      "must have required property 'description'"
     )
   })
 
@@ -122,7 +122,7 @@ describe('Representation tests', () => {
     )
     expect(validate.errors).toHaveLength(1)
     expect(validate.errors![0].message).toEqual(
-      "should have required property 'name'"
+      "must have required property 'name'"
     )
   })
 
