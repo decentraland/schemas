@@ -1,4 +1,4 @@
-import Ajv, { ErrorObject, JSONSchemaType } from 'ajv'
+import Ajv, { ErrorObject, JSONSchemaType, KeywordDefinition } from 'ajv'
 import ajv_keywords from 'ajv-keywords'
 import ajv_errors from 'ajv-errors'
 
@@ -35,11 +35,13 @@ export type AbstractTypedSchema<T> = {
  * @public
  */
 export function generateValidator<T>(
-  schema: JSONSchema<T>
+  schema: JSONSchema<T>,
+  keywordDefinitions?: KeywordDefinition[]
 ): ValidateFunction<T> {
-  const ajv = new Ajv({ allErrors: true })
+  const ajv = new Ajv({ $data: true, allErrors: true })
   ajv_keywords(ajv)
-  ajv_errors(ajv)
+  ajv_errors(ajv, { singleError: true })
+  keywordDefinitions?.forEach((kw) => ajv.addKeyword(kw))
 
   return ajv.compile<T>(schema)
 }

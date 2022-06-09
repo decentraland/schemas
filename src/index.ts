@@ -15,7 +15,6 @@ export {
   CollectionSortBy
 } from './dapps/collection'
 export { Contract, ContractFilters, ContractSortBy } from './dapps/contract'
-export { EmoteCategory } from './dapps/emote-category'
 export { Item, ItemFilters, ItemSortBy } from './dapps/item'
 export { ListingStatus } from './dapps/listing-status'
 export { MetaTransaction } from './dapps/meta-transactions'

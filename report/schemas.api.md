@@ -7,6 +7,7 @@
 import Ajv from 'ajv';
 import { ErrorObject } from 'ajv';
 import { JSONSchemaType } from 'ajv';
+import { KeywordDefinition } from 'ajv';
 
 // @public
 export type AbstractTypedSchema<T> = {
@@ -480,6 +481,19 @@ export type DisplayableDeployment = {
     menuBarIcon?: string;
 };
 
+// Warning: (ae-forgotten-export) The symbol "EmoteADR74" needs to be exported by the entry point index.d.ts
+//
+// @alpha (undocumented)
+export type Emote = EmoteADR74;
+
+// @alpha (undocumented)
+export namespace Emote {
+    const // (undocumented)
+    schema: JSONSchema<Emote>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteADR74>;
+}
+
 // Warning: (ae-missing-release-tag) "EmoteCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "EmoteCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -497,6 +511,39 @@ export namespace EmoteCategory {
     schema: JSONSchema<EmoteCategory>;
     const // (undocumented)
     validate: ValidateFunction<EmoteCategory>;
+}
+
+// Warning: (ae-missing-release-tag) "EmoteDataADR74" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteDataADR74" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteDataADR74 = {
+    category: EmoteCategory;
+    representations: EmoteRepresentationADR74[];
+    tags: string[];
+};
+
+// @public (undocumented)
+export namespace EmoteDataADR74 {
+    const // (undocumented)
+    schema: JSONSchema<EmoteDataADR74>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteDataADR74>;
+}
+
+// @alpha (undocumented)
+export type EmoteRepresentationADR74 = {
+    bodyShapes: BodyShape_2[];
+    mainFile: string;
+    contents: string[];
+};
+
+// @alpha (undocumented)
+export namespace EmoteRepresentationADR74 {
+    const // (undocumented)
+    schema: JSONSchema<EmoteRepresentationADR74>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteRepresentationADR74>;
 }
 
 // @public
@@ -520,6 +567,8 @@ export namespace Entity {
 
 // @public
 export enum EntityType {
+    // (undocumented)
+    EMOTE = "emote",
     // (undocumented)
     PROFILE = "profile",
     // (undocumented)
@@ -553,7 +602,7 @@ export namespace FeatureToggles {
 }
 
 // @public
-export function generateValidator<T>(schema: JSONSchema<T>): ValidateFunction<T>;
+export function generateValidator<T>(schema: JSONSchema<T>, keywordDefinitions?: KeywordDefinition[]): ValidateFunction<T>;
 
 // @alpha
 export function getChainId(chainName: ChainName): ChainId | null;
@@ -605,6 +654,17 @@ export namespace IPFSv2 {
 
 // @alpha
 export function isInsideWorldLimits(x: number, y: number): boolean;
+
+// Warning: (ae-forgotten-export) The symbol "BaseItem" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "isStandard" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function isStandard<T extends BaseItem>(item: T): item is T & StandardProps;
+
+// Warning: (ae-missing-release-tag) "isThirdParty" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function isThirdParty<T extends BaseItem>(item: T): item is T & ThirdPartyProps;
 
 // Warning: (ae-missing-release-tag) "Item" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Item" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1058,7 +1118,7 @@ export namespace PreviewCamera {
 export type PreviewConfig = {
     wearable?: WearableDefinition;
     wearables: WearableDefinition[];
-    bodyShape: WearableBodyShape;
+    bodyShape: BodyShape_2;
     skin: string;
     hair: string;
     eyes: string;
@@ -1173,7 +1233,7 @@ export type PreviewOptions = {
     tokenId?: string | null;
     itemId?: string | null;
     profile?: string | null;
-    bodyShape?: WearableBodyShape | null;
+    bodyShape?: BodyShape_2 | null;
     skin?: string | null;
     hair?: string | null;
     eyes?: string | null;
@@ -1532,8 +1592,13 @@ export namespace SpawnPoint {
     validate: ValidateFunction<SpawnPoint>;
 }
 
-// @alpha (undocumented)
-export type StandardWearable = Omit<WithRequired<Wearable, 'collectionAddress' | 'rarity'>, 'merkleProof' | 'content'>;
+// Warning: (ae-missing-release-tag) "StandardProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StandardProps = {
+    collectionAddress: string;
+    rarity: Rarity;
+};
 
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1562,11 +1627,13 @@ export namespace Store {
     validate: ValidateFunction<Store>;
 }
 
-// Warning: (ae-incompatible-release-tags) The symbol "ThirdPartyWearable" is marked as @public, but its signature references "Wearable" which is marked as @alpha
-// Warning: (ae-missing-release-tag) "ThirdPartyWearable" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ThirdPartyProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type ThirdPartyWearable = Omit<WithRequired<Wearable, 'merkleProof'>, 'rarity' | 'collectionAddress'>;
+export type ThirdPartyProps = {
+    merkleProof: MerkleProof;
+    content: Record<string, string>;
+};
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
@@ -1610,10 +1677,7 @@ export type ValidWorldRange = {
 };
 
 // @alpha (undocumented)
-export type Wearable = DisplayableDeployment & {
-    id: string;
-    name: string;
-    description: string;
+export type Wearable = BaseItem & {
     data: {
         replaces: WearableCategory[];
         hides: WearableCategory[];
@@ -1621,37 +1685,13 @@ export type Wearable = DisplayableDeployment & {
         representations: WearableRepresentation[];
         category: WearableCategory;
     };
-    i18n: I18N[];
-    thumbnail: string;
-    image: string;
-    rarity?: Rarity;
-    collectionAddress?: string;
-    metrics?: Metrics;
-    content?: Record<string, string>;
-    merkleProof?: MerkleProof;
-};
+} & (StandardProps | ThirdPartyProps);
 
 // @alpha (undocumented)
 export namespace Wearable {
     const // (undocumented)
     schema: JSONSchema<Wearable>;
     const validate: ValidateFunction<Wearable>;
-}
-
-// @alpha (undocumented)
-export enum WearableBodyShape {
-    // (undocumented)
-    FEMALE = "urn:decentraland:off-chain:base-avatars:BaseFemale",
-    // (undocumented)
-    MALE = "urn:decentraland:off-chain:base-avatars:BaseMale"
-}
-
-// @alpha (undocumented)
-export namespace WearableBodyShape {
-    const // (undocumented)
-    schema: JSONSchema<WearableBodyShape>;
-    const // (undocumented)
-    validate: ValidateFunction<WearableBodyShape>;
 }
 
 // Warning: (ae-missing-release-tag) "WearableCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1739,7 +1779,7 @@ export type WearableId = string;
 
 // @alpha (undocumented)
 export type WearableRepresentation = {
-    bodyShapes: WearableBodyShape[];
+    bodyShapes: BodyShape_2[];
     mainFile: string;
     contents: string[];
     overrideHides: WearableCategory[];
@@ -1753,13 +1793,6 @@ export namespace WearableRepresentation {
     const // (undocumented)
     validate: ValidateFunction<WearableRepresentation>;
 }
-
-// Warning: (ae-missing-release-tag) "WithRequired" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type WithRequired<T, K extends keyof T> = T & {
-    [P in K]-?: T[P];
-};
 
 // @alpha
 export type World = {
@@ -1801,12 +1834,14 @@ export namespace World {
 // src/dapps/order.ts:32:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:8:3 - (ae-incompatible-release-tags) The symbol "wearable" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:9:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
-// src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "WearableBodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:15:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
 // src/dapps/preview/preview-message.ts:32:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/platform/item/emote/adr74/emote-data-adr74.ts:11:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
+// src/platform/item/emote/adr74/representation-adr74.ts:10:3 - (ae-forgotten-export) The symbol "BodyShape" needs to be exported by the entry point index.d.ts
+// src/platform/item/third-party-props.ts:10:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
 // src/platform/scene/spawn-point.ts:10:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:10:3 - (ae-forgotten-export) The symbol "MultiPosition" needs to be exported by the entry point index.d.ts
 // src/sdk/project/asset-json.ts:24:3 - (ae-forgotten-export) The symbol "AssetWearableGender" needs to be exported by the entry point index.d.ts

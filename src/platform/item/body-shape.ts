@@ -5,18 +5,17 @@ import {
 } from '../../validation'
 
 /** @alpha */
-export enum WearableBodyShape {
+export enum BodyShape {
   MALE = 'urn:decentraland:off-chain:base-avatars:BaseMale',
   FEMALE = 'urn:decentraland:off-chain:base-avatars:BaseFemale'
 }
 
 /** @alpha */
-export namespace WearableBodyShape {
-  export const schema: JSONSchema<WearableBodyShape> = {
+export namespace BodyShape {
+  export const schema: JSONSchema<BodyShape> = {
     type: 'string',
-    enum: Object.values(WearableBodyShape)
+    enum: Object.values(BodyShape)
   }
 
-  export const validate: ValidateFunction<WearableBodyShape> =
-    generateValidator(schema)
+  export const validate: ValidateFunction<BodyShape> = generateValidator(schema)
 }
