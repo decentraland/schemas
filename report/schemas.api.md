@@ -69,6 +69,36 @@ type Actions = typeof SCENE_UPDATE | typeof UPDATE;
 
 export { Ajv }
 
+// Warning: (ae-missing-release-tag) "AnalyticsDayData" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type AnalyticsDayData = {
+    id: string;
+    date: number;
+    sales: number;
+    volume: string;
+    creatorsEarnings: string;
+    daoEarnings: string;
+};
+
+// Warning: (ae-missing-release-tag) "AnalyticsDayDataFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type AnalyticsDayDataFilters = {
+    from?: number;
+    network?: Network;
+};
+
+// Warning: (ae-missing-release-tag) "AnalyticsDayDataSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum AnalyticsDayDataSortBy {
+    // (undocumented)
+    DATE = "date",
+    // (undocumented)
+    MOST_SALES = "most_sales"
+}
+
 // @alpha (undocumented)
 type AssetJson = {
     id: string;
@@ -121,9 +151,9 @@ export enum AuthLinkType {
     'ECDSA_EIP_1654_EPHEMERAL' = "ECDSA_EIP_1654_EPHEMERAL",
     'ECDSA_EIP_1654_SIGNED_ENTITY' = "ECDSA_EIP_1654_SIGNED_ENTITY",
     // (undocumented)
-    'ECDSA_PERSONAL_EPHEMERAL' = "ECDSA_PERSONAL_EPHEMERAL",
+    'ECDSA_PERSONAL_EPHEMERAL' = "ECDSA_EPHEMERAL",
     // (undocumented)
-    'ECDSA_PERSONAL_SIGNED_ENTITY' = "ECDSA_PERSONAL_SIGNED_ENTITY",
+    'ECDSA_PERSONAL_SIGNED_ENTITY' = "ECDSA_SIGNED_ENTITY",
     // (undocumented)
     'SIGNER' = "SIGNER"
 }
@@ -378,6 +408,20 @@ export namespace Color3 {
     validate: ValidateFunction<Color3>;
 }
 
+// @public
+export type ContentMapping = {
+    file: string;
+    hash: IPFSv1 | IPFSv2;
+};
+
+// @public (undocumented)
+export namespace ContentMapping {
+    const // (undocumented)
+    schema: JSONSchema<ContentMapping>;
+    const // (undocumented)
+    validate: ValidateFunction<ContentMapping>;
+}
+
 // Warning: (ae-missing-release-tag) "Contract" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Contract" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -455,6 +499,37 @@ export namespace EmoteCategory {
     validate: ValidateFunction<EmoteCategory>;
 }
 
+// @public
+export type Entity = {
+    version: string;
+    id: IPFSv1 | IPFSv2;
+    type: EntityType;
+    pointers: string[];
+    timestamp: number;
+    content: ContentMapping[];
+    metadata?: any;
+};
+
+// @public (undocumented)
+export namespace Entity {
+    const // (undocumented)
+    schema: JSONSchema<Entity>;
+    const // (undocumented)
+    validate: ValidateFunction<Entity>;
+}
+
+// @public
+export enum EntityType {
+    // (undocumented)
+    PROFILE = "profile",
+    // (undocumented)
+    SCENE = "scene",
+    // (undocumented)
+    STORE = "store",
+    // (undocumented)
+    WEARABLE = "wearable"
+}
+
 // @alpha
 export type EthAddress = string;
 
@@ -506,10 +581,21 @@ export namespace I18N {
     validate: ValidateFunction<I18N>;
 }
 
-// @alpha
+// @public (undocumented)
+export type IPFSv1 = string;
+
+// @public
+export namespace IPFSv1 {
+    const // (undocumented)
+    schema: JSONSchema<IPFSv1>;
+    const // (undocumented)
+    validate: ValidateFunction<IPFSv1>;
+}
+
+// @public
 export type IPFSv2 = string;
 
-// @alpha
+// @public
 export namespace IPFSv2 {
     const // (undocumented)
     schema: JSONSchema<IPFSv2>;
@@ -1691,6 +1777,7 @@ export namespace World {
 // Warnings were encountered during analysis:
 //
 // src/dapps/account.ts:28:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/analyticsDayData.ts:14:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/bid.ts:21:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/bid.ts:22:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/bid.ts:41:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha

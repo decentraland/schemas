@@ -94,7 +94,9 @@ export namespace Wearable {
       i18n: {
         type: 'array',
         items: I18N.schema,
-        minItems: 1
+        minItems: 1,
+        uniqueItemProperties: ['code'],
+        errorMessage: '${0#} array should not have duplicates for "code"'
       },
       data: {
         type: 'object',
@@ -153,10 +155,22 @@ export namespace Wearable {
       'thumbnail',
       'image',
       'i18n'
+    ],
+    oneOf: [
+      {
+        required: ['collectionAddress', 'rarity'],
+        prohibited: ['merkleProof', 'content'],
+        errorMessage:
+          'for standard wearables "merkleProof" and "content" are not allowed'
+      },
+      {
+        required: ['merkleProof', 'content'],
+        prohibited: ['collectionAddress', 'rarity'],
+        errorMessage:
+          'for third party wearables "collectionAddress" and "rarity" are not allowed'
+      }
     ]
   }
-
-  const schemaValidator: ValidateFunction<Wearable> = generateValidator(schema)
 
   /**
    * Validates that the wearable metadata complies with the standard or third party wearable, and doesn't have repeated locales.
@@ -166,28 +180,7 @@ export namespace Wearable {
    *    - rarity
    *  Third Party Wearables should contain:
    *    - merkleProof
+   *    - content
    */
-
-  export const validate: ValidateFunction<Wearable> = (
-    wearable: any
-  ): wearable is Wearable => {
-    const validationResult =
-      schemaValidator(wearable) &&
-      validateDuplicatedLocales(wearable.i18n) &&
-      XOR(
-        validateStandardWearable(wearable.rarity, wearable.collectionAddress),
-        validateThirdParty(wearable)
-      )
-    validate.errors = schemaValidator.errors
-    return validationResult
-  }
-
-  const XOR = (b1: boolean, b2: boolean) => (b1 && !b2) || (b2 && !b1)
-
-  // Returns true only if there are no entries with the same locale
-  const validateDuplicatedLocales = (i18ns: I18N[]) =>
-    i18ns.every(
-      ({ code }, index) =>
-        i18ns.findIndex((i18n) => i18n.code === code) === index
-    )
+  export const validate: ValidateFunction<Wearable> = generateValidator(schema)
 }
