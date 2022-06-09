@@ -30,7 +30,7 @@ describe('Emote representation tests', () => {
         ...representation,
         bodyShapes: []
       },
-      ['should NOT have fewer than 1 items']
+      ['must NOT have fewer than 1 items']
     )
   })
 
@@ -41,7 +41,7 @@ describe('Emote representation tests', () => {
         ...representation,
         bodyShapes: [BodyShape.FEMALE, BodyShape.FEMALE]
       },
-      ['should NOT have duplicate items (items ## 1 and 0 are identical)']
+      ['must NOT have duplicate items (items ## 1 and 0 are identical)']
     )
   })
 
@@ -53,7 +53,7 @@ describe('Emote representation tests', () => {
         contents: []
       },
       [
-        'should NOT have fewer than 1 items',
+        'must NOT have fewer than 1 items',
         'contents should contain mainFile: "file1"'
       ]
     )
@@ -66,7 +66,7 @@ describe('Emote representation tests', () => {
         ...representation,
         contents: ['file1', 'file1']
       },
-      ['should NOT have duplicate items (items ## 1 and 0 are identical)']
+      ['must NOT have duplicate items (items ## 1 and 0 are identical)']
     )
   })
 

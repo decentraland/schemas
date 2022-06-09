@@ -103,12 +103,12 @@ describe('Representation tests', () => {
 
   it('static tests must return the correct errors when missing properties', () => {
     expectValidationFailureWithErrors(Wearable.validate, {}, [
-      "should have required property 'id'",
-      "should have required property 'description'",
-      "should have required property 'name'",
-      "should have required property 'i18n'",
-      "should have required property 'thumbnail'",
-      "should have required property 'image'"
+      "must have required property 'id'",
+      "must have required property 'description'",
+      "must have required property 'name'",
+      "must have required property 'i18n'",
+      "must have required property 'thumbnail'",
+      "must have required property 'image'"
     ])
   })
 
@@ -136,7 +136,7 @@ describe('Representation tests', () => {
           representations: []
         }
       },
-      ['should NOT have fewer than 1 items']
+      ['must NOT have fewer than 1 items']
     )
   })
 
