@@ -1,4 +1,8 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import {
+  generateValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../../../validation'
 
 export enum EmoteCategory {
   SIMPLE = 'simple',

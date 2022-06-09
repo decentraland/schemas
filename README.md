@@ -39,13 +39,16 @@ export namespace MyType {
 In that sense, MyType can be both used as type `const a: MyType` and as object `MyType.validate(a)`.
 
 Beware that `validate` has type `ValidateFunction<T>` which `ajv` creates automatically. When writing new
-validations always try to implement it as an ajv validation, even if custom code is needed. See [here](https://ajv.js.org/keywords.html#define-keyword-with-code-generation-function). 
+validations always try to implement it as an ajv validation, even if custom code is needed. See [here](https://ajv.js.org/keywords.html#define-keyword-with-code-generation-function).
 
 In particular, don't fall in the trap of doing this:
+
 ```ts
-  const validator = generateValidator<MyType>(schema)
-  export const validate = (mt: MyType) => validator.validate(mt) && otherValidations(mt);
+const validator = generateValidator<MyType>(schema);
+export const validate = (mt: MyType) =>
+  validator.validate(mt) && otherValidations(mt);
 ```
+
 By doing this, all the errors reported by the `validator.validate` function are lost and never returned
 to the caller.
 
@@ -63,7 +66,7 @@ It is recommended that if you are a stakeholder of the interoperable parts of De
 
 To make sure everybody is aware of changes in types, we have a process of api-extraction using https://api-extractor.com. It creates [a report file](report/schemas.api.md) that should be reviewed upon every change and committed as part of the PR.
 
-To generate the file with your changes run `npm run build && npm run refresh-api`.
+To generate the file with your changes run `npm run refresh-api`.
 
 In the CI, `npm run check-api` is executed to verify the generated file matches the exported types.
 

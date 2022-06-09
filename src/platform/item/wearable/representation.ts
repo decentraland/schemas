@@ -1,14 +1,14 @@
-import { WearableCategory } from '../../dapps/wearable-category'
+import { WearableCategory } from '../../../dapps/wearable-category'
 import {
   generateValidator,
   JSONSchema,
   ValidateFunction
-} from '../../validation'
-import { WearableBodyShape } from './wearable-body-shape'
+} from '../../../validation'
+import { BodyShape } from '../body-shape'
 
 /** @alpha */
 export type WearableRepresentation = {
-  bodyShapes: WearableBodyShape[]
+  bodyShapes: BodyShape[]
   mainFile: string
   contents: string[]
   overrideHides: WearableCategory[]
@@ -22,7 +22,7 @@ export namespace WearableRepresentation {
     properties: {
       bodyShapes: {
         type: 'array',
-        items: WearableBodyShape.schema,
+        items: BodyShape.schema,
         minItems: 1,
         uniqueItems: true
       },
@@ -36,7 +36,10 @@ export namespace WearableRepresentation {
           type: 'string'
         },
         minItems: 1,
-        uniqueItems: true
+        uniqueItems: true,
+        contains: {
+          const: { $data: '2/mainFile' }
+        }
       },
       overrideHides: {
         type: 'array',
@@ -56,11 +59,6 @@ export namespace WearableRepresentation {
     ]
   }
 
-  const schemaValidator: ValidateFunction<WearableRepresentation> =
+  export const validate: ValidateFunction<WearableRepresentation> =
     generateValidator(schema)
-  export const validate: ValidateFunction<WearableRepresentation> = (
-    representation: any
-  ): representation is WearableRepresentation =>
-    schemaValidator(representation) &&
-    representation.contents.includes(representation.mainFile)
 }
