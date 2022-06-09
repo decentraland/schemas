@@ -1,7 +1,5 @@
 on:
   push:
-    tags:
-      - '*'
     branches:
       - master
       - main
