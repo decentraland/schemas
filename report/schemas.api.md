@@ -267,18 +267,15 @@ export enum BidSortBy {
     RECENTLY_UPDATED = "recently_updated"
 }
 
-// Warning: (ae-missing-release-tag) "BodyShape" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "BodyShape" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @alpha (undocumented)
 export enum BodyShape {
     // (undocumented)
-    FEMALE = "BaseFemale",
+    FEMALE = "urn:decentraland:off-chain:base-avatars:BaseFemale",
     // (undocumented)
-    MALE = "BaseMale"
+    MALE = "urn:decentraland:off-chain:base-avatars:BaseMale"
 }
 
-// @public (undocumented)
+// @alpha (undocumented)
 export namespace BodyShape {
     const // (undocumented)
     schema: JSONSchema<BodyShape>;
@@ -533,7 +530,7 @@ export namespace EmoteDataADR74 {
 
 // @alpha (undocumented)
 export type EmoteRepresentationADR74 = {
-    bodyShapes: BodyShape_2[];
+    bodyShapes: BodyShape[];
     mainFile: string;
     contents: string[];
 };
@@ -1118,7 +1115,7 @@ export namespace PreviewCamera {
 export type PreviewConfig = {
     wearable?: WearableDefinition;
     wearables: WearableDefinition[];
-    bodyShape: BodyShape_2;
+    bodyShape: BodyShape;
     skin: string;
     hair: string;
     eyes: string;
@@ -1233,7 +1230,7 @@ export type PreviewOptions = {
     tokenId?: string | null;
     itemId?: string | null;
     profile?: string | null;
-    bodyShape?: BodyShape_2 | null;
+    bodyShape?: BodyShape | null;
     skin?: string | null;
     hair?: string | null;
     eyes?: string | null;
@@ -1779,7 +1776,7 @@ export type WearableId = string;
 
 // @alpha (undocumented)
 export type WearableRepresentation = {
-    bodyShapes: BodyShape_2[];
+    bodyShapes: BodyShape[];
     mainFile: string;
     contents: string[];
     overrideHides: WearableCategory[];
@@ -1826,21 +1823,23 @@ export namespace World {
 // src/dapps/mint.ts:16:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:17:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/mint.ts:37:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/nft.ts:55:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/nft.ts:56:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/nft.ts:82:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:41:7 - (ae-incompatible-release-tags) The symbol "bodyShapes" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
+// src/dapps/nft.ts:51:7 - (ae-incompatible-release-tags) The symbol "bodyShapes" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
+// src/dapps/nft.ts:54:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:55:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/nft.ts:81:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:32:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:8:3 - (ae-incompatible-release-tags) The symbol "wearable" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:9:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
+// src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:15:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
 // src/dapps/preview/preview-message.ts:32:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/platform/item/emote/adr74/emote-data-adr74.ts:11:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
-// src/platform/item/emote/adr74/representation-adr74.ts:10:3 - (ae-forgotten-export) The symbol "BodyShape" needs to be exported by the entry point index.d.ts
 // src/platform/item/third-party-props.ts:10:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
 // src/platform/scene/spawn-point.ts:10:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:10:3 - (ae-forgotten-export) The symbol "MultiPosition" needs to be exported by the entry point index.d.ts
