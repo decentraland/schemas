@@ -6,7 +6,6 @@ export * from './validation'
 // export all the types
 export { Bid, BidFilters, BidSortBy } from './dapps/bid'
 export { Account, AccountFilters, AccountSortBy } from './dapps/account'
-export { BodyShape } from './dapps/body-shape'
 export { ChainId, getChainName, getURNProtocol } from './dapps/chain-id'
 export { ChainName, getChainId } from './dapps/chain-name'
 export {
