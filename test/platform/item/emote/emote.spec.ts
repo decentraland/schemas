@@ -101,12 +101,10 @@ describe('Emote tests', () => {
   testTypeSignature(Emote, thirdPartyEmote)
 
   it('static tests must pass', () => {
-    // Emote.validate(thirdPartyEmote)
-    // console.log(Emote.validate.errors)
     expect(Emote.validate(standardEmote)).toEqual(true)
     expect(Emote.validate(thirdPartyEmote)).toEqual(true)
-    // expect(Emote.validate(null)).toEqual(false)
-    // expect(Emote.validate({})).toEqual(false)
+    expect(Emote.validate(null)).toEqual(false)
+    expect(Emote.validate({})).toEqual(false)
   })
 
   it('static tests must return the correct errors when missing properties', () => {
@@ -250,7 +248,7 @@ describe('Emote tests', () => {
   })
 
   it('thirdparty emote contain all hasing keys but does not have all the required ones', () => {
-    const thirdPartyPropsMissingContent = {
+    const thirdPartyPropsMissingImage = {
       content: {
         'thumbnail.png': 'someHash'
       },
@@ -276,7 +274,7 @@ describe('Emote tests', () => {
     const { image, ...baseEmoteWithoutImage } = baseEmote
     const notThirdPartyEmote = {
       ...baseEmoteWithoutImage,
-      ...thirdPartyPropsMissingContent,
+      ...thirdPartyPropsMissingImage,
       emoteDataADR74
     }
     expectValidationFailureWithErrors(Emote.validate, notThirdPartyEmote, [
