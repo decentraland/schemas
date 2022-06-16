@@ -13,7 +13,7 @@ import {
   testTypeSignature
 } from '../../../test-utils'
 
-describe('Representation tests', () => {
+describe('Wearable representation tests', () => {
   const representation: WearableRepresentation = {
     bodyShapes: [BodyShape.FEMALE],
     mainFile: 'file1',
@@ -144,17 +144,13 @@ describe('Representation tests', () => {
     expectValidationFailureWithErrors(
       Wearable.validate,
       { ...baseWearable, ...standard, ...thirdParty },
-      [
-        'for standard wearables "merkleProof" and "content" are not allowed',
-        'for third party wearables "collectionAddress" and "rarity" are not allowed'
-      ]
+      ['either standard XOR thirdparty properties conditions must be met']
     )
   })
 
   it('wearable should be standard and/or thirdparty', () => {
     expectValidationFailureWithErrors(Wearable.validate, baseWearable, [
-      'for standard wearables "merkleProof" and "content" are not allowed',
-      'for third party wearables "collectionAddress" and "rarity" are not allowed'
+      'either standard XOR thirdparty properties conditions must be met'
     ])
   })
 
@@ -162,10 +158,7 @@ describe('Representation tests', () => {
     expectValidationFailureWithErrors(
       Wearable.validate,
       { ...baseWearable, ...standard, ...thirdParty },
-      [
-        'for standard wearables "merkleProof" and "content" are not allowed',
-        'for third party wearables "collectionAddress" and "rarity" are not allowed'
-      ]
+      ['either standard XOR thirdparty properties conditions must be met']
     )
   })
 
@@ -182,10 +175,7 @@ describe('Representation tests', () => {
     expectValidationFailureWithErrors(
       Wearable.validate,
       { ...baseWearable, collectionAddress: '0x...' },
-      [
-        'for standard wearables "merkleProof" and "content" are not allowed',
-        'for third party wearables "collectionAddress" and "rarity" are not allowed'
-      ]
+      ['either standard XOR thirdparty properties conditions must be met']
     )
   })
 })

@@ -38,7 +38,18 @@ export namespace Emote {
             errorMessage: 'standard properties conditions are not met'
           },
           {
-            required: ['merkleProof', 'content'],
+            required: [
+              'merkleProof',
+              /* MerkleProof emote required Keys (might be redundant) */
+              'content',
+              'id',
+              'name',
+              'description',
+              'i18n',
+              'image',
+              'thumbnail',
+              'emoteDataADR74'
+            ],
             _isThirdParty: true,
             prohibited: ['collectionAddress', 'rarity'],
             errorMessage: 'thirdparty properties conditions are not met'

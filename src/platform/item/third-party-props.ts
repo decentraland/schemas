@@ -26,21 +26,30 @@ const schema: JSONSchema<ThirdPartyProps> = {
   properties: {
     ...thirdPartyProps
   },
-  required: ['merkleProof', 'content']
+  required: ['merkleProof', 'content'],
+  _containsHashingKeys: true
 }
 
-const validate: ValidateFunction<ThirdPartyProps> = generateValidator(schema)
+const _containsHashingKeys = {
+  keyword: '_containsHashingKeys',
+  validate: (schema: boolean, data: any) => {
+    const itemAsThirdParty = data as ThirdPartyProps
+    if (itemAsThirdParty?.merkleProof?.hashingKeys) {
+      return itemAsThirdParty.merkleProof.hashingKeys.every((key) =>
+        itemAsThirdParty.hasOwnProperty(key)
+      )
+    }
+    return false
+  },
+  errors: false
+}
+
+const validate: ValidateFunction<ThirdPartyProps> = generateValidator(schema, [
+  _containsHashingKeys
+])
 
 export function isThirdParty<T extends BaseItem>(
   item: T
 ): item is T & ThirdPartyProps {
-  const isValid = validate(item)
-  if (!isValid) {
-    return isValid
-  }
-  const itemAsThirdParty = item as T & ThirdPartyProps
-  const containsAllKeys = itemAsThirdParty.merkleProof.hashingKeys.every(
-    (key) => itemAsThirdParty.hasOwnProperty(key)
-  )
-  return containsAllKeys
+  return validate(item)
 }
