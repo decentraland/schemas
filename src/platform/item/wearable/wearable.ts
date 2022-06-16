@@ -68,7 +68,6 @@ export namespace Wearable {
         prohibited: ['merkleProof', 'content']
       },
       {
-        // required: ['merkleProof', 'content'],
         required: [
           'merkleProof',
           /* MerkleProof emote required Keys (might be redundant) */
