@@ -69,7 +69,8 @@ export namespace Wearable {
       },
       {
         // required: ['merkleProof', 'content'],
-        required: ['merkleProof',
+        required: [
+          'merkleProof',
           /* MerkleProof emote required Keys (might be redundant) */
           'content',
           'id',
@@ -78,7 +79,8 @@ export namespace Wearable {
           'i18n',
           'image',
           'thumbnail',
-          'data'],
+          'data'
+        ],
         prohibited: ['collectionAddress', 'rarity'],
         _isThirdParty: true
       }

@@ -144,9 +144,7 @@ describe('Wearable representation tests', () => {
     expectValidationFailureWithErrors(
       Wearable.validate,
       { ...baseWearable, ...standard, ...thirdParty },
-      [
-        'either standard XOR thirdparty properties conditions must be met'
-      ]
+      ['either standard XOR thirdparty properties conditions must be met']
     )
   })
 
@@ -160,9 +158,7 @@ describe('Wearable representation tests', () => {
     expectValidationFailureWithErrors(
       Wearable.validate,
       { ...baseWearable, ...standard, ...thirdParty },
-      [
-        'either standard XOR thirdparty properties conditions must be met'
-      ]
+      ['either standard XOR thirdparty properties conditions must be met']
     )
   })
 
@@ -179,9 +175,7 @@ describe('Wearable representation tests', () => {
     expectValidationFailureWithErrors(
       Wearable.validate,
       { ...baseWearable, collectionAddress: '0x...' },
-      [
-        'either standard XOR thirdparty properties conditions must be met'
-      ]
+      ['either standard XOR thirdparty properties conditions must be met']
     )
   })
 })

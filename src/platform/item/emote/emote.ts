@@ -38,7 +38,8 @@ export namespace Emote {
             errorMessage: 'standard properties conditions are not met'
           },
           {
-            required: ['merkleProof',
+            required: [
+              'merkleProof',
               /* MerkleProof emote required Keys (might be redundant) */
               'content',
               'id',
