@@ -1403,7 +1403,7 @@ export type SaleFilters = {
     skip?: number;
     sortBy?: SaleSortBy;
     type?: SaleType;
-    category?: NFTCategory;
+    categories?: NFTCategory[];
     buyer?: string;
     seller?: string;
     contractAddress?: string;
