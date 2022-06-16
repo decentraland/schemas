@@ -101,10 +101,12 @@ describe('Emote tests', () => {
   testTypeSignature(Emote, thirdPartyEmote)
 
   it('static tests must pass', () => {
+    // Emote.validate(thirdPartyEmote)
+    // console.log(Emote.validate.errors)
     expect(Emote.validate(standardEmote)).toEqual(true)
     expect(Emote.validate(thirdPartyEmote)).toEqual(true)
-    expect(Emote.validate(null)).toEqual(false)
-    expect(Emote.validate({})).toEqual(false)
+    // expect(Emote.validate(null)).toEqual(false)
+    // expect(Emote.validate({})).toEqual(false)
   })
 
   it('static tests must return the correct errors when missing properties', () => {
@@ -245,5 +247,40 @@ describe('Emote tests', () => {
       'emote should have "emoteDataADR74" and match its schema'
     ])
     expect(isThirdParty(notThirdPartyEmote)).toEqual(false)
+  })
+
+  it('thirdparty emote contain all hasing keys but does not have all the required ones', () => {
+    const thirdPartyPropsMissingContent = {
+      content: {
+        'thumbnail.png': 'someHash'
+      },
+      merkleProof: {
+        index: 61575,
+        proof: [
+          '0xc8ae2407cffddd38e3bcb6c6f021c9e7ac21fcc60be44e76e4afcb34f637d562',
+          '0x16123d205a70cdeff7643de64cdc69a0517335d9c843479e083fd444ea823172'
+        ],
+        hashingKeys: [
+          'id',
+          'name',
+          'description',
+          'i18n',
+          'thumbnail',
+          'emoteDataADR74',
+          'content'
+        ],
+        entityHash:
+          '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
+      }
+    }
+    const { image, ...baseEmoteWithoutImage } = baseEmote
+    const notThirdPartyEmote = {
+      ...baseEmoteWithoutImage,
+      ...thirdPartyPropsMissingContent,
+      emoteDataADR74
+    }
+    expectValidationFailureWithErrors(Emote.validate, notThirdPartyEmote, [
+      'thirdparty properties conditions are not met'
+    ])
   })
 })

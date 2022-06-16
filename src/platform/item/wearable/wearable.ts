@@ -65,18 +65,27 @@ export namespace Wearable {
     oneOf: [
       {
         required: ['collectionAddress', 'rarity'],
-        prohibited: ['merkleProof', 'content'],
-        errorMessage:
-          'for standard wearables "merkleProof" and "content" are not allowed'
+        prohibited: ['merkleProof', 'content']
       },
       {
-        required: ['merkleProof', 'content'],
-        _isThirdParty: true,
+        // required: ['merkleProof', 'content'],
+        required: ['merkleProof',
+          /* MerkleProof emote required Keys (might be redundant) */
+          'content',
+          'id',
+          'name',
+          'description',
+          'i18n',
+          'image',
+          'thumbnail',
+          'data'],
         prohibited: ['collectionAddress', 'rarity'],
-        errorMessage:
-          'for third party wearables "collectionAddress" and "rarity" are not allowed'
+        _isThirdParty: true
       }
-    ]
+    ],
+    errorMessage: {
+      oneOf: 'either standard XOR thirdparty properties conditions must be met'
+    }
   }
 
   const _isThirdPartyKeywordDef = {
