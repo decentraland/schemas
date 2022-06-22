@@ -54,6 +54,27 @@ describe('Entity', () => {
       })
     ).toEqual(false)
   })
+
+  it('When type is not valid, then entity validation fails', () => {
+    const entityWithValidProfileMetadata = {
+      content: [],
+      id: 'QmUsqJaHc5HQaBrojhBdjF4fr5MQc6CqhwZjqwhVRftNAo',
+      pointers: ['asd'],
+      timestamp: 1,
+      type: 'invalid',
+      metadata: { avatars: [AVATAR] },
+      version: 'v3'
+    }
+    testTypeSignature(Profile, entityWithValidProfileMetadata.metadata)
+    expect(Profile.validate(entityWithValidProfileMetadata.metadata)).toEqual(
+      true
+    )
+    expectValidationFailureWithErrors(
+      Entity.validate,
+      entityWithValidProfileMetadata,
+      ['must be equal to one of the allowed values']
+    )
+  })
   describe('Profile', () => {
     it('When type is profile and metadata is for profile, validation success', () => {
       const profile = {
