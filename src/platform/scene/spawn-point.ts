@@ -34,7 +34,24 @@ export namespace SpawnPoint {
       },
       position: {
         type: 'object',
-        oneOf: [{ $ref: '#single-position' }, { $ref: '#multi-position' }],
+        oneOf: [
+          {
+            properties: {
+              // SinglePosition
+              x: { type: 'number' },
+              y: { type: 'number' },
+              z: { type: 'number' }
+            }
+          },
+          {
+            properties: {
+              // MultiPosition
+              x: { type: 'array', items: { type: 'number' }, minItems: 1 },
+              y: { type: 'array', items: { type: 'number' }, minItems: 1 },
+              z: { type: 'array', items: { type: 'number' }, minItems: 1 }
+            }
+          }
+        ],
         required: ['x', 'y', 'z']
       },
       default: {
@@ -52,29 +69,7 @@ export namespace SpawnPoint {
         nullable: true
       }
     },
-    required: ['position'],
-    definitions: {
-      'single-position': {
-        $id: '#single-position',
-        type: 'object',
-        properties: {
-          x: { type: 'number' },
-          y: { type: 'number' },
-          z: { type: 'number' }
-        },
-        required: ['x', 'y', 'z']
-      },
-      'multi-position': {
-        $id: '#multi-position',
-        type: 'object',
-        properties: {
-          x: { type: 'array', items: { type: 'number' }, minItems: 1 },
-          y: { type: 'array', items: { type: 'number' }, minItems: 1 },
-          z: { type: 'array', items: { type: 'number' }, minItems: 1 }
-        },
-        required: ['x', 'y', 'z']
-      }
-    }
+    required: ['position']
   }
 
   export const validate: ValidateFunction<SpawnPoint> =

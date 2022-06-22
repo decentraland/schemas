@@ -65,7 +65,7 @@ export namespace Emote {
     }
   }
 
-  const _isThirdPartyKeywordDef = {
+  export const _isThirdPartyKeywordDef = {
     keyword: '_isThirdParty',
     validate: (schema: boolean, data: any) => !schema || isThirdParty(data),
     errors: false

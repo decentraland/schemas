@@ -30,7 +30,7 @@ const schema: JSONSchema<ThirdPartyProps> = {
   _containsHashingKeys: true
 }
 
-const _containsHashingKeys = {
+export const _containsHashingKeys = {
   keyword: '_containsHashingKeys',
   validate: (schema: boolean, data: any) => {
     const itemAsThirdParty = data as ThirdPartyProps

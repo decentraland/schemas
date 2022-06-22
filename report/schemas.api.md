@@ -488,6 +488,12 @@ export namespace Emote {
     const // (undocumented)
     schema: JSONSchema<Emote>;
     const // (undocumented)
+    _isThirdPartyKeywordDef: {
+        keyword: string;
+        validate: (schema: boolean, data: any) => boolean;
+        errors: boolean;
+    };
+    const // (undocumented)
     validate: ValidateFunction<EmoteADR74>;
 }
 
@@ -551,7 +557,7 @@ export type Entity = {
     pointers: string[];
     timestamp: number;
     content: ContentMapping[];
-    metadata?: any;
+    metadata?: Profile | Scene | Store | Wearable | Emote;
 };
 
 // @public (undocumented)
@@ -1839,6 +1845,10 @@ export namespace World {
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/platform/entity.ts:37:3 - (ae-incompatible-release-tags) The symbol "metadata" is marked as @public, but its signature references "Profile" which is marked as @alpha
+// src/platform/entity.ts:37:3 - (ae-incompatible-release-tags) The symbol "metadata" is marked as @public, but its signature references "Scene" which is marked as @alpha
+// src/platform/entity.ts:37:3 - (ae-incompatible-release-tags) The symbol "metadata" is marked as @public, but its signature references "Wearable" which is marked as @alpha
+// src/platform/entity.ts:37:3 - (ae-incompatible-release-tags) The symbol "metadata" is marked as @public, but its signature references "Emote" which is marked as @alpha
 // src/platform/item/emote/adr74/emote-data-adr74.ts:11:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/third-party-props.ts:10:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
 // src/platform/scene/spawn-point.ts:10:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
