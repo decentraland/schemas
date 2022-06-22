@@ -497,8 +497,6 @@ export namespace Emote {
 // @public (undocumented)
 export enum EmoteCategory {
     // (undocumented)
-    LOOP = "loop",
-    // (undocumented)
     SIMPLE = "simple"
 }
 
@@ -518,6 +516,7 @@ export type EmoteDataADR74 = {
     category: EmoteCategory;
     representations: EmoteRepresentationADR74[];
     tags: string[];
+    loop: boolean;
 };
 
 // @public (undocumented)
