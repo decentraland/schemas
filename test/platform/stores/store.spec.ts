@@ -1,6 +1,6 @@
 import expect from 'expect'
-import { Store } from '../../src'
-import { testTypeSignature } from '../test-utils'
+import { Store } from '../../../src'
+import { testTypeSignature } from '../../test-utils'
 
 describe('Contract tests', () => {
   const store: Store = {

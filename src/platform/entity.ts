@@ -1,4 +1,4 @@
-import { Store } from '../dapps/store'
+import { Store } from './store/store'
 import { IPFSv1, IPFSv2 } from '../misc'
 import { ContentMapping } from '../misc/content-mapping'
 import { generateValidator, JSONSchema, ValidateFunction } from '../validation'

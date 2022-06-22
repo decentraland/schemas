@@ -31,7 +31,6 @@ export {
   AnalyticsDayDataFilters,
   AnalyticsDayDataSortBy
 } from './dapps/analyticsDayData'
-export { Store } from './dapps/store'
 export { WearableCategory } from './dapps/wearable-category'
 export { WearableGender } from './dapps/wearable-gender'
 export {
