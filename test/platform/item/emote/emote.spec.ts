@@ -35,9 +35,10 @@ describe('Emote tests', () => {
   }
 
   const emoteDataADR74 = {
-    category: EmoteCategory.LOOP,
+    category: EmoteCategory.SIMPLE,
     representations: [representation],
-    tags: ['tag1']
+    tags: ['tag1'],
+    loop: false
   }
 
   const standardProps = {

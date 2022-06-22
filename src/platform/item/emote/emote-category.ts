@@ -5,8 +5,7 @@ import {
 } from '../../../validation'
 
 export enum EmoteCategory {
-  SIMPLE = 'simple',
-  LOOP = 'loop'
+  SIMPLE = 'simple'
 }
 
 export namespace EmoteCategory {
