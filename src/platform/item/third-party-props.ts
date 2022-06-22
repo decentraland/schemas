@@ -44,6 +44,12 @@ export const _containsHashingKeys = {
   errors: false
 }
 
+export const _isThirdPartyKeywordDef = {
+  keyword: '_isThirdParty',
+  validate: (schema: boolean, data: any) => !schema || isThirdParty(data),
+  errors: false
+}
+
 const validate: ValidateFunction<ThirdPartyProps> = generateValidator(schema, [
   _containsHashingKeys
 ])

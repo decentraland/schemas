@@ -8,9 +8,9 @@ import {
 } from '../base-item'
 import { StandardProps, standardProperties } from '../standard-props'
 import {
-  isThirdParty,
   ThirdPartyProps,
-  thirdPartyProps
+  thirdPartyProps,
+  _isThirdPartyKeywordDef
 } from '../third-party-props'
 
 /** @alpha */
@@ -87,12 +87,6 @@ export namespace Wearable {
     errorMessage: {
       oneOf: 'either standard XOR thirdparty properties conditions must be met'
     }
-  }
-
-  const _isThirdPartyKeywordDef = {
-    keyword: '_isThirdParty',
-    validate: (schema: boolean, data: any) => !schema || isThirdParty(data),
-    errors: false
   }
 
   /**

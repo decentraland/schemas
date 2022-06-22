@@ -3,7 +3,10 @@ import { IPFSv1, IPFSv2 } from '../misc'
 import { ContentMapping } from '../misc/content-mapping'
 import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
 import { Emote, Wearable } from './item'
-import { _containsHashingKeys } from './item/third-party-props'
+import {
+  _containsHashingKeys,
+  _isThirdPartyKeywordDef
+} from './item/third-party-props'
 import { Profile } from './profile'
 import { Scene } from './scene'
 
@@ -79,7 +82,7 @@ export namespace Entity {
   }
 
   export const validate: ValidateFunction<Entity> = generateValidator(schema, [
-    Emote._isThirdPartyKeywordDef,
+    _isThirdPartyKeywordDef,
     _containsHashingKeys
   ])
 }

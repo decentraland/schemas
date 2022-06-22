@@ -1,4 +1,3 @@
-import { isThirdParty } from '..'
 import { generateValidator, JSONSchema } from '../../../validation'
 import {
   BaseItem,
@@ -6,7 +5,11 @@ import {
   requiredBaseItemProps
 } from '../base-item'
 import { standardProperties, StandardProps } from '../standard-props'
-import { thirdPartyProps, ThirdPartyProps } from '../third-party-props'
+import {
+  thirdPartyProps,
+  ThirdPartyProps,
+  _isThirdPartyKeywordDef
+} from '../third-party-props'
 import { EmoteDataADR74 } from './adr74/emote-data-adr74'
 
 export type EmoteADR74 = BaseItem &
@@ -63,12 +66,6 @@ export namespace Emote {
     errorMessage: {
       oneOf: 'emote should have "emoteDataADR74" and match its schema'
     }
-  }
-
-  export const _isThirdPartyKeywordDef = {
-    keyword: '_isThirdParty',
-    validate: (schema: boolean, data: any) => !schema || isThirdParty(data),
-    errors: false
   }
 
   export const validate = generateValidator(schema, [_isThirdPartyKeywordDef])
