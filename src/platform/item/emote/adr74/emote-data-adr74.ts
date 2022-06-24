@@ -10,6 +10,7 @@ export type EmoteDataADR74 = {
   category: EmoteCategory
   representations: EmoteRepresentationADR74[]
   tags: string[]
+  loop: boolean
 }
 
 export namespace EmoteDataADR74 {
@@ -28,9 +29,12 @@ export namespace EmoteDataADR74 {
         items: EmoteRepresentationADR74.schema,
         minItems: 1
       },
-      category: EmoteCategory.schema
+      category: EmoteCategory.schema,
+      loop: {
+        type: 'boolean'
+      }
     },
-    required: ['category', 'tags', 'representations'] as any[],
+    required: ['category', 'tags', 'representations', 'loop'] as any[],
     additionalProperties: true
   }
 
