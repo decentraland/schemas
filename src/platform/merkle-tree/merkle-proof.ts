@@ -27,8 +27,7 @@ export namespace MerkleProof {
         type: 'array',
         items: {
           type: 'string'
-        },
-        minItems: 1
+        }
       },
       index: {
         type: 'number'
