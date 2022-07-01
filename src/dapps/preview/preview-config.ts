@@ -15,7 +15,8 @@ export type PreviewConfig = {
   type: PreviewType
   background: {
     image?: string
-    gradient?: string
+    color: string
+    transparent: boolean
   }
   emote: PreviewEmote
   camera: PreviewCamera
