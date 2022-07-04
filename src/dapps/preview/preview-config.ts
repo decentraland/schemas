@@ -13,6 +13,7 @@ export type PreviewConfig = {
   eyes: string
   zoom: number
   type: PreviewType
+  face: boolean
   background: {
     image?: string
     color: string
