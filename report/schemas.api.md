@@ -1120,6 +1120,7 @@ export type PreviewConfig = {
     eyes: string;
     zoom: number;
     type: PreviewType;
+    face: boolean;
     background: {
         image?: string;
         color: string;
@@ -1195,10 +1196,12 @@ export namespace PreviewEnv {
 // Warning: (ae-missing-release-tag) "PreviewMessagePayload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type PreviewMessagePayload<T extends PreviewMessageType> = T extends PreviewMessageType.LOAD ? null : T extends PreviewMessageType.ERROR ? {
+export type PreviewMessagePayload<T extends PreviewMessageType> = T extends PreviewMessageType.READY ? null : T extends PreviewMessageType.LOAD ? null : T extends PreviewMessageType.ERROR ? {
     message: string;
 } : T extends PreviewMessageType.UPDATE ? {
     options: PreviewOptions;
+} : T extends PreviewMessageType.ADD_WEARABLE_WITH_BLOBS ? {
+    wearableWithBlobs: WearableWithBlobs;
 } : unknown;
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
@@ -1206,6 +1209,8 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
 //
 // @public (undocumented)
 export enum PreviewMessageType {
+    // (undocumented)
+    ADD_WEARABLE_WITH_BLOBS = "add_wearable_with_blobs",
     // (undocumented)
     ERROR = "error",
     // (undocumented)
@@ -1241,7 +1246,6 @@ export type PreviewOptions = {
     emote?: PreviewEmote | null;
     camera?: PreviewCamera | null;
     autoRotateSpeed?: number | null;
-    centerBoundingBox?: boolean | null;
     offsetX?: number | null;
     offsetY?: number | null;
     offsetZ?: number | null;
@@ -1249,7 +1253,11 @@ export type PreviewOptions = {
     wheelPrecision?: number | null;
     wheelStart?: number | null;
     background?: string | null;
-    transparentBackground?: boolean | null;
+    disableBackground?: boolean | null;
+    disableAutoCenter?: boolean | null;
+    disableAutoRotate?: boolean | null;
+    disableFace?: boolean | null;
+    disableDefaultWearables?: boolean | null;
     env?: PreviewEnv | null;
 };
 
@@ -1836,7 +1844,8 @@ export namespace World {
 // src/dapps/preview/preview-config.ts:9:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:15:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:32:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
+// src/dapps/preview/preview-message.ts:36:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
+// src/dapps/preview/preview-message.ts:38:9 - (ae-forgotten-export) The symbol "WearableWithBlobs" needs to be exported by the entry point index.d.ts
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha

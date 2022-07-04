@@ -20,7 +20,6 @@ export type PreviewOptions = {
   emote?: PreviewEmote | null
   camera?: PreviewCamera | null
   autoRotateSpeed?: number | null
-  centerBoundingBox?: boolean | null
   offsetX?: number | null
   offsetY?: number | null
   offsetZ?: number | null
@@ -28,6 +27,10 @@ export type PreviewOptions = {
   wheelPrecision?: number | null
   wheelStart?: number | null
   background?: string | null
-  transparentBackground?: boolean | null
+  disableBackground?: boolean | null
+  disableAutoCenter?: boolean | null
+  disableAutoRotate?: boolean | null
+  disableFace?: boolean | null
+  disableDefaultWearables?: boolean | null
   env?: PreviewEnv | null
 }

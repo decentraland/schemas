@@ -4,12 +4,14 @@ import {
   ValidateFunction
 } from '../../validation'
 import { PreviewOptions } from './preview-options'
+import { WearableWithBlobs } from './wearable-with-blobs'
 
 export enum PreviewMessageType {
   READY = 'ready',
   LOAD = 'load',
   ERROR = 'error',
-  UPDATE = 'update'
+  UPDATE = 'update',
+  ADD_WEARABLE_WITH_BLOBS = 'add_wearable_with_blobs'
 }
 
 /** @alpha */
@@ -24,12 +26,16 @@ export namespace PreviewMessageType {
 }
 
 export type PreviewMessagePayload<T extends PreviewMessageType> =
-  T extends PreviewMessageType.LOAD
+  T extends PreviewMessageType.READY
+    ? null
+    : T extends PreviewMessageType.LOAD
     ? null
     : T extends PreviewMessageType.ERROR
     ? { message: string }
     : T extends PreviewMessageType.UPDATE
     ? { options: PreviewOptions }
+    : T extends PreviewMessageType.ADD_WEARABLE_WITH_BLOBS
+    ? { wearableWithBlobs: WearableWithBlobs }
     : unknown
 
 export const sendMessage = <T extends PreviewMessageType>(
