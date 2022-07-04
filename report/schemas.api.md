@@ -626,6 +626,24 @@ export namespace I18N {
     validate: ValidateFunction<I18N>;
 }
 
+// Warning: (ae-missing-release-tag) "IEmoteController" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface IEmoteController {
+    // (undocumented)
+    getLength(): number;
+    // (undocumented)
+    goTo(seconds: number): void;
+    // (undocumented)
+    isPlaying(): boolean;
+    // (undocumented)
+    pause(): void;
+    // (undocumented)
+    play(): void;
+    // (undocumented)
+    stop(): void;
+}
+
 // @public (undocumented)
 export type IPFSv1 = string;
 
@@ -646,6 +664,26 @@ export namespace IPFSv2 {
     schema: JSONSchema<IPFSv2>;
     const // (undocumented)
     validate: ValidateFunction<IPFSv2>;
+}
+
+// Warning: (ae-missing-release-tag) "IPreviewController" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface IPreviewController {
+    // (undocumented)
+    emote: IEmoteController;
+    // (undocumented)
+    scene: ISceneController;
+}
+
+// Warning: (ae-missing-release-tag) "ISceneController" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface ISceneController {
+    // (undocumented)
+    getMetrics(): PreviewSceneMetrics;
+    // (undocumented)
+    getScreenshot(width: number, height: number): Promise<string>;
 }
 
 // @alpha
@@ -1261,6 +1299,16 @@ export type PreviewOptions = {
     env?: PreviewEnv | null;
 };
 
+// Warning: (ae-missing-release-tag) "PreviewSceneMetrics" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PreviewSceneMetrics = {
+    triangles: number;
+    materials: number;
+    meshes: number;
+    textures: number;
+};
+
 // @alpha (undocumented)
 export enum PreviewType {
     // (undocumented)
@@ -1374,6 +1422,14 @@ export type RepresentationDefinition = Omit<WearableRepresentation, 'contents'> 
     contents: {
         key: string;
         url: string;
+    }[];
+};
+
+// @alpha (undocumented)
+export type RepresentationWithBlobs = Omit<RepresentationDefinition, 'contents'> & {
+    contents: {
+        key: string;
+        blob: Blob;
     }[];
 };
 
@@ -1800,6 +1856,13 @@ export namespace WearableRepresentation {
     validate: ValidateFunction<WearableRepresentation>;
 }
 
+// @alpha (undocumented)
+export type WearableWithBlobs = Omit<WearableDefinition, 'data'> & {
+    data: Omit<WearableDefinition['data'], 'representations'> & {
+        representations: RepresentationWithBlobs[];
+    };
+};
+
 // @alpha
 export type World = {
     validWorldRanges: Array<ValidWorldRange>;
@@ -1845,7 +1908,7 @@ export namespace World {
 // src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:15:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
 // src/dapps/preview/preview-message.ts:36:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:38:9 - (ae-forgotten-export) The symbol "WearableWithBlobs" needs to be exported by the entry point index.d.ts
+// src/dapps/preview/preview-message.ts:38:9 - (ae-incompatible-release-tags) The symbol "wearableWithBlobs" is marked as @public, but its signature references "WearableWithBlobs" which is marked as @alpha
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
