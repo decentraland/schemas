@@ -40,6 +40,7 @@ export type AvatarInfo = {
   hair: { color: Color3 }
   skin: { color: Color3 }
   wearables: WearableId[]
+  // emotes must be present after ADR 74
   emotes?: {
     slot: number,
     urn: string
