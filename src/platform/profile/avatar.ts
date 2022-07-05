@@ -42,7 +42,7 @@ export type AvatarInfo = {
   wearables: WearableId[]
   // emotes must be present after ADR 74
   emotes?: {
-    slot: number,
+    slot: number
     urn: string
   }[]
   snapshots: Snapshots
@@ -97,13 +97,14 @@ export namespace AvatarInfo {
           },
           required: ['slot', 'urn']
         },
-        nullable: true,
+        nullable: true
       },
       snapshots: Snapshots.schema
     },
     additionalProperties: true
   }
-  export const validate: ValidateFunction<AvatarInfo> = generateValidator(schema)
+  export const validate: ValidateFunction<AvatarInfo> =
+    generateValidator(schema)
 }
 
 /**

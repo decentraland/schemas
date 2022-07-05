@@ -197,6 +197,10 @@ export type AvatarInfo = {
         color: Color3;
     };
     wearables: WearableId[];
+    emotes?: {
+        slot: number;
+        urn: string;
+    }[];
     snapshots: Snapshots;
 };
 
