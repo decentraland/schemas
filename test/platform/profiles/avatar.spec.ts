@@ -37,11 +37,30 @@ export const AVATAR: Avatar = {
   hasConnectedWeb3: true
 }
 
+export const AVATAR_WITH_EMOTES: Avatar = {
+  userId: '0x87956abc4078a0cc3b89b419628b857b8af826ed',
+  email: 'some@email.com',
+  name: 'Some Name',
+  hasClaimedName: true,
+  description: 'Some Description',
+  ethAddress: '0x87956abC4078a0Cc3b89b419628b857B8AF826Ed',
+  version: 44,
+  avatar: {
+    ...AVATAR_INFO,
+    emotes: [{ slot: 1, urn: 'my-urn' }]
+  },
+  tutorialStep: 355,
+  interests: [],
+  hasConnectedWeb3: true
+}
+
 describe('Avatar tests', () => {
   testTypeSignature(Avatar, AVATAR)
+  testTypeSignature(Avatar, AVATAR_WITH_EMOTES)
 
   it('static tests must pass', () => {
     expect(Avatar.validate(AVATAR)).toEqual(true)
+    expect(Avatar.validate(AVATAR_WITH_EMOTES)).toEqual(true)
     expect(Avatar.validate(null)).toEqual(false)
     expect(Avatar.validate({})).toEqual(false)
   })

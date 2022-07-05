@@ -27,10 +27,7 @@ export namespace Snapshots {
       body: IPFSv2.schema
     }
   }
-  const schemaValidator: ValidateFunction<Snapshots> = generateValidator(schema)
-  export const validate: ValidateFunction<Snapshots> = (
-    snapshots: any
-  ): snapshots is Snapshots => schemaValidator(snapshots)
+  export const validate: ValidateFunction<Snapshots> = generateValidator(schema)
 }
 
 /**
@@ -43,6 +40,11 @@ export type AvatarInfo = {
   hair: { color: Color3 }
   skin: { color: Color3 }
   wearables: WearableId[]
+  // emotes must be present after ADR 74
+  emotes?: {
+    slot: number
+    urn: string
+  }[]
   snapshots: Snapshots
 }
 
@@ -85,15 +87,24 @@ export namespace AvatarInfo {
           type: 'string'
         }
       },
+      emotes: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            slot: { type: 'number' },
+            urn: { type: 'string' }
+          },
+          required: ['slot', 'urn']
+        },
+        nullable: true
+      },
       snapshots: Snapshots.schema
     },
     additionalProperties: true
   }
-  const schemaValidator: ValidateFunction<AvatarInfo> =
+  export const validate: ValidateFunction<AvatarInfo> =
     generateValidator(schema)
-  export const validate: ValidateFunction<AvatarInfo> = (
-    avatarInfo: any
-  ): avatarInfo is AvatarInfo => schemaValidator(avatarInfo)
 }
 
 /**
@@ -190,8 +201,5 @@ export namespace Avatar {
     },
     additionalProperties: true
   }
-  const schemaValidator: ValidateFunction<Avatar> = generateValidator(schema)
-  export const validate: ValidateFunction<Avatar> = (
-    avatar: any
-  ): avatar is Avatar => schemaValidator(avatar)
+  export const validate: ValidateFunction<Avatar> = generateValidator(schema)
 }
