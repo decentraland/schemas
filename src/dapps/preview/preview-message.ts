@@ -4,14 +4,14 @@ import {
   ValidateFunction
 } from '../../validation'
 import { PreviewOptions } from './preview-options'
-import { WearableWithBlobs } from './wearable-with-blobs'
 
 export enum PreviewMessageType {
   READY = 'ready',
   LOAD = 'load',
   ERROR = 'error',
   UPDATE = 'update',
-  ADD_WEARABLE_WITH_BLOBS = 'add_wearable_with_blobs'
+  CONTROLLER_REQUEST = 'controller_request',
+  CONTROLLER_RESPONSE = 'controller_response'
 }
 
 /** @alpha */
@@ -34,8 +34,33 @@ export type PreviewMessagePayload<T extends PreviewMessageType> =
     ? { message: string }
     : T extends PreviewMessageType.UPDATE
     ? { options: PreviewOptions }
-    : T extends PreviewMessageType.ADD_WEARABLE_WITH_BLOBS
-    ? { wearableWithBlobs: WearableWithBlobs }
+    : T extends PreviewMessageType.CONTROLLER_REQUEST
+    ? {
+        id: string
+        namespace: 'scene' | 'emote'
+        method:
+          | 'getScreenshot'
+          | 'getMetrics'
+          | 'getLength'
+          | 'isPlaying'
+          | 'play'
+          | 'pause'
+          | 'stop'
+          | 'goTo'
+        params: any[]
+      }
+    : T extends PreviewMessageType.CONTROLLER_RESPONSE
+    ?
+        | {
+            id: string
+            ok: true
+            result: any
+          }
+        | {
+            id: string
+            ok: false
+            error: string
+          }
     : unknown
 
 export const sendMessage = <T extends PreviewMessageType>(

@@ -1,20 +1,18 @@
-import { PreviewSceneMetrics } from './preview-metrics'
+import { Metrics } from '../../platform/item/metrics'
 
 export interface IPreviewController {
   scene: ISceneController
   emote: IEmoteController
 }
-
 export interface ISceneController {
   getScreenshot(width: number, height: number): Promise<string>
-  getMetrics(): PreviewSceneMetrics
+  getMetrics(): Promise<Metrics>
 }
-
 export interface IEmoteController {
-  getLength(): number
-  isPlaying(): boolean
-  goTo(seconds: number): void
-  play(): void
-  pause(): void
-  stop(): void
+  getLength(): Promise<number>
+  isPlaying(): Promise<boolean>
+  goTo(seconds: number): Promise<void>
+  play(): Promise<void>
+  pause(): Promise<void>
+  stop(): Promise<void>
 }
