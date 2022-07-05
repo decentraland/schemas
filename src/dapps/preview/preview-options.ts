@@ -2,6 +2,7 @@ import { BodyShape } from '../../platform/item'
 import { PreviewCamera } from './preview-camera'
 import { PreviewEmote } from './preview-emote'
 import { PreviewEnv } from './preview-env'
+import { WearableWithBlobs } from './wearable-with-blobs'
 
 /** @alpha */
 export type PreviewOptions = {
@@ -16,6 +17,7 @@ export type PreviewOptions = {
   urns?: string[] | null
   urls?: string[] | null
   base64s?: string[] | null
+  blob?: WearableWithBlobs | null
   zoom?: number | null
   emote?: PreviewEmote | null
   camera?: PreviewCamera | null

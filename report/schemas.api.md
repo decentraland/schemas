@@ -635,17 +635,17 @@ export namespace I18N {
 // @public (undocumented)
 export interface IEmoteController {
     // (undocumented)
-    getLength(): number;
+    getLength(): Promise<number>;
     // (undocumented)
-    goTo(seconds: number): void;
+    goTo(seconds: number): Promise<void>;
     // (undocumented)
-    isPlaying(): boolean;
+    isPlaying(): Promise<boolean>;
     // (undocumented)
-    pause(): void;
+    pause(): Promise<void>;
     // (undocumented)
-    play(): void;
+    play(): Promise<void>;
     // (undocumented)
-    stop(): void;
+    stop(): Promise<void>;
 }
 
 // @public (undocumented)
@@ -684,8 +684,10 @@ export interface IPreviewController {
 //
 // @public (undocumented)
 export interface ISceneController {
+    // Warning: (ae-incompatible-release-tags) The symbol "getMetrics" is marked as @public, but its signature references "Metrics" which is marked as @alpha
+    //
     // (undocumented)
-    getMetrics(): PreviewSceneMetrics;
+    getMetrics(): Promise<Metrics>;
     // (undocumented)
     getScreenshot(width: number, height: number): Promise<string>;
 }
@@ -1242,8 +1244,19 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
     message: string;
 } : T extends PreviewMessageType.UPDATE ? {
     options: PreviewOptions;
-} : T extends PreviewMessageType.ADD_WEARABLE_WITH_BLOBS ? {
-    wearableWithBlobs: WearableWithBlobs;
+} : T extends PreviewMessageType.CONTROLLER_REQUEST ? {
+    id: string;
+    namespace: 'scene' | 'emote';
+    method: 'getScreenshot' | 'getMetrics' | 'getLength' | 'isPlaying' | 'play' | 'pause' | 'stop' | 'goTo';
+    params: any[];
+} : T extends PreviewMessageType.CONTROLLER_RESPONSE ? {
+    id: string;
+    ok: true;
+    result: any;
+} | {
+    id: string;
+    ok: false;
+    error: string;
 } : unknown;
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
@@ -1252,7 +1265,9 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
 // @public (undocumented)
 export enum PreviewMessageType {
     // (undocumented)
-    ADD_WEARABLE_WITH_BLOBS = "add_wearable_with_blobs",
+    CONTROLLER_REQUEST = "controller_request",
+    // (undocumented)
+    CONTROLLER_RESPONSE = "controller_response",
     // (undocumented)
     ERROR = "error",
     // (undocumented)
@@ -1284,6 +1299,7 @@ export type PreviewOptions = {
     urns?: string[] | null;
     urls?: string[] | null;
     base64s?: string[] | null;
+    blob?: WearableWithBlobs | null;
     zoom?: number | null;
     emote?: PreviewEmote | null;
     camera?: PreviewCamera | null;
@@ -1301,16 +1317,6 @@ export type PreviewOptions = {
     disableFace?: boolean | null;
     disableDefaultWearables?: boolean | null;
     env?: PreviewEnv | null;
-};
-
-// Warning: (ae-missing-release-tag) "PreviewSceneMetrics" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type PreviewSceneMetrics = {
-    triangles: number;
-    materials: number;
-    meshes: number;
-    textures: number;
 };
 
 // @alpha (undocumented)
@@ -1912,7 +1918,6 @@ export namespace World {
 // src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:15:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
 // src/dapps/preview/preview-message.ts:36:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:38:9 - (ae-incompatible-release-tags) The symbol "wearableWithBlobs" is marked as @public, but its signature references "WearableWithBlobs" which is marked as @alpha
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
