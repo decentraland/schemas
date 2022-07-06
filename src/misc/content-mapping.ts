@@ -1,5 +1,9 @@
 import { IPFSv1, IPFSv2 } from '../misc'
-import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import {
+  generateLazyValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../validation'
 
 /**
  * Represents a content mapping. The Decentraland file system is
@@ -29,5 +33,5 @@ export namespace ContentMapping {
   }
 
   export const validate: ValidateFunction<ContentMapping> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }

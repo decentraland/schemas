@@ -1,4 +1,8 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import {
+  generateLazyValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../validation'
 
 export enum ListingStatus {
   OPEN = 'open',
@@ -13,5 +17,5 @@ export namespace ListingStatus {
   }
 
   export const validate: ValidateFunction<ListingStatus> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }

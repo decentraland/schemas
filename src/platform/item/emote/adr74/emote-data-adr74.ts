@@ -1,6 +1,6 @@
 import { EmoteCategory } from '../emote-category'
 import {
-  generateValidator,
+  generateLazyValidator,
   JSONSchema,
   ValidateFunction
 } from '../../../../validation'
@@ -39,5 +39,5 @@ export namespace EmoteDataADR74 {
   }
 
   export const validate: ValidateFunction<EmoteDataADR74> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }

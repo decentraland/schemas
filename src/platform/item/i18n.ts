@@ -1,5 +1,5 @@
 import {
-  generateValidator,
+  generateLazyValidator,
   JSONSchema,
   ValidateFunction
 } from '../../validation'
@@ -25,5 +25,5 @@ export namespace I18N {
     required: ['code', 'text']
   }
 
-  export const validate: ValidateFunction<I18N> = generateValidator(schema)
+  export const validate: ValidateFunction<I18N> = generateLazyValidator(schema)
 }

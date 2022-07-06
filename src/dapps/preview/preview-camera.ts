@@ -1,6 +1,6 @@
 import {
   JSONSchema,
-  generateValidator,
+  generateLazyValidator,
   ValidateFunction
 } from '../../validation'
 
@@ -17,5 +17,5 @@ export namespace PreviewCamera {
   }
 
   export const validate: ValidateFunction<PreviewCamera> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }

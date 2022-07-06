@@ -1,5 +1,5 @@
 import {
-  generateValidator,
+  generateLazyValidator,
   JSONSchema,
   ValidateFunction
 } from '../../validation'
@@ -20,5 +20,5 @@ export namespace ProjectType {
   }
 
   export const validate: ValidateFunction<ProjectType> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }

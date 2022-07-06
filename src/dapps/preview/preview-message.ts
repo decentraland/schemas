@@ -1,6 +1,6 @@
 import {
   JSONSchema,
-  generateValidator,
+  generateLazyValidator,
   ValidateFunction
 } from '../../validation'
 import { PreviewOptions } from './preview-options'
@@ -22,7 +22,7 @@ export namespace PreviewMessageType {
   }
 
   export const validate: ValidateFunction<PreviewMessageType> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }
 
 export type PreviewMessagePayload<T extends PreviewMessageType> =

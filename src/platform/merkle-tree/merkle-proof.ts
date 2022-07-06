@@ -1,5 +1,5 @@
 import {
-  generateValidator,
+  generateLazyValidator,
   JSONSchema,
   ValidateFunction
 } from '../../validation'
@@ -47,5 +47,5 @@ export namespace MerkleProof {
   }
 
   export const validate: ValidateFunction<MerkleProof> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }

@@ -1,5 +1,5 @@
 import {
-  generateValidator,
+  generateLazyValidator,
   JSONSchema,
   ValidateFunction
 } from '../../validation'
@@ -44,9 +44,10 @@ const _containsHashingKeys = {
   errors: false
 }
 
-const validate: ValidateFunction<ThirdPartyProps> = generateValidator(schema, [
-  _containsHashingKeys
-])
+const validate: ValidateFunction<ThirdPartyProps> = generateLazyValidator(
+  schema,
+  [_containsHashingKeys]
+)
 
 export function isThirdParty<T extends BaseItem>(
   item: T

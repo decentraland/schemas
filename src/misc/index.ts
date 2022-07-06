@@ -1,4 +1,8 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import {
+  generateLazyValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../validation'
 
 /**
  * Color3 is a data type that describes a color using R, G and B components
@@ -32,7 +36,8 @@ export namespace Color3 {
       }
     }
   }
-  const schemaValidator: ValidateFunction<Color3> = generateValidator(schema)
+  const schemaValidator: ValidateFunction<Color3> =
+    generateLazyValidator(schema)
   export const validate: ValidateFunction<Color3> = (
     color: any
   ): color is Color3 => schemaValidator(color)

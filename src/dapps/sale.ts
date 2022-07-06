@@ -1,4 +1,8 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import {
+  generateLazyValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../validation'
 import { ChainId } from './chain-id'
 import { SaleType } from './sale-type'
 import { Network } from './network'
@@ -92,5 +96,5 @@ export namespace Sale {
     ]
   }
 
-  export const validate: ValidateFunction<Sale> = generateValidator(schema)
+  export const validate: ValidateFunction<Sale> = generateLazyValidator(schema)
 }
