@@ -1,5 +1,5 @@
 import {
-  generateValidator,
+  generateLazyValidator,
   JSONSchema,
   ValidateFunction
 } from '../../validation'
@@ -25,5 +25,6 @@ export namespace Update {
     required: ['type']
   }
 
-  export const validate: ValidateFunction<Update> = generateValidator(schema)
+  export const validate: ValidateFunction<Update> =
+    generateLazyValidator(schema)
 }

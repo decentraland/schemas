@@ -1,5 +1,5 @@
 import {
-  generateValidator,
+  generateLazyValidator,
   JSONSchema,
   ValidateFunction
 } from '../../../../validation'
@@ -46,5 +46,5 @@ export namespace EmoteRepresentationADR74 {
   }
 
   export const validate: ValidateFunction<EmoteRepresentationADR74> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }

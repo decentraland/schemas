@@ -1,5 +1,5 @@
 import { isThirdParty } from '..'
-import { generateValidator, JSONSchema } from '../../../validation'
+import { generateLazyValidator, JSONSchema } from '../../../validation'
 import {
   BaseItem,
   baseItemProperties,
@@ -71,5 +71,7 @@ export namespace Emote {
     errors: false
   }
 
-  export const validate = generateValidator(schema, [_isThirdPartyKeywordDef])
+  export const validate = generateLazyValidator(schema, [
+    _isThirdPartyKeywordDef
+  ])
 }

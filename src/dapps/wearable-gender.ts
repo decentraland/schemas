@@ -1,4 +1,8 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import {
+  generateLazyValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../validation'
 
 export enum WearableGender {
   MALE = 'male',
@@ -12,5 +16,5 @@ export namespace WearableGender {
   }
 
   export const validate: ValidateFunction<WearableGender> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }

@@ -1,5 +1,5 @@
 import {
-  generateValidator,
+  generateLazyValidator,
   JSONSchema,
   ValidateFunction
 } from '../../validation'
@@ -35,7 +35,7 @@ export namespace SceneParcels {
   }
 
   export const schemaValidator: ValidateFunction<SceneParcels> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
   export const validate: ValidateFunction<SceneParcels> = (
     sceneParcels: any
   ): sceneParcels is SceneParcels =>
