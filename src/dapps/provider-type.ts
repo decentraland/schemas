@@ -1,4 +1,8 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import {
+  generateLazyValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../validation'
 
 /**
  * Different supported providers

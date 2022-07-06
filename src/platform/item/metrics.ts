@@ -48,5 +48,6 @@ export namespace Metrics {
     ]
   }
 
-  export const validate: ValidateFunction<Metrics> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<Metrics> =
+    generateLazyValidator(schema)
 }

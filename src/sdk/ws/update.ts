@@ -25,5 +25,6 @@ export namespace Update {
     required: ['type']
   }
 
-  export const validate: ValidateFunction<Update> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<Update> =
+    generateLazyValidator(schema)
 }

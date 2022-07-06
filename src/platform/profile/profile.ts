@@ -29,5 +29,6 @@ export namespace Profile {
     },
     additionalProperties: true
   }
-  export const validate: ValidateFunction<Profile> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<Profile> =
+    generateLazyValidator(schema)
 }

@@ -59,5 +59,6 @@ export namespace AssetJson {
     required: ['category', 'rarity', 'bodyShape', 'thumbnail', 'model']
   }
 
-  export const validate: ValidateFunction<AssetJson> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<AssetJson> =
+    generateLazyValidator(schema)
 }

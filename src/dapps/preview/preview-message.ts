@@ -27,41 +27,41 @@ export namespace PreviewMessageType {
 
 export type PreviewMessagePayload<T extends PreviewMessageType> =
   T extends PreviewMessageType.READY
-  ? null
-  : T extends PreviewMessageType.LOAD
-  ? null
-  : T extends PreviewMessageType.ERROR
-  ? { message: string }
-  : T extends PreviewMessageType.UPDATE
-  ? { options: PreviewOptions }
-  : T extends PreviewMessageType.CONTROLLER_REQUEST
-  ? {
-    id: string
-    namespace: 'scene' | 'emote'
-    method:
-    | 'getScreenshot'
-    | 'getMetrics'
-    | 'getLength'
-    | 'isPlaying'
-    | 'play'
-    | 'pause'
-    | 'stop'
-    | 'goTo'
-    params: any[]
-  }
-  : T extends PreviewMessageType.CONTROLLER_RESPONSE
-  ?
-  | {
-    id: string
-    ok: true
-    result: any
-  }
-  | {
-    id: string
-    ok: false
-    error: string
-  }
-  : unknown
+    ? null
+    : T extends PreviewMessageType.LOAD
+    ? null
+    : T extends PreviewMessageType.ERROR
+    ? { message: string }
+    : T extends PreviewMessageType.UPDATE
+    ? { options: PreviewOptions }
+    : T extends PreviewMessageType.CONTROLLER_REQUEST
+    ? {
+        id: string
+        namespace: 'scene' | 'emote'
+        method:
+          | 'getScreenshot'
+          | 'getMetrics'
+          | 'getLength'
+          | 'isPlaying'
+          | 'play'
+          | 'pause'
+          | 'stop'
+          | 'goTo'
+        params: any[]
+      }
+    : T extends PreviewMessageType.CONTROLLER_RESPONSE
+    ?
+        | {
+            id: string
+            ok: true
+            result: any
+          }
+        | {
+            id: string
+            ok: false
+            error: string
+          }
+    : unknown
 
 export const sendMessage = <T extends PreviewMessageType>(
   window: Window,

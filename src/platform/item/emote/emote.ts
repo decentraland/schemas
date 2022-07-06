@@ -71,5 +71,7 @@ export namespace Emote {
     errors: false
   }
 
-  export const validate = generateLazyValidator(schema, [_isThirdPartyKeywordDef])
+  export const validate = generateLazyValidator(schema, [
+    _isThirdPartyKeywordDef
+  ])
 }

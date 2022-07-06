@@ -1,4 +1,8 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import {
+  generateLazyValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../validation'
 import { ChainId } from './chain-id'
 import { Network } from './network'
 import { NFTCategory } from './nft-category'
@@ -37,5 +41,6 @@ export namespace Contract {
     required: ['name', 'address', 'category', 'network', 'chainId']
   }
 
-  export const validate: ValidateFunction<Contract> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<Contract> =
+    generateLazyValidator(schema)
 }

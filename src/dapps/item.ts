@@ -1,4 +1,8 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import {
+  generateLazyValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../validation'
 import { ChainId } from './chain-id'
 import { EmoteCategory } from '../platform'
 import { Network } from './network'

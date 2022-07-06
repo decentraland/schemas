@@ -1,4 +1,8 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import {
+  generateLazyValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../validation'
 
 export enum Rarity {
   UNIQUE = 'unique',
@@ -16,7 +20,8 @@ export namespace Rarity {
     enum: Object.values(Rarity)
   }
 
-  export const validate: ValidateFunction<Rarity> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<Rarity> =
+    generateLazyValidator(schema)
 
   const maxSupplyByRarity: Record<Rarity, number> = {
     [Rarity.UNIQUE]: 1,

@@ -1,5 +1,9 @@
 import { AuthChain } from '../misc/auth-chain'
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import {
+  generateLazyValidator,
+  JSONSchema,
+  ValidateFunction
+} from '../validation'
 
 /**
  * This type describes the minimum deployment + AuthChain needed to synchronize

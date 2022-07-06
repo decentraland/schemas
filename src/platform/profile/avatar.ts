@@ -27,7 +27,8 @@ export namespace Snapshots {
       body: IPFSv2.schema
     }
   }
-  export const validate: ValidateFunction<Snapshots> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<Snapshots> =
+    generateLazyValidator(schema)
 }
 
 /**
@@ -201,5 +202,6 @@ export namespace Avatar {
     },
     additionalProperties: true
   }
-  export const validate: ValidateFunction<Avatar> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<Avatar> =
+    generateLazyValidator(schema)
 }

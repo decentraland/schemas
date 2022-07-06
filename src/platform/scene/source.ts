@@ -66,5 +66,6 @@ export namespace Source {
     required: ['origin', 'projectId']
   }
 
-  export const validate: ValidateFunction<Source> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<Source> =
+    generateLazyValidator(schema)
 }

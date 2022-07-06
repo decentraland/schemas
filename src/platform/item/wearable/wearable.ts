@@ -105,5 +105,7 @@ export namespace Wearable {
    *    - merkleProof
    *    - content
    */
-  export const validate = generateLazyValidator(schema, [_isThirdPartyKeywordDef])
+  export const validate = generateLazyValidator(schema, [
+    _isThirdPartyKeywordDef
+  ])
 }

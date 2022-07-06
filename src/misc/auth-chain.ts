@@ -1,4 +1,8 @@
-import { JSONSchema, generateLazyValidator, ValidateFunction } from '../validation'
+import {
+  JSONSchema,
+  generateLazyValidator,
+  ValidateFunction
+} from '../validation'
 
 /**
  * @public
@@ -44,7 +48,8 @@ export namespace AuthLink {
     required: ['payload', 'signature', 'type']
   }
 
-  export const validate: ValidateFunction<AuthLink> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<AuthLink> =
+    generateLazyValidator(schema)
 }
 
 /**
@@ -63,5 +68,6 @@ export namespace AuthChain {
     minItems: 1
   }
 
-  export const validate: ValidateFunction<AuthChain> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<AuthChain> =
+    generateLazyValidator(schema)
 }

@@ -17,5 +17,6 @@ export namespace BodyShape {
     enum: Object.values(BodyShape)
   }
 
-  export const validate: ValidateFunction<BodyShape> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<BodyShape> =
+    generateLazyValidator(schema)
 }
