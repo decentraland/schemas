@@ -34,16 +34,24 @@ export type AbstractTypedSchema<T> = {
  * Generates a validator for a specific JSON schema of a type T
  * @public
  */
-export function generateValidator<T>(
+export function generateLazyValidator<T>(
   schema: JSONSchema<T>,
   keywordDefinitions?: KeywordDefinition[]
 ): ValidateFunction<T> {
-  const ajv = new Ajv({ $data: true, allErrors: true })
-  ajv_keywords(ajv)
-  ajv_errors(ajv, { singleError: true })
-  keywordDefinitions?.forEach((kw) => ajv.addKeyword(kw))
-
-  return ajv.compile<T>(schema)
+  let validateFn: ValidateFunction<T> | null = null
+  const theReturnedValidateFunction = (data: any, dataCxt?: any): data is T => {
+    if (!validateFn) {
+      const ajv = new Ajv({ $data: true, allErrors: true })
+      ajv_keywords(ajv)
+      ajv_errors(ajv, { singleError: true })
+      keywordDefinitions?.forEach((kw: string | KeywordDefinition) => ajv.addKeyword(kw))
+      validateFn = ajv.compile<T>(schema)
+      Object.defineProperty(theReturnedValidateFunction,
+        "errors", { get() { return validateFn?.errors } })
+    }
+    return validateFn(data, dataCxt)
+  }
+  return theReturnedValidateFunction
 }
 
 /**
