@@ -1,6 +1,6 @@
 import { IPFSv1, IPFSv2 } from '../misc'
 import { ContentMapping } from '../misc/content-mapping'
-import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * Non-exhaustive list of EntityTypes.
@@ -48,5 +48,5 @@ export namespace Entity {
     required: ['version', 'id', 'type', 'pointers', 'timestamp', 'content']
   }
 
-  export const validate: ValidateFunction<Entity> = generateValidator(schema)
+  export const validate: ValidateFunction<Entity> = generateLazyValidator(schema)
 }

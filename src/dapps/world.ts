@@ -1,4 +1,4 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * World Range
@@ -114,5 +114,5 @@ export namespace World {
     additionalProperties: false
   }
 
-  export const validate: ValidateFunction<World> = generateValidator(schema)
+  export const validate: ValidateFunction<World> = generateLazyValidator(schema)
 }

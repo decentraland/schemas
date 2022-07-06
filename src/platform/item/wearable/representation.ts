@@ -1,6 +1,6 @@
 import { WearableCategory } from '../../../dapps/wearable-category'
 import {
-  generateValidator,
+  generateLazyValidator,
   JSONSchema,
   ValidateFunction
 } from '../../../validation'
@@ -60,5 +60,5 @@ export namespace WearableRepresentation {
   }
 
   export const validate: ValidateFunction<WearableRepresentation> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }

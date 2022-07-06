@@ -1,4 +1,4 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
 import { BodyShape, EmoteCategory } from '../platform'
 import { Network } from './network'
@@ -277,5 +277,5 @@ export namespace NFT {
     ]
   }
 
-  export const validate: ValidateFunction<NFT> = generateValidator(schema)
+  export const validate: ValidateFunction<NFT> = generateLazyValidator(schema)
 }

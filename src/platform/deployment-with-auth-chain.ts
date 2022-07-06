@@ -1,5 +1,5 @@
 import { AuthChain } from '../misc/auth-chain'
-import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * This type describes the minimum deployment + AuthChain needed to synchronize
@@ -37,5 +37,5 @@ export namespace DeploymentWithAuthChain {
   }
 
   export const validate: ValidateFunction<DeploymentWithAuthChain> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }

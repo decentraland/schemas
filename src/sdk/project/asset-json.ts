@@ -1,7 +1,7 @@
 import { ProjectType } from './../project/type'
 import { WearableCategory } from './../../dapps/wearable-category'
 import {
-  generateValidator,
+  generateLazyValidator,
   JSONSchema,
   ValidateFunction
 } from '../../validation'
@@ -59,5 +59,5 @@ export namespace AssetJson {
     required: ['category', 'rarity', 'bodyShape', 'thumbnail', 'model']
   }
 
-  export const validate: ValidateFunction<AssetJson> = generateValidator(schema)
+  export const validate: ValidateFunction<AssetJson> = generateLazyValidator(schema)
 }

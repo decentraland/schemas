@@ -1,4 +1,4 @@
-import { generateValidator, JSONSchema } from '../../../validation'
+import { generateLazyValidator, JSONSchema } from '../../../validation'
 import { WearableCategory } from '../../../dapps/wearable-category'
 import { WearableRepresentation } from './representation'
 import {
@@ -105,5 +105,5 @@ export namespace Wearable {
    *    - merkleProof
    *    - content
    */
-  export const validate = generateValidator(schema, [_isThirdPartyKeywordDef])
+  export const validate = generateLazyValidator(schema, [_isThirdPartyKeywordDef])
 }

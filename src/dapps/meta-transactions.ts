@@ -1,4 +1,4 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * Meta-transaction to be relayed
@@ -29,5 +29,5 @@ export namespace MetaTransaction {
   }
 
   export const validate: ValidateFunction<MetaTransaction> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }

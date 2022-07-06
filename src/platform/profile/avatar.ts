@@ -1,6 +1,6 @@
 import { Color3, EthAddress, IPFSv2, WearableId } from '../../misc'
 import {
-  generateValidator,
+  generateLazyValidator,
   JSONSchema,
   ValidateFunction
 } from '../../validation'
@@ -27,7 +27,7 @@ export namespace Snapshots {
       body: IPFSv2.schema
     }
   }
-  export const validate: ValidateFunction<Snapshots> = generateValidator(schema)
+  export const validate: ValidateFunction<Snapshots> = generateLazyValidator(schema)
 }
 
 /**
@@ -104,7 +104,7 @@ export namespace AvatarInfo {
     additionalProperties: true
   }
   export const validate: ValidateFunction<AvatarInfo> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }
 
 /**
@@ -201,5 +201,5 @@ export namespace Avatar {
     },
     additionalProperties: true
   }
-  export const validate: ValidateFunction<Avatar> = generateValidator(schema)
+  export const validate: ValidateFunction<Avatar> = generateLazyValidator(schema)
 }

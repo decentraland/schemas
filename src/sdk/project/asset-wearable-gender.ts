@@ -1,5 +1,5 @@
 import {
-  generateValidator,
+  generateLazyValidator,
   JSONSchema,
   ValidateFunction
 } from '../../validation'
@@ -17,5 +17,5 @@ export namespace AssetWearableGender {
   }
 
   export const validate: ValidateFunction<AssetWearableGender> =
-    generateValidator(schema)
+    generateLazyValidator(schema)
 }

@@ -1,4 +1,4 @@
-import { generateValidator, JSONSchema, ValidateFunction } from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 
 export type Store = {
   id: string // urn
@@ -65,5 +65,5 @@ export namespace Store {
     required: ['id', 'version', 'owner', 'description', 'links', 'images']
   }
 
-  export const validate: ValidateFunction<Store> = generateValidator(schema)
+  export const validate: ValidateFunction<Store> = generateLazyValidator(schema)
 }
