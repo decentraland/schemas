@@ -64,7 +64,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> =
     : unknown
 
 export const sendMessage = <T extends PreviewMessageType>(
-  window: Window,
+  window: { postMessage(event: any, targetOrigin: string): any },
   type: T,
   payload: PreviewMessagePayload<T>,
   targetOrigin = '*'

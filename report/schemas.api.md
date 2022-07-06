@@ -1607,7 +1607,9 @@ export { sdk }
 // Warning: (ae-missing-release-tag) "sendMessage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export const sendMessage: <T extends PreviewMessageType>(window: Window, type: T, payload: PreviewMessagePayload<T>, targetOrigin?: string) => void;
+export const sendMessage: <T extends PreviewMessageType>(window: {
+    postMessage(event: any, targetOrigin: string): any;
+}, type: T, payload: PreviewMessagePayload<T>, targetOrigin?: string) => void;
 
 // @alpha
 export type Snapshots = {
