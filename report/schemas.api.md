@@ -1439,7 +1439,7 @@ export type RepresentationDefinition = Omit<WearableRepresentation, 'contents'> 
 export type RepresentationWithBlobs = Omit<RepresentationDefinition, 'contents'> & {
     contents: {
         key: string;
-        blob: Blob;
+        blob: any;
     }[];
 };
 
