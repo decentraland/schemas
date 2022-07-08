@@ -16,7 +16,7 @@ describe('PreviewMessageType tests', () => {
 
   it('should send a LOAD message', () => {
     const fakeWindow = { postMessage: sinon.fake() }
-    sendMessage(fakeWindow as unknown as Window, PreviewMessageType.LOAD, null)
+    sendMessage(fakeWindow, PreviewMessageType.LOAD, null)
     expect(
       fakeWindow.postMessage.calledOnceWith({
         type: PreviewMessageType.LOAD,
@@ -27,7 +27,7 @@ describe('PreviewMessageType tests', () => {
 
   it('should send an ERROR message', () => {
     const fakeWindow = { postMessage: sinon.fake() }
-    sendMessage(fakeWindow as unknown as Window, PreviewMessageType.ERROR, {
+    sendMessage(fakeWindow, PreviewMessageType.ERROR, {
       message: 'Some error'
     })
     expect(
@@ -40,7 +40,7 @@ describe('PreviewMessageType tests', () => {
 
   it('should send an UPDATE message', () => {
     const fakeWindow = { postMessage: sinon.fake() }
-    sendMessage(fakeWindow as unknown as Window, PreviewMessageType.UPDATE, {
+    sendMessage(fakeWindow, PreviewMessageType.UPDATE, {
       options: { hair: '#ff0000', skin: '#cccccc' }
     })
     expect(
