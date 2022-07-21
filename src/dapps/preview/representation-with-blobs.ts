@@ -4,4 +4,4 @@ import { RepresentationDefinition } from './representation-definition'
 export type RepresentationWithBlobs = Omit<
   RepresentationDefinition,
   'contents'
-> & { contents: { key: string; blob: Blob }[] }
+> & { contents: { key: string; blob: any }[] }
