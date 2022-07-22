@@ -10,7 +10,8 @@ import {
 export type AuthLink = {
   type: AuthLinkType
   payload: string
-  signature: string
+  // required if type != 'SIGNER'
+  signature?: string
 }
 
 /**
@@ -43,9 +44,25 @@ export namespace AuthLink {
         enum: Object.values(AuthLinkType)
       },
       payload: { type: 'string' },
-      signature: { type: 'string' }
+      signature: { type: 'string', nullable: true }
     },
-    required: ['payload', 'signature', 'type']
+    required: ['payload', 'type'],
+    if: {
+      properties: { type: { not: { const: AuthLinkType.SIGNER } } }
+    },
+    then: {
+      required: ['signature']
+    },
+    else: {
+      // type = 'SIGNER' => signature = '' | null
+      oneOf: [
+        {
+          properties: { signature: { type: 'string', const: '' } },
+          required: ['signature']
+        },
+        { properties: { signature: { type: 'null' } } }
+      ]
+    }
   }
 
   export const validate: ValidateFunction<AuthLink> =

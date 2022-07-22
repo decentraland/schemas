@@ -97,7 +97,6 @@ describe('Emote tests', () => {
     ...thirdPartyProps,
     emoteDataADR74
   }
-
   testTypeSignature(Emote, standardEmote)
   testTypeSignature(Emote, thirdPartyEmote)
 

@@ -136,7 +136,7 @@ export namespace AuthChain {
 export type AuthLink = {
     type: AuthLinkType;
     payload: string;
-    signature: string;
+    signature?: string;
 };
 
 // @public (undocumented)
