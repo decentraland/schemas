@@ -535,8 +535,8 @@ export namespace EmoteDataADR74 {
 // Warning: (ae-missing-release-tag) "EmoteDefinition" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type EmoteDefinition = Omit<Emote, "emoteDataADR74"> & {
-    emoteDataADR74: Omit<Emote["emoteDataADR74"], "representations"> & {
+export type EmoteDefinition = Omit<Emote, 'emoteDataADR74'> & {
+    emoteDataADR74: Omit<Emote['emoteDataADR74'], 'representations'> & {
         representations: EmoteRepresentationDefinition[];
     };
 };
@@ -557,7 +557,7 @@ export namespace EmoteRepresentationADR74 {
 }
 
 // @alpha (undocumented)
-export type EmoteRepresentationDefinition = Omit<EmoteRepresentationADR74, "contents"> & {
+export type EmoteRepresentationDefinition = Omit<EmoteRepresentationADR74, 'contents'> & {
     contents: {
         key: string;
         url: string;
