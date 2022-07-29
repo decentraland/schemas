@@ -11,6 +11,7 @@ import { ChainId } from './chain-id'
  */
 export enum ChainName {
   ETHEREUM_MAINNET = 'Ethereum Mainnet',
+  ETHEREUM_ROPSTEN = 'Ropsten',
   ETHEREUM_RINKEBY = 'Rinkeby',
   ETHEREUM_GOERLI = 'Goerli',
   ETHEREUM_KOVAN = 'Kovan',
@@ -26,6 +27,8 @@ export function getChainId(chainName: ChainName): ChainId | null {
   switch (chainName) {
     case ChainName.ETHEREUM_MAINNET:
       return ChainId.ETHEREUM_MAINNET
+    case ChainName.ETHEREUM_ROPSTEN:
+      return ChainId.ETHEREUM_ROPSTEN
     case ChainName.ETHEREUM_RINKEBY:
       return ChainId.ETHEREUM_RINKEBY
     case ChainName.ETHEREUM_GOERLI:

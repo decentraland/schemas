@@ -298,6 +298,8 @@ export enum ChainId {
     // (undocumented)
     ETHEREUM_RINKEBY = 4,
     // (undocumented)
+    ETHEREUM_ROPSTEN = 3,
+    // (undocumented)
     MATIC_MAINNET = 137,
     // (undocumented)
     MATIC_MUMBAI = 80001
@@ -321,6 +323,8 @@ export enum ChainName {
     ETHEREUM_MAINNET = "Ethereum Mainnet",
     // (undocumented)
     ETHEREUM_RINKEBY = "Rinkeby",
+    // (undocumented)
+    ETHEREUM_ROPSTEN = "Ropsten",
     // (undocumented)
     MATIC_MAINNET = "Polygon",
     // (undocumented)
