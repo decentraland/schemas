@@ -7,7 +7,7 @@ import {
   EmoteRepresentationADR74,
   isStandard,
   isThirdParty
-} from '../../../../src/platform'
+} from '../../../../src'
 import {
   expectValidationFailureWithErrors,
   testTypeSignature

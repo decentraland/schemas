@@ -71,8 +71,8 @@ export function getURNProtocol(chainId: ChainId): string {
 
 /**
  * Using a base chain id, it'll map the corresponding chain id for the ethereum and matic networks.
- * For example, if trying to determine which chain id is used to map Ropsten in Matic you'd do:
- *    getNetworkMapping(ChainId.ETHEREUM_ROPSTEN)[Network.MATIC]
+ * For example, if trying to determine which chain id is used to map Goerli in Matic you'd do:
+ *    getNetworkMapping(ChainId.ETHEREUM_GOERLI)[Network.MATIC]
  * @alpha
  */
 export function getNetworkMapping(chainId: ChainId): {
