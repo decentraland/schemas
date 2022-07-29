@@ -1,12 +1,13 @@
 import { BodyShape } from '../../platform/item'
+import { EmoteDefinition } from './emote-definition'
 import { PreviewCamera } from './preview-camera'
 import { PreviewEmote } from './preview-emote'
 import { PreviewType } from './preview-type'
 import { WearableDefinition } from './wearable-definition'
 
 export type PreviewConfig = {
-  wearable?: WearableDefinition
-  wearables: WearableDefinition[]
+  wearable?: WearableDefinition | EmoteDefinition
+  wearables: (WearableDefinition | EmoteDefinition)[]
   bodyShape: BodyShape
   skin: string
   hair: string
@@ -19,7 +20,7 @@ export type PreviewConfig = {
     color: string
     transparent: boolean
   }
-  emote: PreviewEmote
+  emote: PreviewEmote | null
   camera: PreviewCamera
   autoRotateSpeed: number
   centerBoundingBox: boolean
