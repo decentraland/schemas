@@ -1334,6 +1334,7 @@ export type PreviewOptions = {
     disableAutoRotate?: boolean | null;
     disableFace?: boolean | null;
     disableDefaultWearables?: boolean | null;
+    disableDefaultEmotes?: boolean | null;
     env?: PreviewEnv | null;
 };
 
