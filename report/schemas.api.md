@@ -1250,13 +1250,13 @@ export namespace PreviewEmote {
 // @public (undocumented)
 export enum PreviewEmoteEventType {
     // (undocumented)
-    ANIMATION_END = "end",
+    ANIMATION_END = "animation_end",
     // (undocumented)
-    ANIMATION_LOOP = "loop",
+    ANIMATION_LOOP = "animation_loop",
     // (undocumented)
-    ANIMATION_PAUSE = "pause",
+    ANIMATION_PAUSE = "animation_pause",
     // (undocumented)
-    ANIMATION_PLAY = "play"
+    ANIMATION_PLAY = "animation_play"
 }
 
 // @alpha (undocumented)

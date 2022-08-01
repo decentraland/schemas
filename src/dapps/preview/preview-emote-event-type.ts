@@ -5,10 +5,10 @@ import {
 } from '../../validation'
 
 export enum PreviewEmoteEventType {
-  ANIMATION_PLAY = 'play',
-  ANIMATION_PAUSE = 'pause',
-  ANIMATION_LOOP = 'loop',
-  ANIMATION_END = 'end'
+  ANIMATION_PLAY = 'animation_play',
+  ANIMATION_PAUSE = 'animation_pause',
+  ANIMATION_LOOP = 'animation_loop',
+  ANIMATION_END = 'animation_end'
 }
 
 /** @alpha */
