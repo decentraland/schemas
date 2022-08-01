@@ -1,3 +1,4 @@
+import EventEmitter from 'events'
 import { Metrics } from '../../platform/item/metrics'
 
 export interface IPreviewController {
@@ -15,4 +16,5 @@ export interface IEmoteController {
   play(): Promise<void>
   pause(): Promise<void>
   stop(): Promise<void>
+  events: EventEmitter
 }

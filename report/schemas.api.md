@@ -4,8 +4,11 @@
 
 ```ts
 
+/// <reference types="node" />
+
 import Ajv from 'ajv';
 import { ErrorObject } from 'ajv';
+import EventEmitter from 'events';
 import { JSONSchemaType } from 'ajv';
 import { KeywordDefinition } from 'ajv';
 
@@ -653,6 +656,8 @@ export namespace I18N {
 // @public (undocumented)
 export interface IEmoteController {
     // (undocumented)
+    events: EventEmitter;
+    // (undocumented)
     getLength(): Promise<number>;
     // (undocumented)
     goTo(seconds: number): Promise<void>;
@@ -1239,6 +1244,29 @@ export namespace PreviewEmote {
     validate: ValidateFunction<PreviewEmote>;
 }
 
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-missing-release-tag) "PreviewEmoteEventType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum PreviewEmoteEventType {
+    // (undocumented)
+    ANIMATION_END = "end",
+    // (undocumented)
+    ANIMATION_LOOP = "loop",
+    // (undocumented)
+    ANIMATION_PAUSE = "pause",
+    // (undocumented)
+    ANIMATION_PLAY = "play"
+}
+
+// @alpha (undocumented)
+export namespace PreviewEmoteEventType {
+    const // (undocumented)
+    schema: JSONSchema<PreviewEmoteEventType>;
+    const // (undocumented)
+    validate: ValidateFunction<PreviewEmoteEventType>;
+}
+
 // @alpha (undocumented)
 export enum PreviewEnv {
     // (undocumented)
@@ -1275,6 +1303,8 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
     id: string;
     ok: false;
     error: string;
+} : T extends PreviewMessageType.EMOTE_EVENT ? {
+    type: PreviewEmoteEventType;
 } : unknown;
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
@@ -1286,6 +1316,8 @@ export enum PreviewMessageType {
     CONTROLLER_REQUEST = "controller_request",
     // (undocumented)
     CONTROLLER_RESPONSE = "controller_response",
+    // (undocumented)
+    EMOTE_EVENT = "emote_event",
     // (undocumented)
     ERROR = "error",
     // (undocumented)
@@ -1939,7 +1971,7 @@ export namespace World {
 // src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:11:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:16:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:36:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
+// src/dapps/preview/preview-message.ts:38:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
 // src/dapps/sale.ts:22:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:23:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:46:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha

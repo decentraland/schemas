@@ -3,6 +3,7 @@ import {
   generateLazyValidator,
   ValidateFunction
 } from '../../validation'
+import { PreviewEmoteEventType } from './preview-emote-event-type'
 import { PreviewOptions } from './preview-options'
 
 export enum PreviewMessageType {
@@ -11,7 +12,8 @@ export enum PreviewMessageType {
   ERROR = 'error',
   UPDATE = 'update',
   CONTROLLER_REQUEST = 'controller_request',
-  CONTROLLER_RESPONSE = 'controller_response'
+  CONTROLLER_RESPONSE = 'controller_response',
+  EMOTE_EVENT = 'emote_event'
 }
 
 /** @alpha */
@@ -61,6 +63,8 @@ export type PreviewMessagePayload<T extends PreviewMessageType> =
             ok: false
             error: string
           }
+    : T extends PreviewMessageType.EMOTE_EVENT
+    ? { type: PreviewEmoteEventType }
     : unknown
 
 export const sendMessage = <T extends PreviewMessageType>(
