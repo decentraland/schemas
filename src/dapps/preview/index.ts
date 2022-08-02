@@ -1,6 +1,7 @@
 export * from './preview-camera'
 export * from './preview-config'
 export * from './preview-controller'
+export * from './preview-emote-event-type'
 export * from './preview-emote'
 export * from './preview-env'
 export * from './preview-message'
