@@ -271,6 +271,7 @@ describe('Emote tests', () => {
           '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
       }
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { image, ...baseEmoteWithoutImage } = baseEmote
     const notThirdPartyEmote = {
       ...baseEmoteWithoutImage,
