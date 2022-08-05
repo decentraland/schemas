@@ -5,7 +5,6 @@ import {
 } from '../../../validation'
 
 export enum EmoteCategory {
-  SIMPLE = 'simple',
   DANCE = 'dance',
   STUNT = 'stunt',
   GREETINGS = 'greetings',

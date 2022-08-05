@@ -518,8 +518,6 @@ export enum EmoteCategory {
     // (undocumented)
     REACTIONS = "reactions",
     // (undocumented)
-    SIMPLE = "simple",
-    // (undocumented)
     STUNT = "stunt"
 }
 
