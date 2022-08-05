@@ -1096,7 +1096,7 @@ export type NFTFilters = {
     tokenId?: string;
     itemId?: string;
     network?: Network;
-};
+} & Pick<RentalsListingsFilterBy, 'tenant' | 'status'>;
 
 // Warning: (ae-missing-release-tag) "NFTSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1105,13 +1105,21 @@ export enum NFTSortBy {
     // (undocumented)
     CHEAPEST = "cheapest",
     // (undocumented)
+    MAX_RENTAL_PRICE = "max_rental_price",
+    // (undocumented)
+    MIN_RENTAL_PRICE = "min_rental_price",
+    // (undocumented)
     NAME = "name",
     // (undocumented)
     NEWEST = "newest",
     // (undocumented)
     RECENTLY_LISTED = "recently_listed",
     // (undocumented)
-    RECENTLY_SOLD = "recently_sold"
+    RECENTLY_SOLD = "recently_sold",
+    // (undocumented)
+    RENTAL_DATE = "rented_date",
+    // (undocumented)
+    RENTAL_LISTING_DATE = "rental_listing_date"
 }
 
 // Warning: (ae-missing-release-tag) "Order" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1168,6 +1176,24 @@ export enum OrderSortBy {
     RECENTLY_LISTED = "recently_listed",
     // (undocumented)
     RECENTLY_UPDATED = "recently_updated"
+}
+
+// Warning: (ae-missing-release-tag) "PeriodCreation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PeriodCreation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type PeriodCreation = {
+    minDays: number;
+    maxDays: number;
+    pricePerDay: string;
+};
+
+// @public (undocumented)
+export namespace PeriodCreation {
+    const // (undocumented)
+    schema: JSONSchemaType<PeriodCreation>;
+    const // (undocumented)
+    validate: ValidateFunction<PeriodCreation>;
 }
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
@@ -1517,6 +1543,133 @@ export namespace Rarity {
     export function getGradient(rarity: Rarity): [string, string];
     // (undocumented)
     export function getMaxSupply(rarity: Rarity): number;
+}
+
+// Warning: (ae-missing-release-tag) "RentalListing" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type RentalListing = {
+    id: string;
+    nftId: string;
+    category: NFTCategory;
+    searchText: string;
+    network: Network;
+    chainId: ChainId;
+    expiration: number;
+    signature: string;
+    nonces: string[];
+    tokenId: string;
+    contractAddress: string;
+    rentalContractAddress: string;
+    lessor: string | null;
+    tenant: string | null;
+    status: RentalStatus;
+    createdAt: number;
+    updatedAt: number;
+    startedAt: number | null;
+    periods: RentalListingPeriod[];
+};
+
+// Warning: (ae-missing-release-tag) "RentalListingCreation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RentalListingCreation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type RentalListingCreation = {
+    network: Network;
+    chainId: ChainId;
+    expiration: number;
+    signature: string;
+    tokenId: string;
+    contractAddress: string;
+    rentalContractAddress: string;
+    nonces: string[];
+    periods: PeriodCreation[];
+};
+
+// @public (undocumented)
+export namespace RentalListingCreation {
+    const // (undocumented)
+    schema: JSONSchema<RentalListingCreation>;
+    const // (undocumented)
+    validate: ValidateFunction<RentalListingCreation>;
+}
+
+// Warning: (ae-missing-release-tag) "RentalListingPeriod" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type RentalListingPeriod = {
+    minDays: number;
+    maxDays: number;
+    pricePerDay: string;
+};
+
+// Warning: (ae-missing-release-tag) "RentalsListingsFilterBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type RentalsListingsFilterBy = {
+    category?: RentalsListingsFilterByCategory;
+    text?: string;
+    status?: RentalStatus;
+    periods?: RentalsListingsFilterByPeriod;
+    lessor?: string;
+    tenant?: string;
+    tokenId?: string;
+    contractAddresses?: string[];
+    network?: Network;
+    nftIds?: string[];
+};
+
+// Warning: (ae-missing-release-tag) "RentalsListingsFilterByCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export enum RentalsListingsFilterByCategory {
+    // (undocumented)
+    ESTATE = "estate",
+    // (undocumented)
+    LAND = "land"
+}
+
+// Warning: (ae-missing-release-tag) "RentalsListingsFilterByPeriod" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type RentalsListingsFilterByPeriod = {
+    minDays: number;
+    maxDays: number;
+    pricePerDay?: number;
+};
+
+// Warning: (ae-missing-release-tag) "RentalsListingSortDirection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export enum RentalsListingSortDirection {
+    // (undocumented)
+    ASC = "asc",
+    // (undocumented)
+    DESC = "desc"
+}
+
+// Warning: (ae-missing-release-tag) "RentalsListingsSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export enum RentalsListingsSortBy {
+    LAND_CREATION_DATE = "land_creation_date",
+    MAX_RENTAL_PRICE = "max_rental_price",
+    MIN_RENTAL_PRICE = "min_rental_price",
+    NAME = "name",
+    RENTAL_DATE = "rented_date",
+    RENTAL_LISTING_DATE = "rental_listing_date"
+}
+
+// Warning: (ae-missing-release-tag) "RentalStatus" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export enum RentalStatus {
+    // (undocumented)
+    CANCELLED = "cancelled",
+    // (undocumented)
+    EXECUTED = "executed",
+    // (undocumented)
+    OPEN = "open"
 }
 
 // @alpha (undocumented)
@@ -1999,11 +2152,11 @@ export namespace World {
 // src/dapps/mint.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:21:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/mint.ts:41:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/nft.ts:45:7 - (ae-incompatible-release-tags) The symbol "bodyShapes" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
-// src/dapps/nft.ts:55:7 - (ae-incompatible-release-tags) The symbol "bodyShapes" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
-// src/dapps/nft.ts:58:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/nft.ts:59:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/nft.ts:85:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:46:7 - (ae-incompatible-release-tags) The symbol "bodyShapes" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
+// src/dapps/nft.ts:56:7 - (ae-incompatible-release-tags) The symbol "bodyShapes" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
+// src/dapps/nft.ts:59:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:60:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/nft.ts:86:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:22:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:23:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:36:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
@@ -2013,6 +2166,11 @@ export namespace World {
 // src/dapps/preview/preview-config.ts:12:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:17:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
 // src/dapps/preview/preview-message.ts:38:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
+// src/dapps/rentals-listings.ts:88:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/rentals-listings.ts:106:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/rentals-listings.ts:108:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/rentals-listings.ts:154:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/rentals-listings.ts:156:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:22:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:23:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:46:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
