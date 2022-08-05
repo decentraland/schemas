@@ -504,7 +504,21 @@ export namespace Emote {
 // @public (undocumented)
 export enum EmoteCategory {
     // (undocumented)
-    SIMPLE = "simple"
+    DANCE = "dance",
+    // (undocumented)
+    FUN = "fun",
+    // (undocumented)
+    GREETINGS = "greetings",
+    // (undocumented)
+    HORROR = "horror",
+    // (undocumented)
+    MISCELLANEOUS = "miscellaneous",
+    // (undocumented)
+    POSES = "poses",
+    // (undocumented)
+    REACTIONS = "reactions",
+    // (undocumented)
+    STUNT = "stunt"
 }
 
 // @public (undocumented)

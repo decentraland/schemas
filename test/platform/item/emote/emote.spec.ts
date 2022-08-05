@@ -35,7 +35,7 @@ describe('Emote tests', () => {
   }
 
   const emoteDataADR74 = {
-    category: EmoteCategory.SIMPLE,
+    category: EmoteCategory.DANCE,
     representations: [representation],
     tags: ['tag1'],
     loop: false
