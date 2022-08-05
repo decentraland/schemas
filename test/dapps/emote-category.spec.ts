@@ -3,7 +3,7 @@ import { EmoteCategory } from '../../src'
 import { testTypeSignature } from '../test-utils'
 
 describe('EmoteCategory tests', () => {
-  const emoteCategory: EmoteCategory = EmoteCategory.SIMPLE
+  const emoteCategory: EmoteCategory = EmoteCategory.DANCE
 
   testTypeSignature(EmoteCategory, emoteCategory)
 

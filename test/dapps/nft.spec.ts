@@ -204,7 +204,7 @@ describe('NFT tests', () => {
       data: {
         emote: {
           description: 'Some Description',
-          category: EmoteCategory.SIMPLE,
+          category: EmoteCategory.DANCE,
           bodyShapes: [BodyShape.MALE, BodyShape.FEMALE],
           rarity: Rarity.MYTHIC
         }
