@@ -27,6 +27,18 @@ export { Rarity } from './dapps/rarity'
 export { SaleType } from './dapps/sale-type'
 export { Sale, SaleFilters, SaleSortBy } from './dapps/sale'
 export {
+  RentalStatus,
+  RentalsListingSortDirection,
+  RentalsListingsFilterByCategory,
+  RentalsListingsSortBy,
+  RentalsListingsFilterByPeriod,
+  RentalsListingsFilterBy,
+  RentalListing,
+  RentalListingPeriod,
+  RentalListingCreation,
+  PeriodCreation
+} from './dapps/rentals-listings'
+export {
   AnalyticsDayData,
   AnalyticsDayDataFilters,
   AnalyticsDayDataSortBy

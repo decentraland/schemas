@@ -10,6 +10,7 @@ import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'
 import { WearableCategory } from './wearable-category'
 import { WearableGender } from './wearable-gender'
+import { RentalsListingsFilterBy } from './rentals-listings'
 
 export type NFT = {
   id: string
@@ -83,14 +84,18 @@ export type NFTFilters = {
   tokenId?: string
   itemId?: string
   network?: Network
-}
+} & Pick<RentalsListingsFilterBy, 'tenant' | 'status'>
 
 export enum NFTSortBy {
   NAME = 'name',
   NEWEST = 'newest',
   RECENTLY_LISTED = 'recently_listed',
   RECENTLY_SOLD = 'recently_sold',
-  CHEAPEST = 'cheapest'
+  CHEAPEST = 'cheapest',
+  RENTAL_LISTING_DATE = 'rental_listing_date',
+  RENTAL_DATE = 'rented_date',
+  MAX_RENTAL_PRICE = 'max_rental_price',
+  MIN_RENTAL_PRICE = 'min_rental_price'
 }
 
 export namespace NFT {
