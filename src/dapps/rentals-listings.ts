@@ -209,9 +209,10 @@ export namespace RentalListingCreation {
       tokenId: { type: 'string', minLength: 1 },
       nonces: {
         type: 'array',
+        minItems: 3,
+        maxItems: 3,
         items: {
-          minLength: 3,
-          maxLength: 3,
+          minLength: 1,
           type: 'string',
           pattern: '^[0-9]+$'
         }

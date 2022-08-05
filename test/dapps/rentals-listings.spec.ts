@@ -13,8 +13,8 @@ describe('Rental listings creation tests', () => {
       expiration: 23423,
       signature: '0x0',
       tokenId: '0',
-      contractAddress: '',
-      rentalContractAddress: '',
+      contractAddress: '0xCACA50770373E85DBe427Fdc46DE3e996a74f446',
+      rentalContractAddress: '0x7331871C7d3AB25BD4F37179650c76fe2Cc6F6a6',
       nonces: ['0', '0', '0'],
       periods: [
         {
@@ -167,8 +167,6 @@ describe('Rental listings creation tests', () => {
   })
 
   it('should return as valid a creation rental listing that has all properties correctly set', () => {
-    expect(RentalListingCreation.validate(baseRentalListingCreation)).toBe(
-      false
-    )
+    expect(RentalListingCreation.validate(baseRentalListingCreation)).toBe(true)
   })
 })
