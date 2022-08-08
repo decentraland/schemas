@@ -70,6 +70,7 @@ export type NFTFilters = {
   category?: NFTCategory
   owner?: string
   isOnSale?: boolean
+  isOnRent?: boolean
   search?: string
   itemRarities?: Rarity[]
   isLand?: boolean
