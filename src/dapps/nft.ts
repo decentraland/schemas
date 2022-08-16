@@ -17,7 +17,8 @@ export type NFT = {
   contractAddress: string
   tokenId: string
   activeOrderId: string | null
-  activeRentalListingId: string | null
+  /** The ID of the open rental listing associated with the NFT */
+  openRentalId: string | null
   owner: string
   name: string
   category: NFTCategory
@@ -117,7 +118,7 @@ export namespace NFT {
         type: 'string',
         nullable: true
       },
-      activeRentalListingId: {
+      openRentalId: {
         type: 'string',
         nullable: true
       },
