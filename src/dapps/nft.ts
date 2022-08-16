@@ -277,6 +277,7 @@ export namespace NFT {
       'tokenId',
       'contractAddress',
       'activeOrderId',
+      'openRentalId',
       'owner',
       'name',
       'image',
