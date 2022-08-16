@@ -13,7 +13,6 @@ import { Network } from './network'
  */
 export enum ChainId {
   ETHEREUM_MAINNET = 1,
-  ETHEREUM_ROPSTEN = 3,
   ETHEREUM_RINKEBY = 4,
   ETHEREUM_GOERLI = 5,
   ETHEREUM_KOVAN = 42,
@@ -29,8 +28,6 @@ export function getChainName(chainId: ChainId): ChainName | null {
   switch (chainId) {
     case ChainId.ETHEREUM_MAINNET:
       return ChainName.ETHEREUM_MAINNET
-    case ChainId.ETHEREUM_ROPSTEN:
-      return ChainName.ETHEREUM_ROPSTEN
     case ChainId.ETHEREUM_RINKEBY:
       return ChainName.ETHEREUM_RINKEBY
     case ChainId.ETHEREUM_GOERLI:
@@ -54,8 +51,6 @@ export function getURNProtocol(chainId: ChainId): string {
   switch (chainId) {
     case ChainId.ETHEREUM_MAINNET:
       return 'mainnet'
-    case ChainId.ETHEREUM_ROPSTEN:
-      return 'ropsten'
     case ChainId.ETHEREUM_RINKEBY:
       return 'rinkeby'
     case ChainId.ETHEREUM_GOERLI:
@@ -84,11 +79,6 @@ export function getNetworkMapping(chainId: ChainId): {
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_MAINNET,
         [Network.MATIC]: ChainId.MATIC_MAINNET
-      }
-    case ChainId.ETHEREUM_ROPSTEN:
-      return {
-        [Network.ETHEREUM]: ChainId.ETHEREUM_ROPSTEN,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI
       }
     case ChainId.ETHEREUM_RINKEBY:
       return {
@@ -125,7 +115,6 @@ export function getNetworkMapping(chainId: ChainId): {
 export function getNetwork(chainId: ChainId): Network {
   switch (chainId) {
     case ChainId.ETHEREUM_MAINNET:
-    case ChainId.ETHEREUM_ROPSTEN:
     case ChainId.ETHEREUM_GOERLI:
     case ChainId.ETHEREUM_KOVAN:
     case ChainId.ETHEREUM_RINKEBY:
