@@ -8,6 +8,13 @@ export interface IPreviewController {
 export interface ISceneController {
   getScreenshot(width: number, height: number): Promise<string>
   getMetrics(): Promise<Metrics>
+  changeZoom(zoom: number): Promise<void>
+  panCamera(offset: { x?: number; y?: number; z?: number }): Promise<void>
+  changeCameraPosition(position: {
+    alpha?: number
+    beta?: number
+    radius?: number
+  }): Promise<void>
 }
 export interface IEmoteController {
   getLength(): Promise<number>
