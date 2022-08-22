@@ -717,12 +717,24 @@ export interface IPreviewController {
 //
 // @public (undocumented)
 export interface ISceneController {
+    // (undocumented)
+    changeCameraPosition(position: {
+        alpha?: number;
+        beta?: number;
+        radius?: number;
+    }): Promise<void>;
     // Warning: (ae-incompatible-release-tags) The symbol "getMetrics" is marked as @public, but its signature references "Metrics" which is marked as @alpha
     //
     // (undocumented)
     getMetrics(): Promise<Metrics>;
     // (undocumented)
     getScreenshot(width: number, height: number): Promise<string>;
+    // (undocumented)
+    panCamera(offset: {
+        x?: number;
+        y?: number;
+        z?: number;
+    }): Promise<void>;
 }
 
 // @alpha
