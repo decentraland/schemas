@@ -723,6 +723,8 @@ export interface ISceneController {
         beta?: number;
         radius?: number;
     }): Promise<void>;
+    // (undocumented)
+    changeZoom(zoom: number): Promise<void>;
     // Warning: (ae-incompatible-release-tags) The symbol "getMetrics" is marked as @public, but its signature references "Metrics" which is marked as @alpha
     //
     // (undocumented)
