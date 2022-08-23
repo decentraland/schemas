@@ -1349,7 +1349,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
 } : T extends PreviewMessageType.CONTROLLER_REQUEST ? {
     id: string;
     namespace: 'scene' | 'emote';
-    method: 'getScreenshot' | 'getMetrics' | 'getLength' | 'isPlaying' | 'play' | 'pause' | 'stop' | 'goTo';
+    method: 'getScreenshot' | 'getMetrics' | 'changeZoom' | 'changeCameraPosition' | 'panCamera' | 'getLength' | 'isPlaying' | 'play' | 'pause' | 'stop' | 'goTo';
     params: any[];
 } : T extends PreviewMessageType.CONTROLLER_RESPONSE ? {
     id: string;

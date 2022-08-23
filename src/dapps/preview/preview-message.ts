@@ -43,6 +43,9 @@ export type PreviewMessagePayload<T extends PreviewMessageType> =
         method:
           | 'getScreenshot'
           | 'getMetrics'
+          | 'changeZoom'
+          | 'changeCameraPosition'
+          | 'panCamera'
           | 'getLength'
           | 'isPlaying'
           | 'play'
