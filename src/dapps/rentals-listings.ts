@@ -30,7 +30,7 @@ export enum RentalsListingSortDirection {
  * All the possible NFT categories of a rental listing.
  */
 export enum RentalsListingsFilterByCategory {
-  LAND = 'land',
+  PARCEL = 'parcel',
   ESTATE = 'estate'
 }
 

@@ -1642,7 +1642,7 @@ export enum RentalsListingsFilterByCategory {
     // (undocumented)
     ESTATE = "estate",
     // (undocumented)
-    LAND = "land"
+    PARCEL = "parcel"
 }
 
 // Warning: (ae-missing-release-tag) "RentalsListingsFilterByPeriod" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
