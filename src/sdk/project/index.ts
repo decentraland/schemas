@@ -1,2 +1,2 @@
 export * from './type'
-export * from './asset-json'
+export * from './wearable-json'
