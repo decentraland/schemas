@@ -103,27 +103,6 @@ export enum AnalyticsDayDataSortBy {
     MOST_SALES = "most_sales"
 }
 
-// @alpha (undocumented)
-type AssetJson = {
-    id: string;
-    assetType: string;
-    name: string;
-    description: string;
-    thumbnail: string;
-    model: string;
-    category: WearableCategory;
-    rarity: Rarity;
-    bodyShape: AssetWearableGender;
-};
-
-// @alpha (undocumented)
-namespace AssetJson {
-    const // (undocumented)
-    schema: JSONSchema<AssetJson>;
-    const // (undocumented)
-    validate: ValidateFunction<AssetJson>;
-}
-
 // @public
 export type AuthChain = AuthLink[];
 
@@ -1860,7 +1839,7 @@ declare namespace sdk {
         UPDATE,
         Update,
         ProjectType,
-        AssetJson
+        WearableJson
     }
 }
 export { sdk }
@@ -2113,6 +2092,19 @@ export namespace WearableGender {
 export type WearableId = string;
 
 // @alpha (undocumented)
+type WearableJson = Pick<Wearable, 'data' | 'name' | 'description'> & {
+    rarity: Rarity;
+};
+
+// @alpha (undocumented)
+namespace WearableJson {
+    const // (undocumented)
+    schema: JSONSchema<WearableJson>;
+    const // (undocumented)
+    validate: ValidateFunction<WearableJson>;
+}
+
+// @alpha (undocumented)
 export type WearableRepresentation = {
     bodyShapes: BodyShape[];
     mainFile: string;
@@ -2194,7 +2186,6 @@ export namespace World {
 // src/platform/item/third-party-props.ts:10:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
 // src/platform/scene/spawn-point.ts:10:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:10:3 - (ae-forgotten-export) The symbol "MultiPosition" needs to be exported by the entry point index.d.ts
-// src/sdk/project/asset-json.ts:24:3 - (ae-forgotten-export) The symbol "AssetWearableGender" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 
