@@ -1233,6 +1233,7 @@ export type PreviewConfig = {
     projection: PreviewProjection;
     autoRotateSpeed: number;
     centerBoundingBox: boolean;
+    fadeEffect: boolean;
     offsetX: number;
     offsetY: number;
     offsetZ: number;
@@ -1304,22 +1305,6 @@ export namespace PreviewEmoteEventType {
     schema: JSONSchema<PreviewEmoteEventType>;
     const // (undocumented)
     validate: ValidateFunction<PreviewEmoteEventType>;
-}
-
-// @alpha (undocumented)
-export enum PreviewEnv {
-    // (undocumented)
-    DEV = "dev",
-    // (undocumented)
-    PROD = "prod"
-}
-
-// @alpha (undocumented)
-export namespace PreviewEnv {
-    const // (undocumented)
-    schema: JSONSchema<PreviewEnv>;
-    const // (undocumented)
-    validate: ValidateFunction<PreviewEnv>;
 }
 
 // Warning: (ae-missing-release-tag) "PreviewMessagePayload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1410,7 +1395,9 @@ export type PreviewOptions = {
     disableFace?: boolean | null;
     disableDefaultWearables?: boolean | null;
     disableDefaultEmotes?: boolean | null;
-    env?: PreviewEnv | null;
+    disableFadeEffect?: boolean | null;
+    peerUrl?: string | null;
+    nftServerUrl?: string | null;
 };
 
 // Warning: (ae-missing-release-tag) "PreviewProjection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

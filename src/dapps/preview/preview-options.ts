@@ -1,7 +1,6 @@
 import { BodyShape } from '../../platform/item'
 import { PreviewCamera } from './preview-camera'
 import { PreviewEmote } from './preview-emote'
-import { PreviewEnv } from './preview-env'
 import { PreviewProjection } from './preview-projection'
 import { WearableWithBlobs } from './wearable-with-blobs'
 
@@ -40,5 +39,7 @@ export type PreviewOptions = {
   disableFace?: boolean | null
   disableDefaultWearables?: boolean | null
   disableDefaultEmotes?: boolean | null
-  env?: PreviewEnv | null
+  disableFadeEffect?: boolean | null
+  peerUrl?: string | null
+  nftServerUrl?: string | null
 }

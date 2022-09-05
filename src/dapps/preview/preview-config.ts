@@ -26,6 +26,7 @@ export type PreviewConfig = {
   projection: PreviewProjection
   autoRotateSpeed: number
   centerBoundingBox: boolean
+  fadeEffect: boolean
   offsetX: number
   offsetY: number
   offsetZ: number
