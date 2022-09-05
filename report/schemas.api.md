@@ -1233,6 +1233,7 @@ export type PreviewConfig = {
     projection: PreviewProjection;
     autoRotateSpeed: number;
     centerBoundingBox: boolean;
+    fadeEffect: boolean;
     offsetX: number;
     offsetY: number;
     offsetZ: number;
@@ -1410,6 +1411,7 @@ export type PreviewOptions = {
     disableFace?: boolean | null;
     disableDefaultWearables?: boolean | null;
     disableDefaultEmotes?: boolean | null;
+    disableFadeEffect?: boolean | null;
     env?: PreviewEnv | null;
 };
 

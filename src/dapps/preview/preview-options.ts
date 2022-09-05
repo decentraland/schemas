@@ -40,5 +40,6 @@ export type PreviewOptions = {
   disableFace?: boolean | null
   disableDefaultWearables?: boolean | null
   disableDefaultEmotes?: boolean | null
+  disableFadeEffect?: boolean | null
   env?: PreviewEnv | null
 }
