@@ -1214,8 +1214,8 @@ export namespace PreviewCamera {
 //
 // @public (undocumented)
 export type PreviewConfig = {
-    wearable?: WearableDefinition | EmoteDefinition;
-    wearables: (WearableDefinition | EmoteDefinition)[];
+    item?: WearableDefinition | EmoteDefinition;
+    wearables: WearableDefinition[];
     bodyShape: BodyShape;
     skin: string;
     hair: string;
@@ -2156,7 +2156,7 @@ export namespace World {
 // src/dapps/order.ts:23:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:36:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/preview/emote-definition.ts:16:5 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationDefinition" which is marked as @alpha
-// src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "wearable" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
+// src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "item" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:11:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:12:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:17:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha

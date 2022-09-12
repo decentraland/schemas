@@ -7,8 +7,8 @@ import { PreviewType } from './preview-type'
 import { WearableDefinition } from './wearable-definition'
 
 export type PreviewConfig = {
-  wearable?: WearableDefinition | EmoteDefinition
-  wearables: (WearableDefinition | EmoteDefinition)[]
+  item?: WearableDefinition | EmoteDefinition
+  wearables: WearableDefinition[]
   bodyShape: BodyShape
   skin: string
   hair: string
