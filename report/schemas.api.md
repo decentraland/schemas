@@ -560,6 +560,21 @@ export type EmoteRepresentationDefinition = Omit<EmoteRepresentationADR74, 'cont
     }[];
 };
 
+// @alpha (undocumented)
+export type EmoteRepresentationWithBlobs = Omit<EmoteRepresentationDefinition, 'contents'> & {
+    contents: {
+        key: string;
+        blob: any;
+    }[];
+};
+
+// @alpha (undocumented)
+export type EmoteWithBlobs = Omit<EmoteDefinition, 'emoteDataADR74'> & {
+    data: Omit<EmoteDefinition['emoteDataADR74'], 'representations'> & {
+        representations: EmoteRepresentationWithBlobs[];
+    };
+};
+
 // @public
 export type Entity = {
     version: string;
@@ -1654,22 +1669,6 @@ export enum RentalStatus {
     OPEN = "open"
 }
 
-// @alpha (undocumented)
-export type RepresentationDefinition = Omit<WearableRepresentation, 'contents'> & {
-    contents: {
-        key: string;
-        url: string;
-    }[];
-};
-
-// @alpha (undocumented)
-export type RepresentationWithBlobs = Omit<RepresentationDefinition, 'contents'> & {
-    contents: {
-        key: string;
-        blob: any;
-    }[];
-};
-
 // Warning: (ae-missing-release-tag) "Sale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Sale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -2049,7 +2048,7 @@ export namespace WearableCategory {
 // @alpha (undocumented)
 export type WearableDefinition = Omit<Wearable, 'data'> & {
     data: Omit<Wearable['data'], 'representations'> & {
-        representations: RepresentationDefinition[];
+        representations: WearableRepresentationDefinition[];
     };
     emoteDataV0?: {
         loop: boolean;
@@ -2109,9 +2108,25 @@ export namespace WearableRepresentation {
 }
 
 // @alpha (undocumented)
+export type WearableRepresentationDefinition = Omit<WearableRepresentation, 'contents'> & {
+    contents: {
+        key: string;
+        url: string;
+    }[];
+};
+
+// @alpha (undocumented)
+export type WearableRepresentationWithBlobs = Omit<WearableRepresentationDefinition, 'contents'> & {
+    contents: {
+        key: string;
+        blob: any;
+    }[];
+};
+
+// @alpha (undocumented)
 export type WearableWithBlobs = Omit<WearableDefinition, 'data'> & {
     data: Omit<WearableDefinition['data'], 'representations'> & {
-        representations: RepresentationWithBlobs[];
+        representations: WearableRepresentationWithBlobs[];
     };
 };
 
@@ -2155,7 +2170,7 @@ export namespace World {
 // src/dapps/order.ts:22:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:23:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:36:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/preview/emote-definition.ts:16:5 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationDefinition" which is marked as @alpha
+// src/dapps/preview/emote-definition.ts:6:5 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "item" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:11:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:12:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha

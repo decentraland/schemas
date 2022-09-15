@@ -1,7 +1,7 @@
 import { WearableRepresentation } from '../../platform/item/wearable'
 
 /** @alpha */
-export type RepresentationDefinition = Omit<
+export type WearableRepresentationDefinition = Omit<
   WearableRepresentation,
   'contents'
 > & { contents: { key: string; url: string }[] }
