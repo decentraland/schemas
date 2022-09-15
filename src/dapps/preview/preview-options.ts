@@ -1,4 +1,5 @@
 import { BodyShape } from '../../platform/item'
+import { EmoteWithBlobs } from './emote-with-blobs'
 import { PreviewCamera } from './preview-camera'
 import { PreviewEmote } from './preview-emote'
 import { PreviewProjection } from './preview-projection'
@@ -17,7 +18,7 @@ export type PreviewOptions = {
   urns?: string[] | null
   urls?: string[] | null
   base64s?: string[] | null
-  blob?: WearableWithBlobs | null
+  blob?: WearableWithBlobs | EmoteWithBlobs | null
   zoom?: number | null
   emote?: PreviewEmote | null
   camera?: PreviewCamera | null

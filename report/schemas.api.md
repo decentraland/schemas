@@ -1388,7 +1388,7 @@ export type PreviewOptions = {
     urns?: string[] | null;
     urls?: string[] | null;
     base64s?: string[] | null;
-    blob?: WearableWithBlobs | null;
+    blob?: WearableWithBlobs | EmoteWithBlobs | null;
     zoom?: number | null;
     emote?: PreviewEmote | null;
     camera?: PreviewCamera | null;
