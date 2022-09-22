@@ -1249,6 +1249,7 @@ export type PreviewConfig = {
     autoRotateSpeed: number;
     centerBoundingBox: boolean;
     fadeEffect: boolean;
+    showSceneBoundaries?: boolean;
     offsetX: number;
     offsetY: number;
     offsetZ: number;
@@ -1411,6 +1412,7 @@ export type PreviewOptions = {
     disableDefaultWearables?: boolean | null;
     disableDefaultEmotes?: boolean | null;
     disableFadeEffect?: boolean | null;
+    showSceneBoundaries?: boolean;
     peerUrl?: string | null;
     nftServerUrl?: string | null;
 };

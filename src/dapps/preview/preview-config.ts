@@ -27,6 +27,7 @@ export type PreviewConfig = {
   autoRotateSpeed: number
   centerBoundingBox: boolean
   fadeEffect: boolean
+  showSceneBoundaries?: boolean
   offsetX: number
   offsetY: number
   offsetZ: number
