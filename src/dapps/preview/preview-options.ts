@@ -41,6 +41,7 @@ export type PreviewOptions = {
   disableDefaultWearables?: boolean | null
   disableDefaultEmotes?: boolean | null
   disableFadeEffect?: boolean | null
+  showSceneBoundaries?: boolean
   peerUrl?: string | null
   nftServerUrl?: string | null
 }
