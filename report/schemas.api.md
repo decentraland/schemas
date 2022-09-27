@@ -2052,9 +2052,6 @@ export type WearableDefinition = Omit<Wearable, 'data'> & {
     data: Omit<Wearable['data'], 'representations'> & {
         representations: WearableRepresentationDefinition[];
     };
-    emoteDataV0?: {
-        loop: boolean;
-    };
 };
 
 // Warning: (ae-missing-release-tag) "WearableGender" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
