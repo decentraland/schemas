@@ -6,7 +6,4 @@ export type WearableDefinition = Omit<Wearable, 'data'> & {
   data: Omit<Wearable['data'], 'representations'> & {
     representations: WearableRepresentationDefinition[]
   }
-  emoteDataV0?: {
-    loop: boolean
-  }
 }
