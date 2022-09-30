@@ -537,6 +537,25 @@ export type EmoteDefinition = Omit<Emote, 'emoteDataADR74'> & {
     };
 };
 
+// Warning: (ae-missing-release-tag) "EmotePlayMode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmotePlayMode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum EmotePlayMode {
+    // (undocumented)
+    LOOP = "loop",
+    // (undocumented)
+    SIMPLE = "simple"
+}
+
+// @public (undocumented)
+export namespace EmotePlayMode {
+    const // (undocumented)
+    schema: JSONSchema<EmotePlayMode>;
+    const // (undocumented)
+    validate: ValidateFunction<EmotePlayMode>;
+}
+
 // @alpha (undocumented)
 export type EmoteRepresentationADR74 = {
     bodyShapes: BodyShape[];
@@ -806,6 +825,7 @@ export type ItemFilters = {
     wearableGenders?: WearableGender[];
     emoteCategory?: EmoteCategory;
     emoteGenders?: WearableGender[];
+    emotePlayMode?: EmotePlayMode;
     contractAddress?: string;
     itemId?: string;
     network?: Network;
@@ -1102,6 +1122,7 @@ export type NFTFilters = {
     wearableGenders?: WearableGender[];
     emoteCategory?: EmoteCategory;
     emoteGenders?: WearableGender[];
+    emotePlayMode?: EmotePlayMode;
     contractAddresses?: string[];
     tokenId?: string;
     itemId?: string;
@@ -2157,7 +2178,7 @@ export namespace World {
 // src/dapps/contract.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/item.ts:34:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/item.ts:35:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/item.ts:57:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/item.ts:58:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:21:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/mint.ts:41:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
@@ -2165,7 +2186,7 @@ export namespace World {
 // src/dapps/nft.ts:58:7 - (ae-incompatible-release-tags) The symbol "bodyShapes" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/nft.ts:61:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/nft.ts:62:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/nft.ts:89:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:90:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:22:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:23:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:36:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
