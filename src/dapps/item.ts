@@ -4,7 +4,7 @@ import {
   ValidateFunction
 } from '../validation'
 import { ChainId } from './chain-id'
-import { EmoteCategory } from '../platform'
+import { EmoteCategory, EmotePlayMode } from '../platform'
 import { Network } from './network'
 import { NFT } from './nft'
 import { NFTCategory } from './nft-category'
@@ -52,6 +52,7 @@ export type ItemFilters = {
   wearableGenders?: WearableGender[]
   emoteCategory?: EmoteCategory
   emoteGenders?: WearableGender[]
+  emotePlayMode?: EmotePlayMode
   contractAddress?: string
   itemId?: string
   network?: Network
