@@ -56,6 +56,7 @@ export type NFT = {
       category: EmoteCategory
       rarity: Rarity
       bodyShapes: BodyShape[]
+      loop: boolean
     }
   }
   network: Network
@@ -244,7 +245,10 @@ export namespace NFT {
               description: {
                 type: 'string'
               },
-              rarity: Rarity.schema
+              rarity: Rarity.schema,
+              loop: {
+                type: 'boolean'
+              }
             },
             required: ['bodyShapes', 'category', 'description', 'rarity'],
             nullable: true
