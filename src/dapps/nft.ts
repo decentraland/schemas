@@ -250,7 +250,13 @@ export namespace NFT {
                 type: 'boolean'
               }
             },
-            required: ['bodyShapes', 'category', 'description', 'rarity'],
+            required: [
+              'bodyShapes',
+              'category',
+              'description',
+              'rarity',
+              'loop'
+            ],
             nullable: true
           }
         },
