@@ -826,7 +826,7 @@ export type ItemFilters = {
     emoteCategory?: EmoteCategory;
     emoteGenders?: WearableGender[];
     emotePlayMode?: EmotePlayMode;
-    contractAddress?: string;
+    contractAddresses?: string[];
     itemId?: string;
     network?: Network;
 };
