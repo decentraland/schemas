@@ -25,24 +25,24 @@ const chain: AuthChain = [
 ]
 
 describe('deployments-to-sqs', () => {
-  it('valid with empty baseUrls', () => {
+  it('valid with empty contentServerUrls', () => {
     const deploymentToSqs: DeploymentToSqs = {
       entity: {
         entityId: 'baz',
         authChain: chain,
       },
-      baseUrls: []
+      contentServerUrls: []
     }
     expect(DeploymentToSqs.validate(deploymentToSqs)).toEqual(true)
   })
 
-  it('valid with baseUrls', () => {
+  it('valid with contentServerUrls', () => {
     const deploymentToSqs: DeploymentToSqs = {
       entity: {
         entityId: 'baz',
         authChain: chain,
       },
-      baseUrls: [
+      contentServerUrls: [
           'https://peer.decentraland.org'
       ]
     }
@@ -57,14 +57,14 @@ describe('deployments-to-sqs', () => {
         metadata: {},
         authChain: chain,
       },
-      baseUrls: [
+      contentServerUrls: [
           'https://peer.decentraland.org'
       ]
     }
     expect(DeploymentToSqs.validate(deploymentToSqs)).toEqual(true)
   })
 
-  it('valid if no baseUrls', () => {
+  it('valid if no contentServerUrls', () => {
     const deploymentToSqs = {
       entity: {
         entityId: 'someId',
@@ -79,7 +79,7 @@ describe('deployments-to-sqs', () => {
       entity: {
         authChain: chain,
       },
-      baseUrls: [
+      contentServerUrls: [
           'https://peer.decentraland.org'
       ]
     }
@@ -93,7 +93,7 @@ describe('deployments-to-sqs', () => {
       entity: {
         entityId: 'someId',
       },
-      baseUrls: [
+      contentServerUrls: [
           'https://peer.decentraland.org'
       ]
     }

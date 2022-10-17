@@ -9,34 +9,11 @@ import { AuthChain } from "./auth-chain";
  * @public
  */
 export type DeploymentToSqs = {
-  entity: Entity
-  baseUrls?: string[]
-}
-
-/**
- * @public
- */
-export type Entity = {
-  entityId: string
-  authChain: AuthChain
-}
-
-/**
- * @public
- */
-export namespace Entity {
-  export const schema: JSONSchema<Entity> = {
-    type: 'object',
-    required: [
-      'entityId',
-      'authChain',
-    ],
-    properties: {
-      entityId: { type: 'string' },
-      authChain: AuthChain.schema
-    },
-    additionalProperties: true
+  entity: {
+    entityId: string
+    authChain: AuthChain
   }
+  contentServerUrls?: string[]
 }
 
 /**
@@ -47,8 +24,23 @@ export namespace DeploymentToSqs {
     type: 'object',
     required: ['entity'],
     properties: {
-      entity: Entity.schema,
-      baseUrls:  { type: 'array', items: { type: 'string' } }
+      entity: {
+        type: 'object',
+        required: [
+          'entityId',
+          'authChain',
+        ],
+        properties: {
+          entityId: { type: 'string' },
+          authChain: AuthChain.schema
+        },
+        additionalProperties: true
+      },
+      contentServerUrls: {
+        type: 'array',
+        items: { type: 'string' },
+        nullable: true,
+      }
     },
     additionalProperties: true
   }
