@@ -3,7 +3,7 @@ import {
   generateLazyValidator,
   ValidateFunction
 } from '../validation'
-import { AuthChain } from "./auth-chain";
+import { AuthChain } from './auth-chain'
 
 /**
  * @public
@@ -26,10 +26,7 @@ export namespace DeploymentToSqs {
     properties: {
       entity: {
         type: 'object',
-        required: [
-          'entityId',
-          'authChain',
-        ],
+        required: ['entityId', 'authChain'],
         properties: {
           entityId: { type: 'string' },
           authChain: AuthChain.schema
@@ -39,7 +36,7 @@ export namespace DeploymentToSqs {
       contentServerUrls: {
         type: 'array',
         items: { type: 'string' },
-        nullable: true,
+        nullable: true
       }
     },
     additionalProperties: true
