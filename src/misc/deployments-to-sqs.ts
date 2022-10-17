@@ -10,7 +10,7 @@ import { AuthChain } from "./auth-chain";
  */
 export type DeploymentToSqs = {
   entity: Entity
-  baseUrls: string[]
+  baseUrls?: string[]
 }
 
 /**
