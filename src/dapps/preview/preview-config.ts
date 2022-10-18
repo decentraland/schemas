@@ -28,6 +28,7 @@ export type PreviewConfig = {
   centerBoundingBox: boolean
   fadeEffect: boolean
   showSceneBoundaries?: boolean
+  showThumbnailBoundaries?: boolean
   offsetX: number
   offsetY: number
   offsetZ: number

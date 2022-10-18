@@ -1268,6 +1268,7 @@ export type PreviewConfig = {
     centerBoundingBox: boolean;
     fadeEffect: boolean;
     showSceneBoundaries?: boolean;
+    showThumbnailBoundaries?: boolean;
     offsetX: number;
     offsetY: number;
     offsetZ: number;
@@ -1431,6 +1432,7 @@ export type PreviewOptions = {
     disableDefaultEmotes?: boolean | null;
     disableFadeEffect?: boolean | null;
     showSceneBoundaries?: boolean;
+    showThumbnailBoundaries?: boolean;
     peerUrl?: string | null;
     nftServerUrl?: string | null;
 };
