@@ -42,6 +42,7 @@ export type PreviewOptions = {
   disableDefaultEmotes?: boolean | null
   disableFadeEffect?: boolean | null
   showSceneBoundaries?: boolean
+  showThumbnailBoundaries?: boolean
   peerUrl?: string | null
   nftServerUrl?: string | null
 }

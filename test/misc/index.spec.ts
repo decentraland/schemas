@@ -1,5 +1,15 @@
 import expect from 'expect'
+import { readFileSync } from 'fs'
 import { EthAddress, IPFSv2, Color3 } from '../../src/misc'
+
+describe('sanity of generated types', () => {
+  const report = readFileSync('./report/schemas.api.md').toString()
+
+  it("resulting types don't include /// <reference", () => {
+    const matches = report.match(/<reference .*/) || []
+    expect(matches).toHaveLength(0)
+  })
+})
 
 describe('Misc tests', () => {
   it('EthAddress static tests must pass', () => {
