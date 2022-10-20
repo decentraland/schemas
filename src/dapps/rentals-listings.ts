@@ -170,6 +170,8 @@ export type RentalListingCreation = {
   nonces: string[]
   /** The periods of the rental */
   periods: PeriodCreation[]
+  /** The target address that can use the signature. If no target is wanted, use the zero address  */
+  target: string
 }
 
 /**
@@ -227,7 +229,8 @@ export namespace RentalListingCreation {
         maxItems: 100,
         uniqueItems: true,
         items: PeriodCreation.schema
-      }
+      },
+      target: { type: 'string', pattern: '^0x[a-fA-F0-9]{40}$' }
     },
     additionalProperties: false,
     required: [
@@ -239,7 +242,8 @@ export namespace RentalListingCreation {
       'tokenId',
       'contractAddress',
       'rentalContractAddress',
-      'periods'
+      'periods',
+      'target'
     ]
   }
   export const validate: ValidateFunction<RentalListingCreation> =
