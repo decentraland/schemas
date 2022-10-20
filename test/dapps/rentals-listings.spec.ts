@@ -22,7 +22,8 @@ describe('Rental listings creation tests', () => {
           maxDays: 20,
           pricePerDay: '1000000'
         }
-      ]
+      ],
+      target: '0x0000000000000000000000000000000000000000'
     }
   })
 
