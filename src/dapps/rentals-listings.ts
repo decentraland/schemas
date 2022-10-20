@@ -132,6 +132,8 @@ export type RentalListing = {
   startedAt: number | null
   /** The periods of the rental */
   periods: RentalListingPeriod[]
+  /** The target address that can use the signature. If no target is wanted, the zero address will be used  */
+  target: string
 }
 
 /**
