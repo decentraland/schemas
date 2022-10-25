@@ -15,7 +15,8 @@ import { NFTCategory } from './nft-category'
 export enum RentalStatus {
   OPEN = 'open',
   CANCELLED = 'cancelled',
-  EXECUTED = 'executed'
+  EXECUTED = 'executed',
+  CLAIMED = 'claimed'
 }
 
 /**
