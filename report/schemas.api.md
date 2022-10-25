@@ -1631,7 +1631,7 @@ export type RentalListingPeriod = {
 export type RentalsListingsFilterBy = {
     category?: RentalsListingsFilterByCategory;
     text?: string;
-    status?: RentalStatus;
+    status?: RentalStatus | RentalStatus[];
     periods?: RentalsListingsFilterByPeriod;
     lessor?: string;
     tenant?: string;

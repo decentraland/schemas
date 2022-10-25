@@ -73,8 +73,8 @@ export type RentalsListingsFilterBy = {
   category?: RentalsListingsFilterByCategory
   /** The blockchain search text of the NFT asset */
   text?: string
-  /** The listing status of the NFT asset rental */
-  status?: RentalStatus
+  /** The listing status or statuses of the NFT asset rental */
+  status?: RentalStatus | RentalStatus[]
   /** The periods of the rental listings the NFT assets where put for rent */
   periods?: RentalsListingsFilterByPeriod
   /** The address of the lessor who put the NFT asset for rent */
