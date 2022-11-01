@@ -70,7 +70,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> =
     : T extends PreviewMessageType.EMOTE_EVENT
     ? {
         type: PreviewEmoteEventType
-        payload?: EmoteEventPayload<PreviewEmoteEventType>
+        payload: EmoteEventPayload<PreviewEmoteEventType>
       }
     : unknown
 
