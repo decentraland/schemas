@@ -4,6 +4,7 @@ import {
   ValidateFunction
 } from '../../validation'
 import { PreviewEmoteEventType } from './preview-emote-event-type'
+import { EmoteEventPayload } from './preview-emote-event-payload'
 import { PreviewOptions } from './preview-options'
 
 export enum PreviewMessageType {
@@ -67,7 +68,10 @@ export type PreviewMessagePayload<T extends PreviewMessageType> =
             error: string
           }
     : T extends PreviewMessageType.EMOTE_EVENT
-    ? { type: PreviewEmoteEventType }
+    ? {
+        type: PreviewEmoteEventType
+        payload: EmoteEventPayload<PreviewEmoteEventType>
+      }
     : unknown
 
 export const sendMessage = <T extends PreviewMessageType>(
