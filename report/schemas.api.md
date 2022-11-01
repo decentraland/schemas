@@ -1333,7 +1333,9 @@ export enum PreviewEmoteEventType {
     // (undocumented)
     ANIMATION_PAUSE = "animation_pause",
     // (undocumented)
-    ANIMATION_PLAY = "animation_play"
+    ANIMATION_PLAY = "animation_play",
+    // (undocumented)
+    ANIMATION_PLAYING = "animation_playing"
 }
 
 // @alpha (undocumented)
@@ -1366,6 +1368,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
     error: string;
 } : T extends PreviewMessageType.EMOTE_EVENT ? {
     type: PreviewEmoteEventType;
+    payload?: any;
 } : unknown;
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
