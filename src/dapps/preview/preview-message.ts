@@ -67,7 +67,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> =
             error: string
           }
     : T extends PreviewMessageType.EMOTE_EVENT
-    ? { type: PreviewEmoteEventType; payload?: any }
+    ? { type: PreviewEmoteEventType; payload?: number }
     : unknown
 
 export const sendMessage = <T extends PreviewMessageType>(
