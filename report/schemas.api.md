@@ -1368,7 +1368,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
     error: string;
 } : T extends PreviewMessageType.EMOTE_EVENT ? {
     type: PreviewEmoteEventType;
-    payload?: EmoteEventPayload<PreviewEmoteEventType>;
+    payload: EmoteEventPayload<PreviewEmoteEventType>;
 } : unknown;
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
