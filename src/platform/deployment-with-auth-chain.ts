@@ -14,8 +14,7 @@ export type DeploymentWithAuthChain = {
   entityId: string
   entityType: string
   pointers: string[]
-  entityTimestamp?: number
-  localTimestamp?: number
+  entityTimestamp: number
   authChain: AuthChain
 }
 
@@ -29,11 +28,16 @@ export namespace DeploymentWithAuthChain {
       entityId: { type: 'string' },
       entityType: { type: 'string' },
       pointers: { type: 'array', items: { type: 'string' }, minItems: 1 },
-      entityTimestamp: { type: 'number', minimum: 0, nullable: true },
-      localTimestamp: { type: 'number', minimum: 0, nullable: true },
+      entityTimestamp: { type: 'number', minimum: 0 },
       authChain: AuthChain.schema
     },
-    required: ['entityId', 'entityType', 'pointers', 'authChain']
+    required: [
+      'entityId',
+      'entityType',
+      'pointers',
+      'entityTimestamp',
+      'authChain'
+    ]
   }
 
   export const validate: ValidateFunction<DeploymentWithAuthChain> =
