@@ -444,7 +444,7 @@ export type DeploymentWithAuthChain = {
     entityId: string;
     entityType: string;
     pointers: string[];
-    localTimestamp: number;
+    entityTimestamp: number;
     authChain: AuthChain;
 };
 

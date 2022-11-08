@@ -25,7 +25,7 @@ describe('deployment-with-auth-chain', () => {
       ],
       entityId: 'QmUsqJaHc5HQaBrojhBdjF4fr5MQc6CqhwZjqwhVRftNAo',
       entityType: 'scene',
-      localTimestamp: 123,
+      entityTimestamp: 123,
       pointers: ['asd']
     }
     expect(DeploymentWithAuthChain.validate(chain)).toEqual(true)
@@ -40,7 +40,7 @@ describe('deployment-with-auth-chain', () => {
         ],
         entityId: 'asd',
         entityType: 'scene',
-        localTimestamp: 1,
+        entityTimestamp: 1,
         pointers: ['asd']
       } as DeploymentWithAuthChain)
     ).toEqual(true)
@@ -51,7 +51,7 @@ describe('deployment-with-auth-chain', () => {
         authChain: [],
         entityId: 'asd',
         entityType: 'scene',
-        localTimestamp: 1,
+        entityTimestamp: 1,
         pointers: ['asd']
       } as DeploymentWithAuthChain)
     ).toEqual(false)
@@ -66,7 +66,7 @@ describe('deployment-with-auth-chain', () => {
         ],
         entityId: 'asd',
         entityType: 'scene',
-        localTimestamp: 1,
+        entityTimestamp: 1,
         pointers: []
       } as DeploymentWithAuthChain)
     ).toEqual(false)
@@ -81,7 +81,7 @@ describe('deployment-with-auth-chain', () => {
         ],
         entityId: 'asd',
         entityType: 'scene',
-        localTimestamp: -1,
+        entityTimestamp: -1,
         pointers: ['asd']
       } as DeploymentWithAuthChain)
     ).toEqual(false)
