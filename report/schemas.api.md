@@ -1593,7 +1593,7 @@ export type RentalListing = {
     startedAt: number | null;
     periods: RentalListingPeriod[];
     target: string;
-    rentedDays: number;
+    rentedDays: number | null;
 };
 
 // Warning: (ae-missing-release-tag) "RentalListingCreation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
