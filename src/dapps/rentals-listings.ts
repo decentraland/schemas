@@ -136,7 +136,7 @@ export type RentalListing = {
   /** The target address that can use the signature. If no target is wanted, the zero address will be used  */
   target: string
   /** The amount of days the land was rented for. NULL if it's in open or cancel status  */
-  rentedDays: number
+  rentedDays: number | null
 }
 
 /**
