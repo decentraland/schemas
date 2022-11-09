@@ -87,10 +87,10 @@ export type NFTFilters = {
   emotePlayMode?: EmotePlayMode
   contractAddresses?: string[]
   tokenId?: string
-  tokenIds?: string[]
   itemId?: string
   network?: Network
   rentalStatus?: RentalsListingsFilterBy['status']
+  ids?: string[]
 } & Pick<RentalsListingsFilterBy, 'tenant'>
 
 export enum NFTSortBy {
