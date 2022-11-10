@@ -440,23 +440,6 @@ export enum ContractSortBy {
 }
 
 // @public
-export type DeploymentWithAuthChain = {
-    entityId: string;
-    entityType: string;
-    pointers: string[];
-    entityTimestamp: number;
-    authChain: AuthChain;
-};
-
-// @public (undocumented)
-export namespace DeploymentWithAuthChain {
-    const // (undocumented)
-    schema: JSONSchema<DeploymentWithAuthChain>;
-    const // (undocumented)
-    validate: ValidateFunction<DeploymentWithAuthChain>;
-}
-
-// @public
 export type DisplayableDeployment = {
     menuBarIcon?: string;
 };
@@ -1226,6 +1209,21 @@ export namespace PeriodCreation {
     validate: ValidateFunction<PeriodCreation>;
 }
 
+// Warning: (ae-forgotten-export) The symbol "SyncDeployment" needs to be exported by the entry point index.d.ts
+//
+// @public
+export type PointerChangesSyncDeployment = SyncDeployment & {
+    localTimestamp: number;
+};
+
+// @public (undocumented)
+export namespace PointerChangesSyncDeployment {
+    const // (undocumented)
+    schema: JSONSchema<PointerChangesSyncDeployment>;
+    const // (undocumented)
+    validate: ValidateFunction<PointerChangesSyncDeployment>;
+}
+
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
 // Warning: (ae-missing-release-tag) "PreviewCamera" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1881,6 +1879,19 @@ export namespace Snapshots {
     schema: JSONSchema<Snapshots>;
     const // (undocumented)
     validate: ValidateFunction<Snapshots>;
+}
+
+// @public
+export type SnapshotSyncDeployment = SyncDeployment & {
+    entityTimestamp: number;
+};
+
+// @public (undocumented)
+export namespace SnapshotSyncDeployment {
+    const // (undocumented)
+    schema: JSONSchema<SnapshotSyncDeployment>;
+    const // (undocumented)
+    validate: ValidateFunction<SnapshotSyncDeployment>;
 }
 
 // @alpha (undocumented)
