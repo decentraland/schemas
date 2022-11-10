@@ -1209,10 +1209,10 @@ export namespace PeriodCreation {
     validate: ValidateFunction<PeriodCreation>;
 }
 
-// Warning: (ae-forgotten-export) The symbol "SyncDeployment" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "BaseSyncDeployment" needs to be exported by the entry point index.d.ts
 //
 // @public
-export type PointerChangesSyncDeployment = SyncDeployment & {
+export type PointerChangesSyncDeployment = BaseSyncDeployment & {
     localTimestamp: number;
 };
 
@@ -1882,7 +1882,7 @@ export namespace Snapshots {
 }
 
 // @public
-export type SnapshotSyncDeployment = SyncDeployment & {
+export type SnapshotSyncDeployment = BaseSyncDeployment & {
     entityTimestamp: number;
 };
 
@@ -1969,6 +1969,11 @@ export namespace Store {
     const // (undocumented)
     validate: ValidateFunction<Store>;
 }
+
+// Warning: (ae-missing-release-tag) "SyncDeployment" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type SyncDeployment = SnapshotSyncDeployment | PointerChangesSyncDeployment;
 
 // Warning: (ae-missing-release-tag) "ThirdPartyProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

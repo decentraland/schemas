@@ -5,7 +5,11 @@ import {
   ValidateFunction
 } from '../validation'
 
-type SyncDeployment = {
+export type SyncDeployment =
+  | SnapshotSyncDeployment
+  | PointerChangesSyncDeployment
+
+type BaseSyncDeployment = {
   entityId: string
   entityType: string
   pointers: string[]
@@ -17,7 +21,7 @@ type SyncDeployment = {
  * a deployed entity across catalysts from the snapshots.
  * @public
  */
-export type SnapshotSyncDeployment = SyncDeployment & {
+export type SnapshotSyncDeployment = BaseSyncDeployment & {
   entityTimestamp: number
 }
 
@@ -52,7 +56,7 @@ export namespace SnapshotSyncDeployment {
  * a deployed entity across catalysts from the old snapshots and /pointer-changes endpoint.
  * @public
  */
-export type PointerChangesSyncDeployment = SyncDeployment & {
+export type PointerChangesSyncDeployment = BaseSyncDeployment & {
   localTimestamp: number
 }
 
