@@ -90,6 +90,7 @@ export type NFTFilters = {
   itemId?: string
   network?: Network
   rentalStatus?: RentalsListingsFilterBy['status']
+  ids?: string[]
 } & Pick<RentalsListingsFilterBy, 'tenant'>
 
 export enum NFTSortBy {
