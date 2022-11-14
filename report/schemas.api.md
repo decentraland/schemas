@@ -439,6 +439,27 @@ export enum ContractSortBy {
     NAME = "name"
 }
 
+// Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
+//
+// @public @deprecated
+export type DeploymentWithAuthChain = {
+    entityId: string;
+    entityType: string;
+    pointers: string[];
+    localTimestamp: number;
+    authChain: AuthChain;
+};
+
+// Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
+//
+// @public @deprecated (undocumented)
+export namespace DeploymentWithAuthChain {
+    const // (undocumented)
+    schema: JSONSchema<DeploymentWithAuthChain>;
+    const // (undocumented)
+    validate: ValidateFunction<DeploymentWithAuthChain>;
+}
+
 // @public
 export type DisplayableDeployment = {
     menuBarIcon?: string;
