@@ -42,7 +42,7 @@ describe('snapshot-sync-deployment', () => {
             signature: ''
           }
         ],
-        entityId: 'asd',
+        entityId: 'bafybeiasb6yrmaounyilfuxbd5pltvosl3asdrfahsb2esg46q6tutyuya',
         entityType: 'scene',
         entityTimestamp: 1,
         pointers: ['asd']
@@ -89,6 +89,21 @@ describe('snapshot-sync-deployment', () => {
         pointers: ['asd']
       } as SnapshotSyncDeployment)
     ).toEqual(false)
+    expect(
+      SnapshotSyncDeployment.validate({
+        authChain: [
+          {
+            type: AuthLinkType.SIGNER,
+            payload: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
+            signature: ''
+          }
+        ],
+        entityId: 'bainvalidhash',
+        entityType: 'scene',
+        entityTimestamp: 1,
+        pointers: ['asd']
+      } as SnapshotSyncDeployment)
+    ).toEqual(false)
   })
 })
 
@@ -130,7 +145,7 @@ describe('pointer-changes-sync-deployment', () => {
             signature: ''
           }
         ],
-        entityId: 'asd',
+        entityId: 'bafybeiasb6yrmaounyilfuxbd5pltvosl3asdrfahsb2esg46q6tutyuya',
         entityType: 'scene',
         localTimestamp: 1,
         pointers: ['asd']
@@ -174,6 +189,21 @@ describe('pointer-changes-sync-deployment', () => {
         entityId: 'asd',
         entityType: 'scene',
         localTimestamp: -1,
+        pointers: ['asd']
+      } as PointerChangesSyncDeployment)
+    ).toEqual(false)
+    expect(
+      PointerChangesSyncDeployment.validate({
+        authChain: [
+          {
+            type: AuthLinkType.SIGNER,
+            payload: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
+            signature: ''
+          }
+        ],
+        entityId: 'bainvalidhash',
+        entityType: 'scene',
+        localTimestamp: 1,
         pointers: ['asd']
       } as PointerChangesSyncDeployment)
     ).toEqual(false)

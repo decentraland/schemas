@@ -1,3 +1,4 @@
+import { IPFSv1, IPFSv2 } from '../misc'
 import { AuthChain } from '../misc/auth-chain'
 import {
   generateLazyValidator,
@@ -10,7 +11,7 @@ export type SyncDeployment =
   | PointerChangesSyncDeployment
 
 type BaseSyncDeployment = {
-  entityId: string
+  entityId: IPFSv1 | IPFSv2
   entityType: string
   pointers: string[]
   authChain: AuthChain
@@ -38,6 +39,10 @@ export namespace SnapshotSyncDeployment {
       entityTimestamp: { type: 'number', minimum: 0 },
       authChain: AuthChain.schema
     },
+    oneOf: [
+      { properties: { entityId: IPFSv1.schema } },
+      { properties: { entityId: IPFSv2.schema } }
+    ],
     required: [
       'entityId',
       'entityType',
@@ -73,6 +78,10 @@ export namespace PointerChangesSyncDeployment {
       localTimestamp: { type: 'number', minimum: 0 },
       authChain: AuthChain.schema
     },
+    oneOf: [
+      { properties: { entityId: IPFSv1.schema } },
+      { properties: { entityId: IPFSv2.schema } }
+    ],
     required: [
       'entityId',
       'entityType',
