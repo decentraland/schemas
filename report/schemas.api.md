@@ -1127,8 +1127,8 @@ export type NFTFilters = {
     network?: Network;
     rentalStatus?: RentalsListingsFilterBy['status'];
     ids?: string[];
-    minPrice?: string;
-    maxPrice?: string;
+    minPrice?: number;
+    maxPrice?: number;
 } & Pick<RentalsListingsFilterBy, 'tenant'>;
 
 // Warning: (ae-missing-release-tag) "NFTSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
