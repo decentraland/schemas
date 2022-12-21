@@ -40,7 +40,8 @@ describe('NFT tests', () => {
       chainId: ChainId.ETHEREUM_MAINNET,
       createdAt: 1545579159000,
       updatedAt: 1619273260000,
-      soldAt: 1619273260000
+      soldAt: 1619273260000,
+      transferredAt: 1619273260000,
     }
 
     testTypeSignature(NFT, parcel)
@@ -103,7 +104,8 @@ describe('NFT tests', () => {
       chainId: ChainId.ETHEREUM_MAINNET,
       createdAt: 1626182617000,
       updatedAt: 1626246391000,
-      soldAt: 1626246391000
+      soldAt: 1626246391000,
+      transferredAt: 1626246391000
     }
 
     testTypeSignature(NFT, estate)
@@ -144,7 +146,8 @@ describe('NFT tests', () => {
       chainId: ChainId.ETHEREUM_MAINNET,
       createdAt: 1626182617000,
       updatedAt: 1626246391000,
-      soldAt: 1626246391000
+      soldAt: 1626246391000,
+      transferredAt: 1626246391000
     }
 
     testTypeSignature(NFT, wearable)
@@ -181,7 +184,8 @@ describe('NFT tests', () => {
       chainId: ChainId.ETHEREUM_MAINNET,
       createdAt: 1626182617000,
       updatedAt: 1626246391000,
-      soldAt: 1626246391000
+      soldAt: 1626246391000,
+      transferredAt: 1626246391000
     }
 
     testTypeSignature(NFT, ens)
@@ -222,7 +226,8 @@ describe('NFT tests', () => {
       chainId: ChainId.ETHEREUM_MAINNET,
       createdAt: 1626182617000,
       updatedAt: 1626246391000,
-      soldAt: 1626246391000
+      soldAt: 1626246391000,
+      transferredAt: 1626246391000,
     }
 
     testTypeSignature(NFT, emote)
