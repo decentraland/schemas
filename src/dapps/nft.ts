@@ -64,6 +64,7 @@ export type NFT = {
   createdAt: number
   updatedAt: number
   soldAt: number
+  transferredAt: number
 }
 
 export type NFTFilters = {
@@ -285,6 +286,9 @@ export namespace NFT {
       },
       soldAt: {
         type: 'integer'
+      },
+      transferredAt: {
+        type: 'integer'
       }
     },
     required: [
@@ -305,7 +309,8 @@ export namespace NFT {
       'chainId',
       'createdAt',
       'updatedAt',
-      'soldAt'
+      'soldAt',
+      'transferredAt'
     ]
   }
 
