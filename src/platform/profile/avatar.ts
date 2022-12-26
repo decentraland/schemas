@@ -125,6 +125,7 @@ export type Avatar = {
   muted?: string[]
   interests?: string[]
   hasClaimedName: boolean
+  socialLinks?: string[]
   avatar: AvatarInfo
   /**
    * Whether or not the player has connected web3 wallet or is a guest user.
@@ -192,6 +193,13 @@ export namespace Avatar {
       },
       hasClaimedName: {
         type: 'boolean',
+        nullable: true
+      },
+      socialLinks: {
+        type: 'array',
+        items: {
+          type: 'string'
+        },
         nullable: true
       },
       hasConnectedWeb3: {
