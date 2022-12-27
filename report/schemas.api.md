@@ -151,6 +151,7 @@ export type Avatar = {
     muted?: string[];
     interests?: string[];
     hasClaimedName: boolean;
+    socialLinks?: string[];
     avatar: AvatarInfo;
     hasConnectedWeb3?: boolean;
 };
