@@ -56,6 +56,8 @@ export type ItemFilters = {
   contractAddresses?: string[]
   itemId?: string
   network?: Network
+  minPrice?: string
+  maxPrice?: string
 }
 
 export enum ItemSortBy {
