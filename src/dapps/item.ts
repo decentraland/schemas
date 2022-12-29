@@ -56,6 +56,14 @@ export type ItemFilters = {
   contractAddresses?: string[]
   itemId?: string
   network?: Network
+  /**
+   * Returns items whose price is greater or equal to this value
+   */
+  minPrice?: string
+  /**
+   * Returns items whose price is smaller or equal to this value
+   */
+  maxPrice?: string
 }
 
 export enum ItemSortBy {
