@@ -646,6 +646,18 @@ export namespace FeatureToggles {
     validate: ValidateFunction<FeatureToggles>;
 }
 
+// Warning: (ae-missing-release-tag) "GenderFilterOption" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum GenderFilterOption {
+    // (undocumented)
+    FEMALE = "female",
+    // (undocumented)
+    MALE = "male",
+    // (undocumented)
+    UNISEX = "unisex"
+}
+
 // @public
 export function generateLazyValidator<T>(schema: JSONSchema<T>, keywordDefinitions?: KeywordDefinition[]): ValidateFunction<T>;
 
@@ -822,7 +834,7 @@ export type ItemFilters = {
     wearableGenders?: GenderFilterOption[];
     emoteCategory?: EmoteCategory;
     emoteGenders?: GenderFilterOption[];
-    emotePlayMode?: EmotePlayMode;
+    emotePlayMode?: EmotePlayMode | EmotePlayMode[];
     contractAddresses?: string[];
     itemId?: string;
     network?: Network;
@@ -1122,7 +1134,7 @@ export type NFTFilters = {
     wearableGenders?: GenderFilterOption[];
     emoteCategory?: EmoteCategory;
     emoteGenders?: GenderFilterOption[];
-    emotePlayMode?: EmotePlayMode;
+    emotePlayMode?: EmotePlayMode | EmotePlayMode[];
     contractAddresses?: string[];
     tokenId?: string;
     itemId?: string;
@@ -2192,7 +2204,6 @@ export namespace World {
 // src/dapps/contract.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/item.ts:34:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/item.ts:35:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/item.ts:52:3 - (ae-forgotten-export) The symbol "GenderFilterOption" needs to be exported by the entry point index.d.ts
 // src/dapps/item.ts:58:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:21:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
