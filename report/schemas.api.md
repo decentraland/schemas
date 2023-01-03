@@ -819,9 +819,9 @@ export type ItemFilters = {
     isWearableAccessory?: boolean;
     isWearableSmart?: boolean;
     wearableCategory?: WearableCategory;
-    wearableGenders?: WearableGender[];
+    wearableGenders?: GenderFilterOption[];
     emoteCategory?: EmoteCategory;
-    emoteGenders?: WearableGender[];
+    emoteGenders?: GenderFilterOption[];
     emotePlayMode?: EmotePlayMode;
     contractAddresses?: string[];
     itemId?: string;
@@ -1119,9 +1119,9 @@ export type NFTFilters = {
     isWearableAccessory?: boolean;
     isWearableSmart?: boolean;
     wearableCategory?: WearableCategory;
-    wearableGenders?: WearableGender[];
+    wearableGenders?: GenderFilterOption[];
     emoteCategory?: EmoteCategory;
-    emoteGenders?: WearableGender[];
+    emoteGenders?: GenderFilterOption[];
     emotePlayMode?: EmotePlayMode;
     contractAddresses?: string[];
     tokenId?: string;
@@ -2192,6 +2192,7 @@ export namespace World {
 // src/dapps/contract.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/item.ts:34:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/item.ts:35:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/item.ts:52:3 - (ae-forgotten-export) The symbol "GenderFilterOption" needs to be exported by the entry point index.d.ts
 // src/dapps/item.ts:58:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:21:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha

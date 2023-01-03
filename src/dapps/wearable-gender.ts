@@ -9,6 +9,12 @@ export enum WearableGender {
   FEMALE = 'female'
 }
 
+enum UnisexOption {
+  UNISEX = 'unisex'
+}
+
+export type GenderFilterOption = WearableGender | UnisexOption
+
 export namespace WearableGender {
   export const schema: JSONSchema<WearableGender> = {
     type: 'string',
