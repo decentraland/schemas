@@ -831,7 +831,7 @@ export type ItemFilters = {
     isWearableAccessory?: boolean;
     isWearableSmart?: boolean;
     wearableCategory?: WearableCategory;
-    wearableGenders?: GenderFilterOption[];
+    wearableGenders?: (WearableGender | GenderFilterOption)[];
     emoteCategory?: EmoteCategory;
     emoteGenders?: GenderFilterOption[];
     emotePlayMode?: EmotePlayMode | EmotePlayMode[];
@@ -1131,7 +1131,7 @@ export type NFTFilters = {
     isWearableAccessory?: boolean;
     isWearableSmart?: boolean;
     wearableCategory?: WearableCategory;
-    wearableGenders?: GenderFilterOption[];
+    wearableGenders?: (WearableGender | GenderFilterOption)[];
     emoteCategory?: EmoteCategory;
     emoteGenders?: GenderFilterOption[];
     emotePlayMode?: EmotePlayMode | EmotePlayMode[];
