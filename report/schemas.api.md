@@ -646,6 +646,18 @@ export namespace FeatureToggles {
     validate: ValidateFunction<FeatureToggles>;
 }
 
+// Warning: (ae-missing-release-tag) "GenderFilterOption" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum GenderFilterOption {
+    // (undocumented)
+    FEMALE = "female",
+    // (undocumented)
+    MALE = "male",
+    // (undocumented)
+    UNISEX = "unisex"
+}
+
 // @public
 export function generateLazyValidator<T>(schema: JSONSchema<T>, keywordDefinitions?: KeywordDefinition[]): ValidateFunction<T>;
 
@@ -819,9 +831,9 @@ export type ItemFilters = {
     isWearableAccessory?: boolean;
     isWearableSmart?: boolean;
     wearableCategory?: WearableCategory;
-    wearableGenders?: WearableGender[];
+    wearableGenders?: (WearableGender | GenderFilterOption)[];
     emoteCategory?: EmoteCategory;
-    emoteGenders?: WearableGender[];
+    emoteGenders?: (WearableGender | GenderFilterOption)[];
     emotePlayMode?: EmotePlayMode | EmotePlayMode[];
     contractAddresses?: string[];
     itemId?: string;
@@ -1119,9 +1131,9 @@ export type NFTFilters = {
     isWearableAccessory?: boolean;
     isWearableSmart?: boolean;
     wearableCategory?: WearableCategory;
-    wearableGenders?: WearableGender[];
+    wearableGenders?: (WearableGender | GenderFilterOption)[];
     emoteCategory?: EmoteCategory;
-    emoteGenders?: WearableGender[];
+    emoteGenders?: (WearableGender | GenderFilterOption)[];
     emotePlayMode?: EmotePlayMode | EmotePlayMode[];
     contractAddresses?: string[];
     tokenId?: string;

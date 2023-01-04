@@ -45,7 +45,7 @@ export {
 } from './dapps/analyticsDayData'
 export { Store } from './dapps/store'
 export { WearableCategory } from './dapps/wearable-category'
-export { WearableGender } from './dapps/wearable-gender'
+export { WearableGender, GenderFilterOption } from './dapps/wearable-gender'
 export {
   World,
   ValidWorldRange,

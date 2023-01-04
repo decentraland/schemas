@@ -10,7 +10,7 @@ import { NFT } from './nft'
 import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'
 import { WearableCategory } from './wearable-category'
-import { WearableGender } from './wearable-gender'
+import { GenderFilterOption, WearableGender } from './wearable-gender'
 
 export type Item = {
   id: string
@@ -49,9 +49,9 @@ export type ItemFilters = {
   isWearableAccessory?: boolean
   isWearableSmart?: boolean
   wearableCategory?: WearableCategory
-  wearableGenders?: WearableGender[]
+  wearableGenders?: (WearableGender | GenderFilterOption)[]
   emoteCategory?: EmoteCategory
-  emoteGenders?: WearableGender[]
+  emoteGenders?: (WearableGender | GenderFilterOption)[]
   emotePlayMode?: EmotePlayMode | EmotePlayMode[]
   contractAddresses?: string[]
   itemId?: string
