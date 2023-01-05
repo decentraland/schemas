@@ -19,7 +19,8 @@ export type DeploymentWithAuthChain = {
 }
 
 /**
- * @public @deprecated
+ * @public 
+ * @deprecated use SyncDeployment instead
  */
 export namespace DeploymentWithAuthChain {
   export const schema: JSONSchema<DeploymentWithAuthChain> = {

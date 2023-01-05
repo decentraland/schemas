@@ -450,8 +450,6 @@ export type DeploymentWithAuthChain = {
     authChain: AuthChain;
 };
 
-// Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
-//
 // @public @deprecated (undocumented)
 export namespace DeploymentWithAuthChain {
     const // (undocumented)
