@@ -19,7 +19,7 @@ export type DeploymentWithAuthChain = {
 }
 
 /**
- * @public 
+ * @public
  * @deprecated use SyncDeployment instead
  */
 export namespace DeploymentWithAuthChain {
