@@ -648,6 +648,18 @@ export namespace FeatureToggles {
     validate: ValidateFunction<FeatureToggles>;
 }
 
+// Warning: (ae-missing-release-tag) "GenderFilterOption" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum GenderFilterOption {
+    // (undocumented)
+    FEMALE = "female",
+    // (undocumented)
+    MALE = "male",
+    // (undocumented)
+    UNISEX = "unisex"
+}
+
 // @public
 export function generateLazyValidator<T>(schema: JSONSchema<T>, keywordDefinitions?: KeywordDefinition[]): ValidateFunction<T>;
 
@@ -821,13 +833,15 @@ export type ItemFilters = {
     isWearableAccessory?: boolean;
     isWearableSmart?: boolean;
     wearableCategory?: WearableCategory;
-    wearableGenders?: WearableGender[];
+    wearableGenders?: (WearableGender | GenderFilterOption)[];
     emoteCategory?: EmoteCategory;
-    emoteGenders?: WearableGender[];
-    emotePlayMode?: EmotePlayMode;
+    emoteGenders?: (WearableGender | GenderFilterOption)[];
+    emotePlayMode?: EmotePlayMode | EmotePlayMode[];
     contractAddresses?: string[];
     itemId?: string;
     network?: Network;
+    minPrice?: string;
+    maxPrice?: string;
 };
 
 // Warning: (ae-missing-release-tag) "ItemSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1119,16 +1133,18 @@ export type NFTFilters = {
     isWearableAccessory?: boolean;
     isWearableSmart?: boolean;
     wearableCategory?: WearableCategory;
-    wearableGenders?: WearableGender[];
+    wearableGenders?: (WearableGender | GenderFilterOption)[];
     emoteCategory?: EmoteCategory;
-    emoteGenders?: WearableGender[];
-    emotePlayMode?: EmotePlayMode;
+    emoteGenders?: (WearableGender | GenderFilterOption)[];
+    emotePlayMode?: EmotePlayMode | EmotePlayMode[];
     contractAddresses?: string[];
     tokenId?: string;
     itemId?: string;
     network?: Network;
     rentalStatus?: RentalsListingsFilterBy['status'];
     ids?: string[];
+    minPrice?: string;
+    maxPrice?: string;
 } & Pick<RentalsListingsFilterBy, 'tenant'>;
 
 // Warning: (ae-missing-release-tag) "NFTSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)

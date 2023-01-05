@@ -10,7 +10,7 @@ import { NFT } from './nft'
 import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'
 import { WearableCategory } from './wearable-category'
-import { WearableGender } from './wearable-gender'
+import { GenderFilterOption, WearableGender } from './wearable-gender'
 
 export type Item = {
   id: string
@@ -49,13 +49,21 @@ export type ItemFilters = {
   isWearableAccessory?: boolean
   isWearableSmart?: boolean
   wearableCategory?: WearableCategory
-  wearableGenders?: WearableGender[]
+  wearableGenders?: (WearableGender | GenderFilterOption)[]
   emoteCategory?: EmoteCategory
-  emoteGenders?: WearableGender[]
-  emotePlayMode?: EmotePlayMode
+  emoteGenders?: (WearableGender | GenderFilterOption)[]
+  emotePlayMode?: EmotePlayMode | EmotePlayMode[]
   contractAddresses?: string[]
   itemId?: string
   network?: Network
+  /**
+   * Returns items whose price is greater or equal to this value
+   */
+  minPrice?: string
+  /**
+   * Returns items whose price is smaller or equal to this value
+   */
+  maxPrice?: string
 }
 
 export enum ItemSortBy {
