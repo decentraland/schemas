@@ -439,7 +439,9 @@ export enum ContractSortBy {
     NAME = "name"
 }
 
-// @public
+// Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
+//
+// @public @deprecated
 export type DeploymentWithAuthChain = {
     entityId: string;
     entityType: string;
@@ -448,7 +450,7 @@ export type DeploymentWithAuthChain = {
     authChain: AuthChain;
 };
 
-// @public (undocumented)
+// @public @deprecated (undocumented)
 export namespace DeploymentWithAuthChain {
     const // (undocumented)
     schema: JSONSchema<DeploymentWithAuthChain>;
@@ -1243,6 +1245,21 @@ export namespace PeriodCreation {
     validate: ValidateFunction<PeriodCreation>;
 }
 
+// Warning: (ae-forgotten-export) The symbol "BaseSyncDeployment" needs to be exported by the entry point index.d.ts
+//
+// @public
+export type PointerChangesSyncDeployment = BaseSyncDeployment & {
+    localTimestamp: number;
+};
+
+// @public (undocumented)
+export namespace PointerChangesSyncDeployment {
+    const // (undocumented)
+    schema: JSONSchema<PointerChangesSyncDeployment>;
+    const // (undocumented)
+    validate: ValidateFunction<PointerChangesSyncDeployment>;
+}
+
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
 // Warning: (ae-missing-release-tag) "PreviewCamera" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1900,6 +1917,19 @@ export namespace Snapshots {
     validate: ValidateFunction<Snapshots>;
 }
 
+// @public
+export type SnapshotSyncDeployment = BaseSyncDeployment & {
+    entityTimestamp: number;
+};
+
+// @public (undocumented)
+export namespace SnapshotSyncDeployment {
+    const // (undocumented)
+    schema: JSONSchema<SnapshotSyncDeployment>;
+    const // (undocumented)
+    validate: ValidateFunction<SnapshotSyncDeployment>;
+}
+
 // @alpha (undocumented)
 export type Source = {
     version?: number;
@@ -1975,6 +2005,11 @@ export namespace Store {
     const // (undocumented)
     validate: ValidateFunction<Store>;
 }
+
+// Warning: (ae-missing-release-tag) "SyncDeployment" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type SyncDeployment = SnapshotSyncDeployment | PointerChangesSyncDeployment;
 
 // Warning: (ae-missing-release-tag) "ThirdPartyProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

@@ -8,7 +8,7 @@ import {
 /**
  * This type describes the minimum deployment + AuthChain needed to synchronize
  * a deployed entity across catalysts.
- * @public
+ * @public @deprecated
  */
 export type DeploymentWithAuthChain = {
   entityId: string
@@ -20,6 +20,7 @@ export type DeploymentWithAuthChain = {
 
 /**
  * @public
+ * @deprecated use SyncDeployment instead
  */
 export namespace DeploymentWithAuthChain {
   export const schema: JSONSchema<DeploymentWithAuthChain> = {
