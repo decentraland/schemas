@@ -9,7 +9,7 @@ import { Network } from './network'
 import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'
 import { WearableCategory } from './wearable-category'
-import { WearableGender } from './wearable-gender'
+import { GenderFilterOption, WearableGender } from './wearable-gender'
 import { RentalsListingsFilterBy } from './rentals-listings'
 
 export type NFT = {
@@ -81,16 +81,18 @@ export type NFTFilters = {
   isWearableAccessory?: boolean
   isWearableSmart?: boolean
   wearableCategory?: WearableCategory
-  wearableGenders?: WearableGender[]
+  wearableGenders?: (WearableGender | GenderFilterOption)[]
   emoteCategory?: EmoteCategory
-  emoteGenders?: WearableGender[]
-  emotePlayMode?: EmotePlayMode
+  emoteGenders?: (WearableGender | GenderFilterOption)[]
+  emotePlayMode?: EmotePlayMode | EmotePlayMode[]
   contractAddresses?: string[]
   tokenId?: string
   itemId?: string
   network?: Network
   rentalStatus?: RentalsListingsFilterBy['status']
   ids?: string[]
+  minPrice?: string
+  maxPrice?: string
 } & Pick<RentalsListingsFilterBy, 'tenant'>
 
 export enum NFTSortBy {
