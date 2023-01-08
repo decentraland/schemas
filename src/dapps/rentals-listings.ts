@@ -89,6 +89,10 @@ export type RentalsListingsFilterBy = {
   network?: Network
   /** The NFT ids of the NFT assets that were put for rent */
   nftIds?: string[]
+  /** The UTC timestamp in milliseconds since epoch to get the rentals that were updated after it */
+  updatedAfter?: number
+  /** The target address of the rental. The default value is the address zero (everyone). */
+  target?: string
 }
 
 /**
