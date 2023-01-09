@@ -1678,6 +1678,8 @@ export type RentalsListingsFilterBy = {
     contractAddresses?: string[];
     network?: Network;
     nftIds?: string[];
+    updatedAfter?: number;
+    target?: string;
 };
 
 // Warning: (ae-missing-release-tag) "RentalsListingsFilterByCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -2259,10 +2261,10 @@ export namespace World {
 // src/dapps/preview/preview-message.ts:39:9 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
 // src/dapps/preview/preview-message.ts:73:9 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
 // src/dapps/rentals-listings.ts:89:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/rentals-listings.ts:107:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/rentals-listings.ts:109:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/rentals-listings.ts:159:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/rentals-listings.ts:161:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/rentals-listings.ts:111:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/rentals-listings.ts:113:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/rentals-listings.ts:163:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/rentals-listings.ts:165:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:22:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:23:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:46:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
