@@ -1838,6 +1838,7 @@ export type Scene = DisplayableDeployment & {
     spawnPoints?: SpawnPoint[];
     requiredPermissions?: string[];
     featureToggles?: FeatureToggles;
+    worldConfiguration?: WorldConfiguration;
 };
 
 // @alpha (undocumented)
@@ -2224,6 +2225,22 @@ export namespace World {
     schema: JSONSchema<World>;
     const // (undocumented)
     validate: ValidateFunction<World>;
+}
+
+// @alpha (undocumented)
+export type WorldConfiguration = {
+    name: string;
+    skybox?: number;
+    minimapVisible?: boolean;
+    fixedAdapter?: string;
+};
+
+// @alpha (undocumented)
+export namespace WorldConfiguration {
+    const // (undocumented)
+    schema: JSONSchema<WorldConfiguration>;
+    const // (undocumented)
+    validate: ValidateFunction<WorldConfiguration>;
 }
 
 // Warnings were encountered during analysis:
