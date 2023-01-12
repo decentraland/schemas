@@ -11,6 +11,7 @@ import { FeatureToggles } from './feature-toggles'
 import { SceneParcels } from './scene-parcels'
 import { Source } from './source'
 import { SpawnPoint } from './spawn-point'
+import { WorldConfiguration } from './world-configuration'
 
 /** @alpha */
 export type Scene = DisplayableDeployment & {
@@ -35,6 +36,7 @@ export type Scene = DisplayableDeployment & {
   spawnPoints?: SpawnPoint[]
   requiredPermissions?: string[]
   featureToggles?: FeatureToggles
+  worldConfiguration?: WorldConfiguration
 }
 
 /** @alpha */
@@ -122,6 +124,10 @@ export namespace Scene {
       },
       featureToggles: {
         ...FeatureToggles.schema,
+        nullable: true
+      },
+      worldConfiguration: {
+        ...WorldConfiguration.schema,
         nullable: true
       }
     },
