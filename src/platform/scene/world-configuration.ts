@@ -32,7 +32,7 @@ export namespace WorldConfiguration {
       fixedAdapter: {
         type: 'string',
         nullable: true
-      },
+      }
     },
     required: ['name']
   }
