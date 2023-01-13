@@ -6,7 +6,7 @@ import {
 
 /** @alpha */
 export type WorldConfiguration = {
-  name: string
+  name?: string
   skybox?: number
   minimapVisible?: boolean
   fixedAdapter?: string
@@ -19,7 +19,7 @@ export namespace WorldConfiguration {
     properties: {
       name: {
         type: 'string',
-        nullable: false
+        nullable: true
       },
       skybox: {
         type: 'number',
@@ -34,7 +34,7 @@ export namespace WorldConfiguration {
         nullable: true
       }
     },
-    required: ['name']
+    required: []
   }
 
   export const validate: ValidateFunction<WorldConfiguration> =

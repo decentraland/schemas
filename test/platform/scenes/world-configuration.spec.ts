@@ -1,5 +1,5 @@
 import expect from 'expect'
-import { WorldConfiguration } from '../../../src'
+import { validateType, WorldConfiguration } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
 
 describe('World Configuration tests', () => {
@@ -7,20 +7,22 @@ describe('World Configuration tests', () => {
     name: 'some-name.dcl.eth'
   }
 
-  testTypeSignature(WorldConfiguration, worldConfiguration)
+  it('type has a "schema" object', () => {
+    expect(typeof WorldConfiguration.schema).toEqual('object')
+  })
+
+  it('type has a "validate" function', () => {
+    expect(typeof WorldConfiguration.validate).toEqual('function')
+  })
+
+  it('evaluate a valid example', () => {
+    expect(WorldConfiguration.validate(worldConfiguration)).toEqual(true)
+    expect(validateType(WorldConfiguration, worldConfiguration)).toEqual(true)
+  })
 
   it('static tests must pass', () => {
     expect(WorldConfiguration.validate(worldConfiguration)).toBeTruthy()
-    expect(WorldConfiguration.validate({})).toBeFalsy()
-    expect(WorldConfiguration.validate.errors).toEqual([
-      {
-        keyword: 'required',
-        message: "must have required property 'name'",
-        instancePath: '',
-        params: { missingProperty: 'name' },
-        schemaPath: '#/required'
-      }
-    ])
+    expect(WorldConfiguration.validate({})).toBeTruthy()
     expect(WorldConfiguration.validate(null)).toBeFalsy()
     expect(WorldConfiguration.validate.errors).toEqual([
       {
@@ -33,8 +35,8 @@ describe('World Configuration tests', () => {
     ])
   })
 
-  it('name must be present', () => {
-    expect(WorldConfiguration.validate({ skybox: 20 })).toBeFalsy()
+  it('name, if present, must be a string', () => {
+    expect(WorldConfiguration.validate({ name: 20 })).toBeFalsy()
   })
 
   it('skybox, if present, must be a number', () => {
