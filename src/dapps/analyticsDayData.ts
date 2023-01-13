@@ -4,6 +4,7 @@ export type AnalyticsDayData = {
   id: string
   date: number
   sales: number
+  rentals: number
   volume: string
   creatorsEarnings: string
   daoEarnings: string

@@ -77,6 +77,7 @@ export type AnalyticsDayData = {
     id: string;
     date: number;
     sales: number;
+    rentals: number;
     volume: string;
     creatorsEarnings: string;
     daoEarnings: string;
@@ -2246,7 +2247,7 @@ export namespace WorldConfiguration {
 // Warnings were encountered during analysis:
 //
 // src/dapps/account.ts:32:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/analyticsDayData.ts:14:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/analyticsDayData.ts:15:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/bid.ts:25:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/bid.ts:26:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/bid.ts:45:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
