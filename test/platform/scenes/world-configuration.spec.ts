@@ -1,6 +1,5 @@
 import expect from 'expect'
 import { validateType, WorldConfiguration } from '../../../src'
-import { testTypeSignature } from '../../test-utils'
 
 describe('World Configuration tests', () => {
   const worldConfiguration: WorldConfiguration = {
