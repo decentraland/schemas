@@ -2229,7 +2229,7 @@ export namespace World {
 
 // @alpha (undocumented)
 export type WorldConfiguration = {
-    name: string;
+    name?: string;
     skybox?: number;
     minimapVisible?: boolean;
     fixedAdapter?: string;
