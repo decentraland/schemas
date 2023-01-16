@@ -93,6 +93,10 @@ export type RentalsListingsFilterBy = {
   updatedAfter?: number
   /** The target address of the rental. The default value is the address zero (everyone). */
   target?: string
+  /** The minimum price per day of the rental */
+  minPricePerDay?: string
+  /** The maximun price per day of the rental */
+  maxPricePerDay?: string
 }
 
 /**
