@@ -31,6 +31,12 @@ export type AbstractTypedSchema<T> = {
 }
 
 /**
+ * Cache ajv instance
+ * @private
+ */
+const ajvCache: { ajv: unknown | null } = { ajv: null }
+
+/**
  * Generates a validator for a specific JSON schema of a type T
  * @public
  */
@@ -41,12 +47,15 @@ export function generateLazyValidator<T>(
   let validateFn: ValidateFunction<T> | null = null
   const theReturnedValidateFunction = (data: any, dataCxt?: any): data is T => {
     if (!validateFn) {
-      const ajv = new Ajv({ $data: true, allErrors: true })
-      ajv_keywords(ajv)
-      ajv_errors(ajv, { singleError: true })
-      keywordDefinitions?.forEach((kw: string | KeywordDefinition) =>
-        ajv.addKeyword(kw)
-      )
+      if (ajvCache.ajv === nul) {
+        ajvCache.ajv = new Ajv({ $data: true, allErrors: true })
+        ajv_keywords(ajv)
+        ajv_errors(ajv, { singleError: true })
+        keywordDefinitions?.forEach((kw: string | KeywordDefinition) =>
+          ajv.addKeyword(kw)
+        )
+      }
+      const ajv = ajvCache.ajv
       validateFn = ajv.compile<T>(schema)
       Object.defineProperty(theReturnedValidateFunction, 'errors', {
         get() {
