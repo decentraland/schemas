@@ -51,12 +51,15 @@ export function generateLazyValidator<T>(
         ajvCache.ajv = new Ajv({ $data: true, allErrors: true })
         ajv_keywords(ajvCache.ajv)
         ajv_errors(ajvCache.ajv, { singleError: true })
-        keywordDefinitions?.forEach((kw: string | KeywordDefinition) =>
-          ajvCache.ajv!.addKeyword(kw)
-        )
       }
       const ajv = ajvCache.ajv
+      keywordDefinitions?.forEach((kw: string | KeywordDefinition) =>
+        ajvCache.ajv!.addKeyword(kw)
+      )
       validateFn = ajv.compile<T>(schema)
+      keywordDefinitions?.forEach((kw: string | KeywordDefinition) =>
+        ajvCache.ajv!.removeKeyword(kw)
+      )
       Object.defineProperty(theReturnedValidateFunction, 'errors', {
         get() {
           return validateFn?.errors
