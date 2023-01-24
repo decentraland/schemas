@@ -57,9 +57,17 @@ export function generateLazyValidator<T>(
         ajvCache.ajv!.addKeyword(kw)
       )
       validateFn = ajv.compile<T>(schema)
-      keywordDefinitions?.forEach((kw: string | KeywordDefinition) =>
-        ajvCache.ajv!.removeKeyword(kw)
-      )
+      keywordDefinitions?.forEach((kw: string | KeywordDefinition) => {
+        if (typeof kw === 'string') {
+          ajvCache.ajv!.removeKeyword(kw)
+        } else if (Array.isArray(kw.keyword)) {
+          kw.keyword.forEach((innerKw: string) =>
+            ajvCache.ajv!.removeKeyword(innerKw)
+          )
+        } else if (typeof kw.keyword === 'string') {
+          ajvCache.ajv!.removeKeyword(kw.keyword)
+        }
+      })
       Object.defineProperty(theReturnedValidateFunction, 'errors', {
         get() {
           return validateFn?.errors
