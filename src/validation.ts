@@ -52,7 +52,7 @@ export function generateLazyValidator<T>(
         ajv_keywords(ajvCache.ajv)
         ajv_errors(ajvCache.ajv, { singleError: true })
         keywordDefinitions?.forEach((kw: string | KeywordDefinition) =>
-          ajvCache.ajv.addKeyword(kw)
+          ajvCache.ajv!.addKeyword(kw)
         )
       }
       const ajv = ajvCache.ajv
