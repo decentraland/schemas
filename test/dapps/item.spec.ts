@@ -41,7 +41,8 @@ describe('Item tests', () => {
       createdAt: 1625731369000,
       updatedAt: 1626088534000,
       reviewedAt: 1626088534000,
-      soldAt: 1626088534000
+      soldAt: 1626088534000,
+      firstListedAt: null
     }
 
     testTypeSignature(Item, wearable)
