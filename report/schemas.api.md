@@ -806,6 +806,7 @@ export type Item = {
     data: NFT['data'];
     network: Network;
     chainId: ChainId;
+    firstListedAt: number | null;
 };
 
 // @public (undocumented)
@@ -854,6 +855,8 @@ export enum ItemSortBy {
     NAME = "name",
     // (undocumented)
     NEWEST = "newest",
+    // (undocumented)
+    RECENTLY_LISTED = "recently_listed",
     // (undocumented)
     RECENTLY_REVIEWED = "recently_reviewed",
     // (undocumented)
@@ -2260,7 +2263,7 @@ export namespace WorldConfiguration {
 // src/dapps/contract.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/item.ts:34:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/item.ts:35:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/item.ts:58:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/item.ts:59:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:21:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/mint.ts:41:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
