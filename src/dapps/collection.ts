@@ -18,12 +18,14 @@ export type Collection = {
   reviewedAt: number
   network: Network
   chainId: ChainId
+  firstListedAt: number | null
 }
 
 export enum CollectionSortBy {
   NEWEST = 'newest',
   NAME = 'name',
   RECENTLY_REVIEWED = 'recently_reviewed',
+  RECENTLY_LISTED = 'recently_listed',
   SIZE = 'size'
 }
 
@@ -72,7 +74,11 @@ export namespace Collection {
         type: 'integer'
       },
       network: Network.schema,
-      chainId: ChainId.schema
+      chainId: ChainId.schema,
+      firstListedAt: {
+        type: 'integer',
+        nullable: true
+      }
     },
     required: [
       'urn',

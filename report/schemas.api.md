@@ -334,6 +334,7 @@ export type Collection = {
     reviewedAt: number;
     network: Network;
     chainId: ChainId;
+    firstListedAt: number | null;
 };
 
 // @public (undocumented)
@@ -368,6 +369,8 @@ export enum CollectionSortBy {
     NAME = "name",
     // (undocumented)
     NEWEST = "newest",
+    // (undocumented)
+    RECENTLY_LISTED = "recently_listed",
     // (undocumented)
     RECENTLY_REVIEWED = "recently_reviewed",
     // (undocumented)
@@ -2257,7 +2260,7 @@ export namespace WorldConfiguration {
 // src/dapps/bid.ts:45:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/collection.ts:19:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/collection.ts:20:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/collection.ts:40:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/collection.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/contract.ts:14:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/contract.ts:15:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/contract.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
