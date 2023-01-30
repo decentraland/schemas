@@ -64,6 +64,7 @@ export type ItemFilters = {
    * Returns items whose price is smaller or equal to this value
    */
   maxPrice?: string
+  urns: string[]
 }
 
 export enum ItemSortBy {

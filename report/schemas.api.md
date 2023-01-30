@@ -842,6 +842,7 @@ export type ItemFilters = {
     network?: Network;
     minPrice?: string;
     maxPrice?: string;
+    urns?: string[];
 };
 
 // Warning: (ae-missing-release-tag) "ItemSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
