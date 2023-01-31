@@ -93,6 +93,10 @@ export type NFTFilters = {
   ids?: string[]
   minPrice?: string
   maxPrice?: string
+  /** Filter NFTs with a greater estate size */
+  minEstateSize?: string
+  /** Filter NFTs with a lesser estate size */
+  maxEstateSize?: string
 } & Pick<RentalsListingsFilterBy, 'tenant'>
 
 export enum NFTSortBy {
