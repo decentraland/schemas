@@ -15,7 +15,8 @@ describe('Collection tests', () => {
       isOnSale: false,
       size: 1,
       network: Network.MATIC,
-      chainId: ChainId.MATIC_MAINNET
+      chainId: ChainId.MATIC_MAINNET,
+      firstListedAt: null
     }
 
     testTypeSignature(Collection, collection)

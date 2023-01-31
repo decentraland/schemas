@@ -33,6 +33,8 @@ export type Item = {
   data: NFT['data']
   network: Network
   chainId: ChainId
+  /** The timestamp in seconds since epoch when the item was listed for sale for the first time */
+  firstListedAt: number | null
 }
 
 export type ItemFilters = {
@@ -72,6 +74,7 @@ export enum ItemSortBy {
   NEWEST = 'newest',
   RECENTLY_REVIEWED = 'recently_reviewed',
   RECENTLY_SOLD = 'recently_sold',
+  RECENTLY_LISTED = 'recently_listed',
   CHEAPEST = 'cheapest'
 }
 
@@ -131,6 +134,10 @@ export namespace Item {
       },
       soldAt: {
         type: 'integer'
+      },
+      firstListedAt: {
+        type: 'integer',
+        nullable: true
       }
     },
     required: [
