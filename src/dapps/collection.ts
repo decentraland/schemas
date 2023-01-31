@@ -18,6 +18,7 @@ export type Collection = {
   reviewedAt: number
   network: Network
   chainId: ChainId
+  /** The timestamp in seconds since epoch when the collection was listed for sale for the first time */
   firstListedAt: number | null
 }
 

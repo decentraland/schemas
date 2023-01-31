@@ -33,6 +33,7 @@ export type Item = {
   data: NFT['data']
   network: Network
   chainId: ChainId
+  /** The timestamp in seconds since epoch when the item was listed for sale for the first time */
   firstListedAt: number | null
 }
 
