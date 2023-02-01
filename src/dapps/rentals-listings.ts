@@ -97,6 +97,8 @@ export type RentalsListingsFilterBy = {
   minPricePerDay?: string
   /** The maximun price per day of the rental */
   maxPricePerDay?: string
+  /** Filter NFTs that are available to rent in this periods */
+  rentalPeriodInDays?: number[]
 }
 
 /**
