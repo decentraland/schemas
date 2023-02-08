@@ -1154,6 +1154,9 @@ export type NFTFilters = {
     maxPrice?: string;
     minEstateSize?: number;
     maxEstateSize?: number;
+    minDistanceToPlaza?: number;
+    maxDistanceToPlaza?: number;
+    adjacentToRoad?: boolean;
 } & Pick<RentalsListingsFilterBy, 'tenant'>;
 
 // Warning: (ae-missing-release-tag) "NFTSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
