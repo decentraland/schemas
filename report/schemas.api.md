@@ -831,7 +831,7 @@ export type ItemFilters = {
     skip?: number;
     sortBy?: ItemSortBy;
     category?: NFTCategory;
-    creator?: string;
+    creator?: string | string[];
     rarities?: Rarity[];
     isSoldOut?: boolean;
     isOnSale?: boolean;
@@ -1148,6 +1148,7 @@ export type NFTFilters = {
     emoteGenders?: (WearableGender | GenderFilterOption)[];
     emotePlayMode?: EmotePlayMode | EmotePlayMode[];
     contractAddresses?: string[];
+    creator?: string | string[];
     tokenId?: string;
     itemId?: string;
     network?: Network;
@@ -2283,7 +2284,7 @@ export namespace WorldConfiguration {
 // src/dapps/nft.ts:58:7 - (ae-incompatible-release-tags) The symbol "bodyShapes" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/nft.ts:62:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/nft.ts:63:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/nft.ts:91:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:92:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:22:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:23:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:36:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha

@@ -42,7 +42,7 @@ export type ItemFilters = {
   skip?: number
   sortBy?: ItemSortBy
   category?: NFTCategory
-  creator?: string
+  creator?: string | string[]
   rarities?: Rarity[]
   isSoldOut?: boolean
   isOnSale?: boolean
