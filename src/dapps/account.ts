@@ -13,6 +13,7 @@ export type Account = {
   spent: string
   earned: string
   royalties: string
+  collections: number
 }
 
 export enum AccountSortBy {
@@ -20,7 +21,8 @@ export enum AccountSortBy {
   MOST_PURCHASES = 'most_purchases',
   MOST_SPENT = 'most_spent',
   MOST_EARNED = 'most_earned',
-  MOST_ROYALTIES = 'most_royalties'
+  MOST_ROYALTIES = 'most_royalties',
+  MOST_COLLECTIONS = 'most_collections'
 }
 
 export type AccountFilters = {
@@ -28,7 +30,7 @@ export type AccountFilters = {
   skip?: number
   sortBy?: AccountSortBy
   id?: string
-  address?: string
+  address?: string[]
   network?: Network
 }
 
@@ -56,6 +58,9 @@ export namespace Account {
       },
       royalties: {
         type: 'string'
+      },
+      collections: {
+        type: 'number'
       }
     },
     required: [
@@ -65,7 +70,8 @@ export namespace Account {
       'purchases',
       'spent',
       'earned',
-      'royalties'
+      'royalties',
+      'collections'
     ]
   }
 

@@ -10,7 +10,8 @@ describe('Account tests', () => {
     purchases: 10,
     spent: '1000000000000000000',
     earned: '1000000000000000000',
-    royalties: '1000000000000000000'
+    royalties: '1000000000000000000',
+    collections: 1
   }
 
   testTypeSignature(Account, account)
