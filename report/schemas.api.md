@@ -27,6 +27,7 @@ export type Account = {
     spent: string;
     earned: string;
     royalties: string;
+    collections: number;
 };
 
 // @public (undocumented)
@@ -45,7 +46,7 @@ export type AccountFilters = {
     skip?: number;
     sortBy?: AccountSortBy;
     id?: string;
-    address?: string;
+    address?: string[];
     network?: Network;
 };
 
@@ -53,6 +54,8 @@ export type AccountFilters = {
 //
 // @public (undocumented)
 export enum AccountSortBy {
+    // (undocumented)
+    MOST_COLLECTIONS = "most_collections",
     // (undocumented)
     MOST_EARNED = "most_earned",
     // (undocumented)
@@ -2259,7 +2262,7 @@ export namespace WorldConfiguration {
 
 // Warnings were encountered during analysis:
 //
-// src/dapps/account.ts:32:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/account.ts:34:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/analyticsDayData.ts:14:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/bid.ts:25:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/bid.ts:26:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
