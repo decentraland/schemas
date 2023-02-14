@@ -1856,6 +1856,7 @@ export type Scene = DisplayableDeployment & {
     requiredPermissions?: string[];
     featureToggles?: FeatureToggles;
     worldConfiguration?: WorldConfiguration;
+    allowedMediaHostnames?: string[];
 };
 
 // @alpha (undocumented)
