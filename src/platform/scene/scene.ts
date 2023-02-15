@@ -37,6 +37,7 @@ export type Scene = DisplayableDeployment & {
   requiredPermissions?: string[]
   featureToggles?: FeatureToggles
   worldConfiguration?: WorldConfiguration
+  allowedMediaHostnames?: string[]
 }
 
 /** @alpha */
@@ -128,6 +129,13 @@ export namespace Scene {
       },
       worldConfiguration: {
         ...WorldConfiguration.schema,
+        nullable: true
+      },
+      allowedMediaHostnames: {
+        type: 'array',
+        items: {
+          type: 'string'
+        },
         nullable: true
       }
     },
