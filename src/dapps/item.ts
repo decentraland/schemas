@@ -42,6 +42,7 @@ export type ItemFilters = {
   skip?: number
   sortBy?: ItemSortBy
   category?: NFTCategory
+  /** The address or the addresses of the creators to filter for */
   creator?: string | string[]
   rarities?: Rarity[]
   isSoldOut?: boolean
