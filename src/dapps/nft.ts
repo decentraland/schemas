@@ -86,6 +86,7 @@ export type NFTFilters = {
   emoteGenders?: (WearableGender | GenderFilterOption)[]
   emotePlayMode?: EmotePlayMode | EmotePlayMode[]
   contractAddresses?: string[]
+  creator?: string | string[]
   tokenId?: string
   itemId?: string
   network?: Network
