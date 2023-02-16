@@ -14,7 +14,7 @@ export enum ProviderType {
   NETWORK = 'network',
   WALLET_CONNECT = 'wallet_connect',
   WALLET_CONNECT_V2 = 'wallet_connect_v2',
-  WALLET_LINK = 'wallet_link'
+  WALLET_LINK = 'wallet_link',
   METAMASK_MOBILE = 'metamask_mobile'
 }
 
