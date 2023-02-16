@@ -1569,9 +1569,13 @@ export enum ProviderType {
     // (undocumented)
     INJECTED = "injected",
     // (undocumented)
+    METAMASK_MOBILE = "metamask_mobile",
+    // (undocumented)
     NETWORK = "network",
     // (undocumented)
     WALLET_CONNECT = "wallet_connect",
+    // (undocumented)
+    WALLET_CONNECT_V2 = "wallet_connect_v2",
     // (undocumented)
     WALLET_LINK = "wallet_link"
 }
