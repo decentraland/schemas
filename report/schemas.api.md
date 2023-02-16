@@ -1575,6 +1575,8 @@ export enum ProviderType {
     // (undocumented)
     WALLET_CONNECT = "wallet_connect",
     // (undocumented)
+    WALLET_CONNECT_V2 = "wallet_connect_v2",
+    // (undocumented)
     WALLET_LINK = "wallet_link"
 }
 
