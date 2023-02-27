@@ -98,16 +98,16 @@ export type RentalsListingsFilterBy = {
   /** The maximun price per day of the rental */
   maxPricePerDay?: string
   /** The minimum amount of parcels to a plaza */
-  minDistanceToPlaza?: string
+  minDistanceToPlaza?: number
   /**
    * The maxiumum amount of parcels to a plaza. If this value is more than 10, it will only bring those that
    * are less than 10 as those are the ones which distances were calculated
    */
-  maxDistanceToPlaza?: string
+  maxDistanceToPlaza?: number
   /** The minimum amount of parcels in the estate */
-  minEstateSize?: string
+  minEstateSize?: number
   /** The maxiumum amount of parcels in the estate */
-  maxEstateSize?: string
+  maxEstateSize?: number
   /** If true, it will fetch all parcels and estates that are next to a road */
   adjacentToRoad?: boolean
 }

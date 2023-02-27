@@ -1702,10 +1702,10 @@ export type RentalsListingsFilterBy = {
     target?: string;
     minPricePerDay?: string;
     maxPricePerDay?: string;
-    minDistanceToPlaza?: string;
-    maxDistanceToPlaza?: string;
-    minEstateSize?: string;
-    maxEstateSize?: string;
+    minDistanceToPlaza?: number;
+    maxDistanceToPlaza?: number;
+    minEstateSize?: number;
+    maxEstateSize?: number;
     adjacentToRoad?: boolean;
 };
 
