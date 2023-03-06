@@ -102,8 +102,10 @@ export type NFTFilters = {
   minDistanceToPlaza?: number
   /** Filter NFTs with at most this distance to a plaza */
   maxDistanceToPlaza?: number
-  /** Filter that are next to a road */
+  /** Filter NFTs that are next to a road */
   adjacentToRoad?: boolean
+  /** Filter rentals that have periods that include any of the rental days */
+  rentalDays?: number[]
 } & Pick<RentalsListingsFilterBy, 'tenant'>
 
 export enum NFTSortBy {
