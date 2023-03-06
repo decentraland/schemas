@@ -104,7 +104,7 @@ export type NFTFilters = {
   maxDistanceToPlaza?: number
   /** Filter NFTs that are next to a road */
   adjacentToRoad?: boolean
-  /** Filter rentals that have periods that include any of the rental days */
+  /** Filter NFTs by rentals that have periods that include any of the rental days */
   rentalDays?: number[]
 } & Pick<RentalsListingsFilterBy, 'tenant'>
 
