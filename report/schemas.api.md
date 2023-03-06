@@ -1161,7 +1161,7 @@ export type NFTFilters = {
     minDistanceToPlaza?: number;
     maxDistanceToPlaza?: number;
     adjacentToRoad?: boolean;
-    rentalDays: number[];
+    rentalDays?: number[];
 } & Pick<RentalsListingsFilterBy, 'tenant'>;
 
 // Warning: (ae-missing-release-tag) "NFTSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1708,7 +1708,7 @@ export type RentalsListingsFilterBy = {
     minEstateSize?: number;
     maxEstateSize?: number;
     adjacentToRoad?: boolean;
-    rentalDays: number[];
+    rentalDays?: number[];
 };
 
 // Warning: (ae-missing-release-tag) "RentalsListingsFilterByCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
