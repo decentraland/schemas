@@ -110,6 +110,8 @@ export type RentalsListingsFilterBy = {
   maxEstateSize?: number
   /** If true, it will fetch all parcels and estates that are next to a road */
   adjacentToRoad?: boolean
+  /** The days that a rental should be available */
+  rentalDays?: number[]
 }
 
 /**
