@@ -1458,6 +1458,7 @@ export type PreviewOptions = {
     itemId?: string | null;
     profile?: string | null;
     bodyShape?: BodyShape | null;
+    type?: PreviewType | null;
     skin?: string | null;
     hair?: string | null;
     eyes?: string | null;

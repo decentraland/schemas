@@ -3,6 +3,7 @@ import { EmoteWithBlobs } from './emote-with-blobs'
 import { PreviewCamera } from './preview-camera'
 import { PreviewEmote } from './preview-emote'
 import { PreviewProjection } from './preview-projection'
+import { PreviewType } from './preview-type'
 import { WearableWithBlobs } from './wearable-with-blobs'
 
 /** @alpha */
@@ -12,6 +13,7 @@ export type PreviewOptions = {
   itemId?: string | null
   profile?: string | null
   bodyShape?: BodyShape | null
+  type?: PreviewType | null
   skin?: string | null
   hair?: string | null
   eyes?: string | null
