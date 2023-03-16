@@ -35,6 +35,7 @@ export type OrderFilters = {
   status?: ListingStatus
   network?: Network
   issuedId?: string
+  name?: string
 }
 
 export enum OrderSortBy {
