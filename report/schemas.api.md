@@ -1230,7 +1230,7 @@ export type OrderFilters = {
     tokenId?: string;
     status?: ListingStatus;
     network?: Network;
-    issuedId?: string;
+    itemId?: string;
     nftName?: string;
 };
 
