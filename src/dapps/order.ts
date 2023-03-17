@@ -34,12 +34,17 @@ export type OrderFilters = {
   tokenId?: string
   status?: ListingStatus
   network?: Network
+  issuedId?: string
+  nftName?: string
 }
 
 export enum OrderSortBy {
   RECENTLY_LISTED = 'recently_listed',
   RECENTLY_UPDATED = 'recently_updated',
-  CHEAPEST = 'cheapest'
+  CHEAPEST = 'cheapest',
+  ISSUED_ID_ASC = 'issued_id_asc',
+  ISSUED_ID_DESC = 'issued_id_desc',
+  OLDEST = 'oldest'
 }
 
 export namespace Order {

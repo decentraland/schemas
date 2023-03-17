@@ -1230,6 +1230,8 @@ export type OrderFilters = {
     tokenId?: string;
     status?: ListingStatus;
     network?: Network;
+    issuedId?: string;
+    nftName?: string;
 };
 
 // Warning: (ae-missing-release-tag) "OrderSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1238,6 +1240,12 @@ export type OrderFilters = {
 export enum OrderSortBy {
     // (undocumented)
     CHEAPEST = "cheapest",
+    // (undocumented)
+    ISSUED_ID_ASC = "issued_id_asc",
+    // (undocumented)
+    ISSUED_ID_DESC = "issued_id_desc",
+    // (undocumented)
+    OLDEST = "oldest",
     // (undocumented)
     RECENTLY_LISTED = "recently_listed",
     // (undocumented)
