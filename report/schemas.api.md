@@ -1231,7 +1231,7 @@ export type OrderFilters = {
     status?: ListingStatus;
     network?: Network;
     issuedId?: string;
-    name?: string;
+    nftName?: string;
 };
 
 // Warning: (ae-missing-release-tag) "OrderSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
