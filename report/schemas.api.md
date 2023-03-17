@@ -1243,11 +1243,11 @@ export enum OrderSortBy {
     // (undocumented)
     RECENTLY_UPDATED = "recently_updated"
      // (undocumented)
-    ISSUED_ID_ASC = 'issued_id_asc',
+    ISSUED_ID_ASC = "issued_id_asc",
     // (undocumented)
-    ISSUED_ID_DESC = 'issued_id_desc'
+    ISSUED_ID_DESC = "issued_id_desc",
     // (undocumented)
-    OLDEST = 'oldest'
+    OLDEST = "oldest"
 }
 
 // Warning: (ae-missing-release-tag) "PeriodCreation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
