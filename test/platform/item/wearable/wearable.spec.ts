@@ -95,6 +95,15 @@ describe('Wearable representation tests', () => {
   testTypeSignature(Wearable, wearable)
   testTypeSignature(Wearable, thirdPartyWearable)
 
+  it('static base wearable must puss', () => {
+    expect(
+      Wearable.validate({
+        ...baseWearable,
+        id: 'urn:decentraland:off-chain:base-avatars:basemale'
+      })
+    ).toEqual(true)
+  })
+
   it('static tests must pass', () => {
     expect(Wearable.validate(wearable)).toEqual(true)
     expect(Wearable.validate(null)).toEqual(false)
@@ -146,12 +155,6 @@ describe('Wearable representation tests', () => {
       { ...baseWearable, ...standard, ...thirdParty },
       ['either standard XOR thirdparty properties conditions must be met']
     )
-  })
-
-  it('wearable should be standard and/or thirdparty', () => {
-    expectValidationFailureWithErrors(Wearable.validate, baseWearable, [
-      'either standard XOR thirdparty properties conditions must be met'
-    ])
   })
 
   it('wearable cannot be both standard and thirdparty', () => {

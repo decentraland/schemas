@@ -4,6 +4,7 @@ import { WearableRepresentation } from './representation'
 import {
   BaseItem,
   baseItemProperties,
+  isBaseAvatar,
   requiredBaseItemProps
 } from '../base-item'
 import { StandardProps, standardProperties } from '../standard-props'
@@ -61,24 +62,29 @@ export namespace Wearable {
       }
     },
     additionalProperties: true,
-    required: [...requiredBaseItemProps, 'data'],
+    required: [],
     oneOf: [
       {
-        required: ['collectionAddress', 'rarity'],
+        required: ['id', 'i18n'],
+        prohibited: ['merkleProof', 'content', 'collectionAddress', 'rarity'],
+        _isBaseAvatar: true
+      },
+      {
+        required: [
+          ...requiredBaseItemProps,
+          'data',
+          'collectionAddress',
+          'rarity'
+        ],
         prohibited: ['merkleProof', 'content']
       },
       {
         required: [
+          ...requiredBaseItemProps,
+          'data',
           'merkleProof',
           /* MerkleProof emote required Keys (might be redundant) */
-          'content',
-          'id',
-          'name',
-          'description',
-          'i18n',
-          'image',
-          'thumbnail',
-          'data'
+          'content'
         ],
         prohibited: ['collectionAddress', 'rarity'],
         _isThirdParty: true
@@ -95,6 +101,12 @@ export namespace Wearable {
     errors: false
   }
 
+  const _isBaseAvatarKeywordDef = {
+    keyword: '_isBaseAvatar',
+    validate: (schema: boolean, data: any) => !schema || isBaseAvatar(data),
+    errors: false
+  }
+
   /**
    * Validates that the wearable metadata complies with the standard or third party wearable, and doesn't have repeated locales.
    * Some fields are defined as optional but those are validated to be present as standard XOR third party:
@@ -106,6 +118,7 @@ export namespace Wearable {
    *    - content
    */
   export const validate = generateLazyValidator(schema, [
-    _isThirdPartyKeywordDef
+    _isThirdPartyKeywordDef,
+    _isBaseAvatarKeywordDef
   ])
 }
