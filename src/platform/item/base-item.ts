@@ -57,3 +57,15 @@ export const requiredBaseItemProps = [
   'thumbnail',
   'image'
 ] as const
+
+export function isBaseAvatar(item: BaseItem): boolean {
+  if (!item || !item.id) {
+    return false
+  }
+
+  const urnParts = item.id.split(':')
+  const isDecentralandAvatar = urnParts[1] === 'decentraland'
+  const isBaseAvatar = urnParts[3] === 'base-avatars'
+
+  return urnParts.length === 5 && isDecentralandAvatar && isBaseAvatar
+}
