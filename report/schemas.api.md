@@ -1206,6 +1206,7 @@ export type Order = {
     updatedAt: number;
     network: Network;
     chainId: ChainId;
+    issuedId: string;
 };
 
 // @public (undocumented)
