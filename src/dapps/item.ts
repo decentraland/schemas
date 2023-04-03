@@ -56,6 +56,7 @@ export type ItemFilters = {
   emoteCategory?: EmoteCategory
   emoteGenders?: (WearableGender | GenderFilterOption)[]
   emotePlayMode?: EmotePlayMode | EmotePlayMode[]
+  ids?: string[]
   contractAddresses?: string[]
   itemId?: string
   network?: Network
