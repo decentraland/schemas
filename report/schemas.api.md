@@ -1207,6 +1207,7 @@ export type Order = {
     updatedAt: number;
     network: Network;
     chainId: ChainId;
+    issuedId: string;
 };
 
 // @public (undocumented)
@@ -2309,7 +2310,7 @@ export namespace WorldConfiguration {
 // src/dapps/nft.ts:92:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:22:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:23:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/order.ts:36:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/order.ts:37:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/preview/emote-definition.ts:6:5 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "item" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:11:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
