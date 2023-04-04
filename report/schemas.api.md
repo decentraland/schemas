@@ -813,7 +813,7 @@ export type Item = {
     network: Network;
     chainId: ChainId;
     firstListedAt: number | null;
-    picks: {
+    picks?: {
         pickedByUser?: boolean;
         count: number;
     };
