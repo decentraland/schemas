@@ -35,7 +35,7 @@ export type Item = {
   chainId: ChainId
   /** The timestamp in seconds since epoch when the item was listed for sale for the first time */
   firstListedAt: number | null
-  picks: {
+  picks?: {
     pickedByUser?: boolean
     count: number
   }
@@ -156,7 +156,8 @@ export namespace Item {
             type: 'integer'
           }
         },
-        required: ['count']
+        required: ['count'],
+        nullable: true
       }
     },
     required: [
