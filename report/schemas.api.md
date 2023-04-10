@@ -269,6 +269,64 @@ export namespace BodyShape {
     validate: ValidateFunction<BodyShape>;
 }
 
+// Warning: (ae-missing-release-tag) "CatalogFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CatalogFilters = Pick<ItemFilters, 'first' | 'skip' | 'category' | 'creator' | 'isSoldOut' | 'isOnSale' | 'search' | 'isWearableHead' | 'isWearableSmart' | 'isWearableAccessory' | 'isWearableAccessory' | 'wearableCategory' | 'rarities' | 'wearableGenders' | 'emoteCategory' | 'emoteGenders' | 'emotePlayMode' | 'contractAddresses' | 'itemId' | 'network' | 'minPrice' | 'maxPrice'> & {
+    onlyMinting?: boolean;
+    onlyListing?: boolean;
+    sortBy?: CatalogSortBy;
+    sortDirection?: CatalogSortDirection;
+    limit?: number;
+    offset?: number;
+};
+
+// Warning: (ae-missing-release-tag) "CatalogItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CatalogItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CatalogItem = Pick<Item, 'id' | 'name' | 'contractAddress' | 'thumbnail' | 'url' | 'rarity' | 'category' | 'creator' | 'data' | 'network' | 'chainId' | 'available' | 'isOnSale' | 'price'> & {
+    minPrice: string;
+    minListingPrice: string | null;
+    maxListingPrice: string | null;
+    listings: number | null;
+    owners: number | null;
+};
+
+// @public (undocumented)
+export namespace CatalogItem {
+    const // (undocumented)
+    schema: JSONSchema<CatalogItem>;
+    const // (undocumented)
+    validate: ValidateFunction<CatalogItem>;
+}
+
+// Warning: (ae-missing-release-tag) "CatalogSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum CatalogSortBy {
+    // (undocumented)
+    CHEAPEST = "cheapest",
+    // (undocumented)
+    MOST_EXPENSIVE = "most_expensive",
+    // (undocumented)
+    NEWEST = "newest",
+    // (undocumented)
+    RECENTLY_LISTED = "recently_listed",
+    // (undocumented)
+    RECENTLY_SOLD = "recently_sold"
+}
+
+// Warning: (ae-missing-release-tag) "CatalogSortDirection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum CatalogSortDirection {
+    // (undocumented)
+    ASC = "asc",
+    // (undocumented)
+    DESC = "desc"
+}
+
 // @alpha
 export enum ChainId {
     // (undocumented)
