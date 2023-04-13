@@ -131,6 +131,20 @@ export namespace CatalogItem {
       owners: {
         type: 'integer'
       },
+      picks: {
+        type: 'object',
+        properties: {
+          pickedByUser: {
+            type: 'boolean',
+            nullable: true
+          },
+          count: {
+            type: 'integer'
+          }
+        },
+        required: ['count'],
+        nullable: true
+      },
       data: {
         type: 'object',
         nullable: false,

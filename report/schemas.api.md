@@ -285,7 +285,7 @@ export type CatalogFilters = Pick<ItemFilters, 'first' | 'skip' | 'category' | '
 // Warning: (ae-missing-release-tag) "CatalogItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type CatalogItem = Pick<Item, 'id' | 'name' | 'contractAddress' | 'thumbnail' | 'url' | 'rarity' | 'category' | 'creator' | 'data' | 'network' | 'chainId' | 'available' | 'isOnSale' | 'price'> & {
+export type CatalogItem = Pick<Item, 'id' | 'name' | 'contractAddress' | 'thumbnail' | 'url' | 'rarity' | 'category' | 'creator' | 'data' | 'network' | 'chainId' | 'available' | 'isOnSale' | 'price' | 'picks'> & {
     minPrice: string;
     minListingPrice: string | null;
     maxListingPrice: string | null;
