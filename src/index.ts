@@ -21,6 +21,12 @@ export { Mint, MintFilters, MintSortBy } from './dapps/mint'
 export { Network } from './dapps/network'
 export { NFTCategory } from './dapps/nft-category'
 export { NFT, NFTFilters, NFTSortBy } from './dapps/nft'
+export {
+  CatalogItem,
+  CatalogFilters,
+  CatalogSortBy,
+  CatalogSortDirection
+} from './dapps/catalog'
 export { Order, OrderFilters, OrderSortBy } from './dapps/order'
 export { ProviderType } from './dapps/provider-type'
 export { Rarity } from './dapps/rarity'
