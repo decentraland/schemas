@@ -11,6 +11,10 @@ import { Rarity } from './rarity'
 import { WearableCategory } from './wearable-category'
 import { Item, ItemFilters } from './item'
 
+/**
+ * Representation of the Item returned for the Marketplace's catalog.
+ * @public
+ */
 export type CatalogItem = Pick<
   Item,
   | 'id'
@@ -36,6 +40,10 @@ export type CatalogItem = Pick<
   owners: number | null
 }
 
+/**
+ * All the possible sort options for the Marketplace's catalog.
+ * @public
+ */
 export enum CatalogSortBy {
   NEWEST = 'newest',
   RECENTLY_SOLD = 'recently_sold',
@@ -44,11 +52,19 @@ export enum CatalogSortBy {
   RECENTLY_LISTED = 'recently_listed'
 }
 
+/**
+ * All the possible sort directions.
+ * @public
+ */
 export enum CatalogSortDirection {
   ASC = 'asc',
   DESC = 'desc'
 }
 
+/**
+ * All the possible Marketplace's catalog filters.
+ * @public
+ */
 export type CatalogFilters = Pick<
   ItemFilters,
   | 'first'
@@ -82,6 +98,9 @@ export type CatalogFilters = Pick<
   offset?: number
 }
 
+/**
+ * @public
+ */
 export namespace CatalogItem {
   export const schema: JSONSchema<CatalogItem> = {
     type: 'object',

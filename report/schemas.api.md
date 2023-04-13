@@ -269,9 +269,7 @@ export namespace BodyShape {
     validate: ValidateFunction<BodyShape>;
 }
 
-// Warning: (ae-missing-release-tag) "CatalogFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @public
 export type CatalogFilters = Pick<ItemFilters, 'first' | 'skip' | 'category' | 'creator' | 'isSoldOut' | 'isOnSale' | 'search' | 'isWearableHead' | 'isWearableSmart' | 'isWearableAccessory' | 'isWearableAccessory' | 'wearableCategory' | 'rarities' | 'wearableGenders' | 'emoteCategory' | 'emoteGenders' | 'emotePlayMode' | 'contractAddresses' | 'itemId' | 'network' | 'minPrice' | 'maxPrice'> & {
     onlyMinting?: boolean;
     onlyListing?: boolean;
@@ -281,10 +279,7 @@ export type CatalogFilters = Pick<ItemFilters, 'first' | 'skip' | 'category' | '
     offset?: number;
 };
 
-// Warning: (ae-missing-release-tag) "CatalogItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "CatalogItem" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @public
 export type CatalogItem = Pick<Item, 'id' | 'name' | 'contractAddress' | 'thumbnail' | 'url' | 'rarity' | 'category' | 'creator' | 'data' | 'network' | 'chainId' | 'available' | 'isOnSale' | 'price' | 'picks'> & {
     minPrice: string;
     minListingPrice: string | null;
@@ -301,9 +296,7 @@ export namespace CatalogItem {
     validate: ValidateFunction<CatalogItem>;
 }
 
-// Warning: (ae-missing-release-tag) "CatalogSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @public
 export enum CatalogSortBy {
     // (undocumented)
     CHEAPEST = "cheapest",
@@ -317,9 +310,7 @@ export enum CatalogSortBy {
     RECENTLY_SOLD = "recently_sold"
 }
 
-// Warning: (ae-missing-release-tag) "CatalogSortDirection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @public
 export enum CatalogSortDirection {
     // (undocumented)
     ASC = "asc",
