@@ -27,6 +27,7 @@ export type CatalogItem = Pick<
   | 'available'
   | 'isOnSale'
   | 'price'
+  | 'picks'
 > & {
   minPrice: string
   minListingPrice: string | null
