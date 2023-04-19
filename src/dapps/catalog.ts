@@ -18,6 +18,7 @@ import { Item, ItemFilters } from './item'
 export type CatalogItem = Pick<
   Item,
   | 'id'
+  | 'itemId'
   | 'name'
   | 'contractAddress'
   | 'thumbnail'
@@ -106,6 +107,9 @@ export namespace CatalogItem {
     type: 'object',
     properties: {
       id: {
+        type: 'string'
+      },
+      itemId: {
         type: 'string'
       },
       contractAddress: {
