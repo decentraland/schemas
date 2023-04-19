@@ -280,7 +280,7 @@ export type CatalogFilters = Pick<ItemFilters, 'first' | 'skip' | 'category' | '
 };
 
 // @public
-export type CatalogItem = Pick<Item, 'id' | 'name' | 'contractAddress' | 'thumbnail' | 'url' | 'rarity' | 'category' | 'creator' | 'data' | 'network' | 'chainId' | 'available' | 'isOnSale' | 'price' | 'picks'> & {
+export type CatalogItem = Pick<Item, 'id' | 'itemId' | 'name' | 'contractAddress' | 'thumbnail' | 'url' | 'rarity' | 'category' | 'creator' | 'data' | 'network' | 'chainId' | 'available' | 'isOnSale' | 'price' | 'picks'> & {
     minPrice: string;
     minListingPrice: string | null;
     maxListingPrice: string | null;
