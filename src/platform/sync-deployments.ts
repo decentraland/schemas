@@ -10,6 +10,9 @@ export type SyncDeployment =
   | SnapshotSyncDeployment
   | PointerChangesSyncDeployment
 
+/**
+ * @deprecated
+ */
 type BaseSyncDeployment = {
   entityId: IPFSv1 | IPFSv2
   entityType: string
@@ -22,7 +25,11 @@ type BaseSyncDeployment = {
  * a deployed entity across catalysts from the snapshots.
  * @public
  */
-export type SnapshotSyncDeployment = BaseSyncDeployment & {
+export type SnapshotSyncDeployment = {
+  entityId: IPFSv1 | IPFSv2
+  entityType: string
+  pointers: string[]
+  authChain: AuthChain
   entityTimestamp: number
 }
 
@@ -36,8 +43,8 @@ export namespace SnapshotSyncDeployment {
       entityId: { type: 'string' },
       entityType: { type: 'string' },
       pointers: { type: 'array', items: { type: 'string' }, minItems: 1 },
-      entityTimestamp: { type: 'number', minimum: 0 },
-      authChain: AuthChain.schema
+      authChain: AuthChain.schema,
+      entityTimestamp: { type: 'number', minimum: 0 }
     },
     oneOf: [
       { properties: { entityId: IPFSv1.schema } },
@@ -61,7 +68,7 @@ export namespace SnapshotSyncDeployment {
  * a deployed entity across catalysts from the old snapshots and /pointer-changes endpoint.
  * @public
  */
-export type PointerChangesSyncDeployment = BaseSyncDeployment & {
+export type PointerChangesSyncDeployment = SnapshotSyncDeployment & {
   localTimestamp: number
 }
 
@@ -75,8 +82,9 @@ export namespace PointerChangesSyncDeployment {
       entityId: { type: 'string' },
       entityType: { type: 'string' },
       pointers: { type: 'array', items: { type: 'string' }, minItems: 1 },
-      localTimestamp: { type: 'number', minimum: 0 },
-      authChain: AuthChain.schema
+      authChain: AuthChain.schema,
+      entityTimestamp: { type: 'number', minimum: 0 },
+      localTimestamp: { type: 'number', minimum: 0 }
     },
     oneOf: [
       { properties: { entityId: IPFSv1.schema } },
@@ -87,6 +95,7 @@ export namespace PointerChangesSyncDeployment {
       'entityType',
       'pointers',
       'localTimestamp',
+      'entityTimestamp',
       'authChain'
     ]
   }
