@@ -11,7 +11,6 @@ import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'
 import { WearableCategory } from './wearable-category'
 import { GenderFilterOption, WearableGender } from './wearable-gender'
-import { CatalogSortBy } from './catalog'
 
 export type Item = {
   id: string
@@ -51,7 +50,7 @@ export type Item = {
 export type ItemFilters = {
   first?: number
   skip?: number
-  sortBy?: ItemSortBy | CatalogSortBy
+  sortBy?: ItemSortBy
   category?: NFTCategory
   /** The address or the addresses of the creators to filter for */
   creator?: string | string[]
