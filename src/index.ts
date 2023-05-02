@@ -22,7 +22,6 @@ export { Network } from './dapps/network'
 export { NFTCategory } from './dapps/nft-category'
 export { NFT, NFTFilters, NFTSortBy } from './dapps/nft'
 export {
-  CatalogItem,
   CatalogFilters,
   CatalogSortBy,
   CatalogSortDirection
