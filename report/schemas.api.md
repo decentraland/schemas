@@ -870,7 +870,7 @@ export namespace Item {
 export type ItemFilters = {
     first?: number;
     skip?: number;
-    sortBy?: ItemSortBy | CatalogSortBy;
+    sortBy?: ItemSortBy;
     category?: NFTCategory;
     creator?: string | string[];
     rarities?: Rarity[];

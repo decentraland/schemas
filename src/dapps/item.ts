@@ -51,7 +51,7 @@ export type Item = {
 export type ItemFilters = {
   first?: number
   skip?: number
-  sortBy?: ItemSortBy | CatalogSortBy
+  sortBy?: ItemSortBy
   category?: NFTCategory
   /** The address or the addresses of the creators to filter for */
   creator?: string | string[]
