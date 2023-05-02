@@ -31,6 +31,12 @@ export type AbstractTypedSchema<T> = {
 }
 
 /**
+ * Cache ajv instance
+ * @private
+ */
+const ajvCache: { ajv: Ajv | null } = { ajv: null }
+
+/**
  * Generates a validator for a specific JSON schema of a type T
  * @public
  */
@@ -41,13 +47,27 @@ export function generateLazyValidator<T>(
   let validateFn: ValidateFunction<T> | null = null
   const theReturnedValidateFunction = (data: any, dataCxt?: any): data is T => {
     if (!validateFn) {
-      const ajv = new Ajv({ $data: true, allErrors: true })
-      ajv_keywords(ajv)
-      ajv_errors(ajv, { singleError: true })
+      if (ajvCache.ajv === null) {
+        ajvCache.ajv = new Ajv({ $data: true, allErrors: true })
+        ajv_keywords(ajvCache.ajv)
+        ajv_errors(ajvCache.ajv, { singleError: true })
+      }
+      const ajv = ajvCache.ajv
       keywordDefinitions?.forEach((kw: string | KeywordDefinition) =>
-        ajv.addKeyword(kw)
+        ajvCache.ajv!.addKeyword(kw)
       )
       validateFn = ajv.compile<T>(schema)
+      keywordDefinitions?.forEach((kw: string | KeywordDefinition) => {
+        if (typeof kw === 'string') {
+          ajvCache.ajv!.removeKeyword(kw)
+        } else if (Array.isArray(kw.keyword)) {
+          kw.keyword.forEach((innerKw: string) =>
+            ajvCache.ajv!.removeKeyword(innerKw)
+          )
+        } else if (typeof kw.keyword === 'string') {
+          ajvCache.ajv!.removeKeyword(kw.keyword)
+        }
+      })
       Object.defineProperty(theReturnedValidateFunction, 'errors', {
         get() {
           return validateFn?.errors
