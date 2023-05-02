@@ -11,6 +11,7 @@ import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'
 import { WearableCategory } from './wearable-category'
 import { GenderFilterOption, WearableGender } from './wearable-gender'
+import { CatalogSortBy } from './catalog'
 
 export type Item = {
   id: string
@@ -39,12 +40,18 @@ export type Item = {
     pickedByUser?: boolean
     count: number
   }
+  /** The following fields are for the items for the Marketplace's catalog */
+  minPrice?: string
+  minListingPrice?: string | null
+  maxListingPrice?: string | null
+  listings?: number | null
+  owners?: number | null
 }
 
 export type ItemFilters = {
   first?: number
   skip?: number
-  sortBy?: ItemSortBy
+  sortBy?: ItemSortBy | CatalogSortBy
   category?: NFTCategory
   /** The address or the addresses of the creators to filter for */
   creator?: string | string[]
@@ -157,6 +164,26 @@ export namespace Item {
           }
         },
         required: ['count'],
+        nullable: true
+      },
+      minPrice: {
+        type: 'string',
+        nullable: true
+      },
+      minListingPrice: {
+        type: 'string',
+        nullable: true
+      },
+      maxListingPrice: {
+        type: 'string',
+        nullable: true
+      },
+      listings: {
+        type: 'integer',
+        nullable: true
+      },
+      owners: {
+        type: 'integer',
         nullable: true
       }
     },

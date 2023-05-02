@@ -270,7 +270,7 @@ export namespace BodyShape {
 }
 
 // @public
-export type CatalogFilters = Pick<ItemFilters, 'first' | 'skip' | 'category' | 'creator' | 'isSoldOut' | 'isOnSale' | 'search' | 'isWearableHead' | 'isWearableSmart' | 'isWearableAccessory' | 'isWearableAccessory' | 'wearableCategory' | 'rarities' | 'wearableGenders' | 'emoteCategory' | 'emoteGenders' | 'emotePlayMode' | 'contractAddresses' | 'itemId' | 'network' | 'minPrice' | 'maxPrice'> & {
+export type CatalogFilters = Pick<ItemFilters, 'ids' | 'first' | 'skip' | 'category' | 'creator' | 'isSoldOut' | 'isOnSale' | 'search' | 'isWearableHead' | 'isWearableSmart' | 'isWearableAccessory' | 'isWearableAccessory' | 'wearableCategory' | 'rarities' | 'wearableGenders' | 'emoteCategory' | 'emoteGenders' | 'emotePlayMode' | 'contractAddresses' | 'itemId' | 'network' | 'minPrice' | 'maxPrice'> & {
     onlyMinting?: boolean;
     onlyListing?: boolean;
     sortBy?: CatalogSortBy;
@@ -278,23 +278,6 @@ export type CatalogFilters = Pick<ItemFilters, 'first' | 'skip' | 'category' | '
     limit?: number;
     offset?: number;
 };
-
-// @public
-export type CatalogItem = Pick<Item, 'id' | 'itemId' | 'name' | 'contractAddress' | 'thumbnail' | 'url' | 'rarity' | 'category' | 'creator' | 'data' | 'network' | 'chainId' | 'available' | 'isOnSale' | 'price' | 'picks'> & {
-    minPrice: string;
-    minListingPrice: string | null;
-    maxListingPrice: string | null;
-    listings: number | null;
-    owners: number | null;
-};
-
-// @public (undocumented)
-export namespace CatalogItem {
-    const // (undocumented)
-    schema: JSONSchema<CatalogItem>;
-    const // (undocumented)
-    validate: ValidateFunction<CatalogItem>;
-}
 
 // @public
 export enum CatalogSortBy {
@@ -866,6 +849,11 @@ export type Item = {
         pickedByUser?: boolean;
         count: number;
     };
+    minPrice?: string;
+    minListingPrice?: string | null;
+    maxListingPrice?: string | null;
+    listings?: number | null;
+    owners?: number | null;
 };
 
 // @public (undocumented)
@@ -882,7 +870,7 @@ export namespace Item {
 export type ItemFilters = {
     first?: number;
     skip?: number;
-    sortBy?: ItemSortBy;
+    sortBy?: ItemSortBy | CatalogSortBy;
     category?: NFTCategory;
     creator?: string | string[];
     rarities?: Rarity[];
@@ -2350,9 +2338,9 @@ export namespace WorldConfiguration {
 // src/dapps/contract.ts:14:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/contract.ts:15:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/contract.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/item.ts:34:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/item.ts:35:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/item.ts:66:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/item.ts:35:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/item.ts:36:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/item.ts:73:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:20:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/mint.ts:21:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/mint.ts:41:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
