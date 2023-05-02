@@ -11,7 +11,6 @@ import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'
 import { WearableCategory } from './wearable-category'
 import { GenderFilterOption, WearableGender } from './wearable-gender'
-import { CatalogSortBy } from './catalog'
 
 export type Item = {
   id: string
