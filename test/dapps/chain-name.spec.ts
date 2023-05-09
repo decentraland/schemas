@@ -14,9 +14,7 @@ describe('ChainName tests', () => {
   })
 
   it('Should get a valid chain id', () => {
-    expect(getChainId(ChainName.ETHEREUM_MAINNET)).toEqual(
-      ChainId.ETHEREUM_MAINNET
-    )
+    expect(getChainId(ChainName.ETHEREUM_MAINNET)).toEqual(ChainId.ETHEREUM_MAINNET)
   })
 
   it('Should get null if the chain name is not valid', () => {

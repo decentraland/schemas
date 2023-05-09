@@ -1,14 +1,8 @@
 import { IPFSv1, IPFSv2 } from '../misc'
 import { AuthChain } from '../misc/auth-chain'
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 
-export type SyncDeployment =
-  | SnapshotSyncDeployment
-  | PointerChangesSyncDeployment
+export type SyncDeployment = SnapshotSyncDeployment | PointerChangesSyncDeployment
 
 type BaseSyncDeployment = {
   entityId: IPFSv1 | IPFSv2
@@ -39,21 +33,11 @@ export namespace SnapshotSyncDeployment {
       entityTimestamp: { type: 'number', minimum: 0 },
       authChain: AuthChain.schema
     },
-    oneOf: [
-      { properties: { entityId: IPFSv1.schema } },
-      { properties: { entityId: IPFSv2.schema } }
-    ],
-    required: [
-      'entityId',
-      'entityType',
-      'pointers',
-      'entityTimestamp',
-      'authChain'
-    ]
+    oneOf: [{ properties: { entityId: IPFSv1.schema } }, { properties: { entityId: IPFSv2.schema } }],
+    required: ['entityId', 'entityType', 'pointers', 'entityTimestamp', 'authChain']
   }
 
-  export const validate: ValidateFunction<SnapshotSyncDeployment> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<SnapshotSyncDeployment> = generateLazyValidator(schema)
 }
 
 /**
@@ -78,19 +62,9 @@ export namespace PointerChangesSyncDeployment {
       localTimestamp: { type: 'number', minimum: 0 },
       authChain: AuthChain.schema
     },
-    oneOf: [
-      { properties: { entityId: IPFSv1.schema } },
-      { properties: { entityId: IPFSv2.schema } }
-    ],
-    required: [
-      'entityId',
-      'entityType',
-      'pointers',
-      'localTimestamp',
-      'authChain'
-    ]
+    oneOf: [{ properties: { entityId: IPFSv1.schema } }, { properties: { entityId: IPFSv2.schema } }],
+    required: ['entityId', 'entityType', 'pointers', 'localTimestamp', 'authChain']
   }
 
-  export const validate: ValidateFunction<PointerChangesSyncDeployment> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<PointerChangesSyncDeployment> = generateLazyValidator(schema)
 }

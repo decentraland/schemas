@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../../validation'
 import { BodyShape } from '../../body-shape'
 
 /** @alpha */
@@ -45,6 +41,5 @@ export namespace EmoteRepresentationADR74 {
     required: ['bodyShapes', 'mainFile', 'contents']
   }
 
-  export const validate: ValidateFunction<EmoteRepresentationADR74> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<EmoteRepresentationADR74> = generateLazyValidator(schema)
 }

@@ -1,16 +1,11 @@
 import { isThirdParty } from '..'
 import { generateLazyValidator, JSONSchema } from '../../../validation'
-import {
-  BaseItem,
-  baseItemProperties,
-  requiredBaseItemProps
-} from '../base-item'
+import { BaseItem, baseItemProperties, requiredBaseItemProps } from '../base-item'
 import { standardProperties, StandardProps } from '../standard-props'
 import { thirdPartyProps, ThirdPartyProps } from '../third-party-props'
 import { EmoteDataADR74 } from './adr74/emote-data-adr74'
 
-export type EmoteADR74 = BaseItem &
-  (StandardProps | ThirdPartyProps) & { emoteDataADR74: EmoteDataADR74 }
+export type EmoteADR74 = BaseItem & (StandardProps | ThirdPartyProps) & { emoteDataADR74: EmoteDataADR74 }
 
 /** @alpha */
 export type Emote = EmoteADR74
@@ -71,7 +66,5 @@ export namespace Emote {
     errors: false
   }
 
-  export const validate = generateLazyValidator(schema, [
-    _isThirdPartyKeywordDef
-  ])
+  export const validate = generateLazyValidator(schema, [_isThirdPartyKeywordDef])
 }

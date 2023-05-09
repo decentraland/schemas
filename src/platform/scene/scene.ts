@@ -1,12 +1,5 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../validation'
-import {
-  DisplayableDeployment,
-  displayableProperties
-} from '../shared/displayable'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
+import { DisplayableDeployment, displayableProperties } from '../shared/displayable'
 import { FeatureToggles } from './feature-toggles'
 import { SceneParcels } from './scene-parcels'
 import { Source } from './source'
@@ -58,20 +51,17 @@ export namespace Scene {
         type: 'object',
         properties: {
           title: {
-            description:
-              'A name so other users can identify what the contents of this land should be',
+            description: 'A name so other users can identify what the contents of this land should be',
             type: 'string',
             nullable: true
           },
           favicon: {
-            description:
-              'DEPRECATED. Allow the land owner to set up a favicon to this land',
+            description: 'DEPRECATED. Allow the land owner to set up a favicon to this land',
             type: 'string',
             nullable: true
           },
           description: {
-            description:
-              "A description that will be shown on client's nav map when the scene is selected",
+            description: "A description that will be shown on client's nav map when the scene is selected",
             type: 'string',
             nullable: true
           },

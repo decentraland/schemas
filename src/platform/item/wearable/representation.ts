@@ -1,9 +1,5 @@
 import { WearableCategory } from '../../../dapps/wearable-category'
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../validation'
 import { BodyShape } from '../body-shape'
 
 /** @alpha */
@@ -50,15 +46,8 @@ export namespace WearableRepresentation {
         items: WearableCategory.schema
       }
     },
-    required: [
-      'bodyShapes',
-      'mainFile',
-      'contents',
-      'overrideHides',
-      'overrideReplaces'
-    ]
+    required: ['bodyShapes', 'mainFile', 'contents', 'overrideHides', 'overrideReplaces']
   }
 
-  export const validate: ValidateFunction<WearableRepresentation> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<WearableRepresentation> = generateLazyValidator(schema)
 }

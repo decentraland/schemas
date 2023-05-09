@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 /** @public */
 export const SCENE_UPDATE = 'SCENE_UPDATE'
@@ -42,6 +38,5 @@ export namespace SceneUpdate {
     required: ['payload', 'type']
   }
 
-  export const validate: ValidateFunction<SceneUpdate> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<SceneUpdate> = generateLazyValidator(schema)
 }

@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 /**
  * Merkle Proof
@@ -46,6 +42,5 @@ export namespace MerkleProof {
     additionalProperties: true
   }
 
-  export const validate: ValidateFunction<MerkleProof> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<MerkleProof> = generateLazyValidator(schema)
 }

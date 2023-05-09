@@ -80,8 +80,6 @@ describe('Avatar tests', () => {
     }
     expect(Avatar.validate(avatar)).toBeFalsy()
     const errors = Avatar.validate.errors as any[]
-    expect(errors[0].message).toBe(
-      '"wearables" array should not have duplicates'
-    )
+    expect(errors[0].message).toBe('"wearables" array should not have duplicates')
   })
 })

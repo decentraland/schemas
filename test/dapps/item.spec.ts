@@ -1,13 +1,5 @@
 import expect from 'expect'
-import {
-  BodyShape,
-  ChainId,
-  Item,
-  Network,
-  NFTCategory,
-  Rarity,
-  WearableCategory
-} from '../../src'
+import { BodyShape, ChainId, Item, Network, NFTCategory, Rarity, WearableCategory } from '../../src'
 import { testTypeSignature } from '../test-utils'
 
 describe('Item tests', () => {

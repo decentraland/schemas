@@ -49,14 +49,7 @@ export const baseItemProperties = {
   }
 } as const
 
-export const requiredBaseItemProps = [
-  'id',
-  'name',
-  'description',
-  'i18n',
-  'thumbnail',
-  'image'
-] as const
+export const requiredBaseItemProps = ['id', 'name', 'description', 'i18n', 'thumbnail', 'image'] as const
 
 export function isBaseAvatar(item: BaseItem): boolean {
   if (!item || !item.id) {

@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 /** @alpha */
 export type FeatureToggles = Record<string, 'enabled' | 'disabled'>
@@ -15,6 +11,5 @@ export namespace FeatureToggles {
     required: []
   }
 
-  export const validate: ValidateFunction<FeatureToggles> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<FeatureToggles> = generateLazyValidator(schema)
 }
