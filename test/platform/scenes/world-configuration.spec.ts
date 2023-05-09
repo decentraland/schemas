@@ -82,4 +82,38 @@ describe('World Configuration tests', () => {
       }
     ])
   })
+
+  it('customSkybox must be valid', () => {
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        customSkybox: []
+      })
+    ).toBeTruthy()
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        customSkybox: ['1-string']
+      })
+    ).toBeTruthy()
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        customSkybox: ['1-string', '2-string', '3-string', '4-string', '5-string', '6-string']
+      })
+    ).toBeTruthy()
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        customSkybox: ['1-string', '2-string', '3-string', '4-string', '5-string']
+      })
+    ).toBeFalsy()
+
+    expect(WorldConfiguration.validate.errors).toMatchObject([
+      {
+        instancePath: '/customSkybox',
+        message: 'customSkybox must be an array of 0, 1 or 6 strings'
+      }
+    ])
+  })
 })
