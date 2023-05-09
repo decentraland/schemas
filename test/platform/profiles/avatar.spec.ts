@@ -69,17 +69,4 @@ describe('Avatar tests', () => {
     const avatar: Avatar = { ...AVATAR, ethAddress: 'someInvalidAddress' }
     expect(Avatar.validate(avatar)).toEqual(false)
   })
-
-  it('should fail when duplicate wearables equipped', () => {
-    const avatar: Avatar = {
-      ...AVATAR,
-      avatar: {
-        ...AVATAR.avatar,
-        wearables: [...AVATAR.avatar.wearables, ...AVATAR.avatar.wearables]
-      }
-    }
-    expect(Avatar.validate(avatar)).toBeFalsy()
-    const errors = Avatar.validate.errors as any[]
-    expect(errors[0].message).toBe('"wearables" array should not have duplicates')
-  })
 })

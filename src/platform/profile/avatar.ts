@@ -81,9 +81,7 @@ export namespace AvatarInfo {
         type: 'array',
         items: {
           type: 'string'
-        },
-        uniqueItems: true,
-        errorMessage: '${0#} array should not have duplicates'
+        }
       },
       emotes: {
         type: 'array',
