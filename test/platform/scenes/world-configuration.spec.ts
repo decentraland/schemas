@@ -21,7 +21,7 @@ describe('World Configuration tests', () => {
 
   it('static tests must pass', () => {
     expect(WorldConfiguration.validate(worldConfiguration)).toBeTruthy()
-    expect(WorldConfiguration.validate({})).toBeTruthy()
+    expect(WorldConfiguration.validate({ name: 'some-name' })).toBeTruthy()
     expect(WorldConfiguration.validate(null)).toBeFalsy()
     expect(WorldConfiguration.validate.errors).toEqual([
       {
@@ -34,7 +34,7 @@ describe('World Configuration tests', () => {
     ])
   })
 
-  it('name, if present, must be a string', () => {
+  it('name must be present and must be a string', () => {
     expect(WorldConfiguration.validate({ name: 20 })).toBeFalsy()
   })
 

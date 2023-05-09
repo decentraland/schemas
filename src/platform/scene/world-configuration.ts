@@ -6,10 +6,13 @@ import {
 
 /** @alpha */
 export type WorldConfiguration = {
-  name?: string
+  name: string
   skybox?: number
   minimapVisible?: boolean
+  dataImage?: string
+  estateImage?: string
   fixedAdapter?: string
+  placesOptOut?: boolean
 }
 
 /** @alpha */
@@ -18,8 +21,7 @@ export namespace WorldConfiguration {
     type: 'object',
     properties: {
       name: {
-        type: 'string',
-        nullable: true
+        type: 'string'
       },
       skybox: {
         type: 'number',
@@ -29,12 +31,24 @@ export namespace WorldConfiguration {
         type: 'boolean',
         nullable: true
       },
+      dataImage: {
+        type: 'string',
+        nullable: true
+      },
+      estateImage: {
+        type: 'string',
+        nullable: true
+      },
       fixedAdapter: {
         type: 'string',
         nullable: true
+      },
+      placesOptOut: {
+        type: 'boolean',
+        nullable: true
       }
     },
-    required: []
+    required: ['name']
   }
 
   export const validate: ValidateFunction<WorldConfiguration> =
