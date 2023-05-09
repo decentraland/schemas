@@ -44,9 +44,7 @@ export function generateLazyValidator<T>(
       const ajv = new Ajv({ $data: true, allErrors: true })
       ajv_keywords(ajv)
       ajv_errors(ajv, { singleError: true })
-      keywordDefinitions?.forEach((kw: string | KeywordDefinition) =>
-        ajv.addKeyword(kw)
-      )
+      keywordDefinitions?.forEach((kw: string | KeywordDefinition) => ajv.addKeyword(kw))
       validateFn = ajv.compile<T>(schema)
       Object.defineProperty(theReturnedValidateFunction, 'errors', {
         get() {
@@ -63,9 +61,6 @@ export function generateLazyValidator<T>(
  * Validates a type with a schema in a functional way.
  * @public
  */
-export function validateType<T>(
-  theType: Pick<AbstractTypedSchema<T>, 'validate'>,
-  value: T
-) {
+export function validateType<T>(theType: Pick<AbstractTypedSchema<T>, 'validate'>, value: T) {
   return theType.validate(value)
 }

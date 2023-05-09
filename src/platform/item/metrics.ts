@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 /** @alpha */
 export type Metrics = {
@@ -38,16 +34,8 @@ export namespace Metrics {
         type: 'number'
       }
     },
-    required: [
-      'triangles',
-      'materials',
-      'textures',
-      'meshes',
-      'bodies',
-      'entities'
-    ]
+    required: ['triangles', 'materials', 'textures', 'meshes', 'bodies', 'entities']
   }
 
-  export const validate: ValidateFunction<Metrics> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<Metrics> = generateLazyValidator(schema)
 }

@@ -77,11 +77,9 @@ describe('deployments-to-sqs', () => {
       },
       contentServerUrls: ['https://peer.decentraland.org']
     }
-    expectValidationFailureWithErrors(
-      DeploymentToSqs.validate,
-      deploymentToSqs,
-      ["must have required property 'entityId'"]
-    )
+    expectValidationFailureWithErrors(DeploymentToSqs.validate, deploymentToSqs, [
+      "must have required property 'entityId'"
+    ])
   })
 
   it('invalid if no authChain', () => {
@@ -91,10 +89,8 @@ describe('deployments-to-sqs', () => {
       },
       contentServerUrls: ['https://peer.decentraland.org']
     }
-    expectValidationFailureWithErrors(
-      DeploymentToSqs.validate,
-      deploymentToSqs,
-      ["must have required property 'authChain'"]
-    )
+    expectValidationFailureWithErrors(DeploymentToSqs.validate, deploymentToSqs, [
+      "must have required property 'authChain'"
+    ])
   })
 })

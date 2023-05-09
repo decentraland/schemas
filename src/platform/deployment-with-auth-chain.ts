@@ -1,9 +1,5 @@
 import { AuthChain } from '../misc/auth-chain'
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * This type describes the minimum deployment + AuthChain needed to synchronize
@@ -32,15 +28,8 @@ export namespace DeploymentWithAuthChain {
       localTimestamp: { type: 'number', minimum: 0 },
       authChain: AuthChain.schema
     },
-    required: [
-      'entityId',
-      'entityType',
-      'pointers',
-      'localTimestamp',
-      'authChain'
-    ]
+    required: ['entityId', 'entityType', 'pointers', 'localTimestamp', 'authChain']
   }
 
-  export const validate: ValidateFunction<DeploymentWithAuthChain> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<DeploymentWithAuthChain> = generateLazyValidator(schema)
 }

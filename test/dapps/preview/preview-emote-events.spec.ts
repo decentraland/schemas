@@ -3,8 +3,7 @@ import { PreviewEmoteEventType } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
 
 describe('PreviewEmoteEvents tests', () => {
-  const previewEmoteEvent: PreviewEmoteEventType =
-    PreviewEmoteEventType.ANIMATION_PLAY
+  const previewEmoteEvent: PreviewEmoteEventType = PreviewEmoteEventType.ANIMATION_PLAY
 
   testTypeSignature(PreviewEmoteEventType, previewEmoteEvent)
 

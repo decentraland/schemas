@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * Color3 is a data type that describes a color using R, G and B components
@@ -36,11 +32,8 @@ export namespace Color3 {
       }
     }
   }
-  const schemaValidator: ValidateFunction<Color3> =
-    generateLazyValidator(schema)
-  export const validate: ValidateFunction<Color3> = (
-    color: any
-  ): color is Color3 => schemaValidator(color)
+  const schemaValidator: ValidateFunction<Color3> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<Color3> = (color: any): color is Color3 => schemaValidator(color)
 }
 /**
  * @alpha
@@ -63,9 +56,8 @@ export namespace EthAddress {
     pattern: '^0x[a-fA-F0-9]{40}$'
   }
   const regexp = new RegExp(schema.pattern!)
-  export const validate: ValidateFunction<EthAddress> = (
-    ethAddress: any
-  ): ethAddress is EthAddress => regexp.test(ethAddress)
+  export const validate: ValidateFunction<EthAddress> = (ethAddress: any): ethAddress is EthAddress =>
+    regexp.test(ethAddress)
 }
 
 /**
@@ -84,9 +76,7 @@ export namespace IPFSv2 {
     pattern: '^(ba)[a-zA-Z0-9]{57}$'
   }
   const regexp = new RegExp(schema.pattern!)
-  export const validate: ValidateFunction<IPFSv2> = (
-    hash: any
-  ): hash is IPFSv2 => regexp.test(hash)
+  export const validate: ValidateFunction<IPFSv2> = (hash: any): hash is IPFSv2 => regexp.test(hash)
 }
 
 /**
@@ -104,7 +94,5 @@ export namespace IPFSv1 {
     pattern: '^(Qm)[a-zA-Z0-9]{44}$'
   }
   const regexp = new RegExp(schema.pattern!)
-  export const validate: ValidateFunction<IPFSv1> = (
-    hash: any
-  ): hash is IPFSv1 => regexp.test(hash)
+  export const validate: ValidateFunction<IPFSv1> = (hash: any): hash is IPFSv1 => regexp.test(hash)
 }

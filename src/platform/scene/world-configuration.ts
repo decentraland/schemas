@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 /** @alpha */
 export type WorldConfiguration = {
@@ -51,6 +47,5 @@ export namespace WorldConfiguration {
     required: ['name']
   }
 
-  export const validate: ValidateFunction<WorldConfiguration> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<WorldConfiguration> = generateLazyValidator(schema)
 }

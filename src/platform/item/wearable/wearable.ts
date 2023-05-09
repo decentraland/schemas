@@ -1,18 +1,9 @@
 import { generateLazyValidator, JSONSchema } from '../../../validation'
 import { WearableCategory } from '../../../dapps/wearable-category'
 import { WearableRepresentation } from './representation'
-import {
-  BaseItem,
-  baseItemProperties,
-  isBaseAvatar,
-  requiredBaseItemProps
-} from '../base-item'
+import { BaseItem, baseItemProperties, isBaseAvatar, requiredBaseItemProps } from '../base-item'
 import { StandardProps, standardProperties } from '../standard-props'
-import {
-  isThirdParty,
-  ThirdPartyProps,
-  thirdPartyProps
-} from '../third-party-props'
+import { isThirdParty, ThirdPartyProps, thirdPartyProps } from '../third-party-props'
 
 /** @alpha */
 export type Wearable = BaseItem & {
@@ -70,12 +61,7 @@ export namespace Wearable {
         _isBaseAvatar: true
       },
       {
-        required: [
-          ...requiredBaseItemProps,
-          'data',
-          'collectionAddress',
-          'rarity'
-        ],
+        required: [...requiredBaseItemProps, 'data', 'collectionAddress', 'rarity'],
         prohibited: ['merkleProof', 'content']
       },
       {
@@ -117,8 +103,5 @@ export namespace Wearable {
    *    - merkleProof
    *    - content
    */
-  export const validate = generateLazyValidator(schema, [
-    _isThirdPartyKeywordDef,
-    _isBaseAvatarKeywordDef
-  ])
+  export const validate = generateLazyValidator(schema, [_isThirdPartyKeywordDef, _isBaseAvatarKeywordDef])
 }

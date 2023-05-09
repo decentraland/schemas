@@ -2,11 +2,7 @@ import { Rarity } from '../../dapps/rarity'
 import { WearableCategory } from '../../dapps/wearable-category'
 import { WearableRepresentation } from '../../platform/item/wearable/representation'
 import { Wearable } from '../../platform/item/wearable/wearable'
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 /**
  * @alpha
@@ -64,6 +60,5 @@ export namespace WearableJson {
     required: ['description', 'name', 'data']
   }
 
-  export const validate: ValidateFunction<WearableJson> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<WearableJson> = generateLazyValidator(schema)
 }
