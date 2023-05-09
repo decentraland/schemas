@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 /** @public */
 export enum ProjectType {
@@ -19,6 +15,5 @@ export namespace ProjectType {
     enum: Object.values(ProjectType)
   }
 
-  export const validate: ValidateFunction<ProjectType> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<ProjectType> = generateLazyValidator(schema)
 }

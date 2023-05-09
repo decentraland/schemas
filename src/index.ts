@@ -8,11 +8,7 @@ export { Bid, BidFilters, BidSortBy } from './dapps/bid'
 export { Account, AccountFilters, AccountSortBy } from './dapps/account'
 export { ChainId, getChainName, getURNProtocol } from './dapps/chain-id'
 export { ChainName, getChainId } from './dapps/chain-name'
-export {
-  Collection,
-  CollectionFilters,
-  CollectionSortBy
-} from './dapps/collection'
+export { Collection, CollectionFilters, CollectionSortBy } from './dapps/collection'
 export { Contract, ContractFilters, ContractSortBy } from './dapps/contract'
 export { Item, ItemFilters, ItemSortBy } from './dapps/item'
 export { ListingStatus } from './dapps/listing-status'
@@ -21,11 +17,7 @@ export { Mint, MintFilters, MintSortBy } from './dapps/mint'
 export { Network } from './dapps/network'
 export { NFTCategory } from './dapps/nft-category'
 export { NFT, NFTFilters, NFTSortBy } from './dapps/nft'
-export {
-  CatalogFilters,
-  CatalogSortBy,
-  CatalogSortDirection
-} from './dapps/catalog'
+export { CatalogFilters, CatalogSortBy, CatalogSortDirection } from './dapps/catalog'
 export { Order, OrderFilters, OrderSortBy } from './dapps/order'
 export { ProviderType } from './dapps/provider-type'
 export { Rarity } from './dapps/rarity'
@@ -43,20 +35,11 @@ export {
   RentalListingCreation,
   PeriodCreation
 } from './dapps/rentals-listings'
-export {
-  AnalyticsDayData,
-  AnalyticsDayDataFilters,
-  AnalyticsDayDataSortBy
-} from './dapps/analyticsDayData'
+export { AnalyticsDayData, AnalyticsDayDataFilters, AnalyticsDayDataSortBy } from './dapps/analyticsDayData'
 export { Store } from './dapps/store'
 export { WearableCategory } from './dapps/wearable-category'
 export { WearableGender, GenderFilterOption } from './dapps/wearable-gender'
-export {
-  World,
-  ValidWorldRange,
-  getWorld,
-  isInsideWorldLimits
-} from './dapps/world'
+export { World, ValidWorldRange, getWorld, isInsideWorldLimits } from './dapps/world'
 export * from './dapps/preview'
 export * from './platform'
 export * from './misc'

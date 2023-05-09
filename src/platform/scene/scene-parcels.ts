@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 /** @alpha */
 export type SceneParcels = {
@@ -34,11 +30,7 @@ export namespace SceneParcels {
     required: ['base', 'parcels']
   }
 
-  export const schemaValidator: ValidateFunction<SceneParcels> =
-    generateLazyValidator(schema)
-  export const validate: ValidateFunction<SceneParcels> = (
-    sceneParcels: any
-  ): sceneParcels is SceneParcels =>
-    schemaValidator(sceneParcels) &&
-    sceneParcels.parcels.includes(sceneParcels.base)
+  export const schemaValidator: ValidateFunction<SceneParcels> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<SceneParcels> = (sceneParcels: any): sceneParcels is SceneParcels =>
+    schemaValidator(sceneParcels) && sceneParcels.parcels.includes(sceneParcels.base)
 }

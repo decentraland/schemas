@@ -1,25 +1,14 @@
 import expect from 'expect'
-import {
-  BodyShape,
-  ChainId,
-  Network,
-  NFT,
-  NFTCategory,
-  Rarity,
-  WearableCategory,
-  EmoteCategory
-} from '../../src'
+import { BodyShape, ChainId, Network, NFT, NFTCategory, Rarity, WearableCategory, EmoteCategory } from '../../src'
 import { testTypeSignature } from '../test-utils'
 
 describe('NFT tests', () => {
   describe('parcel', () => {
     const parcel: NFT = {
       id: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d-115792089237316195423570985008687907832172477916542379304728358347143500529549',
-      tokenId:
-        '115792089237316195423570985008687907832172477916542379304728358347143500529549',
+      tokenId: '115792089237316195423570985008687907832172477916542379304728358347143500529549',
       contractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
-      activeOrderId:
-        '0x2911f6ca62802491be38c859c6c3c8e3e3ae9732ad19032d4756a93f6fce88b1',
+      activeOrderId: '0x2911f6ca62802491be38c859c6c3c8e3e3ae9732ad19032d4756a93f6fce88b1',
       openRentalId: null,
       owner: '0xdfbf2c0bfbfafbfa81a47b736012c80af181142b',
       name: 'The Dope Spot',
@@ -57,8 +46,7 @@ describe('NFT tests', () => {
       id: '0x959e104e1a4db6317fa58f8295f586e1a978c297-4302',
       tokenId: '4302',
       contractAddress: '0x959e104e1a4db6317fa58f8295f586e1a978c297',
-      activeOrderId:
-        '0xedd3ac22aca9f0aecf39d42479dc982170bc2fefea282fe77b4ce4b63859add8',
+      activeOrderId: '0xedd3ac22aca9f0aecf39d42479dc982170bc2fefea282fe77b4ce4b63859add8',
       openRentalId: 'e87f4f9a-19e1-4b6f-85bc-62921b503bfb',
       owner: '0x953c87eaee6889bf6623bf18031de42ba95a05cb',
       name: 'Fashion Hall',
@@ -120,8 +108,7 @@ describe('NFT tests', () => {
       id: '0xabb0ca6ee85825f6d7f549ef36bf571484c157c5-16',
       tokenId: '16',
       contractAddress: '0xabb0ca6ee85825f6d7f549ef36bf571484c157c5',
-      activeOrderId:
-        '0x606a55e3aaa112d90a9474d73d8293dc8496d491eff32431b762a7ca46160fc0',
+      activeOrderId: '0x606a55e3aaa112d90a9474d73d8293dc8496d491eff32431b762a7ca46160fc0',
       openRentalId: null,
       owner: '0x3bec652537ebf756d9c5f471f33b28278b1dd26d',
       name: 'HypnoVision',
@@ -159,11 +146,9 @@ describe('NFT tests', () => {
   describe('ens', () => {
     const ens: NFT = {
       id: '0x2a187453064356c898cae034eaed119e1663acb8-20267204986233636871295784595277786190248304170965188964447216591051155494561',
-      tokenId:
-        '20267204986233636871295784595277786190248304170965188964447216591051155494561',
+      tokenId: '20267204986233636871295784595277786190248304170965188964447216591051155494561',
       contractAddress: '0x2a187453064356c898cae034eaed119e1663acb8',
-      activeOrderId:
-        '0x625dd3bd828a4060bc9bd049f2f06579cdae679f54e35e183e2152fe003c4569',
+      activeOrderId: '0x625dd3bd828a4060bc9bd049f2f06579cdae679f54e35e183e2152fe003c4569',
       openRentalId: null,
       owner: '0x61d2911f0986ce12f4dddb61575600a9d3593c03',
       name: 'Rumors',
@@ -198,8 +183,7 @@ describe('NFT tests', () => {
       id: '0xabb0ca6ee85825f6d7f549ef36bf571484c157c5-16',
       tokenId: '16',
       contractAddress: '0xabb0ca6ee85825f6d7f549ef36bf571484c157c5',
-      activeOrderId:
-        '0x606a55e3aaa112d90a9474d73d8293dc8496d491eff32431b762a7ca46160fc0',
+      activeOrderId: '0x606a55e3aaa112d90a9474d73d8293dc8496d491eff32431b762a7ca46160fc0',
       openRentalId: null,
       owner: '0x3bec652537ebf756d9c5f471f33b28278b1dd26d',
       name: 'Head Explode',

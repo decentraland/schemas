@@ -18,8 +18,6 @@ describe('Profile tests', () => {
     const validate = Profile.validate
     expect(validate({})).toEqual(false)
     expect(validate.errors).toHaveLength(1)
-    expect(validate.errors![0].message).toEqual(
-      "must have required property 'avatars'"
-    )
+    expect(validate.errors![0].message).toEqual("must have required property 'avatars'")
   })
 })

@@ -1,9 +1,5 @@
 import { EmoteCategory } from '../emote-category'
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../../validation'
 import { EmoteRepresentationADR74 } from './representation-adr74'
 
 export type EmoteDataADR74 = {
@@ -38,6 +34,5 @@ export namespace EmoteDataADR74 {
     additionalProperties: true
   }
 
-  export const validate: ValidateFunction<EmoteDataADR74> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<EmoteDataADR74> = generateLazyValidator(schema)
 }

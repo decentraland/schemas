@@ -1,11 +1,5 @@
 import expect from 'expect'
-import {
-  ChainId,
-  ChainName,
-  getChainName,
-  getURNProtocol,
-  Network
-} from '../../src'
+import { ChainId, ChainName, getChainName, getURNProtocol, Network } from '../../src'
 import { getNetwork, getNetworkMapping } from '../../src/dapps/chain-id'
 import { testTypeSignature } from '../test-utils'
 
@@ -21,9 +15,7 @@ describe('ChainId tests', () => {
   })
 
   it('Should get a valid chain name', () => {
-    expect(getChainName(ChainId.ETHEREUM_MAINNET)).toEqual(
-      ChainName.ETHEREUM_MAINNET
-    )
+    expect(getChainName(ChainId.ETHEREUM_MAINNET)).toEqual(ChainName.ETHEREUM_MAINNET)
   })
 
   it('Should get null if the chain id is not valid', () => {

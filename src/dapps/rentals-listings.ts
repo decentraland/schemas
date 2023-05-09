@@ -1,9 +1,5 @@
 import { JSONSchemaType } from 'ajv'
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
 import { Network } from './network'
 import { NFTCategory } from './nft-category'
@@ -224,8 +220,7 @@ export namespace PeriodCreation {
     required: ['minDays', 'maxDays', 'pricePerDay']
   }
 
-  export const validate: ValidateFunction<PeriodCreation> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<PeriodCreation> = generateLazyValidator(schema)
 }
 
 export namespace RentalListingCreation {
@@ -272,6 +267,5 @@ export namespace RentalListingCreation {
       'target'
     ]
   }
-  export const validate: ValidateFunction<RentalListingCreation> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<RentalListingCreation> = generateLazyValidator(schema)
 }

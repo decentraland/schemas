@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { MerkleProof } from '../merkle-tree/merkle-proof'
 import { BaseItem } from './base-item'
 
@@ -35,22 +31,15 @@ const _containsHashingKeys = {
   validate: (schema: boolean, data: any) => {
     const itemAsThirdParty = data as ThirdPartyProps
     if (itemAsThirdParty?.merkleProof?.hashingKeys) {
-      return itemAsThirdParty.merkleProof.hashingKeys.every((key) =>
-        itemAsThirdParty.hasOwnProperty(key)
-      )
+      return itemAsThirdParty.merkleProof.hashingKeys.every((key) => itemAsThirdParty.hasOwnProperty(key))
     }
     return false
   },
   errors: false
 }
 
-const validate: ValidateFunction<ThirdPartyProps> = generateLazyValidator(
-  schema,
-  [_containsHashingKeys]
-)
+const validate: ValidateFunction<ThirdPartyProps> = generateLazyValidator(schema, [_containsHashingKeys])
 
-export function isThirdParty<T extends BaseItem>(
-  item: T
-): item is T & ThirdPartyProps {
+export function isThirdParty<T extends BaseItem>(item: T): item is T & ThirdPartyProps {
   return validate(item)
 }

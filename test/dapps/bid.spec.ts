@@ -10,8 +10,7 @@ describe('Bid tests', () => {
     seller: '0x81e4fb0c64bf49f89b57f6648562fc9a791b2e92',
     price: '5000000000000000000000',
     fingerprint: '0x',
-    blockchainId:
-      '0x8f5a0664d8ff4d91241540b1dc372cfd76ac22eb9c5522be46a5459c6cebe80a',
+    blockchainId: '0x8f5a0664d8ff4d91241540b1dc372cfd76ac22eb9c5522be46a5459c6cebe80a',
     blockNumber: '12828878',
     contractAddress: '0xf87e31492faf9a91b02ee0deaad50d51d56d5d4d',
     tokenId: '2041694201525630780780247644590609268611',

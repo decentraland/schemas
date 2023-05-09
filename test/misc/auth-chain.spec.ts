@@ -70,9 +70,7 @@ describe('auth-chain', () => {
           '0xd73b0315dd39080d9b6d1a613a56732a75d68d2cef2a38f3b7be12bdab3c59830c92c6bdf394dcb47ba1aa736e0338cf9112c9eee59dbe4109b8af6a993b12d71b'
       }
     ]
-    expectValidationFailureWithErrors(AuthChain.validate, chain, [
-      "must have required property 'signature'"
-    ])
+    expectValidationFailureWithErrors(AuthChain.validate, chain, ["must have required property 'signature'"])
   })
 
   it(`invalid - if signature present in SIGNER, it must be ''`, () => {
@@ -96,8 +94,6 @@ describe('auth-chain', () => {
           '0xd73b0315dd39080d9b6d1a613a56732a75d68d2cef2a38f3b7be12bdab3c59830c92c6bdf394dcb47ba1aa736e0338cf9112c9eee59dbe4109b8af6a993b12d71b'
       }
     ]
-    expectValidationFailureWithErrors(AuthChain.validate, chain, [
-      'must be equal to constant'
-    ])
+    expectValidationFailureWithErrors(AuthChain.validate, chain, ['must be equal to constant'])
   })
 })

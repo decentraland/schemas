@@ -157,8 +157,7 @@ describe('Rental listings creation tests', () => {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { tokenId, ...rentalListingCreationWithoutTokenId } =
-      rentalListingCreation
+    const { tokenId, ...rentalListingCreationWithoutTokenId } = rentalListingCreation
 
     expect(
       RentalListingCreation.validate({
