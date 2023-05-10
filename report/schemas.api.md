@@ -2314,11 +2314,17 @@ export type WorldConfiguration = {
     name?: string;
     skybox?: number;
     minimapVisible?: boolean;
-    mapDataImage?: string;
-    estateImage?: string;
+    miniMapConfig?: {
+        visible?: boolean;
+        dataImage?: string;
+        estateImage?: string;
+    };
     fixedAdapter?: string;
     placesOptOut?: boolean;
-    customSkybox?: string[];
+    skyboxConfig?: {
+        fixedTime?: number;
+        textures?: string[];
+    };
 };
 
 // @alpha (undocumented)

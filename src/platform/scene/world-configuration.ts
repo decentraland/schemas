@@ -3,12 +3,13 @@ import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../valid
 /** @alpha */
 export type WorldConfiguration = {
   name?: string
-  /** @public @deprecated */
+  /** @public @deprecated Use `skyboxConfig.fixedTime` instead */
   skybox?: number
-  /** @public @deprecated */
+  /** @public @deprecated Use `miniMapConfig.visible` instead */
   minimapVisible?: boolean
   miniMapConfig?: {
-    mapDataImage?: string
+    visible?: boolean
+    dataImage?: string
     estateImage?: string
   }
   fixedAdapter?: string
@@ -40,7 +41,11 @@ export namespace WorldConfiguration {
         type: 'object',
         nullable: true,
         properties: {
-          mapDataImage: {
+          visible: {
+            type: 'boolean',
+            nullable: true
+          },
+          dataImage: {
             type: 'string',
             nullable: true
           },
