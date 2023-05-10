@@ -83,6 +83,50 @@ describe('World Configuration tests', () => {
     ])
   })
 
+  it('mapDataImage, if present, must be a string', () => {
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        mapDataImage: 233
+      })
+    ).toBeFalsy()
+    expect(WorldConfiguration.validate.errors).toMatchObject([
+      {
+        instancePath: '/mapDataImage',
+        message: 'must be string'
+      }
+    ])
+  })
+
+  it('estateImage, if present, must be a string', () => {
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        estateImage: 233
+      })
+    ).toBeFalsy()
+    expect(WorldConfiguration.validate.errors).toMatchObject([
+      {
+        instancePath: '/estateImage',
+        message: 'must be string'
+      }
+    ])
+  })
+
+  it('placesOptOut, if present, must be boolean', () => {
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        placesOptOut: 233
+      })
+    ).toBeFalsy()
+    expect(WorldConfiguration.validate.errors).toMatchObject([
+      {
+        instancePath: '/placesOptOut',
+        message: 'must be boolean'
+      }
+    ])
+  })
   it('customSkybox must be valid', () => {
     expect(
       WorldConfiguration.validate({
