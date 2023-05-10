@@ -1,9 +1,5 @@
 import { Color3, WearableId } from '../../misc'
-import {
-  JSONSchema,
-  ValidateFunction,
-  generateLazyValidator
-} from '../../validation'
+import { JSONSchema, ValidateFunction, generateLazyValidator } from '../../validation'
 
 /**
  * @alpha
@@ -58,8 +54,7 @@ export namespace Outfit {
     },
     additionalProperties: true
   }
-  export const validate: ValidateFunction<Outfit> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<Outfit> = generateLazyValidator(schema)
 }
 
 /**
@@ -97,6 +92,5 @@ export namespace Outfits {
     },
     additionalProperties: true
   }
-  export const validate: ValidateFunction<Outfits> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<Outfits> = generateLazyValidator(schema)
 }
