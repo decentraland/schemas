@@ -3,13 +3,20 @@ import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../valid
 /** @alpha */
 export type WorldConfiguration = {
   name?: string
+  /** @public @deprecated */
   skybox?: number
+  /** @public @deprecated */
   minimapVisible?: boolean
-  mapDataImage?: string
-  estateImage?: string
+  miniMapConfig?: {
+    mapDataImage?: string
+    estateImage?: string
+  }
   fixedAdapter?: string
   placesOptOut?: boolean
-  customSkybox?: string[]
+  skyboxConfig?: {
+    fixedTime?: number
+    textures?: string[]
+  }
 }
 
 /** @alpha */
@@ -29,13 +36,49 @@ export namespace WorldConfiguration {
         type: 'boolean',
         nullable: true
       },
-      mapDataImage: {
-        type: 'string',
-        nullable: true
+      miniMapConfig: {
+        type: 'object',
+        nullable: true,
+        properties: {
+          mapDataImage: {
+            type: 'string',
+            nullable: true
+          },
+          estateImage: {
+            type: 'string',
+            nullable: true
+          }
+        }
       },
-      estateImage: {
-        type: 'string',
-        nullable: true
+      skyboxConfig: {
+        type: 'object',
+        nullable: true,
+        properties: {
+          fixedTime: {
+            type: 'number',
+            nullable: true
+          },
+          textures: {
+            type: 'array',
+            nullable: true,
+            items: { type: 'string' },
+            oneOf: [
+              {
+                minItems: 0,
+                maxItems: 0
+              },
+              {
+                minItems: 1,
+                maxItems: 1
+              },
+              {
+                minItems: 6,
+                maxItems: 6
+              }
+            ],
+            errorMessage: 'customSkybox must be an array of 0, 1 or 6 strings'
+          }
+        }
       },
       fixedAdapter: {
         type: 'string',
@@ -44,26 +87,6 @@ export namespace WorldConfiguration {
       placesOptOut: {
         type: 'boolean',
         nullable: true
-      },
-      customSkybox: {
-        type: 'array',
-        nullable: true,
-        items: { type: 'string' },
-        oneOf: [
-          {
-            minItems: 0,
-            maxItems: 0
-          },
-          {
-            minItems: 1,
-            maxItems: 1
-          },
-          {
-            minItems: 6,
-            maxItems: 6
-          }
-        ],
-        errorMessage: 'customSkybox must be an array of 0, 1 or 6 strings'
       }
     },
     required: []
