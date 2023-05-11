@@ -119,16 +119,16 @@ describe('World Configuration tests', () => {
     ])
   })
 
-  it('placesOptOut, if present, must be boolean', () => {
+  it('placesConfig.optOut, if present, must be boolean', () => {
     expect(
       WorldConfiguration.validate({
         ...worldConfiguration,
-        placesOptOut: 233
+        placesConfig: { optOut: 233 }
       })
     ).toBeFalsy()
     expect(WorldConfiguration.validate.errors).toMatchObject([
       {
-        instancePath: '/placesOptOut',
+        instancePath: '/placesConfig/optOut',
         message: 'must be boolean'
       }
     ])

@@ -12,11 +12,13 @@ export type WorldConfiguration = {
     dataImage?: string
     estateImage?: string
   }
-  fixedAdapter?: string
-  placesOptOut?: boolean
   skyboxConfig?: {
     fixedTime?: number
     textures?: string[]
+  }
+  fixedAdapter?: string
+  placesConfig?: {
+    optOut?: boolean
   }
 }
 
@@ -89,9 +91,15 @@ export namespace WorldConfiguration {
         type: 'string',
         nullable: true
       },
-      placesOptOut: {
-        type: 'boolean',
-        nullable: true
+      placesConfig: {
+        type: 'object',
+        nullable: true,
+        properties: {
+          optOut: {
+            type: 'boolean',
+            nullable: true
+          }
+        }
       }
     },
     required: []

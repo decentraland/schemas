@@ -2319,11 +2319,13 @@ export type WorldConfiguration = {
         dataImage?: string;
         estateImage?: string;
     };
-    fixedAdapter?: string;
-    placesOptOut?: boolean;
     skyboxConfig?: {
         fixedTime?: number;
         textures?: string[];
+    };
+    fixedAdapter?: string;
+    placesConfig?: {
+        optOut?: boolean;
     };
 };
 
