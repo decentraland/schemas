@@ -23,7 +23,8 @@ const OUTFITS: Outfits = {
         ]
       }
     }
-  ]
+  ],
+  namesForExtraSlots: ['someName']
 }
 
 it('outfits is valid', () => {
@@ -43,10 +44,11 @@ it('empty object outfits is invalid', () => {
   expect(Outfits.validate({})).toEqual(false)
 })
 
-it('outfits with not outfits is valid', () => {
+it('outfits without outfits is valid', () => {
   expect(
     Outfits.validate({
-      outfits: []
+      outfits: [],
+      namesForExtraSlots: []
     })
   ).toEqual(true)
 })

@@ -65,6 +65,7 @@ export type Outfits = {
     slot: number
     outfit: Outfit
   }[]
+  namesForExtraSlots: string[]
 }
 
 /**
@@ -74,7 +75,7 @@ export type Outfits = {
 export namespace Outfits {
   export const schema: JSONSchema<Outfits> = {
     type: 'object',
-    required: ['outfits'],
+    required: ['outfits', 'namesForExtraSlots'],
     properties: {
       outfits: {
         type: 'array',
@@ -87,6 +88,12 @@ export namespace Outfits {
             },
             outfit: Outfit.schema
           }
+        }
+      },
+      namesForExtraSlots: {
+        type: 'array',
+        items: {
+          type: 'string'
         }
       }
     },

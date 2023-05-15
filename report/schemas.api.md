@@ -1326,6 +1326,7 @@ export type Outfits = {
         slot: number;
         outfit: Outfit;
     }[];
+    namesForExtraSlots: string[];
 };
 
 // @alpha
