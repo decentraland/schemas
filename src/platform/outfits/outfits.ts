@@ -92,6 +92,7 @@ export namespace Outfits {
       },
       namesForExtraSlots: {
         type: 'array',
+        uniqueItems: true,
         items: {
           type: 'string'
         }

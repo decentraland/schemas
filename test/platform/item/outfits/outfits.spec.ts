@@ -127,3 +127,12 @@ it('outfit without wearables is invalid', () => {
     })
   ).toEqual(false)
 })
+
+it('outfit with repeated names is invalid', () => {
+  const someName = 'someName'
+  const outfits: Outfits = {
+    outfits: OUTFITS.outfits,
+    namesForExtraSlots: [someName, someName]
+  }
+  expect(Outfits.validate(outfits)).toEqual(false)
+})
