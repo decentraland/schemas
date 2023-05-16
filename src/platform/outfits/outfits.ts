@@ -69,7 +69,7 @@ export type Outfits = {
 }
 
 /**
- * Avatar
+ * Outfits
  * @alpha
  */
 export namespace Outfits {
