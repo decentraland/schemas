@@ -655,6 +655,8 @@ export enum EntityType {
     // (undocumented)
     EMOTE = "emote",
     // (undocumented)
+    OUTFITS = "outfits",
+    // (undocumented)
     PROFILE = "profile",
     // (undocumented)
     SCENE = "scene",
@@ -1293,6 +1295,46 @@ export enum OrderSortBy {
     RECENTLY_LISTED = "recently_listed",
     // (undocumented)
     RECENTLY_UPDATED = "recently_updated"
+}
+
+// @alpha (undocumented)
+export type Outfit = {
+    bodyShape: WearableId;
+    eyes: {
+        color: Color3;
+    };
+    hair: {
+        color: Color3;
+    };
+    skin: {
+        color: Color3;
+    };
+    wearables: WearableId[];
+};
+
+// @alpha
+export namespace Outfit {
+    const // (undocumented)
+    schema: JSONSchema<Outfit>;
+    const // (undocumented)
+    validate: ValidateFunction<Outfit>;
+}
+
+// @alpha (undocumented)
+export type Outfits = {
+    outfits: {
+        slot: number;
+        outfit: Outfit;
+    }[];
+    namesForExtraSlots: string[];
+};
+
+// @alpha
+export namespace Outfits {
+    const // (undocumented)
+    schema: JSONSchema<Outfits>;
+    const // (undocumented)
+    validate: ValidateFunction<Outfits>;
 }
 
 // Warning: (ae-missing-release-tag) "PeriodCreation" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)

@@ -11,7 +11,8 @@ export enum EntityType {
   PROFILE = 'profile',
   WEARABLE = 'wearable',
   STORE = 'store',
-  EMOTE = 'emote'
+  EMOTE = 'emote',
+  OUTFITS = 'outfits'
 }
 
 /**
