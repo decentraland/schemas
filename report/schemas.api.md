@@ -2356,7 +2356,19 @@ export type WorldConfiguration = {
     name?: string;
     skybox?: number;
     minimapVisible?: boolean;
+    miniMapConfig?: {
+        visible?: boolean;
+        dataImage?: string;
+        estateImage?: string;
+    };
+    skyboxConfig?: {
+        fixedTime?: number;
+        textures?: string[];
+    };
     fixedAdapter?: string;
+    placesConfig?: {
+        optOut?: boolean;
+    };
 };
 
 // @alpha (undocumented)

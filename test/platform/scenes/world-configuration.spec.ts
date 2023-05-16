@@ -82,4 +82,94 @@ describe('World Configuration tests', () => {
       }
     ])
   })
+
+  it('miniMapConfig.dataImage, if present, must be a string', () => {
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        miniMapConfig: {
+          ...worldConfiguration.miniMapConfig,
+          dataImage: 233
+        }
+      })
+    ).toBeFalsy()
+    expect(WorldConfiguration.validate.errors).toMatchObject([
+      {
+        instancePath: '/miniMapConfig/dataImage',
+        message: 'must be string'
+      }
+    ])
+  })
+
+  it('miniMapConfig.estateImage, if present, must be a string', () => {
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        miniMapConfig: {
+          ...worldConfiguration.miniMapConfig,
+          estateImage: 233
+        }
+      })
+    ).toBeFalsy()
+    expect(WorldConfiguration.validate.errors).toMatchObject([
+      {
+        instancePath: '/miniMapConfig/estateImage',
+        message: 'must be string'
+      }
+    ])
+  })
+
+  it('placesConfig.optOut, if present, must be boolean', () => {
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        placesConfig: { optOut: 233 }
+      })
+    ).toBeFalsy()
+    expect(WorldConfiguration.validate.errors).toMatchObject([
+      {
+        instancePath: '/placesConfig/optOut',
+        message: 'must be boolean'
+      }
+    ])
+  })
+  it('skyboxConfig.textures must be valid', () => {
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        skyboxConfig: {
+          textures: []
+        }
+      })
+    ).toBeTruthy()
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        customSkybox: ['1-string']
+      })
+    ).toBeTruthy()
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        skyboxConfig: {
+          textures: ['1-string', '2-string', '3-string', '4-string', '5-string', '6-string']
+        }
+      })
+    ).toBeTruthy()
+    expect(
+      WorldConfiguration.validate({
+        ...worldConfiguration,
+        skyboxConfig: {
+          textures: ['1-string', '2-string', '3-string', '4-string', '5-string']
+        }
+      })
+    ).toBeFalsy()
+
+    expect(WorldConfiguration.validate.errors).toMatchObject([
+      {
+        instancePath: '/skyboxConfig/textures',
+        message: 'customSkybox must be an array of 0, 1 or 6 strings'
+      }
+    ])
+  })
 })
