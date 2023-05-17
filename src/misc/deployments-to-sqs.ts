@@ -1,8 +1,4 @@
-import {
-  JSONSchema,
-  generateLazyValidator,
-  ValidateFunction
-} from '../validation'
+import { JSONSchema, generateLazyValidator, ValidateFunction } from '../validation'
 import { AuthChain } from './auth-chain'
 
 /**
@@ -42,6 +38,5 @@ export namespace DeploymentToSqs {
     additionalProperties: true
   }
 
-  export const validate: ValidateFunction<DeploymentToSqs> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<DeploymentToSqs> = generateLazyValidator(schema)
 }

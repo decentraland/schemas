@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
 import { BodyShape, EmoteCategory, EmotePlayMode } from '../platform'
 import { Network } from './network'
@@ -232,13 +228,7 @@ export namespace NFT {
                 type: 'boolean'
               }
             },
-            required: [
-              'bodyShapes',
-              'category',
-              'description',
-              'rarity',
-              'isSmart'
-            ],
+            required: ['bodyShapes', 'category', 'description', 'rarity', 'isSmart'],
             nullable: true
           },
           ens: {
@@ -267,13 +257,7 @@ export namespace NFT {
                 type: 'boolean'
               }
             },
-            required: [
-              'bodyShapes',
-              'category',
-              'description',
-              'rarity',
-              'loop'
-            ],
+            required: ['bodyShapes', 'category', 'description', 'rarity', 'loop'],
             nullable: true
           }
         },

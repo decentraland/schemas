@@ -1,8 +1,5 @@
 import expect from 'expect'
-import {
-  BodyShape,
-  WearableRepresentation
-} from '../../../../src/platform/item'
+import { BodyShape, WearableRepresentation } from '../../../../src/platform/item'
 import { testTypeSignature } from '../../../test-utils'
 
 describe('Wearable representation tests', () => {

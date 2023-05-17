@@ -29,8 +29,6 @@ describe('Feature toggles tests', () => {
   })
 
   it('feature with other string value fails', () => {
-    expect(FeatureToggles.validate({ 'voice-chat': 'not-valid' })).toEqual(
-      false
-    )
+    expect(FeatureToggles.validate({ 'voice-chat': 'not-valid' })).toEqual(false)
   })
 })

@@ -1,17 +1,7 @@
 import expect from 'expect'
 import { Rarity, EmoteCategory } from '../../../../src'
-import {
-  Locale,
-  BodyShape,
-  Emote,
-  EmoteRepresentationADR74,
-  isStandard,
-  isThirdParty
-} from '../../../../src'
-import {
-  expectValidationFailureWithErrors,
-  testTypeSignature
-} from '../../../test-utils'
+import { Locale, BodyShape, Emote, EmoteRepresentationADR74, isStandard, isThirdParty } from '../../../../src'
+import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
 
 describe('Emote tests', () => {
   const representation: EmoteRepresentationADR74 = {
@@ -72,18 +62,8 @@ describe('Emote tests', () => {
         '0x5ff2905107fe4cce21c93504414d9548f311cd27efe5696c0e03acc059d2e445',
         '0x6c764a5d8ded16bf0b04028b5754afbd216b111fa0c9b10f2126ac2e9002e2fa'
       ],
-      hashingKeys: [
-        'id',
-        'name',
-        'description',
-        'i18n',
-        'image',
-        'thumbnail',
-        'emoteDataADR74',
-        'content'
-      ],
-      entityHash:
-        '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
+      hashingKeys: ['id', 'name', 'description', 'i18n', 'image', 'thumbnail', 'emoteDataADR74', 'content'],
+      entityHash: '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
     }
   }
 
@@ -229,8 +209,7 @@ describe('Emote tests', () => {
           'content',
           'notPresentKey'
         ],
-        entityHash:
-          '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
+        entityHash: '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
       }
     }
     const notThirdPartyEmote = {
@@ -258,17 +237,8 @@ describe('Emote tests', () => {
           '0xc8ae2407cffddd38e3bcb6c6f021c9e7ac21fcc60be44e76e4afcb34f637d562',
           '0x16123d205a70cdeff7643de64cdc69a0517335d9c843479e083fd444ea823172'
         ],
-        hashingKeys: [
-          'id',
-          'name',
-          'description',
-          'i18n',
-          'thumbnail',
-          'emoteDataADR74',
-          'content'
-        ],
-        entityHash:
-          '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
+        hashingKeys: ['id', 'name', 'description', 'i18n', 'thumbnail', 'emoteDataADR74', 'content'],
+        entityHash: '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
       }
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

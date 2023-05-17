@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * Different supported networks
@@ -22,6 +18,5 @@ export namespace Network {
     enum: Object.values(Network)
   }
 
-  export const validate: ValidateFunction<Network> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<Network> = generateLazyValidator(schema)
 }

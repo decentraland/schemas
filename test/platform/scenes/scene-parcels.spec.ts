@@ -17,9 +17,7 @@ describe('Scene parcels tests', () => {
   })
 
   it('non-parcel string fails', () => {
-    expect(SceneParcels.validate({ base: '1-1', parcels: ['1-1'] })).toEqual(
-      false
-    )
+    expect(SceneParcels.validate({ base: '1-1', parcels: ['1-1'] })).toEqual(false)
   })
 
   it('when base is not in parcels fails', () => {

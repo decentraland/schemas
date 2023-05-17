@@ -1,9 +1,5 @@
 import expect from 'expect'
-import {
-  AuthLinkType,
-  SnapshotSyncDeployment,
-  PointerChangesSyncDeployment
-} from '../../src'
+import { AuthLinkType, SnapshotSyncDeployment, PointerChangesSyncDeployment } from '../../src'
 describe('snapshot-sync-deployment', () => {
   it('valid', () => {
     const deployment: SnapshotSyncDeployment = {

@@ -1,12 +1,6 @@
 import expect from 'expect'
-import {
-  BodyShape,
-  EmoteRepresentationADR74
-} from '../../../../../src/platform/item'
-import {
-  expectValidationFailureWithErrors,
-  testTypeSignature
-} from '../../../../test-utils'
+import { BodyShape, EmoteRepresentationADR74 } from '../../../../../src/platform/item'
+import { expectValidationFailureWithErrors, testTypeSignature } from '../../../../test-utils'
 
 describe('Emote representation tests', () => {
   const representation: EmoteRepresentationADR74 = {
@@ -52,10 +46,7 @@ describe('Emote representation tests', () => {
         ...representation,
         contents: []
       },
-      [
-        'must NOT have fewer than 1 items',
-        'contents should contain mainFile: "file1"'
-      ]
+      ['must NOT have fewer than 1 items', 'contents should contain mainFile: "file1"']
     )
   })
 

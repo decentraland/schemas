@@ -1,8 +1,4 @@
-import {
-  JSONSchema,
-  generateLazyValidator,
-  ValidateFunction
-} from '../../validation'
+import { JSONSchema, generateLazyValidator, ValidateFunction } from '../../validation'
 
 export enum PreviewProjection {
   ORTHOGRAPHIC = 'orthographic',
@@ -15,6 +11,5 @@ export namespace PreviewProjection {
     enum: Object.values(PreviewProjection)
   }
 
-  export const validate: ValidateFunction<PreviewProjection> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<PreviewProjection> = generateLazyValidator(schema)
 }

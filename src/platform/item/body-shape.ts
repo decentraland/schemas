@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 /** @alpha */
 export enum BodyShape {
@@ -17,6 +13,5 @@ export namespace BodyShape {
     enum: Object.values(BodyShape)
   }
 
-  export const validate: ValidateFunction<BodyShape> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<BodyShape> = generateLazyValidator(schema)
 }

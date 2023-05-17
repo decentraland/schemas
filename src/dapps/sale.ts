@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
 import { SaleType } from './sale-type'
 import { Network } from './network'

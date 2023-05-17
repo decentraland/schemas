@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../../../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../validation'
 
 export enum EmoteCategory {
   DANCE = 'dance',
@@ -21,6 +17,5 @@ export namespace EmoteCategory {
     enum: Object.values(EmoteCategory)
   }
 
-  export const validate: ValidateFunction<EmoteCategory> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<EmoteCategory> = generateLazyValidator(schema)
 }

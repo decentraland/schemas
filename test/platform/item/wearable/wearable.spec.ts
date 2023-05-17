@@ -1,17 +1,9 @@
 import expect from 'expect'
 import { Rarity, WearableCategory } from '../../../../src'
-import {
-  BodyShape,
-  Wearable,
-  WearableRepresentation,
-  Locale
-} from '../../../../src/platform'
+import { BodyShape, Wearable, WearableRepresentation, Locale } from '../../../../src/platform'
 import { isStandard } from '../../../../src/platform/item/standard-props'
 import { isThirdParty } from '../../../../src/platform/item/third-party-props'
-import {
-  expectValidationFailureWithErrors,
-  testTypeSignature
-} from '../../../test-utils'
+import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
 
 describe('Wearable representation tests', () => {
   const representation: WearableRepresentation = {
@@ -74,18 +66,8 @@ describe('Wearable representation tests', () => {
         '0x5ff2905107fe4cce21c93504414d9548f311cd27efe5696c0e03acc059d2e445',
         '0x6c764a5d8ded16bf0b04028b5754afbd216b111fa0c9b10f2126ac2e9002e2fa'
       ],
-      hashingKeys: [
-        'id',
-        'name',
-        'description',
-        'i18n',
-        'image',
-        'thumbnail',
-        'data',
-        'content'
-      ],
-      entityHash:
-        '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
+      hashingKeys: ['id', 'name', 'description', 'i18n', 'image', 'thumbnail', 'data', 'content'],
+      entityHash: '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
     }
   }
 
@@ -150,19 +132,15 @@ describe('Wearable representation tests', () => {
   })
 
   it('wearable with merkle proof and standard fields fails', () => {
-    expectValidationFailureWithErrors(
-      Wearable.validate,
-      { ...baseWearable, ...standard, ...thirdParty },
-      ['either standard XOR thirdparty properties conditions must be met']
-    )
+    expectValidationFailureWithErrors(Wearable.validate, { ...baseWearable, ...standard, ...thirdParty }, [
+      'either standard XOR thirdparty properties conditions must be met'
+    ])
   })
 
   it('wearable cannot be both standard and thirdparty', () => {
-    expectValidationFailureWithErrors(
-      Wearable.validate,
-      { ...baseWearable, ...standard, ...thirdParty },
-      ['either standard XOR thirdparty properties conditions must be met']
-    )
+    expectValidationFailureWithErrors(Wearable.validate, { ...baseWearable, ...standard, ...thirdParty }, [
+      'either standard XOR thirdparty properties conditions must be met'
+    ])
   })
 
   it('wearable with standard props is standard', () => {
@@ -175,10 +153,8 @@ describe('Wearable representation tests', () => {
 
   it('group of properties must be complete, not partial', () => {
     // misses 'rarity' to complete standard properties
-    expectValidationFailureWithErrors(
-      Wearable.validate,
-      { ...baseWearable, collectionAddress: '0x...' },
-      ['either standard XOR thirdparty properties conditions must be met']
-    )
+    expectValidationFailureWithErrors(Wearable.validate, { ...baseWearable, collectionAddress: '0x...' }, [
+      'either standard XOR thirdparty properties conditions must be met'
+    ])
   })
 })

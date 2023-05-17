@@ -1,8 +1,4 @@
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
 import { EmoteCategory, EmotePlayMode } from '../platform'
 import { Network } from './network'
@@ -39,6 +35,12 @@ export type Item = {
     pickedByUser?: boolean
     count: number
   }
+  /** The following fields are for the items for the Marketplace's catalog */
+  minPrice?: string
+  minListingPrice?: string | null
+  maxListingPrice?: string | null
+  listings?: number | null
+  owners?: number | null
 }
 
 export type ItemFilters = {
@@ -157,6 +159,26 @@ export namespace Item {
           }
         },
         required: ['count'],
+        nullable: true
+      },
+      minPrice: {
+        type: 'string',
+        nullable: true
+      },
+      minListingPrice: {
+        type: 'string',
+        nullable: true
+      },
+      maxListingPrice: {
+        type: 'string',
+        nullable: true
+      },
+      listings: {
+        type: 'integer',
+        nullable: true
+      },
+      owners: {
+        type: 'integer',
         nullable: true
       }
     },

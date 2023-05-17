@@ -1,10 +1,6 @@
 import { IPFSv1, IPFSv2 } from '../misc'
 import { ContentMapping } from '../misc/content-mapping'
-import {
-  generateLazyValidator,
-  JSONSchema,
-  ValidateFunction
-} from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 
 /**
  * Non-exhaustive list of EntityTypes.
@@ -15,7 +11,8 @@ export enum EntityType {
   PROFILE = 'profile',
   WEARABLE = 'wearable',
   STORE = 'store',
-  EMOTE = 'emote'
+  EMOTE = 'emote',
+  OUTFITS = 'outfits'
 }
 
 /**
@@ -52,6 +49,5 @@ export namespace Entity {
     required: ['version', 'id', 'type', 'pointers', 'timestamp', 'content']
   }
 
-  export const validate: ValidateFunction<Entity> =
-    generateLazyValidator(schema)
+  export const validate: ValidateFunction<Entity> = generateLazyValidator(schema)
 }
