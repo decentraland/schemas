@@ -5,16 +5,6 @@ import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validati
 export type SyncDeployment = SnapshotSyncDeployment | PointerChangesSyncDeployment
 
 /**
- * @deprecated
- */
-type BaseSyncDeployment = {
-  entityId: IPFSv1 | IPFSv2
-  entityType: string
-  pointers: string[]
-  authChain: AuthChain
-}
-
-/**
  * This type describes deployment + AuthChain needed to synchronize
  * a deployed entity across catalysts from the snapshots.
  * @public
@@ -70,18 +60,8 @@ export namespace PointerChangesSyncDeployment {
       entityTimestamp: { type: 'number', minimum: 0 },
       localTimestamp: { type: 'number', minimum: 0 }
     },
-    oneOf: [
-      { properties: { entityId: IPFSv1.schema } },
-      { properties: { entityId: IPFSv2.schema } }
-    ],
-    required: [
-      'entityId',
-      'entityType',
-      'pointers',
-      'localTimestamp',
-      'entityTimestamp',
-      'authChain'
-    ]
+    oneOf: [{ properties: { entityId: IPFSv1.schema } }, { properties: { entityId: IPFSv2.schema } }],
+    required: ['entityId', 'entityType', 'pointers', 'localTimestamp', 'entityTimestamp', 'authChain']
   }
 
   export const validate: ValidateFunction<PointerChangesSyncDeployment> = generateLazyValidator(schema)
