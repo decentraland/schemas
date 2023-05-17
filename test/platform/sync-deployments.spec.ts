@@ -2,7 +2,7 @@ import expect from 'expect'
 import { AuthLinkType, SnapshotSyncDeployment, PointerChangesSyncDeployment } from '../../src'
 describe('snapshot-sync-deployment', () => {
   it('valid', () => {
-    const chain: SnapshotSyncDeployment = {
+    const deployment: SnapshotSyncDeployment = {
       authChain: [
         {
           type: AuthLinkType.SIGNER,
@@ -28,7 +28,7 @@ describe('snapshot-sync-deployment', () => {
       entityTimestamp: 123,
       pointers: ['asd']
     }
-    expect(SnapshotSyncDeployment.validate(chain)).toEqual(true)
+    expect(SnapshotSyncDeployment.validate(deployment)).toEqual(true)
     expect(
       SnapshotSyncDeployment.validate({
         authChain: [
@@ -105,7 +105,7 @@ describe('snapshot-sync-deployment', () => {
 
 describe('pointer-changes-sync-deployment', () => {
   it('valid', () => {
-    const chain: PointerChangesSyncDeployment = {
+    const deployment: PointerChangesSyncDeployment = {
       authChain: [
         {
           type: AuthLinkType.SIGNER,
@@ -128,10 +128,11 @@ describe('pointer-changes-sync-deployment', () => {
       ],
       entityId: 'QmUsqJaHc5HQaBrojhBdjF4fr5MQc6CqhwZjqwhVRftNAo',
       entityType: 'scene',
+      entityTimestamp: 122,
       localTimestamp: 123,
       pointers: ['asd']
     }
-    expect(PointerChangesSyncDeployment.validate(chain)).toEqual(true)
+    expect(PointerChangesSyncDeployment.validate(deployment)).toEqual(true)
     expect(
       PointerChangesSyncDeployment.validate({
         authChain: [
@@ -143,6 +144,7 @@ describe('pointer-changes-sync-deployment', () => {
         ],
         entityId: 'bafybeiasb6yrmaounyilfuxbd5pltvosl3asdrfahsb2esg46q6tutyuya',
         entityType: 'scene',
+        entityTimestamp: 0,
         localTimestamp: 1,
         pointers: ['asd']
       } as PointerChangesSyncDeployment)
@@ -154,6 +156,7 @@ describe('pointer-changes-sync-deployment', () => {
         authChain: [],
         entityId: 'asd',
         entityType: 'scene',
+        entityTimestamp: 0,
         localTimestamp: 1,
         pointers: ['asd']
       } as PointerChangesSyncDeployment)
@@ -169,6 +172,7 @@ describe('pointer-changes-sync-deployment', () => {
         ],
         entityId: 'asd',
         entityType: 'scene',
+        entityTimestamp: 0,
         localTimestamp: 1,
         pointers: []
       } as PointerChangesSyncDeployment)
@@ -184,6 +188,7 @@ describe('pointer-changes-sync-deployment', () => {
         ],
         entityId: 'asd',
         entityType: 'scene',
+        entityTimestamp: 0,
         localTimestamp: -1,
         pointers: ['asd']
       } as PointerChangesSyncDeployment)
@@ -199,9 +204,25 @@ describe('pointer-changes-sync-deployment', () => {
         ],
         entityId: 'bainvalidhash',
         entityType: 'scene',
+        entityTimestamp: 1,
         localTimestamp: 1,
         pointers: ['asd']
       } as PointerChangesSyncDeployment)
+    ).toEqual(false)
+    expect(
+      PointerChangesSyncDeployment.validate({
+        authChain: [
+          {
+            type: AuthLinkType.SIGNER,
+            payload: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
+            signature: ''
+          }
+        ],
+        entityId: 'bafybeiasb6yrmaounyilfuxbd5pltvosl3asdrfahsb2esg46q6tutyuya',
+        entityType: 'scene',
+        localTimestamp: 1,
+        pointers: ['asd']
+      })
     ).toEqual(false)
   })
 })

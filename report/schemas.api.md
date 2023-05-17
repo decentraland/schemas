@@ -1355,10 +1355,8 @@ export namespace PeriodCreation {
     validate: ValidateFunction<PeriodCreation>;
 }
 
-// Warning: (ae-forgotten-export) The symbol "BaseSyncDeployment" needs to be exported by the entry point index.d.ts
-//
 // @public
-export type PointerChangesSyncDeployment = BaseSyncDeployment & {
+export type PointerChangesSyncDeployment = SnapshotSyncDeployment & {
     localTimestamp: number;
 };
 
@@ -2045,7 +2043,11 @@ export namespace Snapshots {
 }
 
 // @public
-export type SnapshotSyncDeployment = BaseSyncDeployment & {
+export type SnapshotSyncDeployment = {
+    entityId: IPFSv1 | IPFSv2;
+    entityType: string;
+    pointers: string[];
+    authChain: AuthChain;
     entityTimestamp: number;
 };
 
