@@ -85,6 +85,13 @@ export namespace AvatarInfo {
           type: 'string'
         }
       },
+      forceRender: {
+        type: 'array',
+        nullable: true,
+        items: {
+          type: 'string'
+        }
+      },
       emotes: {
         type: 'array',
         items: {
