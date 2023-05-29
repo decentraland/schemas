@@ -179,6 +179,7 @@ export type AvatarInfo = {
         color: Color3;
     };
     wearables: WearableId[];
+    forceRender?: WearableCategory[];
     emotes?: {
         slot: number;
         urn: string;
