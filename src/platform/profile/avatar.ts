@@ -88,9 +88,7 @@ export namespace AvatarInfo {
       forceRender: {
         type: 'array',
         nullable: true,
-        items: {
-          type: 'string'
-        }
+        items: WearableCategory.schema
       },
       emotes: {
         type: 'array',
