@@ -1,3 +1,4 @@
+import { WearableCategory } from '../../dapps/wearable-category'
 import { Color3, EthAddress, IPFSv2, WearableId } from '../../misc'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
@@ -36,6 +37,7 @@ export type AvatarInfo = {
   hair: { color: Color3 }
   skin: { color: Color3 }
   wearables: WearableId[]
+  forceRender?: WearableCategory[]
   // emotes must be present after ADR 74
   emotes?: {
     slot: number
@@ -79,6 +81,13 @@ export namespace AvatarInfo {
       },
       wearables: {
         type: 'array',
+        items: {
+          type: 'string'
+        }
+      },
+      forceRender: {
+        type: 'array',
+        nullable: true,
         items: {
           type: 'string'
         }
