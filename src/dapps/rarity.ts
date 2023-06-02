@@ -29,13 +29,13 @@ export namespace Rarity {
   }
 
   const lightColorByRarity: Record<Rarity, string> = {
-    [Rarity.UNIQUE]: '#FFE617',
-    [Rarity.MYTHIC]: '#FB7DE3',
-    [Rarity.LEGENDARY]: '#A657ED',
-    [Rarity.EPIC]: '#6397F2',
-    [Rarity.RARE]: '#3AD682',
-    [Rarity.UNCOMMON]: '#FF8563',
-    [Rarity.COMMON]: '#D4E0E0'
+    [Rarity.UNIQUE]: '#FFF280',
+    [Rarity.MYTHIC]: '#F6C1FF',
+    [Rarity.LEGENDARY]: '#DF9CFF',
+    [Rarity.EPIC]: '#81D1FF',
+    [Rarity.RARE]: '#73FFAF',
+    [Rarity.UNCOMMON]: '#FFD6B2',
+    [Rarity.COMMON]: '#ACF8F8'
   }
 
   const colorByRarity: Record<Rarity, string> = {
