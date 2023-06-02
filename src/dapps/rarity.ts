@@ -39,13 +39,13 @@ export namespace Rarity {
   }
 
   const colorByRarity: Record<Rarity, string> = {
-    [Rarity.UNIQUE]: '#FFB626',
-    [Rarity.MYTHIC]: '#FF63E1',
-    [Rarity.LEGENDARY]: '#842DDA',
-    [Rarity.EPIC]: '#3D85E6',
-    [Rarity.RARE]: '#36CF75',
-    [Rarity.UNCOMMON]: '#ED6D4F',
-    [Rarity.COMMON]: '#ABC1C1'
+    [Rarity.UNIQUE]: '#FEA217',
+    [Rarity.MYTHIC]: '#FF4BED',
+    [Rarity.LEGENDARY]: '#A14BF3',
+    [Rarity.EPIC]: '#438FFF',
+    [Rarity.RARE]: '#34CE76',
+    [Rarity.UNCOMMON]: '#FF8362',
+    [Rarity.COMMON]: '#73D3D3'
   }
 
   export function getMaxSupply(rarity: Rarity): number {
