@@ -1,28 +1,28 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
+import { MiniMapConfiguration, SkyboxConfiguration } from './dream-space-configuration'
 
-/** @alpha */
+/**
+ * @deprecated Use `DreamSpaceConfiguration` instead.
+ * @alpha
+ */
 export type WorldConfiguration = {
   name?: string
-  /** @public @deprecated Use `skyboxConfig.fixedTime` instead */
+  /** @alpha @deprecated Use `skyboxConfig.fixedTime` instead */
   skybox?: number
-  /** @public @deprecated Use `miniMapConfig.visible` instead */
+  /** @alpha @deprecated Use `miniMapConfig.visible` instead */
   minimapVisible?: boolean
-  miniMapConfig?: {
-    visible?: boolean
-    dataImage?: string
-    estateImage?: string
-  }
-  skyboxConfig?: {
-    fixedTime?: number
-    textures?: string[]
-  }
+  miniMapConfig?: MiniMapConfiguration
+  skyboxConfig?: SkyboxConfiguration
   fixedAdapter?: string
   placesConfig?: {
     optOut?: boolean
   }
 }
 
-/** @alpha */
+/**
+ * @deprecated Use `DreamSpaceConfiguration` instead.
+ * @alpha
+ */
 export namespace WorldConfiguration {
   export const schema: JSONSchema<WorldConfiguration> = {
     type: 'object',
