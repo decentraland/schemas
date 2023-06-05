@@ -65,11 +65,6 @@ jobs:
           comment-author: 'github-actions[bot]'
           body-includes: Test this pull request
 
-      - name: Get the current branch name
-        shell: bash
-        run: echo "branch=${{github.head_ref}}" >> $GITHUB_OUTPUT
-        id: myref
-
       - name: Generate S3 URL
         id: url-generator
         run: echo "body=${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.check_and_build.outputs.s3_bucket_key }}" >> $GITHUB_OUTPUT
