@@ -18,7 +18,7 @@ jobs:
     outputs:
       s3_bucket_key: ${{ steps.publish_package.outputs.s3-bucket-key }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: install
         run: npm ci
       - name: build
@@ -39,7 +39,7 @@ jobs:
           deterministic-snapshot: true
 
           ## publish every package to s3
-          s3-bucket: ${{ secrets.SDK_TEAM_S3_BUCKET }}
+          s3-bucket: "triggeree"
           s3-bucket-key-prefix: '@dcl/${{ github.event.repository_name }}/branch/${{ steps.myref.outputs.branch }}'
 
           ## inform gitlab after publishing to proceed with CDN propagation
