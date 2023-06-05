@@ -40,7 +40,7 @@ jobs:
 
           ## publish every package to s3
           s3-bucket: ${{ secrets.SDK_TEAM_S3_BUCKET }}
-          s3-bucket-key-prefix: '@dcl/${{ github.event.repository_name }}/branch/${{ github.head_ref }}'
+          s3-bucket-key-prefix: '@dcl/${{ github.event.repository.name }}/branch/${{ github.head_ref }}'
 
           ## inform gitlab after publishing to proceed with CDN propagation
           gitlab-token: ${{ secrets.GITLAB_TOKEN }}
