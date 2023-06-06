@@ -5,6 +5,7 @@ import { SceneParcels } from './scene-parcels'
 import { Source } from './source'
 import { SpawnPoint } from './spawn-point'
 import { WorldConfiguration } from './world-configuration'
+import { DreamSpaceConfiguration } from './dream-space-configuration'
 
 /** @alpha */
 export type Scene = DisplayableDeployment & {
@@ -30,6 +31,7 @@ export type Scene = DisplayableDeployment & {
   requiredPermissions?: string[]
   featureToggles?: FeatureToggles
   worldConfiguration?: WorldConfiguration
+  dreamSpaceConfiguration?: DreamSpaceConfiguration
   allowedMediaHostnames?: string[]
 }
 
@@ -119,6 +121,10 @@ export namespace Scene {
       },
       worldConfiguration: {
         ...WorldConfiguration.schema,
+        nullable: true
+      },
+      dreamSpaceConfiguration: {
+        ...DreamSpaceConfiguration.schema,
         nullable: true
       },
       allowedMediaHostnames: {
