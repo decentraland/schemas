@@ -21,7 +21,7 @@ describe('DreamSpace Configuration tests', () => {
 
   it('static tests must pass', () => {
     expect(DreamSpaceConfiguration.validate(dreamSpaceConfiguration)).toBeTruthy()
-    expect(DreamSpaceConfiguration.validate({})).toBeTruthy()
+    expect(DreamSpaceConfiguration.validate({ name: 'something.dcl.eth' })).toBeTruthy()
     expect(DreamSpaceConfiguration.validate(null)).toBeFalsy()
     expect(DreamSpaceConfiguration.validate.errors).toEqual([
       {
