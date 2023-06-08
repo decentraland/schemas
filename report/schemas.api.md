@@ -938,10 +938,7 @@ export enum ItemSortBy {
 // @public
 export type JSONSchema<T> = JSONSchemaType<T>;
 
-// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
-// Warning: (ae-missing-release-tag) "Link" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @alpha
 export type Link = {
     title: string;
     url: LinkUrl;
@@ -953,10 +950,7 @@ export namespace Link {
     schema: JSONSchema<Link>;
 }
 
-// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
-// Warning: (ae-missing-release-tag) "LinkUrl" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @alpha
 export type LinkUrl = string;
 
 // @alpha

@@ -109,11 +109,10 @@ export namespace AvatarInfo {
   export const validate: ValidateFunction<AvatarInfo> = generateLazyValidator(schema)
 }
 
-export type Link = {
-  title: string
-  url: LinkUrl
-}
-
+/**
+ * LinkUrl
+ * @alpha
+ */
 export type LinkUrl = string
 
 /**
@@ -127,6 +126,15 @@ export namespace LinkUrl {
   }
   const regexp = new RegExp(schema.pattern!)
   export const validate: ValidateFunction<LinkUrl> = (url: any): url is LinkUrl => regexp.test(url)
+}
+
+/**
+ * Link
+ * @alpha
+ */
+export type Link = {
+  title: string
+  url: LinkUrl
 }
 
 /**
