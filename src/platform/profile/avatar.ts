@@ -109,6 +109,43 @@ export namespace AvatarInfo {
   export const validate: ValidateFunction<AvatarInfo> = generateLazyValidator(schema)
 }
 
+export type Link = {
+  title: string
+  url: LinkUrl
+}
+
+export type LinkUrl = string
+
+/**
+ * LinkUrl
+ * @alpha
+ */
+export namespace LinkUrl {
+  export const schema: JSONSchema<LinkUrl> = {
+    type: 'string',
+    pattern: '^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?' // RFC-3986: Uniform Resource Identifier (URI): Generic Syntax // Parsing a URI Reference with a Regular Expression
+  }
+  const regexp = new RegExp(schema.pattern!)
+  export const validate: ValidateFunction<LinkUrl> = (url: any): url is LinkUrl => regexp.test(url)
+}
+
+/**
+ * Link
+ * @alpha
+ */
+export namespace Link {
+  export const schema: JSONSchema<Link> = {
+    type: 'object',
+    required: ['title', 'url'],
+    properties: {
+      title: {
+        type: 'string'
+      },
+      url: LinkUrl.schema
+    }
+  }
+}
+
 /**
  * Avatar represents a profile avatar. Used both for comms, internal state of the
  * explorer and the deployed profiles.
@@ -118,6 +155,7 @@ export type Avatar = {
   userId: string
   name: string
   description: string
+  links?: Link[]
   ethAddress: EthAddress
   version: number
   tutorialStep: number
@@ -151,6 +189,12 @@ export namespace Avatar {
       },
       description: {
         type: 'string'
+      },
+      links: {
+        type: 'array',
+        maxItems: 5,
+        items: Link.schema,
+        nullable: true
       },
       ethAddress: EthAddress.schema,
       version: {

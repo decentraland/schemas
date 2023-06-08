@@ -146,6 +146,7 @@ export type Avatar = {
     userId: string;
     name: string;
     description: string;
+    links?: Link[];
     ethAddress: EthAddress;
     version: number;
     tutorialStep: number;
@@ -936,6 +937,35 @@ export enum ItemSortBy {
 
 // @public
 export type JSONSchema<T> = JSONSchemaType<T>;
+
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-missing-release-tag) "Link" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Link = {
+    title: string;
+    url: LinkUrl;
+};
+
+// @alpha
+export namespace Link {
+    const // (undocumented)
+    schema: JSONSchema<Link>;
+}
+
+// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
+// Warning: (ae-missing-release-tag) "LinkUrl" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type LinkUrl = string;
+
+// @alpha
+export namespace LinkUrl {
+    const // (undocumented)
+    schema: JSONSchema<LinkUrl>;
+    const // (undocumented)
+    validate: ValidateFunction<LinkUrl>;
+}
 
 // Warning: (ae-missing-release-tag) "ListingStatus" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "ListingStatus" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
