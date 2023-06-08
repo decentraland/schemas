@@ -122,9 +122,9 @@ export type LinkUrl = string
 export namespace LinkUrl {
   export const schema: JSONSchema<LinkUrl> = {
     type: 'string',
-    pattern: '^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?' // RFC-3986: Uniform Resource Identifier (URI): Generic Syntax // Parsing a URI Reference with a Regular Expression
+    pattern: '^((https?:)?\\/\\/)?([\\da-z.-]+)\\.([a-z.]{2,6})([\\/\\w.-]*)*\\/?$' // RFC-3986: Uniform Resource Identifier (URI): Generic Syntax // Parsing a URI Reference with a Regular Expression
   }
-  const regexp = new RegExp(schema.pattern!)
+  const regexp = new RegExp(schema.pattern!, 'i')
   export const validate: ValidateFunction<LinkUrl> = (url: any): url is LinkUrl => regexp.test(url)
 }
 
