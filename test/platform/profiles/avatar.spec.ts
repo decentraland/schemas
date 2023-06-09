@@ -29,6 +29,16 @@ export const AVATAR: Avatar = {
   name: 'Some Name',
   hasClaimedName: true,
   description: 'Some Description',
+  links: [
+    {
+      title: 'Twitter',
+      url: 'https://twitter.com/decentraland'
+    },
+    {
+      title: 'Discord',
+      url: 'https://discord.gg/decentraland'
+    }
+  ],
   ethAddress: '0x87956abC4078a0Cc3b89b419628b857B8AF826Ed',
   version: 44,
   avatar: AVATAR_INFO,

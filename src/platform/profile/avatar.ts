@@ -110,6 +110,51 @@ export namespace AvatarInfo {
 }
 
 /**
+ * LinkUrl
+ * @alpha
+ */
+export type LinkUrl = string
+
+/**
+ * LinkUrl
+ * @alpha
+ */
+export namespace LinkUrl {
+  export const schema: JSONSchema<LinkUrl> = {
+    type: 'string',
+    pattern: '^((https?:)?\\/\\/)?([\\da-z.-]+)\\.([a-z.]{2,6})([\\/\\w.-]*)*\\/?$' // RFC-3986: Uniform Resource Identifier (URI): Generic Syntax // Parsing a URI Reference with a Regular Expression
+  }
+  const regexp = new RegExp(schema.pattern!, 'i')
+  export const validate: ValidateFunction<LinkUrl> = (url: any): url is LinkUrl => regexp.test(url)
+}
+
+/**
+ * Link
+ * @alpha
+ */
+export type Link = {
+  title: string
+  url: LinkUrl
+}
+
+/**
+ * Link
+ * @alpha
+ */
+export namespace Link {
+  export const schema: JSONSchema<Link> = {
+    type: 'object',
+    required: ['title', 'url'],
+    properties: {
+      title: {
+        type: 'string'
+      },
+      url: LinkUrl.schema
+    }
+  }
+}
+
+/**
  * Avatar represents a profile avatar. Used both for comms, internal state of the
  * explorer and the deployed profiles.
  * @alpha
@@ -118,6 +163,7 @@ export type Avatar = {
   userId: string
   name: string
   description: string
+  links?: Link[]
   ethAddress: EthAddress
   version: number
   tutorialStep: number
@@ -151,6 +197,12 @@ export namespace Avatar {
       },
       description: {
         type: 'string'
+      },
+      links: {
+        type: 'array',
+        maxItems: 5,
+        items: Link.schema,
+        nullable: true
       },
       ethAddress: EthAddress.schema,
       version: {
