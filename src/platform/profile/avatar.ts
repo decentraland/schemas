@@ -187,7 +187,7 @@ export type Avatar = {
 export namespace Avatar {
   export const schema: JSONSchema<Avatar> = {
     type: 'object',
-    required: ['name', 'description', 'ethAddress', 'version', 'tutorialStep', 'avatar'],
+    required: ['name', 'description', 'ethAddress', 'version', 'tutorialStep', 'avatar', 'hasClaimedName'],
     properties: {
       userId: {
         type: 'string'
@@ -237,8 +237,7 @@ export namespace Avatar {
         nullable: true
       },
       hasClaimedName: {
-        type: 'boolean',
-        nullable: false
+        type: 'boolean'
       },
       hasConnectedWeb3: {
         type: 'boolean',
