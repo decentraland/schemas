@@ -174,7 +174,7 @@ export type Avatar = {
   hasClaimedName: boolean
   avatar: AvatarInfo
   /**
-   * Whether or not the player has connected web3 wallet or is a guest user.
+   * Whether the player has connected web3 wallet or is a guest user.
    * This is always true for deployed profiles.
    */
   hasConnectedWeb3?: boolean
@@ -238,7 +238,7 @@ export namespace Avatar {
       },
       hasClaimedName: {
         type: 'boolean',
-        nullable: true
+        nullable: false
       },
       hasConnectedWeb3: {
         type: 'boolean',
