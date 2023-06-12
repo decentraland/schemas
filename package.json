@@ -7,25 +7,25 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "mocha",
-    "lint": "eslint . --ext .ts",
+    "lint:check": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "check-api": "npm run build && api-extractor run --typescript-compiler-folder ./node_modules/typescript",
     "refresh-api": "npm run build && api-extractor run --local --verbose --diagnostics --typescript-compiler-folder ./node_modules/typescript"
   },
   "devDependencies": {
-    "@dcl/eslint-config": "^1.1.1",
-    "@microsoft/api-extractor": "^7.34.8",
+    "@dcl/eslint-config": "^1.1.2",
+    "@microsoft/api-extractor": "^7.35.2",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^16.18.27",
-    "@types/sinon": "^10.0.14",
+    "@types/node": "^16.18.34",
+    "@types/sinon": "^10.0.15",
     "expect": "^29.5.0",
     "mocha": "^10.2.0",
-    "sinon": "^15.0.4",
+    "sinon": "^15.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "ajv": "^8.11.0",
+    "ajv": "8.11.0",
     "ajv-errors": "^3.0.0",
     "ajv-keywords": "^5.1.0"
   },
