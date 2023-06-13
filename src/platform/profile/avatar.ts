@@ -174,7 +174,7 @@ export type Avatar = {
   hasClaimedName: boolean
   avatar: AvatarInfo
   /**
-   * Whether or not the player has connected web3 wallet or is a guest user.
+   * Whether the player has connected web3 wallet or is a guest user.
    * This is always true for deployed profiles.
    */
   hasConnectedWeb3?: boolean
@@ -187,7 +187,7 @@ export type Avatar = {
 export namespace Avatar {
   export const schema: JSONSchema<Avatar> = {
     type: 'object',
-    required: ['name', 'description', 'ethAddress', 'version', 'tutorialStep', 'avatar'],
+    required: ['name', 'description', 'ethAddress', 'version', 'tutorialStep', 'avatar', 'hasClaimedName'],
     properties: {
       userId: {
         type: 'string'
@@ -237,8 +237,7 @@ export namespace Avatar {
         nullable: true
       },
       hasClaimedName: {
-        type: 'boolean',
-        nullable: true
+        type: 'boolean'
       },
       hasConnectedWeb3: {
         type: 'boolean',
