@@ -1,10 +1,6 @@
-import { WearableCategory } from '../../dapps/wearable-category';
-import { Color3, WearableId } from '../../misc';
-import {
-  JSONSchema,
-  ValidateFunction,
-  generateLazyValidator,
-} from '../../validation';
+import { WearableCategory } from '../../dapps/wearable-category'
+import { Color3, WearableId } from '../../misc'
+import { JSONSchema, ValidateFunction, generateLazyValidator } from '../../validation'
 
 /**
  * @alpha
