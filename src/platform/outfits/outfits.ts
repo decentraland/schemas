@@ -16,7 +16,7 @@ export type Outfit = {
   skin: { color: Color3 }
   wearables: WearableId[]
   forceRender?: WearableCategory[]
-};
+}
 
 /**
  * Outfit
@@ -61,11 +61,11 @@ export namespace Outfit {
         type: 'array',
         nullable: true,
         items: WearableCategory.schema,
-      },
+      }
     },
-    additionalProperties: true,
+    additionalProperties: true
   }
-  export const validate: ValidateFunction<Outfit> = generateLazyValidator(schema);
+  export const validate: ValidateFunction<Outfit> = generateLazyValidator(schema)
 }
 
 /**
