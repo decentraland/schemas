@@ -12,6 +12,10 @@
     "check-api": "npm run build && api-extractor run --typescript-compiler-folder ./node_modules/typescript",
     "refresh-api": "npm run build && api-extractor run --local --verbose --diagnostics --typescript-compiler-folder ./node_modules/typescript"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/decentraland/schemas.git"
+  },
   "devDependencies": {
     "@dcl/eslint-config": "^1.1.2",
     "@microsoft/api-extractor": "^7.35.2",
