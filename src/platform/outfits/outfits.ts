@@ -28,34 +28,34 @@ export namespace Outfit {
     required: ['bodyShape', 'eyes', 'hair', 'skin', 'wearables'],
     properties: {
       bodyShape: {
-        type: 'string',
+        type: 'string'
       },
       eyes: {
         type: 'object',
         required: ['color'],
         properties: {
-          color: Color3.schema,
-        },
+          color: Color3.schema
+        }
       },
       hair: {
         type: 'object',
         required: ['color'],
         properties: {
-          color: Color3.schema,
-        },
+          color: Color3.schema
+        }
       },
       skin: {
         type: 'object',
         required: ['color'],
         properties: {
-          color: Color3.schema,
-        },
+          color: Color3.schema
+        }
       },
       wearables: {
         type: 'array',
         items: {
-          type: 'string',
-        },
+          type: 'string'
+        }
       },
       forceRender: {
         type: 'array',
@@ -64,9 +64,8 @@ export namespace Outfit {
       },
     },
     additionalProperties: true,
-  };
-  export const validate: ValidateFunction<Outfit> =
-    generateLazyValidator(schema);
+  }
+  export const validate: ValidateFunction<Outfit> = generateLazyValidator(schema);
 }
 
 /**
