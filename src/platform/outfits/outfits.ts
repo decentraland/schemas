@@ -1,16 +1,22 @@
-import { Color3, WearableId } from '../../misc'
-import { JSONSchema, ValidateFunction, generateLazyValidator } from '../../validation'
+import { WearableCategory } from "../../dapps/wearable-category";
+import { Color3, WearableId } from "../../misc";
+import {
+  JSONSchema,
+  ValidateFunction,
+  generateLazyValidator,
+} from "../../validation";
 
 /**
  * @alpha
  */
 export type Outfit = {
-  bodyShape: WearableId
-  eyes: { color: Color3 }
-  hair: { color: Color3 }
-  skin: { color: Color3 }
-  wearables: WearableId[]
-}
+  bodyShape: WearableId;
+  eyes: { color: Color3 };
+  hair: { color: Color3 };
+  skin: { color: Color3 };
+  wearables: WearableId[];
+  forceRender?: WearableCategory[];
+};
 
 /**
  * Outfit
@@ -18,43 +24,49 @@ export type Outfit = {
  */
 export namespace Outfit {
   export const schema: JSONSchema<Outfit> = {
-    type: 'object',
-    required: ['bodyShape', 'eyes', 'hair', 'skin', 'wearables'],
+    type: "object",
+    required: ["bodyShape", "eyes", "hair", "skin", "wearables"],
     properties: {
       bodyShape: {
-        type: 'string'
+        type: "string",
       },
       eyes: {
-        type: 'object',
-        required: ['color'],
+        type: "object",
+        required: ["color"],
         properties: {
-          color: Color3.schema
-        }
+          color: Color3.schema,
+        },
       },
       hair: {
-        type: 'object',
-        required: ['color'],
+        type: "object",
+        required: ["color"],
         properties: {
-          color: Color3.schema
-        }
+          color: Color3.schema,
+        },
       },
       skin: {
-        type: 'object',
-        required: ['color'],
+        type: "object",
+        required: ["color"],
         properties: {
-          color: Color3.schema
-        }
+          color: Color3.schema,
+        },
       },
       wearables: {
-        type: 'array',
+        type: "array",
         items: {
-          type: 'string'
-        }
-      }
+          type: "string",
+        },
+      },
+      forceRender: {
+        type: "array",
+        nullable: true,
+        items: WearableCategory.schema,
+      },
     },
-    additionalProperties: true
-  }
-  export const validate: ValidateFunction<Outfit> = generateLazyValidator(schema)
+    additionalProperties: true,
+  };
+  export const validate: ValidateFunction<Outfit> =
+    generateLazyValidator(schema);
 }
 
 /**
@@ -62,11 +74,11 @@ export namespace Outfit {
  */
 export type Outfits = {
   outfits: {
-    slot: number
-    outfit: Outfit
-  }[]
-  namesForExtraSlots: string[]
-}
+    slot: number;
+    outfit: Outfit;
+  }[];
+  namesForExtraSlots: string[];
+};
 
 /**
  * Outfits
@@ -74,31 +86,32 @@ export type Outfits = {
  */
 export namespace Outfits {
   export const schema: JSONSchema<Outfits> = {
-    type: 'object',
-    required: ['outfits', 'namesForExtraSlots'],
+    type: "object",
+    required: ["outfits", "namesForExtraSlots"],
     properties: {
       outfits: {
-        type: 'array',
+        type: "array",
         items: {
-          type: 'object',
-          required: ['slot', 'outfit'],
+          type: "object",
+          required: ["slot", "outfit"],
           properties: {
             slot: {
-              type: 'number'
+              type: "number",
             },
-            outfit: Outfit.schema
-          }
-        }
+            outfit: Outfit.schema,
+          },
+        },
       },
       namesForExtraSlots: {
-        type: 'array',
+        type: "array",
         uniqueItems: true,
         items: {
-          type: 'string'
-        }
-      }
+          type: "string",
+        },
+      },
     },
-    additionalProperties: true
-  }
-  export const validate: ValidateFunction<Outfits> = generateLazyValidator(schema)
+    additionalProperties: true,
+  };
+  export const validate: ValidateFunction<Outfits> =
+    generateLazyValidator(schema);
 }

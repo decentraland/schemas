@@ -1361,6 +1361,7 @@ export type Outfit = {
         color: Color3;
     };
     wearables: WearableId[];
+    forceRender?: WearableCategory[];
 };
 
 // @alpha
