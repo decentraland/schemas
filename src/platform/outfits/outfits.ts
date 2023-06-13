@@ -1,10 +1,10 @@
-import { WearableCategory } from "../../dapps/wearable-category";
-import { Color3, WearableId } from "../../misc";
+import { WearableCategory } from '../../dapps/wearable-category';
+import { Color3, WearableId } from '../../misc';
 import {
   JSONSchema,
   ValidateFunction,
   generateLazyValidator,
-} from "../../validation";
+} from '../../validation';
 
 /**
  * @alpha
@@ -60,7 +60,7 @@ export namespace Outfit {
       forceRender: {
         type: 'array',
         nullable: true,
-        items: WearableCategory.schema,
+        items: WearableCategory.schema
       }
     },
     additionalProperties: true
