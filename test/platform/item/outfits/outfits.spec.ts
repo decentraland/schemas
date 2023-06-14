@@ -1,5 +1,5 @@
 import expect from 'expect'
-import { Outfits } from '../../../../src'
+import { Outfits, WearableCategory } from '../../../../src'
 import { testTypeSignature } from '../../../test-utils'
 
 const OUTFITS: Outfits = {
@@ -28,6 +28,12 @@ const OUTFITS: Outfits = {
 }
 
 it('outfits is valid', () => {
+  testTypeSignature(Outfits, OUTFITS)
+  expect(Outfits.validate(OUTFITS)).toEqual(true)
+})
+
+it('outfits with forceRender is valid', () => {
+  OUTFITS.outfits[0].outfit.forceRender = [WearableCategory.EYEBROWS]
   testTypeSignature(Outfits, OUTFITS)
   expect(Outfits.validate(OUTFITS)).toEqual(true)
 })
