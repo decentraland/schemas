@@ -1,3 +1,4 @@
+import { WearableCategory } from '../../dapps/wearable-category'
 import { Color3, WearableId } from '../../misc'
 import { JSONSchema, ValidateFunction, generateLazyValidator } from '../../validation'
 
@@ -10,6 +11,7 @@ export type Outfit = {
   hair: { color: Color3 }
   skin: { color: Color3 }
   wearables: WearableId[]
+  forceRender?: WearableCategory[]
 }
 
 /**
@@ -50,6 +52,11 @@ export namespace Outfit {
         items: {
           type: 'string'
         }
+      },
+      forceRender: {
+        type: 'array',
+        nullable: true,
+        items: WearableCategory.schema
       }
     },
     additionalProperties: true
