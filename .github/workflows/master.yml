@@ -1,0 +1,42 @@
+on:
+  push:
+    branches:
+      - master
+      - main
+    tags:
+      - '*'
+  release:
+    types:
+      - created
+
+name: Publish NPM package
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: npm ci
+        run:  npm ci
+      - name: npm run build
+        run:  npm run build
+      - name: npm run test
+        run: npm run test
+      - name: npm run lint
+        run: npm run lint
+      - name: npm run check-api
+        run: npm run check-api
+      - name: print diff if failed
+        if: ${{ failure() }}
+        run: cp temp/schemas.api.md report/schemas.api.md && git diff
+
+      - name: Publish
+        uses: menduz/oddish-action@master
+        with:
+          access: public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
