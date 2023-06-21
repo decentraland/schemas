@@ -1677,6 +1677,17 @@ export namespace PreviewType {
 // @alpha
 export type Profile = {
     avatars: Avatar[];
+    country: Country;
+    employment_status: EmploymentStatus;
+    gender: Gender;
+    pronouns: Pronouns;
+    relationship_status: RelationshipStatus;
+    sexual_orientation: SexualOrientation;
+    language: Language;
+    profession?: string;
+    birthdate?: string;
+    real_name?: string;
+    hobbies?: string;
 };
 
 // @alpha
@@ -2477,6 +2488,13 @@ export namespace WorldConfiguration {
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/third-party-props.ts:6:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
+// src/platform/profile/profile.ts:17:3 - (ae-forgotten-export) The symbol "Country" needs to be exported by the entry point index.d.ts
+// src/platform/profile/profile.ts:18:3 - (ae-forgotten-export) The symbol "EmploymentStatus" needs to be exported by the entry point index.d.ts
+// src/platform/profile/profile.ts:19:3 - (ae-forgotten-export) The symbol "Gender" needs to be exported by the entry point index.d.ts
+// src/platform/profile/profile.ts:20:3 - (ae-forgotten-export) The symbol "Pronouns" needs to be exported by the entry point index.d.ts
+// src/platform/profile/profile.ts:21:3 - (ae-forgotten-export) The symbol "RelationshipStatus" needs to be exported by the entry point index.d.ts
+// src/platform/profile/profile.ts:22:3 - (ae-forgotten-export) The symbol "SexualOrientation" needs to be exported by the entry point index.d.ts
+// src/platform/profile/profile.ts:23:3 - (ae-forgotten-export) The symbol "Language" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "MultiPosition" needs to be exported by the entry point index.d.ts
 
