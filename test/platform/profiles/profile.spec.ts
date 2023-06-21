@@ -2,9 +2,29 @@ import expect from 'expect'
 import { Profile } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
 import { AVATAR } from './avatar.spec'
+import { Country } from '../../../src/platform/profile/additional-info/country'
+import { EmploymentStatus } from '../../../src/platform/profile/additional-info/employment'
+import { Gender } from '../../../src/platform/profile/additional-info/gender'
+import { Pronouns } from '../../../src/platform/profile/additional-info/pronouns'
+import { RelationshipStatus } from '../../../src/platform/profile/additional-info/relationship'
+import { SexualOrientation } from '../../../src/platform/profile/additional-info/sexual-orientation'
+import { Language } from '../../../src/platform/profile/additional-info/language'
 
 describe('Profile tests', () => {
-  const profile = { avatars: [AVATAR] }
+  const profile = {
+    avatars: [AVATAR],
+    country: Country.ARGENTINA,
+    employment_status: EmploymentStatus.NONE,
+    gender: Gender.NONE,
+    pronouns: Pronouns.SHE,
+    relationship_status: RelationshipStatus.COMPLICATED,
+    sexual_orientation: SexualOrientation.ASEXUAL,
+    language: Language.ENGLISH,
+    profession: 'Ninja Software Engineer',
+    birthdate: '1990-01-01',
+    real_name: 'Tini',
+    hobbies: 'sing, dance, code, play, eat, sleep, repeat'
+  }
 
   testTypeSignature(Profile, profile)
 
