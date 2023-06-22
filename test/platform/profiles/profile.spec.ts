@@ -5,7 +5,6 @@ import { AVATAR } from './avatar.spec'
 import { Country } from '../../../src/platform/profile/additional-info/country'
 import { EmploymentStatus } from '../../../src/platform/profile/additional-info/employment'
 import { Gender } from '../../../src/platform/profile/additional-info/gender'
-import { Pronouns } from '../../../src/platform/profile/additional-info/pronouns'
 import { RelationshipStatus } from '../../../src/platform/profile/additional-info/relationship'
 import { SexualOrientation } from '../../../src/platform/profile/additional-info/sexual-orientation'
 import { Language } from '../../../src/platform/profile/additional-info/language'
@@ -16,7 +15,6 @@ describe('Profile tests', () => {
     country: Country.ARGENTINA,
     employment_status: EmploymentStatus.CHILLING,
     gender: Gender.FEMALE,
-    pronouns: Pronouns.SHE,
     relationship_status: RelationshipStatus.COMPLICATED,
     sexual_orientation: SexualOrientation.ASEXUAL,
     language: Language.ENGLISH,
