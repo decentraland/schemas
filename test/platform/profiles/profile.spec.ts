@@ -14,8 +14,8 @@ describe('Profile tests', () => {
   const profile = {
     avatars: [AVATAR],
     country: Country.ARGENTINA,
-    employment_status: EmploymentStatus.NONE,
-    gender: Gender.NONE,
+    employment_status: EmploymentStatus.CHILLING,
+    gender: Gender.FEMALE,
     pronouns: Pronouns.SHE,
     relationship_status: RelationshipStatus.COMPLICATED,
     sexual_orientation: SexualOrientation.ASEXUAL,
