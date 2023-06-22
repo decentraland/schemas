@@ -17,8 +17,7 @@ export enum Gender {
 export namespace Gender {
   export const schema: JSONSchema<Gender> = {
     type: 'string',
-    enum: Object.values(Gender),
-    default: Gender.NONE
+    enum: Object.values(Gender)
   }
   export const validate: ValidateFunction<Gender> = generateLazyValidator(schema)
 }
