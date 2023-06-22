@@ -11,8 +11,7 @@ export enum Gender {
   PANGENDER = 'Pangender',
   QUEER = 'Queer',
   TWO_SPIRIT = 'Two-Spirit',
-  OTHER = 'Other',
-  NONE = 'None'
+  OTHER = 'Other'
 }
 
 export namespace Gender {

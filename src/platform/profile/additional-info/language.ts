@@ -28,8 +28,7 @@ export enum Language {
   IRANIAN_PERSIAN = 'Iranian Persian (excl. Dari and Tajik)',
   BHOJPURI = 'Bhojpuri',
   HAUSA = 'Hausa',
-  OTHER = 'Other',
-  NONE = 'None'
+  OTHER = 'Other'
 }
 
 export namespace Language {

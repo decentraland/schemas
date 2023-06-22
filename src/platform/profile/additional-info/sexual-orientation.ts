@@ -9,8 +9,7 @@ export enum SexualOrientation {
   QUEER = 'Queer',
   POLYSEXUAL = 'Polysexual',
   PANSEXUAL = 'Pansexual',
-  OTHER = 'Other',
-  NONE = 'None'
+  OTHER = 'Other'
 }
 
 export namespace SexualOrientation {

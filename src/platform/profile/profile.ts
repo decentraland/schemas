@@ -14,13 +14,13 @@ import { Avatar } from './avatar'
  */
 export type Profile = {
   avatars: Avatar[]
-  country: Country
-  employment_status: EmploymentStatus
-  gender: Gender
-  pronouns: Pronouns
-  relationship_status: RelationshipStatus
-  sexual_orientation: SexualOrientation
-  language: Language
+  country?: Country
+  employment_status?: EmploymentStatus
+  gender?: Gender
+  pronouns?: Pronouns
+  relationship_status?: RelationshipStatus
+  sexual_orientation?: SexualOrientation
+  language?: Language
   profession?: string
   birthdate?: string
   real_name?: string

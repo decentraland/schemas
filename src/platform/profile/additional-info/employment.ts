@@ -7,8 +7,7 @@ export enum EmploymentStatus {
   LOOKING_FOR_JOB = 'Looking for job',
   HOME_FAMILY = 'Home/Family',
   RETIRED = 'Retired',
-  OTHER = 'Other',
-  NONE = 'None'
+  OTHER = 'Other'
 }
 
 export namespace EmploymentStatus {

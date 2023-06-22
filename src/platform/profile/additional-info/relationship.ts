@@ -10,8 +10,7 @@ export enum RelationshipStatus {
   WIDOWED = 'Widowed',
   SEPARATED = 'Separated',
   DIVORCED = 'Divorced',
-  OTHER = 'Other',
-  NONE = 'None'
+  OTHER = 'Other'
 }
 
 export namespace RelationshipStatus {

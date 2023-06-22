@@ -8,8 +8,7 @@ export enum Pronouns {
   XE = 'Xe / Xem',
   HIR = 'Ze / Hir',
   PER = 'Per / Per',
-  OTHER = 'Other',
-  NONE = 'None'
+  OTHER = 'Other'
 }
 
 export namespace Pronouns {

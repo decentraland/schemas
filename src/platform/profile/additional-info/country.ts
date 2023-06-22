@@ -198,8 +198,7 @@ export enum Country {
   YEMEN = 'Yemen',
   ZAMBIA = 'Zambia',
   ZIMBABWE = 'Zimbabwe',
-  OTHER = 'Other',
-  NONE = 'None'
+  OTHER = 'Other'
 }
 
 export namespace Country {
