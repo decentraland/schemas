@@ -40,13 +40,34 @@ export namespace Profile {
         type: 'array',
         items: Avatar.schema
       },
-      country: Country.schema,
-      employment_status: EmploymentStatus.schema,
-      gender: Gender.schema,
-      pronouns: Pronouns.schema,
-      relationship_status: RelationshipStatus.schema,
-      sexual_orientation: SexualOrientation.schema,
-      language: Language.schema,
+      country: {
+        ...Country.schema,
+        nullable: true
+      },
+      employment_status: {
+        ...EmploymentStatus.schema,
+        nullable: true
+      },
+      gender: {
+        ...Gender.schema,
+        nullable: true
+      },
+      pronouns: {
+        ...Pronouns.schema,
+        nullable: true
+      },
+      relationship_status: {
+        ...RelationshipStatus.schema,
+        nullable: true
+      },
+      sexual_orientation: {
+        ...SexualOrientation.schema,
+        nullable: true
+      },
+      language: {
+        ...Language.schema,
+        nullable: true
+      },
       profession: {
         nullable: true,
         type: 'string'
