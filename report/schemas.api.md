@@ -1678,15 +1678,15 @@ export namespace PreviewType {
 export type Profile = {
     avatars: Avatar[];
     country?: Country;
-    employment_status?: EmploymentStatus;
+    employmentStatus?: EmploymentStatus;
     gender?: Gender;
     pronouns?: Pronouns;
-    relationship_status?: RelationshipStatus;
-    sexual_orientation?: SexualOrientation;
+    relationshipStatus?: RelationshipStatus;
+    sexualOrientation?: SexualOrientation;
     language?: Language;
     profession?: string;
     birthdate?: string;
-    real_name?: string;
+    realName?: string;
     hobbies?: string;
 };
 
