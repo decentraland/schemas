@@ -13,7 +13,8 @@ export enum EmploymentStatus {
 export namespace EmploymentStatus {
   export const schema: JSONSchema<EmploymentStatus> = {
     type: 'string',
-    enum: Object.values(EmploymentStatus)
+    enum: Object.values(EmploymentStatus),
+    nullable: true
   }
   export const validate: ValidateFunction<EmploymentStatus> = generateLazyValidator(schema)
 }

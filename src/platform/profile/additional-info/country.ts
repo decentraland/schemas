@@ -204,7 +204,8 @@ export enum Country {
 export namespace Country {
   export const schema: JSONSchema<Country> = {
     type: 'string',
-    enum: Object.values(Country)
+    enum: Object.values(Country),
+    nullable: true
   }
   export const validate: ValidateFunction<Country> = generateLazyValidator(schema)
 }

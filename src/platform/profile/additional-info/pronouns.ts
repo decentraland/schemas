@@ -14,7 +14,8 @@ export enum Pronouns {
 export namespace Pronouns {
   export const schema: JSONSchema<Pronouns> = {
     type: 'string',
-    enum: Object.values(Pronouns)
+    enum: Object.values(Pronouns),
+    nullable: true
   }
   export const validate: ValidateFunction<Pronouns> = generateLazyValidator(schema)
 }
