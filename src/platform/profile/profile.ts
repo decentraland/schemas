@@ -15,15 +15,15 @@ import { Avatar } from './avatar'
 export type Profile = {
   avatars: Avatar[]
   country?: Country
-  employment_status?: EmploymentStatus
+  employmentStatus?: EmploymentStatus
   gender?: Gender
   pronouns?: Pronouns
-  relationship_status?: RelationshipStatus
-  sexual_orientation?: SexualOrientation
+  relationshipStatus?: RelationshipStatus
+  sexualOrientation?: SexualOrientation
   language?: Language
   profession?: string
   birthdate?: string
-  real_name?: string
+  realName?: string
   hobbies?: string
 }
 
@@ -44,7 +44,7 @@ export namespace Profile {
         ...Country.schema,
         nullable: true
       },
-      employment_status: {
+      employmentStatus: {
         ...EmploymentStatus.schema,
         nullable: true
       },
@@ -56,11 +56,11 @@ export namespace Profile {
         ...Pronouns.schema,
         nullable: true
       },
-      relationship_status: {
+      relationshipStatus: {
         ...RelationshipStatus.schema,
         nullable: true
       },
-      sexual_orientation: {
+      sexualOrientation: {
         ...SexualOrientation.schema,
         nullable: true
       },
@@ -76,7 +76,7 @@ export namespace Profile {
         nullable: true,
         type: 'string'
       },
-      real_name: {
+      realName: {
         nullable: true,
         type: 'string'
       },
