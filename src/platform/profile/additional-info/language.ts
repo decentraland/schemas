@@ -34,8 +34,7 @@ export enum Language {
 export namespace Language {
   export const schema: JSONSchema<Language> = {
     type: 'string',
-    enum: Object.values(Language),
-    nullable: true
+    enum: Object.values(Language)
   }
   export const validate: ValidateFunction<Language> = generateLazyValidator(schema)
 }

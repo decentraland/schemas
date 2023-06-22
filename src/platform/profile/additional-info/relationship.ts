@@ -16,8 +16,7 @@ export enum RelationshipStatus {
 export namespace RelationshipStatus {
   export const schema: JSONSchema<RelationshipStatus> = {
     type: 'string',
-    enum: Object.values(RelationshipStatus),
-    nullable: true
+    enum: Object.values(RelationshipStatus)
   }
   export const validate: ValidateFunction<RelationshipStatus> = generateLazyValidator(schema)
 }
