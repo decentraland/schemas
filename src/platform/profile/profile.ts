@@ -7,6 +7,17 @@ import { Avatar } from './avatar'
  */
 export type Profile = {
   avatars: Avatar[]
+  country?: string
+  employmentStatus?: string
+  gender?: string
+  pronouns?: string
+  relationshipStatus?: string
+  sexualOrientation?: string
+  language?: string
+  profession?: string
+  birthdate?: number
+  realName?: string
+  hobbies?: string
 }
 
 /**
@@ -21,6 +32,50 @@ export namespace Profile {
       avatars: {
         type: 'array',
         items: Avatar.schema
+      },
+      country: {
+        nullable: true,
+        type: 'string'
+      },
+      employmentStatus: {
+        nullable: true,
+        type: 'string'
+      },
+      gender: {
+        nullable: true,
+        type: 'string'
+      },
+      pronouns: {
+        nullable: true,
+        type: 'string'
+      },
+      relationshipStatus: {
+        nullable: true,
+        type: 'string'
+      },
+      sexualOrientation: {
+        nullable: true,
+        type: 'string'
+      },
+      language: {
+        nullable: true,
+        type: 'string'
+      },
+      profession: {
+        nullable: true,
+        type: 'string'
+      },
+      birthdate: {
+        nullable: true,
+        type: 'number'
+      },
+      realName: {
+        nullable: true,
+        type: 'string'
+      },
+      hobbies: {
+        nullable: true,
+        type: 'string'
       }
     },
     additionalProperties: true

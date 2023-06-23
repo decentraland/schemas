@@ -1677,6 +1677,17 @@ export namespace PreviewType {
 // @alpha
 export type Profile = {
     avatars: Avatar[];
+    country?: string;
+    employmentStatus?: string;
+    gender?: string;
+    pronouns?: string;
+    relationshipStatus?: string;
+    sexualOrientation?: string;
+    language?: string;
+    profession?: string;
+    birthdate?: number;
+    realName?: string;
+    hobbies?: string;
 };
 
 // @alpha
