@@ -14,13 +14,13 @@ import { Avatar } from './avatar'
  */
 export type Profile = {
   avatars: Avatar[]
-  country?: Country
-  employmentStatus?: EmploymentStatus
-  gender?: Gender
-  pronouns?: Pronouns
-  relationshipStatus?: RelationshipStatus
-  sexualOrientation?: SexualOrientation
-  language?: Language
+  country?: string
+  employmentStatus?: string
+  gender?: string
+  pronouns?: string
+  relationshipStatus?: string
+  sexualOrientation?: string
+  language?: string
   profession?: string
   birthdate?: string
   realName?: string
@@ -41,32 +41,32 @@ export namespace Profile {
         items: Avatar.schema
       },
       country: {
-        ...Country.schema,
-        nullable: true
+        nullable: true,
+        type: 'string'
       },
       employmentStatus: {
-        ...EmploymentStatus.schema,
-        nullable: true
+        nullable: true,
+        type: 'string'
       },
       gender: {
-        ...Gender.schema,
-        nullable: true
+        nullable: true,
+        type: 'string'
       },
       pronouns: {
-        ...Pronouns.schema,
-        nullable: true
+        nullable: true,
+        type: 'string'
       },
       relationshipStatus: {
-        ...RelationshipStatus.schema,
-        nullable: true
+        nullable: true,
+        type: 'string'
       },
       sexualOrientation: {
-        ...SexualOrientation.schema,
-        nullable: true
+        nullable: true,
+        type: 'string'
       },
       language: {
-        ...Language.schema,
-        nullable: true
+        nullable: true,
+        type: 'string'
       },
       profession: {
         nullable: true,
