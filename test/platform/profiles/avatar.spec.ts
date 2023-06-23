@@ -53,6 +53,12 @@ export const AVATAR_WITH_EMOTES: Avatar = {
   name: 'Some Name',
   hasClaimedName: true,
   description: 'Some Description',
+  country: 'Argetina',
+  relationshipStatus: 'situationship',
+  profession: 'Ninja Software Engineer',
+  birthdate: 1687537233,
+  realName: 'Tini',
+  hobbies: 'sing, dance, code, play, eat, sleep, repeat',
   ethAddress: '0x87956abC4078a0Cc3b89b419628b857B8AF826Ed',
   version: 44,
   avatar: {
