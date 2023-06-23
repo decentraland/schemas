@@ -5,13 +5,7 @@ import { AVATAR } from './avatar.spec'
 
 describe('Profile tests', () => {
   const profile = {
-    avatars: [AVATAR],
-    country: 'Argetina',
-    relationshipStatus: 'situationship',
-    profession: 'Ninja Software Engineer',
-    birthdate: 1687537233,
-    realName: 'Tini',
-    hobbies: 'sing, dance, code, play, eat, sleep, repeat'
+    avatars: [AVATAR]
   }
 
   testTypeSignature(Profile, profile)

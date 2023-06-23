@@ -164,6 +164,17 @@ export type Avatar = {
   name: string
   description: string
   links?: Link[]
+  country?: string
+  employmentStatus?: string
+  gender?: string
+  pronouns?: string
+  relationshipStatus?: string
+  sexualOrientation?: string
+  language?: string
+  profession?: string
+  birthdate?: number
+  realName?: string
+  hobbies?: string
   ethAddress: EthAddress
   version: number
   tutorialStep: number
@@ -203,6 +214,50 @@ export namespace Avatar {
         maxItems: 5,
         items: Link.schema,
         nullable: true
+      },
+      country: {
+        nullable: true,
+        type: 'string'
+      },
+      employmentStatus: {
+        nullable: true,
+        type: 'string'
+      },
+      gender: {
+        nullable: true,
+        type: 'string'
+      },
+      pronouns: {
+        nullable: true,
+        type: 'string'
+      },
+      relationshipStatus: {
+        nullable: true,
+        type: 'string'
+      },
+      sexualOrientation: {
+        nullable: true,
+        type: 'string'
+      },
+      language: {
+        nullable: true,
+        type: 'string'
+      },
+      profession: {
+        nullable: true,
+        type: 'string'
+      },
+      birthdate: {
+        nullable: true,
+        type: 'number'
+      },
+      realName: {
+        nullable: true,
+        type: 'string'
+      },
+      hobbies: {
+        nullable: true,
+        type: 'string'
       },
       ethAddress: EthAddress.schema,
       version: {
