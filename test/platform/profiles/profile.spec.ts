@@ -13,14 +13,14 @@ describe('Profile tests', () => {
   const profile = {
     avatars: [AVATAR],
     country: Country.ARGENTINA,
-    employment_status: EmploymentStatus.CHILLING,
+    employmentStatus: EmploymentStatus.CHILLING,
     gender: Gender.FEMALE,
-    relationship_status: RelationshipStatus.COMPLICATED,
-    sexual_orientation: SexualOrientation.ASEXUAL,
-    language: Language.ENGLISH,
+    relationshipStatus: RelationshipStatus.COMPLICATED,
+    sexualOrientation: SexualOrientation.ASEXUAL,
+    language: Language.EN,
     profession: 'Ninja Software Engineer',
     birthdate: '1990-01-01',
-    real_name: 'Tini',
+    realName: 'Tini',
     hobbies: 'sing, dance, code, play, eat, sleep, repeat'
   }
 
