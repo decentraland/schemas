@@ -1,11 +1,4 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { Country } from './additional-info/country'
-import { EmploymentStatus } from './additional-info/employment'
-import { Gender } from './additional-info/gender'
-import { Language } from './additional-info/language'
-import { Pronouns } from './additional-info/pronouns'
-import { RelationshipStatus } from './additional-info/relationship'
-import { SexualOrientation } from './additional-info/sexual-orientation'
 import { Avatar } from './avatar'
 
 /**
