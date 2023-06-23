@@ -15,7 +15,7 @@ export type Profile = {
   sexualOrientation?: string
   language?: string
   profession?: string
-  birthdate?: string
+  birthdate?: number
   realName?: string
   hobbies?: string
 }
@@ -67,7 +67,7 @@ export namespace Profile {
       },
       birthdate: {
         nullable: true,
-        type: 'string'
+        type: 'number'
       },
       realName: {
         nullable: true,

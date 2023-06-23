@@ -9,7 +9,7 @@ describe('Profile tests', () => {
     country: 'Argetina',
     relationshipStatus: 'situationship',
     profession: 'Ninja Software Engineer',
-    birthdate: '1990-01-01',
+    birthdate: 1687537233,
     realName: 'Tini',
     hobbies: 'sing, dance, code, play, eat, sleep, repeat'
   }

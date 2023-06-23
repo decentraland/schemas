@@ -1685,7 +1685,7 @@ export type Profile = {
     sexualOrientation?: string;
     language?: string;
     profession?: string;
-    birthdate?: string;
+    birthdate?: number;
     realName?: string;
     hobbies?: string;
 };
