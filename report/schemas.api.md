@@ -2299,6 +2299,8 @@ export enum WearableCategory {
     // (undocumented)
     HAIR = "hair",
     // (undocumented)
+    HANDS = "hands",
+    // (undocumented)
     HAT = "hat",
     // (undocumented)
     HEAD = "head",
