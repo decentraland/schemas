@@ -6,6 +6,7 @@ import { Source } from './source'
 import { SpawnPoint } from './spawn-point'
 import { WorldConfiguration } from './world-configuration'
 import { DreamSpaceConfiguration } from './dream-space-configuration'
+import { PortableExperiences } from './portable-experiences'
 
 /** @alpha */
 export type Scene = DisplayableDeployment & {
@@ -32,6 +33,7 @@ export type Scene = DisplayableDeployment & {
   featureToggles?: FeatureToggles
   worldConfiguration?: WorldConfiguration
   dreamSpaceConfiguration?: DreamSpaceConfiguration
+  portableExperiences?: PortableExperiences
   allowedMediaHostnames?: string[]
 }
 
@@ -132,6 +134,10 @@ export namespace Scene {
         items: {
           type: 'string'
         },
+        nullable: true
+      },
+      portableExperiences: {
+        ...PortableExperiences.schema,
         nullable: true
       }
     },
