@@ -13,6 +13,7 @@ export enum ChainId {
   ETHEREUM_RINKEBY = 4,
   ETHEREUM_GOERLI = 5,
   ETHEREUM_KOVAN = 42,
+  ETHEREUM_SEPOLIA = 11155111,
   MATIC_MAINNET = 137,
   MATIC_MUMBAI = 80001
 }
@@ -33,6 +34,8 @@ export function getChainName(chainId: ChainId): ChainName | null {
       return ChainName.ETHEREUM_GOERLI
     case ChainId.ETHEREUM_KOVAN:
       return ChainName.ETHEREUM_KOVAN
+    case ChainId.ETHEREUM_SEPOLIA:
+      return ChainName.ETHEREUM_SEPOLIA
     case ChainId.MATIC_MAINNET:
       return ChainName.MATIC_MAINNET
     case ChainId.MATIC_MUMBAI:
@@ -58,6 +61,8 @@ export function getURNProtocol(chainId: ChainId): string {
       return 'goerli'
     case ChainId.ETHEREUM_KOVAN:
       return 'kovan'
+    case ChainId.ETHEREUM_SEPOLIA: 
+      return 'sepolia'
     case ChainId.MATIC_MAINNET:
       return 'matic'
     case ChainId.MATIC_MUMBAI:
@@ -101,6 +106,11 @@ export function getNetworkMapping(chainId: ChainId): {
         [Network.ETHEREUM]: ChainId.ETHEREUM_KOVAN,
         [Network.MATIC]: ChainId.MATIC_MUMBAI
       }
+    case ChainId.ETHEREUM_SEPOLIA: 
+      return {
+        [Network.ETHEREUM]: ChainId.ETHEREUM_SEPOLIA,
+        [Network.MATIC]: ChainId.MATIC_MUMBAI
+      }
     case ChainId.MATIC_MAINNET:
       return {
         [Network.ETHEREUM]: ChainId.MATIC_MAINNET,
@@ -125,6 +135,7 @@ export function getNetwork(chainId: ChainId): Network {
     case ChainId.ETHEREUM_GOERLI:
     case ChainId.ETHEREUM_KOVAN:
     case ChainId.ETHEREUM_RINKEBY:
+    case ChainId.ETHEREUM_SEPOLIA:
       return Network.ETHEREUM
     case ChainId.MATIC_MAINNET:
     case ChainId.MATIC_MUMBAI:
