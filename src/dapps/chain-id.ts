@@ -61,7 +61,7 @@ export function getURNProtocol(chainId: ChainId): string {
       return 'goerli'
     case ChainId.ETHEREUM_KOVAN:
       return 'kovan'
-    case ChainId.ETHEREUM_SEPOLIA: 
+    case ChainId.ETHEREUM_SEPOLIA:
       return 'sepolia'
     case ChainId.MATIC_MAINNET:
       return 'matic'
@@ -106,7 +106,7 @@ export function getNetworkMapping(chainId: ChainId): {
         [Network.ETHEREUM]: ChainId.ETHEREUM_KOVAN,
         [Network.MATIC]: ChainId.MATIC_MUMBAI
       }
-    case ChainId.ETHEREUM_SEPOLIA: 
+    case ChainId.ETHEREUM_SEPOLIA:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_SEPOLIA,
         [Network.MATIC]: ChainId.MATIC_MUMBAI
