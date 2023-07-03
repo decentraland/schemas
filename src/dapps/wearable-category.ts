@@ -18,7 +18,8 @@ export enum WearableCategory {
   MASK = 'mask',
   TIARA = 'tiara',
   TOP_HEAD = 'top_head',
-  SKIN = 'skin'
+  SKIN = 'skin',
+  HAND = 'hand'
 }
 
 export namespace WearableCategory {
