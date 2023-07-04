@@ -1422,6 +1422,16 @@ export namespace PeriodCreation {
     validate: ValidateFunction<PeriodCreation>;
 }
 
+// @alpha (undocumented)
+export enum PermissionItem {
+    // (undocumented)
+    PI_ALLOW = "allow",
+    // (undocumented)
+    PI_HIDE_UI = "hideUi",
+    // (undocumented)
+    PI_KILL = "kill"
+}
+
 // @public
 export type PointerChangesSyncDeployment = SnapshotSyncDeployment & {
     localTimestamp: number;
@@ -1433,6 +1443,19 @@ export namespace PointerChangesSyncDeployment {
     schema: JSONSchema<PointerChangesSyncDeployment>;
     const // (undocumented)
     validate: ValidateFunction<PointerChangesSyncDeployment>;
+}
+
+// @alpha
+export type PortableExperience = {
+    permission?: PermissionItem;
+};
+
+// @alpha (undocumented)
+export namespace PortableExperience {
+    const // (undocumented)
+    schema: JSONSchema<PortableExperience>;
+    const // (undocumented)
+    validate: ValidateFunction<PortableExperience>;
 }
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
@@ -2028,6 +2051,7 @@ export type Scene = DisplayableDeployment & {
     featureToggles?: FeatureToggles;
     worldConfiguration?: WorldConfiguration;
     dreamSpaceConfiguration?: DreamSpaceConfiguration;
+    portableExperience?: PortableExperience;
     allowedMediaHostnames?: string[];
 };
 
