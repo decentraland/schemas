@@ -266,6 +266,25 @@ export enum BidSortBy {
     RECENTLY_UPDATED = "recently_updated"
 }
 
+// Warning: (ae-missing-release-tag) "BodyPartCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "BodyPartCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum BodyPartCategory {
+    // (undocumented)
+    HANDS = "hands",
+    // (undocumented)
+    HEAD = "head"
+}
+
+// @public (undocumented)
+export namespace BodyPartCategory {
+    const // (undocumented)
+    schema: JSONSchema<BodyPartCategory>;
+    const // (undocumented)
+    validate: ValidateFunction<BodyPartCategory>;
+}
+
 // @alpha (undocumented)
 export enum BodyShape {
     // (undocumented)
@@ -746,6 +765,20 @@ export function getURNProtocol(chainId: ChainId): string;
 
 // @alpha
 export function getWorld(): World;
+
+// Warning: (ae-missing-release-tag) "HideableWearableCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "HideableWearableCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type HideableWearableCategory = WearableCategory | BodyPartCategory;
+
+// @public (undocumented)
+export namespace HideableWearableCategory {
+    const // (undocumented)
+    schema: JSONSchema<BodyPartCategory>;
+    const // (undocumented)
+    validate: ValidateFunction<BodyPartCategory>;
+}
 
 // @alpha (undocumented)
 export type I18N = {
@@ -2263,7 +2296,7 @@ export type ValidWorldRange = {
 export type Wearable = BaseItem & {
     data: {
         replaces: WearableCategory[];
-        hides: WearableCategory[];
+        hides: HideableWearableCategory[];
         tags: string[];
         representations: WearableRepresentation[];
         category: WearableCategory;
@@ -2299,11 +2332,7 @@ export enum WearableCategory {
     // (undocumented)
     HAIR = "hair",
     // (undocumented)
-    HANDS = "hands",
-    // (undocumented)
     HAT = "hat",
-    // (undocumented)
-    HEAD = "head",
     // (undocumented)
     HELMET = "helmet",
     // (undocumented)
@@ -2377,7 +2406,7 @@ export type WearableRepresentation = {
     bodyShapes: BodyShape[];
     mainFile: string;
     contents: string[];
-    overrideHides: WearableCategory[];
+    overrideHides: HideableWearableCategory[];
     overrideReplaces: WearableCategory[];
 };
 
