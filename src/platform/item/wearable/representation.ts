@@ -1,13 +1,14 @@
-import { WearableCategory } from '../../../dapps/wearable-category'
+import { WearableCategory } from './wearable-category'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../validation'
 import { BodyShape } from '../body-shape'
+import { HideableWearableCategory } from './hideable-category'
 
 /** @alpha */
 export type WearableRepresentation = {
   bodyShapes: BodyShape[]
   mainFile: string
   contents: string[]
-  overrideHides: WearableCategory[]
+  overrideHides: HideableWearableCategory[]
   overrideReplaces: WearableCategory[]
 }
 

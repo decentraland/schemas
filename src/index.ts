@@ -37,7 +37,7 @@ export {
 } from './dapps/rentals-listings'
 export { AnalyticsDayData, AnalyticsDayDataFilters, AnalyticsDayDataSortBy } from './dapps/analyticsDayData'
 export { Store } from './dapps/store'
-export { WearableCategory } from './dapps/wearable-category'
+export { WearableCategory } from './platform/item/wearable/wearable-category'
 export { WearableGender, GenderFilterOption } from './dapps/wearable-gender'
 export { World, ValidWorldRange, getWorld, isInsideWorldLimits } from './dapps/world'
 export * from './dapps/preview'
