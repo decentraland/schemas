@@ -678,6 +678,8 @@ export enum EntityType {
     // (undocumented)
     SCENE = "scene",
     // (undocumented)
+    SKYBOX = "skybox",
+    // (undocumented)
     STORE = "store",
     // (undocumented)
     WEARABLE = "wearable"
@@ -2093,6 +2095,23 @@ export { sdk }
 export const sendMessage: <T extends PreviewMessageType>(window: {
     postMessage(event: any, targetOrigin: string): any;
 }, type: T, payload: PreviewMessagePayload<T>, targetOrigin?: string) => void;
+
+// @alpha (undocumented)
+export type Skybox = {
+    id: string;
+    name: string;
+    description: string;
+    thumbnail: string;
+    unityPackage: string;
+};
+
+// @alpha
+export namespace Skybox {
+    const // (undocumented)
+    schema: JSONSchema<Skybox>;
+    const // (undocumented)
+    validate: ValidateFunction<Skybox>;
+}
 
 // @alpha
 export type Snapshots = {
