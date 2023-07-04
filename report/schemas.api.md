@@ -518,25 +518,6 @@ export type DisplayableDeployment = {
     menuBarIcon?: string;
 };
 
-// @alpha
-export type DreamSpaceConfiguration = {
-    name: string;
-    miniMapConfig?: MiniMapConfiguration;
-    skyboxConfig?: SkyboxConfiguration;
-    fixedAdapter?: string;
-    placesConfig?: {
-        optOut?: boolean;
-    };
-};
-
-// @alpha (undocumented)
-export namespace DreamSpaceConfiguration {
-    const // (undocumented)
-    schema: JSONSchema<DreamSpaceConfiguration>;
-    const // (undocumented)
-    validate: ValidateFunction<DreamSpaceConfiguration>;
-}
-
 // Warning: (ae-forgotten-export) The symbol "EmoteADR74" needs to be exported by the entry point index.d.ts
 //
 // @alpha (undocumented)
@@ -1063,13 +1044,6 @@ export namespace Metrics {
     const // (undocumented)
     validate: ValidateFunction<Metrics>;
 }
-
-// @alpha (undocumented)
-export type MiniMapConfiguration = {
-    visible?: boolean;
-    dataImage?: string;
-    estateImage?: string;
-};
 
 // Warning: (ae-missing-release-tag) "Mint" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Mint" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -2051,7 +2025,6 @@ export type Scene = DisplayableDeployment & {
     requiredPermissions?: string[];
     featureToggles?: FeatureToggles;
     worldConfiguration?: WorldConfiguration;
-    dreamSpaceConfiguration?: DreamSpaceConfiguration;
     portableExperience?: PortableExperience;
     allowedMediaHostnames?: string[];
 };
@@ -2120,12 +2093,6 @@ export { sdk }
 export const sendMessage: <T extends PreviewMessageType>(window: {
     postMessage(event: any, targetOrigin: string): any;
 }, type: T, payload: PreviewMessagePayload<T>, targetOrigin?: string) => void;
-
-// @alpha (undocumented)
-export type SkyboxConfiguration = {
-    fixedTime?: number;
-    textures?: string[];
-};
 
 // @alpha
 export type Snapshots = {
@@ -2452,20 +2419,27 @@ export namespace World {
     validate: ValidateFunction<World>;
 }
 
-// @alpha @deprecated (undocumented)
+// @alpha (undocumented)
 export type WorldConfiguration = {
     name?: string;
     skybox?: number;
     minimapVisible?: boolean;
-    miniMapConfig?: MiniMapConfiguration;
-    skyboxConfig?: SkyboxConfiguration;
+    miniMapConfig?: {
+        visible?: boolean;
+        dataImage?: string;
+        estateImage?: string;
+    };
+    skyboxConfig?: {
+        fixedTime?: number;
+        textures?: string[];
+    };
     fixedAdapter?: string;
     placesConfig?: {
         optOut?: boolean;
     };
 };
 
-// @alpha @deprecated (undocumented)
+// @alpha (undocumented)
 export namespace WorldConfiguration {
     const // (undocumented)
     schema: JSONSchema<WorldConfiguration>;
