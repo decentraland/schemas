@@ -10,8 +10,8 @@ describe('Wearable representation tests', () => {
     bodyShapes: [BodyShape.FEMALE],
     mainFile: 'file1',
     contents: ['file1', 'file2'],
-    overrideHides: [],
-    overrideReplaces: []
+    overrideHides: [WearableCategory.HAIR, BodyPartCategory.HANDS],
+    overrideReplaces: [BodyPartCategory.HANDS, WearableCategory.EYEWEAR]
   }
 
   const baseWearable = {
@@ -19,7 +19,7 @@ describe('Wearable representation tests', () => {
     name: 'name',
     description: 'some description',
     data: {
-      replaces: [],
+      replaces: [WearableCategory.EYES, BodyPartCategory.HEAD],
       hides: [WearableCategory.EYEBROWS, BodyPartCategory.HANDS],
       tags: ['tag1'],
       representations: [representation],

@@ -9,7 +9,7 @@ import { HideableWearableCategory } from './hideable-category'
 /** @alpha */
 export type Wearable = BaseItem & {
   data: {
-    replaces: WearableCategory[]
+    replaces: HideableWearableCategory[]
     hides: HideableWearableCategory[]
     tags: string[]
     representations: WearableRepresentation[]
@@ -30,7 +30,7 @@ export namespace Wearable {
         properties: {
           replaces: {
             type: 'array',
-            items: WearableCategory.schema
+            items: HideableWearableCategory.schema
           },
           hides: {
             type: 'array',

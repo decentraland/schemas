@@ -9,7 +9,7 @@ export type WearableRepresentation = {
   mainFile: string
   contents: string[]
   overrideHides: HideableWearableCategory[]
-  overrideReplaces: WearableCategory[]
+  overrideReplaces: HideableWearableCategory[]
 }
 
 /** @alpha */
@@ -40,11 +40,11 @@ export namespace WearableRepresentation {
       },
       overrideHides: {
         type: 'array',
-        items: WearableCategory.schema
+        items: HideableWearableCategory.schema
       },
       overrideReplaces: {
         type: 'array',
-        items: WearableCategory.schema
+        items: HideableWearableCategory.schema
       }
     },
     required: ['bodyShapes', 'mainFile', 'contents', 'overrideHides', 'overrideReplaces']
