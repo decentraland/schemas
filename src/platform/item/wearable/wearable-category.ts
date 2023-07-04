@@ -1,11 +1,10 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../validation'
 
 export enum WearableCategory {
   EYEBROWS = 'eyebrows',
   EYES = 'eyes',
   FACIAL_HAIR = 'facial_hair',
   HAIR = 'hair',
-  HEAD = 'head',
   BODY_SHAPE = 'body_shape',
   MOUTH = 'mouth',
   UPPER_BODY = 'upper_body',
@@ -18,8 +17,7 @@ export enum WearableCategory {
   MASK = 'mask',
   TIARA = 'tiara',
   TOP_HEAD = 'top_head',
-  SKIN = 'skin',
-  HANDS = 'hands'
+  SKIN = 'skin'
 }
 
 export namespace WearableCategory {
