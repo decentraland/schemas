@@ -520,7 +520,7 @@ export type DisplayableDeployment = {
 
 // @alpha
 export type DreamSpaceConfiguration = {
-    name: string;
+    name?: string;
     miniMapConfig?: MiniMapConfiguration;
     skyboxConfig?: SkyboxConfiguration;
     fixedAdapter?: string;

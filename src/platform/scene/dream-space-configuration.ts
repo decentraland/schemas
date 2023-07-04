@@ -19,7 +19,7 @@ export type SkyboxConfiguration = {
  * @alpha
  */
 export type DreamSpaceConfiguration = {
-  name: string
+  name?: string
   miniMapConfig?: MiniMapConfiguration
   skyboxConfig?: SkyboxConfiguration
   fixedAdapter?: string
@@ -85,7 +85,7 @@ export namespace DreamSpaceConfiguration {
     properties: {
       name: {
         type: 'string',
-        nullable: false
+        nullable: true
       },
       miniMapConfig: {
         ...miniMapConfigurationSchema,
@@ -110,7 +110,7 @@ export namespace DreamSpaceConfiguration {
         }
       }
     },
-    required: ['name']
+    required: []
   }
 
   export const validate: ValidateFunction<DreamSpaceConfiguration> = generateLazyValidator(schema)
