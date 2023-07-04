@@ -2029,6 +2029,7 @@ export namespace SaleType {
 
 // @alpha (undocumented)
 export type Scene = DisplayableDeployment & {
+    isPortableExperience?: boolean;
     main: string;
     scene: SceneParcels;
     display?: {

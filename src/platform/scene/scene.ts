@@ -10,6 +10,7 @@ import { PortableExperience } from './portable-experience'
 
 /** @alpha */
 export type Scene = DisplayableDeployment & {
+  isPortableExperience?: boolean
   main: string
   scene: SceneParcels
   display?: {
@@ -42,6 +43,11 @@ export namespace Scene {
   export const schema: JSONSchema<Scene> = {
     type: 'object',
     properties: {
+      isPortableExperience: {
+        description: 'Define the current scene as a Portable Experience',
+        type: 'boolean',
+        nullable: true
+      },
       main: {
         description: "File that contains the entry point of the scene's code",
         type: 'string',
