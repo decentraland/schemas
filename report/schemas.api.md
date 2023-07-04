@@ -2295,7 +2295,7 @@ export type ValidWorldRange = {
 // @alpha (undocumented)
 export type Wearable = BaseItem & {
     data: {
-        replaces: WearableCategory[];
+        replaces: HideableWearableCategory[];
         hides: HideableWearableCategory[];
         tags: string[];
         representations: WearableRepresentation[];
@@ -2407,7 +2407,7 @@ export type WearableRepresentation = {
     mainFile: string;
     contents: string[];
     overrideHides: HideableWearableCategory[];
-    overrideReplaces: WearableCategory[];
+    overrideReplaces: HideableWearableCategory[];
 };
 
 // @alpha (undocumented)

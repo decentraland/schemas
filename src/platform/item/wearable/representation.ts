@@ -1,4 +1,3 @@
-import { WearableCategory } from './wearable-category'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../validation'
 import { BodyShape } from '../body-shape'
 import { HideableWearableCategory } from './hideable-category'
