@@ -12,22 +12,23 @@ export enum PermissionItem {
  *
  * @alpha
  */
-export type PortableExperiences = {
+export type PortableExperience = {
   permission?: PermissionItem
 }
 
 /** @alpha */
-export namespace PortableExperiences {
-  export const schema: JSONSchema<PortableExperiences> = {
+export namespace PortableExperience {
+  export const schema: JSONSchema<PortableExperience> = {
     type: 'object',
     properties: {
       permission: {
         type: 'string',
         enum: Object.values(PermissionItem),
-        nullable: true
+        nullable: true,
+        errorMessage: `permission should be one of: ${Object.values(PermissionItem).join(', ')}`
       }
     }
   }
 
-  export const validate: ValidateFunction<PortableExperiences> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<PortableExperience> = generateLazyValidator(schema)
 }

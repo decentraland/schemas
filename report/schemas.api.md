@@ -1442,16 +1442,16 @@ export namespace PointerChangesSyncDeployment {
 }
 
 // @alpha
-export type PortableExperiences = {
+export type PortableExperience = {
     permission?: PermissionItem;
 };
 
 // @alpha (undocumented)
-export namespace PortableExperiences {
+export namespace PortableExperience {
     const // (undocumented)
-    schema: JSONSchema<PortableExperiences>;
+    schema: JSONSchema<PortableExperience>;
     const // (undocumented)
-    validate: ValidateFunction<PortableExperiences>;
+    validate: ValidateFunction<PortableExperience>;
 }
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
@@ -2047,7 +2047,7 @@ export type Scene = DisplayableDeployment & {
     featureToggles?: FeatureToggles;
     worldConfiguration?: WorldConfiguration;
     dreamSpaceConfiguration?: DreamSpaceConfiguration;
-    portableExperiences?: PortableExperiences;
+    portableExperience?: PortableExperience;
     allowedMediaHostnames?: string[];
 };
 
