@@ -327,6 +327,8 @@ export enum ChainId {
     // (undocumented)
     ETHEREUM_ROPSTEN = 3,
     // (undocumented)
+    ETHEREUM_SEPOLIA = 11155111,
+    // (undocumented)
     MATIC_MAINNET = 137,
     // (undocumented)
     MATIC_MUMBAI = 80001
@@ -352,6 +354,8 @@ export enum ChainName {
     ETHEREUM_RINKEBY = "Rinkeby",
     // (undocumented)
     ETHEREUM_ROPSTEN = "Ropsten",
+    // (undocumented)
+    ETHEREUM_SEPOLIA = "Sepolia",
     // (undocumented)
     MATIC_MAINNET = "Polygon",
     // (undocumented)
