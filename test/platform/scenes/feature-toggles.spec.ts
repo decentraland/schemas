@@ -1,14 +1,19 @@
 import expect from 'expect'
 import { FeatureToggles } from '../../../src'
-import { testTypeSignature } from '../../test-utils'
 
 describe('Feature toggles tests', () => {
   const toggles: FeatureToggles = {
-    'voice-chat': 'disabled',
-    'other-feature': 'enabled'
+    voiceChat: 'disabled',
+    portableExperience: 'hideUi'
   }
 
-  testTypeSignature(FeatureToggles, toggles)
+  it('type has a "schema" object', () => {
+    expect(typeof FeatureToggles.schema).toEqual('object')
+  })
+
+  it('type has a "validate" function', () => {
+    expect(typeof FeatureToggles.validate).toEqual('function')
+  })
 
   it('static tests must pass', () => {
     expect(FeatureToggles.validate(toggles)).toEqual(true)
@@ -17,18 +22,38 @@ describe('Feature toggles tests', () => {
   })
 
   it('feature with number value fails', () => {
-    expect(FeatureToggles.validate({ 'voice-chat': 1 })).toEqual(false)
+    expect(FeatureToggles.validate({ voiceChat: 1 })).toEqual(false)
   })
 
   it('feature with boolean value fails', () => {
-    expect(FeatureToggles.validate({ 'voice-chat': true })).toEqual(false)
+    expect(FeatureToggles.validate({ voiceChat: true })).toEqual(false)
   })
 
   it('feature with object value fails', () => {
-    expect(FeatureToggles.validate({ 'voice-chat': {} })).toEqual(false)
+    expect(FeatureToggles.validate({ voiceChat: {} })).toEqual(false)
   })
 
   it('feature with other string value fails', () => {
-    expect(FeatureToggles.validate({ 'voice-chat': 'not-valid' })).toEqual(false)
+    expect(FeatureToggles.validate({ voiceChat: 'not-valid' })).toEqual(false)
+  })
+
+  it('default error message', () => {
+    FeatureToggles.validate({ voiceChat: 'not-valid' })
+    expect(FeatureToggles.validate.errors).toMatchObject([
+      {
+        instancePath: '',
+        message: 'valid options are enabled, disabled'
+      }
+    ])
+  })
+
+  it('portableExperience error message', () => {
+    expect(FeatureToggles.validate({ portableExperience: 'not-valid' })).toEqual(false)
+    expect(FeatureToggles.validate.errors).toMatchObject([
+      {
+        instancePath: '/portableExperience',
+        message: 'valid options are enabled, disabled, hideUi'
+      }
+    ])
   })
 })
