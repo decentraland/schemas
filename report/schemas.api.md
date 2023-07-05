@@ -697,7 +697,7 @@ export namespace EthAddress {
 // @alpha (undocumented)
 export type FeatureToggles = {
     voiceChat: EnabledDisabled;
-    portableExperience: EnabledDisabled | PortableExperienceToggles;
+    portableExperiences: EnabledDisabled | PortableExperiencesToggles;
 };
 
 // @alpha (undocumented)
@@ -2471,7 +2471,7 @@ export namespace WorldConfiguration {
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/third-party-props.ts:6:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
 // src/platform/scene/feature-toggles.ts:11:3 - (ae-forgotten-export) The symbol "EnabledDisabled" needs to be exported by the entry point index.d.ts
-// src/platform/scene/feature-toggles.ts:12:3 - (ae-forgotten-export) The symbol "PortableExperienceToggles" needs to be exported by the entry point index.d.ts
+// src/platform/scene/feature-toggles.ts:12:3 - (ae-forgotten-export) The symbol "PortableExperiencesToggles" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "MultiPosition" needs to be exported by the entry point index.d.ts
 

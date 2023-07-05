@@ -3,13 +3,13 @@ import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../valid
 export type EnabledDisabled = 'enabled' | 'disabled'
 export const toggles: EnabledDisabled[] = ['enabled', 'disabled']
 
-export type PortableExperienceToggles = EnabledDisabled | 'hideUi'
-export const portableExperienceToggles: PortableExperienceToggles[] = [...toggles, 'hideUi']
+export type PortableExperiencesToggles = EnabledDisabled | 'hideUi'
+export const portableExperiencesToggles: PortableExperiencesToggles[] = [...toggles, 'hideUi']
 
 /** @alpha */
 export type FeatureToggles = {
   voiceChat: EnabledDisabled
-  portableExperience: EnabledDisabled | PortableExperienceToggles
+  portableExperiences: EnabledDisabled | PortableExperiencesToggles
 }
 
 /** @alpha */
@@ -22,11 +22,11 @@ export namespace FeatureToggles {
         enum: toggles,
         nullable: true
       },
-      portableExperience: {
+      portableExperiences: {
         type: 'string',
-        enum: portableExperienceToggles,
+        enum: portableExperiencesToggles,
         nullable: true,
-        errorMessage: `valid options are ${portableExperienceToggles.join(', ')}`
+        errorMessage: `valid options are ${portableExperiencesToggles.join(', ')}`
       }
     },
     errorMessage: `valid options are ${toggles.join(', ')}`,

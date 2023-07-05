@@ -4,7 +4,7 @@ import { FeatureToggles } from '../../../src'
 describe('Feature toggles tests', () => {
   const toggles: FeatureToggles = {
     voiceChat: 'disabled',
-    portableExperience: 'hideUi'
+    portableExperiences: 'hideUi'
   }
 
   it('type has a "schema" object', () => {
@@ -47,11 +47,11 @@ describe('Feature toggles tests', () => {
     ])
   })
 
-  it('portableExperience error message', () => {
-    expect(FeatureToggles.validate({ portableExperience: 'not-valid' })).toEqual(false)
+  it('portableExperiences error message', () => {
+    expect(FeatureToggles.validate({ portableExperiences: 'not-valid' })).toEqual(false)
     expect(FeatureToggles.validate.errors).toMatchObject([
       {
-        instancePath: '/portableExperience',
+        instancePath: '/portableExperiences',
         message: 'valid options are enabled, disabled, hideUi'
       }
     ])
