@@ -1,2 +1,5 @@
 export { WearableRepresentation } from './representation'
 export { Wearable } from './wearable'
+export { WearableCategory } from './wearable-category'
+export { BodyPartCategory } from './body-part-category'
+export { HideableWearableCategory } from './hideable-category'

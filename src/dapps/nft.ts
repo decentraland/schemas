@@ -4,7 +4,7 @@ import { BodyShape, EmoteCategory, EmotePlayMode } from '../platform'
 import { Network } from './network'
 import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'
-import { WearableCategory } from './wearable-category'
+import { WearableCategory } from '../platform/item/wearable/wearable-category'
 import { GenderFilterOption, WearableGender } from './wearable-gender'
 import { RentalsListingsFilterBy } from './rentals-listings'
 
