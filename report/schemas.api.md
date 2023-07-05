@@ -714,7 +714,10 @@ export namespace EthAddress {
 }
 
 // @alpha (undocumented)
-export type FeatureToggles = Record<string, 'enabled' | 'disabled'>;
+export type FeatureToggles = {
+    voiceChat: EnabledDisabled;
+    portableExperiences: EnabledDisabled | PortableExperiencesToggles;
+};
 
 // @alpha (undocumented)
 export namespace FeatureToggles {
@@ -1429,16 +1432,6 @@ export namespace PeriodCreation {
     validate: ValidateFunction<PeriodCreation>;
 }
 
-// @alpha (undocumented)
-export enum PermissionItem {
-    // (undocumented)
-    PI_ALLOW = "allow",
-    // (undocumented)
-    PI_HIDE_UI = "hideUi",
-    // (undocumented)
-    PI_KILL = "kill"
-}
-
 // @public
 export type PointerChangesSyncDeployment = SnapshotSyncDeployment & {
     localTimestamp: number;
@@ -1450,19 +1443,6 @@ export namespace PointerChangesSyncDeployment {
     schema: JSONSchema<PointerChangesSyncDeployment>;
     const // (undocumented)
     validate: ValidateFunction<PointerChangesSyncDeployment>;
-}
-
-// @alpha
-export type PortableExperience = {
-    permission?: PermissionItem;
-};
-
-// @alpha (undocumented)
-export namespace PortableExperience {
-    const // (undocumented)
-    schema: JSONSchema<PortableExperience>;
-    const // (undocumented)
-    validate: ValidateFunction<PortableExperience>;
 }
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
@@ -2058,7 +2038,6 @@ export type Scene = DisplayableDeployment & {
     requiredPermissions?: string[];
     featureToggles?: FeatureToggles;
     worldConfiguration?: WorldConfiguration;
-    portableExperience?: PortableExperience;
     allowedMediaHostnames?: string[];
 };
 
@@ -2522,6 +2501,8 @@ export namespace WorldConfiguration {
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/third-party-props.ts:6:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
+// src/platform/scene/feature-toggles.ts:11:3 - (ae-forgotten-export) The symbol "EnabledDisabled" needs to be exported by the entry point index.d.ts
+// src/platform/scene/feature-toggles.ts:12:3 - (ae-forgotten-export) The symbol "PortableExperiencesToggles" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "MultiPosition" needs to be exported by the entry point index.d.ts
 
