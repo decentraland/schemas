@@ -29,6 +29,7 @@ export type Item = {
   data: NFT['data']
   network: Network
   chainId: ChainId
+  urn: string
   /** The timestamp in seconds since epoch when the item was listed for sale for the first time */
   firstListedAt: number | null
   picks?: {
@@ -131,6 +132,9 @@ export namespace Item {
       data: NFT.schema.properties!.data,
       network: Network.schema,
       chainId: ChainId.schema,
+      urn: {
+        type: 'string'
+      },
       createdAt: {
         type: 'integer'
       },

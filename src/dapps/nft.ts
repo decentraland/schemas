@@ -60,6 +60,7 @@ export type NFT = {
   createdAt: number
   updatedAt: number
   soldAt: number
+  urn?: string
 }
 
 export type NFTFilters = {
@@ -282,6 +283,10 @@ export namespace NFT {
       },
       soldAt: {
         type: 'integer'
+      },
+      urn: {
+        type: 'string',
+        nullable: true
       }
     },
     required: [
