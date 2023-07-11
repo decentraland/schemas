@@ -1,15 +1,16 @@
 import { generateLazyValidator, JSONSchema } from '../../../validation'
-import { WearableCategory } from '../../../dapps/wearable-category'
+import { WearableCategory } from './wearable-category'
 import { WearableRepresentation } from './representation'
 import { BaseItem, baseItemProperties, isBaseAvatar, requiredBaseItemProps } from '../base-item'
 import { StandardProps, standardProperties } from '../standard-props'
 import { isThirdParty, ThirdPartyProps, thirdPartyProps } from '../third-party-props'
+import { HideableWearableCategory } from './hideable-category'
 
 /** @alpha */
 export type Wearable = BaseItem & {
   data: {
-    replaces: WearableCategory[]
-    hides: WearableCategory[]
+    replaces: HideableWearableCategory[]
+    hides: HideableWearableCategory[]
     tags: string[]
     representations: WearableRepresentation[]
     category: WearableCategory
@@ -29,11 +30,11 @@ export namespace Wearable {
         properties: {
           replaces: {
             type: 'array',
-            items: WearableCategory.schema
+            items: HideableWearableCategory.schema
           },
           hides: {
             type: 'array',
-            items: WearableCategory.schema
+            items: HideableWearableCategory.schema
           },
           tags: {
             type: 'array',

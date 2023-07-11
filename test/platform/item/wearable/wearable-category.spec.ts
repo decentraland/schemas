@@ -1,6 +1,6 @@
 import expect from 'expect'
-import { WearableCategory } from '../../src'
-import { testTypeSignature } from '../test-utils'
+import { BodyPartCategory, WearableCategory } from '../../../../src'
+import { testTypeSignature } from '../../../test-utils'
 
 describe('WearableCategory tests', () => {
   const wearableCategory: WearableCategory = WearableCategory.HELMET
@@ -11,5 +11,9 @@ describe('WearableCategory tests', () => {
     expect(WearableCategory.validate(wearableCategory)).toEqual(true)
     expect(WearableCategory.validate(null)).toEqual(false)
     expect(WearableCategory.validate({})).toEqual(false)
+  })
+
+  it('hands is not a wearable category', () => {
+    expect(WearableCategory.validate(BodyPartCategory.HANDS)).toEqual(false)
   })
 })

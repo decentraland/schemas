@@ -34,7 +34,8 @@ describe('Item tests', () => {
       updatedAt: 1626088534000,
       reviewedAt: 1626088534000,
       soldAt: 1626088534000,
-      firstListedAt: null
+      firstListedAt: null,
+      urn: 'urn:decentraland:matic:collections-v2:0x0699189ac32c8e404d900786317c93c23fe6f209:0'
     }
 
     testTypeSignature(Item, wearable)

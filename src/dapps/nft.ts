@@ -4,7 +4,7 @@ import { BodyShape, EmoteCategory, EmotePlayMode } from '../platform'
 import { Network } from './network'
 import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'
-import { WearableCategory } from './wearable-category'
+import { WearableCategory } from '../platform/item/wearable/wearable-category'
 import { GenderFilterOption, WearableGender } from './wearable-gender'
 import { RentalsListingsFilterBy } from './rentals-listings'
 
@@ -60,6 +60,7 @@ export type NFT = {
   createdAt: number
   updatedAt: number
   soldAt: number
+  urn?: string
 }
 
 export type NFTFilters = {
@@ -282,6 +283,10 @@ export namespace NFT {
       },
       soldAt: {
         type: 'integer'
+      },
+      urn: {
+        type: 'string',
+        nullable: true
       }
     },
     required: [

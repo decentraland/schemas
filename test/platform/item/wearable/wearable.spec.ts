@@ -1,6 +1,6 @@
 import expect from 'expect'
 import { Rarity, WearableCategory } from '../../../../src'
-import { BodyShape, Wearable, WearableRepresentation, Locale } from '../../../../src/platform'
+import { BodyShape, Wearable, WearableRepresentation, Locale, BodyPartCategory } from '../../../../src/platform'
 import { isStandard } from '../../../../src/platform/item/standard-props'
 import { isThirdParty } from '../../../../src/platform/item/third-party-props'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
@@ -10,8 +10,8 @@ describe('Wearable representation tests', () => {
     bodyShapes: [BodyShape.FEMALE],
     mainFile: 'file1',
     contents: ['file1', 'file2'],
-    overrideHides: [],
-    overrideReplaces: []
+    overrideHides: [WearableCategory.HAIR, BodyPartCategory.HANDS],
+    overrideReplaces: [BodyPartCategory.HANDS, WearableCategory.EYEWEAR]
   }
 
   const baseWearable = {
@@ -19,8 +19,8 @@ describe('Wearable representation tests', () => {
     name: 'name',
     description: 'some description',
     data: {
-      replaces: [],
-      hides: [],
+      replaces: [WearableCategory.EYES, BodyPartCategory.HEAD],
+      hides: [WearableCategory.EYEBROWS, BodyPartCategory.HANDS],
       tags: ['tag1'],
       representations: [representation],
       category: WearableCategory.UPPER_BODY

@@ -5,7 +5,6 @@ import { SceneParcels } from './scene-parcels'
 import { Source } from './source'
 import { SpawnPoint } from './spawn-point'
 import { WorldConfiguration } from './world-configuration'
-import { PortableExperience } from './portable-experience'
 
 /** @alpha */
 export type Scene = DisplayableDeployment & {
@@ -32,7 +31,6 @@ export type Scene = DisplayableDeployment & {
   requiredPermissions?: string[]
   featureToggles?: FeatureToggles
   worldConfiguration?: WorldConfiguration
-  portableExperience?: PortableExperience
   allowedMediaHostnames?: string[]
 }
 
@@ -134,10 +132,6 @@ export namespace Scene {
         items: {
           type: 'string'
         },
-        nullable: true
-      },
-      portableExperience: {
-        ...PortableExperience.schema,
         nullable: true
       }
     },
