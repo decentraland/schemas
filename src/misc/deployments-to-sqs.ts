@@ -34,9 +34,7 @@ export namespace DeploymentToSqs {
         type: 'array',
         items: { type: 'string' },
         nullable: true
-      }
-    },
-    optionalProperties: {
+      },
       force: {
         type: 'boolean',
         nullable: true
