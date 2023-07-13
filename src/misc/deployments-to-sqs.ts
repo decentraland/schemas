@@ -9,7 +9,7 @@ export type DeploymentToSqs = {
     entityId: string
     authChain: AuthChain
   }
-  contentServerUrls?: string[],
+  contentServerUrls?: string[]
   force?: boolean
 }
 
