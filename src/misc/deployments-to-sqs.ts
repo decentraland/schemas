@@ -10,6 +10,7 @@ export type DeploymentToSqs = {
     authChain: AuthChain
   }
   contentServerUrls?: string[]
+  force?: boolean
 }
 
 /**
@@ -32,6 +33,10 @@ export namespace DeploymentToSqs {
       contentServerUrls: {
         type: 'array',
         items: { type: 'string' },
+        nullable: true
+      },
+      force: {
+        type: 'boolean',
         nullable: true
       }
     },
