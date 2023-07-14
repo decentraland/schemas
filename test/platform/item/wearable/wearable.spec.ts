@@ -158,7 +158,7 @@ describe('Wearable representation tests', () => {
     ])
   })
 
-  it('wearable with removeImplicitHiding is valid', () => {
+  it('wearable with removesDefaultHiding is valid', () => {
     expect(
       Wearable.validate({
         ...wearable,
