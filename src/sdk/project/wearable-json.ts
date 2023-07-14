@@ -3,6 +3,7 @@ import { WearableCategory } from '../../platform/item/wearable/wearable-category
 import { WearableRepresentation } from '../../platform/item/wearable/representation'
 import { Wearable } from '../../platform/item/wearable/wearable'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
+import { HideableWearableCategory } from '../../platform'
 
 /**
  * @alpha
@@ -51,7 +52,12 @@ export namespace WearableJson {
             items: WearableRepresentation.schema,
             minItems: 1
           },
-          category: WearableCategory.schema
+          category: WearableCategory.schema,
+          removesDefaultHiding: {
+            type: 'array',
+            nullable: true,
+            items: HideableWearableCategory.schema
+          }
         },
         required: ['replaces', 'hides', 'tags', 'representations', 'category']
       }
