@@ -1,6 +1,6 @@
 import expect from 'expect'
 import { Rarity, WearableCategory } from '../../../../src'
-import { BodyShape, Wearable, WearableRepresentation, Locale, BodyPartCategory, HideableWearableCategory } from '../../../../src/platform'
+import { BodyShape, Wearable, WearableRepresentation, Locale, BodyPartCategory } from '../../../../src/platform'
 import { isStandard } from '../../../../src/platform/item/standard-props'
 import { isThirdParty } from '../../../../src/platform/item/third-party-props'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
