@@ -1,6 +1,6 @@
 import expect from 'expect'
 import { Rarity, WearableCategory } from '../../../../src'
-import { BodyShape, Wearable, WearableRepresentation, Locale, BodyPartCategory } from '../../../../src/platform'
+import { BodyShape, Wearable, WearableRepresentation, Locale, BodyPartCategory, HideableWearableCategory } from '../../../../src/platform'
 import { isStandard } from '../../../../src/platform/item/standard-props'
 import { isThirdParty } from '../../../../src/platform/item/third-party-props'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
@@ -156,5 +156,17 @@ describe('Wearable representation tests', () => {
     expectValidationFailureWithErrors(Wearable.validate, { ...baseWearable, collectionAddress: '0x...' }, [
       'either standard XOR thirdparty properties conditions must be met'
     ])
+  })
+
+  it('wearable with removeImplicitHiding is valid', () => {
+    expect(
+      Wearable.validate({
+        ...wearable,
+        data: {
+          ...wearable.data,
+          removesDefaultHiding: [BodyPartCategory.HANDS, WearableCategory.HANDS_WEAR]
+        }
+      })
+    ).toEqual(true)
   })
 })

@@ -14,6 +14,7 @@ export type Wearable = BaseItem & {
     tags: string[]
     representations: WearableRepresentation[]
     category: WearableCategory
+    removesDefaultHiding?: HideableWearableCategory[]
   }
 } & (StandardProps | ThirdPartyProps)
 
@@ -48,7 +49,12 @@ export namespace Wearable {
             items: WearableRepresentation.schema,
             minItems: 1
           },
-          category: WearableCategory.schema
+          category: WearableCategory.schema,
+          removesDefaultHiding: {
+            type: 'array',
+            nullable: true,
+            items: HideableWearableCategory.schema
+          }
         },
         required: ['replaces', 'hides', 'tags', 'representations', 'category']
       }
