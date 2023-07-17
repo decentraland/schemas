@@ -157,4 +157,16 @@ describe('Wearable representation tests', () => {
       'either standard XOR thirdparty properties conditions must be met'
     ])
   })
+
+  it('wearable with removesDefaultHiding is valid', () => {
+    expect(
+      Wearable.validate({
+        ...wearable,
+        data: {
+          ...wearable.data,
+          removesDefaultHiding: [BodyPartCategory.HANDS, WearableCategory.HANDS_WEAR]
+        }
+      })
+    ).toEqual(true)
+  })
 })

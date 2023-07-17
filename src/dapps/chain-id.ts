@@ -52,7 +52,7 @@ export function getChainName(chainId: ChainId): ChainName | null {
 export function getURNProtocol(chainId: ChainId): string {
   switch (chainId) {
     case ChainId.ETHEREUM_MAINNET:
-      return 'mainnet'
+      return 'ethereum'
     case ChainId.ETHEREUM_ROPSTEN:
       return 'ropsten'
     case ChainId.ETHEREUM_RINKEBY:
