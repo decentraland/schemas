@@ -715,8 +715,8 @@ export namespace EthAddress {
 
 // @alpha (undocumented)
 export type FeatureToggles = {
-    voiceChat: EnabledDisabled;
-    portableExperiences: EnabledDisabled | PortableExperiencesToggles;
+    voiceChat?: EnabledDisabled;
+    portableExperiences?: EnabledDisabled | PortableExperiencesToggles;
 };
 
 // @alpha (undocumented)

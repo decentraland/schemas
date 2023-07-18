@@ -8,8 +8,8 @@ export const portableExperiencesToggles: PortableExperiencesToggles[] = [...togg
 
 /** @alpha */
 export type FeatureToggles = {
-  voiceChat: EnabledDisabled
-  portableExperiences: EnabledDisabled | PortableExperiencesToggles
+  voiceChat?: EnabledDisabled
+  portableExperiences?: EnabledDisabled | PortableExperiencesToggles
 }
 
 /** @alpha */
