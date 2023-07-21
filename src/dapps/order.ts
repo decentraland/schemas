@@ -18,6 +18,7 @@ export type Order = {
   network: Network
   chainId: ChainId
   issuedId: string
+  legacy?: boolean
 }
 
 export type OrderFilters = {
