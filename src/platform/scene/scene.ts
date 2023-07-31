@@ -7,6 +7,17 @@ import { SpawnPoint } from './spawn-point'
 import { WorldConfiguration } from './world-configuration'
 
 /** @alpha */
+export enum RequiredPermission {
+  ALLOW_TO_MOVE_PLAYER_INSIDE_SCENE = 'ALLOW_TO_MOVE_PLAYER_INSIDE_SCENE',
+  ALLOW_TO_TRIGGER_AVATAR_EMOTE = 'ALLOW_TO_TRIGGER_AVATAR_EMOTE',
+  ALLOW_MEDIA_HOSTNAMES = 'ALLOW_MEDIA_HOSTNAMES',
+  USE_WEB3_API = 'USE_WEB3_API',
+  USE_FETCH = 'USE_FETCH',
+  USE_WEBSOCKET = 'USE_WEBSOCKET',
+  OPEN_EXTERNAL_LINK = 'OPEN_EXTERNAL_LINK'
+}
+
+/** @alpha */
 export type Scene = DisplayableDeployment & {
   isPortableExperience?: boolean
   main: string
@@ -28,7 +39,7 @@ export type Scene = DisplayableDeployment & {
   tags?: string[]
   source?: Source
   spawnPoints?: SpawnPoint[]
-  requiredPermissions?: string[]
+  requiredPermissions?: RequiredPermission[]
   featureToggles?: FeatureToggles
   worldConfiguration?: WorldConfiguration
   allowedMediaHostnames?: string[]
@@ -115,8 +126,10 @@ export namespace Scene {
       requiredPermissions: {
         type: 'array',
         items: {
-          type: 'string'
+          type: 'string',
+          enum: Object.values(RequiredPermission)
         },
+        uniqueItems: true,
         nullable: true
       },
       featureToggles: {
@@ -136,7 +149,24 @@ export namespace Scene {
       }
     },
     additionalProperties: true,
-    required: ['main', 'scene']
+    required: ['main', 'scene'],
+    dependencies: {
+      requiredPermissions: {
+        if: {
+          properties: {
+            requiredPermissions: {
+              type: 'array',
+              contains: {
+                const: RequiredPermission.ALLOW_MEDIA_HOSTNAMES
+              }
+            }
+          }
+        },
+        then: {
+          required: ['allowedMediaHostnames']
+        }
+      }
+    }
   }
 
   export const validate: ValidateFunction<Scene> = generateLazyValidator(schema)
