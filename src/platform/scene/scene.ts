@@ -174,6 +174,15 @@ export namespace Scene {
             }
           },
           required: ['allowedMediaHostnames']
+        },
+        else: {
+          properties: {
+            allowedMediaHostnames: {
+              type: ['null', 'array'],
+              nullable: true,
+              maxItems: 0
+            }
+          }
         }
       }
     }

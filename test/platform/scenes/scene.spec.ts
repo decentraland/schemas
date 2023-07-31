@@ -50,8 +50,16 @@ describe('Scene tests', () => {
     const aRequiredPermission = RequiredPermission.ALLOW_TO_MOVE_PLAYER_INSIDE_SCENE
     const anotherRequiredPermission = RequiredPermission.USE_WEB3_API
 
-    const validateRequiredPermissions = (requiredPermissions: (RequiredPermission | string | number)[]) =>
+    const validateRequiredPermissions = (requiredPermissions?: (RequiredPermission | string | number)[]) =>
       Scene.validate(setScene(scene, { requiredPermissions }))
+
+    it('should return true when the required permissions are not defined', () => {
+      expect(validateRequiredPermissions()).toEqual(true)
+    })
+
+    it('should return true when the scene does not require permissions', () => {
+      expect(validateRequiredPermissions([])).toEqual(true)
+    })
 
     it('should return true when there is only one correct required permissions', () => {
       expect(validateRequiredPermissions([aRequiredPermission])).toEqual(true)
@@ -94,6 +102,17 @@ describe('Scene tests', () => {
           setScene(scene, {
             requiredPermissions: [RequiredPermission.ALLOW_MEDIA_HOSTNAMES],
             allowedMediaHostnames: []
+          })
+        )
+      ).toEqual(false)
+    })
+
+    it('should return false if the ALLOW_MEDIA_HOSTNAMES is not one of the required permissions and the allowedMediaHostnames is not empty or null', () => {
+      expect(
+        Scene.validate(
+          setScene(scene, {
+            requiredPermissions: [RequiredPermission.USE_WEB3_API],
+            allowedMediaHostnames: ['example.xyz']
           })
         )
       ).toEqual(false)
