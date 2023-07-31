@@ -163,6 +163,16 @@ export namespace Scene {
           }
         },
         then: {
+          properties: {
+            allowedMediaHostnames: {
+              type: 'array',
+              items: {
+                type: 'string'
+              },
+              nullable: false,
+              minItems: 1
+            }
+          },
           required: ['allowedMediaHostnames']
         }
       }

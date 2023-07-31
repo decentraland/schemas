@@ -5,7 +5,7 @@ import { RequiredPermission } from '../../../src/platform/scene/scene'
 
 const setScene = (scene: Scene, props: any): Scene => ({ ...scene, ...props })
 
-describe.only('Scene tests', () => {
+describe('Scene tests', () => {
   const scene: Scene = {
     main: 'bin/main.js',
     scene: {
@@ -73,8 +73,30 @@ describe.only('Scene tests', () => {
       expect(validateRequiredPermissions([aRequiredPermission, anotherRequiredPermission])).toEqual(true)
     })
 
-    it('should return false if the ALLOW_MEDIA_HOSTNAMES is one of the required permissions required and the allowedMediaHostnames property is empty', () => {
+    it('should return false if the ALLOW_MEDIA_HOSTNAMES is one of the required permissions required and the allowedMediaHostnames property is undefined', () => {
       expect(validateRequiredPermissions([RequiredPermission.ALLOW_MEDIA_HOSTNAMES])).toEqual(false)
+    })
+
+    it('should return false if the ALLOW_MEDIA_HOSTNAMES is one of the required permissions and the allowedMediaHostnames is null', () => {
+      expect(
+        Scene.validate(
+          setScene(scene, {
+            requiredPermissions: [RequiredPermission.ALLOW_MEDIA_HOSTNAMES],
+            allowedMediaHostnames: null
+          })
+        )
+      ).toEqual(false)
+    })
+
+    it('should return false if the ALLOW_MEDIA_HOSTNAMES is one of the required permissions and the allowedMediaHostnames is an empty array', () => {
+      expect(
+        Scene.validate(
+          setScene(scene, {
+            requiredPermissions: [RequiredPermission.ALLOW_MEDIA_HOSTNAMES],
+            allowedMediaHostnames: []
+          })
+        )
+      ).toEqual(false)
     })
 
     it('should return true if the ALLOW_MEDIA_HOSTNAMES is one of the required permissions and the allowedMediaHostnames property is correctly set', () => {
