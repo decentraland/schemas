@@ -1,7 +1,7 @@
 import expect from 'expect'
 import { Scene } from '../../../src'
-import { testTypeSignature } from '../../test-utils'
 import { RequiredPermission } from '../../../src/platform/scene/scene'
+import { testTypeSignature } from '../../test-utils'
 
 const setScene = (scene: Scene, props: any): Scene => ({ ...scene, ...props })
 
