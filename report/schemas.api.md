@@ -1937,6 +1937,24 @@ export enum RentalStatus {
     OPEN = "open"
 }
 
+// @alpha (undocumented)
+export enum RequiredPermission {
+    // (undocumented)
+    ALLOW_MEDIA_HOSTNAMES = "ALLOW_MEDIA_HOSTNAMES",
+    // (undocumented)
+    ALLOW_TO_MOVE_PLAYER_INSIDE_SCENE = "ALLOW_TO_MOVE_PLAYER_INSIDE_SCENE",
+    // (undocumented)
+    ALLOW_TO_TRIGGER_AVATAR_EMOTE = "ALLOW_TO_TRIGGER_AVATAR_EMOTE",
+    // (undocumented)
+    OPEN_EXTERNAL_LINK = "OPEN_EXTERNAL_LINK",
+    // (undocumented)
+    USE_FETCH = "USE_FETCH",
+    // (undocumented)
+    USE_WEB3_API = "USE_WEB3_API",
+    // (undocumented)
+    USE_WEBSOCKET = "USE_WEBSOCKET"
+}
+
 // Warning: (ae-missing-release-tag) "Sale" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Sale" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -2037,7 +2055,7 @@ export type Scene = DisplayableDeployment & {
     tags?: string[];
     source?: Source;
     spawnPoints?: SpawnPoint[];
-    requiredPermissions?: string[];
+    requiredPermissions?: RequiredPermission[];
     featureToggles?: FeatureToggles;
     worldConfiguration?: WorldConfiguration;
     allowedMediaHostnames?: string[];
