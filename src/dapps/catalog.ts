@@ -50,6 +50,7 @@ export type CatalogFilters = Pick<
   | 'network'
   | 'minPrice'
   | 'maxPrice'
+  | 'urns'
 > & {
   onlyMinting?: boolean
   onlyListing?: boolean
