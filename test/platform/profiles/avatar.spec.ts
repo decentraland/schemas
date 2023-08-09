@@ -37,6 +37,10 @@ export const AVATAR: Avatar = {
     {
       title: 'Discord',
       url: 'https://discord.gg/decentraland'
+    },
+    {
+      title: 'Handle',
+      url: 'https://twitter.com/@decentraland'
     }
   ],
   ethAddress: '0x87956abC4078a0Cc3b89b419628b857B8AF826Ed',
