@@ -47,4 +47,8 @@ export type PreviewOptions = {
   showThumbnailBoundaries?: boolean
   peerUrl?: string | null
   nftServerUrl?: string | null
+  panning?: boolean
+  lockAlpha?: boolean
+  lockBeta?: boolean
+  lockRadius?: boolean
 }
