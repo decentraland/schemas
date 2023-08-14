@@ -1501,6 +1501,10 @@ export type PreviewConfig = {
     wheelZoom: number;
     wheelPrecision: number;
     wheelStart: number;
+    panning: boolean;
+    lockAlpha: boolean;
+    lockBeta: boolean;
+    lockRadius: boolean;
 };
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
@@ -1662,6 +1666,10 @@ export type PreviewOptions = {
     showThumbnailBoundaries?: boolean;
     peerUrl?: string | null;
     nftServerUrl?: string | null;
+    panning?: boolean;
+    lockAlpha?: boolean;
+    lockBeta?: boolean;
+    lockRadius?: boolean;
 };
 
 // Warning: (ae-missing-release-tag) "PreviewProjection" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)

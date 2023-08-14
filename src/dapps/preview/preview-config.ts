@@ -38,4 +38,8 @@ export type PreviewConfig = {
   wheelZoom: number
   wheelPrecision: number
   wheelStart: number
+  panning: boolean
+  lockAlpha: boolean
+  lockBeta: boolean
+  lockRadius: boolean
 }
