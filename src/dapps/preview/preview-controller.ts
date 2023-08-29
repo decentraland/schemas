@@ -18,5 +18,8 @@ export interface IEmoteController {
   play(): Promise<void>
   pause(): Promise<void>
   stop(): Promise<void>
+  enableSound(): Promise<void>
+  disableSound(): Promise<void>
+  hasSound: boolean
   events: any
 }
