@@ -787,11 +787,17 @@ export namespace I18N {
 // @public (undocumented)
 export interface IEmoteController {
     // (undocumented)
+    disableSound(): Promise<void>;
+    // (undocumented)
+    enableSound(): Promise<void>;
+    // (undocumented)
     events: any;
     // (undocumented)
     getLength(): Promise<number>;
     // (undocumented)
     goTo(seconds: number): Promise<void>;
+    // (undocumented)
+    hasSound: boolean;
     // (undocumented)
     isPlaying(): Promise<boolean>;
     // (undocumented)
