@@ -797,7 +797,7 @@ export interface IEmoteController {
     // (undocumented)
     goTo(seconds: number): Promise<void>;
     // (undocumented)
-    hasSound: boolean;
+    hasSound(): Promise<void>;
     // (undocumented)
     isPlaying(): Promise<boolean>;
     // (undocumented)
@@ -1587,7 +1587,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
 } : T extends PreviewMessageType.CONTROLLER_REQUEST ? {
     id: string;
     namespace: 'scene' | 'emote';
-    method: 'getScreenshot' | 'getMetrics' | 'changeZoom' | 'changeCameraPosition' | 'panCamera' | 'getLength' | 'isPlaying' | 'play' | 'pause' | 'stop' | 'goTo';
+    method: 'getScreenshot' | 'getMetrics' | 'changeZoom' | 'changeCameraPosition' | 'panCamera' | 'getLength' | 'isPlaying' | 'play' | 'pause' | 'stop' | 'goTo' | 'enableSound' | 'disableSound' | 'hasSound';
     params: any[];
 } : T extends PreviewMessageType.CONTROLLER_RESPONSE ? {
     id: string;
@@ -2527,7 +2527,7 @@ export namespace WorldConfiguration {
 // src/dapps/preview/preview-config.ts:12:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:17:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
 // src/dapps/preview/preview-message.ts:33:7 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:67:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
+// src/dapps/preview/preview-message.ts:70:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
 // src/dapps/rentals-listings.ts:85:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/rentals-listings.ts:126:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/rentals-listings.ts:128:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
