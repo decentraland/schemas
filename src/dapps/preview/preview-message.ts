@@ -47,6 +47,9 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
         | 'pause'
         | 'stop'
         | 'goTo'
+        | 'enableSound'
+        | 'disableSound'
+        | 'hasSound'
       params: any[]
     }
   : T extends PreviewMessageType.CONTROLLER_RESPONSE

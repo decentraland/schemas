@@ -20,6 +20,6 @@ export interface IEmoteController {
   stop(): Promise<void>
   enableSound(): Promise<void>
   disableSound(): Promise<void>
-  hasSound: boolean
+  hasSound(): Promise<void>
   events: any
 }
