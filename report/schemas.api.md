@@ -797,7 +797,7 @@ export interface IEmoteController {
     // (undocumented)
     goTo(seconds: number): Promise<void>;
     // (undocumented)
-    hasSound(): Promise<void>;
+    hasSound(): Promise<boolean>;
     // (undocumented)
     isPlaying(): Promise<boolean>;
     // (undocumented)
