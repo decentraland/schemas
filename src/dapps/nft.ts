@@ -53,6 +53,8 @@ export type NFT = {
       rarity: Rarity
       bodyShapes: BodyShape[]
       loop: boolean
+      hasSound: boolean
+      hasGeometry: boolean
     }
   }
   network: Network
@@ -255,6 +257,12 @@ export namespace NFT {
               },
               rarity: Rarity.schema,
               loop: {
+                type: 'boolean'
+              },
+              hasSound: {
+                type: 'boolean'
+              },
+              hasGeometry: {
                 type: 'boolean'
               }
             },

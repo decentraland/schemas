@@ -196,7 +196,9 @@ describe('NFT tests', () => {
           category: EmoteCategory.DANCE,
           bodyShapes: [BodyShape.MALE, BodyShape.FEMALE],
           rarity: Rarity.MYTHIC,
-          loop: false
+          loop: false,
+          hasSound: false,
+          hasGeometry: false
         }
       },
       issuedId: '16',
