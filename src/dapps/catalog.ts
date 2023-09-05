@@ -51,6 +51,8 @@ export type CatalogFilters = Pick<
   | 'minPrice'
   | 'maxPrice'
   | 'urns'
+  | 'emoteHasGeometry'
+  | 'emoteHasSound'
 > & {
   onlyMinting?: boolean
   onlyListing?: boolean

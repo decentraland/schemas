@@ -76,6 +76,14 @@ export type ItemFilters = {
    */
   maxPrice?: string
   urns?: string[]
+  /**
+   * Returns emotes that have sound
+   */
+  emoteHasSound?: boolean
+  /**
+   * Returns emotes that have additional geomtry
+   */
+  emoteHasGeometry?: boolean
 }
 
 export enum ItemSortBy {

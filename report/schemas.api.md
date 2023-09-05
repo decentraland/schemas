@@ -302,7 +302,7 @@ export namespace BodyShape {
 }
 
 // @public
-export type CatalogFilters = Pick<ItemFilters, 'ids' | 'first' | 'skip' | 'category' | 'creator' | 'isSoldOut' | 'isOnSale' | 'search' | 'isWearableHead' | 'isWearableSmart' | 'isWearableAccessory' | 'isWearableAccessory' | 'wearableCategory' | 'rarities' | 'wearableGenders' | 'emoteCategory' | 'emoteGenders' | 'emotePlayMode' | 'contractAddresses' | 'itemId' | 'network' | 'minPrice' | 'maxPrice' | 'urns'> & {
+export type CatalogFilters = Pick<ItemFilters, 'ids' | 'first' | 'skip' | 'category' | 'creator' | 'isSoldOut' | 'isOnSale' | 'search' | 'isWearableHead' | 'isWearableSmart' | 'isWearableAccessory' | 'isWearableAccessory' | 'wearableCategory' | 'rarities' | 'wearableGenders' | 'emoteCategory' | 'emoteGenders' | 'emotePlayMode' | 'contractAddresses' | 'itemId' | 'network' | 'minPrice' | 'maxPrice' | 'urns' | 'emoteHasGeometry' | 'emoteHasSound'> & {
     onlyMinting?: boolean;
     onlyListing?: boolean;
     sortBy?: CatalogSortBy;
@@ -954,6 +954,8 @@ export type ItemFilters = {
     minPrice?: string;
     maxPrice?: string;
     urns?: string[];
+    emoteHasSound?: boolean;
+    emoteHasGeometry?: boolean;
 };
 
 // Warning: (ae-missing-release-tag) "ItemSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1210,6 +1212,8 @@ export type NFT = {
             rarity: Rarity;
             bodyShapes: BodyShape[];
             loop: boolean;
+            hasSound: boolean;
+            hasGeometry: boolean;
         };
     };
     network: Network;
@@ -2515,9 +2519,9 @@ export namespace WorldConfiguration {
 // src/dapps/mint.ts:37:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/nft.ts:44:7 - (ae-incompatible-release-tags) The symbol "bodyShapes" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/nft.ts:54:7 - (ae-incompatible-release-tags) The symbol "bodyShapes" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
-// src/dapps/nft.ts:58:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/nft.ts:59:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/nft.ts:89:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:60:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/nft.ts:61:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/nft.ts:91:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/order.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:33:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
