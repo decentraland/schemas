@@ -302,7 +302,7 @@ export namespace BodyShape {
 }
 
 // @public
-export type CatalogFilters = Pick<ItemFilters, 'ids' | 'first' | 'skip' | 'category' | 'creator' | 'isSoldOut' | 'isOnSale' | 'search' | 'isWearableHead' | 'isWearableSmart' | 'isWearableAccessory' | 'isWearableAccessory' | 'wearableCategory' | 'rarities' | 'wearableGenders' | 'emoteCategory' | 'emoteGenders' | 'emotePlayMode' | 'contractAddresses' | 'itemId' | 'network' | 'minPrice' | 'maxPrice' | 'urns' | 'hasGeometry' | 'hasSound'> & {
+export type CatalogFilters = Pick<ItemFilters, 'ids' | 'first' | 'skip' | 'category' | 'creator' | 'isSoldOut' | 'isOnSale' | 'search' | 'isWearableHead' | 'isWearableSmart' | 'isWearableAccessory' | 'isWearableAccessory' | 'wearableCategory' | 'rarities' | 'wearableGenders' | 'emoteCategory' | 'emoteGenders' | 'emotePlayMode' | 'contractAddresses' | 'itemId' | 'network' | 'minPrice' | 'maxPrice' | 'urns' | 'emoteHasGeometry' | 'emoteHasSound'> & {
     onlyMinting?: boolean;
     onlyListing?: boolean;
     sortBy?: CatalogSortBy;
@@ -954,8 +954,8 @@ export type ItemFilters = {
     minPrice?: string;
     maxPrice?: string;
     urns?: string[];
-    hasSound?: boolean;
-    hasGeometry?: boolean;
+    emoteHasSound?: boolean;
+    emoteHasGeometry?: boolean;
 };
 
 // Warning: (ae-missing-release-tag) "ItemSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)

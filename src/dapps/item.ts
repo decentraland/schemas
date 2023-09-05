@@ -79,11 +79,11 @@ export type ItemFilters = {
   /**
    * Returns emotes that have sound
    */
-  hasSound?: boolean
+  emoteHasSound?: boolean
   /**
    * Returns emotes that have additional geomtry
    */
-  hasGeometry?: boolean
+  emoteHasGeometry?: boolean
 }
 
 export enum ItemSortBy {
