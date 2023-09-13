@@ -1294,6 +1294,8 @@ export type NFTFilters = {
     maxDistanceToPlaza?: number;
     adjacentToRoad?: boolean;
     rentalDays?: number[];
+    emoteHasSound?: boolean;
+    emoteHasGeometry?: boolean;
 } & Pick<RentalsListingsFilterBy, 'tenant'>;
 
 // Warning: (ae-missing-release-tag) "NFTSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
