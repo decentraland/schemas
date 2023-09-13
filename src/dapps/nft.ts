@@ -105,6 +105,14 @@ export type NFTFilters = {
   adjacentToRoad?: boolean
   /** Filter NFTs by rentals that have periods that include any of the rental days */
   rentalDays?: number[]
+  /**
+   * Returns emotes that have sound
+   */
+  emoteHasSound?: boolean
+  /**
+   * Returns emotes that have additional geomtry
+   */
+  emoteHasGeometry?: boolean
 } & Pick<RentalsListingsFilterBy, 'tenant'>
 
 export enum NFTSortBy {
