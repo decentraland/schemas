@@ -1517,6 +1517,7 @@ export type PreviewConfig = {
     lockAlpha: boolean;
     lockBeta: boolean;
     lockRadius: boolean;
+    forceRender?: Array<string>;
 };
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
