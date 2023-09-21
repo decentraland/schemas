@@ -42,4 +42,5 @@ export type PreviewConfig = {
   lockAlpha: boolean
   lockBeta: boolean
   lockRadius: boolean
+  forceRender?: Array<string>
 }
