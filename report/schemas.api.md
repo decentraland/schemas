@@ -1762,6 +1762,8 @@ export enum ProviderType {
     // (undocumented)
     INJECTED = "injected",
     // (undocumented)
+    MAGIC = "magic",
+    // (undocumented)
     METAMASK_MOBILE = "metamask_mobile",
     // (undocumented)
     NETWORK = "network",
