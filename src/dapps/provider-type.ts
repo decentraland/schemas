@@ -6,6 +6,7 @@ import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validati
  */
 export enum ProviderType {
   INJECTED = 'injected',
+  MAGIC = 'magic',
   FORTMATIC = 'formatic',
   NETWORK = 'network',
   WALLET_CONNECT = 'wallet_connect',
