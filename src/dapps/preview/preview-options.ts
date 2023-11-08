@@ -22,6 +22,7 @@ export type PreviewOptions = {
   base64s?: string[] | null
   blob?: WearableWithBlobs | EmoteWithBlobs | null
   zoom?: number | null
+  zoomScale?: number | null
   emote?: PreviewEmote | null
   camera?: PreviewCamera | null
   projection?: PreviewProjection | null
