@@ -18,13 +18,13 @@ describe('Rarity tests', () => {
   })
 
   it('should return color', () => {
-    expect(Rarity.getColor(mythic)).toEqual('#FF63E1')
+    expect(Rarity.getColor(mythic)).toEqual('#FF4BED')
   })
 
   it('should return gradient', () => {
     const gradient = Rarity.getGradient(mythic)
     expect(gradient.length).toBe(2)
-    expect(gradient[0]).toEqual('#FB7DE3')
-    expect(gradient[1]).toEqual('#FF63E1')
+    expect(gradient[0]).toEqual('#F6C1FF')
+    expect(gradient[1]).toEqual('#FF4BED')
   })
 })
