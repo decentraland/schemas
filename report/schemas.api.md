@@ -1759,6 +1759,8 @@ namespace ProjectType {
 // @alpha
 export enum ProviderType {
     // (undocumented)
+    AUTH_SERVER = "auth_server",
+    // (undocumented)
     FORTMATIC = "formatic",
     // (undocumented)
     INJECTED = "injected",
