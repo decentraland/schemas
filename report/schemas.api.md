@@ -997,8 +997,8 @@ export namespace Link {
 export type LinkerAuthorization = {
     name: string;
     desc: string;
-    startDate?: number;
-    endDate?: number;
+    startDate?: string;
+    endDate?: string;
     contactInfo: {
         name: string;
         [key: string]: string;
