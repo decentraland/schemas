@@ -1,0 +1,51 @@
+import { JSONSchema, ValidateFunction, generateLazyValidator } from '../validation'
+
+/**
+ * Represents a Linker-Server Authorization.
+ *
+ * @public
+ */
+export type LinkerAuthorization = {
+  name: string
+  desc: string
+  startDate?: number
+  endDate?: number
+  contactInfo: {
+    name: string
+    [key: string]: string
+  }
+  addresses: string[]
+  plots: string[]
+}
+
+export namespace LinkerAuthorization {
+  export const schema: JSONSchema<LinkerAuthorization> = {
+    type: 'object',
+    properties: {
+      name: { type: 'string' },
+      desc: { type: 'string' },
+      startDate: { type: 'number', nullable: true },
+      endDate: { type: 'number', nullable: true },
+      contactInfo: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' }
+        },
+        required: ['name']
+      },
+      addresses: {
+        type: 'array',
+        items: { type: 'string' },
+        minItems: 1
+      },
+      plots: {
+        type: 'array',
+        items: { type: 'string' },
+        minItems: 1
+      }
+    },
+    required: ['name', 'desc', 'contactInfo', 'addresses', 'plots']
+  }
+
+  export const validate: ValidateFunction<LinkerAuthorization> = generateLazyValidator(schema)
+}

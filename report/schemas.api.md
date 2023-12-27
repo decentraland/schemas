@@ -991,6 +991,30 @@ export namespace Link {
     schema: JSONSchema<Link>;
 }
 
+// Warning: (ae-missing-release-tag) "LinkerAuthorization" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export type LinkerAuthorization = {
+    name: string;
+    desc: string;
+    startDate?: number;
+    endDate?: number;
+    contactInfo: {
+        name: string;
+        [key: string]: string;
+    };
+    addresses: string[];
+    plots: string[];
+};
+
+// @public (undocumented)
+export namespace LinkerAuthorization {
+    const // (undocumented)
+    schema: JSONSchema<LinkerAuthorization>;
+    const // (undocumented)
+    validate: ValidateFunction<LinkerAuthorization>;
+}
+
 // @alpha
 export type LinkUrl = string;
 
