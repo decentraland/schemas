@@ -42,6 +42,7 @@ export { World, ValidWorldRange, getWorld, isInsideWorldLimits } from './dapps/w
 export * from './dapps/preview'
 export * from './platform'
 export * from './misc'
+export * from './misc/linker-authorization'
 export * from './misc/auth-chain'
 export * from './misc/content-mapping'
 export { sdk }
