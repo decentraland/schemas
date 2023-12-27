@@ -8,8 +8,8 @@ import { JSONSchema, ValidateFunction, generateLazyValidator } from '../validati
 export type LinkerAuthorization = {
   name: string
   desc: string
-  startDate?: number
-  endDate?: number
+  startDate?: string
+  endDate?: string
   contactInfo: {
     name: string
     [key: string]: string
@@ -24,8 +24,8 @@ export namespace LinkerAuthorization {
     properties: {
       name: { type: 'string' },
       desc: { type: 'string' },
-      startDate: { type: 'number', nullable: true },
-      endDate: { type: 'number', nullable: true },
+      startDate: { type: 'string', nullable: true },
+      endDate: { type: 'string', nullable: true },
       contactInfo: {
         type: 'object',
         properties: {
