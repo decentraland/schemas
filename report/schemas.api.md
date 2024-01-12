@@ -1572,7 +1572,9 @@ export enum PreviewEmote {
     // (undocumented)
     LOVE = "love",
     // (undocumented)
-    MONEY = "money"
+    MONEY = "money",
+    // (undocumented)
+    WAVE = "wave"
 }
 
 // @alpha (undocumented)
