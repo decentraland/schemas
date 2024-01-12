@@ -12,7 +12,8 @@ export enum PreviewEmote {
   LOVE = 'love',
   MONEY = 'money',
   FIST_PUMP = 'fist-pump',
-  HEAD_EXPLODE = 'head-explode'
+  HEAD_EXPLODE = 'head-explode',
+  WAVE = 'wave'
 }
 
 /** @alpha */
