@@ -71,6 +71,8 @@ export function getURNProtocol(chainId: ChainId): string {
       return 'matic'
     case ChainId.MATIC_MUMBAI:
       return 'mumbai'
+    default:
+      return ''
   }
 }
 
@@ -120,6 +122,11 @@ export function getNetworkMapping(chainId: ChainId): {
         [Network.ETHEREUM]: ChainId.MATIC_MUMBAI,
         [Network.MATIC]: ChainId.MATIC_MUMBAI
       }
+    default:
+      return {
+        [Network.ETHEREUM]: ChainId.ETHEREUM_MAINNET,
+        [Network.MATIC]: ChainId.MATIC_MAINNET
+      }
   }
 }
 
@@ -138,6 +145,16 @@ export function getNetwork(chainId: ChainId): Network {
     case ChainId.MATIC_MAINNET:
     case ChainId.MATIC_MUMBAI:
       return Network.MATIC
+    case ChainId.BNB_MAINNET:
+      return Network.BINANCE
+    case ChainId.OPTIMISM_MAINNET:
+      return Network.OPTIMISM
+    case ChainId.ARBITRUM_MAINNET:
+      return Network.ARBITRUM
+    case ChainId.FANTOM_MAINNET:
+      return Network.FANTOM
+    case ChainId.AVALANCHE_MAINNET:
+      return Network.AVALANCHE
   }
 }
 
