@@ -6,7 +6,12 @@ import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validati
  */
 export enum Network {
   ETHEREUM = 'ETHEREUM',
-  MATIC = 'MATIC'
+  MATIC = 'MATIC',
+  AVALANCHE = 'AVALANCHE',
+  BINANCE = 'BINANCE',
+  OPTIMISM = 'OPTIMISM',
+  ARBITRUM = 'ARBITRUM',
+  FANTOM = 'FANTOM'
 }
 
 /**
