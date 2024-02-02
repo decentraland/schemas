@@ -13,7 +13,12 @@ export enum ChainName {
   ETHEREUM_KOVAN = 'Kovan',
   ETHEREUM_SEPOLIA = 'Sepolia',
   MATIC_MAINNET = 'Polygon',
-  MATIC_MUMBAI = 'Mumbai'
+  MATIC_MUMBAI = 'Mumbai',
+  AVALANCHE_MAINNET = 'Avalanche Mainnet',
+  BINANCE_MAINNET = 'Binance Smart Chain Mainnet',
+  ARBITRUM_MAINNET = 'Arbitrum One',
+  OPTIMISM_MAINNET = 'Optimism Mainnet',
+  FANTOM_MAINNET = 'Fantom Mainnet'
 }
 
 /**
@@ -38,6 +43,16 @@ export function getChainId(chainName: ChainName): ChainId | null {
       return ChainId.MATIC_MAINNET
     case ChainName.MATIC_MUMBAI:
       return ChainId.MATIC_MUMBAI
+    case ChainName.AVALANCHE_MAINNET:
+      return ChainId.AVALANCHE_MAINNET
+    case ChainName.BINANCE_MAINNET:
+      return ChainId.BNB_MAINNET
+    case ChainName.ARBITRUM_MAINNET:
+      return ChainId.ARBITRUM_MAINNET
+    case ChainName.OPTIMISM_MAINNET:
+      return ChainId.OPTIMISM_MAINNET
+    case ChainName.FANTOM_MAINNET:
+      return ChainId.FANTOM_MAINNET
     default:
       return null
   }
