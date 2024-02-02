@@ -392,6 +392,8 @@ export enum ChainName {
     // (undocumented)
     ETHEREUM_SEPOLIA = "Sepolia",
     // (undocumented)
+    FANTOM_MAINNET = "Fantom Mainnet",
+    // (undocumented)
     MATIC_MAINNET = "Polygon",
     // (undocumented)
     MATIC_MUMBAI = "Mumbai",

@@ -17,7 +17,8 @@ export enum ChainName {
   AVALANCHE_MAINNET = 'Avalanche Mainnet',
   BINANCE_MAINNET = 'Binance Smart Chain Mainnet',
   ARBITRUM_MAINNET = 'Arbitrum One',
-  OPTIMISM_MAINNET = 'Optimism Mainnet'
+  OPTIMISM_MAINNET = 'Optimism Mainnet',
+  FANTOM_MAINNET = 'Fantom Mainnet'
 }
 
 /**
@@ -50,6 +51,8 @@ export function getChainId(chainName: ChainName): ChainId | null {
       return ChainId.ARBITRUM_MAINNET
     case ChainName.OPTIMISM_MAINNET:
       return ChainId.OPTIMISM_MAINNET
+    case ChainName.FANTOM_MAINNET:
+      return ChainId.FANTOM_MAINNET
     default:
       return null
   }
