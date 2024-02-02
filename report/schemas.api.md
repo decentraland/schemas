@@ -374,6 +374,12 @@ export namespace ChainId {
 // @alpha
 export enum ChainName {
     // (undocumented)
+    ARBITRUM_MAINNET = "Arbitrum One",
+    // (undocumented)
+    AVALANCHE_MAINNET = "Avalanche Mainnet",
+    // (undocumented)
+    BINANCE_MAINNET = "Binance Smart Chain Mainnet",
+    // (undocumented)
     ETHEREUM_GOERLI = "Goerli",
     // (undocumented)
     ETHEREUM_KOVAN = "Kovan",
@@ -388,7 +394,9 @@ export enum ChainName {
     // (undocumented)
     MATIC_MAINNET = "Polygon",
     // (undocumented)
-    MATIC_MUMBAI = "Mumbai"
+    MATIC_MUMBAI = "Mumbai",
+    // (undocumented)
+    OPTIMISM_MAINNET = "Optimism Mainnet"
 }
 
 // @alpha (undocumented)
