@@ -1600,9 +1600,15 @@ export enum PreviewEmote {
     // (undocumented)
     IDLE = "idle",
     // (undocumented)
+    JUMP = "jump",
+    // (undocumented)
     LOVE = "love",
     // (undocumented)
     MONEY = "money",
+    // (undocumented)
+    RUN = "run",
+    // (undocumented)
+    WALK = "walk",
     // (undocumented)
     WAVE = "wave"
 }

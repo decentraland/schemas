@@ -2,6 +2,9 @@ import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../valid
 
 export enum PreviewEmote {
   IDLE = 'idle',
+  WALK = 'walk',
+  RUN = 'run',
+  JUMP = 'jump',
   CLAP = 'clap',
   DAB = 'dab',
   DANCE = 'dance',
