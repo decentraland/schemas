@@ -29,7 +29,12 @@ describe('ChainId tests', () => {
   it('Should get a valid network mapping', () => {
     expect(getNetworkMapping(ChainId.ETHEREUM_KOVAN)).toEqual({
       [Network.ETHEREUM]: ChainId.ETHEREUM_KOVAN,
-      [Network.MATIC]: ChainId.MATIC_MUMBAI
+      [Network.MATIC]: ChainId.MATIC_MUMBAI,
+      [Network.AVALANCHE]: ChainId.AVALANCHE_MAINNET,
+      [Network.BINANCE]: ChainId.BNB_MAINNET,
+      [Network.ARBITRUM]: ChainId.ARBITRUM_MAINNET,
+      [Network.OPTIMISM]: ChainId.OPTIMISM_MAINNET,
+      [Network.FANTOM]: ChainId.FANTOM_MAINNET
     })
   })
 
