@@ -15,7 +15,12 @@ export enum ChainId {
   ETHEREUM_KOVAN = 42,
   ETHEREUM_SEPOLIA = 11155111,
   MATIC_MAINNET = 137,
-  MATIC_MUMBAI = 80001
+  MATIC_MUMBAI = 80001,
+  BNB_MAINNET = 56,
+  OPTIMISM_MAINNET = 10,
+  ARBITRUM_MAINNET = 42161,
+  FANTOM_MAINNET = 250,
+  AVALANCHE_MAINNET = 43114
 }
 
 /**
@@ -147,6 +152,16 @@ export function getNetwork(chainId: ChainId): Network {
     case ChainId.MATIC_MAINNET:
     case ChainId.MATIC_MUMBAI:
       return Network.MATIC
+    case ChainId.BNB_MAINNET:
+      return Network.BINANCE
+    case ChainId.OPTIMISM_MAINNET:
+      return Network.OPTIMISM
+    case ChainId.ARBITRUM_MAINNET:
+      return Network.ARBITRUM
+    case ChainId.FANTOM_MAINNET:
+      return Network.FANTOM
+    case ChainId.AVALANCHE_MAINNET:
+      return Network.AVALANCHE
   }
 }
 

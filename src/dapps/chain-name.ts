@@ -43,6 +43,16 @@ export function getChainId(chainName: ChainName): ChainId | null {
       return ChainId.MATIC_MAINNET
     case ChainName.MATIC_MUMBAI:
       return ChainId.MATIC_MUMBAI
+    case ChainName.AVALANCHE_MAINNET:
+      return ChainId.AVALANCHE_MAINNET
+    case ChainName.BINANCE_MAINNET:
+      return ChainId.BNB_MAINNET
+    case ChainName.ARBITRUM_MAINNET:
+      return ChainId.ARBITRUM_MAINNET
+    case ChainName.OPTIMISM_MAINNET:
+      return ChainId.OPTIMISM_MAINNET
+    case ChainName.FANTOM_MAINNET:
+      return ChainId.FANTOM_MAINNET
     default:
       return null
   }

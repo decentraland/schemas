@@ -336,6 +336,12 @@ export enum CatalogSortDirection {
 // @alpha
 export enum ChainId {
     // (undocumented)
+    ARBITRUM_MAINNET = 42161,
+    // (undocumented)
+    AVALANCHE_MAINNET = 43114,
+    // (undocumented)
+    BNB_MAINNET = 56,
+    // (undocumented)
     ETHEREUM_GOERLI = 5,
     // (undocumented)
     ETHEREUM_KOVAN = 42,
@@ -348,9 +354,13 @@ export enum ChainId {
     // (undocumented)
     ETHEREUM_SEPOLIA = 11155111,
     // (undocumented)
+    FANTOM_MAINNET = 250,
+    // (undocumented)
     MATIC_MAINNET = 137,
     // (undocumented)
-    MATIC_MUMBAI = 80001
+    MATIC_MUMBAI = 80001,
+    // (undocumented)
+    OPTIMISM_MAINNET = 10
 }
 
 // @alpha (undocumented)
@@ -1182,9 +1192,19 @@ export enum MintSortBy {
 // @alpha
 export enum Network {
     // (undocumented)
+    ARBITRUM = "ARBITRUM",
+    // (undocumented)
+    AVALANCHE = "AVALANCHE",
+    // (undocumented)
+    BINANCE = "BINANCE",
+    // (undocumented)
     ETHEREUM = "ETHEREUM",
     // (undocumented)
-    MATIC = "MATIC"
+    FANTOM = "FANTOM",
+    // (undocumented)
+    MATIC = "MATIC",
+    // (undocumented)
+    OPTIMISM = "OPTIMISM"
 }
 
 // @alpha (undocumented)
