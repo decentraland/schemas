@@ -45,6 +45,16 @@ export function getChainName(chainId: ChainId): ChainName | null {
       return ChainName.MATIC_MAINNET
     case ChainId.MATIC_MUMBAI:
       return ChainName.MATIC_MUMBAI
+    case ChainId.BNB_MAINNET:
+      return ChainName.BINANCE_MAINNET
+    case ChainId.ARBITRUM_MAINNET:
+      return ChainName.ARBITRUM_MAINNET
+    case ChainId.OPTIMISM_MAINNET:
+      return ChainName.OPTIMISM_MAINNET
+    case ChainId.FANTOM_MAINNET:
+      return ChainName.FANTOM_MAINNET
+    case ChainId.AVALANCHE_MAINNET:
+      return ChainName.AVALANCHE_MAINNET
     default:
       return null
   }
@@ -83,55 +93,68 @@ export function getURNProtocol(chainId: ChainId): string {
  *    getNetworkMapping(ChainId.ETHEREUM_GOERLI)[Network.MATIC]
  * @alpha
  */
-export function getNetworkMapping(chainId: ChainId): {
-  [Network.ETHEREUM]: ChainId
-  [Network.MATIC]: ChainId
-} {
+export function getNetworkMapping(chainId: ChainId): Record<Network, ChainId> {
+  const baseEVMCompatibleChains = {
+    [Network.BINANCE]: ChainId.BNB_MAINNET,
+    [Network.OPTIMISM]: ChainId.OPTIMISM_MAINNET,
+    [Network.ARBITRUM]: ChainId.ARBITRUM_MAINNET,
+    [Network.FANTOM]: ChainId.FANTOM_MAINNET,
+    [Network.AVALANCHE]: ChainId.AVALANCHE_MAINNET
+  }
   switch (chainId) {
     case ChainId.ETHEREUM_MAINNET:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_MAINNET,
-        [Network.MATIC]: ChainId.MATIC_MAINNET
+        [Network.MATIC]: ChainId.MATIC_MAINNET,
+        ...baseEVMCompatibleChains
       }
     case ChainId.ETHEREUM_ROPSTEN:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_ROPSTEN,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI
+        [Network.MATIC]: ChainId.MATIC_MUMBAI,
+        ...baseEVMCompatibleChains
       }
     case ChainId.ETHEREUM_RINKEBY:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_RINKEBY,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI
+        [Network.MATIC]: ChainId.MATIC_MUMBAI,
+        ...baseEVMCompatibleChains
       }
     case ChainId.ETHEREUM_GOERLI:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_GOERLI,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI
+        [Network.MATIC]: ChainId.MATIC_MUMBAI,
+        ...baseEVMCompatibleChains
       }
     case ChainId.ETHEREUM_KOVAN:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_KOVAN,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI
+        [Network.MATIC]: ChainId.MATIC_MUMBAI,
+        ...baseEVMCompatibleChains
       }
     case ChainId.ETHEREUM_SEPOLIA:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_SEPOLIA,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI
+        [Network.MATIC]: ChainId.MATIC_MUMBAI,
+        ...baseEVMCompatibleChains
       }
     case ChainId.MATIC_MAINNET:
       return {
         [Network.ETHEREUM]: ChainId.MATIC_MAINNET,
-        [Network.MATIC]: ChainId.MATIC_MAINNET
+        [Network.MATIC]: ChainId.MATIC_MAINNET,
+        ...baseEVMCompatibleChains
       }
     case ChainId.MATIC_MUMBAI:
       return {
         [Network.ETHEREUM]: ChainId.MATIC_MUMBAI,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI
+        [Network.MATIC]: ChainId.MATIC_MUMBAI,
+        ...baseEVMCompatibleChains
       }
     default:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_MAINNET,
-        [Network.MATIC]: ChainId.MATIC_MAINNET
+        [Network.MATIC]: ChainId.MATIC_MAINNET,
+        ...baseEVMCompatibleChains
       }
   }
 }
