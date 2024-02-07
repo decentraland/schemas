@@ -340,7 +340,7 @@ export enum ChainId {
     // (undocumented)
     AVALANCHE_MAINNET = 43114,
     // (undocumented)
-    BNB_MAINNET = 56,
+    BSC_MAINNET = 56,
     // (undocumented)
     ETHEREUM_GOERLI = 5,
     // (undocumented)
@@ -374,11 +374,11 @@ export namespace ChainId {
 // @alpha
 export enum ChainName {
     // (undocumented)
-    ARBITRUM_MAINNET = "Arbitrum One",
+    ARBITRUM_MAINNET = "Arbitrum",
     // (undocumented)
-    AVALANCHE_MAINNET = "Avalanche Mainnet",
+    AVALANCHE_MAINNET = "Avalanche",
     // (undocumented)
-    BINANCE_MAINNET = "Binance Smart Chain Mainnet",
+    BINANCE_MAINNET = "Binance Smart Chain",
     // (undocumented)
     ETHEREUM_GOERLI = "Goerli",
     // (undocumented)
@@ -392,13 +392,13 @@ export enum ChainName {
     // (undocumented)
     ETHEREUM_SEPOLIA = "Sepolia",
     // (undocumented)
-    FANTOM_MAINNET = "Fantom Mainnet",
+    FANTOM_MAINNET = "Fantom",
     // (undocumented)
     MATIC_MAINNET = "Polygon",
     // (undocumented)
     MATIC_MUMBAI = "Mumbai",
     // (undocumented)
-    OPTIMISM_MAINNET = "Optimism Mainnet"
+    OPTIMISM_MAINNET = "Optimism"
 }
 
 // @alpha (undocumented)
@@ -1196,7 +1196,7 @@ export enum Network {
     // (undocumented)
     AVALANCHE = "AVALANCHE",
     // (undocumented)
-    BINANCE = "BINANCE",
+    BSC = "BINANCE SMART CHAIN",
     // (undocumented)
     ETHEREUM = "ETHEREUM",
     // (undocumented)
