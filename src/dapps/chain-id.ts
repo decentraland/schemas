@@ -16,7 +16,7 @@ export enum ChainId {
   ETHEREUM_SEPOLIA = 11155111,
   MATIC_MAINNET = 137,
   MATIC_MUMBAI = 80001,
-  BNB_MAINNET = 56,
+  BSC_MAINNET = 56,
   OPTIMISM_MAINNET = 10,
   ARBITRUM_MAINNET = 42161,
   FANTOM_MAINNET = 250,
@@ -45,7 +45,7 @@ export function getChainName(chainId: ChainId): ChainName | null {
       return ChainName.MATIC_MAINNET
     case ChainId.MATIC_MUMBAI:
       return ChainName.MATIC_MUMBAI
-    case ChainId.BNB_MAINNET:
+    case ChainId.BSC_MAINNET:
       return ChainName.BINANCE_MAINNET
     case ChainId.ARBITRUM_MAINNET:
       return ChainName.ARBITRUM_MAINNET
@@ -95,7 +95,7 @@ export function getURNProtocol(chainId: ChainId): string {
  */
 export function getNetworkMapping(chainId: ChainId): Record<Network, ChainId> {
   const baseEVMCompatibleChains = {
-    [Network.BINANCE]: ChainId.BNB_MAINNET,
+    [Network.BSC]: ChainId.BSC_MAINNET,
     [Network.OPTIMISM]: ChainId.OPTIMISM_MAINNET,
     [Network.ARBITRUM]: ChainId.ARBITRUM_MAINNET,
     [Network.FANTOM]: ChainId.FANTOM_MAINNET,
@@ -175,8 +175,8 @@ export function getNetwork(chainId: ChainId): Network {
     case ChainId.MATIC_MAINNET:
     case ChainId.MATIC_MUMBAI:
       return Network.MATIC
-    case ChainId.BNB_MAINNET:
-      return Network.BINANCE
+    case ChainId.BSC_MAINNET:
+      return Network.BSC
     case ChainId.OPTIMISM_MAINNET:
       return Network.OPTIMISM
     case ChainId.ARBITRUM_MAINNET:

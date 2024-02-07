@@ -31,7 +31,7 @@ describe('ChainId tests', () => {
       [Network.ETHEREUM]: ChainId.ETHEREUM_KOVAN,
       [Network.MATIC]: ChainId.MATIC_MUMBAI,
       [Network.AVALANCHE]: ChainId.AVALANCHE_MAINNET,
-      [Network.BINANCE]: ChainId.BNB_MAINNET,
+      [Network.BSC]: ChainId.BSC_MAINNET,
       [Network.ARBITRUM]: ChainId.ARBITRUM_MAINNET,
       [Network.OPTIMISM]: ChainId.OPTIMISM_MAINNET,
       [Network.FANTOM]: ChainId.FANTOM_MAINNET
