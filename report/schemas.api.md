@@ -15,8 +15,8 @@ export type AbstractTypedSchema<T> = {
     validate: ValidateFunction<T>;
 };
 
-// Warning: (ae-missing-release-tag) "Account" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Account" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Account" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Account" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type Account = {
@@ -38,7 +38,7 @@ export namespace Account {
     validate: ValidateFunction<Account>;
 }
 
-// Warning: (ae-missing-release-tag) "AccountFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "AccountFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type AccountFilters = {
@@ -50,7 +50,7 @@ export type AccountFilters = {
     network?: Network;
 };
 
-// Warning: (ae-missing-release-tag) "AccountSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "AccountSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum AccountSortBy {
@@ -73,7 +73,7 @@ type Actions = typeof SCENE_UPDATE | typeof UPDATE;
 
 export { Ajv }
 
-// Warning: (ae-missing-release-tag) "AnalyticsDayData" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "AnalyticsDayData" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type AnalyticsDayData = {
@@ -85,7 +85,7 @@ export type AnalyticsDayData = {
     daoEarnings: string;
 };
 
-// Warning: (ae-missing-release-tag) "AnalyticsDayDataFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "AnalyticsDayDataFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type AnalyticsDayDataFilters = {
@@ -93,7 +93,7 @@ export type AnalyticsDayDataFilters = {
     network?: Network;
 };
 
-// Warning: (ae-missing-release-tag) "AnalyticsDayDataSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "AnalyticsDayDataSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum AnalyticsDayDataSortBy {
@@ -207,8 +207,8 @@ export namespace AvatarInfo {
     validate: ValidateFunction<AvatarInfo>;
 }
 
-// Warning: (ae-missing-release-tag) "Bid" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Bid" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Bid" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Bid" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type Bid = {
@@ -226,7 +226,7 @@ export type Bid = {
     updatedAt: number;
     contractAddress: string;
     tokenId: string;
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
 };
 
@@ -238,7 +238,7 @@ export namespace Bid {
     validate: ValidateFunction<Bid>;
 }
 
-// Warning: (ae-missing-release-tag) "BidFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "BidFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type BidFilters = {
@@ -254,7 +254,7 @@ export type BidFilters = {
     network?: Network;
 };
 
-// Warning: (ae-missing-release-tag) "BidSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "BidSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum BidSortBy {
@@ -266,8 +266,8 @@ export enum BidSortBy {
     RECENTLY_UPDATED = "recently_updated"
 }
 
-// Warning: (ae-missing-release-tag) "BodyPartCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "BodyPartCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "BodyPartCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "BodyPartCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum BodyPartCategory {
@@ -409,8 +409,8 @@ export namespace ChainName {
     validate: ValidateFunction<ChainName>;
 }
 
-// Warning: (ae-missing-release-tag) "Collection" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Collection" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Collection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Collection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type Collection = {
@@ -423,7 +423,7 @@ export type Collection = {
     createdAt: number;
     updatedAt: number;
     reviewedAt: number;
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
     firstListedAt: number | null;
 };
@@ -436,7 +436,7 @@ export namespace Collection {
     validate: ValidateFunction<Collection>;
 }
 
-// Warning: (ae-missing-release-tag) "CollectionFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CollectionFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type CollectionFilters = {
@@ -452,7 +452,7 @@ export type CollectionFilters = {
     network?: Network;
 };
 
-// Warning: (ae-missing-release-tag) "CollectionSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CollectionSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum CollectionSortBy {
@@ -497,15 +497,15 @@ export namespace ContentMapping {
     validate: ValidateFunction<ContentMapping>;
 }
 
-// Warning: (ae-missing-release-tag) "Contract" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Contract" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Contract" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Contract" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type Contract = {
     name: string;
     address: string;
     category: NFTCategory;
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
 };
 
@@ -517,7 +517,7 @@ export namespace Contract {
     validate: ValidateFunction<Contract>;
 }
 
-// Warning: (ae-missing-release-tag) "ContractFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ContractFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type ContractFilters = {
@@ -525,7 +525,7 @@ export type ContractFilters = {
     network?: Network;
 };
 
-// Warning: (ae-missing-release-tag) "ContractSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ContractSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum ContractSortBy {
@@ -570,8 +570,8 @@ export namespace Emote {
     validate: ValidateFunction<EmoteADR74>;
 }
 
-// Warning: (ae-missing-release-tag) "EmoteCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "EmoteCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum EmoteCategory {
@@ -601,8 +601,8 @@ export namespace EmoteCategory {
     validate: ValidateFunction<EmoteCategory>;
 }
 
-// Warning: (ae-missing-release-tag) "EmoteDataADR74" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "EmoteDataADR74" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteDataADR74" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteDataADR74" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type EmoteDataADR74 = {
@@ -621,7 +621,7 @@ export namespace EmoteDataADR74 {
 }
 
 // Warning: (ae-incompatible-release-tags) The symbol "EmoteDefinition" is marked as @public, but its signature references "Emote" which is marked as @alpha
-// Warning: (ae-missing-release-tag) "EmoteDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteDefinition" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type EmoteDefinition = Omit<Emote, 'emoteDataADR74'> & {
@@ -630,8 +630,8 @@ export type EmoteDefinition = Omit<Emote, 'emoteDataADR74'> & {
     };
 };
 
-// Warning: (ae-missing-release-tag) "EmotePlayMode" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "EmotePlayMode" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmotePlayMode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmotePlayMode" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum EmotePlayMode {
@@ -747,7 +747,7 @@ export namespace FeatureToggles {
     validate: ValidateFunction<FeatureToggles>;
 }
 
-// Warning: (ae-missing-release-tag) "GenderFilterOption" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GenderFilterOption" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum GenderFilterOption {
@@ -774,8 +774,8 @@ export function getURNProtocol(chainId: ChainId): string;
 // @alpha
 export function getWorld(): World;
 
-// Warning: (ae-missing-release-tag) "HideableWearableCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "HideableWearableCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "HideableWearableCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "HideableWearableCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type HideableWearableCategory = WearableCategory | BodyPartCategory;
@@ -802,7 +802,7 @@ export namespace I18N {
     validate: ValidateFunction<I18N>;
 }
 
-// Warning: (ae-missing-release-tag) "IEmoteController" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "IEmoteController" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface IEmoteController {
@@ -850,7 +850,7 @@ export namespace IPFSv2 {
     validate: ValidateFunction<IPFSv2>;
 }
 
-// Warning: (ae-missing-release-tag) "IPreviewController" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "IPreviewController" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface IPreviewController {
@@ -860,7 +860,7 @@ export interface IPreviewController {
     scene: ISceneController;
 }
 
-// Warning: (ae-missing-release-tag) "ISceneController" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ISceneController" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface ISceneController {
@@ -890,18 +890,18 @@ export interface ISceneController {
 export function isInsideWorldLimits(x: number, y: number): boolean;
 
 // Warning: (ae-forgotten-export) The symbol "BaseItem" needs to be exported by the entry point index.d.ts
-// Warning: (ae-missing-release-tag) "isStandard" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "isStandard" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function isStandard<T extends BaseItem>(item: T): item is T & StandardProps;
 
-// Warning: (ae-missing-release-tag) "isThirdParty" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "isThirdParty" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export function isThirdParty<T extends BaseItem>(item: T): item is T & ThirdPartyProps;
 
-// Warning: (ae-missing-release-tag) "Item" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Item" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Item" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Item" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type Item = {
@@ -923,7 +923,7 @@ export type Item = {
     reviewedAt: number;
     soldAt: number;
     data: NFT['data'];
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
     urn: string;
     firstListedAt: number | null;
@@ -946,7 +946,7 @@ export namespace Item {
     validate: ValidateFunction<Item>;
 }
 
-// Warning: (ae-missing-release-tag) "ItemFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ItemFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type ItemFilters = {
@@ -978,7 +978,7 @@ export type ItemFilters = {
     emoteHasGeometry?: boolean;
 };
 
-// Warning: (ae-missing-release-tag) "ItemSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ItemSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum ItemSortBy {
@@ -1011,7 +1011,7 @@ export namespace Link {
     schema: JSONSchema<Link>;
 }
 
-// Warning: (ae-missing-release-tag) "LinkerAuthorization" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "LinkerAuthorization" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export type LinkerAuthorization = {
@@ -1046,8 +1046,8 @@ export namespace LinkUrl {
     validate: ValidateFunction<LinkUrl>;
 }
 
-// Warning: (ae-missing-release-tag) "ListingStatus" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "ListingStatus" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ListingStatus" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ListingStatus" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum ListingStatus {
@@ -1134,8 +1134,8 @@ export namespace Metrics {
     validate: ValidateFunction<Metrics>;
 }
 
-// Warning: (ae-missing-release-tag) "Mint" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Mint" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Mint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Mint" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type Mint = {
@@ -1149,7 +1149,7 @@ export type Mint = {
     contractAddress: string;
     price: string | null;
     timestamp: number;
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
 };
 
@@ -1161,7 +1161,7 @@ export namespace Mint {
     validate: ValidateFunction<Mint>;
 }
 
-// Warning: (ae-missing-release-tag) "MintFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "MintFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type MintFilters = {
@@ -1179,7 +1179,7 @@ export type MintFilters = {
     network?: Network;
 };
 
-// Warning: (ae-missing-release-tag) "MintSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "MintSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum MintSortBy {
@@ -1215,8 +1215,8 @@ export namespace Network {
     validate: ValidateFunction<Network>;
 }
 
-// Warning: (ae-missing-release-tag) "NFT" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "NFT" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "NFT" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "NFT" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type NFT = {
@@ -1270,7 +1270,7 @@ export type NFT = {
             hasGeometry: boolean;
         };
     };
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
     createdAt: number;
     updatedAt: number;
@@ -1286,8 +1286,8 @@ export namespace NFT {
     validate: ValidateFunction<NFT>;
 }
 
-// Warning: (ae-missing-release-tag) "NFTCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "NFTCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "NFTCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "NFTCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum NFTCategory {
@@ -1311,7 +1311,7 @@ export namespace NFTCategory {
     validate: ValidateFunction<NFTCategory>;
 }
 
-// Warning: (ae-missing-release-tag) "NFTFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "NFTFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type NFTFilters = {
@@ -1352,7 +1352,7 @@ export type NFTFilters = {
     emoteHasGeometry?: boolean;
 } & Pick<RentalsListingsFilterBy, 'tenant'>;
 
-// Warning: (ae-missing-release-tag) "NFTSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "NFTSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum NFTSortBy {
@@ -1376,8 +1376,8 @@ export enum NFTSortBy {
     RENTAL_LISTING_DATE = "rental_listing_date"
 }
 
-// Warning: (ae-missing-release-tag) "Order" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Order" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Order" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Order" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type Order = {
@@ -1392,7 +1392,7 @@ export type Order = {
     expiresAt: number;
     createdAt: number;
     updatedAt: number;
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
     issuedId: string;
 };
@@ -1405,7 +1405,7 @@ export namespace Order {
     validate: ValidateFunction<Order>;
 }
 
-// Warning: (ae-missing-release-tag) "OrderFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "OrderFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type OrderFilters = {
@@ -1423,7 +1423,7 @@ export type OrderFilters = {
     nftName?: string;
 };
 
-// Warning: (ae-missing-release-tag) "OrderSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "OrderSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum OrderSortBy {
@@ -1482,8 +1482,8 @@ export namespace Outfits {
     validate: ValidateFunction<Outfits>;
 }
 
-// Warning: (ae-missing-release-tag) "PeriodCreation" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "PeriodCreation" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PeriodCreation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PeriodCreation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export type PeriodCreation = {
@@ -1514,7 +1514,7 @@ export namespace PointerChangesSyncDeployment {
 }
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
-// Warning: (ae-missing-release-tag) "PreviewCamera" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PreviewCamera" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum PreviewCamera {
@@ -1532,7 +1532,7 @@ export namespace PreviewCamera {
     validate: ValidateFunction<PreviewCamera>;
 }
 
-// Warning: (ae-missing-release-tag) "PreviewConfig" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PreviewConfig" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type PreviewConfig = {
@@ -1575,7 +1575,7 @@ export type PreviewConfig = {
 };
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
-// Warning: (ae-missing-release-tag) "PreviewEmote" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PreviewEmote" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum PreviewEmote {
@@ -1622,7 +1622,7 @@ export namespace PreviewEmote {
 }
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
-// Warning: (ae-missing-release-tag) "PreviewEmoteEventType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PreviewEmoteEventType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum PreviewEmoteEventType {
@@ -1646,7 +1646,7 @@ export namespace PreviewEmoteEventType {
     validate: ValidateFunction<PreviewEmoteEventType>;
 }
 
-// Warning: (ae-missing-release-tag) "PreviewMessagePayload" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PreviewMessagePayload" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type PreviewMessagePayload<T extends PreviewMessageType> = T extends PreviewMessageType.READY ? null : T extends PreviewMessageType.LOAD ? null : T extends PreviewMessageType.ERROR ? {
@@ -1672,7 +1672,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
 } : unknown;
 
 // Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
-// Warning: (ae-missing-release-tag) "PreviewMessageType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PreviewMessageType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum PreviewMessageType {
@@ -1748,8 +1748,8 @@ export type PreviewOptions = {
     lockRadius?: boolean;
 };
 
-// Warning: (ae-missing-release-tag) "PreviewProjection" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "PreviewProjection" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PreviewProjection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PreviewProjection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum PreviewProjection {
@@ -1848,8 +1848,8 @@ export namespace ProviderType {
     validate: ValidateFunction<ProviderType>;
 }
 
-// Warning: (ae-missing-release-tag) "Rarity" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Rarity" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Rarity" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Rarity" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum Rarity {
@@ -1883,7 +1883,7 @@ export namespace Rarity {
     export function getMaxSupply(rarity: Rarity): number;
 }
 
-// Warning: (ae-missing-release-tag) "RentalListing" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RentalListing" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export type RentalListing = {
@@ -1891,7 +1891,7 @@ export type RentalListing = {
     nftId: string;
     category: NFTCategory;
     searchText: string;
-    network: Network;
+    network: Network.ETHEREUM;
     chainId: ChainId;
     expiration: number;
     signature: string;
@@ -1910,12 +1910,12 @@ export type RentalListing = {
     rentedDays: number | null;
 };
 
-// Warning: (ae-missing-release-tag) "RentalListingCreation" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "RentalListingCreation" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RentalListingCreation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RentalListingCreation" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export type RentalListingCreation = {
-    network: Network;
+    network: Network.ETHEREUM;
     chainId: ChainId;
     expiration: number;
     signature: string;
@@ -1935,7 +1935,7 @@ export namespace RentalListingCreation {
     validate: ValidateFunction<RentalListingCreation>;
 }
 
-// Warning: (ae-missing-release-tag) "RentalListingPeriod" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RentalListingPeriod" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export type RentalListingPeriod = {
@@ -1944,7 +1944,7 @@ export type RentalListingPeriod = {
     pricePerDay: string;
 };
 
-// Warning: (ae-missing-release-tag) "RentalsListingsFilterBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RentalsListingsFilterBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export type RentalsListingsFilterBy = {
@@ -1970,7 +1970,7 @@ export type RentalsListingsFilterBy = {
     rentalDays?: number[];
 };
 
-// Warning: (ae-missing-release-tag) "RentalsListingsFilterByCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RentalsListingsFilterByCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export enum RentalsListingsFilterByCategory {
@@ -1980,7 +1980,7 @@ export enum RentalsListingsFilterByCategory {
     PARCEL = "parcel"
 }
 
-// Warning: (ae-missing-release-tag) "RentalsListingsFilterByPeriod" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RentalsListingsFilterByPeriod" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export type RentalsListingsFilterByPeriod = {
@@ -1989,7 +1989,7 @@ export type RentalsListingsFilterByPeriod = {
     pricePerDay?: number;
 };
 
-// Warning: (ae-missing-release-tag) "RentalsListingSortDirection" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RentalsListingSortDirection" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export enum RentalsListingSortDirection {
@@ -1999,7 +1999,7 @@ export enum RentalsListingSortDirection {
     DESC = "desc"
 }
 
-// Warning: (ae-missing-release-tag) "RentalsListingsSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RentalsListingsSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export enum RentalsListingsSortBy {
@@ -2011,7 +2011,7 @@ export enum RentalsListingsSortBy {
     RENTAL_LISTING_DATE = "rental_listing_date"
 }
 
-// Warning: (ae-missing-release-tag) "RentalStatus" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RentalStatus" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
 export enum RentalStatus {
@@ -2043,8 +2043,8 @@ export enum RequiredPermission {
     USE_WEBSOCKET = "USE_WEBSOCKET"
 }
 
-// Warning: (ae-missing-release-tag) "Sale" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Sale" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Sale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Sale" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type Sale = {
@@ -2058,7 +2058,7 @@ export type Sale = {
     price: string;
     timestamp: number;
     txHash: string;
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
 };
 
@@ -2070,7 +2070,7 @@ export namespace Sale {
     validate: ValidateFunction<Sale>;
 }
 
-// Warning: (ae-missing-release-tag) "SaleFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "SaleFilters" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type SaleFilters = {
@@ -2091,7 +2091,7 @@ export type SaleFilters = {
     network?: Network;
 };
 
-// Warning: (ae-missing-release-tag) "SaleSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "SaleSortBy" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum SaleSortBy {
@@ -2101,8 +2101,8 @@ export enum SaleSortBy {
     RECENTLY_SOLD = "recently_sold"
 }
 
-// Warning: (ae-missing-release-tag) "SaleType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "SaleType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "SaleType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "SaleType" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum SaleType {
@@ -2207,7 +2207,7 @@ declare namespace sdk {
 }
 export { sdk }
 
-// Warning: (ae-missing-release-tag) "sendMessage" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "sendMessage" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export const sendMessage: <T extends PreviewMessageType>(window: {
@@ -2286,7 +2286,7 @@ export namespace SpawnPoint {
     validate: ValidateFunction<SpawnPoint>;
 }
 
-// Warning: (ae-missing-release-tag) "StandardProps" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StandardProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type StandardProps = {
@@ -2294,8 +2294,8 @@ export type StandardProps = {
     rarity: Rarity;
 };
 
-// Warning: (ae-missing-release-tag) "Store" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "Store" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Store" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type Store = {
@@ -2321,12 +2321,12 @@ export namespace Store {
     validate: ValidateFunction<Store>;
 }
 
-// Warning: (ae-missing-release-tag) "SyncDeployment" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "SyncDeployment" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type SyncDeployment = SnapshotSyncDeployment | PointerChangesSyncDeployment;
 
-// Warning: (ae-missing-release-tag) "ThirdPartyProps" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ThirdPartyProps" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type ThirdPartyProps = {
@@ -2394,8 +2394,8 @@ export namespace Wearable {
     const validate: ValidateFunction<Wearable>;
 }
 
-// Warning: (ae-missing-release-tag) "WearableCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "WearableCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WearableCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WearableCategory" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum WearableCategory {
@@ -2452,8 +2452,8 @@ export type WearableDefinition = Omit<Wearable, 'data'> & {
     };
 };
 
-// Warning: (ae-missing-release-tag) "WearableGender" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "WearableGender" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WearableGender" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WearableGender" is exported by the package, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export enum WearableGender {

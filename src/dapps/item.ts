@@ -27,7 +27,7 @@ export type Item = {
   reviewedAt: number
   soldAt: number
   data: NFT['data']
-  network: Network
+  network: Network.ETHEREUM | Network.MATIC
   chainId: ChainId
   urn: string
   /** The timestamp in seconds since epoch when the item was listed for sale for the first time */

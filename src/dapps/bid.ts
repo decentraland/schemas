@@ -18,7 +18,7 @@ export type Bid = {
   updatedAt: number
   contractAddress: string
   tokenId: string
-  network: Network
+  network: Network.ETHEREUM | Network.MATIC
   chainId: ChainId
 }
 

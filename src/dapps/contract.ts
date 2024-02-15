@@ -7,7 +7,7 @@ export type Contract = {
   name: string
   address: string
   category: NFTCategory
-  network: Network
+  network: Network.ETHEREUM | Network.MATIC
   chainId: ChainId
 }
 

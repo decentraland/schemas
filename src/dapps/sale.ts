@@ -15,7 +15,7 @@ export type Sale = {
   price: string
   timestamp: number
   txHash: string
-  network: Network
+  network: Network.ETHEREUM | Network.MATIC
   chainId: ChainId
 }
 
