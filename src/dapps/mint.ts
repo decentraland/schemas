@@ -13,7 +13,7 @@ export type Mint = {
   contractAddress: string
   price: string | null
   timestamp: number
-  network: Network
+  network: Network.ETHEREUM | Network.MATIC
   chainId: ChainId
 }
 

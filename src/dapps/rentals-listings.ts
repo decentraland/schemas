@@ -123,7 +123,7 @@ export type RentalListing = {
   /** The blockchain search text of the NFT asset */
   searchText: string
   /** The network where the asset being rented is on */
-  network: Network
+  network: Network.ETHEREUM
   /** The chain id where the asset being rented is on */
   chainId: ChainId
   /** UTC timestamp in milliseconds since epoch of the signature's expiration */
@@ -175,7 +175,7 @@ export type RentalListingPeriod = {
  */
 export type RentalListingCreation = {
   /** The network where the asset being rented is on */
-  network: Network
+  network: Network.ETHEREUM
   /** The chain id where the asset being rented is on */
   chainId: ChainId
   /** UTC timestamp in milliseconds since epoch of the signature's expiration */

@@ -12,7 +12,7 @@ export type Collection = {
   createdAt: number
   updatedAt: number
   reviewedAt: number
-  network: Network
+  network: Network.ETHEREUM | Network.MATIC
   chainId: ChainId
   /** The timestamp in seconds since epoch when the collection was listed for sale for the first time */
   firstListedAt: number | null

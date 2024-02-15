@@ -226,7 +226,7 @@ export type Bid = {
     updatedAt: number;
     contractAddress: string;
     tokenId: string;
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
 };
 
@@ -423,7 +423,7 @@ export type Collection = {
     createdAt: number;
     updatedAt: number;
     reviewedAt: number;
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
     firstListedAt: number | null;
 };
@@ -505,7 +505,7 @@ export type Contract = {
     name: string;
     address: string;
     category: NFTCategory;
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
 };
 
@@ -923,7 +923,7 @@ export type Item = {
     reviewedAt: number;
     soldAt: number;
     data: NFT['data'];
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
     urn: string;
     firstListedAt: number | null;
@@ -1149,7 +1149,7 @@ export type Mint = {
     contractAddress: string;
     price: string | null;
     timestamp: number;
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
 };
 
@@ -1270,7 +1270,7 @@ export type NFT = {
             hasGeometry: boolean;
         };
     };
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
     createdAt: number;
     updatedAt: number;
@@ -1392,7 +1392,7 @@ export type Order = {
     expiresAt: number;
     createdAt: number;
     updatedAt: number;
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
     issuedId: string;
 };
@@ -1891,7 +1891,7 @@ export type RentalListing = {
     nftId: string;
     category: NFTCategory;
     searchText: string;
-    network: Network;
+    network: Network.ETHEREUM;
     chainId: ChainId;
     expiration: number;
     signature: string;
@@ -1915,7 +1915,7 @@ export type RentalListing = {
 //
 // @public
 export type RentalListingCreation = {
-    network: Network;
+    network: Network.ETHEREUM;
     chainId: ChainId;
     expiration: number;
     signature: string;
@@ -2058,7 +2058,7 @@ export type Sale = {
     price: string;
     timestamp: number;
     txHash: string;
-    network: Network;
+    network: Network.ETHEREUM | Network.MATIC;
     chainId: ChainId;
 };
 

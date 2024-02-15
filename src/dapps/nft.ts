@@ -57,7 +57,7 @@ export type NFT = {
       hasGeometry: boolean
     }
   }
-  network: Network
+  network: Network.ETHEREUM | Network.MATIC
   chainId: ChainId
   createdAt: number
   updatedAt: number

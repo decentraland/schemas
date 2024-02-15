@@ -15,7 +15,7 @@ export type Order = {
   expiresAt: number
   createdAt: number
   updatedAt: number
-  network: Network
+  network: Network.ETHEREUM | Network.MATIC
   chainId: ChainId
   issuedId: string
 }
