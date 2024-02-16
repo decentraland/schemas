@@ -62,3 +62,12 @@ export function isBaseAvatar(item: BaseItem): boolean {
 
   return urnParts.length === 5 && isDecentralandAvatar && isBaseAvatar
 }
+
+export function isBaseEmote(item: BaseItem): boolean {
+  if (!item || !item.id) {
+    return false
+  }
+
+  const urnParts = item.id.split(':')
+  return urnParts.length === 5 && urnParts[1] === 'decentraland' && urnParts[3] === 'base-emotes'
+}

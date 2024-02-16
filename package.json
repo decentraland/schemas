@@ -16,6 +16,13 @@
     "type": "git",
     "url": "git+https://github.com/decentraland/schemas.git"
   },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "tabWidth": 2
+  },
   "devDependencies": {
     "@dcl/eslint-config": "^1.1.1",
     "@microsoft/api-extractor": "^7.34.8",
