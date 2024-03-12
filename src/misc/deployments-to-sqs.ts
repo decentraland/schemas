@@ -9,6 +9,7 @@ export type DeploymentToSqs = {
     entityId: string
     authChain: AuthChain
   }
+  lods?: string[]
   contentServerUrls?: string[]
   force?: boolean
 }
@@ -29,6 +30,11 @@ export namespace DeploymentToSqs {
           authChain: AuthChain.schema
         },
         additionalProperties: true
+      },
+      lods: {
+        type: 'array',
+        items: { type: 'string' },
+        nullable: true
       },
       contentServerUrls: {
         type: 'array',

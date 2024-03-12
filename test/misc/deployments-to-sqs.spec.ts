@@ -93,4 +93,15 @@ describe('deployments-to-sqs', () => {
       "must have required property 'authChain'"
     ])
   })
+
+  it('valid with lods', () => {
+    const deploymentToSqs: DeploymentToSqs = {
+      entity: {
+        entityId: 'baz',
+        authChain: chain
+      },
+      lods: ['https://cdn.test/file1.pbx', 'https://cdn.test/file2.pbx']
+    }
+    expect(DeploymentToSqs.validate(deploymentToSqs)).toEqual(true)
+  })
 })
