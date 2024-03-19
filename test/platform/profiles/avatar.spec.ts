@@ -130,7 +130,7 @@ describe('Avatar tests', () => {
     })
   })
 
-  describe("when the avatar contains links that point to a protocol that's javascript", () => {
+  describe("when the avatar contains links that point to a protocol that's not http", () => {
     it('should return false', () => {
       const avatar: Avatar = {
         ...AVATAR,
