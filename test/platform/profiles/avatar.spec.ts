@@ -89,4 +89,54 @@ describe('Avatar tests', () => {
     const avatar: Avatar = { ...AVATAR, ethAddress: 'someInvalidAddress' }
     expect(Avatar.validate(avatar)).toEqual(false)
   })
+
+  describe('when the avatar contains links that have query parameters', () => {
+    it('should return false', () => {
+      const avatar: Avatar = {
+        ...AVATAR,
+        links: [{ title: 'Invalid Link', url: 'https://alink.com?aVar=aValue&anotherVar=anotherValue' }]
+      }
+      expect(Avatar.validate(avatar)).toEqual(true)
+    })
+  })
+
+  describe('when the avatar contains links with url encoded characters', () => {
+    it('should return true', () => {
+      const avatar: Avatar = {
+        ...AVATAR,
+        links: [{ title: 'Link', url: 'https://alink.com?someVar=some%20value' }]
+      }
+      expect(Avatar.validate(avatar)).toEqual(true)
+    })
+  })
+
+  describe('when the avatar contains links that are of the https protocol', () => {
+    it('should return true', () => {
+      const avatar: Avatar = {
+        ...AVATAR,
+        links: [{ title: 'Link', url: 'https://alink.com' }]
+      }
+      expect(Avatar.validate(avatar)).toEqual(true)
+    })
+  })
+
+  describe('when the avatar contains links that are of the http protocol', () => {
+    it('should return true', () => {
+      const avatar: Avatar = {
+        ...AVATAR,
+        links: [{ title: 'Link', url: 'http://alink.com' }]
+      }
+      expect(Avatar.validate(avatar)).toEqual(true)
+    })
+  })
+
+  describe("when the avatar contains links that point to a protocol that's not http", () => {
+    it('should return false', () => {
+      const avatar: Avatar = {
+        ...AVATAR,
+        links: [{ title: 'Invalid Link', url: 'javascript:window%5b%22ale%22%2b%22rt%22%5d(document.domain)//.com' }]
+      }
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
 })
