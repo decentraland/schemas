@@ -1,4 +1,4 @@
-import type { EventEmitter } from '@foxify/events'
+import type { Emitter } from 'mitt'
 import type { Metrics } from '../../platform/item/metrics'
 import type { PreviewEmoteEventType } from './preview-emote-event-type'
 
@@ -8,11 +8,11 @@ export interface IPreviewController {
 }
 
 export type EmoteEvents = {
-  [PreviewEmoteEventType.ANIMATION_PLAY]: () => unknown
-  [PreviewEmoteEventType.ANIMATION_PAUSE]: () => unknown
-  [PreviewEmoteEventType.ANIMATION_LOOP]: () => unknown
-  [PreviewEmoteEventType.ANIMATION_END]: () => unknown
-  [PreviewEmoteEventType.ANIMATION_PLAYING]: ({ length }: { length: number }) => unknown
+  [PreviewEmoteEventType.ANIMATION_PLAY]: void
+  [PreviewEmoteEventType.ANIMATION_PAUSE]: void
+  [PreviewEmoteEventType.ANIMATION_LOOP]: void
+  [PreviewEmoteEventType.ANIMATION_END]: void
+  [PreviewEmoteEventType.ANIMATION_PLAYING]: { length: number }
 }
 
 export interface ISceneController {
@@ -32,5 +32,5 @@ export interface IEmoteController {
   enableSound(): Promise<void>
   disableSound(): Promise<void>
   hasSound(): Promise<boolean>
-  events: EventEmitter<EmoteEvents>
+  events: Emitter<EmoteEvents>
 }
