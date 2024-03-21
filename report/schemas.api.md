@@ -6,6 +6,7 @@
 
 import Ajv from 'ajv';
 import { ErrorObject } from 'ajv';
+import type { EventEmitter } from '@foxify/events';
 import { JSONSchemaType } from 'ajv';
 import { KeywordDefinition } from 'ajv';
 
@@ -630,6 +631,19 @@ export type EmoteDefinition = Omit<Emote, 'emoteDataADR74'> & {
     };
 };
 
+// Warning: (ae-missing-release-tag) "EmoteEvents" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteEvents = {
+    [PreviewEmoteEventType.ANIMATION_PLAY]: () => unknown;
+    [PreviewEmoteEventType.ANIMATION_PAUSE]: () => unknown;
+    [PreviewEmoteEventType.ANIMATION_LOOP]: () => unknown;
+    [PreviewEmoteEventType.ANIMATION_END]: () => unknown;
+    [PreviewEmoteEventType.ANIMATION_PLAYING]: ({ length }: {
+        length: number;
+    }) => unknown;
+};
+
 // Warning: (ae-missing-release-tag) "EmotePlayMode" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "EmotePlayMode" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -811,7 +825,7 @@ export interface IEmoteController {
     // (undocumented)
     enableSound(): Promise<void>;
     // (undocumented)
-    events: any;
+    events: EventEmitter<EmoteEvents>;
     // (undocumented)
     getLength(): Promise<number>;
     // (undocumented)
