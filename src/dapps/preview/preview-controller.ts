@@ -1,9 +1,20 @@
-import { Metrics } from '../../platform/item/metrics'
+import type { EventEmitter } from '@foxify/events'
+import type { Metrics } from '../../platform/item/metrics'
+import type { PreviewEmoteEventType } from './preview-emote-event-type'
 
 export interface IPreviewController {
   scene: ISceneController
   emote: IEmoteController
 }
+
+export type EmoteEvents = {
+  [PreviewEmoteEventType.ANIMATION_PLAY]: () => unknown
+  [PreviewEmoteEventType.ANIMATION_PAUSE]: () => unknown
+  [PreviewEmoteEventType.ANIMATION_LOOP]: () => unknown
+  [PreviewEmoteEventType.ANIMATION_END]: () => unknown
+  [PreviewEmoteEventType.ANIMATION_PLAYING]: ({ length }: { length: number }) => unknown
+}
+
 export interface ISceneController {
   getScreenshot(width: number, height: number): Promise<string>
   getMetrics(): Promise<Metrics>
@@ -21,5 +32,5 @@ export interface IEmoteController {
   enableSound(): Promise<void>
   disableSound(): Promise<void>
   hasSound(): Promise<boolean>
-  events: any
+  events: EventEmitter<EmoteEvents>
 }
