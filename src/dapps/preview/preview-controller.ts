@@ -1,9 +1,20 @@
-import { Metrics } from '../../platform/item/metrics'
+import type { Emitter } from 'mitt'
+import type { Metrics } from '../../platform/item/metrics'
+import type { PreviewEmoteEventType } from './preview-emote-event-type'
 
 export interface IPreviewController {
   scene: ISceneController
   emote: IEmoteController
 }
+
+export type EmoteEvents = {
+  [PreviewEmoteEventType.ANIMATION_PLAY]: void
+  [PreviewEmoteEventType.ANIMATION_PAUSE]: void
+  [PreviewEmoteEventType.ANIMATION_LOOP]: void
+  [PreviewEmoteEventType.ANIMATION_END]: void
+  [PreviewEmoteEventType.ANIMATION_PLAYING]: { length: number }
+}
+
 export interface ISceneController {
   getScreenshot(width: number, height: number): Promise<string>
   getMetrics(): Promise<Metrics>
@@ -21,5 +32,5 @@ export interface IEmoteController {
   enableSound(): Promise<void>
   disableSound(): Promise<void>
   hasSound(): Promise<boolean>
-  events: any
+  events: Emitter<EmoteEvents>
 }

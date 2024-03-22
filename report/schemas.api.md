@@ -5,6 +5,7 @@
 ```ts
 
 import Ajv from 'ajv';
+import type { Emitter } from 'mitt';
 import { ErrorObject } from 'ajv';
 import { JSONSchemaType } from 'ajv';
 import { KeywordDefinition } from 'ajv';
@@ -630,6 +631,19 @@ export type EmoteDefinition = Omit<Emote, 'emoteDataADR74'> & {
     };
 };
 
+// Warning: (ae-missing-release-tag) "EmoteEvents" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteEvents = {
+    [PreviewEmoteEventType.ANIMATION_PLAY]: void;
+    [PreviewEmoteEventType.ANIMATION_PAUSE]: void;
+    [PreviewEmoteEventType.ANIMATION_LOOP]: void;
+    [PreviewEmoteEventType.ANIMATION_END]: void;
+    [PreviewEmoteEventType.ANIMATION_PLAYING]: {
+        length: number;
+    };
+};
+
 // Warning: (ae-missing-release-tag) "EmotePlayMode" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "EmotePlayMode" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -811,7 +825,7 @@ export interface IEmoteController {
     // (undocumented)
     enableSound(): Promise<void>;
     // (undocumented)
-    events: any;
+    events: Emitter<EmoteEvents>;
     // (undocumented)
     getLength(): Promise<number>;
     // (undocumented)
