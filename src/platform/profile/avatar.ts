@@ -123,7 +123,8 @@ export namespace LinkUrl {
   export const schema: JSONSchema<LinkUrl> = {
     type: 'string',
     maxLength: 2083,
-    pattern: '^(?:https?):\\/\\/[^\\s/$.?#].[^\\s]*$'
+    pattern:
+      "^(https?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)*([\\/\\w\\-._~:?#[\\]@!$&'()*+,;=]*[\\w\\-._~:?#[\\]@!$&'()*+,;= %]+)?$"
   }
   const regexp = new RegExp(schema.pattern!, 'i')
   export const validate: ValidateFunction<LinkUrl> = (url: any): url is LinkUrl => regexp.test(url)

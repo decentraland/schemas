@@ -91,7 +91,7 @@ describe('Avatar tests', () => {
   })
 
   describe('when the avatar contains links that have query parameters', () => {
-    it('should return false', () => {
+    it('should return true', () => {
       const avatar: Avatar = {
         ...AVATAR,
         links: [{ title: 'Invalid Link', url: 'https://alink.com?aVar=aValue&anotherVar=anotherValue' }]
@@ -130,11 +130,31 @@ describe('Avatar tests', () => {
     })
   })
 
+  describe('when the avatar contains links without protocol', () => {
+    it('should return true', () => {
+      const avatar: Avatar = {
+        ...AVATAR,
+        links: [{ title: 'Link', url: 'alink.com' }]
+      }
+      expect(Avatar.validate(avatar)).toEqual(true)
+    })
+  })
+
   describe("when the avatar contains links that point to a protocol that's not http", () => {
     it('should return false', () => {
       const avatar: Avatar = {
         ...AVATAR,
         links: [{ title: 'Invalid Link', url: 'javascript:window%5b%22ale%22%2b%22rt%22%5d(document.domain)//.com' }]
+      }
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe("when the avatar contains links that point to a protocol that's not http (2)", () => {
+    it('should return false', () => {
+      const avatar: Avatar = {
+        ...AVATAR,
+        links: [{ title: 'Invalid Link', url: 'anyother:window%5b%22ale%22%2b%22rt%22%5d(document.domain)//.com' }]
       }
       expect(Avatar.validate(avatar)).toEqual(false)
     })
