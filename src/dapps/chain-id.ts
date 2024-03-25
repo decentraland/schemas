@@ -16,6 +16,7 @@ export enum ChainId {
   ETHEREUM_SEPOLIA = 11155111,
   MATIC_MAINNET = 137,
   MATIC_MUMBAI = 80001,
+  MATIC_AMOY = 80002,
   BSC_MAINNET = 56,
   OPTIMISM_MAINNET = 10,
   ARBITRUM_MAINNET = 42161,
@@ -45,6 +46,8 @@ export function getChainName(chainId: ChainId): ChainName | null {
       return ChainName.MATIC_MAINNET
     case ChainId.MATIC_MUMBAI:
       return ChainName.MATIC_MUMBAI
+    case ChainId.MATIC_AMOY:
+      return ChainName.MATIC_AMOY
     case ChainId.BSC_MAINNET:
       return ChainName.BINANCE_MAINNET
     case ChainId.ARBITRUM_MAINNET:
@@ -82,6 +85,8 @@ export function getURNProtocol(chainId: ChainId): string {
       return 'matic'
     case ChainId.MATIC_MUMBAI:
       return 'mumbai'
+    case ChainId.MATIC_AMOY:
+      return 'amoy'
     default:
       return ''
   }
@@ -150,6 +155,12 @@ export function getNetworkMapping(chainId: ChainId): Record<Network, ChainId> {
         [Network.MATIC]: ChainId.MATIC_MUMBAI,
         ...baseEVMCompatibleChains
       }
+    case ChainId.MATIC_MUMBAI:
+      return {
+        [Network.ETHEREUM]: ChainId.MATIC_AMOY,
+        [Network.MATIC]: ChainId.MATIC_AMOY,
+        ...baseEVMCompatibleChains
+      }
     default:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_MAINNET,
@@ -174,6 +185,7 @@ export function getNetwork(chainId: ChainId): Network {
       return Network.ETHEREUM
     case ChainId.MATIC_MAINNET:
     case ChainId.MATIC_MUMBAI:
+    case ChainId.MATIC_AMOY:
       return Network.MATIC
     case ChainId.BSC_MAINNET:
       return Network.BSC
