@@ -357,6 +357,8 @@ export enum ChainId {
     // (undocumented)
     FANTOM_MAINNET = 250,
     // (undocumented)
+    MATIC_AMOY = 80002,
+    // (undocumented)
     MATIC_MAINNET = 137,
     // (undocumented)
     MATIC_MUMBAI = 80001,
@@ -394,6 +396,8 @@ export enum ChainName {
     ETHEREUM_SEPOLIA = "Sepolia",
     // (undocumented)
     FANTOM_MAINNET = "Fantom",
+    // (undocumented)
+    MATIC_AMOY = "Amoy",
     // (undocumented)
     MATIC_MAINNET = "Polygon",
     // (undocumented)
