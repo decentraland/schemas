@@ -23,7 +23,8 @@ describe('Wearable representation tests', () => {
       hides: [WearableCategory.EYEBROWS, BodyPartCategory.HANDS],
       tags: ['tag1'],
       representations: [representation],
-      category: WearableCategory.UPPER_BODY
+      category: WearableCategory.UPPER_BODY,
+      blockVrmExport: false
     },
     i18n: [
       {
@@ -90,6 +91,12 @@ describe('Wearable representation tests', () => {
     expect(Wearable.validate(wearable)).toEqual(true)
     expect(Wearable.validate(null)).toEqual(false)
     expect(Wearable.validate({})).toEqual(false)
+  })
+
+  it('should validate wearable without blockVrmExport', () => {
+    const wearableExport = { ...wearable }
+    delete (wearableExport.data as Wearable['data']).blockVrmExport
+    expect(Wearable.validate(wearableExport)).toEqual(true)
   })
 
   it('static tests must return the correct errors when missing properties', () => {
