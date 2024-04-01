@@ -2402,6 +2402,7 @@ export type Wearable = BaseItem & {
         representations: WearableRepresentation[];
         category: WearableCategory;
         removesDefaultHiding?: HideableWearableCategory[];
+        blockVrmExport?: boolean;
     };
 } & (StandardProps | ThirdPartyProps);
 
