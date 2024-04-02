@@ -1876,6 +1876,8 @@ export enum Rarity {
     // (undocumented)
     EPIC = "epic",
     // (undocumented)
+    EXOTIC = "exotic",
+    // (undocumented)
     LEGENDARY = "legendary",
     // (undocumented)
     MYTHIC = "mythic",
@@ -1899,6 +1901,8 @@ export namespace Rarity {
     export function getGradient(rarity: Rarity): [string, string];
     // (undocumented)
     export function getMaxSupply(rarity: Rarity): number;
+    // (undocumented)
+    export function getRarities(): Rarity[];
 }
 
 // Warning: (ae-missing-release-tag) "RentalListing" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)

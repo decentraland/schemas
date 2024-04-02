@@ -3,6 +3,7 @@ import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validati
 export enum Rarity {
   UNIQUE = 'unique',
   MYTHIC = 'mythic',
+  EXOTIC = 'exotic',
   LEGENDARY = 'legendary',
   EPIC = 'epic',
   RARE = 'rare',
@@ -21,6 +22,7 @@ export namespace Rarity {
   const maxSupplyByRarity: Record<Rarity, number> = {
     [Rarity.UNIQUE]: 1,
     [Rarity.MYTHIC]: 10,
+    [Rarity.EXOTIC]: 50,
     [Rarity.LEGENDARY]: 100,
     [Rarity.EPIC]: 1000,
     [Rarity.RARE]: 5000,
@@ -31,6 +33,7 @@ export namespace Rarity {
   const lightColorByRarity: Record<Rarity, string> = {
     [Rarity.UNIQUE]: '#FFE617',
     [Rarity.MYTHIC]: '#FB7DE3',
+    [Rarity.EXOTIC]: '#E4FFB8',
     [Rarity.LEGENDARY]: '#A657ED',
     [Rarity.EPIC]: '#6397F2',
     [Rarity.RARE]: '#3AD682',
@@ -41,6 +44,7 @@ export namespace Rarity {
   const colorByRarity: Record<Rarity, string> = {
     [Rarity.UNIQUE]: '#FFB626',
     [Rarity.MYTHIC]: '#FF63E1',
+    [Rarity.EXOTIC]: '#CAFF73',
     [Rarity.LEGENDARY]: '#842DDA',
     [Rarity.EPIC]: '#3D85E6',
     [Rarity.RARE]: '#36CF75',
@@ -54,6 +58,19 @@ export namespace Rarity {
 
   export function getColor(rarity: Rarity): string {
     return colorByRarity[rarity]
+  }
+
+  export function getRarities(): Rarity[] {
+    return [
+      Rarity.UNIQUE,
+      Rarity.MYTHIC,
+      Rarity.EXOTIC,
+      Rarity.LEGENDARY,
+      Rarity.EPIC,
+      Rarity.RARE,
+      Rarity.UNCOMMON,
+      Rarity.COMMON
+    ]
   }
 
   export function getGradient(rarity: Rarity): [string, string] {
