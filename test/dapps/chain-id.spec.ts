@@ -41,4 +41,8 @@ describe('ChainId tests', () => {
   it('Should get a valid network', () => {
     expect(getNetwork(ChainId.MATIC_MUMBAI)).toEqual(Network.MATIC)
   })
+
+  it('Should get a valid network', () => {
+    expect(getNetwork(ChainId.MATIC_AMOY)).toEqual(Network.MATIC)
+  })
 })

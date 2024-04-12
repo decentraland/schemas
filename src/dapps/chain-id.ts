@@ -140,7 +140,7 @@ export function getNetworkMapping(chainId: ChainId): Record<Network, ChainId> {
     case ChainId.ETHEREUM_SEPOLIA:
       return {
         [Network.ETHEREUM]: ChainId.ETHEREUM_SEPOLIA,
-        [Network.MATIC]: ChainId.MATIC_MUMBAI,
+        [Network.MATIC]: ChainId.MATIC_AMOY,
         ...baseEVMCompatibleChains
       }
     case ChainId.MATIC_MAINNET:
@@ -155,7 +155,7 @@ export function getNetworkMapping(chainId: ChainId): Record<Network, ChainId> {
         [Network.MATIC]: ChainId.MATIC_MUMBAI,
         ...baseEVMCompatibleChains
       }
-    case ChainId.MATIC_MUMBAI:
+    case ChainId.MATIC_AMOY:
       return {
         [Network.ETHEREUM]: ChainId.MATIC_AMOY,
         [Network.MATIC]: ChainId.MATIC_AMOY,
