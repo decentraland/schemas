@@ -1,27 +1,25 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
-/**
- * Types of notifications used inn the notifications-workers
- * @alpha
- */
-export type NotificationMessageType =
-  | 'governance_new_comment_on_project_update'
-  | 'bid_accepted'
-  | 'reward_assignment'
-  | 'events_starts_soon'
-  | 'royalties_earned'
-  | 'rental_started'
-  | 'governance_proposal_enacted'
-  | 'governance_coauthor_requested'
-  | 'worlds_access_restored'
-  | 'worlds_missing_resources'
-  | 'governance_authored_proposal_finished'
-  | 'bid_received'
-  | 'rental_ended'
-  | 'governance_new_comment_on_proposal'
-  | 'item_sold'
-  | 'governance_voting_ended_voter'
-  | 'events_started'
+export enum NotificationType {
+  GOVERNANCE_NEW_COMMENT_ON_PROJECT_UPDATE = 'governance_new_comment_on_project_update',
+  BID_ACCEPTED = 'bid_accepted',
+  REWARD_ASSIGNMENT = 'reward_assignment',
+  EVENTS_STARTS_SOON = 'events_starts_soon',
+  ROYALTIES_EARNED = 'royalties_earned',
+  RENTAL_STARTED = 'rental_started',
+  GOVERNANCE_PROPOSAL_ENACTED = 'governance_proposal_enacted',
+  GOVERNANCE_COAUTHOR_REQUESTED = 'governance_coauthor_requested',
+  WORLDS_ACCESS_RESTORED = 'worlds_access_restored',
+  WORLDS_MISSING_RESOURCES = 'worlds_missing_resources',
+  GOVERNANCE_AUTHORED_PROPOSAL_FINISHED = 'governance_authored_proposal_finished',
+  BID_RECEIVED = 'bid_received',
+  RENTAL_ENDED = 'rental_ended',
+  GOVERNANCE_NEW_COMMENT_ON_PROPOSAL = 'governance_new_comment_on_proposal',
+  ITEM_SOLD = 'item_sold',
+  GOVERNANCE_VOTING_ENDED_VOTER = 'governance_voting_ended_voter',
+  EVENTS_STARTED = 'events_started'
+}
+
 
 /**
  * The medium/channel used to send the notification
@@ -40,9 +38,28 @@ export type SubscriptionDetails = {
   ignore_all_email: boolean
   ignore_all_in_app: boolean
   message_type: {
-    [notificationType in NotificationMessageType]: NotificationChannelType
+    [notificationType in NotificationType]: NotificationChannelType
   }
 }
+
+// Define the schema for NotificationChannelType
+const NotificationChannelTypeSchema: JSONSchema<NotificationChannelType> = {
+  type: 'object',
+  required: ['email', 'in_app'],
+  properties: {
+    email: {
+      type: 'boolean'
+    },
+    in_app: {
+      type: 'boolean'
+    }
+  }
+}
+
+const messageTypeProperties = Object.values(NotificationType).reduce((properties, notificationType) => {
+  properties[notificationType] = NotificationChannelTypeSchema
+  return properties
+}, {} as Record<NotificationType, typeof NotificationChannelTypeSchema>)
 
 /**
  * Subscription details
@@ -61,233 +78,12 @@ export namespace SubscriptionDetails {
       },
       message_type: {
         type: 'object',
-        required: [
-          'governance_new_comment_on_project_update',
-          'bid_accepted',
-          'reward_assignment',
-          'events_starts_soon',
-          'royalties_earned',
-          'rental_started',
-          'governance_proposal_enacted',
-          'governance_coauthor_requested',
-          'worlds_access_restored',
-          'worlds_missing_resources',
-          'governance_authored_proposal_finished',
-          'bid_received',
-          'rental_ended',
-          'governance_new_comment_on_proposal',
-          'item_sold',
-          'governance_voting_ended_voter',
-          'events_started'
-        ],
-        properties: {
-          governance_new_comment_on_project_update: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          bid_accepted: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          reward_assignment: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          events_starts_soon: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          royalties_earned: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          rental_started: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          governance_proposal_enacted: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          governance_coauthor_requested: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          worlds_access_restored: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          worlds_missing_resources: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          governance_authored_proposal_finished: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          bid_received: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          rental_ended: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          governance_new_comment_on_proposal: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          item_sold: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          governance_voting_ended_voter: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          },
-          events_started: {
-            type: 'object',
-            required: ['email', 'in_app'],
-            properties: {
-              email: {
-                type: 'boolean'
-              },
-              in_app: {
-                type: 'boolean'
-              }
-            }
-          }
-        }
+        required: Object.values(NotificationType), // All enum values are required
+        additionalProperties: false, // No other properties are allowed
+        properties: messageTypeProperties
       }
     }
   }
+
   export const validate: ValidateFunction<SubscriptionDetails> = generateLazyValidator(schema)
 }
