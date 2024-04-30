@@ -1,32 +1,9 @@
 import expect from 'expect'
 import { testTypeSignature } from '../../test-utils'
-import { NotificationType, SubscriptionDetails } from '../../../src'
+import { SubscriptionDetails } from '../../../src'
+import { subscriptionDetails } from './subscription.spec'
 
 describe('Subscription details tests', () => {
-  const subscriptionDetails: SubscriptionDetails = {
-    ignore_all_email: true,
-    ignore_all_in_app: false,
-    message_type: {
-      [NotificationType.GOVERNANCE_NEW_COMMENT_ON_PROJECT_UPDATE]: { email: true, in_app: true },
-      [NotificationType.BID_ACCEPTED]: { email: true, in_app: true },
-      [NotificationType.REWARD_ASSIGNMENT]: { email: true, in_app: true },
-      [NotificationType.EVENTS_STARTS_SOON]: { email: true, in_app: true },
-      [NotificationType.ROYALTIES_EARNED]: { email: true, in_app: true },
-      [NotificationType.RENTAL_STARTED]: { email: true, in_app: true },
-      [NotificationType.GOVERNANCE_PROPOSAL_ENACTED]: { email: true, in_app: true },
-      [NotificationType.GOVERNANCE_COAUTHOR_REQUESTED]: { email: true, in_app: true },
-      [NotificationType.WORLDS_ACCESS_RESTORED]: { email: true, in_app: true },
-      [NotificationType.WORLDS_MISSING_RESOURCES]: { email: true, in_app: true },
-      [NotificationType.GOVERNANCE_AUTHORED_PROPOSAL_FINISHED]: { email: true, in_app: true },
-      [NotificationType.BID_RECEIVED]: { email: true, in_app: true },
-      [NotificationType.RENTAL_ENDED]: { email: true, in_app: true },
-      [NotificationType.GOVERNANCE_NEW_COMMENT_ON_PROPOSAL]: { email: true, in_app: true },
-      [NotificationType.ITEM_SOLD]: { email: true, in_app: true },
-      [NotificationType.GOVERNANCE_VOTING_ENDED_VOTER]: { email: true, in_app: true },
-      [NotificationType.EVENTS_STARTED]: { email: true, in_app: true }
-    }
-  }
-
   testTypeSignature(SubscriptionDetails, subscriptionDetails)
 
   it('static tests must pass', () => {

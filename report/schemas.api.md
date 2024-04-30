@@ -1400,9 +1400,7 @@ export type NotificationChannelType = {
     in_app: boolean;
 };
 
-// Warning: (ae-missing-release-tag) "NotificationType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
+// @alpha
 export enum NotificationType {
     // (undocumented)
     BID_ACCEPTED = "bid_accepted",

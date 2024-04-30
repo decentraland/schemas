@@ -1,3 +1,7 @@
+/**
+ * Notification Types (the keys as stored in the notifications DB)
+ * @alpha
+ */
 export enum NotificationType {
   GOVERNANCE_NEW_COMMENT_ON_PROJECT_UPDATE = 'governance_new_comment_on_project_update',
   BID_ACCEPTED = 'bid_accepted',
@@ -19,7 +23,7 @@ export enum NotificationType {
 }
 
 /**
- * The medium/channel used to send the notification
+ * The channel used for sending the notification
  * @alpha
  */
 export type NotificationChannelType = {
