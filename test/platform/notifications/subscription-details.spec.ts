@@ -1,6 +1,6 @@
 import expect from 'expect'
 import { testTypeSignature } from '../../test-utils'
-import { NotificationType, SubscriptionDetails } from '../../../src/platform/notifications'
+import { NotificationType, SubscriptionDetails } from '../../../src'
 
 describe('Subscription details tests', () => {
   const subscriptionDetails: SubscriptionDetails = {
