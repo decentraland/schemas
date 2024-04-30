@@ -1,29 +1,29 @@
 import expect from 'expect'
 import { testTypeSignature } from '../../test-utils'
-import { SubscriptionDetails } from '../../../src/platform/notifications'
+import { NotificationType, SubscriptionDetails } from '../../../src/platform/notifications'
 
 describe('Subscription details tests', () => {
   const subscriptionDetails: SubscriptionDetails = {
     ignore_all_email: true,
     ignore_all_in_app: false,
     message_type: {
-      governance_new_comment_on_project_update: { email: true, in_app: true },
-      bid_accepted: { email: true, in_app: true },
-      reward_assignment: { email: true, in_app: true },
-      events_starts_soon: { email: true, in_app: true },
-      royalties_earned: { email: true, in_app: true },
-      rental_started: { email: true, in_app: true },
-      governance_proposal_enacted: { email: true, in_app: true },
-      governance_coauthor_requested: { email: true, in_app: true },
-      worlds_access_restored: { email: true, in_app: true },
-      worlds_missing_resources: { email: true, in_app: true },
-      governance_authored_proposal_finished: { email: true, in_app: true },
-      bid_received: { email: true, in_app: true },
-      rental_ended: { email: true, in_app: true },
-      governance_new_comment_on_proposal: { email: true, in_app: true },
-      item_sold: { email: true, in_app: true },
-      governance_voting_ended_voter: { email: true, in_app: true },
-      events_started: { email: true, in_app: true }
+      [NotificationType.GOVERNANCE_NEW_COMMENT_ON_PROJECT_UPDATE]: { email: true, in_app: true },
+      [NotificationType.BID_ACCEPTED]: { email: true, in_app: true },
+      [NotificationType.REWARD_ASSIGNMENT]: { email: true, in_app: true },
+      [NotificationType.EVENTS_STARTS_SOON]: { email: true, in_app: true },
+      [NotificationType.ROYALTIES_EARNED]: { email: true, in_app: true },
+      [NotificationType.RENTAL_STARTED]: { email: true, in_app: true },
+      [NotificationType.GOVERNANCE_PROPOSAL_ENACTED]: { email: true, in_app: true },
+      [NotificationType.GOVERNANCE_COAUTHOR_REQUESTED]: { email: true, in_app: true },
+      [NotificationType.WORLDS_ACCESS_RESTORED]: { email: true, in_app: true },
+      [NotificationType.WORLDS_MISSING_RESOURCES]: { email: true, in_app: true },
+      [NotificationType.GOVERNANCE_AUTHORED_PROPOSAL_FINISHED]: { email: true, in_app: true },
+      [NotificationType.BID_RECEIVED]: { email: true, in_app: true },
+      [NotificationType.RENTAL_ENDED]: { email: true, in_app: true },
+      [NotificationType.GOVERNANCE_NEW_COMMENT_ON_PROPOSAL]: { email: true, in_app: true },
+      [NotificationType.ITEM_SOLD]: { email: true, in_app: true },
+      [NotificationType.GOVERNANCE_VOTING_ENDED_VOTER]: { email: true, in_app: true },
+      [NotificationType.EVENTS_STARTED]: { email: true, in_app: true }
     }
   }
 
