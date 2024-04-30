@@ -1394,6 +1394,52 @@ export enum NFTSortBy {
     RENTAL_LISTING_DATE = "rental_listing_date"
 }
 
+// @alpha
+export type NotificationChannelType = {
+    email: boolean;
+    in_app: boolean;
+};
+
+// Warning: (ae-missing-release-tag) "NotificationType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum NotificationType {
+    // (undocumented)
+    BID_ACCEPTED = "bid_accepted",
+    // (undocumented)
+    BID_RECEIVED = "bid_received",
+    // (undocumented)
+    EVENTS_STARTED = "events_started",
+    // (undocumented)
+    EVENTS_STARTS_SOON = "events_starts_soon",
+    // (undocumented)
+    GOVERNANCE_AUTHORED_PROPOSAL_FINISHED = "governance_authored_proposal_finished",
+    // (undocumented)
+    GOVERNANCE_COAUTHOR_REQUESTED = "governance_coauthor_requested",
+    // (undocumented)
+    GOVERNANCE_NEW_COMMENT_ON_PROJECT_UPDATE = "governance_new_comment_on_project_update",
+    // (undocumented)
+    GOVERNANCE_NEW_COMMENT_ON_PROPOSAL = "governance_new_comment_on_proposal",
+    // (undocumented)
+    GOVERNANCE_PROPOSAL_ENACTED = "governance_proposal_enacted",
+    // (undocumented)
+    GOVERNANCE_VOTING_ENDED_VOTER = "governance_voting_ended_voter",
+    // (undocumented)
+    ITEM_SOLD = "item_sold",
+    // (undocumented)
+    RENTAL_ENDED = "rental_ended",
+    // (undocumented)
+    RENTAL_STARTED = "rental_started",
+    // (undocumented)
+    REWARD_ASSIGNMENT = "reward_assignment",
+    // (undocumented)
+    ROYALTIES_EARNED = "royalties_earned",
+    // (undocumented)
+    WORLDS_ACCESS_RESTORED = "worlds_access_restored",
+    // (undocumented)
+    WORLDS_MISSING_RESOURCES = "worlds_missing_resources"
+}
+
 // Warning: (ae-missing-release-tag) "Order" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Order" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -2341,6 +2387,23 @@ export namespace Store {
     schema: JSONSchema<Store>;
     const // (undocumented)
     validate: ValidateFunction<Store>;
+}
+
+// @alpha
+export type SubscriptionDetails = {
+    ignore_all_email: boolean;
+    ignore_all_in_app: boolean;
+    message_type: {
+        [notificationType in NotificationType]: NotificationChannelType;
+    };
+};
+
+// @alpha
+export namespace SubscriptionDetails {
+    const // (undocumented)
+    schema: JSONSchema<SubscriptionDetails>;
+    const // (undocumented)
+    validate: ValidateFunction<SubscriptionDetails>;
 }
 
 // Warning: (ae-missing-release-tag) "SyncDeployment" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
