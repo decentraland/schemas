@@ -28,6 +28,7 @@ export const subscriptionDetails: SubscriptionDetails = {
 
 const subscription = {
   address: '0x13a088C9ae5028C55F8E1cd5A13dc8134b062d50',
+  email: 'email@example.org',
   details: subscriptionDetails
 }
 
@@ -56,7 +57,7 @@ describe('Subscription tests', () => {
     ])
   })
 
-  it('name, if present, must be a string', () => {
+  it('address must be present and be an ethereum address', () => {
     expect(
       Subscription.validate({
         address: '0x13a',
@@ -72,6 +73,27 @@ describe('Subscription tests', () => {
           pattern: '^0x[a-fA-F0-9]{40}$'
         },
         schemaPath: '#/properties/address/pattern'
+      }
+    ])
+  })
+
+  it('email, if present, must be a valid email address', () => {
+    expect(
+      Subscription.validate({
+        address: '0x13a088C9ae5028C55F8E1cd5A13dc8134b062d50',
+        email: 'not-an-email',
+        details: subscriptionDetails
+      })
+    ).toBeFalsy()
+    expect(Subscription.validate.errors).toMatchObject([
+      {
+        instancePath: '/email',
+        keyword: 'pattern',
+        message: 'must match pattern "^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,}$"',
+        params: {
+          pattern: '^[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,}$'
+        },
+        schemaPath: '#/properties/email/pattern'
       }
     ])
   })
