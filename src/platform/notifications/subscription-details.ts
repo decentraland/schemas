@@ -20,7 +20,6 @@ export enum NotificationType {
   EVENTS_STARTED = 'events_started'
 }
 
-
 /**
  * The medium/channel used to send the notification
  * @alpha
