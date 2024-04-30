@@ -562,6 +562,17 @@ export type DisplayableDeployment = {
     menuBarIcon?: string;
 };
 
+// @public
+export type Email = string;
+
+// @public
+export namespace Email {
+    const // (undocumented)
+    schema: JSONSchema<Email>;
+    const // (undocumented)
+    validate: ValidateFunction<Email>;
+}
+
 // Warning: (ae-forgotten-export) The symbol "EmoteADR74" needs to be exported by the entry point index.d.ts
 //
 // @alpha (undocumented)
@@ -1411,6 +1422,8 @@ export enum NotificationType {
     // (undocumented)
     EVENTS_STARTS_SOON = "events_starts_soon",
     // (undocumented)
+    GOVERNANCE_ANNOUNCEMENT = "governance_announcement",
+    // (undocumented)
     GOVERNANCE_AUTHORED_PROPOSAL_FINISHED = "governance_authored_proposal_finished",
     // (undocumented)
     GOVERNANCE_COAUTHOR_REQUESTED = "governance_coauthor_requested",
@@ -1425,15 +1438,17 @@ export enum NotificationType {
     // (undocumented)
     ITEM_SOLD = "item_sold",
     // (undocumented)
-    RENTAL_ENDED = "rental_ended",
+    LAND_RENTAL_ENDED = "rental_ended",
     // (undocumented)
-    RENTAL_STARTED = "rental_started",
+    LAND_RENTED = "rental_started",
     // (undocumented)
-    REWARD_ASSIGNMENT = "reward_assignment",
+    REWARD_ASSIGNED = "rewards_assignment",
     // (undocumented)
     ROYALTIES_EARNED = "royalties_earned",
     // (undocumented)
     WORLDS_ACCESS_RESTORED = "worlds_access_restored",
+    // (undocumented)
+    WORLDS_ACCESS_RESTRICTED = "worlds_access_restricted",
     // (undocumented)
     WORLDS_MISSING_RESOURCES = "worlds_missing_resources"
 }
@@ -2390,6 +2405,7 @@ export namespace Store {
 // @alpha
 export type Subscription = {
     address: EthAddress;
+    email: string | undefined;
     details: SubscriptionDetails;
 };
 
