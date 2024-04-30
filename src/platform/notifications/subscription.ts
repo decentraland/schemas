@@ -2,11 +2,19 @@ import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../valid
 import { SubscriptionDetails } from './subscription-details'
 import { EthAddress } from '../../misc'
 
+/**
+ * Subscription returned by the notifications-workers
+ * @alpha
+ */
 export type Subscription = {
   address: EthAddress
   details: SubscriptionDetails
 }
 
+/**
+ * Subscription schema and validator function
+ * @alpha
+ */
 export namespace Subscription {
   export const schema: JSONSchema<Subscription> = {
     type: 'object',
