@@ -2389,6 +2389,23 @@ export namespace Store {
     validate: ValidateFunction<Store>;
 }
 
+// Warning: (ae-missing-release-tag) "Subscription" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Subscription" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Subscription = {
+    address: EthAddress;
+    details: SubscriptionDetails;
+};
+
+// @public (undocumented)
+export namespace Subscription {
+    const // (undocumented)
+    schema: JSONSchema<Subscription>;
+    const // (undocumented)
+    validate: ValidateFunction<Subscription>;
+}
+
 // @alpha
 export type SubscriptionDetails = {
     ignore_all_email: boolean;
@@ -2698,6 +2715,8 @@ export namespace WorldConfiguration {
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/third-party-props.ts:6:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
+// src/platform/notifications/subscription.ts:6:3 - (ae-incompatible-release-tags) The symbol "address" is marked as @public, but its signature references "EthAddress" which is marked as @alpha
+// src/platform/notifications/subscription.ts:7:3 - (ae-incompatible-release-tags) The symbol "details" is marked as @public, but its signature references "SubscriptionDetails" which is marked as @alpha
 // src/platform/scene/feature-toggles.ts:11:3 - (ae-forgotten-export) The symbol "EnabledDisabled" needs to be exported by the entry point index.d.ts
 // src/platform/scene/feature-toggles.ts:12:3 - (ae-forgotten-export) The symbol "PortableExperiencesToggles" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts
