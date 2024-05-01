@@ -42,6 +42,7 @@ export type Item = {
   maxListingPrice?: string | null
   listings?: number | null
   owners?: number | null
+  utility?: string
 }
 
 export type ItemFilters = {
@@ -174,6 +175,10 @@ export namespace Item {
         nullable: true
       },
       minPrice: {
+        type: 'string',
+        nullable: true
+      },
+      utility: {
         type: 'string',
         nullable: true
       },

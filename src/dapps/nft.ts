@@ -63,6 +63,7 @@ export type NFT = {
   updatedAt: number
   soldAt: number
   urn?: string
+  utility?: string
 }
 
 export type NFTFilters = {
@@ -141,6 +142,10 @@ export namespace NFT {
         type: 'string'
       },
       activeOrderId: {
+        type: 'string',
+        nullable: true
+      },
+      utility: {
         type: 'string',
         nullable: true
       },
