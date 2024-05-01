@@ -45,4 +45,5 @@ export * from './misc'
 export * from './misc/linker-authorization'
 export * from './misc/auth-chain'
 export * from './misc/content-mapping'
+export * from './misc/email'
 export { sdk }
