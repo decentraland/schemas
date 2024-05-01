@@ -63,6 +63,7 @@ export type NFT = {
   updatedAt: number
   soldAt: number
   urn?: string
+  /** A description of the utility the nft has in the explorer */
   utility?: string
 }
 

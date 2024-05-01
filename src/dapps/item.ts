@@ -42,6 +42,7 @@ export type Item = {
   maxListingPrice?: string | null
   listings?: number | null
   owners?: number | null
+  /** A description of the utility the item has in the explorer */
   utility?: string
 }
 
