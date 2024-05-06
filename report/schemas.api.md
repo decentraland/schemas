@@ -1452,7 +1452,11 @@ export enum NotificationType {
     // (undocumented)
     WORLDS_ACCESS_RESTRICTED = "worlds_access_restricted",
     // (undocumented)
-    WORLDS_MISSING_RESOURCES = "worlds_missing_resources"
+    WORLDS_MISSING_RESOURCES = "worlds_missing_resources",
+    // (undocumented)
+    WORLDS_PERMISSION_GRANTED = "worlds_permission_granted",
+    // (undocumented)
+    WORLDS_PERMISSION_REVOKED = "worlds_permission_revoked"
 }
 
 // Warning: (ae-missing-release-tag) "Order" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)

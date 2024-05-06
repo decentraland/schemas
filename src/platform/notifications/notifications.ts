@@ -21,7 +21,9 @@ export enum NotificationType {
   ROYALTIES_EARNED = 'royalties_earned',
   WORLDS_ACCESS_RESTORED = 'worlds_access_restored',
   WORLDS_ACCESS_RESTRICTED = 'worlds_access_restricted',
-  WORLDS_MISSING_RESOURCES = 'worlds_missing_resources'
+  WORLDS_MISSING_RESOURCES = 'worlds_missing_resources',
+  WORLDS_PERMISSION_GRANTED = 'worlds_permission_granted',
+  WORLDS_PERMISSION_REVOKED = 'worlds_permission_revoked'
 }
 
 /**
