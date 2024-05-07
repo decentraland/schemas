@@ -1434,7 +1434,11 @@ export enum NotificationType {
     // (undocumented)
     GOVERNANCE_NEW_COMMENT_ON_PROPOSAL = "governance_new_comment_on_proposal",
     // (undocumented)
+    GOVERNANCE_PITCH_PASSED = "governance_pitch_passed",
+    // (undocumented)
     GOVERNANCE_PROPOSAL_ENACTED = "governance_proposal_enacted",
+    // (undocumented)
+    GOVERNANCE_TENDER_PASSED = "governance_tender_passed",
     // (undocumented)
     GOVERNANCE_VOTING_ENDED_VOTER = "governance_voting_ended_voter",
     // (undocumented)
