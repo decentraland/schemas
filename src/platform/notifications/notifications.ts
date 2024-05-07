@@ -14,6 +14,8 @@ export enum NotificationType {
   GOVERNANCE_NEW_COMMENT_ON_PROPOSAL = 'governance_new_comment_on_proposal',
   GOVERNANCE_PROPOSAL_ENACTED = 'governance_proposal_enacted',
   GOVERNANCE_VOTING_ENDED_VOTER = 'governance_voting_ended_voter',
+  GOVERNANCE_PITCH_PASSED = 'governance_pitch_passed',
+  GOVERNANCE_TENDER_PASSED = 'governance_tender_passed',
   ITEM_SOLD = 'item_sold',
   LAND_RENTAL_ENDED = 'rental_ended',
   LAND_RENTED = 'rental_started',
