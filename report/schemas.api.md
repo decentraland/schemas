@@ -2457,6 +2457,67 @@ export type ThirdPartyProps = {
     content: Record<string, string>;
 };
 
+// Warning: (ae-missing-release-tag) "Trade" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type Trade = {
+    signer: string;
+    signature: string;
+    checks: TradeChecks;
+    sent: TradeAsset;
+    received: TradeAsset[];
+};
+
+// Warning: (ae-missing-release-tag) "TradeAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type TradeAsset = {
+    assetType: TradeAssetType;
+    contractAddress: string;
+    value: number;
+    extra: string;
+    benenficiary: string;
+};
+
+// Warning: (ae-missing-release-tag) "TradeAssetType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum TradeAssetType {
+    // (undocumented)
+    COLLECTION_ITEM = 3,
+    // (undocumented)
+    ERC20 = 1,
+    // (undocumented)
+    ERC20_WITH_FEES = 4,
+    // (undocumented)
+    ERC721 = 2
+}
+
+// Warning: (ae-missing-release-tag) "TradeChecks" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type TradeChecks = {
+    uses: number;
+    expiration: number;
+    effective: number;
+    salt: number;
+    contractSignatureIndex: number;
+    signerSignatureIndex: number;
+    allowedRoot: string;
+    allowedProof: string[];
+    externalChecks: TradeExternalCheck[];
+};
+
+// Warning: (ae-missing-release-tag) "TradeExternalCheck" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type TradeExternalCheck = {
+    contractAddress: string;
+    selector: string;
+    value: number;
+    required: boolean;
+};
+
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
 // @public @deprecated (undocumented)
