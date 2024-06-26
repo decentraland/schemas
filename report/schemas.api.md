@@ -2496,6 +2496,13 @@ export enum TradeAssetType {
     ERC721 = 2
 }
 
+// Warning: (ae-missing-release-tag) "TradeAssetWithBeneficiary" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type TradeAssetWithBeneficiary = TradeAsset & {
+    beneficiary: string;
+};
+
 // Warning: (ae-missing-release-tag) "TradeChecks" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -2824,7 +2831,6 @@ export namespace WorldConfiguration {
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/trade.ts:49:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/trade.ts:50:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/trade.ts:55:3 - (ae-forgotten-export) The symbol "TradeAssetWithBeneficiary" needs to be exported by the entry point index.d.ts
 // src/dapps/trade.ts:61:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/trade.ts:62:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
