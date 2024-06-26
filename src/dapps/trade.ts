@@ -1,3 +1,11 @@
+import { ChainId } from './chain-id'
+import { Network } from './network'
+
+export enum TradeType {
+  BID = 'bid',
+  PUBLIC_ORDER = 'public_order'
+}
+
 export type TradeExternalCheck = {
   contractAddress: string
   selector: string
@@ -13,7 +21,7 @@ export type TradeChecks = {
   contractSignatureIndex: number
   signerSignatureIndex: number
   allowedRoot: string
-  allowedProof: string[]
+  allowedProof?: string[]
   externalChecks: TradeExternalCheck[]
 }
 
@@ -29,13 +37,31 @@ export type TradeAsset = {
   contractAddress: string
   value: number
   extra: string
-  benenficiary: string
+}
+
+export type TradeAssetWithBeneficiary = TradeAsset & {
+  beneficiary: string
 }
 
 export type Trade = {
+  id: string
+  signer: string
+  network: Network
+  chainId: ChainId
+  type: TradeType
+  checks: TradeChecks
+  createdAt: number
+  sent: TradeAsset[]
+  received: TradeAssetWithBeneficiary[]
+}
+
+export type TradeCreation = {
   signer: string
   signature: string
+  network: Network
+  chainId: ChainId
+  type: TradeType
   checks: TradeChecks
-  sent: TradeAsset
-  received: TradeAsset[]
+  sent: TradeAsset[]
+  received: TradeAssetWithBeneficiary[]
 }

@@ -23,7 +23,16 @@ export { ProviderType } from './dapps/provider-type'
 export { Rarity } from './dapps/rarity'
 export { SaleType } from './dapps/sale-type'
 export { Sale, SaleFilters, SaleSortBy } from './dapps/sale'
-export { Trade, TradeAsset, TradeAssetType, TradeChecks, TradeExternalCheck } from './dapps/trade'
+export {
+  Trade,
+  TradeAsset,
+  TradeAssetType,
+  TradeChecks,
+  TradeExternalCheck,
+  TradeCreation,
+  TradeType,
+  TradeAssetWithBeneficiary
+} from './dapps/trade'
 export {
   RentalStatus,
   RentalsListingSortDirection,
