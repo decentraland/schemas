@@ -2461,11 +2461,15 @@ export type ThirdPartyProps = {
 //
 // @public (undocumented)
 export type Trade = {
+    id: string;
     signer: string;
-    signature: string;
+    network: Network;
+    chainId: ChainId;
+    type: TradeType;
     checks: TradeChecks;
-    sent: TradeAsset;
-    received: TradeAsset[];
+    createdAt: number;
+    sent: TradeAsset[];
+    received: TradeAssetWithBeneficiary[];
 };
 
 // Warning: (ae-missing-release-tag) "TradeAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -2476,7 +2480,6 @@ export type TradeAsset = {
     contractAddress: string;
     value: number;
     extra: string;
-    benenficiary: string;
 };
 
 // Warning: (ae-missing-release-tag) "TradeAssetType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -2504,8 +2507,22 @@ export type TradeChecks = {
     contractSignatureIndex: number;
     signerSignatureIndex: number;
     allowedRoot: string;
-    allowedProof: string[];
+    allowedProof?: string[];
     externalChecks: TradeExternalCheck[];
+};
+
+// Warning: (ae-missing-release-tag) "TradeCreation" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type TradeCreation = {
+    signer: string;
+    signature: string;
+    network: Network;
+    chainId: ChainId;
+    type: TradeType;
+    checks: TradeChecks;
+    sent: TradeAsset[];
+    received: TradeAssetWithBeneficiary[];
 };
 
 // Warning: (ae-missing-release-tag) "TradeExternalCheck" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -2517,6 +2534,16 @@ export type TradeExternalCheck = {
     value: number;
     required: boolean;
 };
+
+// Warning: (ae-missing-release-tag) "TradeType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum TradeType {
+    // (undocumented)
+    BID = "bid",
+    // (undocumented)
+    PUBLIC_ORDER = "public_order"
+}
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
@@ -2795,6 +2822,11 @@ export namespace WorldConfiguration {
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/trade.ts:49:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/trade.ts:50:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/trade.ts:55:3 - (ae-forgotten-export) The symbol "TradeAssetWithBeneficiary" needs to be exported by the entry point index.d.ts
+// src/dapps/trade.ts:61:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/trade.ts:62:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/third-party-props.ts:6:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
 // src/platform/scene/feature-toggles.ts:11:3 - (ae-forgotten-export) The symbol "EnabledDisabled" needs to be exported by the entry point index.d.ts
