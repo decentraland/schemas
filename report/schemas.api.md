@@ -2478,7 +2478,7 @@ export type Trade = {
 export type TradeAsset = {
     assetType: TradeAssetType;
     contractAddress: string;
-    value: number;
+    value: string;
     extra: string;
 };
 
@@ -2510,7 +2510,7 @@ export type TradeChecks = {
     uses: number;
     expiration: number;
     effective: number;
-    salt: number;
+    salt: string;
     contractSignatureIndex: number;
     signerSignatureIndex: number;
     allowedRoot: string;
@@ -2538,7 +2538,7 @@ export type TradeCreation = {
 export type TradeExternalCheck = {
     contractAddress: string;
     selector: string;
-    value: number;
+    value: string;
     required: boolean;
 };
 

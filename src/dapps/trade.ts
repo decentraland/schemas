@@ -9,7 +9,7 @@ export enum TradeType {
 export type TradeExternalCheck = {
   contractAddress: string
   selector: string
-  value: number
+  value: string
   required: boolean
 }
 
@@ -17,7 +17,7 @@ export type TradeChecks = {
   uses: number
   expiration: number
   effective: number
-  salt: number
+  salt: string
   contractSignatureIndex: number
   signerSignatureIndex: number
   allowedRoot: string
@@ -35,7 +35,7 @@ export enum TradeAssetType {
 export type TradeAsset = {
   assetType: TradeAssetType
   contractAddress: string
-  value: number
+  value: string
   extra: string
 }
 
