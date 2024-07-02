@@ -28,16 +28,31 @@ export type TradeChecks = {
 export enum TradeAssetType {
   ERC20 = 1,
   ERC721 = 2,
-  COLLECTION_ITEM = 3,
-  ERC20_WITH_FEES = 4
+  COLLECTION_ITEM = 3
 }
 
-export type TradeAsset = {
+export type BaseTradeAsset = {
   assetType: TradeAssetType
   contractAddress: string
-  value: string
   extra: string
 }
+
+export type CollectionItemTradeAsset = BaseTradeAsset & {
+  assetType: TradeAssetType.COLLECTION_ITEM
+  itemId: string
+}
+
+export type ERC20TradeAsset = BaseTradeAsset & {
+  assetType: TradeAssetType.ERC20
+  amount: number
+}
+
+export type ERC721TradeAsset = BaseTradeAsset & {
+  assetType: TradeAssetType.ERC721
+  tokenId: string
+}
+
+export type TradeAsset = CollectionItemTradeAsset | ERC20TradeAsset | ERC721TradeAsset
 
 export type TradeAssetWithBeneficiary = TradeAsset & {
   beneficiary: string
