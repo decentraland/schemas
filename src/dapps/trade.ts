@@ -44,7 +44,7 @@ export type CollectionItemTradeAsset = BaseTradeAsset & {
 
 export type ERC20TradeAsset = BaseTradeAsset & {
   assetType: TradeAssetType.ERC20
-  amount: number
+  amount: string
 }
 
 export type ERC721TradeAsset = BaseTradeAsset & {
