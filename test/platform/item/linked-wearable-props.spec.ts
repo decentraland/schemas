@@ -1,12 +1,6 @@
 import expect from 'expect'
 import { testTypeSignature } from '../../test-utils'
-import {
-  AllMapping,
-  Mapping,
-  MultipleMapping,
-  RangeMapping,
-  SingleMapping
-} from '../../../src/platform/item/linked-wearable-props'
+import { AllMapping, Mapping, MultipleMapping, RangeMapping, SingleMapping } from '../../../src'
 
 const singleMapping: SingleMapping = {
   type: 'single',
