@@ -12,7 +12,7 @@ export type Mapping = SingleMapping | AllMapping | RangeMapping | MultipleMappin
  */
 export type SingleMapping = {
   type: 'single'
-  id: number
+  id: string
 }
 
 /**
@@ -29,8 +29,8 @@ export type AllMapping = {
  */
 export type RangeMapping = {
   type: 'range'
-  from: number
-  to: number
+  from: string
+  to: string
 }
 
 /**
@@ -39,7 +39,7 @@ export type RangeMapping = {
  */
 export type MultipleMapping = {
   type: 'multiple'
-  ids: number[]
+  ids: string[]
 }
 
 /**
@@ -61,7 +61,7 @@ export namespace Mapping {
         type: 'object',
         properties: {
           type: { type: 'string', const: 'single' },
-          id: { type: 'number' }
+          id: { type: 'string', pattern: '^[0-9]+$' }
         },
         required: ['type', 'id'],
         additionalProperties: false
@@ -78,8 +78,8 @@ export namespace Mapping {
         type: 'object',
         properties: {
           type: { type: 'string', const: 'range' },
-          from: { type: 'number' },
-          to: { type: 'number' }
+          from: { type: 'string', pattern: '^[0-9]+$' },
+          to: { type: 'string', pattern: '^[0-9]+$' }
         },
         required: ['type', 'from', 'to'],
         additionalProperties: false
@@ -88,7 +88,7 @@ export namespace Mapping {
         type: 'object',
         properties: {
           type: { type: 'string', const: 'multiple' },
-          ids: { type: 'array', items: { type: 'number' } }
+          ids: { type: 'array', items: { type: 'string', pattern: '^[0-9]+$' } }
         },
         required: ['type', 'ids'],
         additionalProperties: false

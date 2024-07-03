@@ -74,12 +74,12 @@ describe('Linked wearables tests', () => {
     mappings: [
       {
         type: 'range',
-        from: 0,
-        to: 1
+        from: '0',
+        to: '1'
       },
       {
         type: 'multiple',
-        ids: [5, 7]
+        ids: ['5', '7']
       }
     ]
   }

@@ -1238,7 +1238,7 @@ export enum MintSortBy {
 // @alpha
 export type MultipleMapping = {
     type: 'multiple';
-    ids: number[];
+    ids: string[];
 };
 
 // @alpha
@@ -1960,8 +1960,8 @@ export namespace ProviderType {
 // @alpha
 export type RangeMapping = {
     type: 'range';
-    from: number;
-    to: number;
+    from: string;
+    to: string;
 };
 
 // Warning: (ae-missing-release-tag) "Rarity" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -2337,7 +2337,7 @@ export const sendMessage: <T extends PreviewMessageType>(window: {
 // @alpha
 export type SingleMapping = {
     type: 'single';
-    id: number;
+    id: string;
 };
 
 // @alpha

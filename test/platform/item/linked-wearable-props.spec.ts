@@ -10,7 +10,7 @@ import {
 
 const singleMapping: SingleMapping = {
   type: 'single',
-  id: 1
+  id: '1'
 }
 
 const allMapping: AllMapping = {
@@ -19,13 +19,13 @@ const allMapping: AllMapping = {
 
 const multipleMapping: MultipleMapping = {
   type: 'multiple',
-  ids: [1, 3]
+  ids: ['1', '3']
 }
 
 const rangeMapping: RangeMapping = {
   type: 'range',
-  from: 1,
-  to: 9
+  from: '1',
+  to: '9'
 }
 
 describe('Linked Wearable Props tests', () => {
