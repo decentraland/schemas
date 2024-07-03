@@ -79,6 +79,14 @@ export type AllMapping = {
     type: 'all';
 };
 
+// @alpha
+export namespace AllMapping {
+    const // (undocumented)
+    schema: JSONSchema<AllMapping>;
+    const // (undocumented)
+    validate: ValidateFunction<Mapping>;
+}
+
 // Warning: (ae-missing-release-tag) "AnalyticsDayData" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1242,6 +1250,14 @@ export type MultipleMapping = {
 };
 
 // @alpha
+export namespace MultipleMapping {
+    const // (undocumented)
+    schema: JSONSchema<MultipleMapping>;
+    const // (undocumented)
+    validate: ValidateFunction<Mapping>;
+}
+
+// @alpha
 export enum Network {
     // (undocumented)
     ARBITRUM = "ARBITRUM",
@@ -1964,6 +1980,14 @@ export type RangeMapping = {
     to: string;
 };
 
+// @alpha
+export namespace RangeMapping {
+    const // (undocumented)
+    schema: JSONSchema<RangeMapping>;
+    const // (undocumented)
+    validate: ValidateFunction<Mapping>;
+}
+
 // Warning: (ae-missing-release-tag) "Rarity" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Rarity" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -2339,6 +2363,14 @@ export type SingleMapping = {
     type: 'single';
     id: string;
 };
+
+// @alpha
+export namespace SingleMapping {
+    const // (undocumented)
+    schema: JSONSchema<SingleMapping>;
+    const // (undocumented)
+    validate: ValidateFunction<Mapping>;
+}
 
 // @alpha
 export type Snapshots = {
