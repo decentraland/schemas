@@ -88,7 +88,7 @@ describe('Linked wearables tests', () => {
 
   testTypeSignature(Wearable, linkedWearable)
 
-  it('static base wearable must puss', () => {
+  it('static base wearable must pass', () => {
     expect(
       Wearable.validate({
         ...baseWearable,
