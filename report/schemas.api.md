@@ -1416,6 +1416,8 @@ export type NotificationChannelType = {
 // @alpha
 export enum NotificationType {
     // (undocumented)
+    BADGE_GRANTED = "badge_granted",
+    // (undocumented)
     BID_ACCEPTED = "bid_accepted",
     // (undocumented)
     BID_RECEIVED = "bid_received",
