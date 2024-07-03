@@ -74,6 +74,11 @@ type Actions = typeof SCENE_UPDATE | typeof UPDATE;
 
 export { Ajv }
 
+// @alpha
+export type AllMapping = {
+    type: 'all';
+};
+
 // Warning: (ae-missing-release-tag) "AnalyticsDayData" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1114,6 +1119,17 @@ export namespace Locale {
 }
 
 // @alpha
+export type Mapping = SingleMapping | AllMapping | RangeMapping | MultipleMapping;
+
+// @alpha
+export namespace Mapping {
+    const // (undocumented)
+    schema: JSONSchema<Mapping>;
+    const // (undocumented)
+    validate: ValidateFunction<Mapping>;
+}
+
+// @alpha
 export type MerkleProof = {
     proof: string[];
     index: number;
@@ -1218,6 +1234,12 @@ export enum MintSortBy {
     // (undocumented)
     RECENTLY_MINTED = "recently_minted"
 }
+
+// @alpha
+export type MultipleMapping = {
+    type: 'multiple';
+    ids: number[];
+};
 
 // @alpha
 export enum Network {
@@ -1935,6 +1957,13 @@ export namespace ProviderType {
     validate: ValidateFunction<ProviderType>;
 }
 
+// @alpha
+export type RangeMapping = {
+    type: 'range';
+    from: number;
+    to: number;
+};
+
 // Warning: (ae-missing-release-tag) "Rarity" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Rarity" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -2306,6 +2335,12 @@ export const sendMessage: <T extends PreviewMessageType>(window: {
 }, type: T, payload: PreviewMessagePayload<T>, targetOrigin?: string) => void;
 
 // @alpha
+export type SingleMapping = {
+    type: 'single';
+    id: number;
+};
+
+// @alpha
 export type Snapshots = {
     face256: IPFSv2;
     body: IPFSv2;
@@ -2455,6 +2490,7 @@ export type SyncDeployment = SnapshotSyncDeployment | PointerChangesSyncDeployme
 export type ThirdPartyProps = {
     merkleProof: MerkleProof;
     content: Record<string, string>;
+    mappings?: Mapping[];
 };
 
 // Warning: (ae-missing-release-tag) "Trade" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -2830,7 +2866,8 @@ export namespace WorldConfiguration {
 // src/dapps/trade.ts:76:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/trade.ts:77:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
-// src/platform/item/third-party-props.ts:6:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
+// src/platform/item/third-party-props.ts:7:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
+// src/platform/item/third-party-props.ts:9:3 - (ae-incompatible-release-tags) The symbol "mappings" is marked as @public, but its signature references "Mapping" which is marked as @alpha
 // src/platform/scene/feature-toggles.ts:11:3 - (ae-forgotten-export) The symbol "EnabledDisabled" needs to be exported by the entry point index.d.ts
 // src/platform/scene/feature-toggles.ts:12:3 - (ae-forgotten-export) The symbol "PortableExperiencesToggles" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts

@@ -1,10 +1,12 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { MerkleProof } from '../merkle-tree/merkle-proof'
+import { MerkleProof } from '../merkle-tree'
 import { BaseItem } from './base-item'
+import { Mapping } from './linked-wearable-props'
 
 export type ThirdPartyProps = {
   merkleProof: MerkleProof
   content: Record<string, string>
+  mappings?: Mapping[]
 }
 
 export const thirdPartyProps = {
@@ -14,6 +16,12 @@ export const thirdPartyProps = {
     nullable: false,
     additionalProperties: { type: 'string' },
     required: [] as any[]
+  },
+  mappings: {
+    type: 'array',
+    items: Mapping.schema,
+    minItems: 1,
+    nullable: true
   }
 } as const
 

@@ -1,11 +1,17 @@
 import expect from 'expect'
-import { Rarity, WearableCategory } from '../../../../src'
-import { BodyShape, Wearable, WearableRepresentation, Locale, BodyPartCategory } from '../../../../src'
-import { isStandard } from '../../../../src'
-import { isThirdParty } from '../../../../src'
+import {
+  BodyPartCategory,
+  BodyShape,
+  isThirdParty,
+  Locale,
+  ThirdPartyProps,
+  Wearable,
+  WearableCategory,
+  WearableRepresentation
+} from '../../../../src'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
 
-describe('Wearable representation tests', () => {
+describe('Linked wearables tests', () => {
   const representation: WearableRepresentation = {
     bodyShapes: [BodyShape.FEMALE],
     mainFile: 'file1',
@@ -36,12 +42,7 @@ describe('Wearable representation tests', () => {
     image: 'image.png'
   }
 
-  const standard = {
-    collectionAddress: '0x...',
-    rarity: Rarity.LEGENDARY
-  }
-
-  const thirdParty = {
+  const thirdParty: ThirdPartyProps = {
     content: {
       'thumbnail.png': 'someHash',
       'iamge.png': 'someOtherHash'
@@ -67,16 +68,25 @@ describe('Wearable representation tests', () => {
         '0x5ff2905107fe4cce21c93504414d9548f311cd27efe5696c0e03acc059d2e445',
         '0x6c764a5d8ded16bf0b04028b5754afbd216b111fa0c9b10f2126ac2e9002e2fa'
       ],
-      hashingKeys: ['id', 'name', 'description', 'i18n', 'image', 'thumbnail', 'data', 'content'],
+      hashingKeys: ['id', 'name', 'description', 'i18n', 'image', 'thumbnail', 'data', 'content', 'mappings'],
       entityHash: '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
-    }
+    },
+    mappings: [
+      {
+        type: 'range',
+        from: 0,
+        to: 1
+      },
+      {
+        type: 'multiple',
+        ids: [5, 7]
+      }
+    ]
   }
 
-  const wearable = { ...baseWearable, ...standard }
-  const thirdPartyWearable = { ...baseWearable, ...thirdParty }
+  const linkedWearable = { ...baseWearable, ...thirdParty }
 
-  testTypeSignature(Wearable, wearable)
-  testTypeSignature(Wearable, thirdPartyWearable)
+  testTypeSignature(Wearable, linkedWearable)
 
   it('static base wearable must puss', () => {
     expect(
@@ -88,15 +98,9 @@ describe('Wearable representation tests', () => {
   })
 
   it('static tests must pass', () => {
-    expect(Wearable.validate(wearable)).toEqual(true)
+    expect(Wearable.validate(linkedWearable)).toEqual(true)
     expect(Wearable.validate(null)).toEqual(false)
     expect(Wearable.validate({})).toEqual(false)
-  })
-
-  it('should validate wearable without blockVrmExport', () => {
-    const wearableExport = { ...wearable }
-    delete (wearableExport.data as Wearable['data']).blockVrmExport
-    expect(Wearable.validate(wearableExport)).toEqual(true)
   })
 
   it('static tests must return the correct errors when missing properties', () => {
@@ -110,70 +114,18 @@ describe('Wearable representation tests', () => {
     ])
   })
 
-  it('wearable with two i18n with same locale fails', () => {
-    expectValidationFailureWithErrors(
-      Wearable.validate,
-      {
-        ...wearable,
-        i18n: [
-          { code: Locale.ES, text: 'texto' },
-          { code: Locale.ES, text: 'otro texto' }
-        ]
-      },
-      ['"i18n" array should not have duplicates for "code"']
-    )
+  it('wearable with thirdparty props is thirdParty', () => {
+    expect(isThirdParty(linkedWearable)).toBeTruthy()
   })
 
-  it('wearable without representation fails', () => {
+  it('wearable with invalid mappings fails', () => {
     expectValidationFailureWithErrors(
       Wearable.validate,
       {
-        ...wearable,
-        data: {
-          ...wearable.data,
-          representations: []
-        }
+        ...linkedWearable,
+        mappings: []
       },
       ['must NOT have fewer than 1 items']
     )
-  })
-
-  it('wearable with merkle proof and standard fields fails', () => {
-    expectValidationFailureWithErrors(Wearable.validate, { ...baseWearable, ...standard, ...thirdParty }, [
-      'either standard XOR thirdparty properties conditions must be met'
-    ])
-  })
-
-  it('wearable cannot be both standard and thirdparty', () => {
-    expectValidationFailureWithErrors(Wearable.validate, { ...baseWearable, ...standard, ...thirdParty }, [
-      'either standard XOR thirdparty properties conditions must be met'
-    ])
-  })
-
-  it('wearable with standard props is standard', () => {
-    expect(isStandard(wearable)).toBeTruthy()
-  })
-
-  it('wearable with thirdparty props is thirdParty', () => {
-    expect(isThirdParty(thirdPartyWearable)).toBeTruthy()
-  })
-
-  it('group of properties must be complete, not partial', () => {
-    // misses 'rarity' to complete standard properties
-    expectValidationFailureWithErrors(Wearable.validate, { ...baseWearable, collectionAddress: '0x...' }, [
-      'either standard XOR thirdparty properties conditions must be met'
-    ])
-  })
-
-  it('wearable with removesDefaultHiding is valid', () => {
-    expect(
-      Wearable.validate({
-        ...wearable,
-        data: {
-          ...wearable.data,
-          removesDefaultHiding: [BodyPartCategory.HANDS, WearableCategory.HANDS_WEAR]
-        }
-      })
-    ).toEqual(true)
   })
 })
