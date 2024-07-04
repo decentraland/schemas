@@ -31,6 +31,11 @@ export enum TradeAssetType {
   COLLECTION_ITEM = 3
 }
 
+export enum TradeAssetDirection {
+  SENT = 'sent',
+  RECEIVED = 'received'
+}
+
 export type BaseTradeAsset = {
   assetType: TradeAssetType
   contractAddress: string
