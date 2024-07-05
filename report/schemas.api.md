@@ -208,6 +208,15 @@ export namespace AvatarInfo {
     validate: ValidateFunction<AvatarInfo>;
 }
 
+// Warning: (ae-missing-release-tag) "BaseEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type BaseEvent = {
+    type: string;
+    key: string;
+    timestamp: number;
+};
+
 // Warning: (ae-missing-release-tag) "Bid" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Bid" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -239,6 +248,14 @@ export namespace Bid {
     validate: ValidateFunction<Bid>;
 }
 
+// Warning: (ae-missing-release-tag) "BidAcceptedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type BidAcceptedEvent = BaseEvent & {
+    type: EventType.BID_ACCEPTED;
+    metadata: BidMetadata;
+};
+
 // Warning: (ae-missing-release-tag) "BidFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -253,6 +270,14 @@ export type BidFilters = {
     tokenId?: string;
     status?: ListingStatus;
     network?: Network;
+};
+
+// Warning: (ae-missing-release-tag) "BidReceivedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type BidReceivedEvent = BaseEvent & {
+    type: EventType.BID_RECEIVED;
+    metadata: BidMetadata;
 };
 
 // Warning: (ae-missing-release-tag) "BidSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -762,6 +787,29 @@ export namespace EthAddress {
     validate: ValidateFunction<EthAddress>;
 }
 
+// Warning: (ae-missing-release-tag) "EventNotification" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EventNotification = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent;
+
+// Warning: (ae-missing-release-tag) "EventType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum EventType {
+    // (undocumented)
+    BID_ACCEPTED = "bid-accepted",
+    // (undocumented)
+    BID_RECEIVED = "bid-received",
+    // (undocumented)
+    ITEM_SOLD = "item-sold",
+    // (undocumented)
+    RENTAL_ENDED = "land-rental-ended",
+    // (undocumented)
+    RENTAL_STARTED = "land-rental-started",
+    // (undocumented)
+    ROYALTIES_EARNED = "royalties-earned"
+}
+
 // @alpha (undocumented)
 export type FeatureToggles = {
     voiceChat?: EnabledDisabled;
@@ -1006,6 +1054,25 @@ export type ItemFilters = {
     urns?: string[];
     emoteHasSound?: boolean;
     emoteHasGeometry?: boolean;
+};
+
+// Warning: (ae-missing-release-tag) "ItemSoldEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ItemSoldEvent = BaseEvent & {
+    type: EventType.ITEM_SOLD;
+    metadata: {
+        address: string;
+        image: string;
+        seller: string;
+        category: string;
+        rarity?: string;
+        link: string;
+        nftName?: string;
+        network: string;
+        title: string;
+        description: string;
+    };
 };
 
 // Warning: (ae-missing-release-tag) "ItemSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1976,6 +2043,14 @@ export namespace Rarity {
     export function getRarities(): Rarity[];
 }
 
+// Warning: (ae-missing-release-tag) "RentalEndedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type RentalEndedEvent = BaseEvent & {
+    type: EventType.RENTAL_ENDED;
+    metadata: RentalMetadata;
+};
+
 // Warning: (ae-missing-release-tag) "RentalListing" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -2104,6 +2179,14 @@ export enum RentalsListingsSortBy {
     RENTAL_LISTING_DATE = "rental_listing_date"
 }
 
+// Warning: (ae-missing-release-tag) "RentalStartedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type RentalStartedEvent = BaseEvent & {
+    type: EventType.RENTAL_STARTED;
+    metadata: RentalMetadata;
+};
+
 // Warning: (ae-missing-release-tag) "RentalStatus" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public
@@ -2135,6 +2218,26 @@ export enum RequiredPermission {
     // (undocumented)
     USE_WEBSOCKET = "USE_WEBSOCKET"
 }
+
+// Warning: (ae-missing-release-tag) "RoyaltiesEarnedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type RoyaltiesEarnedEvent = BaseEvent & {
+    type: EventType.ROYALTIES_EARNED;
+    metadata: {
+        address: string;
+        image: string;
+        category: string;
+        rarity?: string;
+        link: string;
+        nftName?: string;
+        royaltiesCut: string;
+        royaltiesCollector: string;
+        network: string;
+        title: string;
+        description?: string;
+    };
+};
 
 // Warning: (ae-missing-release-tag) "Sale" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Sale" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -2831,6 +2934,8 @@ export namespace WorldConfiguration {
 // src/dapps/trade.ts:70:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/trade.ts:81:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/trade.ts:82:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/platform/events/blockchain.ts:19:3 - (ae-forgotten-export) The symbol "BidMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/blockchain.ts:60:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/third-party-props.ts:6:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
 // src/platform/scene/feature-toggles.ts:11:3 - (ae-forgotten-export) The symbol "EnabledDisabled" needs to be exported by the entry point index.d.ts
