@@ -52,7 +52,6 @@ describe('Subscription details tests', () => {
       },
       schemaPath: '#/properties/message_type/required'
     }))
-    console.log(errors)
 
     expect(SubscriptionDetails.validate.errors).toEqual(errors)
   })

@@ -10,6 +10,7 @@ import {
   WearableRepresentation
 } from '../../../../src'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
+import { MappingType } from '../../../../src/platform/item/linked-wearable-props'
 
 describe('Linked wearables tests', () => {
   const representation: WearableRepresentation = {
@@ -73,12 +74,12 @@ describe('Linked wearables tests', () => {
     },
     mappings: [
       {
-        type: 'range',
+        type: MappingType.RANGE,
         from: '0',
         to: '1'
       },
       {
-        type: 'multiple',
+        type: MappingType.MULTIPLE,
         ids: ['5', '7']
       }
     ]
@@ -126,6 +127,27 @@ describe('Linked wearables tests', () => {
         mappings: []
       },
       ['must NOT have fewer than 1 items']
+    )
+  })
+
+  // For now we will support only one mapping type
+  it('wearable with more than one mapping fails', () => {
+    expectValidationFailureWithErrors(
+      Wearable.validate,
+      {
+        ...linkedWearable,
+        mappings: [
+          {
+            type: MappingType.MULTIPLE,
+            ids: [1, 2]
+          },
+          {
+            type: MappingType.SINGLE,
+            id: 3
+          }
+        ]
+      },
+      ['must NOT have more than 1 items']
     )
   })
 })

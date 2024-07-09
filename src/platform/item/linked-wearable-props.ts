@@ -1,26 +1,37 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 /**
+ * MappingType
+ * @alpha
+ */
+export enum MappingType {
+  SINGLE = 'single',
+  ANY = 'any',
+  MULTIPLE = 'multiple',
+  RANGE = 'range'
+}
+
+/**
  * Mapping
  * @alpha
  */
-export type Mapping = SingleMapping | AllMapping | RangeMapping | MultipleMapping
+export type Mapping = SingleMapping | AnyMapping | RangeMapping | MultipleMapping
 
 /**
  * SingleMapping
  * @alpha
  */
 export type SingleMapping = {
-  type: 'single'
+  type: MappingType.SINGLE
   id: string
 }
 
 /**
- * AllMapping
+ * AnyMapping
  * @alpha
  */
-export type AllMapping = {
-  type: 'all'
+export type AnyMapping = {
+  type: MappingType.ANY
 }
 
 /**
@@ -28,7 +39,7 @@ export type AllMapping = {
  * @alpha
  */
 export type RangeMapping = {
-  type: 'range'
+  type: MappingType.RANGE
   from: string
   to: string
 }
@@ -38,19 +49,19 @@ export type RangeMapping = {
  * @alpha
  */
 export type MultipleMapping = {
-  type: 'multiple'
+  type: MappingType.MULTIPLE
   ids: string[]
 }
 
 /**
- * Mappings
+ * SingleMapping
  * @alpha
  */
 export namespace SingleMapping {
   export const schema: JSONSchema<SingleMapping> = {
     type: 'object',
     properties: {
-      type: { type: 'string', const: 'single' },
+      type: { type: 'string', const: MappingType.SINGLE },
       id: { type: 'string', pattern: '^[0-9]+$' }
     },
     required: ['type', 'id'],
@@ -61,14 +72,14 @@ export namespace SingleMapping {
 }
 
 /**
- * Mappings
+ * AnyMapping
  * @alpha
  */
-export namespace AllMapping {
-  export const schema: JSONSchema<AllMapping> = {
+export namespace AnyMapping {
+  export const schema: JSONSchema<AnyMapping> = {
     type: 'object',
     properties: {
-      type: { type: 'string', const: 'all' }
+      type: { type: 'string', const: MappingType.ANY }
     },
     required: ['type'],
     additionalProperties: false
@@ -78,14 +89,14 @@ export namespace AllMapping {
 }
 
 /**
- * Mappings
+ * RangeMapping
  * @alpha
  */
 export namespace RangeMapping {
   export const schema: JSONSchema<RangeMapping> = {
     type: 'object',
     properties: {
-      type: { type: 'string', const: 'range' },
+      type: { type: 'string', const: MappingType.RANGE },
       from: { type: 'string', pattern: '^[0-9]+$' },
       to: { type: 'string', pattern: '^[0-9]+$' }
     },
@@ -96,15 +107,23 @@ export namespace RangeMapping {
 }
 
 /**
- * Mappings
+ * MultipleMapping
  * @alpha
  */
 export namespace MultipleMapping {
   export const schema: JSONSchema<MultipleMapping> = {
     type: 'object',
     properties: {
-      type: { type: 'string', const: 'multiple' },
-      ids: { type: 'array', items: { type: 'string', pattern: '^[0-9]+$' } }
+      type: { type: 'string', const: MappingType.MULTIPLE },
+      ids: {
+        type: 'array',
+        items: {
+          type: 'string',
+          pattern: '^[0-9]+$'
+        },
+        minItems: 1,
+        uniqueItems: true
+      }
     },
     required: ['type', 'ids'],
     additionalProperties: false
@@ -122,11 +141,11 @@ export namespace Mapping {
     properties: {
       type: {
         type: 'string',
-        enum: ['single', 'all', 'range', 'multiple']
+        enum: Object.values(MappingType)
       }
     },
     required: ['type'],
-    oneOf: [SingleMapping.schema, AllMapping.schema, RangeMapping.schema, MultipleMapping.schema]
+    oneOf: [SingleMapping.schema, AnyMapping.schema, RangeMapping.schema, MultipleMapping.schema]
   }
 
   export const validate: ValidateFunction<Mapping> = generateLazyValidator(schema)

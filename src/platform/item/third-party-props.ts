@@ -21,6 +21,7 @@ export const thirdPartyProps = {
     type: 'array',
     items: Mapping.schema,
     minItems: 1,
+    maxItems: 1,
     nullable: true
   }
 } as const
