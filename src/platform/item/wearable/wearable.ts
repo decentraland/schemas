@@ -5,6 +5,7 @@ import { BaseItem, baseItemProperties, isBaseAvatar, requiredBaseItemProps } fro
 import { StandardProps, standardProperties } from '../standard-props'
 import { isThirdParty, ThirdPartyProps, thirdPartyProps } from '../third-party-props'
 import { HideableWearableCategory } from './hideable-category'
+import { RangeMapping } from '../linked-wearable-props'
 
 /** @alpha */
 export type Wearable = BaseItem & {
@@ -115,5 +116,9 @@ export namespace Wearable {
    *    - merkleProof
    *    - content
    */
-  export const validate = generateLazyValidator(schema, [_isThirdPartyKeywordDef, _isBaseAvatarKeywordDef])
+  export const validate = generateLazyValidator(schema, [
+    _isThirdPartyKeywordDef,
+    _isBaseAvatarKeywordDef,
+    RangeMapping._fromLessThanOrEqualTo
+  ])
 }

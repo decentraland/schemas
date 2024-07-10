@@ -94,30 +94,19 @@ export namespace AnyMapping {
  * @alpha
  */
 export namespace RangeMapping {
-  const _convertToBigInt: KeywordDefinition = {
-    keyword: '_convertToBigInt',
+  export const _fromLessThanOrEqualTo: KeywordDefinition = {
+    keyword: '_fromLessThanOrEqualTo',
     modifying: true,
     validate: function validate(schema: boolean, data: any) {
-      data.from = BigInt(data.from)
-      data.to = BigInt(data.to)
-      return true
-    },
-    type: 'string'
-  }
-
-  const _fromLessThanOrEqualTo: KeywordDefinition = {
-    keyword: '_fromLessThanOrEqualTo',
-    validate: function validate(schema: boolean, data: any) {
-      if (typeof data.from !== 'bigint' || typeof data.to !== 'bigint') {
+      if (!data || !data.from || !data.to) {
         return false
       }
-      // validate.errors = [
-      //   {
-      //     keyword: 'fromLessThanOrEqualTo',
-      //     message: 'from must be less than or equal to to',
-      //     params: { keyword: 'fromLessThanOrEqualTo' }
-      //   }
-      // ]
+
+      if (typeof data.from !== 'bigint' || typeof data.to !== 'bigint') {
+        data.from = BigInt(data.from)
+        data.to = BigInt(data.to)
+      }
+
       return data.from <= data.to
     },
     errors: false
@@ -127,18 +116,15 @@ export namespace RangeMapping {
     type: 'object',
     properties: {
       type: { type: 'string', const: MappingType.RANGE },
-      from: { type: 'string', pattern: '^[0-9]+$', _convertToBigInt: true },
-      to: { type: 'string', pattern: '^[0-9]+$', _convertToBigInt: true }
+      from: { type: 'string', pattern: '^[0-9]+$' },
+      to: { type: 'string', pattern: '^[0-9]+$' }
     },
     required: ['type', 'from', 'to'],
     additionalProperties: false,
     _fromLessThanOrEqualTo: true
   }
 
-  export const validate: ValidateFunction<Mapping> = generateLazyValidator(schema, [
-    _convertToBigInt,
-    _fromLessThanOrEqualTo
-  ])
+  export const validate: ValidateFunction<Mapping> = generateLazyValidator(schema, [_fromLessThanOrEqualTo])
 }
 
 /**
@@ -183,5 +169,7 @@ export namespace Mapping {
     oneOf: [SingleMapping.schema, AnyMapping.schema, RangeMapping.schema, MultipleMapping.schema]
   }
 
-  export const validate: ValidateFunction<Mapping> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<Mapping> = generateLazyValidator(schema, [
+    RangeMapping._fromLessThanOrEqualTo
+  ])
 }

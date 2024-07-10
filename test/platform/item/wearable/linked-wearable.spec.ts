@@ -10,7 +10,7 @@ import {
   WearableRepresentation
 } from '../../../../src'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
-import { MappingType } from '../../../../src/platform/item/linked-wearable-props'
+import { MappingType } from '../../../../src'
 
 describe('Linked wearables tests', () => {
   const representation: WearableRepresentation = {
@@ -74,13 +74,8 @@ describe('Linked wearables tests', () => {
     },
     mappings: [
       {
-        type: MappingType.RANGE,
-        from: '0',
-        to: '1'
-      },
-      {
-        type: MappingType.MULTIPLE,
-        ids: ['5', '7']
+        type: MappingType.SINGLE,
+        id: '0'
       }
     ]
   }
