@@ -1,4 +1,5 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
+import { KeywordDefinition } from 'ajv'
 
 /**
  * MappingType
@@ -93,17 +94,51 @@ export namespace AnyMapping {
  * @alpha
  */
 export namespace RangeMapping {
+  const _convertToBigInt: KeywordDefinition = {
+    keyword: '_convertToBigInt',
+    modifying: true,
+    validate: function validate(schema: boolean, data: any) {
+      data.from = BigInt(data.from)
+      data.to = BigInt(data.to)
+      return true
+    },
+    type: 'string'
+  }
+
+  const _fromLessThanOrEqualTo: KeywordDefinition = {
+    keyword: '_fromLessThanOrEqualTo',
+    validate: function validate(schema: boolean, data: any) {
+      if (typeof data.from !== 'bigint' || typeof data.to !== 'bigint') {
+        return false
+      }
+      // validate.errors = [
+      //   {
+      //     keyword: 'fromLessThanOrEqualTo',
+      //     message: 'from must be less than or equal to to',
+      //     params: { keyword: 'fromLessThanOrEqualTo' }
+      //   }
+      // ]
+      return data.from <= data.to
+    },
+    errors: false
+  }
+
   export const schema: JSONSchema<RangeMapping> = {
     type: 'object',
     properties: {
       type: { type: 'string', const: MappingType.RANGE },
-      from: { type: 'string', pattern: '^[0-9]+$' },
-      to: { type: 'string', pattern: '^[0-9]+$' }
+      from: { type: 'string', pattern: '^[0-9]+$', _convertToBigInt: true },
+      to: { type: 'string', pattern: '^[0-9]+$', _convertToBigInt: true }
     },
     required: ['type', 'from', 'to'],
-    additionalProperties: false
+    additionalProperties: false,
+    _fromLessThanOrEqualTo: true
   }
-  export const validate: ValidateFunction<Mapping> = generateLazyValidator(schema)
+
+  export const validate: ValidateFunction<Mapping> = generateLazyValidator(schema, [
+    _convertToBigInt,
+    _fromLessThanOrEqualTo
+  ])
 }
 
 /**
