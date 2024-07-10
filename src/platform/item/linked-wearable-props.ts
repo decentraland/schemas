@@ -96,18 +96,18 @@ export namespace AnyMapping {
 export namespace RangeMapping {
   export const _fromLessThanOrEqualTo: KeywordDefinition = {
     keyword: '_fromLessThanOrEqualTo',
-    modifying: true,
     validate: function validate(schema: boolean, data: any) {
       if (!data || !data.from || !data.to) {
         return false
       }
 
-      if (typeof data.from !== 'bigint' || typeof data.to !== 'bigint') {
-        data.from = BigInt(data.from)
-        data.to = BigInt(data.to)
+      let { to, from } = data
+      if (typeof from !== 'bigint' || typeof to !== 'bigint') {
+        from = BigInt(from)
+        to = BigInt(to)
       }
 
-      return data.from <= data.to
+      return from <= to
     },
     errors: false
   }
