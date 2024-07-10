@@ -1,10 +1,12 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { MerkleProof } from '../merkle-tree/merkle-proof'
+import { MerkleProof } from '../merkle-tree'
 import { BaseItem } from './base-item'
+import { Mapping, RangeMapping } from './linked-wearable-props'
 
 export type ThirdPartyProps = {
   merkleProof: MerkleProof
   content: Record<string, string>
+  mappings?: Mapping[]
 }
 
 export const thirdPartyProps = {
@@ -14,6 +16,13 @@ export const thirdPartyProps = {
     nullable: false,
     additionalProperties: { type: 'string' },
     required: [] as any[]
+  },
+  mappings: {
+    type: 'array',
+    items: Mapping.schema,
+    minItems: 1,
+    maxItems: 1,
+    nullable: true
   }
 } as const
 
@@ -38,7 +47,10 @@ const _containsHashingKeys = {
   errors: false
 }
 
-const validate: ValidateFunction<ThirdPartyProps> = generateLazyValidator(schema, [_containsHashingKeys])
+const validate: ValidateFunction<ThirdPartyProps> = generateLazyValidator(schema, [
+  _containsHashingKeys,
+  RangeMapping._fromLessThanOrEqualTo
+])
 
 export function isThirdParty<T extends BaseItem>(item: T): item is T & ThirdPartyProps {
   return validate(item)

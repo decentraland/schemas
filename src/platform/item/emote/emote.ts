@@ -1,4 +1,4 @@
-import { isThirdParty } from '..'
+import { isThirdParty, RangeMapping } from '..'
 import { generateLazyValidator, JSONSchema } from '../../../validation'
 import { BaseItem, baseItemProperties, isBaseEmote, requiredBaseItemProps } from '../base-item'
 import { standardProperties, StandardProps } from '../standard-props'
@@ -77,5 +77,9 @@ export namespace Emote {
     errors: false
   }
 
-  export const validate = generateLazyValidator(schema, [_isThirdPartyKeywordDef, _isBaseEmoteKeywordDef])
+  export const validate = generateLazyValidator(schema, [
+    _isThirdPartyKeywordDef,
+    _isBaseEmoteKeywordDef,
+    RangeMapping._fromLessThanOrEqualTo
+  ])
 }
