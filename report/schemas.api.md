@@ -74,19 +74,6 @@ type Actions = typeof SCENE_UPDATE | typeof UPDATE;
 
 export { Ajv }
 
-// @alpha
-export type AllMapping = {
-    type: 'all';
-};
-
-// @alpha
-export namespace AllMapping {
-    const // (undocumented)
-    schema: JSONSchema<AllMapping>;
-    const // (undocumented)
-    validate: ValidateFunction<Mapping>;
-}
-
 // Warning: (ae-missing-release-tag) "AnalyticsDayData" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -115,6 +102,19 @@ export enum AnalyticsDayDataSortBy {
     DATE = "date",
     // (undocumented)
     MOST_SALES = "most_sales"
+}
+
+// @alpha
+export type AnyMapping = {
+    type: MappingType.ANY;
+};
+
+// @alpha
+export namespace AnyMapping {
+    const // (undocumented)
+    schema: JSONSchema<AnyMapping>;
+    const // (undocumented)
+    validate: ValidateFunction<Mapping>;
 }
 
 // @public
@@ -1194,7 +1194,7 @@ export namespace Locale {
 }
 
 // @alpha
-export type Mapping = SingleMapping | AllMapping | RangeMapping | MultipleMapping;
+export type Mapping = SingleMapping | AnyMapping | RangeMapping | MultipleMapping;
 
 // @alpha
 export namespace Mapping {
@@ -1202,6 +1202,18 @@ export namespace Mapping {
     schema: JSONSchema<Mapping>;
     const // (undocumented)
     validate: ValidateFunction<Mapping>;
+}
+
+// @alpha
+export enum MappingType {
+    // (undocumented)
+    ANY = "any",
+    // (undocumented)
+    MULTIPLE = "multiple",
+    // (undocumented)
+    RANGE = "range",
+    // (undocumented)
+    SINGLE = "single"
 }
 
 // @alpha
@@ -1312,7 +1324,7 @@ export enum MintSortBy {
 
 // @alpha
 export type MultipleMapping = {
-    type: 'multiple';
+    type: MappingType.MULTIPLE;
     ids: string[];
 };
 
@@ -2044,13 +2056,15 @@ export namespace ProviderType {
 
 // @alpha
 export type RangeMapping = {
-    type: 'range';
+    type: MappingType.RANGE;
     from: string;
     to: string;
 };
 
 // @alpha
 export namespace RangeMapping {
+    const // (undocumented)
+    _fromLessThanOrEqualTo: KeywordDefinition;
     const // (undocumented)
     schema: JSONSchema<RangeMapping>;
     const // (undocumented)
@@ -2465,7 +2479,7 @@ export const sendMessage: <T extends PreviewMessageType>(window: {
 
 // @alpha
 export type SingleMapping = {
-    type: 'single';
+    type: MappingType.SINGLE;
     id: string;
 };
 
