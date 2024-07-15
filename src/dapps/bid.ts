@@ -136,7 +136,7 @@ export namespace Bid {
             type: 'string'
           }
         },
-        required: [...baseBidSchema.required, 'tradeId', 'item']
+        required: [...baseBidSchema.required, 'tradeId', 'itemId']
       },
       {
         type: 'object',
