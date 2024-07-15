@@ -65,6 +65,7 @@ export type TradeAssetWithBeneficiary = TradeAsset & {
 
 export type Trade = {
   id: string
+  signature: string
   signer: string
   network: Network
   chainId: ChainId

@@ -230,28 +230,22 @@ export type BaseEvent = {
     timestamp: number;
 };
 
+// Warning: (ae-missing-release-tag) "BaseTradeAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type BaseTradeAsset = {
+    assetType: TradeAssetType;
+    contractAddress: string;
+    extra: string;
+};
+
+// Warning: (ae-forgotten-export) The symbol "LegacyBid" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "BidTrade" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Bid" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Bid" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Bid = {
-    id: string;
-    bidAddress: string;
-    bidder: string;
-    seller: string;
-    price: string;
-    fingerprint: string;
-    status: ListingStatus;
-    blockchainId: string;
-    blockNumber: string;
-    expiresAt: number;
-    createdAt: number;
-    updatedAt: number;
-    contractAddress: string;
-    tokenId: string;
-    network: Network.ETHEREUM | Network.MATIC;
-    chainId: ChainId;
-};
+export type Bid = LegacyBid | BidTrade;
 
 // @public (undocumented)
 export namespace Bid {
@@ -493,6 +487,14 @@ export type CollectionFilters = {
     urn?: string;
     isOnSale?: boolean;
     network?: Network;
+};
+
+// Warning: (ae-missing-release-tag) "CollectionItemTradeAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CollectionItemTradeAsset = BaseTradeAsset & {
+    assetType: TradeAssetType.COLLECTION_ITEM;
+    itemId: string;
 };
 
 // Warning: (ae-missing-release-tag) "CollectionSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -788,6 +790,22 @@ export enum EntityType {
     // (undocumented)
     WEARABLE = "wearable"
 }
+
+// Warning: (ae-missing-release-tag) "ERC20TradeAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ERC20TradeAsset = BaseTradeAsset & {
+    assetType: TradeAssetType.ERC20;
+    amount: string;
+};
+
+// Warning: (ae-missing-release-tag) "ERC721TradeAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ERC721TradeAsset = BaseTradeAsset & {
+    assetType: TradeAssetType.ERC721;
+    tokenId: string;
+};
 
 // @public
 export type EthAddress = string;
@@ -2649,6 +2667,7 @@ export type ThirdPartyProps = {
 // @public (undocumented)
 export type Trade = {
     id: string;
+    signature: string;
     signer: string;
     network: Network;
     chainId: ChainId;
@@ -2659,13 +2678,20 @@ export type Trade = {
     received: TradeAssetWithBeneficiary[];
 };
 
-// Warning: (ae-forgotten-export) The symbol "CollectionItemTradeAsset" needs to be exported by the entry point index.d.ts
-// Warning: (ae-forgotten-export) The symbol "ERC20TradeAsset" needs to be exported by the entry point index.d.ts
-// Warning: (ae-forgotten-export) The symbol "ERC721TradeAsset" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "TradeAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type TradeAsset = CollectionItemTradeAsset | ERC20TradeAsset | ERC721TradeAsset;
+
+// Warning: (ae-missing-release-tag) "TradeAssetDirection" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum TradeAssetDirection {
+    // (undocumented)
+    RECEIVED = "received",
+    // (undocumented)
+    SENT = "sent"
+}
 
 // Warning: (ae-missing-release-tag) "TradeAssetType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -2974,9 +3000,7 @@ export namespace WorldConfiguration {
 //
 // src/dapps/account.ts:30:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/analyticsDayData.ts:14:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/bid.ts:21:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/bid.ts:22:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/bid.ts:41:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/bid.ts:58:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/collection.ts:15:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/collection.ts:16:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/collection.ts:39:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
@@ -3012,10 +3036,10 @@ export namespace WorldConfiguration {
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/trade.ts:69:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/trade.ts:70:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/trade.ts:81:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/trade.ts:82:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/trade.ts:70:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/trade.ts:71:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/trade.ts:82:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/trade.ts:83:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/platform/events/blockchain.ts:19:3 - (ae-forgotten-export) The symbol "BidMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/blockchain.ts:60:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha

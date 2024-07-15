@@ -27,11 +27,16 @@ export {
   Trade,
   TradeAsset,
   TradeAssetType,
+  TradeAssetDirection,
   TradeChecks,
   TradeExternalCheck,
   TradeCreation,
   TradeType,
-  TradeAssetWithBeneficiary
+  TradeAssetWithBeneficiary,
+  BaseTradeAsset,
+  ERC20TradeAsset,
+  ERC721TradeAsset,
+  CollectionItemTradeAsset
 } from './dapps/trade'
 export {
   RentalStatus,
