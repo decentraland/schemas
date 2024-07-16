@@ -2643,6 +2643,7 @@ export type SnapshotSyncDeployment = {
     pointers: string[];
     authChain: AuthChain;
     entityTimestamp: number;
+    metadata?: any;
 };
 
 // @public (undocumented)

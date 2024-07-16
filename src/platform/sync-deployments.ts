@@ -15,6 +15,7 @@ export type SnapshotSyncDeployment = {
   pointers: string[]
   authChain: AuthChain
   entityTimestamp: number
+  metadata?: any
 }
 
 /**
@@ -28,7 +29,8 @@ export namespace SnapshotSyncDeployment {
       entityType: { type: 'string' },
       pointers: { type: 'array', items: { type: 'string' }, minItems: 1 },
       authChain: AuthChain.schema,
-      entityTimestamp: { type: 'number', minimum: 0 }
+      entityTimestamp: { type: 'number', minimum: 0 },
+      metadata: { type: 'object', nullable: true }
     },
     oneOf: [{ properties: { entityId: IPFSv1.schema } }, { properties: { entityId: IPFSv2.schema } }],
     required: ['entityId', 'entityType', 'pointers', 'entityTimestamp', 'authChain']
@@ -58,7 +60,8 @@ export namespace PointerChangesSyncDeployment {
       pointers: { type: 'array', items: { type: 'string' }, minItems: 1 },
       authChain: AuthChain.schema,
       entityTimestamp: { type: 'number', minimum: 0 },
-      localTimestamp: { type: 'number', minimum: 0 }
+      localTimestamp: { type: 'number', minimum: 0 },
+      metadata: { type: 'object', nullable: true }
     },
     oneOf: [{ properties: { entityId: IPFSv1.schema } }, { properties: { entityId: IPFSv2.schema } }],
     required: ['entityId', 'entityType', 'pointers', 'localTimestamp', 'entityTimestamp', 'authChain']
