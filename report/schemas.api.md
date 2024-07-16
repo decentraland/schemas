@@ -387,6 +387,14 @@ export enum CatalogSortDirection {
     DESC = "desc"
 }
 
+// Warning: (ae-missing-release-tag) "CatalystDeployment" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CatalystDeployment = BaseEvent & {
+    type: EventType.CATALYST_DEPLOYMENT;
+    entity: Entity;
+};
+
 // @alpha
 export enum ChainId {
     // (undocumented)
@@ -852,6 +860,8 @@ export enum EventType {
     BID_ACCEPTED = "bid-accepted",
     // (undocumented)
     BID_RECEIVED = "bid-received",
+    // (undocumented)
+    CATALYST_DEPLOYMENT = "catalyst-deployment",
     // (undocumented)
     ITEM_SOLD = "item-sold",
     // (undocumented)

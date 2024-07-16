@@ -13,7 +13,8 @@ export enum EventType {
   ITEM_SOLD = 'item-sold',
   RENTAL_ENDED = 'land-rental-ended',
   RENTAL_STARTED = 'land-rental-started',
-  ROYALTIES_EARNED = 'royalties-earned'
+  ROYALTIES_EARNED = 'royalties-earned',
+  CATALYST_DEPLOYMENT = 'catalyst-deployment'
 }
 
 export type BaseEvent = {
