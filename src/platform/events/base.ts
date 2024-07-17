@@ -6,6 +6,8 @@ import {
   RentalStartedEvent,
   RoyaltiesEarnedEvent
 } from './blockchain'
+import { CatalystDeployment } from './catalyst'
+import { MoveToParcelEvent } from './client'
 
 export enum EventType {
   BID_ACCEPTED = 'bid-accepted',
@@ -14,7 +16,8 @@ export enum EventType {
   RENTAL_ENDED = 'land-rental-ended',
   RENTAL_STARTED = 'land-rental-started',
   ROYALTIES_EARNED = 'royalties-earned',
-  CATALYST_DEPLOYMENT = 'catalyst-deployment'
+  CATALYST_DEPLOYMENT = 'catalyst-deployment',
+  MOVE_TO_PARCEL = 'move-to-parcel'
 }
 
 export type BaseEvent = {
@@ -30,3 +33,5 @@ export type EventNotification =
   | RentalEndedEvent
   | RentalStartedEvent
   | RoyaltiesEarnedEvent
+  | MoveToParcelEvent
+  | CatalystDeployment

@@ -850,7 +850,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "EventNotification" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type EventNotification = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent;
+export type EventNotification = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | MoveToParcelEvent | CatalystDeployment;
 
 // Warning: (ae-missing-release-tag) "EventType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -864,6 +864,8 @@ export enum EventType {
     CATALYST_DEPLOYMENT = "catalyst-deployment",
     // (undocumented)
     ITEM_SOLD = "item-sold",
+    // (undocumented)
+    MOVE_TO_PARCEL = "move-to-parcel",
     // (undocumented)
     RENTAL_ENDED = "land-rental-ended",
     // (undocumented)
@@ -1401,6 +1403,29 @@ export enum MintSortBy {
     // (undocumented)
     RECENTLY_MINTED = "recently_minted"
 }
+
+// Warning: (ae-missing-release-tag) "MoveToParcelEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type MoveToParcelEvent = BaseEvent & {
+    type: EventType.MOVE_TO_PARCEL;
+    metadata: {
+        address: string;
+        timestamp: number;
+        sessionId: string;
+        realm: string;
+        isGuest: boolean;
+        isAuthenticated: boolean;
+        position: string;
+        newParcel: string;
+        oldParcel: string;
+        exactPosition: {
+            x: number;
+            y: number;
+            z: number;
+        };
+    };
+};
 
 // @alpha
 export type MultipleMapping = {
@@ -2643,7 +2668,6 @@ export type SnapshotSyncDeployment = {
     pointers: string[];
     authChain: AuthChain;
     entityTimestamp: number;
-    metadata?: any;
 };
 
 // @public (undocumented)
