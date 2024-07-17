@@ -21,8 +21,8 @@ export enum EventType {
 }
 
 export type BaseEvent = {
-  id: string
   type: string
+  subType: string
   key: string
   timestamp: number
 }

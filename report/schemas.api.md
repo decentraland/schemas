@@ -243,8 +243,8 @@ export type BaseBid = {
 //
 // @public (undocumented)
 export type BaseEvent = {
-    id: string;
     type: string;
+    subType: string;
     key: string;
     timestamp: number;
 };
