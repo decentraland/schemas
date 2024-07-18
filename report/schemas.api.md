@@ -505,6 +505,20 @@ export namespace Collection {
     validate: ValidateFunction<Collection>;
 }
 
+// Warning: (ae-missing-release-tag) "CollectionCreatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CollectionCreatedEvent = BaseEvent & {
+    type: EventType.BLOCKCHAIN;
+    subType: EventSubType.COLLECTION_CREATED;
+    metadata: {
+        id: string;
+        creator: string;
+        name: string;
+        updatedAt: string;
+    };
+};
+
 // Warning: (ae-missing-release-tag) "CollectionFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -853,7 +867,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | MoveToParcelEvent | CatalystDeployment;
+export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeployment;
 
 // Warning: (ae-missing-release-tag) "EventSubType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -863,6 +877,8 @@ export enum EventSubType {
     BID_ACCEPTED = "bid-accepted",
     // (undocumented)
     BID_RECEIVED = "bid-received",
+    // (undocumented)
+    COLLECTION_CREATED = "collection-created",
     // (undocumented)
     ITEM_SOLD = "item-sold",
     // (undocumented)

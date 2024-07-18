@@ -1,6 +1,7 @@
 import {
   BidAcceptedEvent,
   BidReceivedEvent,
+  CollectionCreatedEvent,
   ItemSoldEvent,
   RentalEndedEvent,
   RentalStartedEvent,
@@ -22,6 +23,7 @@ export enum EventSubType {
   RENTAL_ENDED = 'land-rental-ended',
   RENTAL_STARTED = 'land-rental-started',
   ROYALTIES_EARNED = 'royalties-earned',
+  COLLECTION_CREATED = 'collection-created',
   MOVE_TO_PARCEL = 'move-to-parcel'
 }
 
@@ -39,5 +41,6 @@ export type Event =
   | RentalEndedEvent
   | RentalStartedEvent
   | RoyaltiesEarnedEvent
+  | CollectionCreatedEvent
   | MoveToParcelEvent
   | CatalystDeployment
