@@ -243,8 +243,8 @@ export type BaseBid = {
 //
 // @public (undocumented)
 export type BaseEvent = {
-    type: string;
-    subType: string;
+    type: EventType;
+    subType: EventSubType;
     key: string;
     timestamp: number;
 };
@@ -276,7 +276,8 @@ export namespace Bid {
 //
 // @public (undocumented)
 export type BidAcceptedEvent = BaseEvent & {
-    type: EventType.BID_ACCEPTED;
+    type: EventType.BLOCKCHAIN;
+    subType: EventSubType.BID_ACCEPTED;
     metadata: BidMetadata;
 };
 
@@ -300,7 +301,8 @@ export type BidFilters = {
 //
 // @public (undocumented)
 export type BidReceivedEvent = BaseEvent & {
-    type: EventType.BID_RECEIVED;
+    type: EventType.BLOCKCHAIN;
+    subType: EventSubType.BID_RECEIVED;
     metadata: BidMetadata;
 };
 
@@ -853,16 +855,14 @@ export namespace EthAddress {
 // @public (undocumented)
 export type EventNotification = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | MoveToParcelEvent | CatalystDeployment;
 
-// Warning: (ae-missing-release-tag) "EventType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EventSubType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export enum EventType {
+export enum EventSubType {
     // (undocumented)
     BID_ACCEPTED = "bid-accepted",
     // (undocumented)
     BID_RECEIVED = "bid-received",
-    // (undocumented)
-    CATALYST_DEPLOYMENT = "catalyst-deployment",
     // (undocumented)
     ITEM_SOLD = "item-sold",
     // (undocumented)
@@ -873,6 +873,18 @@ export enum EventType {
     RENTAL_STARTED = "land-rental-started",
     // (undocumented)
     ROYALTIES_EARNED = "royalties-earned"
+}
+
+// Warning: (ae-missing-release-tag) "EventType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum EventType {
+    // (undocumented)
+    BLOCKCHAIN = "blockchain",
+    // (undocumented)
+    CATALYST_DEPLOYMENT = "catalyst-deployment",
+    // (undocumented)
+    CLIENT = "client"
 }
 
 // @alpha (undocumented)
@@ -1146,7 +1158,8 @@ export type ItemFilters = {
 //
 // @public (undocumented)
 export type ItemSoldEvent = BaseEvent & {
-    type: EventType.ITEM_SOLD;
+    type: EventType.BLOCKCHAIN;
+    subType: EventSubType.ITEM_SOLD;
     metadata: {
         address: string;
         image: string;
@@ -1409,7 +1422,8 @@ export enum MintSortBy {
 //
 // @public (undocumented)
 export type MoveToParcelEvent = BaseEvent & {
-    type: EventType.MOVE_TO_PARCEL;
+    type: EventType.CLIENT;
+    subType: EventSubType.MOVE_TO_PARCEL;
     metadata: {
         address: string;
         timestamp: number;
@@ -2271,7 +2285,8 @@ export namespace Rarity {
 //
 // @public (undocumented)
 export type RentalEndedEvent = BaseEvent & {
-    type: EventType.RENTAL_ENDED;
+    type: EventType.BLOCKCHAIN;
+    subType: EventSubType.RENTAL_ENDED;
     metadata: RentalMetadata;
 };
 
@@ -2407,7 +2422,8 @@ export enum RentalsListingsSortBy {
 //
 // @public (undocumented)
 export type RentalStartedEvent = BaseEvent & {
-    type: EventType.RENTAL_STARTED;
+    type: EventType.BLOCKCHAIN;
+    subType: EventSubType.RENTAL_STARTED;
     metadata: RentalMetadata;
 };
 
@@ -2447,7 +2463,8 @@ export enum RequiredPermission {
 //
 // @public (undocumented)
 export type RoyaltiesEarnedEvent = BaseEvent & {
-    type: EventType.ROYALTIES_EARNED;
+    type: EventType.BLOCKCHAIN;
+    subType: EventSubType.ROYALTIES_EARNED;
     metadata: {
         address: string;
         image: string;
@@ -3192,8 +3209,8 @@ export namespace WorldConfiguration {
 // src/dapps/trade.ts:79:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/trade.ts:90:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/trade.ts:91:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/platform/events/blockchain.ts:19:3 - (ae-forgotten-export) The symbol "BidMetadata" needs to be exported by the entry point index.d.ts
-// src/platform/events/blockchain.ts:60:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/blockchain.ts:20:3 - (ae-forgotten-export) The symbol "BidMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/blockchain.ts:64:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/third-party-props.ts:7:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
 // src/platform/item/third-party-props.ts:9:3 - (ae-incompatible-release-tags) The symbol "mappings" is marked as @public, but its signature references "Mapping" which is marked as @alpha

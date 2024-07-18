@@ -1,7 +1,8 @@
-import { BaseEvent, EventType } from './base'
+import { BaseEvent, EventSubType, EventType } from './base'
 
 export type MoveToParcelEvent = BaseEvent & {
-  type: EventType.MOVE_TO_PARCEL
+  type: EventType.CLIENT
+  subType: EventSubType.MOVE_TO_PARCEL
   metadata: {
     address: string
     timestamp: number
