@@ -1,3 +1,4 @@
+import { EntityType } from '../entity'
 import {
   BidAcceptedEvent,
   BidReceivedEvent,
@@ -29,7 +30,7 @@ export enum EventSubType {
 
 export type BaseEvent = {
   type: EventType
-  subType: EventSubType
+  subType: EventSubType | EntityType
   key: string
   timestamp: number
 }

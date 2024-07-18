@@ -244,7 +244,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: EventType;
-    subType: EventSubType;
+    subType: EventSubType | EntityType;
     key: string;
     timestamp: number;
 };
