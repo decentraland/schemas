@@ -1,8 +1,17 @@
 import expect from 'expect'
-import { Rarity, WearableCategory } from '../../../../src'
-import { BodyShape, Wearable, WearableRepresentation, Locale, BodyPartCategory } from '../../../../src'
-import { isStandard } from '../../../../src'
-import { isThirdParty } from '../../../../src'
+import {
+  BodyPartCategory,
+  BodyShape,
+  ContractNetwork,
+  isStandard,
+  isThirdParty,
+  Locale,
+  MappingType,
+  Rarity,
+  Wearable,
+  WearableCategory,
+  WearableRepresentation
+} from '../../../../src'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
 
 describe('Wearable representation tests', () => {
@@ -73,10 +82,26 @@ describe('Wearable representation tests', () => {
   }
 
   const wearable = { ...baseWearable, ...standard }
-  const thirdPartyWearable = { ...baseWearable, ...thirdParty }
+  const thirdPartyWearable = {
+    ...baseWearable,
+    ...thirdParty
+  }
 
   testTypeSignature(Wearable, wearable)
   testTypeSignature(Wearable, thirdPartyWearable)
+  testTypeSignature(Wearable, {
+    ...baseWearable,
+    ...thirdParty,
+    mappings: {
+      [ContractNetwork.MAINNET]: {
+        '0x1234567890123456789012345678901234567890': [
+          {
+            type: MappingType.ANY
+          }
+        ]
+      }
+    }
+  })
 
   it('static base wearable must puss', () => {
     expect(

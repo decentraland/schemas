@@ -643,6 +643,9 @@ export namespace Contract {
     validate: ValidateFunction<Contract>;
 }
 
+// @alpha
+export type ContractAddress = string;
+
 // Warning: (ae-missing-release-tag) "ContractFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -651,6 +654,18 @@ export type ContractFilters = {
     network?: Network;
 };
 
+// @alpha
+export enum ContractNetwork {
+    // (undocumented)
+    AMOY = "amoy",
+    // (undocumented)
+    MAINNET = "mainnet",
+    // (undocumented)
+    MATIC = "matic",
+    // (undocumented)
+    SEPOLIA = "sepolia"
+}
+
 // Warning: (ae-missing-release-tag) "ContractSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -658,6 +673,12 @@ export enum ContractSortBy {
     // (undocumented)
     NAME = "name"
 }
+
+// Warning: (ae-incompatible-release-tags) The symbol "createMappingsHelper" is marked as @public, but its signature references "Mappings" which is marked as @alpha
+// Warning: (ae-missing-release-tag) "createMappingsHelper" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export function createMappingsHelper(initial?: Mappings): MappingsHelper;
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
@@ -1380,6 +1401,36 @@ export namespace Mapping {
     const // (undocumented)
     validate: ValidateFunction<Mapping>;
 }
+
+// @alpha
+export type Mappings = Partial<Record<ContractNetwork, Record<ContractAddress, Mapping[]>>>;
+
+// @alpha
+export namespace Mappings {
+    const // (undocumented)
+    _isMappingsValid: {
+        keyword: string;
+        validate: (schema: boolean, data: any) => boolean;
+        errors: boolean;
+    };
+    const // (undocumented)
+    mappingArraySchema: JSONSchema<Mapping[]>;
+    const // (undocumented)
+    innerSchema: JSONSchema<Record<ContractAddress, Mapping[]>>;
+    const // (undocumented)
+    schema: JSONSchema<Mappings>;
+    const // (undocumented)
+    validate: ValidateFunction<Mappings>;
+}
+
+// Warning: (ae-missing-release-tag) "MappingsHelper" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type MappingsHelper = {
+    getMappings(): Mappings;
+    addMapping(network: ContractNetwork, contractAddress: ContractAddress, mapping: Mapping): void;
+    includesNft(network: ContractNetwork, contractAddress: ContractAddress, tokenId: string): boolean;
+};
 
 // @alpha
 export enum MappingType {
@@ -2925,7 +2976,7 @@ export type SyncDeployment = SnapshotSyncDeployment | PointerChangesSyncDeployme
 export type ThirdPartyProps = {
     merkleProof: MerkleProof;
     content: Record<string, string>;
-    mappings?: Mapping[];
+    mappings?: Mappings;
 };
 
 // Warning: (ae-missing-release-tag) "Trade" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -3322,8 +3373,14 @@ export namespace WorldConfiguration {
 // src/platform/events/blockchain.ts:21:3 - (ae-forgotten-export) The symbol "BidMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/blockchain.ts:163:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:255:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:256:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:256:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:256:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "Mapping" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:257:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:257:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
 // src/platform/item/third-party-props.ts:7:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
-// src/platform/item/third-party-props.ts:9:3 - (ae-incompatible-release-tags) The symbol "mappings" is marked as @public, but its signature references "Mapping" which is marked as @alpha
+// src/platform/item/third-party-props.ts:9:3 - (ae-incompatible-release-tags) The symbol "mappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/scene/feature-toggles.ts:11:3 - (ae-forgotten-export) The symbol "EnabledDisabled" needs to be exported by the entry point index.d.ts
 // src/platform/scene/feature-toggles.ts:12:3 - (ae-forgotten-export) The symbol "PortableExperiencesToggles" needs to be exported by the entry point index.d.ts
 // src/platform/scene/spawn-point.ts:6:3 - (ae-forgotten-export) The symbol "SinglePosition" needs to be exported by the entry point index.d.ts

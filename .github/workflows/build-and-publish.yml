@@ -11,7 +11,7 @@ jobs:
     outputs:
       s3_bucket_key: ${{ steps.publish_package.outputs.s3-bucket-key }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: install
         run: npm ci
       - name: build
@@ -52,7 +52,7 @@ jobs:
     name: Deployment Notification
     steps:
       - name: Find Comment
-        uses: peter-evans/find-comment@v2
+        uses: peter-evans/find-comment@v3
         id: fc
         with:
           issue-number: ${{ github.event.pull_request.number }}
@@ -64,7 +64,7 @@ jobs:
         run: echo "body=${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.check_and_build.outputs.s3_bucket_key }}" >> $GITHUB_OUTPUT
 
       - name: Create or update comment
-        uses: peter-evans/create-or-update-comment@v3
+        uses: peter-evans/create-or-update-comment@v4
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
