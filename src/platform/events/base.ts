@@ -7,7 +7,7 @@ import {
   RentalStartedEvent,
   RoyaltiesEarnedEvent
 } from './blockchain'
-import { CatalystDeployment } from './catalyst'
+import { CatalystDeploymentEvent } from './catalyst'
 import { MoveToParcelEvent } from './client'
 
 export enum EventType {
@@ -43,4 +43,4 @@ export type Event =
   | RoyaltiesEarnedEvent
   | CollectionCreatedEvent
   | MoveToParcelEvent
-  | CatalystDeployment
+  | CatalystDeploymentEvent

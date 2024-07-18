@@ -390,11 +390,12 @@ export enum CatalogSortDirection {
     DESC = "desc"
 }
 
-// Warning: (ae-missing-release-tag) "CatalystDeployment" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CatalystDeploymentEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type CatalystDeployment = BaseEvent & {
+export type CatalystDeploymentEvent = BaseEvent & {
     type: EventType.CATALYST_DEPLOYMENT;
+    subType: EntityType;
     entity: Entity;
 };
 
@@ -865,7 +866,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeployment;
+export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent;
 
 // Warning: (ae-missing-release-tag) "EventSubType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
