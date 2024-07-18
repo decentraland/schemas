@@ -92,9 +92,7 @@ export type CollectionCreatedEvent = BaseEvent & {
   type: EventType.BLOCKCHAIN
   subType: EventSubType.COLLECTION_CREATED
   metadata: {
-    id: string
     creator: string
     name: string
-    updatedAt: string
   }
 }
