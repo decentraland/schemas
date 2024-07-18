@@ -850,10 +850,10 @@ export namespace EthAddress {
     validate: ValidateFunction<EthAddress>;
 }
 
-// Warning: (ae-missing-release-tag) "EventNotification" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type EventNotification = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | MoveToParcelEvent | CatalystDeployment;
+export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | MoveToParcelEvent | CatalystDeployment;
 
 // Warning: (ae-missing-release-tag) "EventSubType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //

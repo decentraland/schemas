@@ -32,7 +32,7 @@ export type BaseEvent = {
   timestamp: number
 }
 
-export type EventNotification =
+export type Event =
   | BidAcceptedEvent
   | BidReceivedEvent
   | ItemSoldEvent
