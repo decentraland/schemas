@@ -243,8 +243,8 @@ export type BaseBid = {
 //
 // @public (undocumented)
 export type BaseEvent = {
-    type: EventType;
-    subType: EventSubType | EntityType;
+    type: Events.Type;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client;
     key: string;
     timestamp: number;
 };
@@ -276,8 +276,8 @@ export namespace Bid {
 //
 // @public (undocumented)
 export type BidAcceptedEvent = BaseEvent & {
-    type: EventType.BLOCKCHAIN;
-    subType: EventSubType.BID_ACCEPTED;
+    type: Events.Type.BLOCKCHAIN;
+    subType: Events.SubType.Blockchain.BID_ACCEPTED;
     metadata: BidMetadata;
 };
 
@@ -301,8 +301,8 @@ export type BidFilters = {
 //
 // @public (undocumented)
 export type BidReceivedEvent = BaseEvent & {
-    type: EventType.BLOCKCHAIN;
-    subType: EventSubType.BID_RECEIVED;
+    type: Events.Type.BLOCKCHAIN;
+    subType: Events.SubType.Blockchain.BID_RECEIVED;
     metadata: BidMetadata;
 };
 
@@ -394,8 +394,8 @@ export enum CatalogSortDirection {
 //
 // @public (undocumented)
 export type CatalystDeploymentEvent = BaseEvent & {
-    type: EventType.CATALYST_DEPLOYMENT;
-    subType: EntityType;
+    type: Events.Type.CATALYST_DEPLOYMENT;
+    subType: Events.SubType.CatalystDeployment;
     entity: Entity;
 };
 
@@ -510,8 +510,8 @@ export namespace Collection {
 //
 // @public (undocumented)
 export type CollectionCreatedEvent = BaseEvent & {
-    type: EventType.BLOCKCHAIN;
-    subType: EventSubType.COLLECTION_CREATED;
+    type: Events.Type.BLOCKCHAIN;
+    subType: Events.SubType.Blockchain.COLLECTION_CREATED;
     metadata: {
         creator: string;
         name: string;
@@ -868,38 +868,59 @@ export namespace EthAddress {
 // @public (undocumented)
 export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent;
 
-// Warning: (ae-missing-release-tag) "EventSubType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export enum EventSubType {
+export namespace Events {
     // (undocumented)
-    BID_ACCEPTED = "bid-accepted",
+    export namespace SubType {
+        // (undocumented)
+        export enum Blockchain {
+            // (undocumented)
+            BID_ACCEPTED = "bid-accepted",
+            // (undocumented)
+            BID_RECEIVED = "bid-received",
+            // (undocumented)
+            COLLECTION_CREATED = "collection-created",
+            // (undocumented)
+            ITEM_SOLD = "item-sold",
+            // (undocumented)
+            RENTAL_ENDED = "land-rental-ended",
+            // (undocumented)
+            RENTAL_STARTED = "land-rental-started",
+            // (undocumented)
+            ROYALTIES_EARNED = "royalties-earned"
+        }
+        // (undocumented)
+        export enum CatalystDeployment {
+            // (undocumented)
+            EMOTE = "emote",
+            // (undocumented)
+            OUTFITS = "outfits",
+            // (undocumented)
+            PROFILE = "profile",
+            // (undocumented)
+            SCENE = "scene",
+            // (undocumented)
+            STORE = "store",
+            // (undocumented)
+            WEARABLE = "wearable"
+        }
+        // (undocumented)
+        export enum Client {
+            // (undocumented)
+            MOVE_TO_PARCEL = "move-to-parcel"
+        }
+    }
     // (undocumented)
-    BID_RECEIVED = "bid-received",
-    // (undocumented)
-    COLLECTION_CREATED = "collection-created",
-    // (undocumented)
-    ITEM_SOLD = "item-sold",
-    // (undocumented)
-    MOVE_TO_PARCEL = "move-to-parcel",
-    // (undocumented)
-    RENTAL_ENDED = "land-rental-ended",
-    // (undocumented)
-    RENTAL_STARTED = "land-rental-started",
-    // (undocumented)
-    ROYALTIES_EARNED = "royalties-earned"
-}
-
-// Warning: (ae-missing-release-tag) "EventType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export enum EventType {
-    // (undocumented)
-    BLOCKCHAIN = "blockchain",
-    // (undocumented)
-    CATALYST_DEPLOYMENT = "catalyst-deployment",
-    // (undocumented)
-    CLIENT = "client"
+    export enum Type {
+        // (undocumented)
+        BLOCKCHAIN = "blockchain",
+        // (undocumented)
+        CATALYST_DEPLOYMENT = "catalyst-deployment",
+        // (undocumented)
+        CLIENT = "client"
+    }
 }
 
 // @alpha (undocumented)
@@ -1173,8 +1194,8 @@ export type ItemFilters = {
 //
 // @public (undocumented)
 export type ItemSoldEvent = BaseEvent & {
-    type: EventType.BLOCKCHAIN;
-    subType: EventSubType.ITEM_SOLD;
+    type: Events.Type.BLOCKCHAIN;
+    subType: Events.SubType.Blockchain.ITEM_SOLD;
     metadata: {
         address: string;
         image: string;
@@ -1437,8 +1458,8 @@ export enum MintSortBy {
 //
 // @public (undocumented)
 export type MoveToParcelEvent = BaseEvent & {
-    type: EventType.CLIENT;
-    subType: EventSubType.MOVE_TO_PARCEL;
+    type: Events.Type.CLIENT;
+    subType: Events.SubType.Client.MOVE_TO_PARCEL;
     metadata: {
         address: string;
         timestamp: number;
@@ -2300,8 +2321,8 @@ export namespace Rarity {
 //
 // @public (undocumented)
 export type RentalEndedEvent = BaseEvent & {
-    type: EventType.BLOCKCHAIN;
-    subType: EventSubType.RENTAL_ENDED;
+    type: Events.Type.BLOCKCHAIN;
+    subType: Events.SubType.Blockchain.RENTAL_ENDED;
     metadata: RentalMetadata;
 };
 
@@ -2437,8 +2458,8 @@ export enum RentalsListingsSortBy {
 //
 // @public (undocumented)
 export type RentalStartedEvent = BaseEvent & {
-    type: EventType.BLOCKCHAIN;
-    subType: EventSubType.RENTAL_STARTED;
+    type: Events.Type.BLOCKCHAIN;
+    subType: Events.SubType.Blockchain.RENTAL_STARTED;
     metadata: RentalMetadata;
 };
 
@@ -2478,8 +2499,8 @@ export enum RequiredPermission {
 //
 // @public (undocumented)
 export type RoyaltiesEarnedEvent = BaseEvent & {
-    type: EventType.BLOCKCHAIN;
-    subType: EventSubType.ROYALTIES_EARNED;
+    type: Events.Type.BLOCKCHAIN;
+    subType: Events.SubType.Blockchain.ROYALTIES_EARNED;
     metadata: {
         address: string;
         image: string;

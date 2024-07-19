@@ -1,4 +1,4 @@
-import { BaseEvent, EventSubType, EventType } from './base'
+import { BaseEvent, Events } from './base'
 
 type BidMetadata = {
   address: string
@@ -15,20 +15,20 @@ type BidMetadata = {
 }
 
 export type BidAcceptedEvent = BaseEvent & {
-  type: EventType.BLOCKCHAIN
-  subType: EventSubType.BID_ACCEPTED
+  type: Events.Type.BLOCKCHAIN
+  subType: Events.SubType.Blockchain.BID_ACCEPTED
   metadata: BidMetadata
 }
 
 export type BidReceivedEvent = BaseEvent & {
-  type: EventType.BLOCKCHAIN
-  subType: EventSubType.BID_RECEIVED
+  type: Events.Type.BLOCKCHAIN
+  subType: Events.SubType.Blockchain.BID_RECEIVED
   metadata: BidMetadata
 }
 
 export type ItemSoldEvent = BaseEvent & {
-  type: EventType.BLOCKCHAIN
-  subType: EventSubType.ITEM_SOLD
+  type: Events.Type.BLOCKCHAIN
+  subType: Events.SubType.Blockchain.ITEM_SOLD
   metadata: {
     address: string
     image: string
@@ -59,20 +59,20 @@ type RentalMetadata = {
 }
 
 export type RentalEndedEvent = BaseEvent & {
-  type: EventType.BLOCKCHAIN
-  subType: EventSubType.RENTAL_ENDED
+  type: Events.Type.BLOCKCHAIN
+  subType: Events.SubType.Blockchain.RENTAL_ENDED
   metadata: RentalMetadata
 }
 
 export type RentalStartedEvent = BaseEvent & {
-  type: EventType.BLOCKCHAIN
-  subType: EventSubType.RENTAL_STARTED
+  type: Events.Type.BLOCKCHAIN
+  subType: Events.SubType.Blockchain.RENTAL_STARTED
   metadata: RentalMetadata
 }
 
 export type RoyaltiesEarnedEvent = BaseEvent & {
-  type: EventType.BLOCKCHAIN
-  subType: EventSubType.ROYALTIES_EARNED
+  type: Events.Type.BLOCKCHAIN
+  subType: Events.SubType.Blockchain.ROYALTIES_EARNED
   metadata: {
     address: string
     image: string
@@ -89,8 +89,8 @@ export type RoyaltiesEarnedEvent = BaseEvent & {
 }
 
 export type CollectionCreatedEvent = BaseEvent & {
-  type: EventType.BLOCKCHAIN
-  subType: EventSubType.COLLECTION_CREATED
+  type: Events.Type.BLOCKCHAIN
+  subType: Events.SubType.Blockchain.COLLECTION_CREATED
   metadata: {
     creator: string
     name: string

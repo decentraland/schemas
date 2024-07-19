@@ -26,7 +26,6 @@ export namespace CatalystDeployment {
         },
         additionalProperties: true
       }
-      // Removed 'lods', 'contentServerUrls', and 'force' as they are not defined in the CatalystDeployment type
     },
     additionalProperties: true
   }

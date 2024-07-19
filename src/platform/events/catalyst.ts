@@ -1,8 +1,8 @@
-import { Entity, EntityType } from '../entity'
-import { BaseEvent, EventType } from './base'
+import { Entity } from '../entity'
+import { BaseEvent, Events } from './base'
 
 export type CatalystDeploymentEvent = BaseEvent & {
-  type: EventType.CATALYST_DEPLOYMENT
-  subType: EntityType
+  type: Events.Type.CATALYST_DEPLOYMENT
+  subType: Events.SubType.CatalystDeployment
   entity: Entity
 }
