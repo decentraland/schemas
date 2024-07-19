@@ -1,4 +1,3 @@
-import { EntityType } from '../entity'
 import {
   BidAcceptedEvent,
   BidReceivedEvent,
@@ -30,12 +29,12 @@ export namespace Events {
     }
 
     export enum CatalystDeployment {
-      SCENE = EntityType.SCENE,
-      PROFILE = EntityType.PROFILE,
-      WEARABLE = EntityType.WEARABLE,
-      STORE = EntityType.STORE,
-      EMOTE = EntityType.EMOTE,
-      OUTFITS = EntityType.OUTFITS
+      SCENE = 'scene',
+      PROFILE = 'profile',
+      WEARABLE = 'wearable',
+      STORE = 'store',
+      EMOTE = 'emote',
+      OUTFITS = 'outfits'
     }
 
     export enum Client {
