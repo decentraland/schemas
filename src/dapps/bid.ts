@@ -1,16 +1,24 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
+import { PaginatedParameters } from './common'
 import { ListingStatus } from './listing-status'
 import { Network } from './network'
 
 export type BaseBid = {
   id: string
   bidder: string
+  /**
+   * When the bid is on an item, this is the address of the creator of the collection
+   * When the bid is on an NFT, this is the address of the owner of the NFT
+   */
   seller: string
   price: string
   status: ListingStatus
+  /** expiration date in milliseconds */
   expiresAt: number
+  /** creation date in milliseconds */
   createdAt: number
+  /** updated date in milliseconds */
   updatedAt: number
   contractAddress: string
   network: Network.ETHEREUM | Network.MATIC
@@ -18,7 +26,7 @@ export type BaseBid = {
   fingerprint: string
 }
 
-type LegacyBid = BaseBid & {
+export type LegacyBid = BaseBid & {
   bidAddress: string
   blockchainId: string
   blockNumber: string
@@ -52,6 +60,16 @@ export type BidFilters = {
   bidAddress?: string
   bidder?: string
   seller?: string
+  contractAddress?: string
+  tokenId?: string
+  status?: ListingStatus
+  network?: Network
+}
+
+export type GetBidsParameters = PaginatedParameters & {
+  bidder?: string
+  seller?: string
+  sortBy?: BidSortBy
   contractAddress?: string
   tokenId?: string
   status?: ListingStatus
