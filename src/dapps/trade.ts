@@ -15,7 +15,9 @@ export type TradeExternalCheck = {
 
 export type TradeChecks = {
   uses: number
+  /** Expiration in milliseconds */
   expiration: number
+  /** Effective since date in milliseconds */
   effective: number
   salt: string
   contractSignatureIndex: number
@@ -27,8 +29,9 @@ export type TradeChecks = {
 
 export enum TradeAssetType {
   ERC20 = 1,
-  ERC721 = 2,
-  COLLECTION_ITEM = 3
+  USD_PEGGED_MANA = 2,
+  ERC721 = 3,
+  COLLECTION_ITEM = 4
 }
 
 export enum TradeAssetDirection {
@@ -52,12 +55,17 @@ export type ERC20TradeAsset = BaseTradeAsset & {
   amount: string
 }
 
+export type USDPeggedManaTradeAsset = BaseTradeAsset & {
+  assetType: TradeAssetType.USD_PEGGED_MANA
+  amount: string
+}
+
 export type ERC721TradeAsset = BaseTradeAsset & {
   assetType: TradeAssetType.ERC721
   tokenId: string
 }
 
-export type TradeAsset = CollectionItemTradeAsset | ERC20TradeAsset | ERC721TradeAsset
+export type TradeAsset = CollectionItemTradeAsset | ERC20TradeAsset | ERC721TradeAsset | USDPeggedManaTradeAsset
 
 export type TradeAssetWithBeneficiary = TradeAsset & {
   beneficiary: string
@@ -85,4 +93,20 @@ export type TradeCreation = {
   checks: TradeChecks
   sent: TradeAsset[]
   received: TradeAssetWithBeneficiary[]
+}
+
+export type OnChainTradeAsset = {
+  assetType: TradeAssetType
+  contractAddress: string
+  value: string
+  extra: string
+  beneficiary: string
+}
+
+export type OnChainTrade = {
+  signer: string
+  signature: string
+  checks: TradeChecks & { allowedProof: string[] }
+  sent: OnChainTradeAsset[]
+  received: OnChainTradeAsset[]
 }
