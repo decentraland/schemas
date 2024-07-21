@@ -19,6 +19,7 @@ export enum NotificationType {
   ITEM_SOLD = 'item_sold',
   LAND_RENTAL_ENDED = 'rental_ended',
   LAND_RENTED = 'rental_started',
+  REWARD_IN_PROGRESS = 'reward_in_progress',
   REWARD_ASSIGNED = 'reward_assignment',
   ROYALTIES_EARNED = 'royalties_earned',
   WORLDS_ACCESS_RESTORED = 'worlds_access_restored',
