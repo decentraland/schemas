@@ -1,8 +1,8 @@
-import { isThirdParty, RangeMapping } from '..'
+import { isThirdParty, Mappings, RangeMapping } from '..'
 import { generateLazyValidator, JSONSchema } from '../../../validation'
 import { BaseItem, baseItemProperties, isBaseEmote, requiredBaseItemProps } from '../base-item'
 import { standardProperties, StandardProps } from '../standard-props'
-import { thirdPartyProps, ThirdPartyProps } from '../third-party-props'
+import { schema as thirdPartyPropsSchema, ThirdPartyProps } from '../third-party-props'
 import { EmoteDataADR74 } from './adr74/emote-data-adr74'
 
 export type EmoteADR74 = BaseItem & (StandardProps | ThirdPartyProps) & { emoteDataADR74: EmoteDataADR74 }
@@ -17,7 +17,7 @@ export namespace Emote {
     properties: {
       ...baseItemProperties,
       ...standardProperties,
-      ...thirdPartyProps,
+      ...thirdPartyPropsSchema.properties,
       emoteDataADR74: EmoteDataADR74.schema
     },
     additionalProperties: true,
@@ -80,6 +80,7 @@ export namespace Emote {
   export const validate = generateLazyValidator(schema, [
     _isThirdPartyKeywordDef,
     _isBaseEmoteKeywordDef,
-    RangeMapping._fromLessThanOrEqualTo
+    RangeMapping._fromLessThanOrEqualTo,
+    Mappings._isMappingsValid
   ])
 }

@@ -2,15 +2,16 @@ import expect from 'expect'
 import {
   BodyPartCategory,
   BodyShape,
+  ContractNetwork,
   isThirdParty,
   Locale,
+  MappingType,
   ThirdPartyProps,
   Wearable,
   WearableCategory,
   WearableRepresentation
 } from '../../../../src'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
-import { MappingType } from '../../../../src'
 
 describe('Linked wearables tests', () => {
   const representation: WearableRepresentation = {
@@ -72,12 +73,16 @@ describe('Linked wearables tests', () => {
       hashingKeys: ['id', 'name', 'description', 'i18n', 'image', 'thumbnail', 'data', 'content', 'mappings'],
       entityHash: '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
     },
-    mappings: [
-      {
-        type: MappingType.SINGLE,
-        id: '0'
+    mappings: {
+      [ContractNetwork.MAINNET]: {
+        '0x1234567890123456789012345678901234567890': [
+          {
+            type: MappingType.SINGLE,
+            id: '0'
+          }
+        ]
       }
-    ]
+    }
   }
 
   const linkedWearable = { ...baseWearable, ...thirdParty }
@@ -119,30 +124,11 @@ describe('Linked wearables tests', () => {
       Wearable.validate,
       {
         ...linkedWearable,
-        mappings: []
+        mappings: {
+          bitcoin: {} // Makes third party properties invalid
+        }
       },
-      ['must NOT have fewer than 1 items']
-    )
-  })
-
-  // For now we will support only one mapping type
-  it('wearable with more than one mapping fails', () => {
-    expectValidationFailureWithErrors(
-      Wearable.validate,
-      {
-        ...linkedWearable,
-        mappings: [
-          {
-            type: MappingType.MULTIPLE,
-            ids: [1, 2]
-          },
-          {
-            type: MappingType.SINGLE,
-            id: 3
-          }
-        ]
-      },
-      ['must NOT have more than 1 items']
+      ['either standard XOR thirdparty properties conditions must be met']
     )
   })
 })

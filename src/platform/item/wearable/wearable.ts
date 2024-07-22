@@ -3,9 +3,9 @@ import { WearableCategory } from './wearable-category'
 import { WearableRepresentation } from './representation'
 import { BaseItem, baseItemProperties, isBaseAvatar, requiredBaseItemProps } from '../base-item'
 import { StandardProps, standardProperties } from '../standard-props'
-import { isThirdParty, ThirdPartyProps, thirdPartyProps } from '../third-party-props'
+import { isThirdParty, ThirdPartyProps, schema as thirdPartyPropsSchema } from '../third-party-props'
 import { HideableWearableCategory } from './hideable-category'
-import { RangeMapping } from '../linked-wearable-props'
+import { Mappings, RangeMapping } from '../linked-wearable-mappings'
 
 /** @alpha */
 export type Wearable = BaseItem & {
@@ -27,7 +27,7 @@ export namespace Wearable {
     properties: {
       ...baseItemProperties,
       ...standardProperties,
-      ...thirdPartyProps,
+      ...thirdPartyPropsSchema.properties.thirdPartyProps,
       data: {
         type: 'object',
         properties: {
@@ -70,12 +70,12 @@ export namespace Wearable {
     oneOf: [
       {
         required: ['id', 'i18n'],
-        prohibited: ['merkleProof', 'content', 'collectionAddress', 'rarity'],
+        prohibited: ['merkleProof', 'content', 'collectionAddress', 'rarity', 'mappings'],
         _isBaseAvatar: true
       },
       {
         required: [...requiredBaseItemProps, 'data', 'collectionAddress', 'rarity'],
-        prohibited: ['merkleProof', 'content']
+        prohibited: ['merkleProof', 'content', 'mappings']
       },
       {
         required: [
@@ -119,6 +119,7 @@ export namespace Wearable {
   export const validate = generateLazyValidator(schema, [
     _isThirdPartyKeywordDef,
     _isBaseAvatarKeywordDef,
-    RangeMapping._fromLessThanOrEqualTo
+    RangeMapping._fromLessThanOrEqualTo,
+    Mappings._isMappingsValid
   ])
 }
