@@ -255,6 +255,12 @@ export type MappingsHelper = {
   includesNft(network: ContractNetwork, contractAddress: ContractAddress, tokenId: string): boolean
 }
 
+export class AddMappingError extends Error {
+  constructor(message: string, public mapping: Mapping) {
+    super(message)
+  }
+}
+
 export function createMappingsHelper(initial: Mappings = {}): MappingsHelper {
   const mappings: Mappings = {}
 
@@ -322,10 +328,9 @@ export function createMappingsHelper(initial: Mappings = {}): MappingsHelper {
 
     for (const existingMapping of mappings[network]![lowerContractAddress]) {
       if (overlappingCheck(existingMapping, mapping)) {
-        throw new Error(
-          `Cannot add mapping to contract ${lowerContractAddress} on network ${network} because it overlaps with existing mapping: ${JSON.stringify(
-            existingMapping
-          )}`
+        throw new AddMappingError(
+          `Cannot add mapping to contract ${lowerContractAddress} on network ${network} because it overlaps with existing mapping`,
+          existingMapping
         )
       }
     }
