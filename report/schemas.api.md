@@ -1778,6 +1778,8 @@ export enum NotificationType {
     // (undocumented)
     REWARD_ASSIGNED = "reward_assignment",
     // (undocumented)
+    REWARD_IN_PROGRESS = "reward_in_progress",
+    // (undocumented)
     ROYALTIES_EARNED = "royalties_earned",
     // (undocumented)
     WORLDS_ACCESS_RESTORED = "worlds_access_restored",
