@@ -256,7 +256,7 @@ export type MappingsHelper = {
 }
 
 export class AddMappingError extends Error {
-  constructor(message: string, public mapping: Mapping) {
+  constructor(message: string, public existingMapping: Mapping, public conflictingMapping: Mapping) {
     super(message)
   }
 }
@@ -330,7 +330,8 @@ export function createMappingsHelper(initial: Mappings = {}): MappingsHelper {
       if (overlappingCheck(existingMapping, mapping)) {
         throw new AddMappingError(
           `Cannot add mapping to contract ${lowerContractAddress} on network ${network} because it overlaps with existing mapping`,
-          existingMapping
+          existingMapping,
+          mapping
         )
       }
     }
