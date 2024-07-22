@@ -12,6 +12,8 @@ on:
 name: Publish NPM package
 jobs:
   install:
+    permissions:
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,9 +23,9 @@ jobs:
           node-version: 18.x
 
       - name: npm ci
-        run:  npm ci
+        run: npm ci
       - name: npm run build
-        run:  npm run build
+        run: npm run build
       - name: npm run test
         run: npm run test
       - name: npm run lint
