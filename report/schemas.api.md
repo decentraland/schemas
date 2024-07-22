@@ -72,6 +72,22 @@ export enum AccountSortBy {
 // @public (undocumented)
 type Actions = typeof SCENE_UPDATE | typeof UPDATE;
 
+// Warning: (ae-missing-release-tag) "AddMappingError" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export class AddMappingError extends Error {
+    // Warning: (ae-incompatible-release-tags) The symbol "__constructor" is marked as @public, but its signature references "Mapping" which is marked as @alpha
+    constructor(message: string, existingMapping: Mapping, conflictingMapping: Mapping);
+    // Warning: (ae-incompatible-release-tags) The symbol "conflictingMapping" is marked as @public, but its signature references "Mapping" which is marked as @alpha
+    //
+    // (undocumented)
+    conflictingMapping: Mapping;
+    // Warning: (ae-incompatible-release-tags) The symbol "existingMapping" is marked as @public, but its signature references "Mapping" which is marked as @alpha
+    //
+    // (undocumented)
+    existingMapping: Mapping;
+}
+
 export { Ajv }
 
 // Warning: (ae-missing-release-tag) "AnalyticsDayData" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
