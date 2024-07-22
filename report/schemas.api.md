@@ -1414,8 +1414,6 @@ export namespace Mappings {
         errors: boolean;
     };
     const // (undocumented)
-    mappingArraySchema: JSONSchema<Mapping[]>;
-    const // (undocumented)
     innerSchema: JSONSchema<Record<ContractAddress, Mapping[]>>;
     const // (undocumented)
     schema: JSONSchema<Mappings>;
@@ -3373,12 +3371,12 @@ export namespace WorldConfiguration {
 // src/platform/events/blockchain.ts:21:3 - (ae-forgotten-export) The symbol "BidMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/blockchain.ts:163:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:255:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:256:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:256:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:256:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "Mapping" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:257:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:257:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:253:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:254:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:254:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:254:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "Mapping" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:255:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:255:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
 // src/platform/item/third-party-props.ts:7:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
 // src/platform/item/third-party-props.ts:9:3 - (ae-incompatible-release-tags) The symbol "mappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/scene/feature-toggles.ts:11:3 - (ae-forgotten-export) The symbol "EnabledDisabled" needs to be exported by the entry point index.d.ts
