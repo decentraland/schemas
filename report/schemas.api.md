@@ -1776,9 +1776,9 @@ export enum NotificationType {
     // (undocumented)
     LAND_RENTED = "rental_started",
     // (undocumented)
-    REWARD_IN_PROGRESS = "reward_in_progress",
-    // (undocumented)
     REWARD_ASSIGNED = "reward_assignment",
+    // (undocumented)
+    REWARD_IN_PROGRESS = "reward_in_progress",
     // (undocumented)
     ROYALTIES_EARNED = "royalties_earned",
     // (undocumented)
