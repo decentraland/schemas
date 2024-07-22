@@ -217,15 +217,13 @@ export namespace Mappings {
     errors: false
   }
 
-  export const mappingArraySchema: JSONSchema<Mapping[]> = {
-    type: 'array',
-    items: Mapping.schema
-  }
-
   export const innerSchema: JSONSchema<Record<ContractAddress, Mapping[]>> = {
     type: 'object',
     patternProperties: {
-      '^0x[0-9a-fA-F]{40}$': mappingArraySchema
+      '^0x[0-9a-fA-F]{40}$': {
+        type: 'array',
+        items: Mapping.schema
+      }
     },
     minProperties: 1,
     required: [],
