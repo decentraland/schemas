@@ -50,6 +50,18 @@ describe('Third Party Mappings tests', () => {
     expect(Mappings.validate(mappings)).toEqual(true)
     expect(Mappings.validate(null)).toEqual(false)
     expectValidationFailureWithErrors(Mappings.validate, {}, ['must NOT have fewer than 1 properties'])
+    expectValidationFailureWithErrors(
+      Mappings.validate,
+      {
+        amoy: {
+          '0x1d9fb685c257E74f869BA302e260C0b68f5eBB37': [
+            { type: MappingType.ANY },
+            { type: MappingType.SINGLE, id: '0' }
+          ]
+        }
+      },
+      ['must pass "_isMappingsValid" keyword validation']
+    )
   })
 })
 

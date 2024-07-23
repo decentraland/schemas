@@ -1,6 +1,5 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { KeywordDefinition } from 'ajv'
-import { ThirdPartyProps } from './third-party-props'
+import { FuncKeywordDefinition, KeywordDefinition } from 'ajv'
 
 /**
  * MappingType
@@ -203,17 +202,17 @@ export namespace Mapping {
  * @alpha
  */
 export namespace Mappings {
-  export const _isMappingsValid = {
+  export const _isMappingsValid: FuncKeywordDefinition = {
     keyword: '_isMappingsValid',
-    validate: function (schema: boolean, data: any) {
-      const itemAsThirdParty = data as ThirdPartyProps
+    validate: function (data: Mappings) {
       try {
-        createMappingsHelper(itemAsThirdParty.mappings)
+        createMappingsHelper(data)
       } catch (_) {
         return false
       }
       return true
     },
+    schema: false,
     errors: false
   }
 
@@ -227,8 +226,7 @@ export namespace Mappings {
     },
     minProperties: 1,
     required: [],
-    additionalProperties: false,
-    _isMappingsValid: true
+    additionalProperties: false
   }
 
   const properties = Object.values(ContractNetwork).reduce((acc, network) => {
@@ -240,7 +238,8 @@ export namespace Mappings {
     type: 'object',
     properties,
     minProperties: 1,
-    additionalProperties: false
+    additionalProperties: false,
+    _isMappingsValid: true
   }
 
   export const validate: ValidateFunction<Mappings> = generateLazyValidator(schema, [
