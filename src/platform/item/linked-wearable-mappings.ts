@@ -204,7 +204,7 @@ export namespace Mapping {
 export namespace Mappings {
   export const _isMappingsValid: FuncKeywordDefinition = {
     keyword: '_isMappingsValid',
-    validate: function (data: Mappings) {
+    validate: function (_schema: boolean, data: Mappings) {
       try {
         createMappingsHelper(data)
       } catch (_) {
@@ -212,7 +212,6 @@ export namespace Mappings {
       }
       return true
     },
-    schema: false,
     errors: false
   }
 
