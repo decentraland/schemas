@@ -1037,6 +1037,8 @@ export type GetBidsParameters = PaginatedParameters & {
     tokenId?: string;
     status?: ListingStatus;
     network?: Network;
+    itemId?: string;
+    bidAddress?: string;
 };
 
 // @alpha
