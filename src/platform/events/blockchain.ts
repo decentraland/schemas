@@ -8,7 +8,7 @@ export type BidEventMetadata = {
   category: string
   rarity?: string
   link: string
-  nftName?: string
+  name?: string
   price: string
   title: string
   description: string
@@ -38,7 +38,7 @@ export namespace BidAcceptedEvent {
           category: { type: 'string' },
           rarity: { type: 'string', nullable: true },
           link: { type: 'string' },
-          nftName: { type: 'string', nullable: true },
+          name: { type: 'string', nullable: true },
           price: { type: 'string' },
           title: { type: 'string' },
           description: { type: 'string' },

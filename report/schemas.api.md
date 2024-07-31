@@ -317,7 +317,7 @@ export type BidEventMetadata = {
     category: string;
     rarity?: string;
     link: string;
-    nftName?: string;
+    name?: string;
     price: string;
     title: string;
     description: string;
