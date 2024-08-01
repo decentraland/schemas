@@ -1570,20 +1570,16 @@ export type MoveToParcelEvent = BaseEvent & {
     type: Events.Type.CLIENT;
     subType: Events.SubType.Client.MOVE_TO_PARCEL;
     metadata: {
-        address: string;
-        timestamp: number;
-        sessionId: string;
-        realm: string;
-        isGuest: boolean;
-        isAuthenticated: boolean;
-        position: string;
-        newParcel: string;
-        oldParcel: string;
-        exactPosition: {
-            x: number;
-            y: number;
-            z: number;
+        authChain: AuthLink;
+        parcel: {
+            isEmptyParcel: boolean;
+            newParcel: string;
+            oldParcel: string;
+            sceneHash: string;
         };
+        timestamp: number;
+        userAddress: EthAddress;
+        realm: string;
     };
 };
 
