@@ -1570,7 +1570,7 @@ export type MoveToParcelEvent = BaseEvent & {
     type: Events.Type.CLIENT;
     subType: Events.SubType.Client.MOVE_TO_PARCEL;
     metadata: {
-        authChain: AuthLink;
+        authChain: AuthChain;
         parcel: {
             isEmptyParcel: boolean;
             newParcel: string;
