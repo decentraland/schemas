@@ -23,7 +23,7 @@ describe('Blockchain Events tests', () => {
         category: 'category',
         rarity: 'rarity',
         link: 'link',
-        name: 'nftName',
+        nftName: 'nftName',
         price: '1',
         title: 'title',
         description: 'description',

@@ -25,7 +25,7 @@ export namespace BidReceivedEvent {
           category: { type: 'string' },
           rarity: { type: 'string', nullable: true },
           link: { type: 'string' },
-          name: { type: 'string', nullable: true },
+          nftName: { type: 'string', nullable: true },
           price: { type: 'string' },
           title: { type: 'string' },
           description: { type: 'string' },
