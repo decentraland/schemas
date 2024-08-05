@@ -1,7 +1,6 @@
 import expect from 'expect'
 import {
   BidAcceptedEvent,
-  BidReceivedEvent,
   CollectionCreatedEvent,
   Events,
   ItemSoldEvent,
@@ -35,32 +34,6 @@ describe('Blockchain Events tests', () => {
     expect(BidAcceptedEvent.validate(event)).toEqual(true)
     expect(BidAcceptedEvent.validate(null)).toEqual(false)
     expect(BidAcceptedEvent.validate({})).toEqual(false)
-  })
-
-  it('BidReceivedEvent static tests must pass', () => {
-    const event: BidReceivedEvent = {
-      type: Events.Type.BLOCKCHAIN,
-      subType: Events.SubType.Blockchain.BID_RECEIVED,
-      key: 'key',
-      timestamp: 1,
-      metadata: {
-        address: 'address',
-        image: 'image',
-        seller: 'seller',
-        category: 'category',
-        rarity: 'rarity',
-        link: 'link',
-        nftName: 'nftName',
-        price: '1',
-        title: 'title',
-        description: 'description',
-        network: 'network'
-      }
-    }
-
-    expect(BidReceivedEvent.validate(event)).toEqual(true)
-    expect(BidReceivedEvent.validate(null)).toEqual(false)
-    expect(BidReceivedEvent.validate({})).toEqual(false)
   })
 
   it('ItemSold static tests must pass', () => {

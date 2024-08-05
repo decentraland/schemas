@@ -261,7 +261,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace;
     key: string;
     timestamp: number;
 };
@@ -296,7 +296,7 @@ export namespace Bid {
 export type BidAcceptedEvent = BaseEvent & {
     type: Events.Type.BLOCKCHAIN;
     subType: Events.SubType.Blockchain.BID_ACCEPTED;
-    metadata: BidMetadata;
+    metadata: BidEventMetadata;
 };
 
 // @public (undocumented)
@@ -306,6 +306,23 @@ export namespace BidAcceptedEvent {
     const // (undocumented)
     validate: ValidateFunction<BidAcceptedEvent>;
 }
+
+// Warning: (ae-missing-release-tag) "BidEventMetadata" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type BidEventMetadata = {
+    address: string;
+    image: string;
+    seller: string;
+    category: string;
+    rarity?: string;
+    link: string;
+    nftName?: string;
+    price: string;
+    title: string;
+    description: string;
+    network: string;
+};
 
 // Warning: (ae-missing-release-tag) "BidFilters" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -328,9 +345,9 @@ export type BidFilters = {
 //
 // @public (undocumented)
 export type BidReceivedEvent = BaseEvent & {
-    type: Events.Type.BLOCKCHAIN;
-    subType: Events.SubType.Blockchain.BID_RECEIVED;
-    metadata: BidMetadata;
+    type: Events.Type.MARKETPLACE;
+    subType: Events.SubType.Marketplace.BID_RECEIVED;
+    metadata: BidEventMetadata;
 };
 
 // @public (undocumented)
@@ -953,8 +970,6 @@ export namespace Events {
             // (undocumented)
             BID_ACCEPTED = "bid-accepted",
             // (undocumented)
-            BID_RECEIVED = "bid-received",
-            // (undocumented)
             COLLECTION_CREATED = "collection-created",
             // (undocumented)
             ITEM_SOLD = "item-sold",
@@ -985,6 +1000,11 @@ export namespace Events {
             // (undocumented)
             MOVE_TO_PARCEL = "move-to-parcel"
         }
+        // (undocumented)
+        export enum Marketplace {
+            // (undocumented)
+            BID_RECEIVED = "bid-received"
+        }
     }
     // (undocumented)
     export enum Type {
@@ -993,7 +1013,9 @@ export namespace Events {
         // (undocumented)
         CATALYST_DEPLOYMENT = "catalyst-deployment",
         // (undocumented)
-        CLIENT = "client"
+        CLIENT = "client",
+        // (undocumented)
+        MARKETPLACE = "marketplace"
     }
 }
 
@@ -3379,8 +3401,7 @@ export namespace WorldConfiguration {
 // src/dapps/trade.ts:79:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/trade.ts:90:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/trade.ts:91:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/platform/events/blockchain.ts:21:3 - (ae-forgotten-export) The symbol "BidMetadata" needs to be exported by the entry point index.d.ts
-// src/platform/events/blockchain.ts:163:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/blockchain.ts:124:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
