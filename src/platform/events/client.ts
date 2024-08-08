@@ -15,6 +15,7 @@ export type MoveToParcelEvent = BaseEvent & {
     }
     timestamp: number
     userAddress: EthAddress
+    sessionId: string
     realm: string
   }
 }
