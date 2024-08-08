@@ -1850,7 +1850,11 @@ export enum NotificationType {
     // (undocumented)
     GOVERNANCE_TENDER_PASSED = "governance_tender_passed",
     // (undocumented)
+    GOVERNANCE_VOTED_ON_BEHALF = "governance_voted_on_behalf",
+    // (undocumented)
     GOVERNANCE_VOTING_ENDED_VOTER = "governance_voting_ended_voter",
+    // (undocumented)
+    GOVERNANCE_WHALE_VOTE = "governance_whale_vote",
     // (undocumented)
     ITEM_SOLD = "item_sold",
     // (undocumented)
