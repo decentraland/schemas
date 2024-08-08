@@ -276,46 +276,60 @@ export function createMappingsHelper(initial: Mappings = {}): MappingsHelper {
     return JSON.parse(JSON.stringify(mappings))
   }
 
+  function isInRange(id: string, from: string, to: string): boolean {
+    const idBigInt = BigInt(id)
+    return idBigInt >= BigInt(from) && idBigInt <= BigInt(to)
+  }
+
+  function singleOverlapCheck(mapping: SingleMapping, other: Exclude<Mapping, AnyMapping>): boolean {
+    switch (other.type) {
+      case MappingType.SINGLE:
+        return mapping.id === other.id
+      case MappingType.MULTIPLE:
+        return other.ids.includes(mapping.id)
+      case MappingType.RANGE:
+        return isInRange(mapping.id, other.from, other.to)
+      default:
+        return false
+    }
+  }
+
+  function multipleOverlapCheck(mapping: MultipleMapping, other: Exclude<Mapping, AnyMapping>): boolean {
+    switch (other.type) {
+      case MappingType.SINGLE:
+        return mapping.ids.includes(other.id)
+      case MappingType.MULTIPLE:
+        return mapping.ids.some((id) => other.ids.includes(id))
+      case MappingType.RANGE:
+        return mapping.ids.some((id) => isInRange(id, other.from, other.to))
+      default:
+        return false
+    }
+  }
+
+  function rangeOverlapCheck(mapping: RangeMapping, other: Exclude<Mapping, AnyMapping>): boolean {
+    switch (other.type) {
+      case MappingType.SINGLE:
+        return isInRange(other.id, mapping.from, mapping.to)
+      case MappingType.MULTIPLE:
+        return other.ids.some((id) => isInRange(id, mapping.from, mapping.to))
+      case MappingType.RANGE:
+        return BigInt(mapping.from) <= BigInt(other.to) && BigInt(mapping.to) >= BigInt(other.from)
+    }
+  }
+
   function overlappingCheck(mapping: Mapping, other: Mapping): boolean {
+    if (mapping.type === MappingType.ANY || other.type === MappingType.ANY) {
+      return true
+    }
+
     switch (mapping.type) {
       case MappingType.SINGLE:
-        switch (other.type) {
-          case MappingType.SINGLE:
-            return mapping.id === other.id
-          case MappingType.ANY:
-            return true
-          case MappingType.MULTIPLE:
-            return other.ids.includes(mapping.id)
-          case MappingType.RANGE:
-            return BigInt(mapping.id) >= BigInt(other.from) && BigInt(mapping.id) <= BigInt(other.to)
-        }
-
-      case MappingType.ANY:
-        return true
-
+        return singleOverlapCheck(mapping, other)
       case MappingType.MULTIPLE:
-        switch (other.type) {
-          case MappingType.SINGLE:
-            return mapping.ids.includes(other.id)
-          case MappingType.ANY:
-            return true
-          case MappingType.MULTIPLE:
-            return mapping.ids.some((id) => other.ids.includes(id))
-          case MappingType.RANGE:
-            return mapping.ids.some((id) => BigInt(id) >= BigInt(other.from) && BigInt(id) <= BigInt(other.to))
-        }
-
+        return multipleOverlapCheck(mapping, other)
       case MappingType.RANGE:
-        switch (other.type) {
-          case MappingType.SINGLE:
-            return BigInt(other.id) >= BigInt(mapping.from) && BigInt(other.id) <= BigInt(mapping.to)
-          case MappingType.ANY:
-            return true
-          case MappingType.MULTIPLE:
-            return other.ids.some((id) => BigInt(id) >= BigInt(mapping.from) && BigInt(id) <= BigInt(mapping.to))
-          case MappingType.RANGE:
-            return BigInt(mapping.from) <= BigInt(other.to) && BigInt(mapping.to) >= BigInt(other.from)
-        }
+        return rangeOverlapCheck(mapping, other)
     }
   }
 
