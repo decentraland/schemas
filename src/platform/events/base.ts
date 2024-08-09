@@ -9,13 +9,15 @@ import {
 import { CatalystDeploymentEvent } from './catalyst'
 import { MoveToParcelEvent } from './client'
 import { BidReceivedEvent } from './marketplace'
+import { RewardInProgressEvent, RewardAssignedEvent } from './rewards'
 
 export namespace Events {
   export enum Type {
     BLOCKCHAIN = 'blockchain',
     CATALYST_DEPLOYMENT = 'catalyst-deployment',
     CLIENT = 'client',
-    MARKETPLACE = 'marketplace'
+    MARKETPLACE = 'marketplace',
+    REWARDS = 'rewards'
   }
 
   export namespace SubType {
@@ -44,6 +46,11 @@ export namespace Events {
     export enum Client {
       MOVE_TO_PARCEL = 'move-to-parcel'
     }
+
+    export enum Rewards {
+      REWARD_IN_PROGRESS = 'reward-in-progress',
+      REWARD_ASSIGNED = 'reward-assigned'
+    }
   }
 }
 
@@ -54,6 +61,7 @@ export type BaseEvent = {
     | Events.SubType.CatalystDeployment
     | Events.SubType.Client
     | Events.SubType.Marketplace
+    | Events.SubType.Rewards
   key: string
   timestamp: number
 }
@@ -68,3 +76,5 @@ export type Event =
   | CollectionCreatedEvent
   | MoveToParcelEvent
   | CatalystDeploymentEvent
+  | RewardInProgressEvent
+  | RewardAssignedEvent
