@@ -261,7 +261,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards;
     key: string;
     timestamp: number;
 };
@@ -957,7 +957,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent;
+export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent | RewardInProgressEvent | RewardAssignedEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1005,6 +1005,13 @@ export namespace Events {
             // (undocumented)
             BID_RECEIVED = "bid-received"
         }
+        // (undocumented)
+        export enum Rewards {
+            // (undocumented)
+            REWARD_ASSIGNED = "reward-assigned",
+            // (undocumented)
+            REWARD_IN_PROGRESS = "reward-in-progress"
+        }
     }
     // (undocumented)
     export enum Type {
@@ -1015,7 +1022,9 @@ export namespace Events {
         // (undocumented)
         CLIENT = "client",
         // (undocumented)
-        MARKETPLACE = "marketplace"
+        MARKETPLACE = "marketplace",
+        // (undocumented)
+        REWARDS = "rewards"
     }
 }
 
@@ -2645,6 +2654,54 @@ export enum RequiredPermission {
     USE_WEB3_API = "USE_WEB3_API",
     // (undocumented)
     USE_WEBSOCKET = "USE_WEBSOCKET"
+}
+
+// Warning: (ae-missing-release-tag) "RewardAssignedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RewardAssignedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type RewardAssignedEvent = BaseEvent & {
+    type: Events.Type.REWARDS;
+    subType: Events.SubType.Rewards.REWARD_ASSIGNED;
+    metadata: RewardEventMetadata;
+};
+
+// @public (undocumented)
+export namespace RewardAssignedEvent {
+    const // (undocumented)
+    schema: JSONSchema<RewardAssignedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<RewardAssignedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "RewardEventMetadata" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type RewardEventMetadata = {
+    title: string;
+    description: string;
+    tokenName: string;
+    tokenImage: string;
+    tokenRarity: string | null;
+    tokenCategory: string | null;
+};
+
+// Warning: (ae-missing-release-tag) "RewardInProgressEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RewardInProgressEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type RewardInProgressEvent = BaseEvent & {
+    type: Events.Type.REWARDS;
+    subType: Events.SubType.Rewards.REWARD_IN_PROGRESS;
+    metadata: RewardEventMetadata;
+};
+
+// @public (undocumented)
+export namespace RewardInProgressEvent {
+    const // (undocumented)
+    schema: JSONSchema<RewardInProgressEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<RewardInProgressEvent>;
 }
 
 // Warning: (ae-missing-release-tag) "RoyaltiesEarnedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
