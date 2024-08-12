@@ -3,7 +3,8 @@ import { Network } from './network'
 
 export enum TradeType {
   BID = 'bid',
-  PUBLIC_ORDER = 'public_order'
+  PUBLIC_NFT_ORDER = 'public_nft_order',
+  PUBLIC_ITEM_ORDER = 'public_item_order'
 }
 
 export type TradeExternalCheck = {
