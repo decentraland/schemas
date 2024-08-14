@@ -1601,6 +1601,7 @@ export type MoveToParcelEvent = BaseEvent & {
         };
         timestamp: number;
         userAddress: EthAddress;
+        sessionId: string;
         realm: string;
     };
 };
@@ -1850,7 +1851,11 @@ export enum NotificationType {
     // (undocumented)
     GOVERNANCE_TENDER_PASSED = "governance_tender_passed",
     // (undocumented)
+    GOVERNANCE_VOTED_ON_BEHALF = "governance_voted_on_behalf",
+    // (undocumented)
     GOVERNANCE_VOTING_ENDED_VOTER = "governance_voting_ended_voter",
+    // (undocumented)
+    GOVERNANCE_WHALE_VOTE = "governance_whale_vote",
     // (undocumented)
     ITEM_SOLD = "item_sold",
     // (undocumented)
@@ -3108,7 +3113,9 @@ export enum TradeType {
     // (undocumented)
     BID = "bid",
     // (undocumented)
-    PUBLIC_ORDER = "public_order"
+    PUBLIC_ITEM_ORDER = "public_item_order",
+    // (undocumented)
+    PUBLIC_NFT_ORDER = "public_nft_order"
 }
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
@@ -3397,10 +3404,10 @@ export namespace WorldConfiguration {
 // src/dapps/sale.ts:18:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/sale.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/sale.ts:42:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/trade.ts:78:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/trade.ts:79:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/dapps/trade.ts:90:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
-// src/dapps/trade.ts:91:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/trade.ts:79:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/trade.ts:80:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
+// src/dapps/trade.ts:91:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
+// src/dapps/trade.ts:92:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/platform/events/blockchain.ts:124:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
