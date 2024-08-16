@@ -10,6 +10,7 @@ export enum NotificationType {
   GOVERNANCE_ANNOUNCEMENT = 'governance_announcement',
   GOVERNANCE_AUTHORED_PROPOSAL_FINISHED = 'governance_authored_proposal_finished',
   GOVERNANCE_COAUTHOR_REQUESTED = 'governance_coauthor_requested',
+  GOVERNANCE_CLIFF_ENDED = 'governance_cliff_ended',
   GOVERNANCE_NEW_COMMENT_ON_PROJECT_UPDATE = 'governance_new_comment_on_project_update',
   GOVERNANCE_NEW_COMMENT_ON_PROPOSAL = 'governance_new_comment_on_proposal',
   GOVERNANCE_PROPOSAL_ENACTED = 'governance_proposal_enacted',

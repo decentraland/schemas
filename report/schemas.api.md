@@ -1839,6 +1839,8 @@ export enum NotificationType {
     // (undocumented)
     GOVERNANCE_AUTHORED_PROPOSAL_FINISHED = "governance_authored_proposal_finished",
     // (undocumented)
+    GOVERNANCE_CLIFF_ENDED = "governance_cliff_ended",
+    // (undocumented)
     GOVERNANCE_COAUTHOR_REQUESTED = "governance_coauthor_requested",
     // (undocumented)
     GOVERNANCE_NEW_COMMENT_ON_PROJECT_UPDATE = "governance_new_comment_on_project_update",
