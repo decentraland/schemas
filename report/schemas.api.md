@@ -261,7 +261,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge;
     key: string;
     timestamp: number;
 };
@@ -1018,10 +1018,11 @@ export namespace EthAddress {
     validate: ValidateFunction<EthAddress>;
 }
 
+// Warning: (ae-forgotten-export) The symbol "BadgeGrantedEvent" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent | RewardInProgressEvent | RewardAssignedEvent | CampaignOutOfFundsEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfStockEvent | RewardDelayedEvent;
+export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent | RewardInProgressEvent | RewardAssignedEvent | CampaignOutOfFundsEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfStockEvent | RewardDelayedEvent | BadgeGrantedEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1029,6 +1030,11 @@ export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | Rental
 export namespace Events {
     // (undocumented)
     export namespace SubType {
+        // (undocumented)
+        export enum Badge {
+            // (undocumented)
+            GRANTED = "badge-granted"
+        }
         // (undocumented)
         export enum Blockchain {
             // (undocumented)
@@ -1087,6 +1093,8 @@ export namespace Events {
     }
     // (undocumented)
     export enum Type {
+        // (undocumented)
+        BADGE = "badge",
         // (undocumented)
         BLOCKCHAIN = "blockchain",
         // (undocumented)
