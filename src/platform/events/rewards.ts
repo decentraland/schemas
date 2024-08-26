@@ -7,8 +7,8 @@ export type RewardEventMetadata = {
   beneficiary: string
   tokenName: string
   tokenImage: string
-  tokenRarity?: string | null
-  tokenCategory?: string | null
+  tokenRarity?: string
+  tokenCategory?: string
 }
 
 export type RewardInProgressEvent = BaseEvent & {
