@@ -11,6 +11,7 @@ describe('Rewards Events tests', () => {
       metadata: {
         title: 'title',
         description: 'description',
+        beneficiary: '0xBeneficiary',
         tokenName: 'tokenName',
         tokenImage: 'tokenImage',
         tokenRarity: 'tokenRarity',
@@ -32,6 +33,7 @@ describe('Rewards Events tests', () => {
       metadata: {
         title: 'title',
         description: 'description',
+        beneficiary: '0xBeneficiary',
         tokenName: 'tokenName',
         tokenImage: 'tokenImage',
         tokenRarity: 'tokenRarity',

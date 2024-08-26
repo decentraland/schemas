@@ -4,10 +4,11 @@ import { BaseEvent, Events } from './base'
 export type RewardEventMetadata = {
   title: string
   description: string
+  beneficiary: string
   tokenName: string
   tokenImage: string
-  tokenRarity: string | null
-  tokenCategory: string | null
+  tokenRarity?: string | null
+  tokenCategory?: string | null
 }
 
 export type RewardInProgressEvent = BaseEvent & {
@@ -35,12 +36,13 @@ export namespace RewardInProgressEvent {
         properties: {
           title: { type: 'string' },
           description: { type: 'string' },
+          beneficiary: { type: 'string' },
           tokenName: { type: 'string' },
           tokenImage: { type: 'string' },
           tokenRarity: { type: 'string', nullable: true },
           tokenCategory: { type: 'string', nullable: true }
         },
-        required: ['title', 'description', 'tokenName', 'tokenImage']
+        required: ['title', 'description', 'beneficiary', 'tokenName', 'tokenImage']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
@@ -63,12 +65,13 @@ export namespace RewardAssignedEvent {
         properties: {
           title: { type: 'string' },
           description: { type: 'string' },
+          beneficiary: { type: 'string' },
           tokenName: { type: 'string' },
           tokenImage: { type: 'string' },
           tokenRarity: { type: 'string', nullable: true },
           tokenCategory: { type: 'string', nullable: true }
         },
-        required: ['title', 'description', 'tokenName', 'tokenImage']
+        required: ['title', 'description', 'beneficiary', 'tokenName', 'tokenImage']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
