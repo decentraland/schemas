@@ -49,7 +49,10 @@ export namespace Events {
 
     export enum Rewards {
       REWARD_IN_PROGRESS = 'reward-in-progress',
-      REWARD_ASSIGNED = 'reward-assigned'
+      REWARD_ASSIGNED = 'reward-assigned',
+      CAMPAIGN_OUT_OF_FUNDS = 'campaign-out-of-funds',
+      GAS_PRICES_HIGHER_THAN_EXPECTED = 'gas-prices-higher-than-expected',
+      CAMPAIGN_OUT_OF_STOCK = 'campaign-out-of-stock'
     }
   }
 }
