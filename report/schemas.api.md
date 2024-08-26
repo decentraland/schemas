@@ -2683,10 +2683,11 @@ export namespace RewardAssignedEvent {
 export type RewardEventMetadata = {
     title: string;
     description: string;
+    beneficiary: string;
     tokenName: string;
     tokenImage: string;
-    tokenRarity: string | null;
-    tokenCategory: string | null;
+    tokenRarity?: string | null;
+    tokenCategory?: string | null;
 };
 
 // Warning: (ae-missing-release-tag) "RewardInProgressEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
