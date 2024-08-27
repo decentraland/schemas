@@ -410,6 +410,70 @@ export namespace BodyShape {
     validate: ValidateFunction<BodyShape>;
 }
 
+// Warning: (ae-missing-release-tag) "CampaignGasPriceHigherThanExpectedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CampaignGasPriceHigherThanExpectedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CampaignGasPriceHigherThanExpectedEvent = BaseEvent & {
+    type: Events.Type.REWARDS;
+    subType: Events.SubType.Rewards.CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED;
+    metadata: CampaignWellKnownIssueEventMetadata;
+};
+
+// @public (undocumented)
+export namespace CampaignGasPriceHigherThanExpectedEvent {
+    const // (undocumented)
+    schema: JSONSchema<CampaignGasPriceHigherThanExpectedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CampaignGasPriceHigherThanExpectedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "CampaignOutOfFundsEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CampaignOutOfFundsEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CampaignOutOfFundsEvent = BaseEvent & {
+    type: Events.Type.REWARDS;
+    subType: Events.SubType.Rewards.CAMPAIGN_OUT_OF_FUNDS;
+    metadata: CampaignWellKnownIssueEventMetadata;
+};
+
+// @public (undocumented)
+export namespace CampaignOutOfFundsEvent {
+    const // (undocumented)
+    schema: JSONSchema<CampaignOutOfFundsEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CampaignOutOfFundsEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "CampaignOutOfStockEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CampaignOutOfStockEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CampaignOutOfStockEvent = BaseEvent & {
+    type: Events.Type.REWARDS;
+    subType: Events.SubType.Rewards.CAMPAIGN_OUT_OF_STOCK;
+    metadata: CampaignWellKnownIssueEventMetadata;
+};
+
+// @public (undocumented)
+export namespace CampaignOutOfStockEvent {
+    const // (undocumented)
+    schema: JSONSchema<CampaignOutOfStockEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CampaignOutOfStockEvent>;
+}
+
+// Warning: (ae-forgotten-export) The symbol "BaseEventMetadata" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "CampaignWellKnownIssueEventMetadata" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CampaignWellKnownIssueEventMetadata = BaseEventMetadata & {
+    owner: EthAddress;
+    campaignId: string;
+    campaignName: string;
+};
+
 // @public
 export type CatalogFilters = Pick<ItemFilters, 'ids' | 'first' | 'skip' | 'category' | 'creator' | 'isSoldOut' | 'isOnSale' | 'search' | 'isWearableHead' | 'isWearableSmart' | 'isWearableAccessory' | 'isWearableAccessory' | 'wearableCategory' | 'rarities' | 'wearableGenders' | 'emoteCategory' | 'emoteGenders' | 'emotePlayMode' | 'contractAddresses' | 'itemId' | 'network' | 'minPrice' | 'maxPrice' | 'urns' | 'emoteHasGeometry' | 'emoteHasSound'> & {
     onlyMinting?: boolean;
@@ -957,7 +1021,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent | RewardInProgressEvent | RewardAssignedEvent;
+export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent | RewardInProgressEvent | RewardAssignedEvent | CampaignOutOfFundsEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfStockEvent | RewardDelayedEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1008,7 +1072,15 @@ export namespace Events {
         // (undocumented)
         export enum Rewards {
             // (undocumented)
+            CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED = "campaign-gas-price-higher-than-expected",
+            // (undocumented)
+            CAMPAIGN_OUT_OF_FUNDS = "campaign-out-of-funds",
+            // (undocumented)
+            CAMPAIGN_OUT_OF_STOCK = "campaign-out-of-stock",
+            // (undocumented)
             REWARD_ASSIGNED = "reward-assigned",
+            // (undocumented)
+            REWARD_DELAYED = "reward-delayed",
             // (undocumented)
             REWARD_IN_PROGRESS = "reward-in-progress"
         }
@@ -2677,13 +2749,29 @@ export namespace RewardAssignedEvent {
     validate: ValidateFunction<RewardAssignedEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "RewardDelayedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "RewardDelayedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type RewardDelayedEvent = BaseEvent & {
+    type: Events.Type.REWARDS;
+    subType: Events.SubType.Rewards.REWARD_DELAYED;
+    metadata: RewardEventMetadata;
+};
+
+// @public (undocumented)
+export namespace RewardDelayedEvent {
+    const // (undocumented)
+    schema: JSONSchema<RewardDelayedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<RewardDelayedEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "RewardEventMetadata" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type RewardEventMetadata = {
-    title: string;
-    description: string;
-    beneficiary: string;
+export type RewardEventMetadata = BaseEventMetadata & {
+    beneficiary: EthAddress;
     tokenName: string;
     tokenImage: string;
     tokenRarity?: string;
