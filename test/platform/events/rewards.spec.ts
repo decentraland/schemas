@@ -19,6 +19,7 @@ describe('Rewards Events tests', () => {
       metadata: {
         title: 'title',
         description: 'description',
+        link: 'link',
         beneficiary: '0xBeneficiary',
         tokenName: 'tokenName',
         tokenImage: 'tokenImage',
@@ -41,6 +42,7 @@ describe('Rewards Events tests', () => {
       metadata: {
         title: 'title',
         description: 'description',
+        link: 'link',
         beneficiary: '0xBeneficiary',
         tokenName: 'tokenName',
         tokenImage: 'tokenImage',
@@ -63,6 +65,7 @@ describe('Rewards Events tests', () => {
       metadata: {
         title: 'title',
         description: 'description',
+        link: 'link',
         owner: '0xOwner',
         campaignId: 'campaignId',
         campaignName: 'campaignName'
@@ -83,6 +86,7 @@ describe('Rewards Events tests', () => {
       metadata: {
         title: 'title',
         description: 'description',
+        link: 'link',
         owner: '0xOwner',
         campaignId: 'campaignId',
         campaignName: 'campaignName'
@@ -103,6 +107,7 @@ describe('Rewards Events tests', () => {
       metadata: {
         title: 'title',
         description: 'description',
+        link: 'link',
         owner: '0xOwner',
         campaignId: 'campaignId',
         campaignName: 'campaignName'
@@ -123,6 +128,7 @@ describe('Rewards Events tests', () => {
       metadata: {
         title: 'title',
         description: 'description',
+        link: 'link',
         beneficiary: '0xBeneficiary',
         tokenName: 'tokenName',
         tokenImage: 'tokenImage',
