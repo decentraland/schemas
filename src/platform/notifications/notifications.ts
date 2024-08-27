@@ -3,6 +3,7 @@
  * @alpha
  */
 export enum NotificationType {
+  BADGE_GRANTED = 'badge_granted',
   BID_ACCEPTED = 'bid_accepted',
   BID_RECEIVED = 'bid_received',
   EVENTS_STARTED = 'events_started',
@@ -22,15 +23,18 @@ export enum NotificationType {
   ITEM_SOLD = 'item_sold',
   LAND_RENTAL_ENDED = 'rental_ended',
   LAND_RENTED = 'rental_started',
-  REWARD_IN_PROGRESS = 'reward_in_progress',
   REWARD_ASSIGNED = 'reward_assignment',
+  REWARD_CAMPAIGN_OUT_OF_FUNDS = 'reward_campaign_out_of_funds',
+  REWARD_CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED = 'reward_campaign_gas_price_higher_than_expected',
+  REWARD_CAMPAIGN_OUT_OF_STOCK = 'reward_campaign_out_of_stock',
+  REWARD_DELAYED = 'reward_delayed',
+  REWARD_IN_PROGRESS = 'reward_in_progress',
   ROYALTIES_EARNED = 'royalties_earned',
   WORLDS_ACCESS_RESTORED = 'worlds_access_restored',
   WORLDS_ACCESS_RESTRICTED = 'worlds_access_restricted',
   WORLDS_MISSING_RESOURCES = 'worlds_missing_resources',
   WORLDS_PERMISSION_GRANTED = 'worlds_permission_granted',
-  WORLDS_PERMISSION_REVOKED = 'worlds_permission_revoked',
-  BADGE_GRANTED = 'badge_granted'
+  WORLDS_PERMISSION_REVOKED = 'worlds_permission_revoked'
 }
 
 /**

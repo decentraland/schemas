@@ -1956,6 +1956,14 @@ export enum NotificationType {
     // (undocumented)
     REWARD_ASSIGNED = "reward_assignment",
     // (undocumented)
+    REWARD_CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED = "reward_campaign_gas_price_higher_than_expected",
+    // (undocumented)
+    REWARD_CAMPAIGN_OUT_OF_FUNDS = "reward_campaign_out_of_funds",
+    // (undocumented)
+    REWARD_CAMPAIGN_OUT_OF_STOCK = "reward_campaign_out_of_stock",
+    // (undocumented)
+    REWARD_DELAYED = "reward_delayed",
+    // (undocumented)
     REWARD_IN_PROGRESS = "reward_in_progress",
     // (undocumented)
     ROYALTIES_EARNED = "royalties_earned",
