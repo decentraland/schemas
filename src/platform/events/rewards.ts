@@ -5,6 +5,7 @@ import { BaseEvent, Events } from './base'
 type BaseEventMetadata = {
   title: string
   description: string
+  link?: string
 }
 
 export type RewardEventMetadata = BaseEventMetadata & {
@@ -79,6 +80,7 @@ const rewardEventMetadataSchema: JSONSchema<RewardEventMetadata> = {
   properties: {
     title: { type: 'string' },
     description: { type: 'string' },
+    link: { type: 'string', nullable: true },
     beneficiary: { type: 'string' },
     tokenName: { type: 'string' },
     tokenImage: { type: 'string' },
@@ -94,6 +96,7 @@ const campaignEventMetadataSchema: JSONSchema<CampaignWellKnownIssueEventMetadat
   properties: {
     title: { type: 'string' },
     description: { type: 'string' },
+    link: { type: 'string', nullable: true },
     owner: { type: 'string' },
     campaignId: { type: 'string' },
     campaignName: { type: 'string' }
