@@ -9,7 +9,14 @@ import {
 import { CatalystDeploymentEvent } from './catalyst'
 import { MoveToParcelEvent } from './client'
 import { BidReceivedEvent } from './marketplace'
-import { RewardInProgressEvent, RewardAssignedEvent } from './rewards'
+import {
+  RewardInProgressEvent,
+  RewardAssignedEvent,
+  CampaignOutOfFundsEvent,
+  CampaignGasPriceHigherThanExpectedEvent,
+  CampaignOutOfStockEvent,
+  RewardDelayedEvent
+} from './rewards'
 
 export namespace Events {
   export enum Type {
@@ -51,8 +58,9 @@ export namespace Events {
       REWARD_IN_PROGRESS = 'reward-in-progress',
       REWARD_ASSIGNED = 'reward-assigned',
       CAMPAIGN_OUT_OF_FUNDS = 'campaign-out-of-funds',
-      GAS_PRICES_HIGHER_THAN_EXPECTED = 'gas-prices-higher-than-expected',
-      CAMPAIGN_OUT_OF_STOCK = 'campaign-out-of-stock'
+      CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED = 'campaign-gas-price-higher-than-expected',
+      CAMPAIGN_OUT_OF_STOCK = 'campaign-out-of-stock',
+      REWARD_DELAYED = 'reward-delayed'
     }
   }
 }
@@ -81,3 +89,7 @@ export type Event =
   | CatalystDeploymentEvent
   | RewardInProgressEvent
   | RewardAssignedEvent
+  | CampaignOutOfFundsEvent
+  | CampaignGasPriceHigherThanExpectedEvent
+  | CampaignOutOfStockEvent
+  | RewardDelayedEvent
