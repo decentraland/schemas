@@ -238,6 +238,30 @@ export namespace AvatarInfo {
     validate: ValidateFunction<AvatarInfo>;
 }
 
+// Warning: (ae-missing-release-tag) "BadgeGrantedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "BadgeGrantedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type BadgeGrantedEvent = BaseEvent & {
+    type: Events.Type.BADGE;
+    subType: Events.SubType.Badge.GRANTED;
+    metadata: {
+        badgeId: string;
+        badgeTierId?: string;
+        badgeName: string;
+        badgeImageUrl: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace BadgeGrantedEvent {
+    const // (undocumented)
+    schema: JSONSchema<BadgeGrantedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<BadgeGrantedEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "BaseBid" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1018,7 +1042,6 @@ export namespace EthAddress {
     validate: ValidateFunction<EthAddress>;
 }
 
-// Warning: (ae-forgotten-export) The symbol "BadgeGrantedEvent" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
