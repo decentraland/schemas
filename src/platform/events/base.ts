@@ -17,6 +17,7 @@ import {
   CampaignOutOfStockEvent,
   RewardDelayedEvent
 } from './rewards'
+import { BadgeGrantedEvent } from './services'
 
 export namespace Events {
   export enum Type {
@@ -24,7 +25,8 @@ export namespace Events {
     CATALYST_DEPLOYMENT = 'catalyst-deployment',
     CLIENT = 'client',
     MARKETPLACE = 'marketplace',
-    REWARDS = 'rewards'
+    REWARDS = 'rewards',
+    BADGE = 'badge'
   }
 
   export namespace SubType {
@@ -62,6 +64,10 @@ export namespace Events {
       CAMPAIGN_OUT_OF_STOCK = 'campaign-out-of-stock',
       REWARD_DELAYED = 'reward-delayed'
     }
+
+    export enum Badge {
+      GRANTED = 'badge-granted'
+    }
   }
 }
 
@@ -73,6 +79,7 @@ export type BaseEvent = {
     | Events.SubType.Client
     | Events.SubType.Marketplace
     | Events.SubType.Rewards
+    | Events.SubType.Badge
   key: string
   timestamp: number
 }
@@ -93,3 +100,4 @@ export type Event =
   | CampaignGasPriceHigherThanExpectedEvent
   | CampaignOutOfStockEvent
   | RewardDelayedEvent
+  | BadgeGrantedEvent
