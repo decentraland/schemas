@@ -250,6 +250,7 @@ export type BadgeGrantedEvent = BaseEvent & {
         badgeName: string;
         badgeTierName?: string;
         badgeImageUrl: string;
+        address: string;
     };
 };
 
