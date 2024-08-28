@@ -9,6 +9,7 @@ export type BadgeGrantedEvent = BaseEvent & {
     badgeName: string
     badgeTierName?: string
     badgeImageUrl: string
+    address: string
   }
 }
 
@@ -26,9 +27,10 @@ export namespace BadgeGrantedEvent {
           badgeId: { type: 'string' },
           badgeTierName: { type: 'string', nullable: true },
           badgeName: { type: 'string' },
-          badgeImageUrl: { type: 'string' }
+          badgeImageUrl: { type: 'string' },
+          address: { type: 'string' }
         },
-        required: ['badgeId', 'badgeName', 'badgeImageUrl']
+        required: ['badgeId', 'badgeName', 'badgeImageUrl', 'address']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
