@@ -6,12 +6,12 @@ export type BadgeGrantedEvent = BaseEvent & {
   subType: Events.SubType.Badge.GRANTED
   metadata: {
     badgeId: string
-    badgeTierId?: string
     badgeName: string
+    badgeTierName?: string
     badgeImageUrl: string
-    address: string
   }
 }
+
 export namespace BadgeGrantedEvent {
   export const schema: JSONSchema<BadgeGrantedEvent> = {
     type: 'object',
@@ -24,12 +24,11 @@ export namespace BadgeGrantedEvent {
         type: 'object',
         properties: {
           badgeId: { type: 'string' },
-          badgeTierId: { type: 'string', nullable: true },
+          badgeTierName: { type: 'string', nullable: true },
           badgeName: { type: 'string' },
-          badgeImageUrl: { type: 'string' },
-          address: { type: 'string' }
+          badgeImageUrl: { type: 'string' }
         },
-        required: ['badgeId', 'badgeName', 'badgeImageUrl', 'address']
+        required: ['badgeId', 'badgeName', 'badgeImageUrl']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
