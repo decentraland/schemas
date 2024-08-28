@@ -247,10 +247,9 @@ export type BadgeGrantedEvent = BaseEvent & {
     subType: Events.SubType.Badge.GRANTED;
     metadata: {
         badgeId: string;
-        badgeTierId?: string;
         badgeName: string;
+        badgeTierName?: string;
         badgeImageUrl: string;
-        address: string;
     };
 };
 
