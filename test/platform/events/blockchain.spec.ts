@@ -53,7 +53,8 @@ describe('Blockchain Events tests', () => {
         nftName: 'nftName',
         title: 'title',
         description: 'description',
-        network: 'network'
+        network: 'network',
+        tokenId: 'tokenId'
       }
     }
 

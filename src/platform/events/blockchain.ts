@@ -66,6 +66,7 @@ export type ItemSoldEvent = BaseEvent & {
     rarity?: string
     link: string
     nftName?: string
+    tokenId: string
     network: string
     title: string
     description: string
@@ -91,6 +92,7 @@ export namespace ItemSoldEvent {
           rarity: { type: 'string', nullable: true },
           link: { type: 'string' },
           nftName: { type: 'string', nullable: true },
+          tokenId: { type: 'string' },
           network: { type: 'string' },
           title: { type: 'string' },
           description: { type: 'string' }
