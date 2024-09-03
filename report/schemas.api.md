@@ -1410,6 +1410,7 @@ export type ItemSoldEvent = BaseEvent & {
     metadata: {
         address: string;
         image: string;
+        buyer: string;
         seller: string;
         category: string;
         rarity?: string;
@@ -3596,7 +3597,7 @@ export namespace WorldConfiguration {
 // src/dapps/trade.ts:80:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/trade.ts:91:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/trade.ts:92:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/platform/events/blockchain.ts:124:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/blockchain.ts:126:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha

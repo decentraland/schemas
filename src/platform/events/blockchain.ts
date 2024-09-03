@@ -60,6 +60,7 @@ export type ItemSoldEvent = BaseEvent & {
   metadata: {
     address: string
     image: string
+    buyer: string
     seller: string
     category: string
     rarity?: string
@@ -84,6 +85,7 @@ export namespace ItemSoldEvent {
         properties: {
           address: { type: 'string' },
           image: { type: 'string' },
+          buyer: { type: 'string' },
           seller: { type: 'string' },
           category: { type: 'string' },
           rarity: { type: 'string', nullable: true },
