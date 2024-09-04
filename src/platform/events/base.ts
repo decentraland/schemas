@@ -7,7 +7,7 @@ import {
   RoyaltiesEarnedEvent
 } from './blockchain'
 import { CatalystDeploymentEvent } from './catalyst'
-import { MoveToParcelEvent } from './client'
+import { MoveToParcelEvent, UsedEmoteEvent } from './client'
 import { BidReceivedEvent } from './marketplace'
 import {
   RewardInProgressEvent,
@@ -102,3 +102,4 @@ export type Event =
   | CampaignOutOfStockEvent
   | RewardDelayedEvent
   | BadgeGrantedEvent
+  | UsedEmoteEvent
