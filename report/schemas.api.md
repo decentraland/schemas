@@ -1091,7 +1091,9 @@ export namespace Events {
         // (undocumented)
         export enum Client {
             // (undocumented)
-            MOVE_TO_PARCEL = "move-to-parcel"
+            MOVE_TO_PARCEL = "move-to-parcel",
+            // (undocumented)
+            USED_EMOTE = "used-emote"
         }
         // (undocumented)
         export enum Marketplace {
@@ -1705,18 +1707,13 @@ export enum MintSortBy {
 export type MoveToParcelEvent = BaseEvent & {
     type: Events.Type.CLIENT;
     subType: Events.SubType.Client.MOVE_TO_PARCEL;
-    metadata: {
-        authChain: AuthChain;
+    metadata: ClientBaseMetadata & {
         parcel: {
             isEmptyParcel: boolean;
             newParcel: string;
             oldParcel: string;
             sceneHash: string;
         };
-        timestamp: number;
-        userAddress: EthAddress;
-        sessionId: string;
-        realm: string;
     };
 };
 
@@ -3338,6 +3335,22 @@ export type USDPeggedManaTradeAsset = BaseTradeAsset & {
     amount: string;
 };
 
+// Warning: (ae-missing-release-tag) "UsedEmoteEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type UsedEmoteEvent = BaseEvent & {
+    type: Events.Type.CLIENT;
+    subType: Events.SubType.Client.USED_EMOTE;
+    metadata: ClientBaseMetadata & {
+        emote: {
+            emoteIndex: number;
+            isBase: boolean;
+            itemId: string;
+            source: string;
+        };
+    };
+};
+
 // @public
 export interface ValidateFunction<T = unknown> {
     // (undocumented)
@@ -3599,6 +3612,7 @@ export namespace WorldConfiguration {
 // src/dapps/trade.ts:91:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/trade.ts:92:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/platform/events/blockchain.ts:128:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/client.ts:16:3 - (ae-forgotten-export) The symbol "ClientBaseMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha

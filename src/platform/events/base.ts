@@ -53,7 +53,8 @@ export namespace Events {
     }
 
     export enum Client {
-      MOVE_TO_PARCEL = 'move-to-parcel'
+      MOVE_TO_PARCEL = 'move-to-parcel',
+      USED_EMOTE = 'used-emote'
     }
 
     export enum Rewards {
