@@ -45,6 +45,7 @@ describe('Blockchain Events tests', () => {
       metadata: {
         address: 'address',
         image: 'image',
+        buyer: 'buyer',
         seller: 'seller',
         category: 'category',
         rarity: 'rarity',
@@ -52,7 +53,8 @@ describe('Blockchain Events tests', () => {
         nftName: 'nftName',
         title: 'title',
         description: 'description',
-        network: 'network'
+        network: 'network',
+        tokenId: 'tokenId'
       }
     }
 
