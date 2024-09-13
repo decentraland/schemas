@@ -35,3 +35,13 @@ export type UsedEmoteEvent = BaseEvent & {
     }
   }
 }
+
+export type PassportOpenedEvent = BaseEvent & {
+  type: Events.Type.CLIENT
+  subType: Events.SubType.Client.PASSPORT_OPENED
+  metadata: ClientBaseMetadata & {
+    passport: {
+      receiver: EthAddress
+    }
+  }
+}

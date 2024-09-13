@@ -1045,7 +1045,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent | RewardInProgressEvent | RewardAssignedEvent | CampaignOutOfFundsEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfStockEvent | RewardDelayedEvent | BadgeGrantedEvent | UsedEmoteEvent;
+export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent | RewardInProgressEvent | RewardAssignedEvent | CampaignOutOfFundsEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfStockEvent | RewardDelayedEvent | BadgeGrantedEvent | UsedEmoteEvent | PassportOpenedEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1092,6 +1092,8 @@ export namespace Events {
         export enum Client {
             // (undocumented)
             MOVE_TO_PARCEL = "move-to-parcel",
+            // (undocumented)
+            PASSPORT_OPENED = "passport-opened",
             // (undocumented)
             USED_EMOTE = "used-emote"
         }
@@ -2149,6 +2151,19 @@ export type PaginatedResponse<T> = {
     page: number;
     pages: number;
     limit: number;
+};
+
+// Warning: (ae-missing-release-tag) "PassportOpenedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PassportOpenedEvent = BaseEvent & {
+    type: Events.Type.CLIENT;
+    subType: Events.SubType.Client.PASSPORT_OPENED;
+    metadata: ClientBaseMetadata & {
+        passport: {
+            receiver: EthAddress;
+        };
+    };
 };
 
 // Warning: (ae-missing-release-tag) "PeriodCreation" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
