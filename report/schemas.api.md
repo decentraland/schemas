@@ -1093,6 +1093,8 @@ export namespace Events {
             // (undocumented)
             MOVE_TO_PARCEL = "move-to-parcel",
             // (undocumented)
+            PASSPORT_OPENED = "passport-opened",
+            // (undocumented)
             USED_EMOTE = "used-emote"
         }
         // (undocumented)
@@ -2149,6 +2151,19 @@ export type PaginatedResponse<T> = {
     page: number;
     pages: number;
     limit: number;
+};
+
+// Warning: (ae-missing-release-tag) "PassportOpenedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PassportOpenedEvent = BaseEvent & {
+    type: Events.Type.CLIENT;
+    subType: Events.SubType.Client.PASSPORT_OPENED;
+    metadata: ClientBaseMetadata & {
+        passport: {
+            receiver: EthAddress;
+        };
+    };
 };
 
 // Warning: (ae-missing-release-tag) "PeriodCreation" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
