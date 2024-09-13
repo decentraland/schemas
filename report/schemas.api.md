@@ -1045,7 +1045,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent | RewardInProgressEvent | RewardAssignedEvent | CampaignOutOfFundsEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfStockEvent | RewardDelayedEvent | BadgeGrantedEvent | UsedEmoteEvent;
+export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent | RewardInProgressEvent | RewardAssignedEvent | CampaignOutOfFundsEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfStockEvent | RewardDelayedEvent | BadgeGrantedEvent | UsedEmoteEvent | PassportOpenedEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
