@@ -1,6 +1,7 @@
 import {
   BidAcceptedEvent,
   CollectionCreatedEvent,
+  ItemPublishedEvent,
   ItemSoldEvent,
   RentalEndedEvent,
   RentalStartedEvent,
@@ -36,7 +37,8 @@ export namespace Events {
       RENTAL_ENDED = 'land-rental-ended',
       RENTAL_STARTED = 'land-rental-started',
       ROYALTIES_EARNED = 'royalties-earned',
-      COLLECTION_CREATED = 'collection-created'
+      COLLECTION_CREATED = 'collection-created',
+      ITEM_PUBLISHED = 'item-published'
     }
 
     export enum Marketplace {
@@ -90,6 +92,7 @@ export type Event =
   | BidAcceptedEvent
   | BidReceivedEvent
   | ItemSoldEvent
+  | ItemPublishedEvent
   | RentalEndedEvent
   | RentalStartedEvent
   | RoyaltiesEarnedEvent

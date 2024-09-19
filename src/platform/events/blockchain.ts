@@ -1,5 +1,6 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { BaseEvent, Events } from './base'
+import { createEventSchema } from './utils'
 
 export type BidEventMetadata = {
   address: string
@@ -54,57 +55,71 @@ export namespace BidAcceptedEvent {
   export const validate: ValidateFunction<BidAcceptedEvent> = generateLazyValidator(schema)
 }
 
+type ItemEventMetadata = {
+  address: string
+  image: string
+  buyer: string
+  seller: string
+  category: string
+  rarity?: string
+  link: string
+  nftName?: string
+  tokenId: string
+  network: string
+  title: string
+  description: string
+}
+
 export type ItemSoldEvent = BaseEvent & {
   type: Events.Type.BLOCKCHAIN
   subType: Events.SubType.Blockchain.ITEM_SOLD
-  metadata: {
-    address: string
-    image: string
-    buyer: string
-    seller: string
-    category: string
-    rarity?: string
-    link: string
-    nftName?: string
-    tokenId: string
-    network: string
-    title: string
-    description: string
-  }
+  metadata: ItemEventMetadata
+}
+
+// TODO: should we use the itemId instead of tokenId?
+export type ItemPublishedEvent = BaseEvent & {
+  type: Events.Type.BLOCKCHAIN
+  subType: Events.SubType.Blockchain.ITEM_PUBLISHED
+  metadata: ItemEventMetadata
+}
+
+const itemEventMetadataSchema: JSONSchema<ItemEventMetadata> = {
+  type: 'object',
+  properties: {
+    address: { type: 'string' },
+    image: { type: 'string' },
+    buyer: { type: 'string' },
+    seller: { type: 'string' },
+    category: { type: 'string' },
+    rarity: { type: 'string', nullable: true },
+    link: { type: 'string' },
+    nftName: { type: 'string', nullable: true },
+    tokenId: { type: 'string' },
+    network: { type: 'string' },
+    title: { type: 'string' },
+    description: { type: 'string' }
+  },
+  required: ['address', 'image', 'seller', 'category', 'link', 'network', 'title', 'description']
 }
 
 export namespace ItemSoldEvent {
-  export const schema: JSONSchema<ItemSoldEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.BLOCKCHAIN },
-      subType: { type: 'string', const: Events.SubType.Blockchain.ITEM_SOLD },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          address: { type: 'string' },
-          image: { type: 'string' },
-          buyer: { type: 'string' },
-          seller: { type: 'string' },
-          category: { type: 'string' },
-          rarity: { type: 'string', nullable: true },
-          link: { type: 'string' },
-          nftName: { type: 'string', nullable: true },
-          tokenId: { type: 'string' },
-          network: { type: 'string' },
-          title: { type: 'string' },
-          description: { type: 'string' }
-        },
-        required: ['address', 'image', 'seller', 'category', 'link', 'network', 'title', 'description']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
+  export const schema: JSONSchema<ItemSoldEvent> = createEventSchema(
+    Events.Type.BLOCKCHAIN,
+    Events.SubType.Blockchain.ITEM_SOLD,
+    itemEventMetadataSchema
+  )
 
   export const validate: ValidateFunction<ItemSoldEvent> = generateLazyValidator(schema)
+}
+
+export namespace ItemPublishedEvent {
+  export const schema: JSONSchema<ItemPublishedEvent> = createEventSchema(
+    Events.Type.BLOCKCHAIN,
+    Events.SubType.Blockchain.ITEM_PUBLISHED,
+    itemEventMetadataSchema
+  )
+
+  export const validate: ValidateFunction<ItemPublishedEvent> = generateLazyValidator(schema)
 }
 
 type RentalMetadata = {
