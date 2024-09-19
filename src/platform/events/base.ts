@@ -8,7 +8,13 @@ import {
   RoyaltiesEarnedEvent
 } from './blockchain'
 import { CatalystDeploymentEvent } from './catalyst'
-import { MoveToParcelEvent, PassportOpenedEvent, UsedEmoteEvent, WalkedDistanceEvent } from './client'
+import {
+  MoveToParcelEvent,
+  PassportOpenedEvent,
+  UsedEmoteEvent,
+  VerticalHeightReachedEvent,
+  WalkedDistanceEvent
+} from './client'
 import { BidReceivedEvent } from './marketplace'
 import {
   RewardInProgressEvent,
@@ -58,7 +64,8 @@ export namespace Events {
       MOVE_TO_PARCEL = 'move-to-parcel',
       USED_EMOTE = 'used-emote',
       PASSPORT_OPENED = 'passport-opened',
-      WALKED_DISTANCE = 'walked-distance'
+      WALKED_DISTANCE = 'walked-distance',
+      VERTICAL_HEIGHT_REACHED = 'vertical-height-reached'
     }
 
     export enum Rewards {
@@ -90,23 +97,24 @@ export type BaseEvent = {
 }
 
 export type Event =
+  | BadgeGrantedEvent
   | BidAcceptedEvent
   | BidReceivedEvent
-  | ItemSoldEvent
+  | CampaignGasPriceHigherThanExpectedEvent
+  | CampaignOutOfFundsEvent
+  | CampaignOutOfStockEvent
+  | CatalystDeploymentEvent
+  | CollectionCreatedEvent
   | ItemPublishedEvent
+  | ItemSoldEvent
+  | MoveToParcelEvent
+  | PassportOpenedEvent
   | RentalEndedEvent
   | RentalStartedEvent
-  | RoyaltiesEarnedEvent
-  | CollectionCreatedEvent
-  | MoveToParcelEvent
-  | CatalystDeploymentEvent
-  | RewardInProgressEvent
   | RewardAssignedEvent
-  | CampaignOutOfFundsEvent
-  | CampaignGasPriceHigherThanExpectedEvent
-  | CampaignOutOfStockEvent
   | RewardDelayedEvent
-  | BadgeGrantedEvent
+  | RewardInProgressEvent
+  | RoyaltiesEarnedEvent
   | UsedEmoteEvent
-  | PassportOpenedEvent
+  | VerticalHeightReachedEvent
   | WalkedDistanceEvent

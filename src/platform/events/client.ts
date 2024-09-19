@@ -54,3 +54,11 @@ export type WalkedDistanceEvent = BaseEvent & {
     stepCount: number
   }
 }
+
+export type VerticalHeightReachedEvent = BaseEvent & {
+  type: Events.Type.CLIENT
+  subType: Events.SubType.Client.VERTICAL_HEIGHT_REACHED
+  metadata: ClientBaseMetadata & {
+    height: number
+  }
+}
