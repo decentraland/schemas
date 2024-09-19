@@ -1,6 +1,7 @@
 import { EthAddress } from '../../misc'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { BaseEvent, Events } from './base'
+import { createEventSchema } from './utils'
 
 type BaseEventMetadata = {
   title: string
@@ -21,8 +22,6 @@ export type CampaignWellKnownIssueEventMetadata = BaseEventMetadata & {
   campaignId: string
   campaignName: string
 }
-
-type Metadata = RewardEventMetadata | CampaignWellKnownIssueEventMetadata
 
 export type RewardInProgressEvent = BaseEvent & {
   type: Events.Type.REWARDS
@@ -60,21 +59,6 @@ export type RewardDelayedEvent = BaseEvent & {
   metadata: RewardEventMetadata
 }
 
-function createSchema<T>(subType: string, metadataSchema: JSONSchema<Metadata>): JSONSchema<T> {
-  return {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.REWARDS },
-      subType: { type: 'string', const: subType },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: metadataSchema
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  } as JSONSchema<T>
-}
-
 const rewardEventMetadataSchema: JSONSchema<RewardEventMetadata> = {
   type: 'object',
   properties: {
@@ -106,7 +90,8 @@ const campaignEventMetadataSchema: JSONSchema<CampaignWellKnownIssueEventMetadat
 }
 
 export namespace RewardInProgressEvent {
-  export const schema: JSONSchema<RewardInProgressEvent> = createSchema(
+  export const schema: JSONSchema<RewardInProgressEvent> = createEventSchema(
+    Events.Type.REWARDS,
     Events.SubType.Rewards.REWARD_IN_PROGRESS,
     rewardEventMetadataSchema
   )
@@ -114,7 +99,8 @@ export namespace RewardInProgressEvent {
 }
 
 export namespace RewardAssignedEvent {
-  export const schema: JSONSchema<RewardAssignedEvent> = createSchema(
+  export const schema: JSONSchema<RewardAssignedEvent> = createEventSchema(
+    Events.Type.REWARDS,
     Events.SubType.Rewards.REWARD_ASSIGNED,
     rewardEventMetadataSchema
   )
@@ -122,7 +108,8 @@ export namespace RewardAssignedEvent {
 }
 
 export namespace CampaignOutOfFundsEvent {
-  export const schema: JSONSchema<CampaignOutOfFundsEvent> = createSchema(
+  export const schema: JSONSchema<CampaignOutOfFundsEvent> = createEventSchema(
+    Events.Type.REWARDS,
     Events.SubType.Rewards.CAMPAIGN_OUT_OF_FUNDS,
     campaignEventMetadataSchema
   )
@@ -130,7 +117,8 @@ export namespace CampaignOutOfFundsEvent {
 }
 
 export namespace CampaignGasPriceHigherThanExpectedEvent {
-  export const schema: JSONSchema<CampaignGasPriceHigherThanExpectedEvent> = createSchema(
+  export const schema: JSONSchema<CampaignGasPriceHigherThanExpectedEvent> = createEventSchema(
+    Events.Type.REWARDS,
     Events.SubType.Rewards.CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED,
     campaignEventMetadataSchema
   )
@@ -138,7 +126,8 @@ export namespace CampaignGasPriceHigherThanExpectedEvent {
 }
 
 export namespace CampaignOutOfStockEvent {
-  export const schema: JSONSchema<CampaignOutOfStockEvent> = createSchema(
+  export const schema: JSONSchema<CampaignOutOfStockEvent> = createEventSchema(
+    Events.Type.REWARDS,
     Events.SubType.Rewards.CAMPAIGN_OUT_OF_STOCK,
     campaignEventMetadataSchema
   )
@@ -146,7 +135,8 @@ export namespace CampaignOutOfStockEvent {
 }
 
 export namespace RewardDelayedEvent {
-  export const schema: JSONSchema<RewardDelayedEvent> = createSchema(
+  export const schema: JSONSchema<RewardDelayedEvent> = createEventSchema(
+    Events.Type.REWARDS,
     Events.SubType.Rewards.REWARD_DELAYED,
     rewardEventMetadataSchema
   )
