@@ -45,3 +45,12 @@ export type PassportOpenedEvent = BaseEvent & {
     }
   }
 }
+
+export type WalkedDistanceEvent = BaseEvent & {
+  type: Events.Type.CLIENT
+  subType: Events.SubType.Client.WALKED_DISTANCE
+  metadata: ClientBaseMetadata & {
+    distance: number
+    stepCount: number
+  }
+}

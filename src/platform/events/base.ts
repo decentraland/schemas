@@ -8,7 +8,7 @@ import {
   RoyaltiesEarnedEvent
 } from './blockchain'
 import { CatalystDeploymentEvent } from './catalyst'
-import { MoveToParcelEvent, PassportOpenedEvent, UsedEmoteEvent } from './client'
+import { MoveToParcelEvent, PassportOpenedEvent, UsedEmoteEvent, WalkedDistanceEvent } from './client'
 import { BidReceivedEvent } from './marketplace'
 import {
   RewardInProgressEvent,
@@ -57,7 +57,8 @@ export namespace Events {
     export enum Client {
       MOVE_TO_PARCEL = 'move-to-parcel',
       USED_EMOTE = 'used-emote',
-      PASSPORT_OPENED = 'passport-opened'
+      PASSPORT_OPENED = 'passport-opened',
+      WALKED_DISTANCE = 'walked-distance'
     }
 
     export enum Rewards {
@@ -108,3 +109,4 @@ export type Event =
   | BadgeGrantedEvent
   | UsedEmoteEvent
   | PassportOpenedEvent
+  | WalkedDistanceEvent
