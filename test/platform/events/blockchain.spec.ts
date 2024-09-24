@@ -71,16 +71,9 @@ describe('Blockchain Events tests', () => {
       key: 'key',
       timestamp: 1,
       metadata: {
-        address: 'address',
-        image: 'image',
-        buyer: 'buyer',
-        seller: 'seller',
+        creator: 'creator',
         category: 'category',
         rarity: 'rarity',
-        link: 'link',
-        nftName: 'nftName',
-        title: 'title',
-        description: 'description',
         network: 'network',
         tokenId: 'tokenId'
       }
