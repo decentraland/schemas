@@ -1,6 +1,5 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { BaseEvent, Events } from './base'
-import { createEventSchema } from './utils'
 
 export type BidEventMetadata = {
   address: string
