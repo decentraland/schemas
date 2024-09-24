@@ -1,13 +1,20 @@
 import {
   BidAcceptedEvent,
   CollectionCreatedEvent,
+  ItemPublishedEvent,
   ItemSoldEvent,
   RentalEndedEvent,
   RentalStartedEvent,
   RoyaltiesEarnedEvent
 } from './blockchain'
 import { CatalystDeploymentEvent } from './catalyst'
-import { MoveToParcelEvent, PassportOpenedEvent, UsedEmoteEvent } from './client'
+import {
+  MoveToParcelEvent,
+  PassportOpenedEvent,
+  UsedEmoteEvent,
+  VerticalHeightReachedEvent,
+  WalkedDistanceEvent
+} from './client'
 import { BidReceivedEvent } from './marketplace'
 import {
   RewardInProgressEvent,
@@ -36,7 +43,8 @@ export namespace Events {
       RENTAL_ENDED = 'land-rental-ended',
       RENTAL_STARTED = 'land-rental-started',
       ROYALTIES_EARNED = 'royalties-earned',
-      COLLECTION_CREATED = 'collection-created'
+      COLLECTION_CREATED = 'collection-created',
+      ITEM_PUBLISHED = 'item-published'
     }
 
     export enum Marketplace {
@@ -55,7 +63,9 @@ export namespace Events {
     export enum Client {
       MOVE_TO_PARCEL = 'move-to-parcel',
       USED_EMOTE = 'used-emote',
-      PASSPORT_OPENED = 'passport-opened'
+      PASSPORT_OPENED = 'passport-opened',
+      WALKED_DISTANCE = 'walked-distance',
+      VERTICAL_HEIGHT_REACHED = 'vertical-height-reached'
     }
 
     export enum Rewards {
@@ -87,21 +97,24 @@ export type BaseEvent = {
 }
 
 export type Event =
+  | BadgeGrantedEvent
   | BidAcceptedEvent
   | BidReceivedEvent
+  | CampaignGasPriceHigherThanExpectedEvent
+  | CampaignOutOfFundsEvent
+  | CampaignOutOfStockEvent
+  | CatalystDeploymentEvent
+  | CollectionCreatedEvent
+  | ItemPublishedEvent
   | ItemSoldEvent
+  | MoveToParcelEvent
+  | PassportOpenedEvent
   | RentalEndedEvent
   | RentalStartedEvent
-  | RoyaltiesEarnedEvent
-  | CollectionCreatedEvent
-  | MoveToParcelEvent
-  | CatalystDeploymentEvent
-  | RewardInProgressEvent
   | RewardAssignedEvent
-  | CampaignOutOfFundsEvent
-  | CampaignGasPriceHigherThanExpectedEvent
-  | CampaignOutOfStockEvent
   | RewardDelayedEvent
-  | BadgeGrantedEvent
+  | RewardInProgressEvent
+  | RoyaltiesEarnedEvent
   | UsedEmoteEvent
-  | PassportOpenedEvent
+  | VerticalHeightReachedEvent
+  | WalkedDistanceEvent

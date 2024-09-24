@@ -21,6 +21,7 @@ export enum NotificationType {
   GOVERNANCE_WHALE_VOTE = 'governance_whale_vote',
   GOVERNANCE_VOTED_ON_BEHALF = 'governance_voted_on_behalf',
   ITEM_SOLD = 'item_sold',
+  ITEM_PUBLISHED = 'item_published',
   LAND_RENTAL_ENDED = 'rental_ended',
   LAND_RENTED = 'rental_started',
   REWARD_ASSIGNED = 'reward_assignment',

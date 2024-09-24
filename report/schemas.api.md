@@ -1045,7 +1045,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BidAcceptedEvent | BidReceivedEvent | ItemSoldEvent | RentalEndedEvent | RentalStartedEvent | RoyaltiesEarnedEvent | CollectionCreatedEvent | MoveToParcelEvent | CatalystDeploymentEvent | RewardInProgressEvent | RewardAssignedEvent | CampaignOutOfFundsEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfStockEvent | RewardDelayedEvent | BadgeGrantedEvent | UsedEmoteEvent | PassportOpenedEvent;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | ItemPublishedEvent | ItemSoldEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1064,6 +1064,8 @@ export namespace Events {
             BID_ACCEPTED = "bid-accepted",
             // (undocumented)
             COLLECTION_CREATED = "collection-created",
+            // (undocumented)
+            ITEM_PUBLISHED = "item-published",
             // (undocumented)
             ITEM_SOLD = "item-sold",
             // (undocumented)
@@ -1095,7 +1097,11 @@ export namespace Events {
             // (undocumented)
             PASSPORT_OPENED = "passport-opened",
             // (undocumented)
-            USED_EMOTE = "used-emote"
+            USED_EMOTE = "used-emote",
+            // (undocumented)
+            VERTICAL_HEIGHT_REACHED = "vertical-height-reached",
+            // (undocumented)
+            WALKED_DISTANCE = "walked-distance"
         }
         // (undocumented)
         export enum Marketplace {
@@ -1404,6 +1410,24 @@ export type ItemFilters = {
     emoteHasGeometry?: boolean;
 };
 
+// Warning: (ae-missing-release-tag) "ItemPublishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ItemPublishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ItemPublishedEvent = BaseEvent & {
+    type: Events.Type.BLOCKCHAIN;
+    subType: Events.SubType.Blockchain.ITEM_PUBLISHED;
+    metadata: ItemEventMetadata;
+};
+
+// @public (undocumented)
+export namespace ItemPublishedEvent {
+    const // (undocumented)
+    schema: JSONSchema<ItemPublishedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<ItemPublishedEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "ItemSoldEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "ItemSoldEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1411,20 +1435,7 @@ export type ItemFilters = {
 export type ItemSoldEvent = BaseEvent & {
     type: Events.Type.BLOCKCHAIN;
     subType: Events.SubType.Blockchain.ITEM_SOLD;
-    metadata: {
-        address: string;
-        image: string;
-        buyer: string;
-        seller: string;
-        category: string;
-        rarity?: string;
-        link: string;
-        nftName?: string;
-        tokenId: string;
-        network: string;
-        title: string;
-        description: string;
-    };
+    metadata: ItemEventMetadata;
 };
 
 // @public (undocumented)
@@ -1971,6 +1982,8 @@ export enum NotificationType {
     GOVERNANCE_VOTING_ENDED_VOTER = "governance_voting_ended_voter",
     // (undocumented)
     GOVERNANCE_WHALE_VOTE = "governance_whale_vote",
+    // (undocumented)
+    ITEM_PUBLISHED = "item_published",
     // (undocumented)
     ITEM_SOLD = "item_sold",
     // (undocumented)
@@ -3385,6 +3398,29 @@ export type ValidWorldRange = {
     yMax: number;
 };
 
+// Warning: (ae-missing-release-tag) "VerticalHeightReachedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type VerticalHeightReachedEvent = BaseEvent & {
+    type: Events.Type.CLIENT;
+    subType: Events.SubType.Client.VERTICAL_HEIGHT_REACHED;
+    metadata: ClientBaseMetadata & {
+        height: number;
+    };
+};
+
+// Warning: (ae-missing-release-tag) "WalkedDistanceEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WalkedDistanceEvent = BaseEvent & {
+    type: Events.Type.CLIENT;
+    subType: Events.SubType.Client.WALKED_DISTANCE;
+    metadata: ClientBaseMetadata & {
+        distance: number;
+        stepCount: number;
+    };
+};
+
 // @alpha (undocumented)
 export type Wearable = BaseItem & {
     data: {
@@ -3626,7 +3662,8 @@ export namespace WorldConfiguration {
 // src/dapps/trade.ts:80:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/trade.ts:91:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/trade.ts:92:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
-// src/platform/events/blockchain.ts:128:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/blockchain.ts:82:3 - (ae-forgotten-export) The symbol "ItemEventMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/blockchain.ts:142:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/client.ts:16:3 - (ae-forgotten-export) The symbol "ClientBaseMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha

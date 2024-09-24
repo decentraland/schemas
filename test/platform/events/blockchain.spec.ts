@@ -3,6 +3,7 @@ import {
   BidAcceptedEvent,
   CollectionCreatedEvent,
   Events,
+  ItemPublishedEvent,
   ItemSoldEvent,
   RentalEndedEvent,
   RentalStartedEvent,
@@ -61,6 +62,33 @@ describe('Blockchain Events tests', () => {
     expect(ItemSoldEvent.validate(event)).toEqual(true)
     expect(ItemSoldEvent.validate(null)).toEqual(false)
     expect(ItemSoldEvent.validate({})).toEqual(false)
+  })
+
+  it('ItemPublished static tests must pass', () => {
+    const event: ItemPublishedEvent = {
+      type: Events.Type.BLOCKCHAIN,
+      subType: Events.SubType.Blockchain.ITEM_PUBLISHED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        address: 'address',
+        image: 'image',
+        buyer: 'buyer',
+        seller: 'seller',
+        category: 'category',
+        rarity: 'rarity',
+        link: 'link',
+        nftName: 'nftName',
+        title: 'title',
+        description: 'description',
+        network: 'network',
+        tokenId: 'tokenId'
+      }
+    }
+
+    expect(ItemPublishedEvent.validate(event)).toEqual(true)
+    expect(ItemPublishedEvent.validate(null)).toEqual(false)
+    expect(ItemPublishedEvent.validate({})).toEqual(false)
   })
 
   it('RentalEndedEvent static tests must pass', () => {
