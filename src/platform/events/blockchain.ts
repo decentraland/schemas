@@ -76,7 +76,6 @@ export type ItemSoldEvent = BaseEvent & {
   metadata: ItemEventMetadata
 }
 
-// TODO: should we use the itemId instead of tokenId?
 export type ItemPublishedEvent = BaseEvent & {
   type: Events.Type.BLOCKCHAIN
   subType: Events.SubType.Blockchain.ITEM_PUBLISHED
