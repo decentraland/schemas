@@ -1983,6 +1983,8 @@ export enum NotificationType {
     // (undocumented)
     GOVERNANCE_WHALE_VOTE = "governance_whale_vote",
     // (undocumented)
+    ITEM_PUBLISHED = "item_published",
+    // (undocumented)
     ITEM_SOLD = "item_sold",
     // (undocumented)
     LAND_RENTAL_ENDED = "rental_ended",
