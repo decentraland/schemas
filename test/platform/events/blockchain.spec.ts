@@ -75,7 +75,8 @@ describe('Blockchain Events tests', () => {
         category: 'category',
         rarity: 'rarity',
         network: 'network',
-        tokenId: 'tokenId'
+        itemId: 'itemId',
+        urn: 'urn'
       }
     }
 

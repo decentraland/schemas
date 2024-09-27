@@ -79,7 +79,8 @@ export type ItemPublishedEvent = BaseEvent & {
   metadata: {
     creator: string
     category: string
-    tokenId: string
+    itemId: string
+    urn: string
     network: string
     rarity?: string
   }
@@ -133,10 +134,11 @@ export namespace ItemPublishedEvent {
           creator: { type: 'string' },
           category: { type: 'string' },
           rarity: { type: 'string', nullable: true },
-          tokenId: { type: 'string' },
-          network: { type: 'string' }
+          itemId: { type: 'string' },
+          network: { type: 'string' },
+          urn: { type: 'string' }
         },
-        required: ['creator', 'category', 'tokenId', 'network']
+        required: ['creator', 'category', 'itemId', 'network', 'urn']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
