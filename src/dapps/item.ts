@@ -45,6 +45,7 @@ export type Item = {
   /** A description of the utility the item has in the explorer */
   utility?: string
   tradeId?: string
+  tradeExpiresAt?: number
 }
 
 export type ItemFilters = {
@@ -201,6 +202,10 @@ export namespace Item {
         nullable: true
       },
       owners: {
+        type: 'integer',
+        nullable: true
+      },
+      tradeExpiresAt: {
         type: 'integer',
         nullable: true
       }
