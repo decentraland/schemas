@@ -6,6 +6,8 @@ export type CatalystDeploymentEvent = BaseEvent & {
   type: Events.Type.CATALYST_DEPLOYMENT
   subType: Events.SubType.CatalystDeployment
   entity: Entity
+  contentServerUrls?: string[]
+  lods?: string[]
 }
 
 export namespace CatalystDeploymentEvent {
@@ -19,10 +21,12 @@ export namespace CatalystDeploymentEvent {
       },
       key: { type: 'string' },
       timestamp: { type: 'number', minimum: 1 },
-      entity: Entity.schema
+      entity: Entity.schema,
+      contentServerUrls: { type: 'array', items: { type: 'string' }, nullable: true },
+      lods: { type: 'array', items: { type: 'string' }, nullable: true }
     },
     required: ['type', 'subType', 'entity', 'key', 'timestamp'],
-    additionalProperties: false
+    additionalProperties: true // to admit .lods property for lods-generator
   }
 
   export const validate: ValidateFunction<CatalystDeploymentEvent> = generateLazyValidator(schema)
