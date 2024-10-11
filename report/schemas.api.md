@@ -538,6 +538,8 @@ export type CatalystDeploymentEvent = BaseEvent & {
     type: Events.Type.CATALYST_DEPLOYMENT;
     subType: Events.SubType.CatalystDeployment;
     entity: Entity;
+    contentServerUrls?: string[];
+    lods?: string[];
 };
 
 // @public (undocumented)
