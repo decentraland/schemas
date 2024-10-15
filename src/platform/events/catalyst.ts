@@ -1,3 +1,4 @@
+import { AuthChain } from '../../misc/auth-chain'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { Entity } from '../entity'
 import { BaseEvent, Events } from './base'
@@ -6,6 +7,7 @@ export type CatalystDeploymentEvent = BaseEvent & {
   type: Events.Type.CATALYST_DEPLOYMENT
   subType: Events.SubType.CatalystDeployment
   entity: Entity
+  authChain: AuthChain
 }
 
 export namespace CatalystDeploymentEvent {
@@ -19,9 +21,10 @@ export namespace CatalystDeploymentEvent {
       },
       key: { type: 'string' },
       timestamp: { type: 'number', minimum: 1 },
-      entity: Entity.schema
+      entity: Entity.schema,
+      authChain: AuthChain.schema
     },
-    required: ['type', 'subType', 'entity', 'key', 'timestamp'],
+    required: ['type', 'subType', 'entity', 'authChain', 'key', 'timestamp'],
     additionalProperties: false
   }
 
