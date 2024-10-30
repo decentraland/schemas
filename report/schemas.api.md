@@ -1524,6 +1524,7 @@ export type LinkerAuthorization = {
         name: string;
         [key: string]: string;
     };
+    onlyDev?: boolean;
     addresses: string[];
     plots: string[];
 };
