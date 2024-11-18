@@ -45,6 +45,10 @@ export namespace DeploymentToSqs {
       force: {
         type: 'boolean',
         nullable: true
+      },
+      animation: {
+        type: 'string',
+        nullable: true
       }
     },
     additionalProperties: true
