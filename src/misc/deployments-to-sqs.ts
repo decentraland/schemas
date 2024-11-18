@@ -12,6 +12,7 @@ export type DeploymentToSqs = {
   lods?: string[]
   contentServerUrls?: string[]
   force?: boolean
+  animation?: string
 }
 
 /**
