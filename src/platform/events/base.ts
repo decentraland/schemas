@@ -33,7 +33,8 @@ export namespace Events {
     CLIENT = 'client',
     MARKETPLACE = 'marketplace',
     REWARDS = 'rewards',
-    BADGE = 'badge'
+    BADGE = 'badge',
+    ASSET_BUNDLE = 'asset-bundle'
   }
 
   export namespace SubType {
@@ -80,6 +81,10 @@ export namespace Events {
     export enum Badge {
       GRANTED = 'badge-granted'
     }
+
+    export enum AssetBundle {
+      CONVERTED = 'converted'
+    }
   }
 }
 
@@ -92,6 +97,7 @@ export type BaseEvent = {
     | Events.SubType.Marketplace
     | Events.SubType.Rewards
     | Events.SubType.Badge
+    | Events.SubType.AssetBundle
   key: string
   timestamp: number
 }
