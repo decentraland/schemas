@@ -2550,6 +2550,8 @@ export enum ProviderType {
     // (undocumented)
     MAGIC = "magic",
     // (undocumented)
+    MAGIC_TEST = "magic_test",
+    // (undocumented)
     METAMASK_MOBILE = "metamask_mobile",
     // (undocumented)
     NETWORK = "network",
