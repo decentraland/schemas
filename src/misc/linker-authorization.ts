@@ -14,6 +14,7 @@ export type LinkerAuthorization = {
     name: string
     [key: string]: string
   }
+  onlyDev?: boolean
   addresses: string[]
   plots: string[]
 }
@@ -33,6 +34,7 @@ export namespace LinkerAuthorization {
         },
         required: ['name']
       },
+      onlyDev: { type: 'boolean', nullable: true },
       addresses: {
         type: 'array',
         items: { type: 'string' },
