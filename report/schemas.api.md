@@ -142,12 +142,8 @@ export type AssetBundleConvertedEvent = BaseEvent & {
     type: Events.Type.ASSET_BUNDLE;
     subType: Events.SubType.AssetBundle.CONVERTED;
     metadata: {
-        entityType: string;
         entityId: string;
-        entityTimestamp: number;
-        conversionTimestamp: number;
         platform: 'windows' | 'mac' | 'webgl';
-        assetOwner?: string;
     };
 };
 

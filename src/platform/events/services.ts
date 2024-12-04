@@ -44,12 +44,8 @@ export type AssetBundleConvertedEvent = BaseEvent & {
   type: Events.Type.ASSET_BUNDLE
   subType: Events.SubType.AssetBundle.CONVERTED
   metadata: {
-    entityType: string
     entityId: string
-    entityTimestamp: number
-    conversionTimestamp: number
     platform: 'windows' | 'mac' | 'webgl'
-    assetOwner?: string
   }
 }
 
@@ -64,14 +60,10 @@ export namespace AssetBundleConvertedEvent {
       metadata: {
         type: 'object',
         properties: {
-          entityType: { type: 'string' },
           entityId: { type: 'string' },
-          entityTimestamp: { type: 'number', minimum: 0 },
-          conversionTimestamp: { type: 'number', minimum: 0 },
-          platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] },
-          assetOwner: { type: 'string', nullable: true }
+          platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] }
         },
-        required: ['entityType', 'entityId', 'entityTimestamp', 'conversionTimestamp', 'platform']
+        required: ['entityId', 'platform']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
