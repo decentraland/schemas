@@ -134,6 +134,27 @@ export namespace AnyMapping {
     validate: ValidateFunction<Mapping>;
 }
 
+// Warning: (ae-missing-release-tag) "AssetBundleConvertedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "AssetBundleConvertedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type AssetBundleConvertedEvent = BaseEvent & {
+    type: Events.Type.ASSET_BUNDLE;
+    subType: Events.SubType.AssetBundle.CONVERTED;
+    metadata: {
+        entityId: string;
+        platform: 'windows' | 'mac' | 'webgl';
+    };
+};
+
+// @public (undocumented)
+export namespace AssetBundleConvertedEvent {
+    const // (undocumented)
+    schema: JSONSchema<AssetBundleConvertedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<AssetBundleConvertedEvent>;
+}
+
 // @public
 export type AuthChain = AuthLink[];
 
@@ -285,7 +306,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle;
     key: string;
     timestamp: number;
 };
@@ -1055,6 +1076,11 @@ export namespace Events {
     // (undocumented)
     export namespace SubType {
         // (undocumented)
+        export enum AssetBundle {
+            // (undocumented)
+            CONVERTED = "converted"
+        }
+        // (undocumented)
         export enum Badge {
             // (undocumented)
             GRANTED = "badge-granted"
@@ -1127,6 +1153,8 @@ export namespace Events {
     }
     // (undocumented)
     export enum Type {
+        // (undocumented)
+        ASSET_BUNDLE = "asset-bundle",
         // (undocumented)
         BADGE = "badge",
         // (undocumented)
