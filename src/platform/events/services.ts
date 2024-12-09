@@ -45,7 +45,7 @@ export type AssetBundleConvertedEvent = BaseEvent & {
   subType: Events.SubType.AssetBundle.CONVERTED
   metadata: {
     entityId: string
-    platform: 'windows' | 'mac' | 'webgl'
+    platform: 'windows' | 'mac' | 'webglb'
   }
 }
 
@@ -61,7 +61,7 @@ export namespace AssetBundleConvertedEvent {
         type: 'object',
         properties: {
           entityId: { type: 'string' },
-          platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] }
+          platform: { type: 'string', enum: ['windows', 'mac', 'webglb'] }
         },
         required: ['entityId', 'platform']
       }

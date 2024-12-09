@@ -143,7 +143,7 @@ export type AssetBundleConvertedEvent = BaseEvent & {
     subType: Events.SubType.AssetBundle.CONVERTED;
     metadata: {
         entityId: string;
-        platform: 'windows' | 'mac' | 'webgl';
+        platform: 'windows' | 'mac' | 'webglb';
     };
 };
 
