@@ -30,6 +30,7 @@ export namespace Events {
   export enum Type {
     BLOCKCHAIN = 'blockchain',
     CATALYST_DEPLOYMENT = 'catalyst-deployment',
+    WORLD = 'world',
     CLIENT = 'client',
     MARKETPLACE = 'marketplace',
     REWARDS = 'rewards',
@@ -59,6 +60,10 @@ export namespace Events {
       STORE = 'store',
       EMOTE = 'emote',
       OUTFITS = 'outfits'
+    }
+
+    export enum Worlds {
+      DEPLOYMENT = 'deployment'
     }
 
     export enum Client {
