@@ -1150,6 +1150,11 @@ export namespace Events {
             // (undocumented)
             REWARD_IN_PROGRESS = "reward-in-progress"
         }
+        // (undocumented)
+        export enum Worlds {
+            // (undocumented)
+            DEPLOYMENT = "deployment"
+        }
     }
     // (undocumented)
     export enum Type {
@@ -1166,7 +1171,9 @@ export namespace Events {
         // (undocumented)
         MARKETPLACE = "marketplace",
         // (undocumented)
-        REWARDS = "rewards"
+        REWARDS = "rewards",
+        // (undocumented)
+        WORLD = "world"
     }
 }
 
