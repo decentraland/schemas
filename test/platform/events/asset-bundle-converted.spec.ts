@@ -10,7 +10,9 @@ describe('AssetBundleConverted Events tests', () => {
       timestamp: 1,
       metadata: {
         entityId: 'baf',
-        platform: 'mac'
+        platform: 'mac',
+        statusCode: 1,
+        isLods: false
       }
     }
 

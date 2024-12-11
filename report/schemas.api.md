@@ -144,6 +144,8 @@ export type AssetBundleConvertedEvent = BaseEvent & {
     metadata: {
         entityId: string;
         platform: 'windows' | 'mac' | 'webglb';
+        statusCode: number;
+        isLods: boolean;
     };
 };
 
