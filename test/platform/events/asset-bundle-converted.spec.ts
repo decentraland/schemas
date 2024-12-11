@@ -1,9 +1,9 @@
 import expect from 'expect'
-import { AssetBundleConvertedEvent, Events } from '../../../src'
+import { AssetBundleConversionFinishedEvent, Events } from '../../../src'
 
-describe('AssetBundleConverted Events tests', () => {
-  it('AssetBundleConvertedEvent static tests must pass', () => {
-    const event: AssetBundleConvertedEvent = {
+describe('AssetBundleConversionFinished Events tests', () => {
+  it('AssetBundleConversionFinishedEvent static tests must pass', () => {
+    const event: AssetBundleConversionFinishedEvent = {
       type: Events.Type.ASSET_BUNDLE,
       subType: Events.SubType.AssetBundle.CONVERTED,
       key: 'key',
@@ -16,8 +16,8 @@ describe('AssetBundleConverted Events tests', () => {
       }
     }
 
-    expect(AssetBundleConvertedEvent.validate(event)).toEqual(true)
-    expect(AssetBundleConvertedEvent.validate(null)).toEqual(false)
-    expect(AssetBundleConvertedEvent.validate({})).toEqual(false)
+    expect(AssetBundleConversionFinishedEvent.validate(event)).toEqual(true)
+    expect(AssetBundleConversionFinishedEvent.validate(null)).toEqual(false)
+    expect(AssetBundleConversionFinishedEvent.validate({})).toEqual(false)
   })
 })

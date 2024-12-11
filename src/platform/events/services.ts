@@ -40,7 +40,7 @@ export namespace BadgeGrantedEvent {
   export const validate: ValidateFunction<BadgeGrantedEvent> = generateLazyValidator(schema)
 }
 
-export type AssetBundleConvertedEvent = BaseEvent & {
+export type AssetBundleConversionFinishedEvent = BaseEvent & {
   type: Events.Type.ASSET_BUNDLE
   subType: Events.SubType.AssetBundle.CONVERTED
   metadata: {
@@ -51,8 +51,8 @@ export type AssetBundleConvertedEvent = BaseEvent & {
   }
 }
 
-export namespace AssetBundleConvertedEvent {
-  export const schema: JSONSchema<AssetBundleConvertedEvent> = {
+export namespace AssetBundleConversionFinishedEvent {
+  export const schema: JSONSchema<AssetBundleConversionFinishedEvent> = {
     type: 'object',
     properties: {
       type: { type: 'string', const: Events.Type.ASSET_BUNDLE },
@@ -74,5 +74,5 @@ export namespace AssetBundleConvertedEvent {
     additionalProperties: true
   }
 
-  export const validate: ValidateFunction<AssetBundleConvertedEvent> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<AssetBundleConversionFinishedEvent> = generateLazyValidator(schema)
 }

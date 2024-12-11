@@ -134,11 +134,11 @@ export namespace AnyMapping {
     validate: ValidateFunction<Mapping>;
 }
 
-// Warning: (ae-missing-release-tag) "AssetBundleConvertedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "AssetBundleConvertedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "AssetBundleConversionFinishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "AssetBundleConversionFinishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type AssetBundleConvertedEvent = BaseEvent & {
+export type AssetBundleConversionFinishedEvent = BaseEvent & {
     type: Events.Type.ASSET_BUNDLE;
     subType: Events.SubType.AssetBundle.CONVERTED;
     metadata: {
@@ -150,11 +150,11 @@ export type AssetBundleConvertedEvent = BaseEvent & {
 };
 
 // @public (undocumented)
-export namespace AssetBundleConvertedEvent {
+export namespace AssetBundleConversionFinishedEvent {
     const // (undocumented)
-    schema: JSONSchema<AssetBundleConvertedEvent>;
+    schema: JSONSchema<AssetBundleConversionFinishedEvent>;
     const // (undocumented)
-    validate: ValidateFunction<AssetBundleConvertedEvent>;
+    validate: ValidateFunction<AssetBundleConversionFinishedEvent>;
 }
 
 // @public
