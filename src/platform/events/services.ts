@@ -40,17 +40,19 @@ export namespace BadgeGrantedEvent {
   export const validate: ValidateFunction<BadgeGrantedEvent> = generateLazyValidator(schema)
 }
 
-export type AssetBundleConvertedEvent = BaseEvent & {
+export type AssetBundleConversionFinishedEvent = BaseEvent & {
   type: Events.Type.ASSET_BUNDLE
   subType: Events.SubType.AssetBundle.CONVERTED
   metadata: {
     entityId: string
     platform: 'windows' | 'mac' | 'webglb'
+    statusCode: number
+    isLods: boolean
   }
 }
 
-export namespace AssetBundleConvertedEvent {
-  export const schema: JSONSchema<AssetBundleConvertedEvent> = {
+export namespace AssetBundleConversionFinishedEvent {
+  export const schema: JSONSchema<AssetBundleConversionFinishedEvent> = {
     type: 'object',
     properties: {
       type: { type: 'string', const: Events.Type.ASSET_BUNDLE },
@@ -61,14 +63,16 @@ export namespace AssetBundleConvertedEvent {
         type: 'object',
         properties: {
           entityId: { type: 'string' },
-          platform: { type: 'string', enum: ['windows', 'mac', 'webglb'] }
+          platform: { type: 'string', enum: ['windows', 'mac', 'webglb'] },
+          statusCode: { type: 'number' },
+          isLods: { type: 'boolean' }
         },
-        required: ['entityId', 'platform']
+        required: ['entityId', 'platform', 'statusCode', 'isLods']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
     additionalProperties: true
   }
 
-  export const validate: ValidateFunction<AssetBundleConvertedEvent> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<AssetBundleConversionFinishedEvent> = generateLazyValidator(schema)
 }
