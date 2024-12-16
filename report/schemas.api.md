@@ -143,7 +143,7 @@ export type AssetBundleConversionFinishedEvent = BaseEvent & {
     subType: Events.SubType.AssetBundle.CONVERTED;
     metadata: {
         entityId: string;
-        platform: 'windows' | 'mac' | 'webglb';
+        platform: 'windows' | 'mac' | 'webgl';
         statusCode: number;
         isLods: boolean;
     };

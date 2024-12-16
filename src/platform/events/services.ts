@@ -45,7 +45,7 @@ export type AssetBundleConversionFinishedEvent = BaseEvent & {
   subType: Events.SubType.AssetBundle.CONVERTED
   metadata: {
     entityId: string
-    platform: 'windows' | 'mac' | 'webglb'
+    platform: 'windows' | 'mac' | 'webgl'
     statusCode: number
     isLods: boolean
   }
@@ -63,7 +63,7 @@ export namespace AssetBundleConversionFinishedEvent {
         type: 'object',
         properties: {
           entityId: { type: 'string' },
-          platform: { type: 'string', enum: ['windows', 'mac', 'webglb'] },
+          platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] },
           statusCode: { type: 'number' },
           isLods: { type: 'boolean' }
         },
