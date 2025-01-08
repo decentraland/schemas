@@ -39,3 +39,40 @@ export namespace BadgeGrantedEvent {
 
   export const validate: ValidateFunction<BadgeGrantedEvent> = generateLazyValidator(schema)
 }
+
+export type AssetBundleConversionFinishedEvent = BaseEvent & {
+  type: Events.Type.ASSET_BUNDLE
+  subType: Events.SubType.AssetBundle.CONVERTED
+  metadata: {
+    entityId: string
+    platform: 'windows' | 'mac' | 'webgl'
+    statusCode: number
+    isLods: boolean
+  }
+}
+
+export namespace AssetBundleConversionFinishedEvent {
+  export const schema: JSONSchema<AssetBundleConversionFinishedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.ASSET_BUNDLE },
+      subType: { type: 'string', const: Events.SubType.AssetBundle.CONVERTED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          entityId: { type: 'string' },
+          platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] },
+          statusCode: { type: 'number' },
+          isLods: { type: 'boolean' }
+        },
+        required: ['entityId', 'platform', 'statusCode', 'isLods']
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: true
+  }
+
+  export const validate: ValidateFunction<AssetBundleConversionFinishedEvent> = generateLazyValidator(schema)
+}

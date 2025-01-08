@@ -134,6 +134,29 @@ export namespace AnyMapping {
     validate: ValidateFunction<Mapping>;
 }
 
+// Warning: (ae-missing-release-tag) "AssetBundleConversionFinishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "AssetBundleConversionFinishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type AssetBundleConversionFinishedEvent = BaseEvent & {
+    type: Events.Type.ASSET_BUNDLE;
+    subType: Events.SubType.AssetBundle.CONVERTED;
+    metadata: {
+        entityId: string;
+        platform: 'windows' | 'mac' | 'webgl';
+        statusCode: number;
+        isLods: boolean;
+    };
+};
+
+// @public (undocumented)
+export namespace AssetBundleConversionFinishedEvent {
+    const // (undocumented)
+    schema: JSONSchema<AssetBundleConversionFinishedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<AssetBundleConversionFinishedEvent>;
+}
+
 // @public
 export type AuthChain = AuthLink[];
 
@@ -285,7 +308,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle;
     key: string;
     timestamp: number;
 };
@@ -1055,6 +1078,11 @@ export namespace Events {
     // (undocumented)
     export namespace SubType {
         // (undocumented)
+        export enum AssetBundle {
+            // (undocumented)
+            CONVERTED = "converted"
+        }
+        // (undocumented)
         export enum Badge {
             // (undocumented)
             GRANTED = "badge-granted"
@@ -1124,9 +1152,16 @@ export namespace Events {
             // (undocumented)
             REWARD_IN_PROGRESS = "reward-in-progress"
         }
+        // (undocumented)
+        export enum Worlds {
+            // (undocumented)
+            DEPLOYMENT = "deployment"
+        }
     }
     // (undocumented)
     export enum Type {
+        // (undocumented)
+        ASSET_BUNDLE = "asset-bundle",
         // (undocumented)
         BADGE = "badge",
         // (undocumented)
@@ -1138,7 +1173,9 @@ export namespace Events {
         // (undocumented)
         MARKETPLACE = "marketplace",
         // (undocumented)
-        REWARDS = "rewards"
+        REWARDS = "rewards",
+        // (undocumented)
+        WORLD = "world"
     }
 }
 
@@ -1524,6 +1561,7 @@ export type LinkerAuthorization = {
         name: string;
         [key: string]: string;
     };
+    onlyDev?: boolean;
     addresses: string[];
     plots: string[];
 };
@@ -2548,6 +2586,8 @@ export enum ProviderType {
     INJECTED = "injected",
     // (undocumented)
     MAGIC = "magic",
+    // (undocumented)
+    MAGIC_TEST = "magic_test",
     // (undocumented)
     METAMASK_MOBILE = "metamask_mobile",
     // (undocumented)

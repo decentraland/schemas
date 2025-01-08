@@ -30,10 +30,12 @@ export namespace Events {
   export enum Type {
     BLOCKCHAIN = 'blockchain',
     CATALYST_DEPLOYMENT = 'catalyst-deployment',
+    WORLD = 'world',
     CLIENT = 'client',
     MARKETPLACE = 'marketplace',
     REWARDS = 'rewards',
-    BADGE = 'badge'
+    BADGE = 'badge',
+    ASSET_BUNDLE = 'asset-bundle'
   }
 
   export namespace SubType {
@@ -60,6 +62,10 @@ export namespace Events {
       OUTFITS = 'outfits'
     }
 
+    export enum Worlds {
+      DEPLOYMENT = 'deployment'
+    }
+
     export enum Client {
       MOVE_TO_PARCEL = 'move-to-parcel',
       USED_EMOTE = 'used-emote',
@@ -80,6 +86,10 @@ export namespace Events {
     export enum Badge {
       GRANTED = 'badge-granted'
     }
+
+    export enum AssetBundle {
+      CONVERTED = 'converted'
+    }
   }
 }
 
@@ -92,6 +102,7 @@ export type BaseEvent = {
     | Events.SubType.Marketplace
     | Events.SubType.Rewards
     | Events.SubType.Badge
+    | Events.SubType.AssetBundle
   key: string
   timestamp: number
 }
