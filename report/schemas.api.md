@@ -3494,6 +3494,7 @@ export type Wearable = BaseItem & {
         category: WearableCategory;
         removesDefaultHiding?: HideableWearableCategory[];
         blockVrmExport?: boolean;
+        outlineCompatible?: boolean;
     };
 } & (StandardProps | ThirdPartyProps);
 

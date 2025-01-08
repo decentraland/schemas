@@ -61,6 +61,10 @@ export namespace WearableJson {
           blockVrmExport: {
             type: 'boolean',
             nullable: true
+          },
+          outlineCompatible: {
+            type: 'boolean',
+            nullable: true
           }
         },
         required: ['replaces', 'hides', 'tags', 'representations', 'category']

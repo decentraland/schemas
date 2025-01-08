@@ -32,7 +32,8 @@ describe('Linked wearables tests', () => {
       tags: ['tag1'],
       representations: [representation],
       category: WearableCategory.UPPER_BODY,
-      blockVrmExport: false
+      blockVrmExport: false,
+      outlineCompatible: false
     },
     i18n: [
       {
