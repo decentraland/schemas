@@ -17,6 +17,7 @@ export type Wearable = BaseItem & {
     category: WearableCategory
     removesDefaultHiding?: HideableWearableCategory[]
     blockVrmExport?: boolean
+    outlineCompatible?: boolean
   }
 } & (StandardProps | ThirdPartyProps)
 
@@ -58,6 +59,10 @@ export namespace Wearable {
             items: HideableWearableCategory.schema
           },
           blockVrmExport: {
+            type: 'boolean',
+            nullable: true
+          },
+          outlineCompatible: {
             type: 'boolean',
             nullable: true
           }
