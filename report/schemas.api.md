@@ -168,6 +168,7 @@ export type AssetBundleConversionManuallyQueuedEvent = BaseEvent & {
         entityId: string;
         platform: 'windows' | 'mac' | 'webgl';
         isLods: boolean;
+        isPriority: boolean;
     };
 };
 

@@ -32,7 +32,8 @@ describe('AssetBundleConversionManuallyQueued Events tests', () => {
       metadata: {
         entityId: 'baf',
         platform: 'mac',
-        isLods: false
+        isLods: false,
+        isPriority: false
       }
     }
 

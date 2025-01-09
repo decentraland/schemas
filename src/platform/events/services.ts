@@ -84,6 +84,7 @@ export type AssetBundleConversionManuallyQueuedEvent = BaseEvent & {
     entityId: string
     platform: 'windows' | 'mac' | 'webgl'
     isLods: boolean
+    isPriority: boolean
   }
 }
 
@@ -100,7 +101,8 @@ export namespace AssetBundleConversionManuallyQueuedEvent {
         properties: {
           entityId: { type: 'string' },
           platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] },
-          isLods: { type: 'boolean' }
+          isLods: { type: 'boolean' },
+          isPriority: { type: 'boolean' }
         },
         required: ['entityId', 'platform', 'isLods']
       }
