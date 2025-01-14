@@ -88,7 +88,8 @@ export namespace Events {
     }
 
     export enum AssetBundle {
-      CONVERTED = 'converted'
+      CONVERTED = 'converted',
+      MANUALLY_QUEUED = 'manually-queued'
     }
   }
 }

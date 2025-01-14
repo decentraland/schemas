@@ -157,6 +157,29 @@ export namespace AssetBundleConversionFinishedEvent {
     validate: ValidateFunction<AssetBundleConversionFinishedEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "AssetBundleConversionManuallyQueuedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "AssetBundleConversionManuallyQueuedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type AssetBundleConversionManuallyQueuedEvent = BaseEvent & {
+    type: Events.Type.ASSET_BUNDLE;
+    subType: Events.SubType.AssetBundle.MANUALLY_QUEUED;
+    metadata: {
+        entityId: string;
+        platform: 'windows' | 'mac' | 'webgl';
+        isLods: boolean;
+        isPriority: boolean;
+    };
+};
+
+// @public (undocumented)
+export namespace AssetBundleConversionManuallyQueuedEvent {
+    const // (undocumented)
+    schema: JSONSchema<AssetBundleConversionManuallyQueuedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<AssetBundleConversionManuallyQueuedEvent>;
+}
+
 // @public
 export type AuthChain = AuthLink[];
 
@@ -1080,7 +1103,9 @@ export namespace Events {
         // (undocumented)
         export enum AssetBundle {
             // (undocumented)
-            CONVERTED = "converted"
+            CONVERTED = "converted",
+            // (undocumented)
+            MANUALLY_QUEUED = "manually-queued"
         }
         // (undocumented)
         export enum Badge {

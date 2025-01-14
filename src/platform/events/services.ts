@@ -76,3 +76,40 @@ export namespace AssetBundleConversionFinishedEvent {
 
   export const validate: ValidateFunction<AssetBundleConversionFinishedEvent> = generateLazyValidator(schema)
 }
+
+export type AssetBundleConversionManuallyQueuedEvent = BaseEvent & {
+  type: Events.Type.ASSET_BUNDLE
+  subType: Events.SubType.AssetBundle.MANUALLY_QUEUED
+  metadata: {
+    entityId: string
+    platform: 'windows' | 'mac' | 'webgl'
+    isLods: boolean
+    isPriority: boolean
+  }
+}
+
+export namespace AssetBundleConversionManuallyQueuedEvent {
+  export const schema: JSONSchema<AssetBundleConversionManuallyQueuedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.ASSET_BUNDLE },
+      subType: { type: 'string', const: Events.SubType.AssetBundle.MANUALLY_QUEUED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          entityId: { type: 'string' },
+          platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] },
+          isLods: { type: 'boolean' },
+          isPriority: { type: 'boolean' }
+        },
+        required: ['entityId', 'platform', 'isLods']
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: true
+  }
+
+  export const validate: ValidateFunction<AssetBundleConversionManuallyQueuedEvent> = generateLazyValidator(schema)
+}
