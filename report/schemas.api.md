@@ -313,6 +313,29 @@ export namespace BadgeGrantedEvent {
     validate: ValidateFunction<BadgeGrantedEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "BannerFields" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type BannerFields = {
+    id: LocalizedField<string>;
+    desktopTitle: LocalizedField<string>;
+    mobileTitle: LocalizedField<string>;
+    mobileTitleAlignment: LocalizedField<AlignmentFieldType>;
+    desktopTitleAlignment: LocalizedField<AlignmentFieldType>;
+    desktopText: LocalizedField<any>;
+    mobileText: LocalizedField<any>;
+    desktopTextAlignment: LocalizedField<AlignmentFieldType>;
+    mobileTextAlignment: LocalizedField<AlignmentFieldType>;
+    showButton: LocalizedField<boolean>;
+    buttonLink?: LocalizedField<string>;
+    buttonsText?: LocalizedField<string>;
+    desktopButtonAlignment: LocalizedField<AlignmentFieldType>;
+    mobileButtonAlignment: LocalizedField<AlignmentFieldType>;
+    fullSizeBackground: LocalizedField<SysLink<'Asset'>>;
+    mobileBackground: LocalizedField<SysLink<'Asset'>>;
+    logo?: LocalizedField<SysLink<'Asset'>>;
+};
+
 // Warning: (ae-missing-release-tag) "BaseBid" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1354,29 +1377,6 @@ export namespace I18N {
     validate: ValidateFunction<I18N>;
 }
 
-// Warning: (ae-missing-release-tag) "IBannerFields" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type IBannerFields = {
-    id: LocalizedField<string>;
-    desktopTitle: LocalizedField<string>;
-    mobileTitle: LocalizedField<string>;
-    mobileTitleAlignment: LocalizedField<AlignmentFieldType>;
-    desktopTitleAlignment: LocalizedField<AlignmentFieldType>;
-    desktopText: LocalizedField<any>;
-    mobileText: LocalizedField<any>;
-    desktopTextAlignment: LocalizedField<AlignmentFieldType>;
-    mobileTextAlignment: LocalizedField<AlignmentFieldType>;
-    showButton: LocalizedField<boolean>;
-    buttonLink?: LocalizedField<string>;
-    buttonsText?: LocalizedField<string>;
-    desktopButtonAlignment: LocalizedField<AlignmentFieldType>;
-    mobileButtonAlignment: LocalizedField<AlignmentFieldType>;
-    fullSizeBackground: LocalizedField<SysLink<'Asset'>>;
-    mobileBackground: LocalizedField<SysLink<'Asset'>>;
-    logo?: LocalizedField<SysLink<'Asset'>>;
-};
-
 // Warning: (ae-missing-release-tag) "IEmoteController" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1812,11 +1812,11 @@ export enum MappingType {
 // @public (undocumented)
 export type MarketingAdminFields = {
     name: LocalizedField<string>;
-    campaign: LocalizedField<SysLink<'Entry'>>;
-    marketplaceHomepageBanner: LocalizedField<SysLink<'Entry'>>;
-    marketplaceCollectiblesBanner: LocalizedField<SysLink<'Entry'>>;
-    marketplaceCampaignCollectiblesBanner: LocalizedField<SysLink<'Entry'>>;
-    builderCampaignBanner: LocalizedField<SysLink<'Entry'>>;
+    campaign?: LocalizedField<SysLink<'Entry'>>;
+    marketplaceHomepageBanner?: LocalizedField<SysLink<'Entry'>>;
+    marketplaceCollectiblesBanner?: LocalizedField<SysLink<'Entry'>>;
+    marketplaceCampaignCollectiblesBanner?: LocalizedField<SysLink<'Entry'>>;
+    builderCampaignBanner?: LocalizedField<SysLink<'Entry'>>;
 };
 
 // @alpha
