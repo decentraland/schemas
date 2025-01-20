@@ -16,7 +16,7 @@ type CampaignFields = {
   additionalTags?: LocalizedField<string[]>
 }
 
-type IBannerFields = {
+type BannerFields = {
   id: LocalizedField<string>
   desktopTitle: LocalizedField<string>
   mobileTitle: LocalizedField<string>
@@ -38,4 +38,4 @@ type IBannerFields = {
   logo?: LocalizedField<SysLink<'Asset'>>
 }
 
-export { MarketingAdminFields, CampaignFields, IBannerFields }
+export { MarketingAdminFields, CampaignFields, BannerFields }
