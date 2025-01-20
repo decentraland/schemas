@@ -91,6 +91,11 @@ export class AddMappingError extends Error {
 
 export { Ajv }
 
+// Warning: (ae-missing-release-tag) "AlignmentFieldType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type AlignmentFieldType = 'Left' | 'Center' | 'Right';
+
 // Warning: (ae-missing-release-tag) "AnalyticsDayData" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -308,6 +313,29 @@ export namespace BadgeGrantedEvent {
     validate: ValidateFunction<BadgeGrantedEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "BannerFields" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type BannerFields = {
+    id: LocalizedField<string>;
+    desktopTitle: LocalizedField<string>;
+    mobileTitle: LocalizedField<string>;
+    mobileTitleAlignment: LocalizedField<AlignmentFieldType>;
+    desktopTitleAlignment: LocalizedField<AlignmentFieldType>;
+    desktopText: LocalizedField<any>;
+    mobileText: LocalizedField<any>;
+    desktopTextAlignment: LocalizedField<AlignmentFieldType>;
+    mobileTextAlignment: LocalizedField<AlignmentFieldType>;
+    showButton: LocalizedField<boolean>;
+    buttonLink?: LocalizedField<string>;
+    buttonsText?: LocalizedField<string>;
+    desktopButtonAlignment: LocalizedField<AlignmentFieldType>;
+    mobileButtonAlignment: LocalizedField<AlignmentFieldType>;
+    fullSizeBackground: LocalizedField<SysLink<'Asset'>>;
+    mobileBackground: LocalizedField<SysLink<'Asset'>>;
+    logo?: LocalizedField<SysLink<'Asset'>>;
+};
+
 // Warning: (ae-missing-release-tag) "BaseBid" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -479,6 +507,16 @@ export namespace BodyShape {
     const // (undocumented)
     validate: ValidateFunction<BodyShape>;
 }
+
+// Warning: (ae-missing-release-tag) "CampaignFields" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CampaignFields = {
+    name: LocalizedField<string>;
+    mainTag?: LocalizedField<string>;
+    marketplaceTabName?: LocalizedField<string>;
+    additionalTags?: LocalizedField<string[]>;
+};
 
 // Warning: (ae-missing-release-tag) "CampaignGasPriceHigherThanExpectedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "CampaignGasPriceHigherThanExpectedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -777,6 +815,41 @@ export namespace Color3 {
     const // (undocumented)
     validate: ValidateFunction<Color3>;
 }
+
+// Warning: (ae-forgotten-export) The symbol "ContentfulContent" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "AssetFields" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "ContentfulAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ContentfulAsset = ContentfulContent<'Asset', AssetFields>;
+
+// Warning: (ae-missing-release-tag) "ContentfulEntry" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ContentfulEntry<T extends LocalizedFields> = ContentfulContent<'Entry', T>;
+
+// Warning: (ae-missing-release-tag) "ContentfulLocale" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum ContentfulLocale {
+    // (undocumented)
+    enUS = "en-US",
+    // (undocumented)
+    es = "es",
+    // (undocumented)
+    zh = "zh"
+}
+
+// Warning: (ae-missing-release-tag) "ContentfulResponse" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ContentfulResponse<T extends LocalizedFields> = {
+    items: Array<ContentfulEntry<T>>;
+    includes: {
+        Asset?: ContentfulAsset[];
+        Entry?: ContentfulEntry<LocalizedFields>[];
+    };
+};
 
 // @public
 export type ContentMapping = {
@@ -1218,6 +1291,22 @@ export namespace FeatureToggles {
     validate: ValidateFunction<FeatureToggles>;
 }
 
+// Warning: (ae-missing-release-tag) "FileType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type FileType = {
+    url: string;
+    details: {
+        size: number;
+        image?: {
+            width: number;
+            height: number;
+        };
+    };
+    fileName: string;
+    contentType: string;
+};
+
 // Warning: (ae-missing-release-tag) "GenderFilterOption" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1380,6 +1469,11 @@ export function isInsideWorldLimits(x: number, y: number): boolean;
 //
 // @public (undocumented)
 export function isStandard<T extends BaseItem>(item: T): item is T & StandardProps;
+
+// Warning: (ae-missing-release-tag) "isSysLink" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export const isSysLink: (link: any) => link is SysLink<any>;
 
 // Warning: (ae-missing-release-tag) "isThirdParty" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1647,6 +1741,25 @@ export namespace Locale {
     validate: ValidateFunction<Locale>;
 }
 
+// Warning: (ae-missing-release-tag) "LocalizedField" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type LocalizedField<T> = {
+    [ContentfulLocale.enUS]: T;
+    [ContentfulLocale.es]?: T;
+    [ContentfulLocale.zh]?: T;
+};
+
+// Warning: (ae-missing-release-tag) "LocalizedFields" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type LocalizedFields = Record<string, LocalizedField<LocalizedFieldType>>;
+
+// Warning: (ae-missing-release-tag) "LocalizedFieldType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type LocalizedFieldType = any;
+
 // @alpha
 export type Mapping = SingleMapping | AnyMapping | RangeMapping | MultipleMapping;
 
@@ -1693,6 +1806,18 @@ export enum MappingType {
     // (undocumented)
     SINGLE = "single"
 }
+
+// Warning: (ae-missing-release-tag) "MarketingAdminFields" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type MarketingAdminFields = {
+    name: LocalizedField<string>;
+    campaign?: LocalizedField<SysLink<'Entry'>>;
+    marketplaceHomepageBanner?: LocalizedField<SysLink<'Entry'>>;
+    marketplaceCollectiblesBanner?: LocalizedField<SysLink<'Entry'>>;
+    marketplaceCampaignCollectiblesBanner?: LocalizedField<SysLink<'Entry'>>;
+    builderCampaignBanner?: LocalizedField<SysLink<'Entry'>>;
+};
 
 // @alpha
 export type MerkleProof = {
@@ -3308,6 +3433,17 @@ export namespace SubscriptionDetails {
 //
 // @public (undocumented)
 export type SyncDeployment = SnapshotSyncDeployment | PointerChangesSyncDeployment;
+
+// Warning: (ae-missing-release-tag) "SysLink" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type SysLink<T extends 'Entry' | 'Asset' | 'Environment' | 'ContentType' | 'Space'> = {
+    sys: {
+        type: 'Link';
+        linkType: T;
+        id: string;
+    };
+};
 
 // Warning: (ae-missing-release-tag) "ThirdPartyProps" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
