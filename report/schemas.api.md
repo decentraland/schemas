@@ -317,14 +317,13 @@ export namespace BadgeGrantedEvent {
 //
 // @public (undocumented)
 export type BannerFields = {
-    id: LocalizedField<string>;
     desktopTitle: LocalizedField<string>;
+    desktopTitleAlignment: LocalizedField<AlignmentFieldType>;
     mobileTitle: LocalizedField<string>;
     mobileTitleAlignment: LocalizedField<AlignmentFieldType>;
-    desktopTitleAlignment: LocalizedField<AlignmentFieldType>;
     desktopText: LocalizedField<any>;
-    mobileText: LocalizedField<any>;
     desktopTextAlignment: LocalizedField<AlignmentFieldType>;
+    mobileText: LocalizedField<any>;
     mobileTextAlignment: LocalizedField<AlignmentFieldType>;
     showButton: LocalizedField<boolean>;
     buttonLink?: LocalizedField<string>;

@@ -17,16 +17,15 @@ type CampaignFields = {
 }
 
 type BannerFields = {
-  id: LocalizedField<string>
   desktopTitle: LocalizedField<string>
+  desktopTitleAlignment: LocalizedField<AlignmentFieldType>
   mobileTitle: LocalizedField<string>
   mobileTitleAlignment: LocalizedField<AlignmentFieldType>
-  desktopTitleAlignment: LocalizedField<AlignmentFieldType>
   // Uses any to prevent installing the contentful types, but it should be LocalizedField<Document>
   desktopText: LocalizedField<any>
+  desktopTextAlignment: LocalizedField<AlignmentFieldType>
   // Uses any to prevent installing the contentful types, but it should be LocalizedField<Document>
   mobileText: LocalizedField<any>
-  desktopTextAlignment: LocalizedField<AlignmentFieldType>
   mobileTextAlignment: LocalizedField<AlignmentFieldType>
   showButton: LocalizedField<boolean>
   buttonLink?: LocalizedField<string>
