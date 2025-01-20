@@ -18,7 +18,6 @@ type CampaignFields = {
 
 type IBannerFields = {
   id: LocalizedField<string>
-  showBanner: LocalizedField<boolean>
   desktopTitle: LocalizedField<string>
   mobileTitle: LocalizedField<string>
   mobileTitleAlignment: LocalizedField<AlignmentFieldType>
