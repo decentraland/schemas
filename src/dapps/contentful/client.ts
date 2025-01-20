@@ -54,8 +54,8 @@ type ContentfulContent<X extends 'Asset' | 'Entry', T extends LocalizedFields> =
     environment: SysLink<'Environment'>
     publishedVersion: number
     revision: number
-    contentType: SysLink<'ContentType'>
-  }
+    // eslint-disable-next-line @typescript-eslint/ban-types
+  } & (X extends 'Entry' ? { contentType: SysLink<'ContentType'> } : {})
   fields: T
 }
 
