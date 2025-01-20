@@ -2,11 +2,11 @@ import { AlignmentFieldType, LocalizedField, SysLink } from './client'
 
 type MarketingAdminFields = {
   name: LocalizedField<string>
-  campaign: LocalizedField<SysLink<'Entry'>>
-  marketplaceHomepageBanner: LocalizedField<SysLink<'Entry'>>
-  marketplaceCollectiblesBanner: LocalizedField<SysLink<'Entry'>>
-  marketplaceCampaignCollectiblesBanner: LocalizedField<SysLink<'Entry'>>
-  builderCampaignBanner: LocalizedField<SysLink<'Entry'>>
+  campaign?: LocalizedField<SysLink<'Entry'>>
+  marketplaceHomepageBanner?: LocalizedField<SysLink<'Entry'>>
+  marketplaceCollectiblesBanner?: LocalizedField<SysLink<'Entry'>>
+  marketplaceCampaignCollectiblesBanner?: LocalizedField<SysLink<'Entry'>>
+  builderCampaignBanner?: LocalizedField<SysLink<'Entry'>>
 }
 
 type CampaignFields = {
