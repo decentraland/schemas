@@ -48,6 +48,7 @@ export type AssetBundleConversionFinishedEvent = BaseEvent & {
     platform: 'windows' | 'mac' | 'webgl'
     statusCode: number
     isLods: boolean
+    isWorld: boolean
   }
 }
 
@@ -65,9 +66,10 @@ export namespace AssetBundleConversionFinishedEvent {
           entityId: { type: 'string' },
           platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] },
           statusCode: { type: 'number' },
-          isLods: { type: 'boolean' }
+          isLods: { type: 'boolean' },
+          isWorld: { type: 'boolean' }
         },
-        required: ['entityId', 'platform', 'statusCode', 'isLods']
+        required: ['entityId', 'platform', 'statusCode', 'isLods', 'isWorld']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],

@@ -12,7 +12,8 @@ describe('AssetBundleConversionFinished Events tests', () => {
         entityId: 'baf',
         platform: 'mac',
         statusCode: 1,
-        isLods: false
+        isLods: false,
+        isWorld: false
       }
     }
 

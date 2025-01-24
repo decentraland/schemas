@@ -151,6 +151,7 @@ export type AssetBundleConversionFinishedEvent = BaseEvent & {
         platform: 'windows' | 'mac' | 'webgl';
         statusCode: number;
         isLods: boolean;
+        isWorld: boolean;
     };
 };
 
