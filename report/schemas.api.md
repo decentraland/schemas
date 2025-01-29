@@ -359,7 +359,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService;
     key: string;
     timestamp: number;
 };
@@ -1251,6 +1251,13 @@ export namespace Events {
             REWARD_IN_PROGRESS = "reward-in-progress"
         }
         // (undocumented)
+        export enum SocialService {
+            // (undocumented)
+            FRIENDSHIP_ACCEPTED = "friendship-accepted",
+            // (undocumented)
+            FRIENDSHIP_REQUEST = "friendship-request"
+        }
+        // (undocumented)
         export enum Worlds {
             // (undocumented)
             DEPLOYMENT = "deployment"
@@ -1272,6 +1279,8 @@ export namespace Events {
         MARKETPLACE = "marketplace",
         // (undocumented)
         REWARDS = "rewards",
+        // (undocumented)
+        SOCIAL_SERVICE = "social-service",
         // (undocumented)
         WORLD = "world"
     }
@@ -1306,6 +1315,55 @@ export type FileType = {
     fileName: string;
     contentType: string;
 };
+
+// Warning: (ae-missing-release-tag) "FriendshipAcceptedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "FriendshipAcceptedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type FriendshipAcceptedEvent = BaseEvent & {
+    type: Events.Type.SOCIAL_SERVICE;
+    subType: Events.SubType.SocialService.FRIENDSHIP_ACCEPTED;
+    metadata: {
+        sender: {
+            address: string;
+            name: string;
+            profileImageUrl: string;
+        };
+    };
+};
+
+// @public (undocumented)
+export namespace FriendshipAcceptedEvent {
+    const // (undocumented)
+    schema: JSONSchema<FriendshipAcceptedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<FriendshipAcceptedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "FriendshipRequestEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "FriendshipRequestEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type FriendshipRequestEvent = BaseEvent & {
+    type: Events.Type.SOCIAL_SERVICE;
+    subType: Events.SubType.SocialService.FRIENDSHIP_REQUEST;
+    metadata: {
+        sender: {
+            address: string;
+            name: string;
+            profileImageUrl: string;
+        };
+        message?: string;
+    };
+};
+
+// @public (undocumented)
+export namespace FriendshipRequestEvent {
+    const // (undocumented)
+    schema: JSONSchema<FriendshipRequestEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<FriendshipRequestEvent>;
+}
 
 // Warning: (ae-missing-release-tag) "GenderFilterOption" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -2215,6 +2273,10 @@ export enum NotificationType {
     REWARD_IN_PROGRESS = "reward_in_progress",
     // (undocumented)
     ROYALTIES_EARNED = "royalties_earned",
+    // (undocumented)
+    SOCIAL_SERVICE_FRIENDSHIP_ACCEPTED = "social_service_friendship_accepted",
+    // (undocumented)
+    SOCIAL_SERVICE_FRIENDSHIP_REQUEST = "social_service_friendship_request",
     // (undocumented)
     WORLDS_ACCESS_RESTORED = "worlds_access_restored",
     // (undocumented)
