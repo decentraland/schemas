@@ -35,7 +35,8 @@ export namespace Events {
     MARKETPLACE = 'marketplace',
     REWARDS = 'rewards',
     BADGE = 'badge',
-    ASSET_BUNDLE = 'asset-bundle'
+    ASSET_BUNDLE = 'asset-bundle',
+    SOCIAL_SERVICE = 'social-service'
   }
 
   export namespace SubType {
@@ -91,6 +92,11 @@ export namespace Events {
       CONVERTED = 'converted',
       MANUALLY_QUEUED = 'manually-queued'
     }
+
+    export enum SocialService {
+      FRIENDSHIP_REQUEST = 'friendship-request',
+      FRIENDSHIP_ACCEPTED = 'friendship-accepted'
+    }
   }
 }
 
@@ -104,6 +110,7 @@ export type BaseEvent = {
     | Events.SubType.Rewards
     | Events.SubType.Badge
     | Events.SubType.AssetBundle
+    | Events.SubType.SocialService
   key: string
   timestamp: number
 }
