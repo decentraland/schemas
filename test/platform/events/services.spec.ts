@@ -10,9 +10,12 @@ describe('Services tests', () => {
       timestamp: 1,
       metadata: {
         sender: {
-          address: '0x123address',
+          address: '0x123sender',
           name: 'name',
           profileImageUrl: 'https://profileImageUrl.dcl.org'
+        },
+        receiver: {
+          address: '0x456receiver'
         },
         message: 'message'
       }
@@ -31,9 +34,12 @@ describe('Services tests', () => {
       timestamp: 1,
       metadata: {
         sender: {
-          address: '0x123address',
+          address: '0x123sender',
           name: 'name',
           profileImageUrl: 'https://profileImageUrl.dcl.org'
+        },
+        receiver: {
+          address: '0x456receiver'
         }
       }
     }

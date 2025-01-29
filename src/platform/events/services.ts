@@ -125,6 +125,9 @@ export type FriendshipRequestEvent = BaseEvent & {
       name: string
       profileImageUrl: string
     }
+    receiver: {
+      address: string
+    }
     message?: string
   }
 }
@@ -149,6 +152,13 @@ export namespace FriendshipRequestEvent {
             },
             required: ['address', 'name', 'profileImageUrl']
           },
+          receiver: {
+            type: 'object',
+            properties: {
+              address: { type: 'string' }
+            },
+            required: ['address']
+          },
           message: { type: 'string', nullable: true }
         },
         required: ['sender']
@@ -169,6 +179,9 @@ export type FriendshipAcceptedEvent = BaseEvent & {
       address: string
       name: string
       profileImageUrl: string
+    }
+    receiver: {
+      address: string
     }
   }
 }
@@ -192,6 +205,13 @@ export namespace FriendshipAcceptedEvent {
               profileImageUrl: { type: 'string' }
             },
             required: ['address', 'name', 'profileImageUrl']
+          },
+          receiver: {
+            type: 'object',
+            properties: {
+              address: { type: 'string' }
+            },
+            required: ['address']
           }
         },
         required: ['sender']

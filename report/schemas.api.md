@@ -1329,6 +1329,9 @@ export type FriendshipAcceptedEvent = BaseEvent & {
             name: string;
             profileImageUrl: string;
         };
+        receiver: {
+            address: string;
+        };
     };
 };
 
@@ -1352,6 +1355,9 @@ export type FriendshipRequestEvent = BaseEvent & {
             address: string;
             name: string;
             profileImageUrl: string;
+        };
+        receiver: {
+            address: string;
         };
         message?: string;
     };
