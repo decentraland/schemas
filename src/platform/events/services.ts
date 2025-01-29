@@ -115,3 +115,111 @@ export namespace AssetBundleConversionManuallyQueuedEvent {
 
   export const validate: ValidateFunction<AssetBundleConversionManuallyQueuedEvent> = generateLazyValidator(schema)
 }
+
+export type FriendshipRequestEvent = BaseEvent & {
+  type: Events.Type.SOCIAL_SERVICE
+  subType: Events.SubType.SocialService.FRIENDSHIP_REQUEST
+  metadata: {
+    sender: {
+      address: string
+      name: string
+      profileImageUrl: string
+    }
+    receiver: {
+      address: string
+    }
+    message?: string
+  }
+}
+
+export namespace FriendshipRequestEvent {
+  export const schema: JSONSchema<FriendshipRequestEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.SOCIAL_SERVICE },
+      subType: { type: 'string', const: Events.SubType.SocialService.FRIENDSHIP_REQUEST },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          sender: {
+            type: 'object',
+            properties: {
+              address: { type: 'string' },
+              name: { type: 'string' },
+              profileImageUrl: { type: 'string' }
+            },
+            required: ['address', 'name', 'profileImageUrl']
+          },
+          receiver: {
+            type: 'object',
+            properties: {
+              address: { type: 'string' }
+            },
+            required: ['address']
+          },
+          message: { type: 'string', nullable: true }
+        },
+        required: ['sender']
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: true
+  }
+
+  export const validate: ValidateFunction<FriendshipRequestEvent> = generateLazyValidator(schema)
+}
+
+export type FriendshipAcceptedEvent = BaseEvent & {
+  type: Events.Type.SOCIAL_SERVICE
+  subType: Events.SubType.SocialService.FRIENDSHIP_ACCEPTED
+  metadata: {
+    sender: {
+      address: string
+      name: string
+      profileImageUrl: string
+    }
+    receiver: {
+      address: string
+    }
+  }
+}
+
+export namespace FriendshipAcceptedEvent {
+  export const schema: JSONSchema<FriendshipAcceptedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.SOCIAL_SERVICE },
+      subType: { type: 'string', const: Events.SubType.SocialService.FRIENDSHIP_ACCEPTED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          sender: {
+            type: 'object',
+            properties: {
+              address: { type: 'string' },
+              name: { type: 'string' },
+              profileImageUrl: { type: 'string' }
+            },
+            required: ['address', 'name', 'profileImageUrl']
+          },
+          receiver: {
+            type: 'object',
+            properties: {
+              address: { type: 'string' }
+            },
+            required: ['address']
+          }
+        },
+        required: ['sender']
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: true
+  }
+
+  export const validate: ValidateFunction<FriendshipAcceptedEvent> = generateLazyValidator(schema)
+}

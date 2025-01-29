@@ -31,6 +31,8 @@ export enum NotificationType {
   REWARD_DELAYED = 'reward_delayed',
   REWARD_IN_PROGRESS = 'reward_in_progress',
   ROYALTIES_EARNED = 'royalties_earned',
+  SOCIAL_SERVICE_FRIENDSHIP_REQUEST = 'social_service_friendship_request',
+  SOCIAL_SERVICE_FRIENDSHIP_ACCEPTED = 'social_service_friendship_accepted',
   WORLDS_ACCESS_RESTORED = 'worlds_access_restored',
   WORLDS_ACCESS_RESTRICTED = 'worlds_access_restricted',
   WORLDS_MISSING_RESOURCES = 'worlds_missing_resources',
