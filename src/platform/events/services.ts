@@ -120,18 +120,22 @@ export type FriendshipRequestEvent = BaseEvent & {
   type: Events.Type.SOCIAL_SERVICE
   subType: Events.SubType.SocialService.FRIENDSHIP_REQUEST
   metadata: {
+    requestId: string
     sender: {
       address: string
       name: string
       profileImageUrl: string
+      hasClaimedName: boolean
     }
     receiver: {
       address: string
+      name: string
+      profileImageUrl: string
+      hasClaimedName: boolean
     }
     message?: string
   }
 }
-
 export namespace FriendshipRequestEvent {
   export const schema: JSONSchema<FriendshipRequestEvent> = {
     type: 'object',
@@ -143,25 +147,30 @@ export namespace FriendshipRequestEvent {
       metadata: {
         type: 'object',
         properties: {
+          requestId: { type: 'string' },
           sender: {
             type: 'object',
             properties: {
               address: { type: 'string' },
               name: { type: 'string' },
-              profileImageUrl: { type: 'string' }
+              profileImageUrl: { type: 'string' },
+              hasClaimedName: { type: 'boolean' }
             },
-            required: ['address', 'name', 'profileImageUrl']
+            required: ['address', 'name', 'profileImageUrl', 'hasClaimedName']
           },
           receiver: {
             type: 'object',
             properties: {
-              address: { type: 'string' }
+              address: { type: 'string' },
+              name: { type: 'string' },
+              profileImageUrl: { type: 'string' },
+              hasClaimedName: { type: 'boolean' }
             },
-            required: ['address']
+            required: ['address', 'name', 'profileImageUrl', 'hasClaimedName']
           },
           message: { type: 'string', nullable: true }
         },
-        required: ['sender']
+        required: ['requestId', 'sender', 'receiver']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
@@ -175,13 +184,18 @@ export type FriendshipAcceptedEvent = BaseEvent & {
   type: Events.Type.SOCIAL_SERVICE
   subType: Events.SubType.SocialService.FRIENDSHIP_ACCEPTED
   metadata: {
+    requestId: string
     sender: {
       address: string
       name: string
       profileImageUrl: string
+      hasClaimedName: boolean
     }
     receiver: {
       address: string
+      name: string
+      profileImageUrl: string
+      hasClaimedName: boolean
     }
   }
 }
@@ -197,24 +211,29 @@ export namespace FriendshipAcceptedEvent {
       metadata: {
         type: 'object',
         properties: {
+          requestId: { type: 'string' },
           sender: {
             type: 'object',
             properties: {
               address: { type: 'string' },
               name: { type: 'string' },
-              profileImageUrl: { type: 'string' }
+              profileImageUrl: { type: 'string' },
+              hasClaimedName: { type: 'boolean' }
             },
-            required: ['address', 'name', 'profileImageUrl']
+            required: ['address', 'name', 'profileImageUrl', 'hasClaimedName']
           },
           receiver: {
             type: 'object',
             properties: {
-              address: { type: 'string' }
+              address: { type: 'string' },
+              name: { type: 'string' },
+              profileImageUrl: { type: 'string' },
+              hasClaimedName: { type: 'boolean' }
             },
-            required: ['address']
+            required: ['address', 'name', 'profileImageUrl', 'hasClaimedName']
           }
         },
-        required: ['sender']
+        required: ['requestId', 'sender', 'receiver']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
