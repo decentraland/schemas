@@ -1324,13 +1324,18 @@ export type FriendshipAcceptedEvent = BaseEvent & {
     type: Events.Type.SOCIAL_SERVICE;
     subType: Events.SubType.SocialService.FRIENDSHIP_ACCEPTED;
     metadata: {
+        requestId: string;
         sender: {
             address: string;
             name: string;
             profileImageUrl: string;
+            hasClaimedName: boolean;
         };
         receiver: {
             address: string;
+            name: string;
+            profileImageUrl: string;
+            hasClaimedName: boolean;
         };
     };
 };
@@ -1351,13 +1356,18 @@ export type FriendshipRequestEvent = BaseEvent & {
     type: Events.Type.SOCIAL_SERVICE;
     subType: Events.SubType.SocialService.FRIENDSHIP_REQUEST;
     metadata: {
+        requestId: string;
         sender: {
             address: string;
             name: string;
             profileImageUrl: string;
+            hasClaimedName: boolean;
         };
         receiver: {
             address: string;
+            name: string;
+            profileImageUrl: string;
+            hasClaimedName: boolean;
         };
         message?: string;
     };

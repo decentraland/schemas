@@ -9,13 +9,18 @@ describe('Services tests', () => {
       key: 'key',
       timestamp: 1,
       metadata: {
+        requestId: 'requestId',
         sender: {
           address: '0x123sender',
           name: 'name',
-          profileImageUrl: 'https://profileImageUrl.dcl.org'
+          profileImageUrl: 'https://profileImageUrl.dcl.org',
+          hasClaimedName: true
         },
         receiver: {
-          address: '0x456receiver'
+          address: '0x456receiver',
+          name: 'name',
+          profileImageUrl: 'https://profileImageUrl.dcl.org',
+          hasClaimedName: true
         },
         message: 'message'
       }
@@ -33,13 +38,18 @@ describe('Services tests', () => {
       key: 'key',
       timestamp: 1,
       metadata: {
+        requestId: 'requestId',
         sender: {
           address: '0x123sender',
           name: 'name',
-          profileImageUrl: 'https://profileImageUrl.dcl.org'
+          profileImageUrl: 'https://profileImageUrl.dcl.org',
+          hasClaimedName: true
         },
         receiver: {
-          address: '0x456receiver'
+          address: '0x456receiver',
+          name: 'name',
+          profileImageUrl: 'https://profileImageUrl.dcl.org',
+          hasClaimedName: true
         }
       }
     }
