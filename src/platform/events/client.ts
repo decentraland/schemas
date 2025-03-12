@@ -4,7 +4,22 @@ import { BaseEvent, Events } from './base'
 
 type ClientBaseMetadata = {
   authChain: AuthChain
+  /** @deprecated Use timestamps.reportedAt or timestamps.receivedAt instead */
   timestamp: number
+  timestamps: {
+    /**
+     * Timestamp when the event was reported by the client
+     *
+     * @type {number}
+     */
+    reportedAt: number
+    /**
+     * Timestamp when the event was received by the tracking system (e.g. Segment)
+     *
+     * @type {number}
+     */
+    receivedAt: number
+  }
   userAddress: EthAddress
   sessionId: string
   realm: string
