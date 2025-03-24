@@ -1535,6 +1535,13 @@ export interface ISceneController {
     }): Promise<void>;
 }
 
+// Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// Warning: (ae-missing-release-tag) "isInExceptionBlock" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export function isInExceptionBlock(x: number, y: number): boolean;
+
 // @alpha
 export function isInsideWorldLimits(x: number, y: number): boolean;
 
@@ -2453,6 +2460,39 @@ export type PaginatedResponse<T> = {
     page: number;
     pages: number;
     limit: number;
+};
+
+// @public
+export type Parcel = {
+    x: number;
+    y: number;
+};
+
+// @public
+export namespace Parcel {
+    const _isInLimits: KeywordDefinition;
+    const // (undocumented)
+    schema: JSONSchema<Parcel>;
+    const // (undocumented)
+    validate: ValidateFunction<Parcel>;
+    export function isExceptionParcel(parcel: Parcel): boolean;
+    export function isInBounds(parcel: Parcel): boolean;
+    export function isInStandardBounds(parcel: Parcel): boolean;
+    export function isParcelStringValid(parcelString: string): boolean;
+    export function isValid(parcel: Parcel): boolean;
+    export function isValidString(parcelString: string): boolean;
+    // (undocumented)
+    export function parcelToString({ x, y }: Parcel): string;
+    // (undocumented)
+    export function stringToParcel(position: string): Parcel | null;
+}
+
+// @public
+export const PARCEL_LIMITS: {
+    minX: number;
+    maxX: number;
+    minY: number;
+    maxY: number;
 };
 
 // Warning: (ae-missing-release-tag) "PassportOpenedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
