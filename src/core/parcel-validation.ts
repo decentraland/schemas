@@ -1,5 +1,5 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { isOutOfBoundsParcel } from './parcel-exceptions'
+import { isInExceptionBlock } from './parcel-exceptions'
 import { KeywordDefinition } from 'ajv'
 
 /**
@@ -34,19 +34,11 @@ export namespace Parcel {
         return false
       }
 
-      const { x, y } = data
-      // Check if it's within the standard limits
-      const inStandardLimits =
-        x >= PARCEL_LIMITS.minX && x <= PARCEL_LIMITS.maxX && y >= PARCEL_LIMITS.minY && y <= PARCEL_LIMITS.maxY
-
-      // If it's within the standard limits, it's valid
-      if (inStandardLimits) {
+      if (isInStandardBounds(data)) {
         return true
       }
 
-      // If it's not within the standard limits, check exceptions
-      const parcelString = `${x},${y}`
-      return isOutOfBoundsParcel(parcelString)
+      return isInExceptionBlock(data.x, data.y)
     },
     errors: false
   }
@@ -62,7 +54,8 @@ export namespace Parcel {
         type: 'number'
       }
     },
-    _isInLimits: true
+    _isInLimits: true,
+    additionalProperties: false
   } as JSONSchema<Parcel>
 
   export const validate: ValidateFunction<Parcel> = generateLazyValidator(schema, [_isInLimits])
@@ -105,8 +98,7 @@ export namespace Parcel {
    * Checks if a parcel is a known exception
    */
   export function isExceptionParcel(parcel: Parcel): boolean {
-    const parcelString = parcelToString(parcel)
-    return isOutOfBoundsParcel(parcelString)
+    return isInExceptionBlock(parcel.x, parcel.y)
   }
 
   /**
@@ -114,18 +106,6 @@ export namespace Parcel {
    */
   export function isInBounds(parcel: Parcel): boolean {
     return isInStandardBounds(parcel) || isExceptionParcel(parcel)
-  }
-
-  /**
-   * Checks if a string in "x,y" format is within bounds or is an exception
-   */
-  export function isInBoundsString(parcelString: string): boolean {
-    // Quick check for exceptions
-    if (isOutOfBoundsParcel(parcelString)) return true
-
-    const parcel = stringToParcel(parcelString)
-    if (!parcel) return false
-    return isInStandardBounds(parcel)
   }
 
   /**

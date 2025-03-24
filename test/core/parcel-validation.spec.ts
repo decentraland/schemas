@@ -92,13 +92,6 @@ describe('Parcel tests', () => {
       expect(Parcel.isParcelStringValid('invalid')).toEqual(false)
     })
 
-    it('validates bounds of parcel strings', () => {
-      expect(Parcel.isInBoundsString('10,20')).toEqual(true)
-      expect(Parcel.isInBoundsString('151,100')).toEqual(true)
-      expect(Parcel.isInBoundsString('62,151')).toEqual(true)
-      expect(Parcel.isInBoundsString('200,200')).toEqual(false)
-    })
-
     it('validates parcel strings completely', () => {
       expect(Parcel.isValidString('10,20')).toEqual(true)
       expect(Parcel.isValidString('151,100')).toEqual(true)
