@@ -36,7 +36,7 @@ export namespace Parcel {
     }
   }
 
-  const schemaValidator: ValidateFunction<Parcel> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<Parcel> = generateLazyValidator(schema)
 
   // Converts coordinates to string in "x,y" format
   export function parcelToString({ x, y }: Parcel): string {
@@ -56,16 +56,9 @@ export namespace Parcel {
   }
 
   /**
-   * Validates if x,y coordinates form a valid parcel according to the schema
-   */
-  export const validate: ValidateFunction<Parcel> = (parcel: any): parcel is Parcel => {
-    return schemaValidator(parcel)
-  }
-
-  /**
    * Validates if a string in "x,y" format represents a valid parcel
    */
-  export function validateParcelString(parcelString: string): boolean {
+  export function isParcelStringValid(parcelString: string): boolean {
     const parcel = stringToParcel(parcelString)
     if (!parcel) return false
     return validate(parcel)
