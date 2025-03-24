@@ -1538,6 +1538,9 @@ export interface ISceneController {
 // @alpha
 export function isInsideWorldLimits(x: number, y: number): boolean;
 
+// @public
+export function isOutOfBoundsParcel(parcelString: string): boolean;
+
 // Warning: (ae-forgotten-export) The symbol "BaseItem" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "isStandard" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -2453,6 +2456,38 @@ export type PaginatedResponse<T> = {
     page: number;
     pages: number;
     limit: number;
+};
+
+// @public
+export type Parcel = {
+    x: number;
+    y: number;
+};
+
+// @public
+export namespace Parcel {
+    const // (undocumented)
+    schema: JSONSchema<Parcel>;
+    export function isExceptionParcel(parcel: Parcel): boolean;
+    export function isInBounds(parcel: Parcel): boolean;
+    const validate: ValidateFunction<Parcel>;
+    export function isInBoundsString(parcelString: string): boolean;
+    export function isInStandardBounds(parcel: Parcel): boolean;
+    export function isValid(parcel: Parcel): boolean;
+    export function isValidString(parcelString: string): boolean;
+    // (undocumented)
+    export function parcelToString({ x, y }: Parcel): string;
+    // (undocumented)
+    export function stringToParcel(position: string): Parcel | null;
+    export function validateParcelString(parcelString: string): boolean;
+}
+
+// @public
+export const PARCEL_LIMITS: {
+    minX: number;
+    maxX: number;
+    minY: number;
+    maxY: number;
 };
 
 // Warning: (ae-missing-release-tag) "PassportOpenedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
