@@ -34,11 +34,7 @@ export namespace Parcel {
         return false
       }
 
-      if (isInStandardBounds(data)) {
-        return true
-      }
-
-      return isInExceptionBlock(data.x, data.y)
+      return isInStandardBounds(data) || isInExceptionBlock(data.x, data.y)
     },
     errors: false
   }
