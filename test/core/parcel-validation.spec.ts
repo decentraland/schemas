@@ -1,6 +1,5 @@
 import expect from 'expect'
 import { Parcel, PARCEL_LIMITS } from '../../src/core/parcel-validation'
-import { isOutOfBoundsParcel } from '../../src/core/parcel-exceptions'
 import { testTypeSignature } from '../test-utils'
 
 describe('Parcel tests', () => {
