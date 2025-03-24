@@ -1,5 +1,6 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 import { isOutOfBoundsParcel } from './parcel-exceptions'
+import { KeywordDefinition } from 'ajv'
 
 /**
  * Represents a parcel with X and Y coordinates
@@ -23,7 +24,34 @@ export const PARCEL_LIMITS = {
  * @public
  */
 export namespace Parcel {
-  export const schema: JSONSchema<Parcel> = {
+  /**
+   * Custom validation to check if coordinates are within limits
+   */
+  export const _isInLimits: KeywordDefinition = {
+    keyword: '_isInLimits',
+    validate: function validate(schema: boolean, data: Parcel) {
+      if (!data || typeof data.x !== 'number' || typeof data.y !== 'number') {
+        return false
+      }
+
+      const { x, y } = data
+      // Check if it's within the standard limits
+      const inStandardLimits =
+        x >= PARCEL_LIMITS.minX && x <= PARCEL_LIMITS.maxX && y >= PARCEL_LIMITS.minY && y <= PARCEL_LIMITS.maxY
+
+      // If it's within the standard limits, it's valid
+      if (inStandardLimits) {
+        return true
+      }
+
+      // If it's not within the standard limits, check exceptions
+      const parcelString = `${x},${y}`
+      return isOutOfBoundsParcel(parcelString)
+    },
+    errors: false
+  }
+
+  export const schema = {
     type: 'object',
     required: ['x', 'y'],
     properties: {
@@ -33,10 +61,11 @@ export namespace Parcel {
       y: {
         type: 'number'
       }
-    }
-  }
+    },
+    _isInLimits: true
+  } as JSONSchema<Parcel>
 
-  export const validate: ValidateFunction<Parcel> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<Parcel> = generateLazyValidator(schema, [_isInLimits])
 
   // Converts coordinates to string in "x,y" format
   export function parcelToString({ x, y }: Parcel): string {
@@ -103,18 +132,15 @@ export namespace Parcel {
    * Validates if a parcel is valid (satisfies the schema and is within bounds or is an exception)
    */
   export function isValid(parcel: Parcel): boolean {
-    return validate(parcel) && (isInStandardBounds(parcel) || isExceptionParcel(parcel))
+    return validate(parcel)
   }
 
   /**
    * Validates if a parcel in string format is valid
    */
   export function isValidString(parcelString: string): boolean {
-    // Quick check for exceptions
-    if (isOutOfBoundsParcel(parcelString)) return true
-
     const parcel = stringToParcel(parcelString)
     if (!parcel) return false
-    return validate(parcel) && isInStandardBounds(parcel)
+    return validate(parcel)
   }
 }

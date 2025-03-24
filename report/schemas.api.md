@@ -2463,6 +2463,7 @@ export type Parcel = {
 
 // @public
 export namespace Parcel {
+    const _isInLimits: KeywordDefinition;
     const // (undocumented)
     schema: JSONSchema<Parcel>;
     const // (undocumented)

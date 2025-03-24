@@ -87,9 +87,9 @@ describe('Parcel tests', () => {
 
   describe('String validation functions', () => {
     it('validates parcel strings with correct format', () => {
-      expect(Parcel.validateParcelString('10,20')).toEqual(true)
-      expect(Parcel.validateParcelString('-5,-10')).toEqual(true)
-      expect(Parcel.validateParcelString('invalid')).toEqual(false)
+      expect(Parcel.isParcelStringValid('10,20')).toEqual(true)
+      expect(Parcel.isParcelStringValid('-5,-10')).toEqual(true)
+      expect(Parcel.isParcelStringValid('invalid')).toEqual(false)
     })
 
     it('validates bounds of parcel strings', () => {
