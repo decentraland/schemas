@@ -248,7 +248,6 @@ export type CreditsGoalCompletedEvent = BaseEvent & {
   subType: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED
   metadata: {
     goalId: string
-    goalTitle: string
     creditsAmount: number
   }
 }
@@ -265,10 +264,9 @@ export namespace CreditsGoalCompletedEvent {
         type: 'object',
         properties: {
           goalId: { type: 'string' },
-          goalTitle: { type: 'string' },
           creditsAmount: { type: 'number', minimum: 0 }
         },
-        required: ['goalId', 'goalTitle', 'creditsAmount']
+        required: ['goalId', 'creditsAmount']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],

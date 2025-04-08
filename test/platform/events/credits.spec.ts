@@ -10,7 +10,6 @@ describe('CreditsGoalCompleted Events tests', () => {
       timestamp: 1,
       metadata: {
         goalId: 'baf',
-        goalTitle: 'mac',
         creditsAmount: 1
       }
     }
@@ -30,7 +29,6 @@ describe('CreditsGoalCompletedEvent Events tests', () => {
       timestamp: 1,
       metadata: {
         goalId: 'baf',
-        goalTitle: 'mac',
         creditsAmount: 1
       }
     }
