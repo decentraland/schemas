@@ -24,7 +24,12 @@ import {
   CampaignOutOfStockEvent,
   RewardDelayedEvent
 } from './rewards'
-import { BadgeGrantedEvent, FriendshipAcceptedEvent, FriendshipRequestEvent } from './services'
+import {
+  BadgeGrantedEvent,
+  CreditsGoalCompletedEvent,
+  FriendshipAcceptedEvent,
+  FriendshipRequestEvent
+} from './services'
 
 export namespace Events {
   export enum Type {
@@ -145,3 +150,4 @@ export type Event =
   | UsedEmoteEvent
   | VerticalHeightReachedEvent
   | WalkedDistanceEvent
+  | CreditsGoalCompletedEvent
