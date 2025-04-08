@@ -1,3 +1,4 @@
+import { EthAddress } from '../../misc'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { BaseEvent, Events } from './base'
 
@@ -251,6 +252,7 @@ export type CreditsGoalCompletedEvent = BaseEvent & {
     creditsObtained: number
     seasonId: number
     weekNumber: number
+    userAddress: EthAddress
   }
 }
 
@@ -268,9 +270,10 @@ export namespace CreditsGoalCompletedEvent {
           goalId: { type: 'string' },
           creditsObtained: { type: 'number', minimum: 0 },
           seasonId: { type: 'number', minimum: 1 },
-          weekNumber: { type: 'number', minimum: 1 }
+          weekNumber: { type: 'number', minimum: 1 },
+          userAddress: { type: 'string' }
         },
-        required: ['goalId', 'creditsObtained', 'seasonId', 'weekNumber']
+        required: ['goalId', 'creditsObtained', 'seasonId', 'weekNumber', 'userAddress']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],

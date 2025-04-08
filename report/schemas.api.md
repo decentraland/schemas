@@ -934,6 +934,7 @@ export type CreditsGoalCompletedEvent = BaseEvent & {
         creditsObtained: number;
         seasonId: number;
         weekNumber: number;
+        userAddress: EthAddress;
     };
 };
 
