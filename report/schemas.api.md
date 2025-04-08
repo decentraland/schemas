@@ -931,8 +931,9 @@ export type CreditsGoalCompletedEvent = BaseEvent & {
     subType: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED;
     metadata: {
         goalId: string;
-        goalTitle: string;
-        creditsAmount: number;
+        creditsObtained: number;
+        seasonId: number;
+        weekNumber: number;
     };
 };
 
@@ -2275,6 +2276,8 @@ export enum NotificationType {
     BID_ACCEPTED = "bid_accepted",
     // (undocumented)
     BID_RECEIVED = "bid_received",
+    // (undocumented)
+    CREDITS_GOAL_COMPLETED = "credits_goal_completed",
     // (undocumented)
     EVENTS_STARTED = "events_started",
     // (undocumented)
