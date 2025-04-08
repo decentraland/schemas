@@ -359,7 +359,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService;
     key: string;
     timestamp: number;
 };
@@ -922,6 +922,28 @@ export enum ContractSortBy {
 // @public (undocumented)
 export function createMappingsHelper(initial?: Mappings): MappingsHelper;
 
+// Warning: (ae-missing-release-tag) "CreditsGoalCompletedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CreditsGoalCompletedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CreditsGoalCompletedEvent = BaseEvent & {
+    type: Events.Type.CREDITS_SERVICE;
+    subType: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED;
+    metadata: {
+        goalId: string;
+        goalTitle: string;
+        creditsAmount: number;
+    };
+};
+
+// @public (undocumented)
+export namespace CreditsGoalCompletedEvent {
+    const // (undocumented)
+    schema: JSONSchema<CreditsGoalCompletedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CreditsGoalCompletedEvent>;
+}
+
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
 //
 // @public @deprecated
@@ -1231,6 +1253,11 @@ export namespace Events {
             WALKED_DISTANCE = "walked-distance"
         }
         // (undocumented)
+        export enum CreditsService {
+            // (undocumented)
+            CREDITS_GOAL_COMPLETED = "credits-goal-completed"
+        }
+        // (undocumented)
         export enum Marketplace {
             // (undocumented)
             BID_RECEIVED = "bid-received"
@@ -1275,6 +1302,8 @@ export namespace Events {
         CATALYST_DEPLOYMENT = "catalyst-deployment",
         // (undocumented)
         CLIENT = "client",
+        // (undocumented)
+        CREDITS_SERVICE = "credits-service",
         // (undocumented)
         MARKETPLACE = "marketplace",
         // (undocumented)

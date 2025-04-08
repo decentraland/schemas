@@ -242,3 +242,38 @@ export namespace FriendshipAcceptedEvent {
 
   export const validate: ValidateFunction<FriendshipAcceptedEvent> = generateLazyValidator(schema)
 }
+
+export type CreditsGoalCompletedEvent = BaseEvent & {
+  type: Events.Type.CREDITS_SERVICE
+  subType: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED
+  metadata: {
+    goalId: string
+    goalTitle: string
+    creditsAmount: number
+  }
+}
+
+export namespace CreditsGoalCompletedEvent {
+  export const schema: JSONSchema<CreditsGoalCompletedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
+      subType: { type: 'string', const: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          goalId: { type: 'string' },
+          goalTitle: { type: 'string' },
+          creditsAmount: { type: 'number', minimum: 0 }
+        },
+        required: ['goalId', 'goalTitle', 'creditsAmount']
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: true
+  }
+
+  export const validate: ValidateFunction<CreditsGoalCompletedEvent> = generateLazyValidator(schema)
+}
