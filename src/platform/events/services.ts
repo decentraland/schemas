@@ -252,7 +252,7 @@ export type CreditsGoalCompletedEvent = BaseEvent & {
     creditsObtained: number
     seasonId: number
     weekNumber: number
-    userAddress: EthAddress
+    address: EthAddress
   }
 }
 
@@ -271,9 +271,9 @@ export namespace CreditsGoalCompletedEvent {
           creditsObtained: { type: 'number', minimum: 0 },
           seasonId: { type: 'number', minimum: 1 },
           weekNumber: { type: 'number', minimum: 1 },
-          userAddress: { type: 'string' }
+          address: { type: 'string' }
         },
-        required: ['goalId', 'creditsObtained', 'seasonId', 'weekNumber', 'userAddress']
+        required: ['goalId', 'creditsObtained', 'seasonId', 'weekNumber', 'address']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
