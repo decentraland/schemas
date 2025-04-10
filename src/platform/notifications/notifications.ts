@@ -37,7 +37,8 @@ export enum NotificationType {
   WORLDS_ACCESS_RESTRICTED = 'worlds_access_restricted',
   WORLDS_MISSING_RESOURCES = 'worlds_missing_resources',
   WORLDS_PERMISSION_GRANTED = 'worlds_permission_granted',
-  WORLDS_PERMISSION_REVOKED = 'worlds_permission_revoked'
+  WORLDS_PERMISSION_REVOKED = 'worlds_permission_revoked',
+  CREDITS_GOAL_COMPLETED = 'credits_goal_completed'
 }
 
 /**

@@ -24,7 +24,12 @@ import {
   CampaignOutOfStockEvent,
   RewardDelayedEvent
 } from './rewards'
-import { BadgeGrantedEvent, FriendshipAcceptedEvent, FriendshipRequestEvent } from './services'
+import {
+  BadgeGrantedEvent,
+  CreditsGoalCompletedEvent,
+  FriendshipAcceptedEvent,
+  FriendshipRequestEvent
+} from './services'
 
 export namespace Events {
   export enum Type {
@@ -36,7 +41,8 @@ export namespace Events {
     REWARDS = 'rewards',
     BADGE = 'badge',
     ASSET_BUNDLE = 'asset-bundle',
-    SOCIAL_SERVICE = 'social-service'
+    SOCIAL_SERVICE = 'social-service',
+    CREDITS_SERVICE = 'credits-service'
   }
 
   export namespace SubType {
@@ -97,6 +103,10 @@ export namespace Events {
       FRIENDSHIP_REQUEST = 'friendship-request',
       FRIENDSHIP_ACCEPTED = 'friendship-accepted'
     }
+
+    export enum CreditsService {
+      CREDITS_GOAL_COMPLETED = 'credits-goal-completed'
+    }
   }
 }
 
@@ -111,6 +121,7 @@ export type BaseEvent = {
     | Events.SubType.Badge
     | Events.SubType.AssetBundle
     | Events.SubType.SocialService
+    | Events.SubType.CreditsService
   key: string
   timestamp: number
 }
@@ -139,3 +150,4 @@ export type Event =
   | UsedEmoteEvent
   | VerticalHeightReachedEvent
   | WalkedDistanceEvent
+  | CreditsGoalCompletedEvent

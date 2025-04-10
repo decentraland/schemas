@@ -1,3 +1,4 @@
+import { EthAddress } from '../../misc'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { BaseEvent, Events } from './base'
 
@@ -241,4 +242,43 @@ export namespace FriendshipAcceptedEvent {
   }
 
   export const validate: ValidateFunction<FriendshipAcceptedEvent> = generateLazyValidator(schema)
+}
+
+export type CreditsGoalCompletedEvent = BaseEvent & {
+  type: Events.Type.CREDITS_SERVICE
+  subType: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED
+  metadata: {
+    goalId: string
+    creditsObtained: number
+    seasonId: number
+    weekNumber: number
+    address: EthAddress
+  }
+}
+
+export namespace CreditsGoalCompletedEvent {
+  export const schema: JSONSchema<CreditsGoalCompletedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
+      subType: { type: 'string', const: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          goalId: { type: 'string' },
+          creditsObtained: { type: 'number', minimum: 0 },
+          seasonId: { type: 'number', minimum: 1 },
+          weekNumber: { type: 'number', minimum: 1 },
+          address: { type: 'string' }
+        },
+        required: ['goalId', 'creditsObtained', 'seasonId', 'weekNumber', 'address']
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: true
+  }
+
+  export const validate: ValidateFunction<CreditsGoalCompletedEvent> = generateLazyValidator(schema)
 }
