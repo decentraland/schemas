@@ -282,3 +282,42 @@ export namespace CreditsGoalCompletedEvent {
 
   export const validate: ValidateFunction<CreditsGoalCompletedEvent> = generateLazyValidator(schema)
 }
+
+export type CompleteGoalsReminderEvent = BaseEvent & {
+  type: Events.Type.CREDITS_SERVICE
+  subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER
+  metadata: {
+    address: EthAddress
+    seasonId: number
+    weekNumber: number
+    pendingGoalIds: string[]
+    hasCompletedAnyGoal: boolean
+  }
+}
+
+export namespace CompleteGoalsReminderEvent {
+  export const schema: JSONSchema<CompleteGoalsReminderEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
+      subType: { type: 'string', const: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          address: { type: 'string' },
+          seasonId: { type: 'number', minimum: 1 },
+          weekNumber: { type: 'number', minimum: 1 },
+          pendingGoalIds: { type: 'array', items: { type: 'string' } },
+          hasCompletedAnyGoal: { type: 'boolean' }
+        },
+        required: ['address', 'seasonId', 'weekNumber', 'pendingGoalIds', 'hasCompletedAnyGoal']
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: true
+  }
+
+  export const validate: ValidateFunction<CompleteGoalsReminderEvent> = generateLazyValidator(schema)
+}
