@@ -26,6 +26,7 @@ import {
 } from './rewards'
 import {
   BadgeGrantedEvent,
+  CompleteGoalsReminderEvent,
   CreditsGoalCompletedEvent,
   FriendshipAcceptedEvent,
   FriendshipRequestEvent
@@ -105,7 +106,8 @@ export namespace Events {
     }
 
     export enum CreditsService {
-      CREDITS_GOAL_COMPLETED = 'credits-goal-completed'
+      CREDITS_GOAL_COMPLETED = 'credits-goal-completed',
+      COMPLETE_GOALS_REMINDER = 'complete-goals-reminder'
     }
   }
 }
@@ -151,3 +153,4 @@ export type Event =
   | VerticalHeightReachedEvent
   | WalkedDistanceEvent
   | CreditsGoalCompletedEvent
+  | CompleteGoalsReminderEvent
