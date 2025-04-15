@@ -29,7 +29,7 @@ import {
 } from './rewards'
 import {
   BadgeGrantedEvent,
-  CompleteGoalsReminderEvent,
+  CreditsCompleteGoalsReminderEvent,
   CreditsGoalCompletedEvent,
   FriendshipAcceptedEvent,
   FriendshipRequestEvent
@@ -189,4 +189,4 @@ export type Event =
   | StreamingTimeExceededEvent
   | StreamingPlaceUpdatedEvent
   | UserJoinedRoomEvent
-  | CompleteGoalsReminderEvent
+  | CreditsCompleteGoalsReminderEvent

@@ -816,29 +816,6 @@ export namespace Color3 {
     validate: ValidateFunction<Color3>;
 }
 
-// Warning: (ae-missing-release-tag) "CompleteGoalsReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "CompleteGoalsReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public (undocumented)
-export type CompleteGoalsReminderEvent = BaseEvent & {
-    type: Events.Type.CREDITS_SERVICE;
-    subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER;
-    metadata: {
-        address: EthAddress;
-        seasonId: number;
-        weekNumber: number;
-        pendingGoalIds: string[];
-    };
-};
-
-// @public (undocumented)
-export namespace CompleteGoalsReminderEvent {
-    const // (undocumented)
-    schema: JSONSchema<CompleteGoalsReminderEvent>;
-    const // (undocumented)
-    validate: ValidateFunction<CompleteGoalsReminderEvent>;
-}
-
 // Warning: (ae-forgotten-export) The symbol "ContentfulContent" needs to be exported by the entry point index.d.ts
 // Warning: (ae-forgotten-export) The symbol "AssetFields" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "ContentfulAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -944,6 +921,29 @@ export enum ContractSortBy {
 //
 // @public (undocumented)
 export function createMappingsHelper(initial?: Mappings): MappingsHelper;
+
+// Warning: (ae-missing-release-tag) "CreditsCompleteGoalsReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CreditsCompleteGoalsReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CreditsCompleteGoalsReminderEvent = BaseEvent & {
+    type: Events.Type.CREDITS_SERVICE;
+    subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER;
+    metadata: {
+        address: EthAddress;
+        seasonId: number;
+        weekNumber: number;
+        pendingGoalIds: string[];
+    };
+};
+
+// @public (undocumented)
+export namespace CreditsCompleteGoalsReminderEvent {
+    const // (undocumented)
+    schema: JSONSchema<CreditsCompleteGoalsReminderEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CreditsCompleteGoalsReminderEvent>;
+}
 
 // Warning: (ae-missing-release-tag) "CreditsGoalCompletedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "CreditsGoalCompletedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1212,7 +1212,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | CompleteGoalsReminderEvent;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | CreditsCompleteGoalsReminderEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
