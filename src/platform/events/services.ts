@@ -283,7 +283,7 @@ export namespace CreditsGoalCompletedEvent {
   export const validate: ValidateFunction<CreditsGoalCompletedEvent> = generateLazyValidator(schema)
 }
 
-export type CompleteGoalsReminderEvent = BaseEvent & {
+export type CreditsCompleteGoalsReminderEvent = BaseEvent & {
   type: Events.Type.CREDITS_SERVICE
   subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER
   metadata: {
@@ -294,8 +294,8 @@ export type CompleteGoalsReminderEvent = BaseEvent & {
   }
 }
 
-export namespace CompleteGoalsReminderEvent {
-  export const schema: JSONSchema<CompleteGoalsReminderEvent> = {
+export namespace CreditsCompleteGoalsReminderEvent {
+  export const schema: JSONSchema<CreditsCompleteGoalsReminderEvent> = {
     type: 'object',
     properties: {
       type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
@@ -317,5 +317,5 @@ export namespace CompleteGoalsReminderEvent {
     additionalProperties: true
   }
 
-  export const validate: ValidateFunction<CompleteGoalsReminderEvent> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<CreditsCompleteGoalsReminderEvent> = generateLazyValidator(schema)
 }

@@ -1,5 +1,5 @@
 import expect from 'expect'
-import { CompleteGoalsReminderEvent, CreditsGoalCompletedEvent, Events } from '../../../src'
+import { CreditsCompleteGoalsReminderEvent, CreditsGoalCompletedEvent, Events } from '../../../src'
 
 describe('Credits Events tests', () => {
   it('CreditsGoalCompletedEvent static tests must pass', () => {
@@ -95,7 +95,7 @@ describe('Credits Events tests', () => {
   })
 
   it('CompleteGoalsReminderEvent static tests must pass', () => {
-    const event: CompleteGoalsReminderEvent = {
+    const event: CreditsCompleteGoalsReminderEvent = {
       type: Events.Type.CREDITS_SERVICE,
       subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER,
       key: 'complete-goals-reminder-123',
@@ -108,13 +108,13 @@ describe('Credits Events tests', () => {
       }
     }
 
-    expect(CompleteGoalsReminderEvent.validate(event)).toEqual(true)
-    expect(CompleteGoalsReminderEvent.validate(null)).toEqual(false)
-    expect(CompleteGoalsReminderEvent.validate({})).toEqual(false)
+    expect(CreditsCompleteGoalsReminderEvent.validate(event)).toEqual(true)
+    expect(CreditsCompleteGoalsReminderEvent.validate(null)).toEqual(false)
+    expect(CreditsCompleteGoalsReminderEvent.validate({})).toEqual(false)
   })
 
   it('CompleteGoalsReminderEvent should fail with invalid seasonId', () => {
-    const event: CompleteGoalsReminderEvent = {
+    const event: CreditsCompleteGoalsReminderEvent = {
       type: Events.Type.CREDITS_SERVICE,
       subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER,
       key: 'complete-goals-reminder-123',
@@ -127,11 +127,11 @@ describe('Credits Events tests', () => {
       }
     }
 
-    expect(CompleteGoalsReminderEvent.validate(event)).toEqual(false)
+    expect(CreditsCompleteGoalsReminderEvent.validate(event)).toEqual(false)
   })
 
   it('CompleteGoalsReminderEvent should fail with invalid weekNumber', () => {
-    const event: CompleteGoalsReminderEvent = {
+    const event: CreditsCompleteGoalsReminderEvent = {
       type: Events.Type.CREDITS_SERVICE,
       subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER,
       key: 'complete-goals-reminder-123',
@@ -144,7 +144,7 @@ describe('Credits Events tests', () => {
       }
     }
 
-    expect(CompleteGoalsReminderEvent.validate(event)).toEqual(false)
+    expect(CreditsCompleteGoalsReminderEvent.validate(event)).toEqual(false)
   })
 
   it('CompleteGoalsReminderEvent should not fail with missing pendingGoalIds', () => {
@@ -161,6 +161,6 @@ describe('Credits Events tests', () => {
       }
     }
 
-    expect(CompleteGoalsReminderEvent.validate(event)).toEqual(false)
+    expect(CreditsCompleteGoalsReminderEvent.validate(event)).toEqual(false)
   })
 })
