@@ -359,7 +359,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming;
     key: string;
     timestamp: number;
 };
@@ -1189,7 +1189,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1287,6 +1287,19 @@ export namespace Events {
             FRIENDSHIP_REQUEST = "friendship-request"
         }
         // (undocumented)
+        export enum Streaming {
+            // (undocumented)
+            STREAMING_KEY_EXPIRED = "streaming-key-expired",
+            // (undocumented)
+            STREAMING_KEY_RESET = "streaming-key-reset",
+            // (undocumented)
+            STREAMING_KEY_REVOKE = "streaming-key-revoke",
+            // (undocumented)
+            STREAMING_PLACE_UPDATED = "streaming-place-updated",
+            // (undocumented)
+            STREAMING_TIME_EXCEEDED = "streaming-time-exceeded"
+        }
+        // (undocumented)
         export enum Worlds {
             // (undocumented)
             DEPLOYMENT = "deployment"
@@ -1312,6 +1325,8 @@ export namespace Events {
         REWARDS = "rewards",
         // (undocumented)
         SOCIAL_SERVICE = "social-service",
+        // (undocumented)
+        STREAMING = "streaming",
         // (undocumented)
         WORLD = "world"
     }
@@ -2333,6 +2348,16 @@ export enum NotificationType {
     SOCIAL_SERVICE_FRIENDSHIP_ACCEPTED = "social_service_friendship_accepted",
     // (undocumented)
     SOCIAL_SERVICE_FRIENDSHIP_REQUEST = "social_service_friendship_request",
+    // (undocumented)
+    STREAMING_KEY_EXPIRED = "streaming_key_expired",
+    // (undocumented)
+    STREAMING_KEY_RESET = "streaming_key_reset",
+    // (undocumented)
+    STREAMING_KEY_REVOKE = "streaming_key_revoke",
+    // (undocumented)
+    STREAMING_PLACE_UPDATED = "streaming_place_updated",
+    // (undocumented)
+    STREAMING_TIME_EXCEEDED = "streaming_time_exceeded",
     // (undocumented)
     WORLDS_ACCESS_RESTORED = "worlds_access_restored",
     // (undocumented)
@@ -3548,6 +3573,96 @@ export namespace Store {
     validate: ValidateFunction<Store>;
 }
 
+// Warning: (ae-missing-release-tag) "StreamingKeyExpiredEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StreamingKeyExpiredEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StreamingKeyExpiredEvent = BaseEvent & {
+    type: Events.Type.STREAMING;
+    subType: Events.SubType.Streaming.STREAMING_KEY_EXPIRED;
+    metadata: StreamingMetadata;
+};
+
+// @public (undocumented)
+export namespace StreamingKeyExpiredEvent {
+    const // (undocumented)
+    schema: JSONSchema<StreamingKeyExpiredEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<StreamingKeyExpiredEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "StreamingKeyResetEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StreamingKeyResetEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StreamingKeyResetEvent = BaseEvent & {
+    type: Events.Type.STREAMING;
+    subType: Events.SubType.Streaming.STREAMING_KEY_RESET;
+    metadata: StreamingMetadata;
+};
+
+// @public (undocumented)
+export namespace StreamingKeyResetEvent {
+    const // (undocumented)
+    schema: JSONSchema<StreamingKeyResetEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<StreamingKeyResetEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "StreamingKeyRevokeEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StreamingKeyRevokeEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StreamingKeyRevokeEvent = BaseEvent & {
+    type: Events.Type.STREAMING;
+    subType: Events.SubType.Streaming.STREAMING_KEY_REVOKE;
+    metadata: StreamingMetadata;
+};
+
+// @public (undocumented)
+export namespace StreamingKeyRevokeEvent {
+    const // (undocumented)
+    schema: JSONSchema<StreamingKeyRevokeEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<StreamingKeyRevokeEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "StreamingPlaceUpdatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StreamingPlaceUpdatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StreamingPlaceUpdatedEvent = BaseEvent & {
+    type: Events.Type.STREAMING;
+    subType: Events.SubType.Streaming.STREAMING_PLACE_UPDATED;
+    metadata: StreamingMetadata;
+};
+
+// @public (undocumented)
+export namespace StreamingPlaceUpdatedEvent {
+    const // (undocumented)
+    schema: JSONSchema<StreamingPlaceUpdatedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<StreamingPlaceUpdatedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "StreamingTimeExceededEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StreamingTimeExceededEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StreamingTimeExceededEvent = BaseEvent & {
+    type: Events.Type.STREAMING;
+    subType: Events.SubType.Streaming.STREAMING_TIME_EXCEEDED;
+    metadata: StreamingMetadata;
+};
+
+// @public (undocumented)
+export namespace StreamingTimeExceededEvent {
+    const // (undocumented)
+    schema: JSONSchema<StreamingTimeExceededEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<StreamingTimeExceededEvent>;
+}
+
 // @alpha
 export type Subscription = {
     address: EthAddress;
@@ -4040,6 +4155,7 @@ export namespace WorldConfiguration {
 // src/dapps/trade.ts:92:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/platform/events/blockchain.ts:169:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/client.ts:31:3 - (ae-forgotten-export) The symbol "ClientBaseMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/streaming.ts:37:3 - (ae-forgotten-export) The symbol "StreamingMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
