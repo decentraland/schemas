@@ -828,7 +828,6 @@ export type CompleteGoalsReminderEvent = BaseEvent & {
         seasonId: number;
         weekNumber: number;
         pendingGoalIds: string[];
-        hasCompletedAnyGoal: boolean;
     };
 };
 

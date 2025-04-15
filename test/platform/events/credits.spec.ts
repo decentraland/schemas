@@ -104,8 +104,7 @@ describe('Credits Events tests', () => {
         address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
         seasonId: 1,
         weekNumber: 3,
-        pendingGoalIds: ['goal-123', 'goal-456'],
-        hasCompletedAnyGoal: true
+        pendingGoalIds: ['goal-123', 'goal-456']
       }
     }
 
@@ -124,8 +123,7 @@ describe('Credits Events tests', () => {
         address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
         seasonId: 0, // Invalid season number
         weekNumber: 3,
-        pendingGoalIds: ['goal-123', 'goal-456'],
-        hasCompletedAnyGoal: true
+        pendingGoalIds: ['goal-123', 'goal-456']
       }
     }
 
@@ -142,44 +140,24 @@ describe('Credits Events tests', () => {
         address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
         seasonId: 1,
         weekNumber: 0, // Invalid week number
-        pendingGoalIds: ['goal-123', 'goal-456'],
-        hasCompletedAnyGoal: true
-      }
-    }
-
-    expect(CompleteGoalsReminderEvent.validate(event)).toEqual(false)
-  })
-
-  it('CompleteGoalsReminderEvent should fail with missing pendingGoalIds', () => {
-    const event: any = {
-      type: Events.Type.CREDITS_SERVICE,
-      subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER,
-      key: 'complete-goals-reminder-123',
-      timestamp: 1710234567890,
-      metadata: {
-        address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
-        seasonId: 1,
-        weekNumber: 3,
-        pendingGoalIds: [],
-        hasCompletedAnyGoal: true
-      }
-    }
-
-    expect(CompleteGoalsReminderEvent.validate(event)).toEqual(false)
-  })
-
-  it('CompleteGoalsReminderEvent should fail with missing hasCompletedAnyGoal', () => {
-    const event: any = {
-      type: Events.Type.CREDITS_SERVICE,
-      subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER,
-      key: 'complete-goals-reminder-123',
-      timestamp: 1710234567890,
-      metadata: {
-        address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
-        seasonId: 1,
-        weekNumber: 3,
         pendingGoalIds: ['goal-123', 'goal-456']
-        // hasCompletedAnyGoal missing
+      }
+    }
+
+    expect(CompleteGoalsReminderEvent.validate(event)).toEqual(false)
+  })
+
+  it('CompleteGoalsReminderEvent should not fail with missing pendingGoalIds', () => {
+    const event: any = {
+      type: Events.Type.CREDITS_SERVICE,
+      subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER,
+      key: 'complete-goals-reminder-123',
+      timestamp: 1710234567890,
+      metadata: {
+        address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
+        seasonId: 1,
+        weekNumber: 3,
+        pendingGoalIds: []
       }
     }
 

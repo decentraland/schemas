@@ -291,7 +291,6 @@ export type CompleteGoalsReminderEvent = BaseEvent & {
     seasonId: number
     weekNumber: number
     pendingGoalIds: string[]
-    hasCompletedAnyGoal: boolean
   }
 }
 
@@ -309,10 +308,9 @@ export namespace CompleteGoalsReminderEvent {
           address: { type: 'string' },
           seasonId: { type: 'number', minimum: 1 },
           weekNumber: { type: 'number', minimum: 1 },
-          pendingGoalIds: { type: 'array', items: { type: 'string' } },
-          hasCompletedAnyGoal: { type: 'boolean' }
+          pendingGoalIds: { type: 'array', items: { type: 'string' }, minItems: 1 }
         },
-        required: ['address', 'seasonId', 'weekNumber', 'pendingGoalIds', 'hasCompletedAnyGoal']
+        required: ['address', 'seasonId', 'weekNumber', 'pendingGoalIds']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
