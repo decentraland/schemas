@@ -30,6 +30,11 @@ import {
   FriendshipAcceptedEvent,
   FriendshipRequestEvent
 } from './services'
+import { StreamingKeyResetEvent } from './streaming'
+import { StreamingKeyRevokeEvent } from './streaming'
+import { StreamingKeyExpiredEvent } from './streaming'
+import { StreamingTimeExceededEvent } from './streaming'
+import { StreamingPlaceUpdatedEvent } from './streaming'
 
 export namespace Events {
   export enum Type {
@@ -42,7 +47,8 @@ export namespace Events {
     BADGE = 'badge',
     ASSET_BUNDLE = 'asset-bundle',
     SOCIAL_SERVICE = 'social-service',
-    CREDITS_SERVICE = 'credits-service'
+    CREDITS_SERVICE = 'credits-service',
+    STREAMING = 'streaming'
   }
 
   export namespace SubType {
@@ -107,6 +113,14 @@ export namespace Events {
     export enum CreditsService {
       CREDITS_GOAL_COMPLETED = 'credits-goal-completed'
     }
+
+    export enum Streaming {
+      STREAMING_KEY_RESET = 'streaming-key-reset',
+      STREAMING_KEY_REVOKE = 'streaming-key-revoke',
+      STREAMING_KEY_EXPIRED = 'streaming-key-expired',
+      STREAMING_TIME_EXCEEDED = 'streaming-time-exceeded',
+      STREAMING_PLACE_UPDATED = 'streaming-place-updated'
+    }
   }
 }
 
@@ -122,6 +136,7 @@ export type BaseEvent = {
     | Events.SubType.AssetBundle
     | Events.SubType.SocialService
     | Events.SubType.CreditsService
+    | Events.SubType.Streaming
   key: string
   timestamp: number
 }
@@ -151,3 +166,8 @@ export type Event =
   | VerticalHeightReachedEvent
   | WalkedDistanceEvent
   | CreditsGoalCompletedEvent
+  | StreamingKeyResetEvent
+  | StreamingKeyRevokeEvent
+  | StreamingKeyExpiredEvent
+  | StreamingTimeExceededEvent
+  | StreamingPlaceUpdatedEvent
