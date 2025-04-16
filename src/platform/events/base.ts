@@ -121,7 +121,8 @@ export namespace Events {
 
     export enum CreditsService {
       CREDITS_GOAL_COMPLETED = 'credits-goal-completed',
-      COMPLETE_GOALS_REMINDER = 'complete-goals-reminder'
+      COMPLETE_GOALS_REMINDER = 'complete-goals-reminder',
+      CLAIM_CREDITS_REMINDER = 'claim-credits-reminder'
     }
 
     export enum Streaming {

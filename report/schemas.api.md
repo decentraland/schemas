@@ -922,6 +922,28 @@ export enum ContractSortBy {
 // @public (undocumented)
 export function createMappingsHelper(initial?: Mappings): MappingsHelper;
 
+// Warning: (ae-missing-release-tag) "CreditsClaimReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CreditsClaimReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CreditsClaimReminderEvent = BaseEvent & {
+    type: Events.Type.CREDITS_SERVICE;
+    subType: Events.SubType.CreditsService.CLAIM_CREDITS_REMINDER;
+    metadata: {
+        address: EthAddress;
+        seasonId: number;
+        weekNumber: number;
+    };
+};
+
+// @public (undocumented)
+export namespace CreditsClaimReminderEvent {
+    const // (undocumented)
+    schema: JSONSchema<CreditsClaimReminderEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CreditsClaimReminderEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "CreditsCompleteGoalsReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "CreditsCompleteGoalsReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1288,6 +1310,8 @@ export namespace Events {
         }
         // (undocumented)
         export enum CreditsService {
+            // (undocumented)
+            CLAIM_CREDITS_REMINDER = "claim-credits-reminder",
             // (undocumented)
             COMPLETE_GOALS_REMINDER = "complete-goals-reminder",
             // (undocumented)
