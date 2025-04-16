@@ -2441,7 +2441,15 @@ export enum NotificationType {
     // (undocumented)
     CREDITS_GOAL_COMPLETED = "credits_goal_completed",
     // (undocumented)
+    CREDITS_REMINDER_CLAIM_CREDITS = "credits_reminder_claim_credits",
+    // (undocumented)
     CREDITS_REMINDER_COMPLETE_GOALS = "credits_reminder_complete_goals",
+    // (undocumented)
+    CREDITS_REMINDER_DO_NOT_MISS_OUT = "credits_reminder_do_not_miss_out",
+    // (undocumented)
+    CREDITS_REMINDER_USAGE = "credits_reminder_usage",
+    // (undocumented)
+    CREDITS_REMINDER_USAGE_24_HOURS = "credits_reminder_usage_24_hours",
     // (undocumented)
     EVENTS_STARTED = "events_started",
     // (undocumented)
