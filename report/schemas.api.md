@@ -967,6 +967,26 @@ export namespace CreditsCompleteGoalsReminderEvent {
     validate: ValidateFunction<CreditsCompleteGoalsReminderEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "CreditsDoNotMissOutReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CreditsDoNotMissOutReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CreditsDoNotMissOutReminderEvent = BaseEvent & {
+    type: Events.Type.CREDITS_SERVICE;
+    subType: Events.SubType.CreditsService.DO_NOT_MISS_OUT_REMINDER;
+    metadata: {
+        address: EthAddress;
+    };
+};
+
+// @public (undocumented)
+export namespace CreditsDoNotMissOutReminderEvent {
+    const // (undocumented)
+    schema: JSONSchema<CreditsDoNotMissOutReminderEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CreditsDoNotMissOutReminderEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "CreditsGoalCompletedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "CreditsGoalCompletedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -989,6 +1009,48 @@ export namespace CreditsGoalCompletedEvent {
     schema: JSONSchema<CreditsGoalCompletedEvent>;
     const // (undocumented)
     validate: ValidateFunction<CreditsGoalCompletedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "CreditsUsage24HoursReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CreditsUsage24HoursReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CreditsUsage24HoursReminderEvent = BaseEvent & {
+    type: Events.Type.CREDITS_SERVICE;
+    subType: Events.SubType.CreditsService.USAGE_24_HOURS_REMINDER;
+    metadata: {
+        address: EthAddress;
+        creditsAmount: number;
+    };
+};
+
+// @public (undocumented)
+export namespace CreditsUsage24HoursReminderEvent {
+    const // (undocumented)
+    schema: JSONSchema<CreditsUsage24HoursReminderEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CreditsUsage24HoursReminderEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "CreditsUsageReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CreditsUsageReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CreditsUsageReminderEvent = BaseEvent & {
+    type: Events.Type.CREDITS_SERVICE;
+    subType: Events.SubType.CreditsService.USAGE_REMINDER;
+    metadata: {
+        address: EthAddress;
+        creditsAmount: number;
+    };
+};
+
+// @public (undocumented)
+export namespace CreditsUsageReminderEvent {
+    const // (undocumented)
+    schema: JSONSchema<CreditsUsageReminderEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CreditsUsageReminderEvent>;
 }
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
@@ -1234,7 +1296,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | CreditsCompleteGoalsReminderEvent;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1315,7 +1377,13 @@ export namespace Events {
             // (undocumented)
             COMPLETE_GOALS_REMINDER = "complete-goals-reminder",
             // (undocumented)
-            CREDITS_GOAL_COMPLETED = "credits-goal-completed"
+            CREDITS_GOAL_COMPLETED = "credits-goal-completed",
+            // (undocumented)
+            DO_NOT_MISS_OUT_REMINDER = "do-not-miss-out-reminder",
+            // (undocumented)
+            USAGE_24_HOURS_REMINDER = "usage-24-hours-reminder",
+            // (undocumented)
+            USAGE_REMINDER = "usage-reminder"
         }
         // (undocumented)
         export enum Marketplace {

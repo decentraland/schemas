@@ -320,6 +320,103 @@ export namespace CreditsCompleteGoalsReminderEvent {
   export const validate: ValidateFunction<CreditsCompleteGoalsReminderEvent> = generateLazyValidator(schema)
 }
 
+export type CreditsUsageReminderEvent = BaseEvent & {
+  type: Events.Type.CREDITS_SERVICE
+  subType: Events.SubType.CreditsService.USAGE_REMINDER
+  metadata: {
+    address: EthAddress
+    creditsAmount: number
+  }
+}
+
+export namespace CreditsUsageReminderEvent {
+  export const schema: JSONSchema<CreditsUsageReminderEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
+      subType: { type: 'string', const: Events.SubType.CreditsService.USAGE_REMINDER },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          address: { type: 'string' },
+          creditsAmount: { type: 'number', minimum: 1 }
+        },
+        required: ['address', 'creditsAmount']
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: true
+  }
+
+  export const validate: ValidateFunction<CreditsUsageReminderEvent> = generateLazyValidator(schema)
+}
+
+export type CreditsUsage24HoursReminderEvent = BaseEvent & {
+  type: Events.Type.CREDITS_SERVICE
+  subType: Events.SubType.CreditsService.USAGE_24_HOURS_REMINDER
+  metadata: {
+    address: EthAddress
+    creditsAmount: number
+  }
+}
+
+export namespace CreditsUsage24HoursReminderEvent {
+  export const schema: JSONSchema<CreditsUsage24HoursReminderEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
+      subType: { type: 'string', const: Events.SubType.CreditsService.USAGE_24_HOURS_REMINDER },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          address: { type: 'string' },
+          creditsAmount: { type: 'number', minimum: 1 }
+        },
+        required: ['address', 'creditsAmount']
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: true
+  }
+
+  export const validate: ValidateFunction<CreditsUsage24HoursReminderEvent> = generateLazyValidator(schema)
+}
+
+export type CreditsDoNotMissOutReminderEvent = BaseEvent & {
+  type: Events.Type.CREDITS_SERVICE
+  subType: Events.SubType.CreditsService.DO_NOT_MISS_OUT_REMINDER
+  metadata: {
+    address: EthAddress
+  }
+}
+
+export namespace CreditsDoNotMissOutReminderEvent {
+  export const schema: JSONSchema<CreditsDoNotMissOutReminderEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
+      subType: { type: 'string', const: Events.SubType.CreditsService.DO_NOT_MISS_OUT_REMINDER },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          address: { type: 'string' }
+        },
+        required: ['address']
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: true
+  }
+
+  export const validate: ValidateFunction<CreditsDoNotMissOutReminderEvent> = generateLazyValidator(schema)
+}
+
 export type CreditsClaimReminderEvent = BaseEvent & {
   type: Events.Type.CREDITS_SERVICE
   subType: Events.SubType.CreditsService.CLAIM_CREDITS_REMINDER
