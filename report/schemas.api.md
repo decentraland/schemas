@@ -1021,6 +1021,7 @@ export type CreditsUsage24HoursReminderEvent = BaseEvent & {
     metadata: {
         address: EthAddress;
         creditsAmount: number;
+        expirationDate: string;
     };
 };
 
@@ -1042,6 +1043,7 @@ export type CreditsUsageReminderEvent = BaseEvent & {
     metadata: {
         address: EthAddress;
         creditsAmount: number;
+        expirationDate: string;
     };
 };
 

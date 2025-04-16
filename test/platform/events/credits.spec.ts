@@ -270,7 +270,8 @@ describe('Credits Events tests', () => {
         timestamp: 1710234567890,
         metadata: {
           address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
-          creditsAmount: 100
+          creditsAmount: 100,
+          expirationDate: 'Sunday, July 27 at 23:59 UTC'
         }
       }
 
@@ -287,7 +288,8 @@ describe('Credits Events tests', () => {
         timestamp: 1710234567890,
         metadata: {
           address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
-          creditsAmount: -1 // Invalid negative amount
+          creditsAmount: -1, // Invalid negative amount
+          expirationDate: 'Sunday, July 27 at 23:59 UTC'
         }
       }
 
@@ -301,7 +303,8 @@ describe('Credits Events tests', () => {
         key: 'usage-reminder-123',
         timestamp: 1710234567890,
         metadata: {
-          creditsAmount: 100
+          creditsAmount: 100,
+          expirationDate: 'Sunday, July 27 at 23:59 UTC'
           // address missing
         }
       }
@@ -319,7 +322,8 @@ describe('Credits Events tests', () => {
         timestamp: 1710234567890,
         metadata: {
           address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
-          creditsAmount: 100
+          creditsAmount: 100,
+          expirationDate: 'Sunday, July 27 at 23:59 UTC'
         }
       }
 
@@ -336,7 +340,8 @@ describe('Credits Events tests', () => {
         timestamp: 1710234567890,
         metadata: {
           address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
-          creditsAmount: -1 // Invalid negative amount
+          creditsAmount: -1, // Invalid negative amount
+          expirationDate: 'Sunday, July 27 at 23:59 UTC'
         }
       }
 
@@ -350,7 +355,8 @@ describe('Credits Events tests', () => {
         key: 'usage-24-hours-reminder-123',
         timestamp: 1710234567890,
         metadata: {
-          creditsAmount: 100
+          creditsAmount: 100,
+          expirationDate: 'Sunday, July 27 at 23:59 UTC'
           // address missing
         }
       }
