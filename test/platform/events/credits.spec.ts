@@ -1,5 +1,10 @@
 import expect from 'expect'
-import { CreditsCompleteGoalsReminderEvent, CreditsGoalCompletedEvent, Events } from '../../../src'
+import {
+  CreditsClaimReminderEvent,
+  CreditsCompleteGoalsReminderEvent,
+  CreditsGoalCompletedEvent,
+  Events
+} from '../../../src'
 
 describe('Credits Events tests', () => {
   it('CreditsGoalCompletedEvent static tests must pass', () => {
@@ -162,5 +167,71 @@ describe('Credits Events tests', () => {
     }
 
     expect(CreditsCompleteGoalsReminderEvent.validate(event)).toEqual(false)
+  })
+
+  it('CreditsClaimReminderEvent static tests must pass', () => {
+    const event: CreditsClaimReminderEvent = {
+      type: Events.Type.CREDITS_SERVICE,
+      subType: Events.SubType.CreditsService.CLAIM_CREDITS_REMINDER,
+      key: 'claim-credits-reminder-123',
+      timestamp: 1710234567890,
+      metadata: {
+        address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
+        seasonId: 1,
+        weekNumber: 3
+      }
+    }
+
+    expect(CreditsClaimReminderEvent.validate(event)).toEqual(true)
+    expect(CreditsClaimReminderEvent.validate(null)).toEqual(false)
+    expect(CreditsClaimReminderEvent.validate({})).toEqual(false)
+  })
+
+  it('CreditsClaimReminderEvent should fail with invalid seasonId', () => {
+    const event: CreditsClaimReminderEvent = {
+      type: Events.Type.CREDITS_SERVICE,
+      subType: Events.SubType.CreditsService.CLAIM_CREDITS_REMINDER,
+      key: 'claim-credits-reminder-123',
+      timestamp: 1710234567890,
+      metadata: {
+        address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
+        seasonId: 0, // Invalid season number
+        weekNumber: 3
+      }
+    }
+
+    expect(CreditsClaimReminderEvent.validate(event)).toEqual(false)
+  })
+
+  it('CreditsClaimReminderEvent should fail with invalid weekNumber', () => {
+    const event: CreditsClaimReminderEvent = {
+      type: Events.Type.CREDITS_SERVICE,
+      subType: Events.SubType.CreditsService.CLAIM_CREDITS_REMINDER,
+      key: 'claim-credits-reminder-123',
+      timestamp: 1710234567890,
+      metadata: {
+        address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
+        seasonId: 1,
+        weekNumber: 0 // Invalid week number
+      }
+    }
+
+    expect(CreditsClaimReminderEvent.validate(event)).toEqual(false)
+  })
+
+  it('CreditsClaimReminderEvent should fail with missing userAddress', () => {
+    const event: any = {
+      type: Events.Type.CREDITS_SERVICE,
+      subType: Events.SubType.CreditsService.CLAIM_CREDITS_REMINDER,
+      key: 'claim-credits-reminder-123',
+      timestamp: 1710234567890,
+      metadata: {
+        seasonId: 1,
+        weekNumber: 3
+        // userAddress missing
+      }
+    }
+
+    expect(CreditsClaimReminderEvent.validate(event)).toEqual(false)
   })
 })
