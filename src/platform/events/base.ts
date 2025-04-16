@@ -30,11 +30,13 @@ import {
   FriendshipAcceptedEvent,
   FriendshipRequestEvent
 } from './services'
-import { StreamingKeyResetEvent } from './streaming'
-import { StreamingKeyRevokeEvent } from './streaming'
-import { StreamingKeyExpiredEvent } from './streaming'
-import { StreamingTimeExceededEvent } from './streaming'
-import { StreamingPlaceUpdatedEvent } from './streaming'
+import {
+  StreamingKeyResetEvent,
+  StreamingKeyRevokeEvent,
+  StreamingKeyExpiredEvent,
+  StreamingTimeExceededEvent,
+  StreamingPlaceUpdatedEvent
+} from './streaming'
 
 export namespace Events {
   export enum Type {
