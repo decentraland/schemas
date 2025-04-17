@@ -48,11 +48,9 @@ describe('Streaming Events tests', () => {
           title: 'Test Title',
           description: 'Test Description',
           position: '0,0',
-          worldName: 'world-name',
-          host: 'host-name',
+          worldName: null,
           url: 'https://test.com',
-          userName: 'test-user',
-          address: '0x123'
+          isWorld: true
         }
       }
 
