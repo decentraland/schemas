@@ -45,9 +45,14 @@ describe('Streaming Events tests', () => {
         key: 'key',
         timestamp: 1,
         metadata: {
+          title: 'Test Title',
+          description: 'Test Description',
           position: '0,0',
           worldName: 'world-name',
-          host: 'host-name'
+          host: 'host-name',
+          url: 'https://test.com',
+          userName: 'test-user',
+          address: '0x123'
         }
       }
 

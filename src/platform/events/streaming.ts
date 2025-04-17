@@ -3,19 +3,29 @@ import { BaseEvent, Events } from './base'
 import { createEventSchema } from './utils'
 
 type StreamingMetadata = {
+  title: string
+  description: string
   position: string
-  worldName: string
+  worldName: string | null
   host: string
+  url: string
+  userName: string
+  address: string
 }
 
 const streamingMetadataSchema: JSONSchema<StreamingMetadata> = {
   type: 'object',
   properties: {
+    title: { type: 'string' },
+    description: { type: 'string' },
     position: { type: 'string' },
-    worldName: { type: 'string' },
-    host: { type: 'string' }
+    worldName: { type: 'string', nullable: true },
+    host: { type: 'string' },
+    url: { type: 'string' },
+    userName: { type: 'string' },
+    address: { type: 'string' }
   },
-  required: ['position', 'worldName', 'host'],
+  required: ['position', 'host', 'url', 'userName', 'address', 'title', 'description'],
   additionalProperties: false
 }
 
