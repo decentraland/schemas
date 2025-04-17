@@ -9,6 +9,7 @@ import {
 } from './blockchain'
 import { CatalystDeploymentEvent } from './catalyst'
 import {
+  LoggedInEvent,
   MoveToParcelEvent,
   PassportOpenedEvent,
   UsedEmoteEvent,
@@ -164,6 +165,7 @@ export type Event =
   | FriendshipAcceptedEvent
   | ItemPublishedEvent
   | ItemSoldEvent
+  | LoggedInEvent
   | MoveToParcelEvent
   | PassportOpenedEvent
   | RentalEndedEvent
