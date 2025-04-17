@@ -50,7 +50,8 @@ describe('Streaming Events tests', () => {
           position: '0,0',
           worldName: null,
           url: 'https://test.com',
-          isWorld: true
+          isWorld: true,
+          address: '0x123'
         }
       }
 
