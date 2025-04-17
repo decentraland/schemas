@@ -77,3 +77,9 @@ export type VerticalHeightReachedEvent = BaseEvent & {
     height: number
   }
 }
+
+export type LoggedInEvent = BaseEvent & {
+  type: Events.Type.CLIENT
+  subType: Events.SubType.Client.LOGGED_IN
+  metadata: ClientBaseMetadata
+}
