@@ -38,7 +38,12 @@ export enum NotificationType {
   WORLDS_MISSING_RESOURCES = 'worlds_missing_resources',
   WORLDS_PERMISSION_GRANTED = 'worlds_permission_granted',
   WORLDS_PERMISSION_REVOKED = 'worlds_permission_revoked',
-  CREDITS_GOAL_COMPLETED = 'credits_goal_completed'
+  CREDITS_GOAL_COMPLETED = 'credits_goal_completed',
+  STREAMING_KEY_RESET = 'streaming_key_reset',
+  STREAMING_KEY_REVOKE = 'streaming_key_revoke',
+  STREAMING_KEY_EXPIRED = 'streaming_key_expired',
+  STREAMING_TIME_EXCEEDED = 'streaming_time_exceeded',
+  STREAMING_PLACE_UPDATED = 'streaming_place_updated'
 }
 
 /**
