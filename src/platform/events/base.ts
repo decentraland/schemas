@@ -84,6 +84,7 @@ export namespace Events {
     }
 
     export enum Client {
+      LOGGED_IN = 'logged-in',
       MOVE_TO_PARCEL = 'move-to-parcel',
       USED_EMOTE = 'used-emote',
       PASSPORT_OPENED = 'passport-opened',
