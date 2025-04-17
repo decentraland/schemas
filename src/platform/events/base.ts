@@ -15,6 +15,7 @@ import {
   VerticalHeightReachedEvent,
   WalkedDistanceEvent
 } from './client'
+import { UserJoinedRoomEvent } from './comms'
 import { BidReceivedEvent } from './marketplace'
 import {
   RewardInProgressEvent,
@@ -50,7 +51,8 @@ export namespace Events {
     ASSET_BUNDLE = 'asset-bundle',
     SOCIAL_SERVICE = 'social-service',
     CREDITS_SERVICE = 'credits-service',
-    STREAMING = 'streaming'
+    STREAMING = 'streaming',
+    COMMS = 'comms'
   }
 
   export namespace SubType {
@@ -123,6 +125,10 @@ export namespace Events {
       STREAMING_TIME_EXCEEDED = 'streaming-time-exceeded',
       STREAMING_PLACE_UPDATED = 'streaming-place-updated'
     }
+
+    export enum Comms {
+      USER_JOINED_ROOM = 'user-joined-room'
+    }
   }
 }
 
@@ -139,6 +145,7 @@ export type BaseEvent = {
     | Events.SubType.SocialService
     | Events.SubType.CreditsService
     | Events.SubType.Streaming
+    | Events.SubType.Comms
   key: string
   timestamp: number
 }
@@ -173,3 +180,4 @@ export type Event =
   | StreamingKeyExpiredEvent
   | StreamingTimeExceededEvent
   | StreamingPlaceUpdatedEvent
+  | UserJoinedRoomEvent
