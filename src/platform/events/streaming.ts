@@ -9,6 +9,7 @@ type StreamingMetadata = {
   worldName: string | null
   isWorld: boolean
   url: string
+  address: string
 }
 
 const streamingMetadataSchema: JSONSchema<StreamingMetadata> = {
@@ -19,9 +20,10 @@ const streamingMetadataSchema: JSONSchema<StreamingMetadata> = {
     position: { type: 'string' },
     worldName: { type: 'string', nullable: true },
     isWorld: { type: 'boolean' },
-    url: { type: 'string' }
+    url: { type: 'string' },
+    address: { type: 'string' }
   },
-  required: ['position', 'isWorld', 'url', 'title', 'description'],
+  required: ['position', 'isWorld', 'url', 'title', 'description', 'address'],
   additionalProperties: false
 }
 
