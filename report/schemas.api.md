@@ -359,7 +359,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms;
     key: string;
     timestamp: number;
 };
@@ -1189,7 +1189,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1255,6 +1255,11 @@ export namespace Events {
             WALKED_DISTANCE = "walked-distance"
         }
         // (undocumented)
+        export enum Comms {
+            // (undocumented)
+            USER_JOINED_ROOM = "user-joined-room"
+        }
+        // (undocumented)
         export enum CreditsService {
             // (undocumented)
             CREDITS_GOAL_COMPLETED = "credits-goal-completed"
@@ -1317,6 +1322,8 @@ export namespace Events {
         CATALYST_DEPLOYMENT = "catalyst-deployment",
         // (undocumented)
         CLIENT = "client",
+        // (undocumented)
+        COMMS = "comms",
         // (undocumented)
         CREDITS_SERVICE = "credits-service",
         // (undocumented)
@@ -3868,6 +3875,30 @@ export type UsedEmoteEvent = BaseEvent & {
         };
     };
 };
+
+// Warning: (ae-missing-release-tag) "UserJoinedRoomEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "UserJoinedRoomEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type UserJoinedRoomEvent = BaseEvent & {
+    type: Events.Type.COMMS;
+    subType: Events.SubType.Comms.USER_JOINED_ROOM;
+    metadata: {
+        parcel: string;
+        sceneId: string;
+        userAddress: string;
+        realmName: string;
+        isWorld: boolean;
+    };
+};
+
+// @public (undocumented)
+export namespace UserJoinedRoomEvent {
+    const // (undocumented)
+    schema: JSONSchema<UserJoinedRoomEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<UserJoinedRoomEvent>;
+}
 
 // @public
 export interface ValidateFunction<T = unknown> {
