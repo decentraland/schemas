@@ -9,6 +9,7 @@ import {
 } from './blockchain'
 import { CatalystDeploymentEvent } from './catalyst'
 import {
+  LoggedInCachedEvent,
   LoggedInEvent,
   MoveToParcelEvent,
   PassportOpenedEvent,
@@ -86,6 +87,7 @@ export namespace Events {
 
     export enum Client {
       LOGGED_IN = 'logged-in',
+      LOGGED_IN_CACHED = 'logged-in-cached',
       MOVE_TO_PARCEL = 'move-to-parcel',
       USED_EMOTE = 'used-emote',
       PASSPORT_OPENED = 'passport-opened',
@@ -166,6 +168,7 @@ export type Event =
   | ItemPublishedEvent
   | ItemSoldEvent
   | LoggedInEvent
+  | LoggedInCachedEvent
   | MoveToParcelEvent
   | PassportOpenedEvent
   | RentalEndedEvent

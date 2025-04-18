@@ -83,3 +83,9 @@ export type LoggedInEvent = BaseEvent & {
   subType: Events.SubType.Client.LOGGED_IN
   metadata: ClientBaseMetadata
 }
+
+export type LoggedInCachedEvent = BaseEvent & {
+  type: Events.Type.CLIENT
+  subType: Events.SubType.Client.LOGGED_IN_CACHED
+  metadata: ClientBaseMetadata
+}
