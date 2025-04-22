@@ -43,7 +43,12 @@ export enum NotificationType {
   STREAMING_KEY_REVOKE = 'streaming_key_revoke',
   STREAMING_KEY_EXPIRED = 'streaming_key_expired',
   STREAMING_TIME_EXCEEDED = 'streaming_time_exceeded',
-  STREAMING_PLACE_UPDATED = 'streaming_place_updated'
+  STREAMING_PLACE_UPDATED = 'streaming_place_updated',
+  CREDITS_REMINDER_COMPLETE_GOALS = 'credits_reminder_complete_goals',
+  CREDITS_REMINDER_CLAIM_CREDITS = 'credits_reminder_claim_credits',
+  CREDITS_REMINDER_USAGE = 'credits_reminder_usage',
+  CREDITS_REMINDER_USAGE_24_HOURS = 'credits_reminder_usage_24_hours',
+  CREDITS_REMINDER_DO_NOT_MISS_OUT = 'credits_reminder_do_not_miss_out'
 }
 
 /**

@@ -29,7 +29,12 @@ import {
 } from './rewards'
 import {
   BadgeGrantedEvent,
+  CreditsClaimReminderEvent,
+  CreditsCompleteGoalsReminderEvent,
+  CreditsDoNotMissOutReminderEvent,
   CreditsGoalCompletedEvent,
+  CreditsUsage24HoursReminderEvent,
+  CreditsUsageReminderEvent,
   FriendshipAcceptedEvent,
   FriendshipRequestEvent
 } from './services'
@@ -119,7 +124,12 @@ export namespace Events {
     }
 
     export enum CreditsService {
-      CREDITS_GOAL_COMPLETED = 'credits-goal-completed'
+      CREDITS_GOAL_COMPLETED = 'credits-goal-completed',
+      COMPLETE_GOALS_REMINDER = 'complete-goals-reminder',
+      CLAIM_CREDITS_REMINDER = 'claim-credits-reminder',
+      DO_NOT_MISS_OUT_REMINDER = 'do-not-miss-out-reminder',
+      USAGE_REMINDER = 'usage-reminder',
+      USAGE_24_HOURS_REMINDER = 'usage-24-hours-reminder'
     }
 
     export enum Streaming {
@@ -187,3 +197,8 @@ export type Event =
   | StreamingTimeExceededEvent
   | StreamingPlaceUpdatedEvent
   | UserJoinedRoomEvent
+  | CreditsCompleteGoalsReminderEvent
+  | CreditsUsageReminderEvent
+  | CreditsUsage24HoursReminderEvent
+  | CreditsDoNotMissOutReminderEvent
+  | CreditsClaimReminderEvent
