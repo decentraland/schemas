@@ -51,7 +51,8 @@ describe('Streaming Events tests', () => {
           worldName: null,
           url: 'https://test.com',
           isWorld: true,
-          address: '0x123'
+          address: '0x123',
+          image: 'https://test.com/image.png'
         }
       }
 
