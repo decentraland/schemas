@@ -89,3 +89,13 @@ export type LoggedInCachedEvent = BaseEvent & {
   subType: Events.SubType.Client.LOGGED_IN_CACHED
   metadata: ClientBaseMetadata
 }
+
+export type WalkedParcelsEvent = BaseEvent & {
+  type: Events.Type.CLIENT
+  subType: Events.SubType.Client.WALKED_PARCELS
+  metadata: ClientBaseMetadata & {
+    amountOfParcelsVisited: number
+    address: EthAddress
+    lastParcel: string
+  }
+}

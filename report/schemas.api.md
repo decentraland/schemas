@@ -1298,7 +1298,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | WalkedParcelsEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1365,7 +1365,9 @@ export namespace Events {
             // (undocumented)
             VERTICAL_HEIGHT_REACHED = "vertical-height-reached",
             // (undocumented)
-            WALKED_DISTANCE = "walked-distance"
+            WALKED_DISTANCE = "walked-distance",
+            // (undocumented)
+            WALKED_PARCELS = "walked-parcels"
         }
         // (undocumented)
         export enum Comms {
@@ -2516,6 +2518,8 @@ export enum NotificationType {
     STREAMING_PLACE_UPDATED = "streaming_place_updated",
     // (undocumented)
     STREAMING_TIME_EXCEEDED = "streaming_time_exceeded",
+    // (undocumented)
+    WALKED_PARCELS = "walked_parcels",
     // (undocumented)
     WORLDS_ACCESS_RESTORED = "worlds_access_restored",
     // (undocumented)
@@ -4090,6 +4094,19 @@ export type WalkedDistanceEvent = BaseEvent & {
     metadata: ClientBaseMetadata & {
         distance: number;
         stepCount: number;
+    };
+};
+
+// Warning: (ae-missing-release-tag) "WalkedParcelsEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WalkedParcelsEvent = BaseEvent & {
+    type: Events.Type.CLIENT;
+    subType: Events.SubType.Client.WALKED_PARCELS;
+    metadata: ClientBaseMetadata & {
+        amountOfParcelsVisited: number;
+        address: EthAddress;
+        lastParcel: string;
     };
 };
 
