@@ -4103,7 +4103,7 @@ export type WalkedDistanceEvent = BaseEvent & {
 export type WalkedParcelsEvent = BaseEvent & {
     type: Events.Type.CLIENT;
     subType: Events.SubType.Client.WALKED_PARCELS;
-    metadata: ClientBaseMetadata & {
+    metadata: {
         amountOfParcelsVisited: number;
         address: EthAddress;
         lastParcel: string;
