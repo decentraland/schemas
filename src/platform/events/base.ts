@@ -15,7 +15,8 @@ import {
   PassportOpenedEvent,
   UsedEmoteEvent,
   VerticalHeightReachedEvent,
-  WalkedDistanceEvent
+  WalkedDistanceEvent,
+  WalkedParcelsEvent
 } from './client'
 import { UserJoinedRoomEvent } from './comms'
 import { BidReceivedEvent } from './marketplace'
@@ -97,7 +98,8 @@ export namespace Events {
       USED_EMOTE = 'used-emote',
       PASSPORT_OPENED = 'passport-opened',
       WALKED_DISTANCE = 'walked-distance',
-      VERTICAL_HEIGHT_REACHED = 'vertical-height-reached'
+      VERTICAL_HEIGHT_REACHED = 'vertical-height-reached',
+      WALKED_PARCELS = 'walked-parcels'
     }
 
     export enum Rewards {
@@ -202,3 +204,4 @@ export type Event =
   | CreditsUsage24HoursReminderEvent
   | CreditsDoNotMissOutReminderEvent
   | CreditsClaimReminderEvent
+  | WalkedParcelsEvent
