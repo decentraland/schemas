@@ -81,11 +81,17 @@ export type VerticalHeightReachedEvent = BaseEvent & {
 export type LoggedInEvent = BaseEvent & {
   type: Events.Type.CLIENT
   subType: Events.SubType.Client.LOGGED_IN
-  metadata: ClientBaseMetadata
+  metadata: ClientBaseMetadata & {
+    realm: string
+    contextRuntime: string
+  }
 }
 
 export type LoggedInCachedEvent = BaseEvent & {
   type: Events.Type.CLIENT
   subType: Events.SubType.Client.LOGGED_IN_CACHED
-  metadata: ClientBaseMetadata
+  metadata: ClientBaseMetadata & {
+    realm: string
+    contextRuntime: string
+  }
 }
