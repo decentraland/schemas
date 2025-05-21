@@ -95,3 +95,13 @@ export type LoggedInCachedEvent = BaseEvent & {
     contextRuntime: string
   }
 }
+
+export type WalkedParcelsEvent = BaseEvent & {
+  type: Events.Type.CLIENT
+  subType: Events.SubType.Client.WALKED_PARCELS
+  metadata: {
+    amountOfParcelsVisited: number
+    address: EthAddress
+    lastParcel: string
+  }
+}
