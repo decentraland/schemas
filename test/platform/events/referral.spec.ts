@@ -25,11 +25,9 @@ describe('Streaming Events tests', () => {
         metadata: {
           title: 'Test Title',
           description: 'Test Description',
-          position: '0,0',
-          worldName: null,
+          tier: 'tier 1',
           url: 'https://test.com',
-          isWorld: true,
-          address: '0x123',
+          invitedUsers: '5',
           image: 'https://test.com/image.png'
         }
       }
