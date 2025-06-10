@@ -359,7 +359,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral;
     key: string;
     timestamp: number;
 };
@@ -1298,7 +1298,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1393,6 +1393,13 @@ export namespace Events {
             BID_RECEIVED = "bid-received"
         }
         // (undocumented)
+        export enum Referral {
+            // (undocumented)
+            REFERRAL_INVITED_USERS_ACCEPTED = "referral-invited-users-accepted",
+            // (undocumented)
+            REFERRAL_NEW_TIER_REACHED = "referral-new-tier-reached"
+        }
+        // (undocumented)
         export enum Rewards {
             // (undocumented)
             CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED = "campaign-gas-price-higher-than-expected",
@@ -1451,6 +1458,8 @@ export namespace Events {
         CREDITS_SERVICE = "credits-service",
         // (undocumented)
         MARKETPLACE = "marketplace",
+        // (undocumented)
+        REFERRAL = "referral",
         // (undocumented)
         REWARDS = "rewards",
         // (undocumented)
@@ -2495,6 +2504,10 @@ export enum NotificationType {
     // (undocumented)
     LAND_RENTED = "rental_started",
     // (undocumented)
+    REFERRAL_INVITED_USERS_ACCEPTED = "referral_invited_users_accepted",
+    // (undocumented)
+    REFERRAL_NEW_TIER_REACHED = "referral_new_tier_reached",
+    // (undocumented)
     REWARD_ASSIGNED = "reward_assignment",
     // (undocumented)
     REWARD_CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED = "reward_campaign_gas_price_higher_than_expected",
@@ -3152,6 +3165,42 @@ export namespace Rarity {
     export function getMaxSupply(rarity: Rarity): number;
     // (undocumented)
     export function getRarities(): Rarity[];
+}
+
+// Warning: (ae-missing-release-tag) "ReferralInvitedUsersAcceptedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ReferralInvitedUsersAcceptedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ReferralInvitedUsersAcceptedEvent = BaseEvent & {
+    type: Events.Type.REFERRAL;
+    subType: Events.SubType.Referral.REFERRAL_INVITED_USERS_ACCEPTED;
+    metadata: ReferralMetadata;
+};
+
+// @public (undocumented)
+export namespace ReferralInvitedUsersAcceptedEvent {
+    const // (undocumented)
+    schema: JSONSchema<ReferralInvitedUsersAcceptedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<ReferralInvitedUsersAcceptedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "ReferralNewTierReachedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ReferralNewTierReachedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type ReferralNewTierReachedEvent = BaseEvent & {
+    type: Events.Type.REFERRAL;
+    subType: Events.SubType.Referral.REFERRAL_NEW_TIER_REACHED;
+    metadata: ReferralMetadata;
+};
+
+// @public (undocumented)
+export namespace ReferralNewTierReachedEvent {
+    const // (undocumented)
+    schema: JSONSchema<ReferralNewTierReachedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<ReferralNewTierReachedEvent>;
 }
 
 // Warning: (ae-missing-release-tag) "RentalEndedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -4343,6 +4392,7 @@ export namespace WorldConfiguration {
 // src/dapps/trade.ts:92:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/platform/events/blockchain.ts:169:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/client.ts:93:3 - (ae-forgotten-export) The symbol "ClientBaseMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/referral.ts:29:3 - (ae-forgotten-export) The symbol "ReferralMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/streaming.ts:47:3 - (ae-forgotten-export) The symbol "StreamingMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
