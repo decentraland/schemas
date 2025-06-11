@@ -5,6 +5,7 @@ import { createEventSchema } from './utils'
 type ReferralMetadata = {
   title: string
   description: string
+  address: string
   tier: string
   url: string
   image: string
@@ -16,12 +17,13 @@ const referralMetadataSchema: JSONSchema<ReferralMetadata> = {
   properties: {
     title: { type: 'string' },
     description: { type: 'string' },
+    address: { type: 'string' },
     tier: { type: 'string' },
     url: { type: 'string' },
     image: { type: 'string' },
     invitedUsers: { type: 'string' }
   },
-  required: ['tier', 'url', 'title', 'description', 'image', 'invitedUsers'],
+  required: ['address', 'tier', 'url', 'title', 'description', 'image', 'invitedUsers'],
   additionalProperties: false
 }
 

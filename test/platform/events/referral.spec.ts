@@ -25,6 +25,7 @@ describe('Streaming Events tests', () => {
         metadata: {
           title: 'Test Title',
           description: 'Test Description',
+          address: '0x123',
           tier: 'tier 1',
           url: 'https://test.com',
           invitedUsers: '5',
