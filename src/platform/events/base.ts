@@ -19,6 +19,7 @@ import {
 } from './client'
 import { UserJoinedRoomEvent } from './comms'
 import { BidReceivedEvent } from './marketplace'
+import { ReferralInvitedUsersAcceptedEvent, ReferralNewTierReachedEvent } from './referral'
 import {
   RewardInProgressEvent,
   RewardAssignedEvent,
@@ -59,7 +60,8 @@ export namespace Events {
     SOCIAL_SERVICE = 'social-service',
     CREDITS_SERVICE = 'credits-service',
     STREAMING = 'streaming',
-    COMMS = 'comms'
+    COMMS = 'comms',
+    REFERRAL = 'referral'
   }
 
   export namespace SubType {
@@ -143,6 +145,11 @@ export namespace Events {
     export enum Comms {
       USER_JOINED_ROOM = 'user-joined-room'
     }
+
+    export enum Referral {
+      REFERRAL_INVITED_USERS_ACCEPTED = 'referral-invited-users-accepted',
+      REFERRAL_NEW_TIER_REACHED = 'referral-new-tier-reached'
+    }
   }
 }
 
@@ -160,6 +167,7 @@ export type BaseEvent = {
     | Events.SubType.CreditsService
     | Events.SubType.Streaming
     | Events.SubType.Comms
+    | Events.SubType.Referral
   key: string
   timestamp: number
 }
@@ -202,3 +210,5 @@ export type Event =
   | CreditsUsage24HoursReminderEvent
   | CreditsDoNotMissOutReminderEvent
   | CreditsClaimReminderEvent
+  | ReferralInvitedUsersAcceptedEvent
+  | ReferralNewTierReachedEvent
