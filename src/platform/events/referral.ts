@@ -6,10 +6,11 @@ type ReferralMetadata = {
   title: string
   description: string
   address: string
-  tier: string
+  tier: number
   url: string
   image: string
   invitedUserAddress: string
+  invitedUsers: number
 }
 
 const referralMetadataSchema: JSONSchema<ReferralMetadata> = {
@@ -18,10 +19,11 @@ const referralMetadataSchema: JSONSchema<ReferralMetadata> = {
     title: { type: 'string' },
     description: { type: 'string' },
     address: { type: 'string' },
-    tier: { type: 'string' },
+    tier: { type: 'number', minimum: 1 },
     url: { type: 'string' },
     image: { type: 'string' },
-    invitedUserAddress: { type: 'string' }
+    invitedUserAddress: { type: 'string' },
+    invitedUsers: { type: 'number', minimum: 1 }
   },
   required: ['address', 'tier', 'url', 'title', 'description', 'image', 'invitedUserAddress'],
   additionalProperties: false
