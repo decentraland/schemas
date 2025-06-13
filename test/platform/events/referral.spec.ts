@@ -28,7 +28,7 @@ describe('Streaming Events tests', () => {
           address: '0x123',
           tier: 'tier 1',
           url: 'https://test.com',
-          invitedUsers: '5',
+          invitedUserAddress: '0x456',
           image: 'https://test.com/image.png'
         }
       }
