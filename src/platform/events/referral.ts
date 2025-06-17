@@ -11,6 +11,7 @@ type ReferralMetadata = {
   image: string
   invitedUserAddress: string
   invitedUsers: number
+  rarity: string | null
 }
 
 const referralMetadataSchema: JSONSchema<ReferralMetadata> = {
@@ -23,7 +24,8 @@ const referralMetadataSchema: JSONSchema<ReferralMetadata> = {
     url: { type: 'string' },
     image: { type: 'string' },
     invitedUserAddress: { type: 'string' },
-    invitedUsers: { type: 'number', minimum: 1 }
+    invitedUsers: { type: 'number', minimum: 1 },
+    rarity: { type: 'string', nullable: true }
   },
   required: ['address', 'tier', 'url', 'title', 'description', 'image', 'invitedUserAddress'],
   additionalProperties: false
