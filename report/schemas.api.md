@@ -2910,7 +2910,9 @@ export namespace PreviewEmoteEventType {
 // Warning: (ae-missing-release-tag) "PreviewMessagePayload" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type PreviewMessagePayload<T extends PreviewMessageType> = T extends PreviewMessageType.READY ? null : T extends PreviewMessageType.LOAD ? null : T extends PreviewMessageType.ERROR ? {
+export type PreviewMessagePayload<T extends PreviewMessageType> = T extends PreviewMessageType.READY ? null : T extends PreviewMessageType.LOAD ? {
+    renderer: PreviewRenderer;
+} | null : T extends PreviewMessageType.ERROR ? {
     message: string;
 } : T extends PreviewMessageType.UPDATE ? {
     options: PreviewOptions;
@@ -3026,6 +3028,16 @@ export namespace PreviewProjection {
     schema: JSONSchema<PreviewProjection>;
     const // (undocumented)
     validate: ValidateFunction<PreviewProjection>;
+}
+
+// Warning: (ae-missing-release-tag) "PreviewRenderer" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum PreviewRenderer {
+    // (undocumented)
+    BABYLON = "babylon",
+    // (undocumented)
+    UNITY = "unity"
 }
 
 // @alpha (undocumented)
@@ -4376,8 +4388,8 @@ export namespace WorldConfiguration {
 // src/dapps/preview/preview-config.ts:11:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:12:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:17:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:33:7 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:70:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
+// src/dapps/preview/preview-message.ts:38:7 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
+// src/dapps/preview/preview-message.ts:75:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
 // src/dapps/rentals-listings.ts:85:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/rentals-listings.ts:126:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/rentals-listings.ts:128:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
