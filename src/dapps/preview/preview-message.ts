@@ -46,6 +46,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
         | 'changeZoom'
         | 'changeCameraPosition'
         | 'panCamera'
+        | 'cleanup'
         | 'getLength'
         | 'isPlaying'
         | 'play'

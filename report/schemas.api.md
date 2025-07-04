@@ -1706,6 +1706,8 @@ export interface ISceneController {
     }): Promise<void>;
     // (undocumented)
     changeZoom(zoom: number): Promise<void>;
+    // (undocumented)
+    cleanup(): Promise<void>;
     // Warning: (ae-incompatible-release-tags) The symbol "getMetrics" is marked as @public, but its signature references "Metrics" which is marked as @alpha
     //
     // (undocumented)
@@ -2919,7 +2921,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
 } : T extends PreviewMessageType.CONTROLLER_REQUEST ? {
     id: string;
     namespace: 'scene' | 'emote';
-    method: 'getScreenshot' | 'getMetrics' | 'changeZoom' | 'changeCameraPosition' | 'panCamera' | 'getLength' | 'isPlaying' | 'play' | 'pause' | 'stop' | 'goTo' | 'enableSound' | 'disableSound' | 'hasSound';
+    method: 'getScreenshot' | 'getMetrics' | 'changeZoom' | 'changeCameraPosition' | 'panCamera' | 'cleanup' | 'getLength' | 'isPlaying' | 'play' | 'pause' | 'stop' | 'goTo' | 'enableSound' | 'disableSound' | 'hasSound';
     params: any[];
 } : T extends PreviewMessageType.CONTROLLER_RESPONSE ? {
     id: string;
@@ -4389,7 +4391,7 @@ export namespace WorldConfiguration {
 // src/dapps/preview/preview-config.ts:12:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:17:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
 // src/dapps/preview/preview-message.ts:38:7 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:75:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
+// src/dapps/preview/preview-message.ts:76:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
 // src/dapps/rentals-listings.ts:85:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/rentals-listings.ts:126:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/rentals-listings.ts:128:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
