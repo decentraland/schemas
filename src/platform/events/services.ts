@@ -327,6 +327,7 @@ export type CreditsUsageReminderEvent = BaseEvent & {
     address: EthAddress
     creditsAmount: number
     expirationDate: string
+    expirationDay: string
   }
 }
 
@@ -343,9 +344,10 @@ export namespace CreditsUsageReminderEvent {
         properties: {
           address: { type: 'string' },
           creditsAmount: { type: 'number', minimum: 1 },
-          expirationDate: { type: 'string' }
+          expirationDate: { type: 'string' },
+          expirationDay: { type: 'string' }
         },
-        required: ['address', 'creditsAmount', 'expirationDate']
+        required: ['address', 'creditsAmount', 'expirationDate', 'expirationDay']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],

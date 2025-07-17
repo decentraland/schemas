@@ -271,7 +271,8 @@ describe('Credits Events tests', () => {
         metadata: {
           address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
           creditsAmount: 100,
-          expirationDate: 'Sunday, July 27 at 23:59 UTC'
+          expirationDate: 'July 27 at 23:59 UTC',
+          expirationDay: 'Sunday'
         }
       }
 
@@ -289,7 +290,8 @@ describe('Credits Events tests', () => {
         metadata: {
           address: '0x3b21028719a4aca7ebee35b0157a6f1b0cf0d0c5',
           creditsAmount: -1, // Invalid negative amount
-          expirationDate: 'Sunday, July 27 at 23:59 UTC'
+          expirationDate: 'July 27 at 23:59 UTC',
+          expirationDay: 'Sunday'
         }
       }
 
@@ -304,7 +306,8 @@ describe('Credits Events tests', () => {
         timestamp: 1710234567890,
         metadata: {
           creditsAmount: 100,
-          expirationDate: 'Sunday, July 27 at 23:59 UTC'
+          expirationDate: 'July 27 at 23:59 UTC',
+          expirationDay: 'Sunday'
           // address missing
         }
       }
