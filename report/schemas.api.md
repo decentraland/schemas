@@ -1044,6 +1044,7 @@ export type CreditsUsageReminderEvent = BaseEvent & {
         address: EthAddress;
         creditsAmount: number;
         expirationDate: string;
+        expirationDay: string;
     };
 };
 
