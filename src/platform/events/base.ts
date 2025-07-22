@@ -18,6 +18,12 @@ import {
   WalkedDistanceEvent
 } from './client'
 import { UserJoinedRoomEvent } from './comms'
+import {
+  CommunityDeletedEvent,
+  CommunityMemberBannedEvent,
+  CommunityMemberRemovedEvent,
+  CommunityRenamedEvent
+} from './communities'
 import { BidReceivedEvent } from './marketplace'
 import { ReferralInvitedUsersAcceptedEvent, ReferralNewTierReachedEvent } from './referral'
 import {
@@ -61,7 +67,8 @@ export namespace Events {
     CREDITS_SERVICE = 'credits-service',
     STREAMING = 'streaming',
     COMMS = 'comms',
-    REFERRAL = 'referral'
+    REFERRAL = 'referral',
+    COMMUNITY = 'community'
   }
 
   export namespace SubType {
@@ -150,6 +157,13 @@ export namespace Events {
       REFERRAL_INVITED_USERS_ACCEPTED = 'referral-invited-users-accepted',
       REFERRAL_NEW_TIER_REACHED = 'referral-new-tier-reached'
     }
+
+    export enum Community {
+      DELETED = 'community-deleted',
+      RENAMED = 'community-renamed',
+      MEMBER_BANNED = 'community-member-banned',
+      MEMBER_REMOVED = 'community-member-removed'
+    }
   }
 }
 
@@ -168,6 +182,7 @@ export type BaseEvent = {
     | Events.SubType.Streaming
     | Events.SubType.Comms
     | Events.SubType.Referral
+    | Events.SubType.Community
   key: string
   timestamp: number
 }
@@ -212,3 +227,7 @@ export type Event =
   | CreditsClaimReminderEvent
   | ReferralInvitedUsersAcceptedEvent
   | ReferralNewTierReachedEvent
+  | CommunityDeletedEvent
+  | CommunityRenamedEvent
+  | CommunityMemberBannedEvent
+  | CommunityMemberRemovedEvent
