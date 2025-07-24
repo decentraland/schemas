@@ -8,6 +8,8 @@ export type CommunityDeletedEvent = BaseEvent & {
   metadata: {
     id: string
     name: string
+    memberAddresses: EthAddress[]
+    thumbnailUrl: string
   }
 }
 
@@ -23,9 +25,11 @@ export namespace CommunityDeletedEvent {
         type: 'object',
         properties: {
           id: { type: 'string' },
-          name: { type: 'string' }
+          name: { type: 'string' },
+          memberAddresses: { type: 'array', items: { type: 'string' } },
+          thumbnailUrl: { type: 'string' }
         },
-        required: ['id', 'name'],
+        required: ['id', 'name', 'memberAddresses', 'thumbnailUrl'],
         additionalProperties: false
       }
     },
@@ -43,6 +47,8 @@ export type CommunityRenamedEvent = BaseEvent & {
     id: string
     oldName: string
     newName: string
+    memberAddresses: EthAddress[]
+    thumbnailUrl: string
   }
 }
 
@@ -59,9 +65,11 @@ export namespace CommunityRenamedEvent {
         properties: {
           id: { type: 'string' },
           oldName: { type: 'string' },
-          newName: { type: 'string' }
+          newName: { type: 'string' },
+          memberAddresses: { type: 'array', items: { type: 'string' } },
+          thumbnailUrl: { type: 'string' }
         },
-        required: ['id', 'oldName', 'newName'],
+        required: ['id', 'oldName', 'newName', 'memberAddresses', 'thumbnailUrl'],
         additionalProperties: false
       }
     },
@@ -79,6 +87,7 @@ export type CommunityMemberBannedEvent = BaseEvent & {
     id: string
     name: string
     memberAddress: EthAddress
+    thumbnailUrl: string
   }
 }
 
@@ -95,9 +104,10 @@ export namespace CommunityMemberBannedEvent {
         properties: {
           id: { type: 'string' },
           name: { type: 'string' },
-          memberAddress: { type: 'string' }
+          memberAddress: { type: 'string' },
+          thumbnailUrl: { type: 'string' }
         },
-        required: ['id', 'name', 'memberAddress'],
+        required: ['id', 'name', 'memberAddress', 'thumbnailUrl'],
         additionalProperties: false
       }
     },
@@ -115,6 +125,7 @@ export type CommunityMemberRemovedEvent = BaseEvent & {
     id: string
     name: string
     memberAddress: EthAddress
+    thumbnailUrl: string
   }
 }
 
@@ -131,9 +142,10 @@ export namespace CommunityMemberRemovedEvent {
         properties: {
           id: { type: 'string' },
           name: { type: 'string' },
-          memberAddress: { type: 'string' }
+          memberAddress: { type: 'string' },
+          thumbnailUrl: { type: 'string' }
         },
-        required: ['id', 'name', 'memberAddress'],
+        required: ['id', 'name', 'memberAddress', 'thumbnailUrl'],
         additionalProperties: false
       }
     },
