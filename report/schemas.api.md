@@ -826,6 +826,8 @@ export type CommunityDeletedEvent = BaseEvent & {
     metadata: {
         id: string;
         name: string;
+        memberAddresses: EthAddress[];
+        thumbnailUrl: string;
     };
 };
 
@@ -848,6 +850,7 @@ export type CommunityMemberBannedEvent = BaseEvent & {
         id: string;
         name: string;
         memberAddress: EthAddress;
+        thumbnailUrl: string;
     };
 };
 
@@ -870,6 +873,7 @@ export type CommunityMemberRemovedEvent = BaseEvent & {
         id: string;
         name: string;
         memberAddress: EthAddress;
+        thumbnailUrl: string;
     };
 };
 
@@ -892,6 +896,8 @@ export type CommunityRenamedEvent = BaseEvent & {
         id: string;
         oldName: string;
         newName: string;
+        memberAddresses: EthAddress[];
+        thumbnailUrl: string;
     };
 };
 
