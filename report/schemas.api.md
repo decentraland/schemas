@@ -2565,6 +2565,14 @@ export enum NotificationType {
     // (undocumented)
     BID_RECEIVED = "bid_received",
     // (undocumented)
+    COMMUNITY_DELETED = "community_deleted",
+    // (undocumented)
+    COMMUNITY_MEMBER_BANNED = "community_member_banned",
+    // (undocumented)
+    COMMUNITY_MEMBER_REMOVED = "community_member_removed",
+    // (undocumented)
+    COMMUNITY_RENAMED = "community_renamed",
+    // (undocumented)
     CREDITS_GOAL_COMPLETED = "credits_goal_completed",
     // (undocumented)
     CREDITS_REMINDER_CLAIM_CREDITS = "credits_reminder_claim_credits",

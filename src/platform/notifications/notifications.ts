@@ -50,7 +50,11 @@ export enum NotificationType {
   CREDITS_REMINDER_USAGE_24_HOURS = 'credits_reminder_usage_24_hours',
   CREDITS_REMINDER_DO_NOT_MISS_OUT = 'credits_reminder_do_not_miss_out',
   REFERRAL_INVITED_USERS_ACCEPTED = 'referral_invited_users_accepted',
-  REFERRAL_NEW_TIER_REACHED = 'referral_new_tier_reached'
+  REFERRAL_NEW_TIER_REACHED = 'referral_new_tier_reached',
+  COMMUNITY_DELETED = 'community_deleted',
+  COMMUNITY_RENAMED = 'community_renamed',
+  COMMUNITY_MEMBER_BANNED = 'community_member_banned',
+  COMMUNITY_MEMBER_REMOVED = 'community_member_removed'
 }
 
 /**
