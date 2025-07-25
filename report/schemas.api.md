@@ -359,7 +359,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community;
     key: string;
     timestamp: number;
 };
@@ -814,6 +814,99 @@ export namespace Color3 {
     schema: JSONSchema<Color3>;
     const // (undocumented)
     validate: ValidateFunction<Color3>;
+}
+
+// Warning: (ae-missing-release-tag) "CommunityDeletedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityDeletedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CommunityDeletedEvent = BaseEvent & {
+    type: Events.Type.COMMUNITY;
+    subType: Events.SubType.Community.DELETED;
+    metadata: {
+        id: string;
+        name: string;
+        memberAddresses: EthAddress[];
+        thumbnailUrl: string;
+    };
+};
+
+// @public (undocumented)
+export namespace CommunityDeletedEvent {
+    const // (undocumented)
+    schema: JSONSchema<CommunityDeletedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CommunityDeletedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "CommunityMemberBannedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityMemberBannedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CommunityMemberBannedEvent = BaseEvent & {
+    type: Events.Type.COMMUNITY;
+    subType: Events.SubType.Community.MEMBER_BANNED;
+    metadata: {
+        id: string;
+        name: string;
+        memberAddress: EthAddress;
+        thumbnailUrl: string;
+    };
+};
+
+// @public (undocumented)
+export namespace CommunityMemberBannedEvent {
+    const // (undocumented)
+    schema: JSONSchema<CommunityMemberBannedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CommunityMemberBannedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "CommunityMemberRemovedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityMemberRemovedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CommunityMemberRemovedEvent = BaseEvent & {
+    type: Events.Type.COMMUNITY;
+    subType: Events.SubType.Community.MEMBER_REMOVED;
+    metadata: {
+        id: string;
+        name: string;
+        memberAddress: EthAddress;
+        thumbnailUrl: string;
+    };
+};
+
+// @public (undocumented)
+export namespace CommunityMemberRemovedEvent {
+    const // (undocumented)
+    schema: JSONSchema<CommunityMemberRemovedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CommunityMemberRemovedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "CommunityRenamedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityRenamedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CommunityRenamedEvent = BaseEvent & {
+    type: Events.Type.COMMUNITY;
+    subType: Events.SubType.Community.RENAMED;
+    metadata: {
+        id: string;
+        oldName: string;
+        newName: string;
+        memberAddresses: EthAddress[];
+        thumbnailUrl: string;
+    };
+};
+
+// @public (undocumented)
+export namespace CommunityRenamedEvent {
+    const // (undocumented)
+    schema: JSONSchema<CommunityRenamedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CommunityRenamedEvent>;
 }
 
 // Warning: (ae-forgotten-export) The symbol "ContentfulContent" needs to be exported by the entry point index.d.ts
@@ -1299,7 +1392,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1372,6 +1465,17 @@ export namespace Events {
         export enum Comms {
             // (undocumented)
             USER_JOINED_ROOM = "user-joined-room"
+        }
+        // (undocumented)
+        export enum Community {
+            // (undocumented)
+            DELETED = "community-deleted",
+            // (undocumented)
+            MEMBER_BANNED = "community-member-banned",
+            // (undocumented)
+            MEMBER_REMOVED = "community-member-removed",
+            // (undocumented)
+            RENAMED = "community-renamed"
         }
         // (undocumented)
         export enum CreditsService {
@@ -1455,6 +1559,8 @@ export namespace Events {
         CLIENT = "client",
         // (undocumented)
         COMMS = "comms",
+        // (undocumented)
+        COMMUNITY = "community",
         // (undocumented)
         CREDITS_SERVICE = "credits-service",
         // (undocumented)
@@ -2458,6 +2564,14 @@ export enum NotificationType {
     BID_ACCEPTED = "bid_accepted",
     // (undocumented)
     BID_RECEIVED = "bid_received",
+    // (undocumented)
+    COMMUNITY_DELETED = "community_deleted",
+    // (undocumented)
+    COMMUNITY_MEMBER_BANNED = "community_member_banned",
+    // (undocumented)
+    COMMUNITY_MEMBER_REMOVED = "community_member_removed",
+    // (undocumented)
+    COMMUNITY_RENAMED = "community_renamed",
     // (undocumented)
     CREDITS_GOAL_COMPLETED = "credits_goal_completed",
     // (undocumented)
