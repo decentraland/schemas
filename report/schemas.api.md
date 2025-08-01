@@ -2585,6 +2585,8 @@ export enum NotificationType {
     // (undocumented)
     CREDITS_REMINDER_USAGE_24_HOURS = "credits_reminder_usage_24_hours",
     // (undocumented)
+    EVENT_CREATED = "event_created",
+    // (undocumented)
     EVENTS_STARTED = "events_started",
     // (undocumented)
     EVENTS_STARTS_SOON = "events_starts_soon",
