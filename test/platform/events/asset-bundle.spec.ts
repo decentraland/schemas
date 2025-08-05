@@ -13,7 +13,8 @@ describe('AssetBundleConversionFinished Events tests', () => {
         platform: 'mac',
         statusCode: 1,
         isLods: false,
-        isWorld: false
+        isWorld: false,
+        version: '1'
       }
     }
 
@@ -34,7 +35,8 @@ describe('AssetBundleConversionManuallyQueued Events tests', () => {
         entityId: 'baf',
         platform: 'mac',
         isLods: false,
-        isPriority: false
+        isPriority: false,
+        version: '1'
       }
     }
 
