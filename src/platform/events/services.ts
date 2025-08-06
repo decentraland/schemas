@@ -50,6 +50,7 @@ export type AssetBundleConversionFinishedEvent = BaseEvent & {
     statusCode: number
     isLods: boolean
     isWorld: boolean
+    version: string
   }
 }
 
@@ -68,9 +69,10 @@ export namespace AssetBundleConversionFinishedEvent {
           platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] },
           statusCode: { type: 'number' },
           isLods: { type: 'boolean' },
-          isWorld: { type: 'boolean' }
+          isWorld: { type: 'boolean' },
+          version: { type: 'string' }
         },
-        required: ['entityId', 'platform', 'statusCode', 'isLods', 'isWorld']
+        required: ['entityId', 'platform', 'statusCode', 'isLods', 'isWorld', 'version']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
@@ -88,6 +90,7 @@ export type AssetBundleConversionManuallyQueuedEvent = BaseEvent & {
     platform: 'windows' | 'mac' | 'webgl'
     isLods: boolean
     isPriority: boolean
+    version: string
   }
 }
 
@@ -105,7 +108,8 @@ export namespace AssetBundleConversionManuallyQueuedEvent {
           entityId: { type: 'string' },
           platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] },
           isLods: { type: 'boolean' },
-          isPriority: { type: 'boolean' }
+          isPriority: { type: 'boolean' },
+          version: { type: 'string' }
         },
         required: ['entityId', 'platform', 'isLods']
       }

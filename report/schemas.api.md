@@ -152,6 +152,7 @@ export type AssetBundleConversionFinishedEvent = BaseEvent & {
         statusCode: number;
         isLods: boolean;
         isWorld: boolean;
+        version: string;
     };
 };
 
@@ -175,6 +176,7 @@ export type AssetBundleConversionManuallyQueuedEvent = BaseEvent & {
         platform: 'windows' | 'mac' | 'webgl';
         isLods: boolean;
         isPriority: boolean;
+        version: string;
     };
 };
 
