@@ -1829,6 +1829,8 @@ export interface ISceneController {
         y?: number;
         z?: number;
     }): Promise<void>;
+    // (undocumented)
+    setUsername(username: string): Promise<void>;
 }
 
 // Warning: (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
@@ -3040,7 +3042,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
 } : T extends PreviewMessageType.CONTROLLER_REQUEST ? {
     id: string;
     namespace: 'scene' | 'emote';
-    method: 'getScreenshot' | 'getMetrics' | 'changeZoom' | 'changeCameraPosition' | 'panCamera' | 'cleanup' | 'getLength' | 'isPlaying' | 'play' | 'pause' | 'stop' | 'goTo' | 'enableSound' | 'disableSound' | 'hasSound';
+    method: 'getScreenshot' | 'getMetrics' | 'changeZoom' | 'changeCameraPosition' | 'panCamera' | 'cleanup' | 'getLength' | 'isPlaying' | 'play' | 'pause' | 'stop' | 'goTo' | 'enableSound' | 'disableSound' | 'hasSound' | 'setUsername';
     params: any[];
 } : T extends PreviewMessageType.CONTROLLER_RESPONSE ? {
     id: string;
@@ -3130,6 +3132,7 @@ export type PreviewOptions = {
     lockAlpha?: boolean;
     lockBeta?: boolean;
     lockRadius?: boolean;
+    username?: string | null;
 };
 
 // Warning: (ae-missing-release-tag) "PreviewProjection" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -4510,7 +4513,7 @@ export namespace WorldConfiguration {
 // src/dapps/preview/preview-config.ts:12:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:17:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
 // src/dapps/preview/preview-message.ts:38:7 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:76:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
+// src/dapps/preview/preview-message.ts:77:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
 // src/dapps/rentals-listings.ts:85:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/rentals-listings.ts:126:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/rentals-listings.ts:128:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
