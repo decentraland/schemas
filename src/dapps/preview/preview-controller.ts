@@ -21,6 +21,7 @@ export interface ISceneController {
   changeZoom(zoom: number): Promise<void>
   panCamera(offset: { x?: number; y?: number; z?: number }): Promise<void>
   changeCameraPosition(position: { alpha?: number; beta?: number; radius?: number }): Promise<void>
+  setUsername(username: string): Promise<void>
   cleanup(): Promise<void>
 }
 export interface IEmoteController {
