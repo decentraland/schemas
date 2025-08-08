@@ -52,4 +52,5 @@ export type PreviewOptions = {
   lockAlpha?: boolean
   lockBeta?: boolean
   lockRadius?: boolean
+  username?: string | null
 }
