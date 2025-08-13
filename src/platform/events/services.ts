@@ -51,6 +51,7 @@ export type AssetBundleConversionFinishedEvent = BaseEvent & {
     isLods: boolean
     isWorld: boolean
     version: string
+    buildDate: string
   }
 }
 
@@ -70,9 +71,10 @@ export namespace AssetBundleConversionFinishedEvent {
           statusCode: { type: 'number' },
           isLods: { type: 'boolean' },
           isWorld: { type: 'boolean' },
-          version: { type: 'string' }
+          version: { type: 'string' },
+          buildDate: { type: 'string' }
         },
-        required: ['entityId', 'platform', 'statusCode', 'isLods', 'isWorld', 'version']
+        required: ['entityId', 'platform', 'statusCode', 'isLods', 'isWorld', 'version', 'buildDate']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
@@ -111,7 +113,7 @@ export namespace AssetBundleConversionManuallyQueuedEvent {
           isPriority: { type: 'boolean' },
           version: { type: 'string' }
         },
-        required: ['entityId', 'platform', 'isLods']
+        required: ['entityId', 'platform', 'isLods', 'version']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],

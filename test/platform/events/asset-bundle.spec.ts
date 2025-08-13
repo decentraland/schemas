@@ -14,7 +14,8 @@ describe('AssetBundleConversionFinished Events tests', () => {
         statusCode: 1,
         isLods: false,
         isWorld: false,
-        version: '1'
+        version: '1',
+        buildDate: '2025-01-01'
       }
     }
 
