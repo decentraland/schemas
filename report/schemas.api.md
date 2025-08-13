@@ -153,6 +153,7 @@ export type AssetBundleConversionFinishedEvent = BaseEvent & {
         isLods: boolean;
         isWorld: boolean;
         version: string;
+        buildDate: string;
     };
 };
 
