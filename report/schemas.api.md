@@ -841,6 +841,29 @@ export namespace CommunityDeletedEvent {
     validate: ValidateFunction<CommunityDeletedEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "CommunityInviteSentEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityInviteSentEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CommunityInviteSentEvent = BaseEvent & {
+    type: Events.Type.COMMUNITY;
+    subType: Events.SubType.Community.INVITE_SENT;
+    metadata: {
+        id: string;
+        name: string;
+        memberAddress: EthAddress;
+        thumbnailUrl: string;
+    };
+};
+
+// @public (undocumented)
+export namespace CommunityInviteSentEvent {
+    const // (undocumented)
+    schema: JSONSchema<CommunityInviteSentEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CommunityInviteSentEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "CommunityMemberBannedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "CommunityMemberBannedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -909,6 +932,52 @@ export namespace CommunityRenamedEvent {
     schema: JSONSchema<CommunityRenamedEvent>;
     const // (undocumented)
     validate: ValidateFunction<CommunityRenamedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "CommunityRequestToJoinAcceptedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityRequestToJoinAcceptedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CommunityRequestToJoinAcceptedEvent = BaseEvent & {
+    type: Events.Type.COMMUNITY;
+    subType: Events.SubType.Community.REQUEST_TO_JOIN_ACCEPTED;
+    metadata: {
+        id: string;
+        name: string;
+        memberAddress: EthAddress;
+        thumbnailUrl: string;
+    };
+};
+
+// @public (undocumented)
+export namespace CommunityRequestToJoinAcceptedEvent {
+    const // (undocumented)
+    schema: JSONSchema<CommunityRequestToJoinAcceptedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CommunityRequestToJoinAcceptedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "CommunityRequestToJoinReceivedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityRequestToJoinReceivedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CommunityRequestToJoinReceivedEvent = BaseEvent & {
+    type: Events.Type.COMMUNITY;
+    subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED;
+    metadata: {
+        id: string;
+        name: string;
+        memberAddress: EthAddress;
+        thumbnailUrl: string;
+    };
+};
+
+// @public (undocumented)
+export namespace CommunityRequestToJoinReceivedEvent {
+    const // (undocumented)
+    schema: JSONSchema<CommunityRequestToJoinReceivedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CommunityRequestToJoinReceivedEvent>;
 }
 
 // Warning: (ae-forgotten-export) The symbol "ContentfulContent" needs to be exported by the entry point index.d.ts
@@ -1473,11 +1542,17 @@ export namespace Events {
             // (undocumented)
             DELETED = "community-deleted",
             // (undocumented)
+            INVITE_SENT = "community-invite-sent",
+            // (undocumented)
             MEMBER_BANNED = "community-member-banned",
             // (undocumented)
             MEMBER_REMOVED = "community-member-removed",
             // (undocumented)
-            RENAMED = "community-renamed"
+            RENAMED = "community-renamed",
+            // (undocumented)
+            REQUEST_TO_JOIN_ACCEPTED = "community-request-to-join-accepted",
+            // (undocumented)
+            REQUEST_TO_JOIN_RECEIVED = "community-request-to-join-received"
         }
         // (undocumented)
         export enum CreditsService {
@@ -2571,11 +2646,17 @@ export enum NotificationType {
     // (undocumented)
     COMMUNITY_DELETED = "community_deleted",
     // (undocumented)
+    COMMUNITY_INVITE_SENT = "community_invite_sent",
+    // (undocumented)
     COMMUNITY_MEMBER_BANNED = "community_member_banned",
     // (undocumented)
     COMMUNITY_MEMBER_REMOVED = "community_member_removed",
     // (undocumented)
     COMMUNITY_RENAMED = "community_renamed",
+    // (undocumented)
+    COMMUNITY_REQUEST_TO_JOIN_ACCEPTED = "community_request_to_join_accepted",
+    // (undocumented)
+    COMMUNITY_REQUEST_TO_JOIN_RECEIVED = "community_request_to_join_received",
     // (undocumented)
     CREDITS_GOAL_COMPLETED = "credits_goal_completed",
     // (undocumented)
