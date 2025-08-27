@@ -841,13 +841,13 @@ export namespace CommunityDeletedEvent {
     validate: ValidateFunction<CommunityDeletedEvent>;
 }
 
-// Warning: (ae-missing-release-tag) "CommunityInviteSentEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "CommunityInviteSentEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityInviteReceivedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityInviteReceivedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type CommunityInviteSentEvent = BaseEvent & {
+export type CommunityInviteReceivedEvent = BaseEvent & {
     type: Events.Type.COMMUNITY;
-    subType: Events.SubType.Community.INVITE_SENT;
+    subType: Events.SubType.Community.INVITE_RECEIVED;
     metadata: {
         id: string;
         name: string;
@@ -857,11 +857,11 @@ export type CommunityInviteSentEvent = BaseEvent & {
 };
 
 // @public (undocumented)
-export namespace CommunityInviteSentEvent {
+export namespace CommunityInviteReceivedEvent {
     const // (undocumented)
-    schema: JSONSchema<CommunityInviteSentEvent>;
+    schema: JSONSchema<CommunityInviteReceivedEvent>;
     const // (undocumented)
-    validate: ValidateFunction<CommunityInviteSentEvent>;
+    validate: ValidateFunction<CommunityInviteReceivedEvent>;
 }
 
 // Warning: (ae-missing-release-tag) "CommunityMemberBannedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -964,7 +964,7 @@ export namespace CommunityRequestToJoinAcceptedEvent {
 export type CommunityRequestToJoinReceivedEvent = BaseEvent & {
     type: Events.Type.COMMUNITY;
     subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED;
-    metadata: {
+    metadata: Audience & {
         id: string;
         name: string;
         memberAddress: EthAddress;
@@ -1542,7 +1542,7 @@ export namespace Events {
             // (undocumented)
             DELETED = "community-deleted",
             // (undocumented)
-            INVITE_SENT = "community-invite-sent",
+            INVITE_RECEIVED = "community-invite-received",
             // (undocumented)
             MEMBER_BANNED = "community-member-banned",
             // (undocumented)
@@ -4609,6 +4609,7 @@ export namespace WorldConfiguration {
 // src/dapps/trade.ts:92:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/platform/events/blockchain.ts:169:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/client.ts:93:3 - (ae-forgotten-export) The symbol "ClientBaseMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/communities.ts:166:3 - (ae-forgotten-export) The symbol "Audience" needs to be exported by the entry point index.d.ts
 // src/platform/events/referral.ts:37:3 - (ae-forgotten-export) The symbol "ReferralMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/streaming.ts:47:3 - (ae-forgotten-export) The symbol "StreamingMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
