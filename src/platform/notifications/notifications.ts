@@ -55,7 +55,10 @@ export enum NotificationType {
   COMMUNITY_DELETED = 'community_deleted',
   COMMUNITY_RENAMED = 'community_renamed',
   COMMUNITY_MEMBER_BANNED = 'community_member_banned',
-  COMMUNITY_MEMBER_REMOVED = 'community_member_removed'
+  COMMUNITY_MEMBER_REMOVED = 'community_member_removed',
+  COMMUNITY_REQUEST_TO_JOIN_RECEIVED = 'community_request_to_join_received',
+  COMMUNITY_REQUEST_TO_JOIN_ACCEPTED = 'community_request_to_join_accepted',
+  COMMUNITY_INVITE_SENT = 'community_invite_sent'
 }
 
 /**

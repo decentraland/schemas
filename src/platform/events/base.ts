@@ -162,7 +162,10 @@ export namespace Events {
       DELETED = 'community-deleted',
       RENAMED = 'community-renamed',
       MEMBER_BANNED = 'community-member-banned',
-      MEMBER_REMOVED = 'community-member-removed'
+      MEMBER_REMOVED = 'community-member-removed',
+      REQUEST_TO_JOIN_RECEIVED = 'community-request-to-join-received',
+      REQUEST_TO_JOIN_ACCEPTED = 'community-request-to-join-accepted',
+      INVITE_SENT = 'community-invite-sent'
     }
   }
 }

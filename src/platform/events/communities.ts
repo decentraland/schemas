@@ -155,3 +155,117 @@ export namespace CommunityMemberRemovedEvent {
 
   export const validate: ValidateFunction<CommunityMemberRemovedEvent> = generateLazyValidator(schema)
 }
+
+export type CommunityRequestToJoinReceivedEvent = BaseEvent & {
+  type: Events.Type.COMMUNITY
+  subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED
+  metadata: {
+    id: string
+    name: string
+    memberAddress: EthAddress
+    thumbnailUrl: string
+  }
+}
+
+export namespace CommunityRequestToJoinReceivedEvent {
+  export const schema: JSONSchema<CommunityRequestToJoinReceivedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.COMMUNITY },
+      subType: { type: 'string', const: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 1 },
+      metadata: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          name: { type: 'string' },
+          memberAddress: { type: 'string' },
+          thumbnailUrl: { type: 'string' }
+        },
+        required: ['id', 'name', 'memberAddress', 'thumbnailUrl'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<CommunityRequestToJoinReceivedEvent> = generateLazyValidator(schema)
+}
+
+export type CommunityRequestToJoinAcceptedEvent = BaseEvent & {
+  type: Events.Type.COMMUNITY
+  subType: Events.SubType.Community.REQUEST_TO_JOIN_ACCEPTED
+  metadata: {
+    id: string
+    name: string
+    memberAddress: EthAddress
+    thumbnailUrl: string
+  }
+}
+
+export namespace CommunityRequestToJoinAcceptedEvent {
+  export const schema: JSONSchema<CommunityRequestToJoinAcceptedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.COMMUNITY },
+      subType: { type: 'string', const: Events.SubType.Community.REQUEST_TO_JOIN_ACCEPTED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 1 },
+      metadata: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          name: { type: 'string' },
+          memberAddress: { type: 'string' },
+          thumbnailUrl: { type: 'string' }
+        },
+        required: ['id', 'name', 'memberAddress', 'thumbnailUrl'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<CommunityRequestToJoinAcceptedEvent> = generateLazyValidator(schema)
+}
+
+export type CommunityInviteSentEvent = BaseEvent & {
+  type: Events.Type.COMMUNITY
+  subType: Events.SubType.Community.INVITE_SENT
+  metadata: {
+    id: string
+    name: string
+    memberAddress: EthAddress
+    thumbnailUrl: string
+  }
+}
+
+export namespace CommunityInviteSentEvent {
+  export const schema: JSONSchema<CommunityInviteSentEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.COMMUNITY },
+      subType: { type: 'string', const: Events.SubType.Community.INVITE_SENT },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 1 },
+      metadata: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          name: { type: 'string' },
+          memberAddress: { type: 'string' },
+          thumbnailUrl: { type: 'string' }
+        },
+        required: ['id', 'name', 'memberAddress', 'thumbnailUrl'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<CommunityInviteSentEvent> = generateLazyValidator(schema)
+}
