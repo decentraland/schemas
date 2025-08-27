@@ -165,7 +165,7 @@ export namespace Events {
       MEMBER_REMOVED = 'community-member-removed',
       REQUEST_TO_JOIN_RECEIVED = 'community-request-to-join-received',
       REQUEST_TO_JOIN_ACCEPTED = 'community-request-to-join-accepted',
-      INVITE_SENT = 'community-invite-sent'
+      INVITE_RECEIVED = 'community-invite-received'
     }
   }
 }

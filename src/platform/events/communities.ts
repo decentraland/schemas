@@ -2,6 +2,10 @@ import { EthAddress } from '../../misc'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { BaseEvent, Events } from './base'
 
+type Audience = {
+  addressesToNotify: EthAddress[]
+}
+
 export type CommunityDeletedEvent = BaseEvent & {
   type: Events.Type.COMMUNITY
   subType: Events.SubType.Community.DELETED
@@ -159,7 +163,7 @@ export namespace CommunityMemberRemovedEvent {
 export type CommunityRequestToJoinReceivedEvent = BaseEvent & {
   type: Events.Type.COMMUNITY
   subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED
-  metadata: {
+  metadata: Audience & {
     id: string
     name: string
     memberAddress: EthAddress
@@ -181,9 +185,10 @@ export namespace CommunityRequestToJoinReceivedEvent {
           id: { type: 'string' },
           name: { type: 'string' },
           memberAddress: { type: 'string' },
-          thumbnailUrl: { type: 'string' }
+          thumbnailUrl: { type: 'string' },
+          addressesToNotify: { type: 'array', items: { type: 'string' } }
         },
-        required: ['id', 'name', 'memberAddress', 'thumbnailUrl'],
+        required: ['id', 'name', 'memberAddress', 'thumbnailUrl', 'addressesToNotify'],
         additionalProperties: false
       }
     },
@@ -232,9 +237,9 @@ export namespace CommunityRequestToJoinAcceptedEvent {
   export const validate: ValidateFunction<CommunityRequestToJoinAcceptedEvent> = generateLazyValidator(schema)
 }
 
-export type CommunityInviteSentEvent = BaseEvent & {
+export type CommunityInviteReceivedEvent = BaseEvent & {
   type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.INVITE_SENT
+  subType: Events.SubType.Community.INVITE_RECEIVED
   metadata: {
     id: string
     name: string
@@ -243,12 +248,12 @@ export type CommunityInviteSentEvent = BaseEvent & {
   }
 }
 
-export namespace CommunityInviteSentEvent {
-  export const schema: JSONSchema<CommunityInviteSentEvent> = {
+export namespace CommunityInviteReceivedEvent {
+  export const schema: JSONSchema<CommunityInviteReceivedEvent> = {
     type: 'object',
     properties: {
       type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.INVITE_SENT },
+      subType: { type: 'string', const: Events.SubType.Community.INVITE_RECEIVED },
       key: { type: 'string' },
       timestamp: { type: 'number', minimum: 1 },
       metadata: {
@@ -267,5 +272,5 @@ export namespace CommunityInviteSentEvent {
     additionalProperties: false
   }
 
-  export const validate: ValidateFunction<CommunityInviteSentEvent> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<CommunityInviteReceivedEvent> = generateLazyValidator(schema)
 }
