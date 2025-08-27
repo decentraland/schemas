@@ -849,8 +849,8 @@ export type CommunityInviteReceivedEvent = BaseEvent & {
     type: Events.Type.COMMUNITY;
     subType: Events.SubType.Community.INVITE_RECEIVED;
     metadata: {
-        id: string;
-        name: string;
+        communityId: string;
+        communityName: string;
         memberAddress: EthAddress;
         thumbnailUrl: string;
     };
@@ -942,8 +942,8 @@ export type CommunityRequestToJoinAcceptedEvent = BaseEvent & {
     type: Events.Type.COMMUNITY;
     subType: Events.SubType.Community.REQUEST_TO_JOIN_ACCEPTED;
     metadata: {
-        id: string;
-        name: string;
+        communityId: string;
+        communityName: string;
         memberAddress: EthAddress;
         thumbnailUrl: string;
     };
@@ -965,8 +965,8 @@ export type CommunityRequestToJoinReceivedEvent = BaseEvent & {
     type: Events.Type.COMMUNITY;
     subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED;
     metadata: Audience & {
-        id: string;
-        name: string;
+        communityId: string;
+        communityName: string;
         memberAddress: EthAddress;
         thumbnailUrl: string;
     };

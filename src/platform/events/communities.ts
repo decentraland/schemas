@@ -164,8 +164,8 @@ export type CommunityRequestToJoinReceivedEvent = BaseEvent & {
   type: Events.Type.COMMUNITY
   subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED
   metadata: Audience & {
-    id: string
-    name: string
+    communityId: string
+    communityName: string
     memberAddress: EthAddress
     thumbnailUrl: string
   }
@@ -182,13 +182,13 @@ export namespace CommunityRequestToJoinReceivedEvent {
       metadata: {
         type: 'object',
         properties: {
-          id: { type: 'string' },
-          name: { type: 'string' },
+          communityId: { type: 'string' },
+          communityName: { type: 'string' },
           memberAddress: { type: 'string' },
           thumbnailUrl: { type: 'string' },
           addressesToNotify: { type: 'array', items: { type: 'string' } }
         },
-        required: ['id', 'name', 'memberAddress', 'thumbnailUrl', 'addressesToNotify'],
+        required: ['communityId', 'communityName', 'memberAddress', 'thumbnailUrl', 'addressesToNotify'],
         additionalProperties: false
       }
     },
@@ -203,8 +203,8 @@ export type CommunityRequestToJoinAcceptedEvent = BaseEvent & {
   type: Events.Type.COMMUNITY
   subType: Events.SubType.Community.REQUEST_TO_JOIN_ACCEPTED
   metadata: {
-    id: string
-    name: string
+    communityId: string
+    communityName: string
     memberAddress: EthAddress
     thumbnailUrl: string
   }
@@ -221,12 +221,12 @@ export namespace CommunityRequestToJoinAcceptedEvent {
       metadata: {
         type: 'object',
         properties: {
-          id: { type: 'string' },
-          name: { type: 'string' },
+          communityId: { type: 'string' },
+          communityName: { type: 'string' },
           memberAddress: { type: 'string' },
           thumbnailUrl: { type: 'string' }
         },
-        required: ['id', 'name', 'memberAddress', 'thumbnailUrl'],
+        required: ['communityId', 'communityName', 'memberAddress', 'thumbnailUrl'],
         additionalProperties: false
       }
     },
@@ -241,8 +241,8 @@ export type CommunityInviteReceivedEvent = BaseEvent & {
   type: Events.Type.COMMUNITY
   subType: Events.SubType.Community.INVITE_RECEIVED
   metadata: {
-    id: string
-    name: string
+    communityId: string
+    communityName: string
     memberAddress: EthAddress
     thumbnailUrl: string
   }
@@ -259,12 +259,12 @@ export namespace CommunityInviteReceivedEvent {
       metadata: {
         type: 'object',
         properties: {
-          id: { type: 'string' },
-          name: { type: 'string' },
+          communityId: { type: 'string' },
+          communityName: { type: 'string' },
           memberAddress: { type: 'string' },
           thumbnailUrl: { type: 'string' }
         },
-        required: ['id', 'name', 'memberAddress', 'thumbnailUrl'],
+        required: ['communityId', 'communityName', 'memberAddress', 'thumbnailUrl'],
         additionalProperties: false
       }
     },
