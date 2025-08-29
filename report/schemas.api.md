@@ -96,6 +96,11 @@ export { Ajv }
 // @public (undocumented)
 export type AlignmentFieldType = 'Left' | 'Center' | 'Right';
 
+// Warning: (ae-missing-release-tag) "ALLOWED_PORTS" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public
+export const ALLOWED_PORTS: string[];
+
 // Warning: (ae-missing-release-tag) "AnalyticsDayData" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -3247,6 +3252,12 @@ export namespace ProviderType {
     validate: ValidateFunction<ProviderType>;
 }
 
+// @public
+export interface QueryParams {
+    // (undocumented)
+    [key: string]: string | number | boolean | null | undefined;
+}
+
 // @alpha
 export type RangeMapping = {
     type: MappingType.RANGE;
@@ -4192,6 +4203,23 @@ namespace Update {
     schema: JSONSchema<Update>;
     const // (undocumented)
     validate: ValidateFunction<Update>;
+}
+
+// @public
+export namespace UrlValidation {
+    export function addQueryParam(baseUrl: string, key: string, value: string | number | boolean): string;
+    export function buildUrlWithParams(basePath: string, params: QueryParams): string;
+    const _isSafeUrl: KeywordDefinition;
+    const // (undocumented)
+    schema: JSONSchema<string>;
+    const // (undocumented)
+    validate: ValidateFunction<string>;
+    export function getQueryParam(url: string, key: string): string | null;
+    export function isSafePath(path: string): boolean;
+    export function isSafeRedirectUrl(url: string): boolean;
+    export function isSafeString(value: string): boolean;
+    export function isSafeUrl(url: string): boolean;
+    export function removeQueryParam(baseUrl: string, key: string): string;
 }
 
 // Warning: (ae-missing-release-tag) "USDPeggedManaTradeAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
