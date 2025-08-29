@@ -46,10 +46,28 @@ function hasBackslash(s: string): boolean {
 }
 
 /**
- * Check if port is disallowed
+ * Allowed ports for URL validation (SSRF protection)
+ * Default: standard HTTP/HTTPS ports (80, 443)
+ * Can be extended for development environments (8080, 3000, etc.)
+ */
+export const ALLOWED_PORTS = ['80', '443']
+
+/**
+ * Get the actual query string length (excluding the leading '?')
+ * @param url - URL object to check
+ * @returns Length of query string without the '?' prefix
+ */
+function queryLength(url: URL): number {
+  if (!url.search) return 0
+  return url.search.startsWith('?') ? url.search.length - 1 : url.search.length
+}
+
+/**
+ * Check if port is disallowed (SSRF protection)
+ * Only allows ports defined in ALLOWED_PORTS
  */
 function isDisallowedPort(u: URL): boolean {
-  return !!u.port && !['80', '443'].includes(u.port)
+  return !!u.port && !ALLOWED_PORTS.includes(u.port)
 }
 
 /**
@@ -71,7 +89,12 @@ function isPrivateHost(hostname: string): boolean {
   }
 
   // Check for IPv6 localhost
-  if (normalized === '::1' || normalized.startsWith('fe80:') || normalized.startsWith('fc00:')) {
+  if (
+    normalized === '::1' ||
+    normalized === '[::1]' ||
+    normalized.startsWith('fe80:') ||
+    normalized.startsWith('fc00:')
+  ) {
     return true
   }
 
@@ -101,63 +124,75 @@ function safeParseUrl(urlString: string): { url: URL; wasRelative: boolean } | n
 }
 
 /**
- * Validates if a string contains potentially malicious content
- * @param value - The string to validate
- * @returns true if the string is safe, false if it contains malicious content
- */
-function isSafeString(value: string): boolean {
-  const normalized = decodeAndNormalize(String(value).toLowerCase())
-
-  // Check for control characters and backslashes
-  if (hasControlOrBidi(normalized) || hasBackslash(normalized)) {
-    return false
-  }
-
-  return true
-}
-
-/**
- * Validates if a URL path is safe
- * @param path - The path to validate
- * @returns true if the path is safe, false if it contains malicious content
- */
-function isSafePath(path: string): boolean {
-  if (!path || typeof path !== 'string') {
-    return false
-  }
-
-  // Prevent directory traversal attacks
-  // Note: Blocking // in paths is strict policy - if legitimate paths could have collapsed //,
-  // consider normalizing /{2,}→/ instead of rejecting
-  if (path.includes('..') || path.includes('//')) {
-    return false
-  }
-
-  // Prevent backslashes and control characters
-  if (hasBackslash(path) || hasControlOrBidi(path)) {
-    return false
-  }
-
-  return true
-}
-
-/**
  * Namespace with utilities to validate URLs safely
  * @public
  */
 export namespace UrlValidation {
+  /**
+   * Validates if a string contains potentially malicious content
+   */
+  export function isSafeString(value: string): boolean {
+    const normalized = decodeAndNormalize(String(value).toLowerCase())
+
+    // Check for control characters and backslashes
+    if (hasControlOrBidi(normalized) || hasBackslash(normalized)) {
+      return false
+    }
+
+    return true
+  }
+
+  /**
+   * Validates if a URL path is safe
+   */
+  export function isSafePath(path: string): boolean {
+    if (!path || typeof path !== 'string') {
+      return false
+    }
+
+    // Prevent directory traversal attacks
+    // Note: Blocking // in paths is strict policy - if legitimate paths could have collapsed //,
+    // consider normalizing /{2,}→/ instead of rejecting
+    if (path.includes('..') || path.includes('//')) {
+      return false
+    }
+
+    // Check for control characters and backslashes
+    if (hasControlOrBidi(path) || hasBackslash(path)) {
+      return false
+    }
+
+    return true
+  }
+
   /**
    * Custom validation to check if a URL is safe
    */
   export const _isSafeUrl: KeywordDefinition = {
     keyword: '_isSafeUrl',
     validate: function validate(schema: boolean, data: string) {
-      if (!data || typeof data !== 'string') {
+      if (!data || typeof data !== 'string' || data.length === 0) {
+        return false
+      }
+
+      // Check URL length limit (4KB)
+      if (data.length > 4096) {
         return false
       }
 
       // Early check for control characters, bidirectional text, and backslashes in raw URL
       if (hasControlOrBidi(data) || hasBackslash(data)) {
+        return false
+      }
+
+      // Early check on decoded URL to catch encoded escapes (%5C, %0a, etc.)
+      const decoded = decodeAndNormalize(data)
+      if (hasControlOrBidi(decoded) || hasBackslash(decoded)) {
+        return false
+      }
+
+      // Block protocol-relative URLs (//host)
+      if (data.startsWith('//')) {
         return false
       }
 
@@ -210,8 +245,7 @@ export namespace UrlValidation {
       }
 
       // Check total query string length (2KB limit)
-      const queryString = urlObj.search
-      if (queryString && queryString.length > 2048) {
+      if (queryLength(urlObj) > 2048) {
         return false
       }
 
@@ -243,7 +277,6 @@ export namespace UrlValidation {
 
   export const schema = {
     type: 'string',
-    format: 'uri-reference',
     _isSafeUrl: true
   } as JSONSchema<string>
 
@@ -257,7 +290,20 @@ export namespace UrlValidation {
    * @throws Error if malicious content is detected
    */
   export function buildUrlWithParams(basePath: string, params: QueryParams): string {
-    // Try to parse as URL to preserve fragments and origin
+    // If absolute, parse and validate the pathname; if relative, validate directly
+    const parsedForValidation = safeParseUrl(basePath)
+    if (parsedForValidation && !parsedForValidation.wasRelative) {
+      const p = parsedForValidation.url.pathname || '/'
+      if (!UrlValidation.isSafePath(p)) {
+        throw new Error('Invalid or potentially malicious base path detected')
+      }
+    } else {
+      if (!UrlValidation.isSafePath(basePath)) {
+        throw new Error('Invalid or potentially malicious base path detected')
+      }
+    }
+
+    // Then, normal parsing to build the result
     const parsed = safeParseUrl(basePath)
     let finalPath: string
     let hasFragment = false
@@ -268,10 +314,6 @@ export namespace UrlValidation {
       hasFragment = !!parsed.url.hash
       isAbsolute = !parsed.wasRelative
     } else {
-      // Fallback to path validation
-      if (!isSafePath(basePath)) {
-        throw new Error('Invalid or potentially malicious base path detected')
-      }
       finalPath = basePath
     }
 
@@ -282,11 +324,15 @@ export namespace UrlValidation {
         const stringValue = String(value)
 
         // Validate key and value for malicious content
-        if (!isSafeString(key)) {
+        if (!key || key.length === 0) {
           throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
         }
 
-        if (!isSafeString(stringValue)) {
+        if (!UrlValidation.isSafeString(key)) {
+          throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
+        }
+
+        if (!UrlValidation.isSafeString(stringValue)) {
           throw new Error(`Invalid or potentially malicious parameter value detected: ${stringValue}`)
         }
 
@@ -324,11 +370,15 @@ export namespace UrlValidation {
    */
   export function addQueryParam(baseUrl: string, key: string, value: string | number | boolean): string {
     // Validate inputs
-    if (!isSafeString(key)) {
+    if (!key || key.length === 0) {
       throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
     }
 
-    if (!isSafeString(String(value))) {
+    if (!UrlValidation.isSafeString(key)) {
+      throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
+    }
+
+    if (!UrlValidation.isSafeString(String(value))) {
       throw new Error(`Invalid or potentially malicious parameter value detected: ${value}`)
     }
 
@@ -357,7 +407,11 @@ export namespace UrlValidation {
    */
   export function removeQueryParam(baseUrl: string, key: string): string {
     // Validate key
-    if (!isSafeString(key)) {
+    if (!key || key.length === 0) {
+      throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
+    }
+
+    if (!UrlValidation.isSafeString(key)) {
       throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
     }
 
@@ -386,7 +440,11 @@ export namespace UrlValidation {
    */
   export function getQueryParam(url: string, key: string): string | null {
     // Validate key
-    if (!isSafeString(key)) {
+    if (!key || key.length === 0) {
+      throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
+    }
+
+    if (!UrlValidation.isSafeString(key)) {
       throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
     }
 
@@ -404,6 +462,11 @@ export namespace UrlValidation {
    * @returns true if the URL is safe, false if it contains malicious content
    */
   export function isSafeUrl(url: string): boolean {
+    // Check for null/undefined/empty
+    if (!url || typeof url !== 'string' || url.length === 0) {
+      return false
+    }
+
     // Check URL length limit (4KB)
     if (url.length > 4096) {
       return false
@@ -411,6 +474,17 @@ export namespace UrlValidation {
 
     // Early check for control characters, bidirectional text, and backslashes in raw URL
     if (hasControlOrBidi(url) || hasBackslash(url)) {
+      return false
+    }
+
+    // Early check on decoded URL to catch encoded escapes (%5C, %0a, etc.)
+    const decoded = decodeAndNormalize(url)
+    if (hasControlOrBidi(decoded) || hasBackslash(decoded)) {
+      return false
+    }
+
+    // Block protocol-relative URLs (//host)
+    if (url.startsWith('//')) {
       return false
     }
 
@@ -447,7 +521,7 @@ export namespace UrlValidation {
     }
 
     // Check path for directory traversal and malicious paths
-    if (!isSafePath(urlObj.pathname)) {
+    if (!UrlValidation.isSafePath(urlObj.pathname)) {
       return false
     }
 
@@ -463,8 +537,7 @@ export namespace UrlValidation {
     }
 
     // Check total query string length (2KB limit)
-    const queryString = urlObj.search
-    if (queryString && queryString.length > 2048) {
+    if (queryLength(urlObj) > 2048) {
       return false
     }
 
@@ -474,7 +547,7 @@ export namespace UrlValidation {
         return false
       }
 
-      if (!isSafeString(key) || !isSafeString(value)) {
+      if (!UrlValidation.isSafeString(key) || !UrlValidation.isSafeString(value)) {
         return false
       }
 
@@ -498,6 +571,11 @@ export namespace UrlValidation {
    * @returns true if the URL is safe for redirection, false otherwise
    */
   export function isSafeRedirectUrl(url: string): boolean {
+    // Check for null/undefined/empty
+    if (!url || typeof url !== 'string' || url.length === 0) {
+      return false
+    }
+
     // Check URL length limit (4KB)
     if (url.length > 4096) {
       return false
@@ -505,6 +583,17 @@ export namespace UrlValidation {
 
     // Early check for control characters, bidirectional text, and backslashes in raw URL
     if (hasControlOrBidi(url) || hasBackslash(url)) {
+      return false
+    }
+
+    // Early check on decoded URL to catch encoded escapes (%5C, %0a, etc.)
+    const decoded = decodeAndNormalize(url)
+    if (hasControlOrBidi(decoded) || hasBackslash(decoded)) {
+      return false
+    }
+
+    // Block protocol-relative URLs (//host)
+    if (url.startsWith('//')) {
       return false
     }
 
@@ -520,28 +609,31 @@ export namespace UrlValidation {
       return false
     }
 
+    // Reject relative URLs for redirection (must be absolute)
+    if (wasRelative) {
+      return false
+    }
+
     // Check for credentials and backslashes
     if (hasCredentials(redirectToURL) || hasBackslash(url) || hasBackslash(redirectToURL.href)) {
       return false
     }
 
-    // Only check host/port/SSRF for absolute URLs
-    if (!wasRelative) {
-      // Check for disallowed ports
-      if (isDisallowedPort(redirectToURL)) {
-        return false
-      }
+    // Check host/port/SSRF for absolute URLs
+    // Check for disallowed ports
+    if (isDisallowedPort(redirectToURL)) {
+      return false
+    }
 
-      // Check for private hosts (SSRF protection)
-      // Note: This is static validation. Complete SSRF protection requires DNS resolution +
-      // IP validation on the server before opening sockets
-      if (redirectToURL.hostname && isPrivateHost(redirectToURL.hostname)) {
-        return false
-      }
+    // Check for private hosts (SSRF protection)
+    // Note: This is static validation. Complete SSRF protection requires DNS resolution +
+    // IP validation on the server before opening sockets
+    if (redirectToURL.hostname && isPrivateHost(redirectToURL.hostname)) {
+      return false
     }
 
     // Additional path validation for redirection
-    if (!isSafePath(redirectToURL.pathname)) {
+    if (!UrlValidation.isSafePath(redirectToURL.pathname)) {
       return false
     }
 
