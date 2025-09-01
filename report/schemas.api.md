@@ -2646,7 +2646,7 @@ export enum NotificationType {
     // (undocumented)
     COMMUNITY_DELETED = "community_deleted",
     // (undocumented)
-    COMMUNITY_INVITE_SENT = "community_invite_sent",
+    COMMUNITY_INVITE_RECEIVED = "community_invite_received",
     // (undocumented)
     COMMUNITY_MEMBER_BANNED = "community_member_banned",
     // (undocumented)
