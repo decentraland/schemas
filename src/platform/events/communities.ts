@@ -167,6 +167,7 @@ export type CommunityRequestToJoinReceivedEvent = BaseEvent & {
     communityId: string
     communityName: string
     memberAddress: EthAddress
+    memberName: string
     thumbnailUrl: string
   }
 }
@@ -185,10 +186,11 @@ export namespace CommunityRequestToJoinReceivedEvent {
           communityId: { type: 'string' },
           communityName: { type: 'string' },
           memberAddress: { type: 'string' },
+          memberName: { type: 'string' },
           thumbnailUrl: { type: 'string' },
           addressesToNotify: { type: 'array', items: { type: 'string' } }
         },
-        required: ['communityId', 'communityName', 'memberAddress', 'thumbnailUrl', 'addressesToNotify'],
+        required: ['communityId', 'communityName', 'memberAddress', 'memberName', 'thumbnailUrl', 'addressesToNotify'],
         additionalProperties: false
       }
     },

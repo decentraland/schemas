@@ -968,6 +968,7 @@ export type CommunityRequestToJoinReceivedEvent = BaseEvent & {
         communityId: string;
         communityName: string;
         memberAddress: EthAddress;
+        memberName: string;
         thumbnailUrl: string;
     };
 };
