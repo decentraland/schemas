@@ -20,9 +20,12 @@ import {
 import { UserJoinedRoomEvent } from './comms'
 import {
   CommunityDeletedEvent,
+  CommunityInviteReceivedEvent,
   CommunityMemberBannedEvent,
   CommunityMemberRemovedEvent,
-  CommunityRenamedEvent
+  CommunityRenamedEvent,
+  CommunityRequestToJoinAcceptedEvent,
+  CommunityRequestToJoinReceivedEvent
 } from './communities'
 import { BidReceivedEvent } from './marketplace'
 import { ReferralInvitedUsersAcceptedEvent, ReferralNewTierReachedEvent } from './referral'
@@ -234,3 +237,6 @@ export type Event =
   | CommunityRenamedEvent
   | CommunityMemberBannedEvent
   | CommunityMemberRemovedEvent
+  | CommunityRequestToJoinReceivedEvent
+  | CommunityRequestToJoinAcceptedEvent
+  | CommunityInviteReceivedEvent
