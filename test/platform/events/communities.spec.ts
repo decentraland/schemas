@@ -104,6 +104,7 @@ describe('Community Events tests', () => {
         metadata: {
           id: 'community-123',
           name: 'Test Community',
+          ownerAddress: '0x1234567890123456789012345678901234567890',
           thumbnailUrl: 'https://example.com/thumbnail.jpg'
         }
       }
@@ -121,6 +122,7 @@ describe('Community Events tests', () => {
         timestamp: 1,
         metadata: {
           name: 'Test Community',
+          ownerAddress: '0x1234567890123456789012345678901234567890',
           thumbnailUrl: 'https://example.com/thumbnail.jpg'
         }
       }
@@ -136,6 +138,23 @@ describe('Community Events tests', () => {
         timestamp: 1,
         metadata: {
           id: 'community-123',
+          ownerAddress: '0x1234567890123456789012345678901234567890',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityDeletedContentViolationEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing ownerAddress', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.DELETED_CONTENT_VIOLATION,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'community-123',
+          name: 'Test Community',
           thumbnailUrl: 'https://example.com/thumbnail.jpg'
         }
       }
@@ -151,7 +170,8 @@ describe('Community Events tests', () => {
         timestamp: 1,
         metadata: {
           id: 'community-123',
-          name: 'Test Community'
+          name: 'Test Community',
+          ownerAddress: '0x1234567890123456789012345678901234567890'
         }
       }
 

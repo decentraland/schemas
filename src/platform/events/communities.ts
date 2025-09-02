@@ -46,6 +46,7 @@ export type CommunityDeletedContentViolationEvent = BaseEvent & {
   metadata: {
     id: string
     name: string
+    ownerAddress: EthAddress
     thumbnailUrl: string
   }
 }
@@ -63,9 +64,10 @@ export namespace CommunityDeletedContentViolationEvent {
         properties: {
           id: { type: 'string' },
           name: { type: 'string' },
+          ownerAddress: { type: 'string' },
           thumbnailUrl: { type: 'string' }
         },
-        required: ['id', 'name', 'thumbnailUrl'],
+        required: ['id', 'name', 'ownerAddress', 'thumbnailUrl'],
         additionalProperties: false
       }
     },
