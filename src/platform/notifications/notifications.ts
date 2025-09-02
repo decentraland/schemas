@@ -53,6 +53,7 @@ export enum NotificationType {
   REFERRAL_INVITED_USERS_ACCEPTED = 'referral_invited_users_accepted',
   REFERRAL_NEW_TIER_REACHED = 'referral_new_tier_reached',
   COMMUNITY_DELETED = 'community_deleted',
+  COMMUNITY_DELETED_CONTENT_VIOLATION = 'community_deleted_content_violation',
   COMMUNITY_RENAMED = 'community_renamed',
   COMMUNITY_MEMBER_BANNED = 'community_member_banned',
   COMMUNITY_MEMBER_REMOVED = 'community_member_removed'

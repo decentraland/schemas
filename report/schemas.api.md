@@ -2596,6 +2596,8 @@ export enum NotificationType {
     // (undocumented)
     COMMUNITY_DELETED = "community_deleted",
     // (undocumented)
+    COMMUNITY_DELETED_CONTENT_VIOLATION = "community_deleted_content_violation",
+    // (undocumented)
     COMMUNITY_MEMBER_BANNED = "community_member_banned",
     // (undocumented)
     COMMUNITY_MEMBER_REMOVED = "community_member_removed",
