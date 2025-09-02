@@ -44,6 +44,44 @@ export namespace CommunityDeletedEvent {
   export const validate: ValidateFunction<CommunityDeletedEvent> = generateLazyValidator(schema)
 }
 
+export type CommunityDeletedContentViolationEvent = BaseEvent & {
+  type: Events.Type.COMMUNITY
+  subType: Events.SubType.Community.DELETED_CONTENT_VIOLATION
+  metadata: {
+    id: string
+    name: string
+    ownerAddress: EthAddress
+    thumbnailUrl: string
+  }
+}
+
+export namespace CommunityDeletedContentViolationEvent {
+  export const schema: JSONSchema<CommunityDeletedContentViolationEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.COMMUNITY },
+      subType: { type: 'string', const: Events.SubType.Community.DELETED_CONTENT_VIOLATION },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 1 },
+      metadata: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          name: { type: 'string' },
+          ownerAddress: { type: 'string' },
+          thumbnailUrl: { type: 'string' }
+        },
+        required: ['id', 'name', 'ownerAddress', 'thumbnailUrl'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<CommunityDeletedContentViolationEvent> = generateLazyValidator(schema)
+}
+
 export type CommunityRenamedEvent = BaseEvent & {
   type: Events.Type.COMMUNITY
   subType: Events.SubType.Community.RENAMED
