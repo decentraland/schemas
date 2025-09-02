@@ -20,6 +20,7 @@ import {
 import { UserJoinedRoomEvent } from './comms'
 import {
   CommunityDeletedEvent,
+  CommunityDeletedContentViolationEvent,
   CommunityMemberBannedEvent,
   CommunityMemberRemovedEvent,
   CommunityRenamedEvent
@@ -160,6 +161,7 @@ export namespace Events {
 
     export enum Community {
       DELETED = 'community-deleted',
+      DELETED_CONTENT_VIOLATION = 'community-deleted-content-violation',
       RENAMED = 'community-renamed',
       MEMBER_BANNED = 'community-member-banned',
       MEMBER_REMOVED = 'community-member-removed'
@@ -228,6 +230,7 @@ export type Event =
   | ReferralInvitedUsersAcceptedEvent
   | ReferralNewTierReachedEvent
   | CommunityDeletedEvent
+  | CommunityDeletedContentViolationEvent
   | CommunityRenamedEvent
   | CommunityMemberBannedEvent
   | CommunityMemberRemovedEvent

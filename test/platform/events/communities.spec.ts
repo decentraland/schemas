@@ -4,7 +4,8 @@ import {
   CommunityRenamedEvent,
   CommunityMemberBannedEvent,
   CommunityMemberRemovedEvent,
-  Events
+  Events,
+  CommunityDeletedContentViolationEvent
 } from '../../../src'
 
 describe('Community Events tests', () => {
@@ -90,6 +91,71 @@ describe('Community Events tests', () => {
       }
 
       expect(CommunityDeletedEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('CommunityDeletedContentViolationEvent', () => {
+    it('should pass validation with valid data', () => {
+      const event: CommunityDeletedContentViolationEvent = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.DELETED_CONTENT_VIOLATION,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'community-123',
+          name: 'Test Community',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityDeletedContentViolationEvent.validate(event)).toEqual(true)
+      expect(CommunityDeletedContentViolationEvent.validate(null)).toEqual(false)
+      expect(CommunityDeletedContentViolationEvent.validate({})).toEqual(false)
+    })
+
+    it('should fail with missing id', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.DELETED_CONTENT_VIOLATION,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          name: 'Test Community',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityDeletedContentViolationEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing name', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.DELETED_CONTENT_VIOLATION,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'community-123',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityDeletedContentViolationEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing thumbnailUrl', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.DELETED_CONTENT_VIOLATION,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'community-123',
+          name: 'Test Community'
+        }
+      }
+
+      expect(CommunityDeletedContentViolationEvent.validate(event)).toEqual(false)
     })
   })
 
