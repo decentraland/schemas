@@ -828,6 +828,7 @@ export type CommunityDeletedContentViolationEvent = BaseEvent & {
     metadata: {
         id: string;
         name: string;
+        ownerAddress: EthAddress;
         thumbnailUrl: string;
     };
 };
