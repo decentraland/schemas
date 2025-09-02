@@ -20,9 +20,12 @@ import {
 import { UserJoinedRoomEvent } from './comms'
 import {
   CommunityDeletedEvent,
+  CommunityInviteReceivedEvent,
   CommunityMemberBannedEvent,
   CommunityMemberRemovedEvent,
-  CommunityRenamedEvent
+  CommunityRenamedEvent,
+  CommunityRequestToJoinAcceptedEvent,
+  CommunityRequestToJoinReceivedEvent
 } from './communities'
 import { BidReceivedEvent } from './marketplace'
 import { ReferralInvitedUsersAcceptedEvent, ReferralNewTierReachedEvent } from './referral'
@@ -162,7 +165,10 @@ export namespace Events {
       DELETED = 'community-deleted',
       RENAMED = 'community-renamed',
       MEMBER_BANNED = 'community-member-banned',
-      MEMBER_REMOVED = 'community-member-removed'
+      MEMBER_REMOVED = 'community-member-removed',
+      REQUEST_TO_JOIN_RECEIVED = 'community-request-to-join-received',
+      REQUEST_TO_JOIN_ACCEPTED = 'community-request-to-join-accepted',
+      INVITE_RECEIVED = 'community-invite-received'
     }
   }
 }
@@ -231,3 +237,6 @@ export type Event =
   | CommunityRenamedEvent
   | CommunityMemberBannedEvent
   | CommunityMemberRemovedEvent
+  | CommunityRequestToJoinReceivedEvent
+  | CommunityRequestToJoinAcceptedEvent
+  | CommunityInviteReceivedEvent
