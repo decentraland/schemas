@@ -4,7 +4,11 @@ import {
   CommunityRenamedEvent,
   CommunityMemberBannedEvent,
   CommunityMemberRemovedEvent,
-  Events
+  Events,
+  CommunityDeletedContentViolationEvent,
+  CommunityRequestToJoinReceivedEvent,
+  CommunityRequestToJoinAcceptedEvent,
+  CommunityInviteReceivedEvent
 } from '../../../src'
 
 describe('Community Events tests', () => {
@@ -90,6 +94,91 @@ describe('Community Events tests', () => {
       }
 
       expect(CommunityDeletedEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('CommunityDeletedContentViolationEvent', () => {
+    it('should pass validation with valid data', () => {
+      const event: CommunityDeletedContentViolationEvent = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.DELETED_CONTENT_VIOLATION,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'community-123',
+          name: 'Test Community',
+          ownerAddress: '0x1234567890123456789012345678901234567890',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityDeletedContentViolationEvent.validate(event)).toEqual(true)
+      expect(CommunityDeletedContentViolationEvent.validate(null)).toEqual(false)
+      expect(CommunityDeletedContentViolationEvent.validate({})).toEqual(false)
+    })
+
+    it('should fail with missing id', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.DELETED_CONTENT_VIOLATION,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          name: 'Test Community',
+          ownerAddress: '0x1234567890123456789012345678901234567890',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityDeletedContentViolationEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing name', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.DELETED_CONTENT_VIOLATION,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'community-123',
+          ownerAddress: '0x1234567890123456789012345678901234567890',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityDeletedContentViolationEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing ownerAddress', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.DELETED_CONTENT_VIOLATION,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'community-123',
+          name: 'Test Community',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityDeletedContentViolationEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing thumbnailUrl', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.DELETED_CONTENT_VIOLATION,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'community-123',
+          name: 'Test Community',
+          ownerAddress: '0x1234567890123456789012345678901234567890'
+        }
+      }
+
+      expect(CommunityDeletedContentViolationEvent.validate(event)).toEqual(false)
     })
   })
 
@@ -367,6 +456,307 @@ describe('Community Events tests', () => {
       }
 
       expect(CommunityMemberRemovedEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('CommunityRequestToJoinReceivedEvent', () => {
+    it('should pass validation with valid data', () => {
+      const event: CommunityRequestToJoinReceivedEvent = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          communityName: 'Test Community',
+          memberAddress: '0x1234567890123456789012345678901234567890',
+          memberName: 'Test Member',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg',
+          addressesToNotify: ['0x1234567890123456789012345678901234567890']
+        }
+      }
+
+      expect(CommunityRequestToJoinReceivedEvent.validate(event)).toEqual(true)
+      expect(CommunityRequestToJoinReceivedEvent.validate(null)).toEqual(false)
+      expect(CommunityRequestToJoinReceivedEvent.validate({})).toEqual(false)
+    })
+
+    it('should fail with missing communityId', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityName: 'Test Community',
+          memberAddress: '0x1234567890123456789012345678901234567890',
+          memberName: 'Test Member',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg',
+          addressesToNotify: ['0x1234567890123456789012345678901234567890']
+        }
+      }
+
+      expect(CommunityRequestToJoinReceivedEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing communityName', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          memberAddress: '0x1234567890123456789012345678901234567890',
+          memberName: 'Test Member',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg',
+          addressesToNotify: ['0x1234567890123456789012345678901234567890']
+        }
+      }
+
+      expect(CommunityRequestToJoinReceivedEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing memberName', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          communityName: 'Test Community',
+          memberAddress: '0x1234567890123456789012345678901234567890',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg',
+          addressesToNotify: ['0x1234567890123456789012345678901234567890']
+        }
+      }
+
+      expect(CommunityRequestToJoinReceivedEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing memberAddress', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          communityName: 'Test Community',
+          memberName: 'Test Member',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg',
+          addressesToNotify: ['0x1234567890123456789012345678901234567890']
+        }
+      }
+
+      expect(CommunityRequestToJoinReceivedEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing thumbnailUrl', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          communityName: 'Test Community',
+          memberAddress: '0x1234567890123456789012345678901234567890',
+          memberName: 'Test Member',
+          addressesToNotify: ['0x1234567890123456789012345678901234567890']
+        }
+      }
+
+      expect(CommunityRequestToJoinReceivedEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing addressesToNotify', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          communityName: 'Test Community',
+          memberAddress: '0x1234567890123456789012345678901234567890',
+          memberName: 'Test Member',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityRequestToJoinReceivedEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('CommunityRequestToJoinAcceptedEvent', () => {
+    it('should pass validation with valid data', () => {
+      const event: CommunityRequestToJoinAcceptedEvent = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.REQUEST_TO_JOIN_ACCEPTED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          communityName: 'Test Community',
+          memberAddress: '0x1234567890123456789012345678901234567890',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityRequestToJoinAcceptedEvent.validate(event)).toEqual(true)
+      expect(CommunityRequestToJoinAcceptedEvent.validate(null)).toEqual(false)
+      expect(CommunityRequestToJoinAcceptedEvent.validate({})).toEqual(false)
+    })
+
+    it('should fail with missing communityId', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.REQUEST_TO_JOIN_ACCEPTED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityName: 'Test Community',
+          memberAddress: '0x1234567890123456789012345678901234567890',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityRequestToJoinAcceptedEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing communityName', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.REQUEST_TO_JOIN_ACCEPTED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          memberAddress: '0x1234567890123456789012345678901234567890',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityRequestToJoinAcceptedEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing memberAddress', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.REQUEST_TO_JOIN_ACCEPTED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          communityName: 'Test Community',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityRequestToJoinAcceptedEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing thumbnailUrl', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.REQUEST_TO_JOIN_ACCEPTED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          communityName: 'Test Community',
+          memberAddress: '0x1234567890123456789012345678901234567890'
+        }
+      }
+
+      expect(CommunityRequestToJoinAcceptedEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('CommunityInviteReceivedEvent', () => {
+    it('should pass validation with valid data', () => {
+      const event: CommunityInviteReceivedEvent = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.INVITE_RECEIVED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          communityName: 'Test Community',
+          memberAddress: '0x1234567890123456789012345678901234567890',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityInviteReceivedEvent.validate(event)).toEqual(true)
+      expect(CommunityInviteReceivedEvent.validate(null)).toEqual(false)
+      expect(CommunityInviteReceivedEvent.validate({})).toEqual(false)
+    })
+
+    it('should fail with missing communityId', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.INVITE_RECEIVED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityName: 'Test Community',
+          memberAddress: '0x1234567890123456789012345678901234567890',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityInviteReceivedEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing communityName', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.INVITE_RECEIVED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          memberAddress: '0x1234567890123456789012345678901234567890',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityInviteReceivedEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing memberAddress', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.INVITE_RECEIVED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          communityName: 'Test Community',
+          thumbnailUrl: 'https://example.com/thumbnail.jpg'
+        }
+      }
+
+      expect(CommunityInviteReceivedEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing thumbnailUrl', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.INVITE_RECEIVED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          communityId: 'community-123',
+          communityName: 'Test Community',
+          memberAddress: '0x1234567890123456789012345678901234567890'
+        }
+      }
+
+      expect(CommunityInviteReceivedEvent.validate(event)).toEqual(false)
     })
   })
 })
