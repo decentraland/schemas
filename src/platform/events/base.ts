@@ -29,6 +29,7 @@ import {
   CommunityRequestToJoinReceivedEvent
 } from './communities'
 import { BidReceivedEvent } from './marketplace'
+import { PhotoPrivacyChanged, PhotoTakenEvent } from './camera'
 import { ReferralInvitedUsersAcceptedEvent, ReferralNewTierReachedEvent } from './referral'
 import {
   RewardInProgressEvent,
@@ -72,7 +73,8 @@ export namespace Events {
     STREAMING = 'streaming',
     COMMS = 'comms',
     REFERRAL = 'referral',
-    COMMUNITY = 'community'
+    COMMUNITY = 'community',
+    CAMERA = 'camera'
   }
 
   export namespace SubType {
@@ -172,6 +174,11 @@ export namespace Events {
       REQUEST_TO_JOIN_ACCEPTED = 'community-request-to-join-accepted',
       INVITE_RECEIVED = 'community-invite-received'
     }
+
+    export enum Camera {
+      PHOTO_TAKEN = 'photo-taken',
+      PHOTO_PRIVACY_CHANGED = 'photo-privacy-changed'
+    }
   }
 }
 
@@ -191,6 +198,7 @@ export type BaseEvent = {
     | Events.SubType.Comms
     | Events.SubType.Referral
     | Events.SubType.Community
+    | Events.SubType.Camera
   key: string
   timestamp: number
 }
@@ -243,3 +251,5 @@ export type Event =
   | CommunityRequestToJoinReceivedEvent
   | CommunityRequestToJoinAcceptedEvent
   | CommunityInviteReceivedEvent
+  | PhotoTakenEvent
+  | PhotoPrivacyChanged
