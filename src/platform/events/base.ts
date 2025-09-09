@@ -17,7 +17,7 @@ import {
   VerticalHeightReachedEvent,
   WalkedDistanceEvent
 } from './client'
-import { UserJoinedRoomEvent } from './comms'
+import { UserJoinedRoomEvent, UserLeftRoomEvent } from './comms'
 import {
   CommunityDeletedEvent,
   CommunityDeletedContentViolationEvent,
@@ -154,7 +154,8 @@ export namespace Events {
     }
 
     export enum Comms {
-      USER_JOINED_ROOM = 'user-joined-room'
+      USER_JOINED_ROOM = 'user-joined-room',
+      USER_LEFT_ROOM = 'user-left-room'
     }
 
     export enum Referral {
@@ -228,6 +229,7 @@ export type Event =
   | StreamingTimeExceededEvent
   | StreamingPlaceUpdatedEvent
   | UserJoinedRoomEvent
+  | UserLeftRoomEvent
   | CreditsCompleteGoalsReminderEvent
   | CreditsUsageReminderEvent
   | CreditsUsage24HoursReminderEvent
