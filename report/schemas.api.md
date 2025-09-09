@@ -3010,6 +3010,7 @@ export type PhotoPrivacyChanged = BaseEvent & {
     type: Events.Type.CAMERA;
     subType: Events.SubType.Camera.PHOTO_PRIVACY_CHANGED;
     metadata: {
+        userAddress: string;
         photoId: string;
         isPublic: boolean;
     };

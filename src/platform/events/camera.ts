@@ -18,6 +18,7 @@ export type PhotoPrivacyChanged = BaseEvent & {
   type: Events.Type.CAMERA
   subType: Events.SubType.Camera.PHOTO_PRIVACY_CHANGED
   metadata: {
+    userAddress: string
     photoId: string
     isPublic: boolean
   }
@@ -34,10 +35,11 @@ export namespace PhotoPrivacyChanged {
       metadata: {
         type: 'object',
         properties: {
+          userAddress: { type: 'string' },
           photoId: { type: 'string' },
           isPublic: { type: 'boolean' }
         },
-        required: ['photoId', 'isPublic']
+        required: ['userAddress', 'photoId', 'isPublic']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
