@@ -361,7 +361,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community | Events.SubType.Camera;
     key: string;
     timestamp: number;
 };
@@ -1487,7 +1487,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | PhotoTakenEvent | PhotoPrivacyChanged;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1523,6 +1523,13 @@ export namespace Events {
             RENTAL_STARTED = "land-rental-started",
             // (undocumented)
             ROYALTIES_EARNED = "royalties-earned"
+        }
+        // (undocumented)
+        export enum Camera {
+            // (undocumented)
+            PHOTO_PRIVACY_CHANGED = "photo-privacy-changed",
+            // (undocumented)
+            PHOTO_TAKEN = "photo-taken"
         }
         // (undocumented)
         export enum CatalystDeployment {
@@ -1658,6 +1665,8 @@ export namespace Events {
         BADGE = "badge",
         // (undocumented)
         BLOCKCHAIN = "blockchain",
+        // (undocumented)
+        CAMERA = "camera",
         // (undocumented)
         CATALYST_DEPLOYMENT = "catalyst-deployment",
         // (undocumented)
@@ -2993,6 +3002,56 @@ export namespace PeriodCreation {
     schema: JSONSchemaType<PeriodCreation>;
     const // (undocumented)
     validate: ValidateFunction<PeriodCreation>;
+}
+
+// Warning: (ae-missing-release-tag) "PhotoPrivacyChanged" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PhotoPrivacyChanged" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PhotoPrivacyChanged = BaseEvent & {
+    type: Events.Type.CAMERA;
+    subType: Events.SubType.Camera.PHOTO_PRIVACY_CHANGED;
+    metadata: {
+        userAddress: string;
+        photoId: string;
+        isPublic: boolean;
+    };
+};
+
+// @public (undocumented)
+export namespace PhotoPrivacyChanged {
+    const // (undocumented)
+    schema: JSONSchema<PhotoPrivacyChanged>;
+    const // (undocumented)
+    validate: ValidateFunction<PhotoPrivacyChanged>;
+}
+
+// Warning: (ae-missing-release-tag) "PhotoTakenEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PhotoTakenEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PhotoTakenEvent = BaseEvent & {
+    type: Events.Type.CAMERA;
+    subType: Events.SubType.Camera.PHOTO_TAKEN;
+    metadata: {
+        sceneId: string;
+        realm: string;
+        userAddress: string;
+        isPublic: boolean;
+        photoId: string;
+        users: Array<{
+            address: string;
+            isEmoting: boolean;
+        }>;
+    };
+};
+
+// @public (undocumented)
+export namespace PhotoTakenEvent {
+    const // (undocumented)
+    schema: JSONSchema<PhotoTakenEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<PhotoTakenEvent>;
 }
 
 // @public
