@@ -72,8 +72,7 @@ export namespace Events {
     STREAMING = 'streaming',
     COMMS = 'comms',
     REFERRAL = 'referral',
-    COMMUNITY = 'community',
-    CAMERA = 'camera'
+    COMMUNITY = 'community'
   }
 
   export namespace SubType {
