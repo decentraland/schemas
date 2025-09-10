@@ -14,7 +14,7 @@ export type PhotoTakenEvent = BaseEvent & {
   }
 }
 
-export type PhotoPrivacyChanged = BaseEvent & {
+export type PhotoPrivacyChangedEvent = BaseEvent & {
   type: Events.Type.CAMERA
   subType: Events.SubType.Camera.PHOTO_PRIVACY_CHANGED
   metadata: {
@@ -24,8 +24,8 @@ export type PhotoPrivacyChanged = BaseEvent & {
   }
 }
 
-export namespace PhotoPrivacyChanged {
-  export const schema: JSONSchema<PhotoPrivacyChanged> = {
+export namespace PhotoPrivacyChangedEvent {
+  export const schema: JSONSchema<PhotoPrivacyChangedEvent> = {
     type: 'object',
     properties: {
       type: { type: 'string', const: Events.Type.CAMERA },
@@ -46,7 +46,7 @@ export namespace PhotoPrivacyChanged {
     additionalProperties: false
   }
 
-  export const validate: ValidateFunction<PhotoPrivacyChanged> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<PhotoPrivacyChangedEvent> = generateLazyValidator(schema)
 }
 
 export namespace PhotoTakenEvent {

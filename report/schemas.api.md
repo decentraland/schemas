@@ -1487,7 +1487,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | PhotoTakenEvent | PhotoPrivacyChanged;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -3004,11 +3004,11 @@ export namespace PeriodCreation {
     validate: ValidateFunction<PeriodCreation>;
 }
 
-// Warning: (ae-missing-release-tag) "PhotoPrivacyChanged" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-// Warning: (ae-missing-release-tag) "PhotoPrivacyChanged" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PhotoPrivacyChangedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PhotoPrivacyChangedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type PhotoPrivacyChanged = BaseEvent & {
+export type PhotoPrivacyChangedEvent = BaseEvent & {
     type: Events.Type.CAMERA;
     subType: Events.SubType.Camera.PHOTO_PRIVACY_CHANGED;
     metadata: {
@@ -3019,11 +3019,11 @@ export type PhotoPrivacyChanged = BaseEvent & {
 };
 
 // @public (undocumented)
-export namespace PhotoPrivacyChanged {
+export namespace PhotoPrivacyChangedEvent {
     const // (undocumented)
-    schema: JSONSchema<PhotoPrivacyChanged>;
+    schema: JSONSchema<PhotoPrivacyChangedEvent>;
     const // (undocumented)
-    validate: ValidateFunction<PhotoPrivacyChanged>;
+    validate: ValidateFunction<PhotoPrivacyChangedEvent>;
 }
 
 // Warning: (ae-missing-release-tag) "PhotoTakenEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)

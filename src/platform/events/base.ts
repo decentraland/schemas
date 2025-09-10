@@ -29,7 +29,7 @@ import {
   CommunityRequestToJoinReceivedEvent
 } from './communities'
 import { BidReceivedEvent } from './marketplace'
-import { PhotoPrivacyChanged, PhotoTakenEvent } from './camera'
+import { PhotoPrivacyChangedEvent, PhotoTakenEvent } from './camera'
 import { ReferralInvitedUsersAcceptedEvent, ReferralNewTierReachedEvent } from './referral'
 import {
   RewardInProgressEvent,
@@ -254,4 +254,4 @@ export type Event =
   | CommunityRequestToJoinAcceptedEvent
   | CommunityInviteReceivedEvent
   | PhotoTakenEvent
-  | PhotoPrivacyChanged
+  | PhotoPrivacyChangedEvent
