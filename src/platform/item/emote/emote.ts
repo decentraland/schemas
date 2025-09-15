@@ -28,6 +28,7 @@ export namespace Emote {
     oneOf: [
       {
         required: ['emoteDataADR74'],
+        prohibited: ['emoteDataADR287'],
         // Emotes of ADR74 must be standard XOR thirdparty
         oneOf: [
           {
@@ -64,6 +65,7 @@ export namespace Emote {
       },
       {
         required: ['emoteDataADR287'],
+        prohibited: ['emoteDataADR74'],
         // Emotes of ADR287 must be standard XOR thirdparty
         oneOf: [
           {
@@ -100,7 +102,7 @@ export namespace Emote {
       }
     ],
     errorMessage: {
-      oneOf: 'emote should have "emoteDataADR74" or "emoteDataADR287" and match its schema'
+      oneOf: 'emote should have either "emoteDataADR74" or "emoteDataADR287" (but not both) and match its schema'
     }
   }
 
