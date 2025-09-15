@@ -1290,18 +1290,31 @@ export namespace Email {
     validate: ValidateFunction<Email>;
 }
 
-// Warning: (ae-forgotten-export) The symbol "EmoteADR74" needs to be exported by the entry point index.d.ts
-//
 // @alpha (undocumented)
-export type Emote = EmoteADR74;
+export type Emote = EmoteADR74 | EmoteADR287;
 
 // @alpha (undocumented)
 export namespace Emote {
     const // (undocumented)
     schema: JSONSchema<Emote>;
     const // (undocumented)
-    validate: ValidateFunction<EmoteADR74>;
+    validate: ValidateFunction<Emote>;
 }
+
+// Warning: (ae-forgotten-export) The symbol "BaseItem" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "EmoteADR287" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteADR287 = BaseItem & (StandardProps | ThirdPartyProps) & {
+    emoteDataADR287: EmoteDataADR287;
+};
+
+// Warning: (ae-missing-release-tag) "EmoteADR74" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteADR74 = BaseItem & (StandardProps | ThirdPartyProps) & {
+    emoteDataADR74: EmoteDataADR74;
+};
 
 // Warning: (ae-missing-release-tag) "EmoteCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "EmoteCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1334,6 +1347,33 @@ export namespace EmoteCategory {
     validate: ValidateFunction<EmoteCategory>;
 }
 
+// Warning: (ae-missing-release-tag) "EmoteClip" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteClip = {
+    armature: string;
+    animation: string;
+    loop: boolean;
+    randomize: boolean;
+};
+
+// Warning: (ae-missing-release-tag) "EmoteDataADR287" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteDataADR287" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteDataADR287 = EmoteDataADR74 & {
+    startAnimation?: Omit<EmoteClip, 'randomize'>[];
+    outcomes: OutcomeGroup[];
+};
+
+// @public (undocumented)
+export namespace EmoteDataADR287 {
+    const // (undocumented)
+    schema: JSONSchema<EmoteDataADR287>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteDataADR287>;
+}
+
 // Warning: (ae-missing-release-tag) "EmoteDataADR74" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "EmoteDataADR74" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1353,12 +1393,27 @@ export namespace EmoteDataADR74 {
     validate: ValidateFunction<EmoteDataADR74>;
 }
 
-// Warning: (ae-incompatible-release-tags) The symbol "EmoteDefinition" is marked as @public, but its signature references "Emote" which is marked as @alpha
 // Warning: (ae-missing-release-tag) "EmoteDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type EmoteDefinition = Omit<Emote, 'emoteDataADR74'> & {
-    emoteDataADR74: Omit<Emote['emoteDataADR74'], 'representations'> & {
+export type EmoteDefinition = EmoteDefinitionADR74 | EmoteDefinitionADR287;
+
+// Warning: (ae-incompatible-release-tags) The symbol "EmoteDefinitionADR287" is marked as @public, but its signature references "Emote" which is marked as @alpha
+// Warning: (ae-missing-release-tag) "EmoteDefinitionADR287" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteDefinitionADR287 = Omit<Emote, 'emoteDataADR287'> & {
+    emoteDataADR287: Omit<EmoteADR287['emoteDataADR287'], 'representations'> & {
+        representations: EmoteRepresentationDefinition[];
+    };
+};
+
+// Warning: (ae-incompatible-release-tags) The symbol "EmoteDefinitionADR74" is marked as @public, but its signature references "Emote" which is marked as @alpha
+// Warning: (ae-missing-release-tag) "EmoteDefinitionADR74" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteDefinitionADR74 = Omit<Emote, 'emoteDataADR74'> & {
+    emoteDataADR74: Omit<EmoteADR74['emoteDataADR74'], 'representations'> & {
         representations: EmoteRepresentationDefinition[];
     };
 };
@@ -1427,8 +1482,18 @@ export type EmoteRepresentationWithBlobs = Omit<EmoteRepresentationDefinition, '
 };
 
 // @alpha (undocumented)
-export type EmoteWithBlobs = Omit<EmoteDefinition, 'emoteDataADR74'> & {
-    emoteDataADR74: Omit<EmoteDefinition['emoteDataADR74'], 'representations'> & {
+export type EmoteWithBlobs = EmoteWithBlobsADR74 | EmoteWithBlobsADR287;
+
+// @alpha (undocumented)
+export type EmoteWithBlobsADR287 = Omit<EmoteDefinition, 'emoteDataADR287'> & {
+    emoteDataADR287: Omit<EmoteDefinitionADR287['emoteDataADR287'], 'representations'> & {
+        representations: EmoteRepresentationWithBlobs[];
+    };
+};
+
+// @alpha (undocumented)
+export type EmoteWithBlobsADR74 = Omit<EmoteDefinitionADR74, 'emoteDataADR74'> & {
+    emoteDataADR74: Omit<EmoteDefinitionADR74['emoteDataADR74'], 'representations'> & {
         representations: EmoteRepresentationWithBlobs[];
     };
 };
@@ -1977,7 +2042,6 @@ export function isInExceptionBlock(x: number, y: number): boolean;
 // @alpha
 export function isInsideWorldLimits(x: number, y: number): boolean;
 
-// Warning: (ae-forgotten-export) The symbol "BaseItem" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "isStandard" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -2905,6 +2969,11 @@ export enum OrderSortBy {
     // (undocumented)
     RECENTLY_UPDATED = "recently_updated"
 }
+
+// Warning: (ae-missing-release-tag) "OutcomeGroup" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type OutcomeGroup = EmoteClip[];
 
 // @alpha (undocumented)
 export type Outfit = {
@@ -4786,6 +4855,7 @@ export namespace WorldConfiguration {
 // src/dapps/order.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:34:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/preview/emote-definition.ts:6:5 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationDefinition" which is marked as @alpha
+// src/dapps/preview/emote-definition.ts:12:5 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "item" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:11:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:12:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
