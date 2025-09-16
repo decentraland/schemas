@@ -22,6 +22,7 @@ type ClientBaseMetadata = {
   }
   userAddress: EthAddress
   sessionId: string
+  anonymousId: string
   realm: string
 }
 
