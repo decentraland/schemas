@@ -1337,21 +1337,30 @@ export namespace EmoteCategory {
 }
 
 // Warning: (ae-missing-release-tag) "EmoteClip" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteClip" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type EmoteClip = {
-    armature: string;
+    armature: ArmatureId;
     animation: string;
     loop: boolean;
-    randomize: boolean;
 };
+
+// @public (undocumented)
+export namespace EmoteClip {
+    const // (undocumented)
+    schema: JSONSchema<EmoteClip>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteClip>;
+}
 
 // Warning: (ae-missing-release-tag) "EmoteDataADR287" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "EmoteDataADR287" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export type EmoteDataADR287 = EmoteDataADR74 & {
-    startAnimation?: Omit<EmoteClip, 'randomize'>[];
+    startAnimation: EmoteClip[];
+    randomizeOutcomes: boolean;
     outcomes: OutcomeGroup[];
 };
 
@@ -2945,9 +2954,21 @@ export enum OrderSortBy {
 }
 
 // Warning: (ae-missing-release-tag) "OutcomeGroup" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "OutcomeGroup" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type OutcomeGroup = EmoteClip[];
+export type OutcomeGroup = {
+    title: string;
+    clips: EmoteClip[];
+};
+
+// @public (undocumented)
+export namespace OutcomeGroup {
+    const // (undocumented)
+    schema: JSONSchema<OutcomeGroup>;
+    const // (undocumented)
+    validate: ValidateFunction<OutcomeGroup>;
+}
 
 // @alpha (undocumented)
 export type Outfit = {
@@ -4794,6 +4815,7 @@ export namespace WorldConfiguration {
 // src/platform/events/communities.ts:204:3 - (ae-forgotten-export) The symbol "Audience" needs to be exported by the entry point index.d.ts
 // src/platform/events/referral.ts:37:3 - (ae-forgotten-export) The symbol "ReferralMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/streaming.ts:47:3 - (ae-forgotten-export) The symbol "StreamingMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/item/emote/adr287/emote-data-adr287.ts:24:3 - (ae-forgotten-export) The symbol "ArmatureId" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
