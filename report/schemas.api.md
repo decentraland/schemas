@@ -1359,7 +1359,7 @@ export namespace EmoteClip {
 //
 // @public (undocumented)
 export type EmoteDataADR287 = EmoteDataADR74 & {
-    startAnimation: EmoteClip;
+    startAnimation: EmoteClip[];
     randomizeOutcomes: boolean;
     outcomes: OutcomeGroup[];
 };

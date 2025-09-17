@@ -73,7 +73,7 @@ export namespace OutcomeGroup {
 }
 
 export type EmoteDataADR287 = EmoteDataADR74 & {
-  startAnimation: EmoteClip
+  startAnimation: EmoteClip[]
   randomizeOutcomes: boolean
   outcomes: OutcomeGroup[]
 }
@@ -86,8 +86,9 @@ export namespace EmoteDataADR287 {
       ...EmoteDataADR74.schema.properties,
       // Add ADR287-specific properties
       startAnimation: {
-        type: 'object',
-        items: EmoteClip.schema
+        type: 'array',
+        items: EmoteClip.schema,
+        minItems: 1
       },
       randomizeOutcomes: {
         type: 'boolean'
