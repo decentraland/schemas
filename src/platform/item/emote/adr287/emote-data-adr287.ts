@@ -95,7 +95,8 @@ export namespace EmoteDataADR287 {
       outcomes: {
         type: 'array',
         items: OutcomeGroup.schema,
-        minItems: 1
+        minItems: 1,
+        maxItems: 4
       }
     },
     required: [...EmoteDataADR74.schema.required, 'startAnimation', 'randomizeOutcomes', 'outcomes'] as any[],
