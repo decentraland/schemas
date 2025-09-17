@@ -1,14 +1,14 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../../validation'
 import { EmoteDataADR74 } from '../adr74/emote-data-adr74'
 
-export type ArmatureId = 'Avatar' | 'Avatar_Other' | 'Avatar_Prop' | string
+export type ArmatureId = 'Armature' | 'Armature_Other' | 'Armature_Prop' | string
 
 export namespace ArmatureId {
   export const schema: JSONSchema<ArmatureId> = {
     oneOf: [
       {
         type: 'string',
-        enum: ['Avatar', 'Avatar_Other', 'Avatar_Prop']
+        enum: ['Armature', 'Armature_Other', 'Armature_Prop']
       },
       {
         type: 'string',
@@ -21,7 +21,7 @@ export namespace ArmatureId {
 }
 
 export type EmoteClip = {
-  armature: ArmatureId // Avatar, Avatar_Other, Avatar_Prop, or any other armature name
+  armature: ArmatureId // Armature, Armature_Other, Armature_Prop, or any other armature name
   animation: string // GLB clip name (e.g., "HighFive_Avatar")
   loop: boolean
 }
