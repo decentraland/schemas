@@ -1359,7 +1359,7 @@ export namespace EmoteClip {
 //
 // @public (undocumented)
 export type EmoteDataADR287 = EmoteDataADR74 & {
-    startAnimation: EmoteClip[];
+    startAnimation: StartAnimation;
     randomizeOutcomes: boolean;
     outcomes: OutcomeGroup[];
 };
@@ -4816,6 +4816,7 @@ export namespace WorldConfiguration {
 // src/platform/events/referral.ts:37:3 - (ae-forgotten-export) The symbol "ReferralMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/streaming.ts:47:3 - (ae-forgotten-export) The symbol "StreamingMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr287/emote-data-adr287.ts:24:3 - (ae-forgotten-export) The symbol "ArmatureId" needs to be exported by the entry point index.d.ts
+// src/platform/item/emote/adr287/emote-data-adr287.ts:96:3 - (ae-forgotten-export) The symbol "StartAnimation" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
