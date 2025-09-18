@@ -199,6 +199,17 @@ export namespace AuthChain {
     validate: ValidateFunction<AuthChain>;
 }
 
+// Warning: (ae-missing-release-tag) "AuthIdentifyEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type AuthIdentifyEvent = BaseEvent & {
+    type: Events.Type.WEB;
+    subType: Events.SubType.Web.AUTH_IDENTIFY;
+    metadata: WebBaseMetadata & {
+        ethAddress: EthAddress;
+    };
+};
+
 // @public (undocumented)
 export type AuthLink = {
     type: AuthLinkType;
@@ -1652,6 +1663,11 @@ export namespace Events {
             STREAMING_TIME_EXCEEDED = "streaming-time-exceeded"
         }
         // (undocumented)
+        export enum Web {
+            // (undocumented)
+            AUTH_IDENTIFY = "auth-identify"
+        }
+        // (undocumented)
         export enum Worlds {
             // (undocumented)
             DEPLOYMENT = "deployment"
@@ -1687,6 +1703,8 @@ export namespace Events {
         SOCIAL_SERVICE = "social-service",
         // (undocumented)
         STREAMING = "streaming",
+        // (undocumented)
+        WEB = "web",
         // (undocumented)
         WORLD = "world"
     }
@@ -4631,6 +4649,23 @@ export type WearableWithBlobs = Omit<WearableDefinition, 'data'> & {
     };
 };
 
+// Warning: (ae-missing-release-tag) "WebBaseMetadata" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WebBaseMetadata = {
+    userAgent: string;
+    ip: string;
+    pagePath: string;
+    pageUrl: string;
+    locale: string;
+    anonymousId: string;
+    userId?: EthAddress | null;
+    timestamps: {
+        reportedAt: number;
+        receivedAt: number;
+    };
+};
+
 // @alpha
 export type World = {
     validWorldRanges: Array<ValidWorldRange>;
@@ -4724,6 +4759,12 @@ export namespace WorldConfiguration {
 // src/platform/events/communities.ts:204:3 - (ae-forgotten-export) The symbol "Audience" needs to be exported by the entry point index.d.ts
 // src/platform/events/referral.ts:37:3 - (ae-forgotten-export) The symbol "ReferralMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/streaming.ts:47:3 - (ae-forgotten-export) The symbol "StreamingMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/web.ts:16:21 - (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
+// src/platform/events/web.ts:16:14 - (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
+// src/platform/events/web.ts:16:8 - (tsdoc-undefined-tag) The TSDoc tag "@type" is not defined in this configuration
+// src/platform/events/web.ts:22:21 - (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
+// src/platform/events/web.ts:22:14 - (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
+// src/platform/events/web.ts:22:8 - (tsdoc-undefined-tag) The TSDoc tag "@type" is not defined in this configuration
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
