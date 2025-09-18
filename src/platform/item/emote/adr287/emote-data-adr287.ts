@@ -46,6 +46,26 @@ export namespace EmoteClip {
   export const validate: ValidateFunction<EmoteClip> = generateLazyValidator(schema)
 }
 
+export type StartAnimation = {
+  avatar: EmoteClip
+  prop?: EmoteClip
+}
+
+export namespace StartAnimation {
+  export const schema: JSONSchema<StartAnimation> = {
+    type: 'object',
+    properties: {
+      avatar: EmoteClip.schema,
+      prop: {
+        ...EmoteClip.schema,
+        nullable: true
+      }
+    },
+    required: ['avatar'],
+    additionalProperties: true
+  }
+}
+
 export type OutcomeGroup = {
   title: string
   clips: EmoteClip[]
@@ -73,7 +93,7 @@ export namespace OutcomeGroup {
 }
 
 export type EmoteDataADR287 = EmoteDataADR74 & {
-  startAnimation: EmoteClip[]
+  startAnimation: StartAnimation
   randomizeOutcomes: boolean
   outcomes: OutcomeGroup[]
 }
@@ -85,11 +105,7 @@ export namespace EmoteDataADR287 {
       // Inherit all properties from EmoteDataADR74
       ...EmoteDataADR74.schema.properties,
       // Add ADR287-specific properties
-      startAnimation: {
-        type: 'array',
-        items: EmoteClip.schema,
-        minItems: 1
-      },
+      startAnimation: StartAnimation.schema,
       randomizeOutcomes: {
         type: 'boolean'
       },

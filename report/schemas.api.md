@@ -5027,6 +5027,7 @@ export namespace WorldConfiguration {
 // src/platform/events/web.ts:22:14 - (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
 // src/platform/events/web.ts:22:8 - (tsdoc-undefined-tag) The TSDoc tag "@type" is not defined in this configuration
 // src/platform/item/emote/adr287/emote-data-adr287.ts:24:3 - (ae-forgotten-export) The symbol "ArmatureId" needs to be exported by the entry point index.d.ts
+// src/platform/item/emote/adr287/emote-data-adr287.ts:96:3 - (ae-forgotten-export) The symbol "StartAnimation" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
