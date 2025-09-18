@@ -64,6 +64,7 @@ export namespace Events {
     CATALYST_DEPLOYMENT = 'catalyst-deployment',
     WORLD = 'world',
     CLIENT = 'client',
+    WEB = 'web',
     MARKETPLACE = 'marketplace',
     REWARDS = 'rewards',
     BADGE = 'badge',
@@ -113,6 +114,10 @@ export namespace Events {
       PASSPORT_OPENED = 'passport-opened',
       WALKED_DISTANCE = 'walked-distance',
       VERTICAL_HEIGHT_REACHED = 'vertical-height-reached'
+    }
+
+    export enum Web {
+      AUTH_IDENTIFY = 'auth-identify'
     }
 
     export enum Rewards {
