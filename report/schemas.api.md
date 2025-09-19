@@ -372,7 +372,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community | Events.SubType.Camera;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community | Events.SubType.Camera | Events.SubType.Web;
     key: string;
     timestamp: number;
 };

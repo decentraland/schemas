@@ -206,6 +206,7 @@ export type BaseEvent = {
     | Events.SubType.Referral
     | Events.SubType.Community
     | Events.SubType.Camera
+    | Events.SubType.Web
   key: string
   timestamp: number
 }
