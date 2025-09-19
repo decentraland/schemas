@@ -57,6 +57,7 @@ import {
   StreamingTimeExceededEvent,
   StreamingPlaceUpdatedEvent
 } from './streaming'
+import { AuthIdentifyEvent } from './web'
 
 export namespace Events {
   export enum Type {
@@ -260,3 +261,4 @@ export type Event =
   | CommunityInviteReceivedEvent
   | PhotoTakenEvent
   | PhotoPrivacyChangedEvent
+  | AuthIdentifyEvent
