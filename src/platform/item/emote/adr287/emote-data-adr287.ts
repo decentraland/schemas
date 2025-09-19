@@ -82,7 +82,8 @@ export namespace OutcomeGroup {
       clips: {
         type: 'array',
         items: EmoteClip.schema,
-        minItems: 1
+        minItems: 1,
+        maxItems: 3
       }
     },
     required: ['title', 'clips'],
@@ -113,7 +114,7 @@ export namespace EmoteDataADR287 {
         type: 'array',
         items: OutcomeGroup.schema,
         minItems: 1,
-        maxItems: 4
+        maxItems: 3
       }
     },
     required: [...EmoteDataADR74.schema.required, 'startAnimation', 'randomizeOutcomes', 'outcomes'] as any[],
