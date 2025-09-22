@@ -1498,7 +1498,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | UserBannedFromSceneEvent | UserUnbannedFromSceneEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1577,9 +1577,13 @@ export namespace Events {
         // (undocumented)
         export enum Comms {
             // (undocumented)
+            USER_BANNED_FROM_SCENE = "user-banned-from-scene",
+            // (undocumented)
             USER_JOINED_ROOM = "user-joined-room",
             // (undocumented)
-            USER_LEFT_ROOM = "user-left-room"
+            USER_LEFT_ROOM = "user-left-room",
+            // (undocumented)
+            USER_UNBANNED_FROM_SCENE = "user-unbanned-from-scene"
         }
         // (undocumented)
         export enum Community {
@@ -2796,6 +2800,10 @@ export enum NotificationType {
     STREAMING_PLACE_UPDATED = "streaming_place_updated",
     // (undocumented)
     STREAMING_TIME_EXCEEDED = "streaming_time_exceeded",
+    // (undocumented)
+    USER_BANNED_FROM_SCENE = "user_banned_from_scene",
+    // (undocumented)
+    USER_UNBANNED_FROM_SCENE = "user_unbanned_from_scene",
     // (undocumented)
     WORLDS_ACCESS_RESTORED = "worlds_access_restored",
     // (undocumented)
@@ -4406,6 +4414,27 @@ export type UsedEmoteEvent = BaseEvent & {
     };
 };
 
+// Warning: (ae-missing-release-tag) "UserBannedFromSceneEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "UserBannedFromSceneEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type UserBannedFromSceneEvent = BaseEvent & {
+    type: Events.Type.COMMS;
+    subType: Events.SubType.Comms.USER_BANNED_FROM_SCENE;
+    metadata: {
+        placeTitle: string;
+        userAddress: string;
+    };
+};
+
+// @public (undocumented)
+export namespace UserBannedFromSceneEvent {
+    const // (undocumented)
+    schema: JSONSchema<UserBannedFromSceneEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<UserBannedFromSceneEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "UserJoinedRoomEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "UserJoinedRoomEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -4451,6 +4480,27 @@ export namespace UserLeftRoomEvent {
     schema: JSONSchema<UserLeftRoomEvent>;
     const // (undocumented)
     validate: ValidateFunction<UserLeftRoomEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "UserUnbannedFromSceneEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "UserUnbannedFromSceneEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type UserUnbannedFromSceneEvent = BaseEvent & {
+    type: Events.Type.COMMS;
+    subType: Events.SubType.Comms.USER_UNBANNED_FROM_SCENE;
+    metadata: {
+        placeTitle: string;
+        userAddress: string;
+    };
+};
+
+// @public (undocumented)
+export namespace UserUnbannedFromSceneEvent {
+    const // (undocumented)
+    schema: JSONSchema<UserUnbannedFromSceneEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<UserUnbannedFromSceneEvent>;
 }
 
 // @public
