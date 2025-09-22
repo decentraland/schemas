@@ -17,7 +17,7 @@ import {
   VerticalHeightReachedEvent,
   WalkedDistanceEvent
 } from './client'
-import { UserJoinedRoomEvent, UserLeftRoomEvent } from './comms'
+import { UserJoinedRoomEvent, UserLeftRoomEvent, UserBannedFromSceneEvent, UserUnbannedFromSceneEvent } from './comms'
 import {
   CommunityDeletedEvent,
   CommunityDeletedContentViolationEvent,
@@ -163,7 +163,9 @@ export namespace Events {
 
     export enum Comms {
       USER_JOINED_ROOM = 'user-joined-room',
-      USER_LEFT_ROOM = 'user-left-room'
+      USER_LEFT_ROOM = 'user-left-room',
+      USER_BANNED_FROM_SCENE = 'user-banned-from-scene',
+      USER_UNBANNED_FROM_SCENE = 'user-unbanned-from-scene'
     }
 
     export enum Referral {
@@ -245,6 +247,8 @@ export type Event =
   | StreamingPlaceUpdatedEvent
   | UserJoinedRoomEvent
   | UserLeftRoomEvent
+  | UserBannedFromSceneEvent
+  | UserUnbannedFromSceneEvent
   | CreditsCompleteGoalsReminderEvent
   | CreditsUsageReminderEvent
   | CreditsUsage24HoursReminderEvent
