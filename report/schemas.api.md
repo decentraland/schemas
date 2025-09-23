@@ -139,6 +139,27 @@ export namespace AnyMapping {
     validate: ValidateFunction<Mapping>;
 }
 
+// Warning: (ae-missing-release-tag) "ArmatureId" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ArmatureId" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum ArmatureId {
+    // (undocumented)
+    Armature = "Armature",
+    // (undocumented)
+    Armature_Other = "Armature_Other",
+    // (undocumented)
+    Armature_Prop = "Armature_Prop"
+}
+
+// @public (undocumented)
+export namespace ArmatureId {
+    const // (undocumented)
+    schema: JSONSchema<ArmatureId>;
+    const // (undocumented)
+    validate: ValidateFunction<ArmatureId>;
+}
+
 // Warning: (ae-missing-release-tag) "AssetBundleConversionFinishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "AssetBundleConversionFinishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -4180,6 +4201,21 @@ export type StandardProps = {
     rarity: Rarity;
 };
 
+// Warning: (ae-missing-release-tag) "StartAnimation" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StartAnimation" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StartAnimation = {
+    [ArmatureId.Armature]: EmoteClip;
+    [ArmatureId.Armature_Prop]?: EmoteClip;
+};
+
+// @public (undocumented)
+export namespace StartAnimation {
+    const // (undocumented)
+    schema: JSONSchema<StartAnimation>;
+}
+
 // Warning: (ae-missing-release-tag) "Store" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Store" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -4905,8 +4941,6 @@ export namespace WorldConfiguration {
 // src/platform/events/web.ts:22:21 - (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
 // src/platform/events/web.ts:22:14 - (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
 // src/platform/events/web.ts:22:8 - (tsdoc-undefined-tag) The TSDoc tag "@type" is not defined in this configuration
-// src/platform/item/emote/adr287/emote-data-adr287.ts:65:3 - (ae-forgotten-export) The symbol "ArmatureId" needs to be exported by the entry point index.d.ts
-// src/platform/item/emote/adr287/emote-data-adr287.ts:97:3 - (ae-forgotten-export) The symbol "StartAnimation" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
