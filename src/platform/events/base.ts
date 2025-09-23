@@ -17,7 +17,7 @@ import {
   VerticalHeightReachedEvent,
   WalkedDistanceEvent
 } from './client'
-import { UserJoinedRoomEvent } from './comms'
+import { UserJoinedRoomEvent, UserLeftRoomEvent, UserBannedFromSceneEvent, UserUnbannedFromSceneEvent } from './comms'
 import {
   CommunityDeletedEvent,
   CommunityDeletedContentViolationEvent,
@@ -29,6 +29,7 @@ import {
   CommunityRequestToJoinReceivedEvent
 } from './communities'
 import { BidReceivedEvent } from './marketplace'
+import { PhotoPrivacyChangedEvent, PhotoTakenEvent } from './camera'
 import { ReferralInvitedUsersAcceptedEvent, ReferralNewTierReachedEvent } from './referral'
 import {
   RewardInProgressEvent,
@@ -56,6 +57,7 @@ import {
   StreamingTimeExceededEvent,
   StreamingPlaceUpdatedEvent
 } from './streaming'
+import { AuthIdentifyEvent } from './web'
 
 export namespace Events {
   export enum Type {
@@ -63,6 +65,7 @@ export namespace Events {
     CATALYST_DEPLOYMENT = 'catalyst-deployment',
     WORLD = 'world',
     CLIENT = 'client',
+    WEB = 'web',
     MARKETPLACE = 'marketplace',
     REWARDS = 'rewards',
     BADGE = 'badge',
@@ -72,7 +75,8 @@ export namespace Events {
     STREAMING = 'streaming',
     COMMS = 'comms',
     REFERRAL = 'referral',
-    COMMUNITY = 'community'
+    COMMUNITY = 'community',
+    CAMERA = 'camera'
   }
 
   export namespace SubType {
@@ -111,6 +115,10 @@ export namespace Events {
       PASSPORT_OPENED = 'passport-opened',
       WALKED_DISTANCE = 'walked-distance',
       VERTICAL_HEIGHT_REACHED = 'vertical-height-reached'
+    }
+
+    export enum Web {
+      AUTH_IDENTIFY = 'auth-identify'
     }
 
     export enum Rewards {
@@ -154,7 +162,10 @@ export namespace Events {
     }
 
     export enum Comms {
-      USER_JOINED_ROOM = 'user-joined-room'
+      USER_JOINED_ROOM = 'user-joined-room',
+      USER_LEFT_ROOM = 'user-left-room',
+      USER_BANNED_FROM_SCENE = 'user-banned-from-scene',
+      USER_UNBANNED_FROM_SCENE = 'user-unbanned-from-scene'
     }
 
     export enum Referral {
@@ -171,6 +182,11 @@ export namespace Events {
       REQUEST_TO_JOIN_RECEIVED = 'community-request-to-join-received',
       REQUEST_TO_JOIN_ACCEPTED = 'community-request-to-join-accepted',
       INVITE_RECEIVED = 'community-invite-received'
+    }
+
+    export enum Camera {
+      PHOTO_TAKEN = 'photo-taken',
+      PHOTO_PRIVACY_CHANGED = 'photo-privacy-changed'
     }
   }
 }
@@ -191,6 +207,8 @@ export type BaseEvent = {
     | Events.SubType.Comms
     | Events.SubType.Referral
     | Events.SubType.Community
+    | Events.SubType.Camera
+    | Events.SubType.Web
   key: string
   timestamp: number
 }
@@ -228,6 +246,9 @@ export type Event =
   | StreamingTimeExceededEvent
   | StreamingPlaceUpdatedEvent
   | UserJoinedRoomEvent
+  | UserLeftRoomEvent
+  | UserBannedFromSceneEvent
+  | UserUnbannedFromSceneEvent
   | CreditsCompleteGoalsReminderEvent
   | CreditsUsageReminderEvent
   | CreditsUsage24HoursReminderEvent
@@ -243,3 +264,6 @@ export type Event =
   | CommunityRequestToJoinReceivedEvent
   | CommunityRequestToJoinAcceptedEvent
   | CommunityInviteReceivedEvent
+  | PhotoTakenEvent
+  | PhotoPrivacyChangedEvent
+  | AuthIdentifyEvent

@@ -1,5 +1,6 @@
-export { Emote } from './emote'
+export { Emote, EmoteADR74, EmoteADR287 } from './emote'
 export { EmoteRepresentationADR74 } from './adr74/representation-adr74'
 export { EmoteDataADR74 } from './adr74/emote-data-adr74'
+export { ArmatureId, EmoteClip, EmoteDataADR287, OutcomeGroup, StartAnimation } from './adr287/emote-data-adr287'
 export { EmoteCategory } from './emote-category'
 export { EmotePlayMode } from './emote-play-mode'

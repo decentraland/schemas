@@ -144,6 +144,27 @@ export namespace AnyMapping {
     validate: ValidateFunction<Mapping>;
 }
 
+// Warning: (ae-missing-release-tag) "ArmatureId" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "ArmatureId" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum ArmatureId {
+    // (undocumented)
+    Armature = "Armature",
+    // (undocumented)
+    Armature_Other = "Armature_Other",
+    // (undocumented)
+    Armature_Prop = "Armature_Prop"
+}
+
+// @public (undocumented)
+export namespace ArmatureId {
+    const // (undocumented)
+    schema: JSONSchema<ArmatureId>;
+    const // (undocumented)
+    validate: ValidateFunction<ArmatureId>;
+}
+
 // Warning: (ae-missing-release-tag) "AssetBundleConversionFinishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "AssetBundleConversionFinishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -203,6 +224,17 @@ export namespace AuthChain {
     const // (undocumented)
     validate: ValidateFunction<AuthChain>;
 }
+
+// Warning: (ae-missing-release-tag) "AuthIdentifyEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type AuthIdentifyEvent = BaseEvent & {
+    type: Events.Type.WEB;
+    subType: Events.SubType.Web.AUTH_IDENTIFY;
+    metadata: WebBaseMetadata & {
+        ethAddress: EthAddress;
+    };
+};
 
 // @public (undocumented)
 export type AuthLink = {
@@ -366,7 +398,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community | Events.SubType.Camera | Events.SubType.Web;
     key: string;
     timestamp: number;
 };
@@ -1284,18 +1316,31 @@ export namespace Email {
     validate: ValidateFunction<Email>;
 }
 
-// Warning: (ae-forgotten-export) The symbol "EmoteADR74" needs to be exported by the entry point index.d.ts
-//
 // @alpha (undocumented)
-export type Emote = EmoteADR74;
+export type Emote = EmoteADR74 | EmoteADR287;
 
 // @alpha (undocumented)
 export namespace Emote {
     const // (undocumented)
     schema: JSONSchema<Emote>;
     const // (undocumented)
-    validate: ValidateFunction<EmoteADR74>;
+    validate: ValidateFunction<Emote>;
 }
+
+// Warning: (ae-forgotten-export) The symbol "BaseItem" needs to be exported by the entry point index.d.ts
+// Warning: (ae-missing-release-tag) "EmoteADR287" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteADR287 = BaseItem & (StandardProps | ThirdPartyProps) & {
+    emoteDataADR287: EmoteDataADR287;
+};
+
+// Warning: (ae-missing-release-tag) "EmoteADR74" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteADR74 = BaseItem & (StandardProps | ThirdPartyProps) & {
+    emoteDataADR74: EmoteDataADR74;
+};
 
 // Warning: (ae-missing-release-tag) "EmoteCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "EmoteCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1328,6 +1373,41 @@ export namespace EmoteCategory {
     validate: ValidateFunction<EmoteCategory>;
 }
 
+// Warning: (ae-missing-release-tag) "EmoteClip" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteClip" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteClip = {
+    animation: string;
+    loop: boolean;
+};
+
+// @public (undocumented)
+export namespace EmoteClip {
+    const // (undocumented)
+    schema: JSONSchema<EmoteClip>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteClip>;
+}
+
+// Warning: (ae-missing-release-tag) "EmoteDataADR287" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteDataADR287" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteDataADR287 = EmoteDataADR74 & {
+    startAnimation: StartAnimation;
+    randomizeOutcomes: boolean;
+    outcomes: OutcomeGroup[];
+};
+
+// @public (undocumented)
+export namespace EmoteDataADR287 {
+    const // (undocumented)
+    schema: JSONSchema<EmoteDataADR287>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteDataADR287>;
+}
+
 // Warning: (ae-missing-release-tag) "EmoteDataADR74" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "EmoteDataADR74" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1347,12 +1427,27 @@ export namespace EmoteDataADR74 {
     validate: ValidateFunction<EmoteDataADR74>;
 }
 
-// Warning: (ae-incompatible-release-tags) The symbol "EmoteDefinition" is marked as @public, but its signature references "Emote" which is marked as @alpha
 // Warning: (ae-missing-release-tag) "EmoteDefinition" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type EmoteDefinition = Omit<Emote, 'emoteDataADR74'> & {
-    emoteDataADR74: Omit<Emote['emoteDataADR74'], 'representations'> & {
+export type EmoteDefinition = EmoteDefinitionADR74 | EmoteDefinitionADR287;
+
+// Warning: (ae-incompatible-release-tags) The symbol "EmoteDefinitionADR287" is marked as @public, but its signature references "Emote" which is marked as @alpha
+// Warning: (ae-missing-release-tag) "EmoteDefinitionADR287" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteDefinitionADR287 = Omit<Emote, 'emoteDataADR287'> & {
+    emoteDataADR287: Omit<EmoteADR287['emoteDataADR287'], 'representations'> & {
+        representations: EmoteRepresentationDefinition[];
+    };
+};
+
+// Warning: (ae-incompatible-release-tags) The symbol "EmoteDefinitionADR74" is marked as @public, but its signature references "Emote" which is marked as @alpha
+// Warning: (ae-missing-release-tag) "EmoteDefinitionADR74" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EmoteDefinitionADR74 = Omit<Emote, 'emoteDataADR74'> & {
+    emoteDataADR74: Omit<EmoteADR74['emoteDataADR74'], 'representations'> & {
         representations: EmoteRepresentationDefinition[];
     };
 };
@@ -1421,8 +1516,18 @@ export type EmoteRepresentationWithBlobs = Omit<EmoteRepresentationDefinition, '
 };
 
 // @alpha (undocumented)
-export type EmoteWithBlobs = Omit<EmoteDefinition, 'emoteDataADR74'> & {
-    emoteDataADR74: Omit<EmoteDefinition['emoteDataADR74'], 'representations'> & {
+export type EmoteWithBlobs = EmoteWithBlobsADR74 | EmoteWithBlobsADR287;
+
+// @alpha (undocumented)
+export type EmoteWithBlobsADR287 = Omit<EmoteDefinition, 'emoteDataADR287'> & {
+    emoteDataADR287: Omit<EmoteDefinitionADR287['emoteDataADR287'], 'representations'> & {
+        representations: EmoteRepresentationWithBlobs[];
+    };
+};
+
+// @alpha (undocumented)
+export type EmoteWithBlobsADR74 = Omit<EmoteDefinitionADR74, 'emoteDataADR74'> & {
+    emoteDataADR74: Omit<EmoteDefinitionADR74['emoteDataADR74'], 'representations'> & {
         representations: EmoteRepresentationWithBlobs[];
     };
 };
@@ -1492,7 +1597,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | UserBannedFromSceneEvent | UserUnbannedFromSceneEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent;
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1530,6 +1635,13 @@ export namespace Events {
             ROYALTIES_EARNED = "royalties-earned"
         }
         // (undocumented)
+        export enum Camera {
+            // (undocumented)
+            PHOTO_PRIVACY_CHANGED = "photo-privacy-changed",
+            // (undocumented)
+            PHOTO_TAKEN = "photo-taken"
+        }
+        // (undocumented)
         export enum CatalystDeployment {
             // (undocumented)
             EMOTE = "emote",
@@ -1564,7 +1676,13 @@ export namespace Events {
         // (undocumented)
         export enum Comms {
             // (undocumented)
-            USER_JOINED_ROOM = "user-joined-room"
+            USER_BANNED_FROM_SCENE = "user-banned-from-scene",
+            // (undocumented)
+            USER_JOINED_ROOM = "user-joined-room",
+            // (undocumented)
+            USER_LEFT_ROOM = "user-left-room",
+            // (undocumented)
+            USER_UNBANNED_FROM_SCENE = "user-unbanned-from-scene"
         }
         // (undocumented)
         export enum Community {
@@ -1648,6 +1766,11 @@ export namespace Events {
             STREAMING_TIME_EXCEEDED = "streaming-time-exceeded"
         }
         // (undocumented)
+        export enum Web {
+            // (undocumented)
+            AUTH_IDENTIFY = "auth-identify"
+        }
+        // (undocumented)
         export enum Worlds {
             // (undocumented)
             DEPLOYMENT = "deployment"
@@ -1661,6 +1784,8 @@ export namespace Events {
         BADGE = "badge",
         // (undocumented)
         BLOCKCHAIN = "blockchain",
+        // (undocumented)
+        CAMERA = "camera",
         // (undocumented)
         CATALYST_DEPLOYMENT = "catalyst-deployment",
         // (undocumented)
@@ -1681,6 +1806,8 @@ export namespace Events {
         SOCIAL_SERVICE = "social-service",
         // (undocumented)
         STREAMING = "streaming",
+        // (undocumented)
+        WEB = "web",
         // (undocumented)
         WORLD = "world"
     }
@@ -1949,7 +2076,6 @@ export function isInExceptionBlock(x: number, y: number): boolean;
 // @alpha
 export function isInsideWorldLimits(x: number, y: number): boolean;
 
-// Warning: (ae-forgotten-export) The symbol "BaseItem" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "isStandard" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -2773,6 +2899,10 @@ export enum NotificationType {
     // (undocumented)
     STREAMING_TIME_EXCEEDED = "streaming_time_exceeded",
     // (undocumented)
+    USER_BANNED_FROM_SCENE = "user_banned_from_scene",
+    // (undocumented)
+    USER_UNBANNED_FROM_SCENE = "user_unbanned_from_scene",
+    // (undocumented)
     WORLDS_ACCESS_RESTORED = "worlds_access_restored",
     // (undocumented)
     WORLDS_ACCESS_RESTRICTED = "worlds_access_restricted",
@@ -2872,6 +3002,23 @@ export enum OrderSortBy {
     RECENTLY_LISTED = "recently_listed",
     // (undocumented)
     RECENTLY_UPDATED = "recently_updated"
+}
+
+// Warning: (ae-missing-release-tag) "OutcomeGroup" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "OutcomeGroup" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type OutcomeGroup = {
+    title: string;
+    clips: Partial<Record<ArmatureId, EmoteClip>>;
+};
+
+// @public (undocumented)
+export namespace OutcomeGroup {
+    const // (undocumented)
+    schema: JSONSchema<OutcomeGroup>;
+    const // (undocumented)
+    validate: ValidateFunction<OutcomeGroup>;
 }
 
 // @alpha (undocumented)
@@ -2996,6 +3143,56 @@ export namespace PeriodCreation {
     schema: JSONSchemaType<PeriodCreation>;
     const // (undocumented)
     validate: ValidateFunction<PeriodCreation>;
+}
+
+// Warning: (ae-missing-release-tag) "PhotoPrivacyChangedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PhotoPrivacyChangedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PhotoPrivacyChangedEvent = BaseEvent & {
+    type: Events.Type.CAMERA;
+    subType: Events.SubType.Camera.PHOTO_PRIVACY_CHANGED;
+    metadata: {
+        userAddress: string;
+        photoId: string;
+        isPublic: boolean;
+    };
+};
+
+// @public (undocumented)
+export namespace PhotoPrivacyChangedEvent {
+    const // (undocumented)
+    schema: JSONSchema<PhotoPrivacyChangedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<PhotoPrivacyChangedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "PhotoTakenEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "PhotoTakenEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type PhotoTakenEvent = BaseEvent & {
+    type: Events.Type.CAMERA;
+    subType: Events.SubType.Camera.PHOTO_TAKEN;
+    metadata: {
+        sceneId: string;
+        realm: string;
+        userAddress: string;
+        isPublic: boolean;
+        photoId: string;
+        users: Array<{
+            address: string;
+            isEmoting: boolean;
+        }>;
+    };
+};
+
+// @public (undocumented)
+export namespace PhotoTakenEvent {
+    const // (undocumented)
+    schema: JSONSchema<PhotoTakenEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<PhotoTakenEvent>;
 }
 
 // @public
@@ -4015,6 +4212,21 @@ export type StandardProps = {
     rarity: Rarity;
 };
 
+// Warning: (ae-missing-release-tag) "StartAnimation" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "StartAnimation" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type StartAnimation = {
+    [ArmatureId.Armature]: EmoteClip;
+    [ArmatureId.Armature_Prop]?: EmoteClip;
+};
+
+// @public (undocumented)
+export namespace StartAnimation {
+    const // (undocumented)
+    schema: JSONSchema<StartAnimation>;
+}
+
 // Warning: (ae-missing-release-tag) "Store" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "Store" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -4355,6 +4567,27 @@ export type UsedEmoteEvent = BaseEvent & {
     };
 };
 
+// Warning: (ae-missing-release-tag) "UserBannedFromSceneEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "UserBannedFromSceneEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type UserBannedFromSceneEvent = BaseEvent & {
+    type: Events.Type.COMMS;
+    subType: Events.SubType.Comms.USER_BANNED_FROM_SCENE;
+    metadata: {
+        placeTitle: string;
+        userAddress: string;
+    };
+};
+
+// @public (undocumented)
+export namespace UserBannedFromSceneEvent {
+    const // (undocumented)
+    schema: JSONSchema<UserBannedFromSceneEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<UserBannedFromSceneEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "UserJoinedRoomEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "UserJoinedRoomEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -4377,6 +4610,50 @@ export namespace UserJoinedRoomEvent {
     schema: JSONSchema<UserJoinedRoomEvent>;
     const // (undocumented)
     validate: ValidateFunction<UserJoinedRoomEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "UserLeftRoomEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "UserLeftRoomEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type UserLeftRoomEvent = BaseEvent & {
+    type: Events.Type.COMMS;
+    subType: Events.SubType.Comms.USER_LEFT_ROOM;
+    metadata: {
+        sceneId?: string;
+        isWorld: boolean;
+        userAddress: string;
+        realmName: string;
+    };
+};
+
+// @public (undocumented)
+export namespace UserLeftRoomEvent {
+    const // (undocumented)
+    schema: JSONSchema<UserLeftRoomEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<UserLeftRoomEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "UserUnbannedFromSceneEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "UserUnbannedFromSceneEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type UserUnbannedFromSceneEvent = BaseEvent & {
+    type: Events.Type.COMMS;
+    subType: Events.SubType.Comms.USER_UNBANNED_FROM_SCENE;
+    metadata: {
+        placeTitle: string;
+        userAddress: string;
+    };
+};
+
+// @public (undocumented)
+export namespace UserUnbannedFromSceneEvent {
+    const // (undocumented)
+    schema: JSONSchema<UserUnbannedFromSceneEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<UserUnbannedFromSceneEvent>;
 }
 
 // @public
@@ -4575,6 +4852,23 @@ export type WearableWithBlobs = Omit<WearableDefinition, 'data'> & {
     };
 };
 
+// Warning: (ae-missing-release-tag) "WebBaseMetadata" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WebBaseMetadata = {
+    userAgent: string;
+    ip: string;
+    pagePath: string;
+    pageUrl: string;
+    locale: string;
+    anonymousId: string;
+    userId?: EthAddress | null;
+    timestamps: {
+        reportedAt: number;
+        receivedAt: number;
+    };
+};
+
 // @alpha
 export type World = {
     validWorldRanges: Array<ValidWorldRange>;
@@ -4645,6 +4939,7 @@ export namespace WorldConfiguration {
 // src/dapps/order.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:34:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/preview/emote-definition.ts:6:5 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationDefinition" which is marked as @alpha
+// src/dapps/preview/emote-definition.ts:12:5 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:10:3 - (ae-incompatible-release-tags) The symbol "item" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:11:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:12:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
@@ -4664,10 +4959,16 @@ export namespace WorldConfiguration {
 // src/dapps/trade.ts:91:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/trade.ts:92:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/platform/events/blockchain.ts:169:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
-// src/platform/events/client.ts:93:3 - (ae-forgotten-export) The symbol "ClientBaseMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/client.ts:94:3 - (ae-forgotten-export) The symbol "ClientBaseMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/communities.ts:204:3 - (ae-forgotten-export) The symbol "Audience" needs to be exported by the entry point index.d.ts
 // src/platform/events/referral.ts:37:3 - (ae-forgotten-export) The symbol "ReferralMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/streaming.ts:47:3 - (ae-forgotten-export) The symbol "StreamingMetadata" needs to be exported by the entry point index.d.ts
+// src/platform/events/web.ts:16:21 - (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
+// src/platform/events/web.ts:16:14 - (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
+// src/platform/events/web.ts:16:8 - (tsdoc-undefined-tag) The TSDoc tag "@type" is not defined in this configuration
+// src/platform/events/web.ts:22:21 - (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
+// src/platform/events/web.ts:22:14 - (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
+// src/platform/events/web.ts:22:8 - (tsdoc-undefined-tag) The TSDoc tag "@type" is not defined in this configuration
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
