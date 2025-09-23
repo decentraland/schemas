@@ -1,27 +1,22 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../../validation'
 import { EmoteDataADR74 } from '../adr74/emote-data-adr74'
 
-export type ArmatureId = 'Armature' | 'Armature_Other' | 'Armature_Prop' | string
+export enum ArmatureId {
+  Armature = 'Armature',
+  Armature_Prop = 'Armature_Prop',
+  Armature_Other = 'Armature_Other'
+}
 
 export namespace ArmatureId {
   export const schema: JSONSchema<ArmatureId> = {
-    oneOf: [
-      {
-        type: 'string',
-        enum: ['Armature', 'Armature_Other', 'Armature_Prop']
-      },
-      {
-        type: 'string',
-        minLength: 1
-      }
-    ]
+    type: 'string',
+    enum: Object.values(ArmatureId)
   }
 
   export const validate: ValidateFunction<ArmatureId> = generateLazyValidator(schema)
 }
 
 export type EmoteClip = {
-  armature: ArmatureId // Armature, Armature_Other, Armature_Prop, or any other armature name
   animation: string // GLB clip name (e.g., "HighFive_Avatar")
   loop: boolean
 }
@@ -30,7 +25,6 @@ export namespace EmoteClip {
   export const schema: JSONSchema<EmoteClip> = {
     type: 'object',
     properties: {
-      armature: ArmatureId.schema,
       animation: {
         type: 'string',
         minLength: 1
@@ -39,7 +33,7 @@ export namespace EmoteClip {
         type: 'boolean'
       }
     },
-    required: ['armature', 'animation', 'loop'],
+    required: ['animation', 'loop'],
     additionalProperties: false
   }
 
@@ -47,28 +41,28 @@ export namespace EmoteClip {
 }
 
 export type StartAnimation = {
-  avatar: EmoteClip
-  prop?: EmoteClip
+  [ArmatureId.Armature]: EmoteClip
+  [ArmatureId.Armature_Prop]?: EmoteClip
 }
 
 export namespace StartAnimation {
   export const schema: JSONSchema<StartAnimation> = {
     type: 'object',
     properties: {
-      avatar: EmoteClip.schema,
-      prop: {
+      [ArmatureId.Armature]: EmoteClip.schema,
+      [ArmatureId.Armature_Prop]: {
         ...EmoteClip.schema,
         nullable: true
       }
     },
-    required: ['avatar'],
+    required: [ArmatureId.Armature],
     additionalProperties: true
   }
 }
 
 export type OutcomeGroup = {
   title: string
-  clips: EmoteClip[]
+  clips: Partial<Record<ArmatureId, EmoteClip>>
 }
 
 export namespace OutcomeGroup {
@@ -80,10 +74,16 @@ export namespace OutcomeGroup {
         minLength: 1
       },
       clips: {
-        type: 'array',
-        items: EmoteClip.schema,
-        minItems: 1,
-        maxItems: 3
+        type: 'object',
+        properties: Object.values(ArmatureId).reduce((properties, armature) => {
+          properties[armature as ArmatureId] = {
+            ...EmoteClip.schema,
+            nullable: true
+          }
+          return properties
+        }, {} as Record<ArmatureId, typeof EmoteClip.schema & { nullable: true }>),
+        additionalProperties: true,
+        minProperties: 1
       }
     },
     required: ['title', 'clips'],
@@ -117,7 +117,7 @@ export namespace EmoteDataADR287 {
         maxItems: 3
       }
     },
-    required: [...EmoteDataADR74.schema.required, 'startAnimation', 'randomizeOutcomes', 'outcomes'] as any[],
+    required: [...EmoteDataADR74.schema.required, 'startAnimation', 'randomizeOutcomes', 'outcomes'],
     additionalProperties: true
   }
 

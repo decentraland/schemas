@@ -1396,7 +1396,6 @@ export namespace EmoteCategory {
 //
 // @public (undocumented)
 export type EmoteClip = {
-  armature: ArmatureId
   animation: string
   loop: boolean
 }
@@ -3077,7 +3076,7 @@ export enum OrderSortBy {
 // @public (undocumented)
 export type OutcomeGroup = {
   title: string
-  clips: EmoteClip[]
+  clips: Partial<Record<ArmatureId, EmoteClip>>
 }
 
 // @public (undocumented)
@@ -5020,13 +5019,7 @@ export namespace WorldConfiguration {
 // src/platform/events/communities.ts:204:3 - (ae-forgotten-export) The symbol "Audience" needs to be exported by the entry point index.d.ts
 // src/platform/events/referral.ts:37:3 - (ae-forgotten-export) The symbol "ReferralMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/streaming.ts:47:3 - (ae-forgotten-export) The symbol "StreamingMetadata" needs to be exported by the entry point index.d.ts
-// src/platform/events/web.ts:16:21 - (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
-// src/platform/events/web.ts:16:14 - (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
-// src/platform/events/web.ts:16:8 - (tsdoc-undefined-tag) The TSDoc tag "@type" is not defined in this configuration
-// src/platform/events/web.ts:22:21 - (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
-// src/platform/events/web.ts:22:14 - (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
-// src/platform/events/web.ts:22:8 - (tsdoc-undefined-tag) The TSDoc tag "@type" is not defined in this configuration
-// src/platform/item/emote/adr287/emote-data-adr287.ts:24:3 - (ae-forgotten-export) The symbol "ArmatureId" needs to be exported by the entry point index.d.ts
+// src/platform/item/emote/adr287/emote-data-adr287.ts:65:3 - (ae-forgotten-export) The symbol "ArmatureId" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr287/emote-data-adr287.ts:97:3 - (ae-forgotten-export) The symbol "StartAnimation" needs to be exported by the entry point index.d.ts
 // src/platform/item/emote/adr74/emote-data-adr74.ts:7:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
 // src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
