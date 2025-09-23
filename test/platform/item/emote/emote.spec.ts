@@ -140,7 +140,7 @@ describe('Emote tests', () => {
         'standard properties conditions are not met',
         'thirdparty properties conditions are not met',
         'emote should have either standard or thirdparty properties',
-        'emote should have "emoteDataADR74" and match its schema'
+        'emote should have either "emoteDataADR74" or "emoteDataADR287" (but not both) and match its schema'
       ]
     )
   })
@@ -156,7 +156,7 @@ describe('Emote tests', () => {
         'standard properties conditions are not met',
         'thirdparty properties conditions are not met',
         'emote should have either standard or thirdparty properties',
-        'emote should have "emoteDataADR74" and match its schema'
+        'emote should have either "emoteDataADR74" or "emoteDataADR287" (but not both) and match its schema'
       ]
     )
   })
@@ -182,7 +182,7 @@ describe('Emote tests', () => {
         'standard properties conditions are not met',
         'thirdparty properties conditions are not met',
         'emote should have either standard or thirdparty properties',
-        'emote should have "emoteDataADR74" and match its schema'
+        'emote should have either "emoteDataADR74" or "emoteDataADR287" (but not both) and match its schema'
       ]
     )
   })
@@ -221,7 +221,7 @@ describe('Emote tests', () => {
       'standard properties conditions are not met',
       'thirdparty properties conditions are not met',
       'emote should have either standard or thirdparty properties',
-      'emote should have "emoteDataADR74" and match its schema'
+      'emote should have either "emoteDataADR74" or "emoteDataADR287" (but not both) and match its schema'
     ])
     expect(isThirdParty(notThirdPartyEmote)).toEqual(false)
   })
