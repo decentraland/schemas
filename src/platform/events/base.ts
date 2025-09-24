@@ -58,6 +58,7 @@ import {
   StreamingPlaceUpdatedEvent
 } from './streaming'
 import { AuthIdentifyEvent } from './web'
+import { EventCreatedEvent, EventStartedEvent, EventStartsSoonEvent } from './event'
 
 export namespace Events {
   export enum Type {
@@ -76,7 +77,8 @@ export namespace Events {
     COMMS = 'comms',
     REFERRAL = 'referral',
     COMMUNITY = 'community',
-    CAMERA = 'camera'
+    CAMERA = 'camera',
+    EVENT = 'event'
   }
 
   export namespace SubType {
@@ -188,6 +190,12 @@ export namespace Events {
       PHOTO_TAKEN = 'photo-taken',
       PHOTO_PRIVACY_CHANGED = 'photo-privacy-changed'
     }
+
+    export enum Event {
+      EVENT_CREATED = 'event-created',
+      EVENT_STARTS_SOON = 'event-starts-soon',
+      EVENT_STARTED = 'event-started'
+    }
   }
 }
 
@@ -209,6 +217,7 @@ export type BaseEvent = {
     | Events.SubType.Community
     | Events.SubType.Camera
     | Events.SubType.Web
+    | Events.SubType.Event
   key: string
   timestamp: number
 }
@@ -267,3 +276,6 @@ export type Event =
   | PhotoTakenEvent
   | PhotoPrivacyChangedEvent
   | AuthIdentifyEvent
+  | EventCreatedEvent
+  | EventStartedEvent
+  | EventStartsSoonEvent
