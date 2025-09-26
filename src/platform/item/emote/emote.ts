@@ -67,7 +67,6 @@ export namespace Emote {
       errorMessage: { oneOf: 'emote should have either standard or thirdparty properties' }
     },
     else: {
-      // Si NO hay ADR287, exigimos ADR74
       required: ['emoteDataADR74'],
       prohibited: ['emoteDataADR287'],
       // ADR74: standard XOR thirdparty
