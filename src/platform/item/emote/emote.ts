@@ -101,7 +101,7 @@ export namespace Emote {
       errorMessage: { oneOf: 'emote should have either standard or thirdparty properties' }
     },
     errorMessage: {
-      if: 'emote schema branching failed',
+      if: 'emote should have either "emoteDataADR74" or "emoteDataADR287" (but not both) and match its schema',
       then: 'emote should have "emoteDataADR287" and match its schema',
       else: 'emote should have "emoteDataADR74" and match its schema'
     }
