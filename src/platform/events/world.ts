@@ -2,8 +2,8 @@ import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../valid
 import { BaseEvent, Events } from './base'
 
 export type WorldsPermissionGrantedEvent = BaseEvent & {
-  type: Events.Type.WORLD_CONTENT_SERVER
-  subType: Events.SubType.WorldContentServer.WORLDS_PERMISSION_GRANTED
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLDS_PERMISSION_GRANTED
   metadata: {
     title: string
     description: string
@@ -15,8 +15,8 @@ export type WorldsPermissionGrantedEvent = BaseEvent & {
 }
 
 export type WorldsPermissionRevokedEvent = BaseEvent & {
-  type: Events.Type.WORLD_CONTENT_SERVER
-  subType: Events.SubType.WorldContentServer.WORLDS_PERMISSION_REVOKED
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLDS_PERMISSION_REVOKED
   metadata: {
     title: string
     description: string
@@ -28,8 +28,8 @@ export type WorldsPermissionRevokedEvent = BaseEvent & {
 }
 
 export type WorldsAccessRestrictedEvent = BaseEvent & {
-  type: Events.Type.WORLD_CONTENT_SERVER
-  subType: Events.SubType.WorldContentServer.WORLDS_ACCESS_RESTRICTED
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLDS_ACCESS_RESTRICTED
   metadata: {
     title: string
     description: string
@@ -39,8 +39,8 @@ export type WorldsAccessRestrictedEvent = BaseEvent & {
 }
 
 export type WorldsAccessRestoredEvent = BaseEvent & {
-  type: Events.Type.WORLD_CONTENT_SERVER
-  subType: Events.SubType.WorldContentServer.WORLDS_ACCESS_RESTORED
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLDS_ACCESS_RESTORED
   metadata: {
     title: string
     description: string
@@ -50,8 +50,8 @@ export type WorldsAccessRestoredEvent = BaseEvent & {
 }
 
 export type WorldsMissingResourcesEvent = BaseEvent & {
-  type: Events.Type.WORLD_CONTENT_SERVER
-  subType: Events.SubType.WorldContentServer.WORLDS_MISSING_RESOURCES
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLDS_MISSING_RESOURCES
   metadata: {
     title: string
     description: string
@@ -65,8 +65,8 @@ export namespace WorldsAccessRestoredEvent {
   export const schema: JSONSchema<WorldsAccessRestoredEvent> = {
     type: 'object',
     properties: {
-      type: { type: 'string', const: Events.Type.WORLD_CONTENT_SERVER },
-      subType: { type: 'string', const: Events.SubType.WorldContentServer.WORLDS_ACCESS_RESTORED },
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_ACCESS_RESTORED },
       key: { type: 'string' },
       timestamp: { type: 'number', minimum: 0 },
       metadata: {
@@ -92,8 +92,8 @@ export namespace WorldsPermissionRevokedEvent {
   export const schema: JSONSchema<WorldsPermissionRevokedEvent> = {
     type: 'object',
     properties: {
-      type: { type: 'string', const: Events.Type.WORLD_CONTENT_SERVER },
-      subType: { type: 'string', const: Events.SubType.WorldContentServer.WORLDS_PERMISSION_REVOKED },
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_PERMISSION_REVOKED },
       key: { type: 'string' },
       timestamp: { type: 'number', minimum: 0 },
       metadata: {
@@ -121,8 +121,8 @@ export namespace WorldsPermissionGrantedEvent {
   export const schema: JSONSchema<WorldsPermissionGrantedEvent> = {
     type: 'object',
     properties: {
-      type: { type: 'string', const: Events.Type.WORLD_CONTENT_SERVER },
-      subType: { type: 'string', const: Events.SubType.WorldContentServer.WORLDS_PERMISSION_GRANTED },
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_PERMISSION_GRANTED },
       key: { type: 'string' },
       timestamp: { type: 'number', minimum: 0 },
       metadata: {
@@ -150,8 +150,8 @@ export namespace WorldsAccessRestrictedEvent {
   export const schema: JSONSchema<WorldsAccessRestrictedEvent> = {
     type: 'object',
     properties: {
-      type: { type: 'string', const: Events.Type.WORLD_CONTENT_SERVER },
-      subType: { type: 'string', const: Events.SubType.WorldContentServer.WORLDS_ACCESS_RESTRICTED },
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_ACCESS_RESTRICTED },
       key: { type: 'string' },
       timestamp: { type: 'number', minimum: 0 },
       metadata: {
@@ -177,8 +177,8 @@ export namespace WorldsMissingResourcesEvent {
   export const schema: JSONSchema<WorldsMissingResourcesEvent> = {
     type: 'object',
     properties: {
-      type: { type: 'string', const: Events.Type.WORLD_CONTENT_SERVER },
-      subType: { type: 'string', const: Events.SubType.WorldContentServer.WORLDS_MISSING_RESOURCES },
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_MISSING_RESOURCES },
       key: { type: 'string' },
       timestamp: { type: 'number', minimum: 0 },
       metadata: {

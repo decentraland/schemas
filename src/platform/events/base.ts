@@ -78,7 +78,7 @@ import {
   WorldsAccessRestoredEvent,
   WorldsAccessRestrictedEvent,
   WorldsMissingResourcesEvent
-} from './worldContentServer'
+} from './world'
 
 export namespace Events {
   export enum Type {
@@ -99,8 +99,7 @@ export namespace Events {
     COMMUNITY = 'community',
     CAMERA = 'camera',
     EVENT = 'event',
-    GOVERNANCE = 'governance',
-    WORLD_CONTENT_SERVER = 'world-content-server'
+    GOVERNANCE = 'governance'
   }
 
   export namespace SubType {
@@ -128,7 +127,12 @@ export namespace Events {
     }
 
     export enum Worlds {
-      DEPLOYMENT = 'deployment'
+      DEPLOYMENT = 'deployment',
+      WORLDS_PERMISSION_GRANTED = 'worlds_permission_granted',
+      WORLDS_PERMISSION_REVOKED = 'worlds_permission_revoked',
+      WORLDS_ACCESS_RESTORED = 'worlds_access_restored',
+      WORLDS_ACCESS_RESTRICTED = 'worlds_access_restricted',
+      WORLDS_MISSING_RESOURCES = 'worlds_missing_resources'
     }
 
     export enum Client {
@@ -232,14 +236,6 @@ export namespace Events {
       VOTED_ON_BEHALF = 'governance_voted_on_behalf',
       CLIFF_ENDED = 'governance_cliff_ended'
     }
-
-    export enum WorldContentServer {
-      WORLDS_PERMISSION_GRANTED = 'worlds_permission_granted',
-      WORLDS_PERMISSION_REVOKED = 'worlds_permission_revoked',
-      WORLDS_ACCESS_RESTORED = 'worlds_access_restored',
-      WORLDS_ACCESS_RESTRICTED = 'worlds_access_restricted',
-      WORLDS_MISSING_RESOURCES = 'worlds_missing_resources'
-    }
   }
 }
 
@@ -263,7 +259,7 @@ export type BaseEvent = {
     | Events.SubType.Web
     | Events.SubType.Event
     | Events.SubType.Governance
-    | Events.SubType.WorldContentServer
+    | Events.SubType.Worlds
   key: string
   timestamp: number
 }
