@@ -18,7 +18,7 @@ export namespace ArmatureId {
 
 export type EmoteClip = {
   animation: string // GLB clip name (e.g., "HighFive_Avatar")
-  loop: boolean
+  sound?: string // Sound clip name (e.g., "HighFive_Avatar.ogg")
 }
 
 export namespace EmoteClip {
@@ -29,18 +29,20 @@ export namespace EmoteClip {
         type: 'string',
         minLength: 1
       },
-      loop: {
-        type: 'boolean'
+      sound: {
+        type: 'string',
+        nullable: true
       }
     },
-    required: ['animation', 'loop'],
-    additionalProperties: false
+    required: ['animation'],
+    additionalProperties: true
   }
 
   export const validate: ValidateFunction<EmoteClip> = generateLazyValidator(schema)
 }
 
 export type StartAnimation = {
+  loop: boolean
   [ArmatureId.Armature]: EmoteClip
   [ArmatureId.Armature_Prop]?: EmoteClip
 }
@@ -49,19 +51,23 @@ export namespace StartAnimation {
   export const schema: JSONSchema<StartAnimation> = {
     type: 'object',
     properties: {
+      loop: {
+        type: 'boolean'
+      },
       [ArmatureId.Armature]: EmoteClip.schema,
       [ArmatureId.Armature_Prop]: {
         ...EmoteClip.schema,
         nullable: true
       }
     },
-    required: [ArmatureId.Armature],
+    required: ['loop', ArmatureId.Armature],
     additionalProperties: true
   }
 }
 
 export type OutcomeGroup = {
   title: string
+  loop: boolean
   clips: Partial<Record<ArmatureId, EmoteClip>>
 }
 
@@ -72,6 +78,9 @@ export namespace OutcomeGroup {
       title: {
         type: 'string',
         minLength: 1
+      },
+      loop: {
+        type: 'boolean'
       },
       clips: {
         type: 'object',
@@ -86,7 +95,7 @@ export namespace OutcomeGroup {
         minProperties: 1
       }
     },
-    required: ['title', 'clips'],
+    required: ['title', 'loop', 'clips'],
     additionalProperties: false
   }
 
