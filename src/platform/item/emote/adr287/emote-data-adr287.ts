@@ -27,15 +27,22 @@ export namespace EmoteClip {
     properties: {
       animation: {
         type: 'string',
-        minLength: 1
+        minLength: 1,
+        errorMessage: 'animation must be a non-empty string (GLB clip name)'
       },
       sound: {
         type: 'string',
-        nullable: true
+        nullable: true,
+        errorMessage: 'sound must be a string (sound clip name) when provided'
       }
     },
     required: ['animation'],
-    additionalProperties: true
+    additionalProperties: true,
+    errorMessage: {
+      required: {
+        animation: 'animation is required (GLB clip name)'
+      }
+    }
   }
 
   export const validate: ValidateFunction<EmoteClip> = generateLazyValidator(schema)
@@ -52,16 +59,27 @@ export namespace StartAnimation {
     type: 'object',
     properties: {
       loop: {
-        type: 'boolean'
+        type: 'boolean',
+        errorMessage: 'startAnimation.loop must be a boolean'
       },
-      [ArmatureId.Armature]: EmoteClip.schema,
+      [ArmatureId.Armature]: {
+        ...EmoteClip.schema,
+        errorMessage: 'startAnimation.Armature is required and must contain valid animation data'
+      },
       [ArmatureId.Armature_Prop]: {
         ...EmoteClip.schema,
-        nullable: true
+        nullable: true,
+        errorMessage: 'startAnimation.Armature_Prop must contain valid animation data when provided'
       }
     },
     required: ['loop', ArmatureId.Armature],
-    additionalProperties: true
+    additionalProperties: true,
+    errorMessage: {
+      required: {
+        loop: 'startAnimation.loop is required',
+        [ArmatureId.Armature]: 'startAnimation.Armature is required'
+      }
+    }
   }
 }
 
@@ -77,26 +95,37 @@ export namespace OutcomeGroup {
     properties: {
       title: {
         type: 'string',
-        minLength: 1
+        minLength: 1,
+        errorMessage: 'outcome.title must be a non-empty string'
       },
       loop: {
-        type: 'boolean'
+        type: 'boolean',
+        errorMessage: 'outcome.loop must be a boolean'
       },
       clips: {
         type: 'object',
         properties: Object.values(ArmatureId).reduce((properties, armature) => {
           properties[armature as ArmatureId] = {
             ...EmoteClip.schema,
-            nullable: true
+            nullable: true,
+            errorMessage: `outcome.clips.${armature} must contain valid animation data when provided`
           }
           return properties
         }, {} as Record<ArmatureId, typeof EmoteClip.schema & { nullable: true }>),
         additionalProperties: true,
-        minProperties: 1
+        minProperties: 1,
+        errorMessage: 'outcome.clips must contain at least one armature animation'
       }
     },
     required: ['title', 'loop', 'clips'],
-    additionalProperties: false
+    additionalProperties: false,
+    errorMessage: {
+      required: {
+        title: 'outcome.title is required',
+        loop: 'outcome.loop is required',
+        clips: 'outcome.clips is required'
+      }
+    }
   }
 
   export const validate: ValidateFunction<OutcomeGroup> = generateLazyValidator(schema)
@@ -115,19 +144,31 @@ export namespace EmoteDataADR287 {
       // Inherit all properties from EmoteDataADR74
       ...EmoteDataADR74.schema.properties,
       // Add ADR287-specific properties
-      startAnimation: StartAnimation.schema,
+      startAnimation: {
+        ...StartAnimation.schema,
+        errorMessage: 'emoteDataADR287.startAnimation is required and must contain valid start animation data'
+      },
       randomizeOutcomes: {
-        type: 'boolean'
+        type: 'boolean',
+        errorMessage: 'emoteDataADR287.randomizeOutcomes must be a boolean'
       },
       outcomes: {
         type: 'array',
         items: OutcomeGroup.schema,
         minItems: 1,
-        maxItems: 3
+        maxItems: 3,
+        errorMessage: 'emoteDataADR287.outcomes must be an array with 1-3 outcome groups'
       }
     },
     required: [...EmoteDataADR74.schema.required, 'startAnimation', 'randomizeOutcomes', 'outcomes'],
-    additionalProperties: true
+    additionalProperties: true,
+    errorMessage: {
+      required: {
+        startAnimation: 'emoteDataADR287.startAnimation is required for ADR287 emotes',
+        randomizeOutcomes: 'emoteDataADR287.randomizeOutcomes is required for ADR287 emotes',
+        outcomes: 'emoteDataADR287.outcomes is required for ADR287 emotes'
+      }
+    }
   }
 
   export const validate: ValidateFunction<EmoteDataADR287> = generateLazyValidator(schema)
