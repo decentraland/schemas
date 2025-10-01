@@ -25,84 +25,85 @@ export namespace Emote {
     },
     additionalProperties: true,
     required: [...requiredBaseItemProps],
-    oneOf: [
+    allOf: [
       {
-        required: ['emoteDataADR74'],
-        prohibited: ['emoteDataADR287'],
-        // Emotes of ADR74 must be standard XOR thirdparty
-        oneOf: [
-          {
-            required: ['id', 'i18n'],
-            prohibited: ['merkleProof', 'content', 'collectionAddress', 'rarity'],
-            _isBaseEmote: true
-          },
-          {
-            required: ['collectionAddress', 'rarity'],
-            prohibited: ['merkleProof', 'content'],
-            errorMessage: 'standard properties conditions are not met'
-          },
-          {
-            required: [
-              'merkleProof',
-              /* MerkleProof emote required Keys (might be redundant) */
-              'content',
-              'id',
-              'name',
-              'description',
-              'i18n',
-              'image',
-              'thumbnail',
-              'emoteDataADR74'
-            ],
-            _isThirdParty: true,
-            prohibited: ['collectionAddress', 'rarity'],
-            errorMessage: 'thirdparty properties conditions are not met'
-          }
-        ],
-        errorMessage: {
-          oneOf: 'emote should have either standard or thirdparty properties'
-        }
-      },
-      {
-        required: ['emoteDataADR287'],
-        prohibited: ['emoteDataADR74'],
-        // Emotes of ADR287 must be standard XOR thirdparty
-        oneOf: [
-          {
-            required: ['id', 'i18n'],
-            prohibited: ['merkleProof', 'content', 'collectionAddress', 'rarity'],
-            _isBaseEmote: true
-          },
-          {
-            required: ['collectionAddress', 'rarity'],
-            prohibited: ['merkleProof', 'content'],
-            errorMessage: 'standard properties conditions are not met'
-          },
-          {
-            required: [
-              'merkleProof',
-              /* MerkleProof emote required Keys (might be redundant) */
-              'content',
-              'id',
-              'name',
-              'description',
-              'i18n',
-              'image',
-              'thumbnail',
-              'emoteDataADR287'
-            ],
-            _isThirdParty: true,
-            prohibited: ['collectionAddress', 'rarity'],
-            errorMessage: 'thirdparty properties conditions are not met'
-          }
-        ],
-        errorMessage: {
-          oneOf: 'emote should have either standard or thirdparty properties'
+        not: {
+          required: ['emoteDataADR74', 'emoteDataADR287']
         }
       }
     ],
+    if: { required: ['emoteDataADR287'] },
+    then: {
+      prohibited: ['emoteDataADR74'],
+      // ADR287: standard XOR thirdparty
+      oneOf: [
+        {
+          required: ['id', 'i18n'],
+          prohibited: ['merkleProof', 'content', 'collectionAddress', 'rarity'],
+          _isBaseEmote: true
+        },
+        {
+          required: ['collectionAddress', 'rarity'],
+          prohibited: ['merkleProof', 'content'],
+          errorMessage: 'standard properties conditions are not met'
+        },
+        {
+          required: [
+            'merkleProof',
+            'content',
+            'id',
+            'name',
+            'description',
+            'i18n',
+            'image',
+            'thumbnail',
+            'emoteDataADR287'
+          ],
+          _isThirdParty: true,
+          prohibited: ['collectionAddress', 'rarity'],
+          errorMessage: 'thirdparty properties conditions are not met'
+        }
+      ],
+      errorMessage: { oneOf: 'emote should have either standard or thirdparty properties' }
+    },
+    else: {
+      required: ['emoteDataADR74'],
+      prohibited: ['emoteDataADR287'],
+      // ADR74: standard XOR thirdparty
+      oneOf: [
+        {
+          required: ['id', 'i18n'],
+          prohibited: ['merkleProof', 'content', 'collectionAddress', 'rarity'],
+          _isBaseEmote: true
+        },
+        {
+          required: ['collectionAddress', 'rarity'],
+          prohibited: ['merkleProof', 'content'],
+          errorMessage: 'standard properties conditions are not met'
+        },
+        {
+          required: [
+            'merkleProof',
+            'content',
+            'id',
+            'name',
+            'description',
+            'i18n',
+            'image',
+            'thumbnail',
+            'emoteDataADR74'
+          ],
+          _isThirdParty: true,
+          prohibited: ['collectionAddress', 'rarity'],
+          errorMessage: 'thirdparty properties conditions are not met'
+        }
+      ],
+      errorMessage: { oneOf: 'emote should have either standard or thirdparty properties' }
+    },
     errorMessage: {
-      oneOf: 'emote should have either "emoteDataADR74" or "emoteDataADR287" (but not both) and match its schema'
+      if: 'emote should have either "emoteDataADR74" or "emoteDataADR287" (but not both) and match its schema',
+      then: 'emote should have "emoteDataADR287" and match its schema',
+      else: 'emote should have "emoteDataADR74" and match its schema'
     }
   }
 
