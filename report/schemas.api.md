@@ -1374,7 +1374,6 @@ export namespace EmoteCategory {
 // @public (undocumented)
 export type EmoteClip = {
     animation: string;
-    loop: boolean;
 };
 
 // @public (undocumented)
@@ -3005,7 +3004,9 @@ export enum OrderSortBy {
 // @public (undocumented)
 export type OutcomeGroup = {
     title: string;
+    loop: boolean;
     clips: Partial<Record<ArmatureId, EmoteClip>>;
+    audio?: string;
 };
 
 // @public (undocumented)
@@ -4206,8 +4207,10 @@ export type StandardProps = {
 //
 // @public (undocumented)
 export type StartAnimation = {
+    loop: boolean;
     [ArmatureId.Armature]: EmoteClip;
     [ArmatureId.Armature_Prop]?: EmoteClip;
+    audio?: string;
 };
 
 // @public (undocumented)
