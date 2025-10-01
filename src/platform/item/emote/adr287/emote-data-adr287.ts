@@ -18,7 +18,6 @@ export namespace ArmatureId {
 
 export type EmoteClip = {
   animation: string // GLB clip name (e.g., "HighFive_Avatar")
-  sound?: string // Sound clip name (e.g., "HighFive_Avatar.ogg")
 }
 
 export namespace EmoteClip {
@@ -29,15 +28,10 @@ export namespace EmoteClip {
         type: 'string',
         minLength: 1,
         errorMessage: 'animation must be a non-empty string (GLB clip name)'
-      },
-      sound: {
-        type: 'string',
-        nullable: true,
-        errorMessage: 'sound must be a string (sound clip name) when provided'
       }
     },
     required: ['animation'],
-    additionalProperties: true,
+    additionalProperties: false,
     errorMessage: {
       required: {
         animation: 'animation is required (GLB clip name)'
@@ -52,6 +46,7 @@ export type StartAnimation = {
   loop: boolean
   [ArmatureId.Armature]: EmoteClip
   [ArmatureId.Armature_Prop]?: EmoteClip
+  audio?: string
 }
 
 export namespace StartAnimation {
@@ -70,6 +65,11 @@ export namespace StartAnimation {
         ...EmoteClip.schema,
         nullable: true,
         errorMessage: 'startAnimation.Armature_Prop must contain valid animation data when provided'
+      },
+      audio: {
+        type: 'string',
+        nullable: true,
+        errorMessage: 'audio must be a string (audio clip filename) when provided'
       }
     },
     required: ['loop', ArmatureId.Armature],
@@ -87,6 +87,7 @@ export type OutcomeGroup = {
   title: string
   loop: boolean
   clips: Partial<Record<ArmatureId, EmoteClip>>
+  audio?: string
 }
 
 export namespace OutcomeGroup {
@@ -115,6 +116,11 @@ export namespace OutcomeGroup {
         additionalProperties: true,
         minProperties: 1,
         errorMessage: 'outcome.clips must contain at least one armature animation'
+      },
+      audio: {
+        type: 'string',
+        nullable: true,
+        errorMessage: 'audio must be a string (audio clip filename) when provided'
       }
     },
     required: ['title', 'loop', 'clips'],
