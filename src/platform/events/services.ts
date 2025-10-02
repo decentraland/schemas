@@ -254,6 +254,7 @@ export type CreditsOnDemandEvent = BaseEvent & {
   metadata: {
     creditsGranted: number
     address: EthAddress
+    granterAddress: EthAddress
   }
 }
 
@@ -269,9 +270,10 @@ export namespace CreditsOnDemandEvent {
         type: 'object',
         properties: {
           creditsGranted: { type: 'number', minimum: 1 },
-          address: { type: 'string' }
+          address: { type: 'string' },
+          granterAddress: { type: 'string' }
         },
-        required: ['creditsGranted', 'address']
+        required: ['creditsGranted', 'address', 'granterAddress']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],

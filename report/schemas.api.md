@@ -1241,6 +1241,7 @@ export type CreditsOnDemandEvent = BaseEvent & {
     metadata: {
         creditsGranted: number;
         address: EthAddress;
+        granterAddress: EthAddress;
     };
 };
 
