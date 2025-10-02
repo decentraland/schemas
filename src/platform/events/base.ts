@@ -46,6 +46,7 @@ import {
   CreditsDoNotMissOutReminderEvent,
   CreditsGoalCompletedEvent,
   CreditsUsage24HoursReminderEvent,
+  CreditsOnDemandEvent,
   CreditsUsageReminderEvent,
   FriendshipAcceptedEvent,
   FriendshipRequestEvent
@@ -178,7 +179,8 @@ export namespace Events {
       CLAIM_CREDITS_REMINDER = 'claim-credits-reminder',
       DO_NOT_MISS_OUT_REMINDER = 'do-not-miss-out-reminder',
       USAGE_REMINDER = 'usage-reminder',
-      USAGE_24_HOURS_REMINDER = 'usage-24-hours-reminder'
+      USAGE_24_HOURS_REMINDER = 'usage-24-hours-reminder',
+      ON_DEMAND_CREDITS_GRANTED = 'on-demand-credits-granted'
     }
 
     export enum Streaming {
@@ -291,6 +293,7 @@ export type Event =
   | VerticalHeightReachedEvent
   | WalkedDistanceEvent
   | CreditsGoalCompletedEvent
+  | CreditsOnDemandEvent
   | StreamingKeyResetEvent
   | StreamingKeyRevokeEvent
   | StreamingKeyExpiredEvent
