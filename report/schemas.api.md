@@ -3240,6 +3240,8 @@ export enum NotificationType {
     // (undocumented)
     CREDITS_GOAL_COMPLETED = "credits_goal_completed",
     // (undocumented)
+    CREDITS_ON_DEMAND_GRANTED = "credits_on_demand_granted",
+    // (undocumented)
     CREDITS_REMINDER_CLAIM_CREDITS = "credits_reminder_claim_credits",
     // (undocumented)
     CREDITS_REMINDER_COMPLETE_GOALS = "credits_reminder_complete_goals",
