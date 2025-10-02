@@ -40,6 +40,7 @@ export enum NotificationType {
   WORLDS_PERMISSION_GRANTED = 'worlds_permission_granted',
   WORLDS_PERMISSION_REVOKED = 'worlds_permission_revoked',
   CREDITS_GOAL_COMPLETED = 'credits_goal_completed',
+  CREDITS_ON_DEMAND_GRANTED = 'credits_on_demand_granted',
   STREAMING_KEY_RESET = 'streaming_key_reset',
   STREAMING_KEY_REVOKE = 'streaming_key_revoke',
   STREAMING_KEY_EXPIRED = 'streaming_key_expired',
