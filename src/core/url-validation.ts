@@ -1,12 +1,4 @@
 /**
- * Interface for query parameters
- * @public
- */
-export interface QueryParams {
-  [key: string]: string | number | boolean | null | undefined
-}
-
-/**
  * Configuration for URL validation
  * @public
  */
@@ -15,8 +7,6 @@ export interface UrlValidationConfig {
   allowLocalhost?: boolean
   /** Additional ports to allow beyond the default 80, 443 */
   allowedPorts?: string[]
-  /** Whether to allow relative URLs for redirection */
-  allowRelativeRedirects?: boolean
 }
 
 /**
@@ -24,8 +14,7 @@ export interface UrlValidationConfig {
  */
 const DEFAULT_CONFIG: Required<UrlValidationConfig> = {
   allowLocalhost: false,
-  allowedPorts: [],
-  allowRelativeRedirects: false
+  allowedPorts: []
 }
 
 /**
@@ -86,16 +75,6 @@ function hasBackslash(s: string): boolean {
  * Standard HTTP/HTTPS ports (80, 443)
  */
 const DEFAULT_ALLOWED_PORTS = ['80', '443']
-
-/**
- * Get the actual query string length (excluding the leading '?')
- * @param url - URL object to check
- * @returns Length of query string without the '?' prefix
- */
-function queryLength(url: URL): number {
-  if (!url.search) return 0
-  return url.search.startsWith('?') ? url.search.length - 1 : url.search.length
-}
 
 /**
  * Check if port is disallowed (SSRF protection)
@@ -159,302 +138,166 @@ function safeParseUrl(urlString: string): { url: URL; wasRelative: boolean } | n
 }
 
 /**
- * Namespace with utilities to validate URLs safely
+ * Validates if a string contains potentially malicious content
+ */
+function isSafeString(value: string): boolean {
+  const normalized = decodeAndNormalize(String(value).toLowerCase())
+
+  // Check for control characters and backslashes
+  if (hasControlOrBidi(normalized) || hasBackslash(normalized)) {
+    return false
+  }
+
+  return true
+}
+
+/**
+ * Validates if a URL path is safe
+ */
+function isSafePath(path: string): boolean {
+  if (!path) {
+    return false
+  }
+
+  // Prevent directory traversal attacks
+  // Note: Blocking // in paths is strict policy - if legitimate paths could have collapsed //,
+  // consider normalizing /{2,}→/ instead of rejecting
+  if (path.includes('..') || path.includes('//')) {
+    return false
+  }
+
+  // Check for control characters and backslashes
+  if (hasControlOrBidi(path) || hasBackslash(path)) {
+    return false
+  }
+
+  return true
+}
+
+/**
+ * Validates if a URL string is safe
+ * @param url - The URL string to validate
+ * @param config - Validation configuration
+ * @returns true if the URL is safe, false if it contains malicious content
  * @public
  */
-export namespace UrlValidation {
-  /**
-   * Validates if a string contains potentially malicious content
-   */
-  export function isSafeString(value: string): boolean {
-    const normalized = decodeAndNormalize(String(value).toLowerCase())
+export function validateUrl(url: string, config: UrlValidationConfig = {}): boolean {
+  const mergedConfig = { ...DEFAULT_CONFIG, ...config }
+  const allowedPorts = [...DEFAULT_ALLOWED_PORTS, ...mergedConfig.allowedPorts]
 
-    // Check for control characters and backslashes
-    if (hasControlOrBidi(normalized) || hasBackslash(normalized)) {
-      return false
-    }
-
-    return true
+  // Check for null/undefined/empty
+  if (!url || typeof url !== 'string' || url.length === 0) {
+    return false
   }
 
-  /**
-   * Validates if a URL path is safe
-   */
-  export function isSafePath(path: string): boolean {
-    if (!path) {
-      return false
-    }
-
-    // Prevent directory traversal attacks
-    // Note: Blocking // in paths is strict policy - if legitimate paths could have collapsed //,
-    // consider normalizing /{2,}→/ instead of rejecting
-    if (path.includes('..') || path.includes('//')) {
-      return false
-    }
-
-    // Check for control characters and backslashes
-    if (hasControlOrBidi(path) || hasBackslash(path)) {
-      return false
-    }
-
-    return true
+  // Check URL length limit (4KB)
+  if (url.length > 4096) {
+    return false
   }
 
-  /**
-   * Core URL validation logic - consolidated to avoid duplication
-   * @param url - The URL to validate
-   * @param config - Validation configuration
-   * @returns true if the URL is safe, false otherwise
-   */
-  function validateUrlCore(url: string, config: UrlValidationConfig = {}): boolean {
-    const mergedConfig = { ...DEFAULT_CONFIG, ...config }
-    const allowedPorts = [...DEFAULT_ALLOWED_PORTS, ...mergedConfig.allowedPorts]
-
-    // Check for null/undefined/empty
-    if (!url || typeof url !== 'string' || url.length === 0) {
-      return false
-    }
-
-    // Check URL length limit (4KB)
-    if (url.length > 4096) {
-      return false
-    }
-
-    // Early check for control characters, bidirectional text, and backslashes in raw URL
-    if (hasControlOrBidi(url) || hasBackslash(url)) {
-      return false
-    }
-
-    // Early check on decoded URL to catch encoded escapes (%5C, %0a, etc.)
-    const decoded = decodeAndNormalize(url)
-    if (hasControlOrBidi(decoded) || hasBackslash(decoded)) {
-      return false
-    }
-
-    // Block protocol-relative URLs (//host)
-    if (url.startsWith('//')) {
-      return false
-    }
-
-    const parsed = safeParseUrl(url)
-    if (!parsed) {
-      return false
-    }
-
-    const { url: urlObj, wasRelative } = parsed
-
-    // Check protocol - only allow http, https, and relative protocols
-    if (urlObj.protocol !== 'http:' && urlObj.protocol !== 'https:' && urlObj.protocol !== '') {
-      return false
-    }
-
-    // Check for credentials and backslashes
-    if (hasCredentials(urlObj) || hasBackslash(url) || hasBackslash(urlObj.href)) {
-      return false
-    }
-
-    // Only check host/port/SSRF for absolute URLs
-    if (!wasRelative) {
-      // Check for disallowed ports
-      if (isDisallowedPort(urlObj, allowedPorts)) {
-        return false
-      }
-
-      // Check for private hosts (SSRF protection) - configurable for development
-      if (!mergedConfig.allowLocalhost && urlObj.hostname && isPrivateHost(urlObj.hostname)) {
-        return false
-      }
-    }
-
-    // Check path for directory traversal and malicious paths
-    if (!UrlValidation.isSafePath(urlObj.pathname)) {
-      return false
-    }
-
-    // Check path length limit (2KB)
-    if (urlObj.pathname.length > 2048) {
-      return false
-    }
-
-    // Check search parameters for malicious content and limits
-    const paramEntries = Array.from(urlObj.searchParams.entries())
-    if (paramEntries.length > 50) {
-      return false // Too many parameters
-    }
-
-    // Check total query string length (2KB limit)
-    if (queryLength(urlObj) > 2048) {
-      return false
-    }
-
-    for (const [key, value] of paramEntries) {
-      // Reject empty keys
-      if (key.length === 0) {
-        return false
-      }
-
-      if (!UrlValidation.isSafeString(key) || !UrlValidation.isSafeString(value)) {
-        return false
-      }
-
-      // Check parameter size limits
-      if (key.length > 128 || value.length > 1024) {
-        return false
-      }
-    }
-
-    // Check fragment for control characters
-    if (urlObj.hash && hasControlOrBidi(urlObj.hash)) {
-      return false
-    }
-
-    return true
+  // Early check for control characters, bidirectional text, and backslashes in raw URL
+  if (hasControlOrBidi(url) || hasBackslash(url)) {
+    return false
   }
 
-  /**
-   * Safely validates a URL instance
-   * @param url - The URL instance to validate
-   * @param config - Validation configuration
-   * @returns true if the URL is safe, false otherwise
-   */
-  export function isSafeUrlInstance(url: URL, config: UrlValidationConfig = {}): boolean {
-    return validateUrlCore(url.toString(), config)
+  // Early check on decoded URL to catch encoded escapes (%5C, %0a, etc.)
+  const decoded = decodeAndNormalize(url)
+  if (hasControlOrBidi(decoded) || hasBackslash(decoded)) {
+    return false
   }
 
-  /**
-   * Safely adds a single query parameter to a URL
-   * @param baseUrl - The base URL
-   * @param key - The parameter key
-   * @param value - The parameter value
-   * @returns A properly encoded URL string
-   * @throws Error if malicious content is detected
-   */
-  export function addQueryParam(baseUrl: string, key: string, value: string | number | boolean): string {
-    // Validate inputs
-    if (!key || key.length === 0) {
-      throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
-    }
-
-    if (!UrlValidation.isSafeString(key)) {
-      throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
-    }
-
-    if (!UrlValidation.isSafeString(String(value))) {
-      throw new Error(`Invalid or potentially malicious parameter value detected: ${value}`)
-    }
-
-    const parsed = safeParseUrl(baseUrl)
-    if (!parsed) {
-      throw new Error(`Invalid base URL: ${baseUrl}`)
-    }
-
-    const { url, wasRelative } = parsed
-    url.searchParams.set(key, String(value))
-
-    // Preserve relative URLs as relative
-    if (wasRelative) {
-      return url.pathname + url.search + url.hash
-    }
-
-    return url.toString()
+  // Block protocol-relative URLs (//host)
+  if (url.startsWith('//')) {
+    return false
   }
 
-  /**
-   * Safely removes a query parameter from a URL
-   * @param baseUrl - The base URL
-   * @param key - The parameter key to remove
-   * @returns A URL string without the specified parameter
-   * @throws Error if malicious content is detected
-   */
-  export function removeQueryParam(baseUrl: string, key: string): string {
-    // Validate key
-    if (!key || key.length === 0) {
-      throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
-    }
-
-    if (!UrlValidation.isSafeString(key)) {
-      throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
-    }
-
-    const parsed = safeParseUrl(baseUrl)
-    if (!parsed) {
-      throw new Error(`Invalid base URL: ${baseUrl}`)
-    }
-
-    const { url, wasRelative } = parsed
-    url.searchParams.delete(key)
-
-    // Preserve relative URLs as relative
-    if (wasRelative) {
-      return url.pathname + url.search + url.hash
-    }
-
-    return url.toString()
+  const parsed = safeParseUrl(url)
+  if (!parsed) {
+    return false
   }
 
-  /**
-   * Safely gets a query parameter value from a URL
-   * @param url - The URL to parse
-   * @param key - The parameter key
-   * @returns The decoded parameter value or null if not found
-   * @throws Error if malicious content is detected
-   */
-  export function getQueryParam(url: string, key: string): string | null {
-    // Validate key
-    if (!key || key.length === 0) {
-      throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
-    }
+  const { url: urlObj, wasRelative } = parsed
 
-    if (!UrlValidation.isSafeString(key)) {
-      throw new Error(`Invalid or potentially malicious parameter key detected: ${key}`)
-    }
-
-    const parsed = safeParseUrl(url)
-    if (!parsed) {
-      return null
-    }
-
-    return parsed.url.searchParams.get(key)
+  // Check protocol - only allow http, https, and relative protocols
+  if (urlObj.protocol !== 'http:' && urlObj.protocol !== 'https:' && urlObj.protocol !== '') {
+    return false
   }
 
-  /**
-   * Validates if a complete URL is safe
-   * @param url - The URL to validate
-   * @param config - Validation configuration
-   * @returns true if the URL is safe, false if it contains malicious content
-   */
-  export function isSafeUrl(url: string, config: UrlValidationConfig = {}): boolean {
-    return validateUrlCore(url, config)
+  // Check for credentials and backslashes
+  if (hasCredentials(urlObj) || hasBackslash(url) || hasBackslash(urlObj.href)) {
+    return false
   }
 
-  /**
-   * Validates if a URL is safe for redirection
-   * @param url - The URL to validate for redirection
-   * @param config - Validation configuration
-   * @returns true if the URL is safe for redirection, false otherwise
-   */
-  export function isSafeRedirectUrl(url: string, config: UrlValidationConfig = {}): boolean {
-    const mergedConfig = { ...DEFAULT_CONFIG, ...config }
-
-    // Use core validation but with stricter protocol requirements for redirection
-    const parsed = safeParseUrl(url)
-    if (!parsed) {
+  // Only check host/port/SSRF for absolute URLs
+  if (!wasRelative) {
+    // Check for disallowed ports
+    if (isDisallowedPort(urlObj, allowedPorts)) {
       return false
     }
 
-    const { url: urlObj, wasRelative } = parsed
-
-    // For redirection, only allow HTTP/HTTPS protocols (no relative URLs unless configured)
-    if (urlObj.protocol !== 'http:' && urlObj.protocol !== 'https:') {
+    // Check for private hosts (SSRF protection) - configurable for development
+    if (!mergedConfig.allowLocalhost && urlObj.hostname && isPrivateHost(urlObj.hostname)) {
       return false
     }
-
-    // Reject relative URLs for redirection unless explicitly allowed
-    if (wasRelative && !mergedConfig.allowRelativeRedirects) {
-      return false
-    }
-
-    // Use core validation logic
-    return validateUrlCore(url, config)
   }
+
+  // Check path for directory traversal and malicious paths
+  if (!isSafePath(urlObj.pathname)) {
+    return false
+  }
+
+  // Check path length limit (2KB)
+  if (urlObj.pathname.length > 2048) {
+    return false
+  }
+
+  // Check search parameters for malicious content and limits
+  const paramEntries = Array.from(urlObj.searchParams.entries())
+  if (paramEntries.length > 50) {
+    return false // Too many parameters
+  }
+
+  // Check total query string length (2KB limit)
+  const queryLength = urlObj.search
+    ? urlObj.search.startsWith('?')
+      ? urlObj.search.length - 1
+      : urlObj.search.length
+    : 0
+  if (queryLength > 2048) {
+    return false
+  }
+
+  for (const [key, value] of paramEntries) {
+    // Reject empty keys
+    if (key.length === 0) {
+      return false
+    }
+
+    if (!isSafeString(key) || !isSafeString(value)) {
+      return false
+    }
+
+    // Check parameter size limits
+    if (key.length > 128 || value.length > 1024) {
+      return false
+    }
+  }
+
+  // Check fragment for control characters
+  if (urlObj.hash && hasControlOrBidi(urlObj.hash)) {
+    return false
+  }
+
+  return true
+}
+
+/**
+ * Validates if a URL instance is safe
+ * @param url - The URL instance to validate
+ * @param config - Validation configuration
+ * @returns true if the URL is safe, false otherwise
+ * @public
+ */
+export function validateUrlInstance(url: URL, config: UrlValidationConfig = {}): boolean {
+  return validateUrl(url.toString(), config)
 }

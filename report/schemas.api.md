@@ -3985,12 +3985,6 @@ export namespace ProviderType {
     validate: ValidateFunction<ProviderType>;
 }
 
-// @public
-export interface QueryParams {
-    // (undocumented)
-    [key: string]: string | number | boolean | null | undefined;
-}
-
 // @alpha
 export type RangeMapping = {
     type: MappingType.RANGE;
@@ -4956,22 +4950,9 @@ namespace Update {
 }
 
 // @public
-export namespace UrlValidation {
-    export function addQueryParam(baseUrl: string, key: string, value: string | number | boolean): string;
-    export function getQueryParam(url: string, key: string): string | null;
-    export function isSafePath(path: string): boolean;
-    export function isSafeRedirectUrl(url: string, config?: UrlValidationConfig): boolean;
-    export function isSafeString(value: string): boolean;
-    export function isSafeUrl(url: string, config?: UrlValidationConfig): boolean;
-    export function isSafeUrlInstance(url: URL, config?: UrlValidationConfig): boolean;
-    export function removeQueryParam(baseUrl: string, key: string): string;
-}
-
-// @public
 export interface UrlValidationConfig {
     allowedPorts?: string[];
     allowLocalhost?: boolean;
-    allowRelativeRedirects?: boolean;
 }
 
 // Warning: (ae-missing-release-tag) "USDPeggedManaTradeAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -5097,6 +5078,12 @@ export interface ValidateFunction<T = unknown> {
 
 // @public
 export function validateType<T>(theType: Pick<AbstractTypedSchema<T>, 'validate'>, value: T): boolean;
+
+// @public
+export function validateUrl(url: string, config?: UrlValidationConfig): boolean;
+
+// @public
+export function validateUrlInstance(url: URL, config?: UrlValidationConfig): boolean;
 
 // @alpha
 export type ValidWorldRange = {
