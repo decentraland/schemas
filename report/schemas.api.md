@@ -398,7 +398,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community | Events.SubType.Camera | Events.SubType.Web;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community | Events.SubType.Camera | Events.SubType.Web | Events.SubType.Event | Events.SubType.Governance | Events.SubType.Worlds;
     key: string;
     timestamp: number;
 };
@@ -1236,6 +1236,28 @@ export namespace CreditsGoalCompletedEvent {
     validate: ValidateFunction<CreditsGoalCompletedEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "CreditsOnDemandEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CreditsOnDemandEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CreditsOnDemandEvent = BaseEvent & {
+    type: Events.Type.CREDITS_SERVICE;
+    subType: Events.SubType.CreditsService.ON_DEMAND_CREDITS_GRANTED;
+    metadata: {
+        creditsGranted: number;
+        address: EthAddress;
+        granterAddress: EthAddress;
+    };
+};
+
+// @public (undocumented)
+export namespace CreditsOnDemandEvent {
+    const // (undocumented)
+    schema: JSONSchema<CreditsOnDemandEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CreditsOnDemandEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "CreditsUsage24HoursReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "CreditsUsage24HoursReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1379,7 +1401,6 @@ export namespace EmoteCategory {
 // @public (undocumented)
 export type EmoteClip = {
     animation: string;
-    loop: boolean;
 };
 
 // @public (undocumented)
@@ -1597,7 +1618,34 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | UserBannedFromSceneEvent | UserUnbannedFromSceneEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent;
+export type Event = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | CreditsOnDemandEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | UserBannedFromSceneEvent | UserUnbannedFromSceneEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent | EventCreatedEvent | EventStartedEvent | EventStartsSoonEvent | GovernanceProposalEnactedEvent | GovernanceCoauthorRequestedEvent | GovernancePitchPassedEvent | GovernanceTenderPassedEvent | GovernanceAuthoredProposalFinishedEvent | GovernanceVotingEndedVoterEvent | GovernanceNewCommentOnProposalEvent | GovernanceNewCommentOnProjectUpdatedEvent | GovernanceWhaleVoteEvent | GovernanceVotedOnBehalfEvent | GovernanceCliffEndedEvent | WorldsPermissionGrantedEvent | WorldsPermissionRevokedEvent | WorldsAccessRestoredEvent | WorldsAccessRestrictedEvent | WorldsMissingResourcesEvent;
+
+// Warning: (ae-missing-release-tag) "EventCreatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EventCreatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EventCreatedEvent = BaseEvent & {
+    type: Events.Type.EVENT;
+    subType: Events.SubType.Event.EVENT_CREATED;
+    metadata: {
+        title: string;
+        description: string;
+        name: string;
+        image: string;
+        communityId: string;
+        communityName: string;
+        communityThumbnail?: string;
+        attendee: string;
+    };
+};
+
+// @public (undocumented)
+export namespace EventCreatedEvent {
+    const // (undocumented)
+    schema: JSONSchema<EventCreatedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<EventCreatedEvent>;
+}
 
 // Warning: (ae-missing-release-tag) "Events" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1714,9 +1762,45 @@ export namespace Events {
             // (undocumented)
             DO_NOT_MISS_OUT_REMINDER = "do-not-miss-out-reminder",
             // (undocumented)
+            ON_DEMAND_CREDITS_GRANTED = "on-demand-credits-granted",
+            // (undocumented)
             USAGE_24_HOURS_REMINDER = "usage-24-hours-reminder",
             // (undocumented)
             USAGE_REMINDER = "usage-reminder"
+        }
+        // (undocumented)
+        export enum Event {
+            // (undocumented)
+            EVENT_CREATED = "event-created",
+            // (undocumented)
+            EVENT_STARTED = "event-started",
+            // (undocumented)
+            EVENT_STARTS_SOON = "event-starts-soon"
+        }
+        // (undocumented)
+        export enum Governance {
+            // (undocumented)
+            AUTHORED_PROPOSAL_FINISHED = "governance_authored_proposal_finished",
+            // (undocumented)
+            CLIFF_ENDED = "governance_cliff_ended",
+            // (undocumented)
+            COAUTHOR_REQUESTED = "governance_coauthor_requested",
+            // (undocumented)
+            NEW_COMMENT_ON_PROJECT_UPDATED = "governance_new_comment_on_project_update",
+            // (undocumented)
+            NEW_COMMENT_ON_PROPOSAL = "governance_new_comment_on_proposal",
+            // (undocumented)
+            PITCH_PASSED = "governance_pitch_passed",
+            // (undocumented)
+            PROPOSAL_ENACTED = "governance_proposal_enacted",
+            // (undocumented)
+            TENDER_PASSED = "governance_tender_passed",
+            // (undocumented)
+            VOTED_ON_BEHALF = "governance_voted_on_behalf",
+            // (undocumented)
+            VOTING_ENDED_VOTER = "governance_voting_ended_voter",
+            // (undocumented)
+            WHALE_VOTE = "governance_whale_vote"
         }
         // (undocumented)
         export enum Marketplace {
@@ -1773,7 +1857,17 @@ export namespace Events {
         // (undocumented)
         export enum Worlds {
             // (undocumented)
-            DEPLOYMENT = "deployment"
+            DEPLOYMENT = "deployment",
+            // (undocumented)
+            WORLDS_ACCESS_RESTORED = "worlds_access_restored",
+            // (undocumented)
+            WORLDS_ACCESS_RESTRICTED = "worlds_access_restricted",
+            // (undocumented)
+            WORLDS_MISSING_RESOURCES = "worlds_missing_resources",
+            // (undocumented)
+            WORLDS_PERMISSION_GRANTED = "worlds_permission_granted",
+            // (undocumented)
+            WORLDS_PERMISSION_REVOKED = "worlds_permission_revoked"
         }
     }
     // (undocumented)
@@ -1797,6 +1891,10 @@ export namespace Events {
         // (undocumented)
         CREDITS_SERVICE = "credits-service",
         // (undocumented)
+        EVENT = "event",
+        // (undocumented)
+        GOVERNANCE = "governance",
+        // (undocumented)
         MARKETPLACE = "marketplace",
         // (undocumented)
         REFERRAL = "referral",
@@ -1811,6 +1909,59 @@ export namespace Events {
         // (undocumented)
         WORLD = "world"
     }
+}
+
+// Warning: (ae-missing-release-tag) "EventStartedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EventStartedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EventStartedEvent = BaseEvent & {
+    type: Events.Type.EVENT;
+    subType: Events.SubType.Event.EVENT_STARTED;
+    metadata: {
+        name: string;
+        image: string;
+        link: string;
+        communityThumbnail?: string;
+        title: string;
+        description: string;
+        attendee: string;
+    };
+};
+
+// @public (undocumented)
+export namespace EventStartedEvent {
+    const // (undocumented)
+    schema: JSONSchema<EventStartedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<EventStartedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "EventStartsSoonEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EventStartsSoonEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type EventStartsSoonEvent = BaseEvent & {
+    type: Events.Type.EVENT;
+    subType: Events.SubType.Event.EVENT_STARTS_SOON;
+    metadata: {
+        name: string;
+        image: string;
+        link: string;
+        startsAt: string;
+        endsAt: string;
+        title: string;
+        description: string;
+        attendee: string;
+    };
+};
+
+// @public (undocumented)
+export namespace EventStartsSoonEvent {
+    const // (undocumented)
+    schema: JSONSchema<EventStartsSoonEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<EventStartsSoonEvent>;
 }
 
 // @alpha (undocumented)
@@ -1949,6 +2100,281 @@ export function getURNProtocol(chainId: ChainId): string;
 
 // @alpha
 export function getWorld(): World;
+
+// Warning: (ae-missing-release-tag) "GovernanceAuthoredProposalFinishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GovernanceAuthoredProposalFinishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type GovernanceAuthoredProposalFinishedEvent = BaseEvent & {
+    type: Events.Type.GOVERNANCE;
+    subType: Events.SubType.Governance.AUTHORED_PROPOSAL_FINISHED;
+    metadata: {
+        proposalId: string;
+        proposalTitle: string;
+        title: string;
+        description: string;
+        link: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace GovernanceAuthoredProposalFinishedEvent {
+    const // (undocumented)
+    schema: JSONSchema<GovernanceAuthoredProposalFinishedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<GovernanceAuthoredProposalFinishedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "GovernanceCliffEndedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GovernanceCliffEndedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type GovernanceCliffEndedEvent = BaseEvent & {
+    type: Events.Type.GOVERNANCE;
+    subType: Events.SubType.Governance.CLIFF_ENDED;
+    metadata: {
+        proposalId: string;
+        proposalTitle: string;
+        title: string;
+        description: string;
+        link: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace GovernanceCliffEndedEvent {
+    const // (undocumented)
+    schema: JSONSchema<GovernanceCliffEndedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<GovernanceCliffEndedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "GovernanceCoauthorRequestedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GovernanceCoauthorRequestedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type GovernanceCoauthorRequestedEvent = BaseEvent & {
+    type: Events.Type.GOVERNANCE;
+    subType: Events.SubType.Governance.COAUTHOR_REQUESTED;
+    metadata: {
+        proposalId: string;
+        proposalTitle: string;
+        title: string;
+        description: string;
+        link: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace GovernanceCoauthorRequestedEvent {
+    const // (undocumented)
+    schema: JSONSchema<GovernanceCoauthorRequestedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<GovernanceCoauthorRequestedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "GovernanceNewCommentOnProjectUpdatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GovernanceNewCommentOnProjectUpdatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type GovernanceNewCommentOnProjectUpdatedEvent = BaseEvent & {
+    type: Events.Type.GOVERNANCE;
+    subType: Events.SubType.Governance.NEW_COMMENT_ON_PROJECT_UPDATED;
+    metadata: {
+        proposalId: string;
+        proposalTitle: string;
+        title: string;
+        description: string;
+        link: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace GovernanceNewCommentOnProjectUpdatedEvent {
+    const // (undocumented)
+    schema: JSONSchema<GovernanceNewCommentOnProjectUpdatedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<GovernanceNewCommentOnProjectUpdatedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "GovernanceNewCommentOnProposalEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GovernanceNewCommentOnProposalEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type GovernanceNewCommentOnProposalEvent = BaseEvent & {
+    type: Events.Type.GOVERNANCE;
+    subType: Events.SubType.Governance.NEW_COMMENT_ON_PROPOSAL;
+    metadata: {
+        proposalId: string;
+        proposalTitle: string;
+        title: string;
+        description: string;
+        link: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace GovernanceNewCommentOnProposalEvent {
+    const // (undocumented)
+    schema: JSONSchema<GovernanceNewCommentOnProposalEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<GovernanceNewCommentOnProposalEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "GovernancePitchPassedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GovernancePitchPassedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type GovernancePitchPassedEvent = BaseEvent & {
+    type: Events.Type.GOVERNANCE;
+    subType: Events.SubType.Governance.PITCH_PASSED;
+    metadata: {
+        proposalId: string;
+        proposalTitle: string;
+        title: string;
+        description: string;
+        link: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace GovernancePitchPassedEvent {
+    const // (undocumented)
+    schema: JSONSchema<GovernancePitchPassedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<GovernancePitchPassedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "GovernanceProposalEnactedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GovernanceProposalEnactedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type GovernanceProposalEnactedEvent = BaseEvent & {
+    type: Events.Type.GOVERNANCE;
+    subType: Events.SubType.Governance.PROPOSAL_ENACTED;
+    metadata: {
+        proposalId: string;
+        proposalTitle: string;
+        title: string;
+        description: string;
+        link: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace GovernanceProposalEnactedEvent {
+    const // (undocumented)
+    schema: JSONSchema<GovernanceProposalEnactedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<GovernanceProposalEnactedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "GovernanceTenderPassedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GovernanceTenderPassedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type GovernanceTenderPassedEvent = BaseEvent & {
+    type: Events.Type.GOVERNANCE;
+    subType: Events.SubType.Governance.TENDER_PASSED;
+    metadata: {
+        proposalId: string;
+        proposalTitle: string;
+        title: string;
+        description: string;
+        link: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace GovernanceTenderPassedEvent {
+    const // (undocumented)
+    schema: JSONSchema<GovernanceTenderPassedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<GovernanceTenderPassedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "GovernanceVotedOnBehalfEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GovernanceVotedOnBehalfEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type GovernanceVotedOnBehalfEvent = BaseEvent & {
+    type: Events.Type.GOVERNANCE;
+    subType: Events.SubType.Governance.VOTED_ON_BEHALF;
+    metadata: {
+        proposalId: string;
+        proposalTitle: string;
+        title: string;
+        description: string;
+        link: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace GovernanceVotedOnBehalfEvent {
+    const // (undocumented)
+    schema: JSONSchema<GovernanceVotedOnBehalfEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<GovernanceVotedOnBehalfEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "GovernanceVotingEndedVoterEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GovernanceVotingEndedVoterEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type GovernanceVotingEndedVoterEvent = BaseEvent & {
+    type: Events.Type.GOVERNANCE;
+    subType: Events.SubType.Governance.VOTING_ENDED_VOTER;
+    metadata: {
+        proposalId: string;
+        proposalTitle: string;
+        title: string;
+        description: string;
+        link: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace GovernanceVotingEndedVoterEvent {
+    const // (undocumented)
+    schema: JSONSchema<GovernanceVotingEndedVoterEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<GovernanceVotingEndedVoterEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "GovernanceWhaleVoteEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "GovernanceWhaleVoteEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type GovernanceWhaleVoteEvent = BaseEvent & {
+    type: Events.Type.GOVERNANCE;
+    subType: Events.SubType.Governance.WHALE_VOTE;
+    metadata: {
+        proposalId: string;
+        proposalTitle: string;
+        title: string;
+        description: string;
+        link: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace GovernanceWhaleVoteEvent {
+    const // (undocumented)
+    schema: JSONSchema<GovernanceWhaleVoteEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<GovernanceWhaleVoteEvent>;
+}
 
 // Warning: (ae-missing-release-tag) "HideableWearableCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "HideableWearableCategory" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -2819,6 +3245,8 @@ export enum NotificationType {
     // (undocumented)
     CREDITS_GOAL_COMPLETED = "credits_goal_completed",
     // (undocumented)
+    CREDITS_ON_DEMAND_GRANTED = "credits_on_demand_granted",
+    // (undocumented)
     CREDITS_REMINDER_CLAIM_CREDITS = "credits_reminder_claim_credits",
     // (undocumented)
     CREDITS_REMINDER_COMPLETE_GOALS = "credits_reminder_complete_goals",
@@ -3010,7 +3438,9 @@ export enum OrderSortBy {
 // @public (undocumented)
 export type OutcomeGroup = {
     title: string;
+    loop: boolean;
     clips: Partial<Record<ArmatureId, EmoteClip>>;
+    audio?: string;
 };
 
 // @public (undocumented)
@@ -4217,8 +4647,10 @@ export type StandardProps = {
 //
 // @public (undocumented)
 export type StartAnimation = {
+    loop: boolean;
     [ArmatureId.Armature]: EmoteClip;
     [ArmatureId.Armature_Prop]?: EmoteClip;
+    audio?: string;
 };
 
 // @public (undocumented)
@@ -4908,6 +5340,126 @@ export namespace WorldConfiguration {
     schema: JSONSchema<WorldConfiguration>;
     const // (undocumented)
     validate: ValidateFunction<WorldConfiguration>;
+}
+
+// Warning: (ae-missing-release-tag) "WorldsAccessRestoredEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorldsAccessRestoredEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WorldsAccessRestoredEvent = BaseEvent & {
+    type: Events.Type.WORLD;
+    subType: Events.SubType.Worlds.WORLDS_ACCESS_RESTORED;
+    metadata: {
+        title: string;
+        description: string;
+        url: string;
+        attendee: string;
+    };
+};
+
+// @public (undocumented)
+export namespace WorldsAccessRestoredEvent {
+    const // (undocumented)
+    schema: JSONSchema<WorldsAccessRestoredEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<WorldsAccessRestoredEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "WorldsAccessRestrictedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorldsAccessRestrictedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WorldsAccessRestrictedEvent = BaseEvent & {
+    type: Events.Type.WORLD;
+    subType: Events.SubType.Worlds.WORLDS_ACCESS_RESTRICTED;
+    metadata: {
+        title: string;
+        description: string;
+        when: number;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace WorldsAccessRestrictedEvent {
+    const // (undocumented)
+    schema: JSONSchema<WorldsAccessRestrictedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<WorldsAccessRestrictedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "WorldsMissingResourcesEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorldsMissingResourcesEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WorldsMissingResourcesEvent = BaseEvent & {
+    type: Events.Type.WORLD;
+    subType: Events.SubType.Worlds.WORLDS_MISSING_RESOURCES;
+    metadata: {
+        title: string;
+        description: string;
+        url: string;
+        when: number;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace WorldsMissingResourcesEvent {
+    const // (undocumented)
+    schema: JSONSchema<WorldsMissingResourcesEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<WorldsMissingResourcesEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "WorldsPermissionGrantedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorldsPermissionGrantedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WorldsPermissionGrantedEvent = BaseEvent & {
+    type: Events.Type.WORLD;
+    subType: Events.SubType.Worlds.WORLDS_PERMISSION_GRANTED;
+    metadata: {
+        title: string;
+        description: string;
+        world: string;
+        permissions: string[];
+        url: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace WorldsPermissionGrantedEvent {
+    const // (undocumented)
+    schema: JSONSchema<WorldsPermissionGrantedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<WorldsPermissionGrantedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "WorldsPermissionRevokedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorldsPermissionRevokedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WorldsPermissionRevokedEvent = BaseEvent & {
+    type: Events.Type.WORLD;
+    subType: Events.SubType.Worlds.WORLDS_PERMISSION_REVOKED;
+    metadata: {
+        title: string;
+        description: string;
+        world: string;
+        permissions: string[];
+        url: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace WorldsPermissionRevokedEvent {
+    const // (undocumented)
+    schema: JSONSchema<WorldsPermissionRevokedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<WorldsPermissionRevokedEvent>;
 }
 
 // Warnings were encountered during analysis:

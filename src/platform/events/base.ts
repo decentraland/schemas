@@ -46,6 +46,7 @@ import {
   CreditsDoNotMissOutReminderEvent,
   CreditsGoalCompletedEvent,
   CreditsUsage24HoursReminderEvent,
+  CreditsOnDemandEvent,
   CreditsUsageReminderEvent,
   FriendshipAcceptedEvent,
   FriendshipRequestEvent
@@ -58,6 +59,27 @@ import {
   StreamingPlaceUpdatedEvent
 } from './streaming'
 import { AuthIdentifyEvent } from './web'
+import { EventCreatedEvent, EventStartedEvent, EventStartsSoonEvent } from './event'
+import {
+  GovernanceProposalEnactedEvent,
+  GovernanceCoauthorRequestedEvent,
+  GovernancePitchPassedEvent,
+  GovernanceTenderPassedEvent,
+  GovernanceAuthoredProposalFinishedEvent,
+  GovernanceVotingEndedVoterEvent,
+  GovernanceNewCommentOnProposalEvent,
+  GovernanceNewCommentOnProjectUpdatedEvent,
+  GovernanceWhaleVoteEvent,
+  GovernanceVotedOnBehalfEvent,
+  GovernanceCliffEndedEvent
+} from './governance'
+import {
+  WorldsPermissionGrantedEvent,
+  WorldsPermissionRevokedEvent,
+  WorldsAccessRestoredEvent,
+  WorldsAccessRestrictedEvent,
+  WorldsMissingResourcesEvent
+} from './world'
 
 export namespace Events {
   export enum Type {
@@ -76,7 +98,9 @@ export namespace Events {
     COMMS = 'comms',
     REFERRAL = 'referral',
     COMMUNITY = 'community',
-    CAMERA = 'camera'
+    CAMERA = 'camera',
+    EVENT = 'event',
+    GOVERNANCE = 'governance'
   }
 
   export namespace SubType {
@@ -104,7 +128,12 @@ export namespace Events {
     }
 
     export enum Worlds {
-      DEPLOYMENT = 'deployment'
+      DEPLOYMENT = 'deployment',
+      WORLDS_PERMISSION_GRANTED = 'worlds_permission_granted',
+      WORLDS_PERMISSION_REVOKED = 'worlds_permission_revoked',
+      WORLDS_ACCESS_RESTORED = 'worlds_access_restored',
+      WORLDS_ACCESS_RESTRICTED = 'worlds_access_restricted',
+      WORLDS_MISSING_RESOURCES = 'worlds_missing_resources'
     }
 
     export enum Client {
@@ -150,7 +179,8 @@ export namespace Events {
       CLAIM_CREDITS_REMINDER = 'claim-credits-reminder',
       DO_NOT_MISS_OUT_REMINDER = 'do-not-miss-out-reminder',
       USAGE_REMINDER = 'usage-reminder',
-      USAGE_24_HOURS_REMINDER = 'usage-24-hours-reminder'
+      USAGE_24_HOURS_REMINDER = 'usage-24-hours-reminder',
+      ON_DEMAND_CREDITS_GRANTED = 'on-demand-credits-granted'
     }
 
     export enum Streaming {
@@ -188,6 +218,26 @@ export namespace Events {
       PHOTO_TAKEN = 'photo-taken',
       PHOTO_PRIVACY_CHANGED = 'photo-privacy-changed'
     }
+
+    export enum Event {
+      EVENT_CREATED = 'event-created',
+      EVENT_STARTS_SOON = 'event-starts-soon',
+      EVENT_STARTED = 'event-started'
+    }
+
+    export enum Governance {
+      PROPOSAL_ENACTED = 'governance_proposal_enacted',
+      COAUTHOR_REQUESTED = 'governance_coauthor_requested',
+      PITCH_PASSED = 'governance_pitch_passed',
+      TENDER_PASSED = 'governance_tender_passed',
+      AUTHORED_PROPOSAL_FINISHED = 'governance_authored_proposal_finished',
+      VOTING_ENDED_VOTER = 'governance_voting_ended_voter',
+      NEW_COMMENT_ON_PROPOSAL = 'governance_new_comment_on_proposal',
+      NEW_COMMENT_ON_PROJECT_UPDATED = 'governance_new_comment_on_project_update',
+      WHALE_VOTE = 'governance_whale_vote',
+      VOTED_ON_BEHALF = 'governance_voted_on_behalf',
+      CLIFF_ENDED = 'governance_cliff_ended'
+    }
   }
 }
 
@@ -209,6 +259,9 @@ export type BaseEvent = {
     | Events.SubType.Community
     | Events.SubType.Camera
     | Events.SubType.Web
+    | Events.SubType.Event
+    | Events.SubType.Governance
+    | Events.SubType.Worlds
   key: string
   timestamp: number
 }
@@ -240,6 +293,7 @@ export type Event =
   | VerticalHeightReachedEvent
   | WalkedDistanceEvent
   | CreditsGoalCompletedEvent
+  | CreditsOnDemandEvent
   | StreamingKeyResetEvent
   | StreamingKeyRevokeEvent
   | StreamingKeyExpiredEvent
@@ -267,3 +321,22 @@ export type Event =
   | PhotoTakenEvent
   | PhotoPrivacyChangedEvent
   | AuthIdentifyEvent
+  | EventCreatedEvent
+  | EventStartedEvent
+  | EventStartsSoonEvent
+  | GovernanceProposalEnactedEvent
+  | GovernanceCoauthorRequestedEvent
+  | GovernancePitchPassedEvent
+  | GovernanceTenderPassedEvent
+  | GovernanceAuthoredProposalFinishedEvent
+  | GovernanceVotingEndedVoterEvent
+  | GovernanceNewCommentOnProposalEvent
+  | GovernanceNewCommentOnProjectUpdatedEvent
+  | GovernanceWhaleVoteEvent
+  | GovernanceVotedOnBehalfEvent
+  | GovernanceCliffEndedEvent
+  | WorldsPermissionGrantedEvent
+  | WorldsPermissionRevokedEvent
+  | WorldsAccessRestoredEvent
+  | WorldsAccessRestrictedEvent
+  | WorldsMissingResourcesEvent

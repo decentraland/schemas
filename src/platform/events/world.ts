@@ -1,0 +1,202 @@
+import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
+import { BaseEvent, Events } from './base'
+
+export type WorldsPermissionGrantedEvent = BaseEvent & {
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLDS_PERMISSION_GRANTED
+  metadata: {
+    title: string
+    description: string
+    world: string
+    permissions: string[]
+    url: string
+    address: string
+  }
+}
+
+export type WorldsPermissionRevokedEvent = BaseEvent & {
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLDS_PERMISSION_REVOKED
+  metadata: {
+    title: string
+    description: string
+    world: string
+    permissions: string[]
+    url: string
+    address: string
+  }
+}
+
+export type WorldsAccessRestrictedEvent = BaseEvent & {
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLDS_ACCESS_RESTRICTED
+  metadata: {
+    title: string
+    description: string
+    when: number
+    address: string
+  }
+}
+
+export type WorldsAccessRestoredEvent = BaseEvent & {
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLDS_ACCESS_RESTORED
+  metadata: {
+    title: string
+    description: string
+    url: string
+    attendee: string
+  }
+}
+
+export type WorldsMissingResourcesEvent = BaseEvent & {
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLDS_MISSING_RESOURCES
+  metadata: {
+    title: string
+    description: string
+    url: string
+    when: number
+    address: string
+  }
+}
+
+export namespace WorldsAccessRestoredEvent {
+  export const schema: JSONSchema<WorldsAccessRestoredEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_ACCESS_RESTORED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          title: { type: 'string' },
+          description: { type: 'string' },
+          url: { type: 'string' },
+          attendee: { type: 'string' }
+        },
+        required: ['title', 'description', 'url', 'attendee'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<WorldsAccessRestoredEvent> = generateLazyValidator(schema)
+}
+
+export namespace WorldsPermissionRevokedEvent {
+  export const schema: JSONSchema<WorldsPermissionRevokedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_PERMISSION_REVOKED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          title: { type: 'string' },
+          description: { type: 'string' },
+          world: { type: 'string' },
+          permissions: { type: 'array', items: { type: 'string' } },
+          url: { type: 'string' },
+          address: { type: 'string' }
+        },
+        required: ['title', 'description', 'world', 'permissions', 'url', 'address'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<WorldsPermissionRevokedEvent> = generateLazyValidator(schema)
+}
+
+export namespace WorldsPermissionGrantedEvent {
+  export const schema: JSONSchema<WorldsPermissionGrantedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_PERMISSION_GRANTED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          title: { type: 'string' },
+          description: { type: 'string' },
+          world: { type: 'string' },
+          permissions: { type: 'array', items: { type: 'string' } },
+          url: { type: 'string' },
+          address: { type: 'string' }
+        },
+        required: ['title', 'description', 'world', 'permissions', 'url', 'address'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<WorldsPermissionGrantedEvent> = generateLazyValidator(schema)
+}
+
+export namespace WorldsAccessRestrictedEvent {
+  export const schema: JSONSchema<WorldsAccessRestrictedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_ACCESS_RESTRICTED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          title: { type: 'string' },
+          description: { type: 'string' },
+          when: { type: 'number' },
+          address: { type: 'string' }
+        },
+        required: ['title', 'description', 'when', 'address'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<WorldsAccessRestrictedEvent> = generateLazyValidator(schema)
+}
+
+export namespace WorldsMissingResourcesEvent {
+  export const schema: JSONSchema<WorldsMissingResourcesEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_MISSING_RESOURCES },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          title: { type: 'string' },
+          description: { type: 'string' },
+          url: { type: 'string' },
+          when: { type: 'number' },
+          address: { type: 'string' }
+        },
+        required: ['title', 'description', 'url', 'when', 'address'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<WorldsMissingResourcesEvent> = generateLazyValidator(schema)
+}
