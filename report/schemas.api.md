@@ -4,6 +4,8 @@
 
 ```ts
 
+/// <reference types="node" />
+
 import Ajv from 'ajv';
 import type { Emitter } from 'mitt';
 import { ErrorObject } from 'ajv';
@@ -4947,6 +4949,12 @@ namespace Update {
     validate: ValidateFunction<Update>;
 }
 
+// @public
+export interface UrlValidationConfig {
+    allowedPorts?: string[];
+    allowLocalhost?: boolean;
+}
+
 // Warning: (ae-missing-release-tag) "USDPeggedManaTradeAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -5070,6 +5078,12 @@ export interface ValidateFunction<T = unknown> {
 
 // @public
 export function validateType<T>(theType: Pick<AbstractTypedSchema<T>, 'validate'>, value: T): boolean;
+
+// @public
+export function validateUrl(url: string, config?: UrlValidationConfig): boolean;
+
+// @public
+export function validateUrlInstance(url: URL, config?: UrlValidationConfig): boolean;
 
 // @alpha
 export type ValidWorldRange = {
