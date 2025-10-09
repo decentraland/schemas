@@ -1,7 +1,7 @@
 import expect from 'expect'
 import { validateUrl, validateUrlInstance, UrlValidationConfig } from '../../src/core/url-validation'
 
-describe.skip('when validating URLs for security', () => {
+describe('when validating URLs for security', () => {
   describe('when checking if a URL is safe', () => {
     let input: string
     let result: boolean
