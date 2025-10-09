@@ -1,5 +1,5 @@
 import expect from 'expect'
-import { UrlValidation } from '../../src/core/url-validation'
+import { UrlValidation, UrlValidationConfig } from '../../src/core/url-validation'
 
 describe('when validating URLs for security', () => {
   describe('when checking if a URL is safe', () => {
@@ -148,89 +148,22 @@ describe('when validating URLs for security', () => {
     })
   })
 
-  describe('when building URLs with parameters', () => {
-    let base: string
-    let params: Record<string, any>
-    let result: string
+  describe('when using native URL constructor for building URLs', () => {
+    it('should demonstrate safe URL construction with parameters', () => {
+      // Using native URL constructor is recommended over custom builders
+      const baseUrl = new URL('https://example.com/api/users')
+      baseUrl.searchParams.set('id', '123')
+      baseUrl.searchParams.set('active', 'true')
 
-    describe('and all parameters are valid', () => {
-      beforeEach(() => {
-        base = '/api/users'
-        params = { id: 123, active: true }
-        result = UrlValidation.buildUrlWithParams(base, params)
-      })
-      it('should include the encoded query string', () => {
-        expect(result).toBe('/api/users?id=123&active=true')
-      })
+      expect(baseUrl.toString()).toBe('https://example.com/api/users?id=123&active=true')
+      expect(UrlValidation.isSafeUrlInstance(baseUrl)).toBe(true)
     })
 
-    describe('and parameters contain null or undefined', () => {
-      beforeEach(() => {
-        base = '/api/users'
-        params = { id: 123, active: null, status: undefined }
-        result = UrlValidation.buildUrlWithParams(base, params)
-      })
-      it('should omit nullish parameters', () => {
-        expect(result).toBe('/api/users?id=123')
-      })
-    })
+    it('should handle relative URLs safely', () => {
+      const relativeUrl = new URL('/api/users?id=123', 'https://example.com')
 
-    describe('and the base path is malicious', () => {
-      beforeEach(() => {
-        base = '/path\u0000'
-        params = {}
-      })
-      it('should throw an error', () => {
-        expect(() => UrlValidation.buildUrlWithParams(base, params)).toThrow(
-          'Invalid or potentially malicious base path detected'
-        )
-      })
-    })
-
-    describe('and a parameter key is empty', () => {
-      beforeEach(() => {
-        base = '/api/users'
-        params = { '': 'value' }
-      })
-      it('should throw an error', () => {
-        expect(() => UrlValidation.buildUrlWithParams(base, params)).toThrow(
-          'Invalid or potentially malicious parameter key detected'
-        )
-      })
-    })
-
-    describe('and a parameter value has control chars', () => {
-      beforeEach(() => {
-        base = '/api/users'
-        params = { key: 'value\u0000' }
-      })
-      it('should throw an error', () => {
-        expect(() => UrlValidation.buildUrlWithParams(base, params)).toThrow(
-          'Invalid or potentially malicious parameter value detected'
-        )
-      })
-    })
-
-    describe('and the base has a fragment', () => {
-      beforeEach(() => {
-        base = 'https://example.com#hash'
-        params = { a: 1 }
-        result = UrlValidation.buildUrlWithParams(base, params)
-      })
-      it('should preserve the fragment', () => {
-        expect(result).toBe('https://example.com/?a=1#hash')
-      })
-    })
-
-    describe('and the base is absolute without path', () => {
-      beforeEach(() => {
-        base = 'https://example.com'
-        params = { q: 1 }
-        result = UrlValidation.buildUrlWithParams(base, params)
-      })
-      it('should preserve the origin', () => {
-        expect(result).toBe('https://example.com/?q=1')
-      })
+      expect(relativeUrl.toString()).toBe('https://example.com/api/users?id=123')
+      expect(UrlValidation.isSafeUrlInstance(relativeUrl)).toBe(true)
     })
   })
 
@@ -423,16 +356,16 @@ describe('when validating URLs for security', () => {
     })
   })
 
-  describe('when using the schema validator', () => {
-    let input: any
+  describe('when validating URL instances', () => {
+    let url: URL
     let result: boolean
     const act = () => {
-      result = UrlValidation.validate(input)
+      result = UrlValidation.isSafeUrlInstance(url)
     }
 
     describe('and the URL is safe', () => {
       beforeEach(() => {
-        input = 'https://example.com/path'
+        url = new URL('https://example.com/path')
         act()
       })
       it('should validate successfully', () => {
@@ -442,17 +375,7 @@ describe('when validating URLs for security', () => {
 
     describe('and the URL is malicious', () => {
       beforeEach(() => {
-        input = 'javascript:alert("xss")'
-        act()
-      })
-      it('should reject the input', () => {
-        expect(result).toBe(false)
-      })
-    })
-
-    describe('and the input type is invalid', () => {
-      beforeEach(() => {
-        input = null as any
+        url = new URL('javascript:alert("xss")')
         act()
       })
       it('should reject the input', () => {
@@ -474,32 +397,58 @@ describe('when validating URLs for security', () => {
   })
 
   describe('when applying SSRF protection', () => {
-    it('should reject localhost URLs', () => {
-      expect(UrlValidation.isSafeUrl('http://localhost/path')).toBe(false)
+    describe('and localhost is not allowed (default)', () => {
+      it('should reject localhost URLs', () => {
+        expect(UrlValidation.isSafeUrl('http://localhost/path')).toBe(false)
+      })
+
+      it('should reject loopback IP URLs', () => {
+        expect(UrlValidation.isSafeUrl('https://127.0.0.1/path')).toBe(false)
+      })
+
+      it('should reject private IP ranges', () => {
+        expect(UrlValidation.isSafeUrl('http://10.0.0.1/path')).toBe(false)
+      })
+
+      it('should reject 192.168.x.x range', () => {
+        expect(UrlValidation.isSafeUrl('http://192.168.1.1/path')).toBe(false)
+      })
+
+      it('should reject 172.16.x.x range', () => {
+        expect(UrlValidation.isSafeUrl('http://172.16.0.1/path')).toBe(false)
+      })
+
+      it('should reject .local domains', () => {
+        expect(UrlValidation.isSafeUrl('http://internal.local/path')).toBe(false)
+      })
+
+      it('should accept public domains', () => {
+        expect(UrlValidation.isSafeUrl('https://example.com/path')).toBe(true)
+      })
     })
 
-    it('should reject loopback IP URLs', () => {
-      expect(UrlValidation.isSafeUrl('https://127.0.0.1/path')).toBe(false)
-    })
+    describe('and localhost is allowed for development', () => {
+      const devConfig: UrlValidationConfig = { allowLocalhost: true }
 
-    it('should reject private IP ranges', () => {
-      expect(UrlValidation.isSafeUrl('http://10.0.0.1/path')).toBe(false)
-    })
+      it('should accept localhost URLs', () => {
+        expect(UrlValidation.isSafeUrl('http://localhost/path', devConfig)).toBe(true)
+      })
 
-    it('should reject 192.168.x.x range', () => {
-      expect(UrlValidation.isSafeUrl('http://192.168.1.1/path')).toBe(false)
-    })
+      it('should accept loopback IP URLs', () => {
+        expect(UrlValidation.isSafeUrl('https://127.0.0.1/path', devConfig)).toBe(true)
+      })
 
-    it('should reject 172.16.x.x range', () => {
-      expect(UrlValidation.isSafeUrl('http://172.16.0.1/path')).toBe(false)
-    })
+      it('should accept private IP ranges', () => {
+        expect(UrlValidation.isSafeUrl('http://10.0.0.1/path', devConfig)).toBe(true)
+      })
 
-    it('should reject .local domains', () => {
-      expect(UrlValidation.isSafeUrl('http://internal.local/path')).toBe(false)
-    })
+      it('should accept 192.168.x.x range', () => {
+        expect(UrlValidation.isSafeUrl('http://192.168.1.1/path', devConfig)).toBe(true)
+      })
 
-    it('should accept public domains', () => {
-      expect(UrlValidation.isSafeUrl('https://example.com/path')).toBe(true)
+      it('should accept .local domains', () => {
+        expect(UrlValidation.isSafeUrl('http://internal.local/path', devConfig)).toBe(true)
+      })
     })
   })
 
@@ -526,32 +475,82 @@ describe('when validating URLs for security', () => {
   })
 
   describe('when enforcing port restrictions', () => {
-    it('should reject disallowed port 22', () => {
-      expect(UrlValidation.isSafeUrl('https://example.com:22/path')).toBe(false)
+    describe('and using default allowed ports', () => {
+      it('should reject disallowed port 22', () => {
+        expect(UrlValidation.isSafeUrl('https://example.com:22/path')).toBe(false)
+      })
+
+      it('should reject disallowed port 25', () => {
+        expect(UrlValidation.isSafeUrl('https://example.com:25/path')).toBe(false)
+      })
+
+      it('should reject disallowed port 3389', () => {
+        expect(UrlValidation.isSafeUrl('https://example.com:3389/path')).toBe(false)
+      })
+
+      it('should accept allowed port 80', () => {
+        expect(UrlValidation.isSafeUrl('https://example.com:80/path')).toBe(true)
+      })
+
+      it('should accept allowed port 443', () => {
+        expect(UrlValidation.isSafeUrl('https://example.com:443/path')).toBe(true)
+      })
+
+      it('should reject non-standard port 8080', () => {
+        expect(UrlValidation.isSafeUrl('https://example.com:8080/path')).toBe(false)
+      })
+
+      it('should reject non-standard port 3000', () => {
+        expect(UrlValidation.isSafeUrl('https://example.com:3000/path')).toBe(false)
+      })
     })
 
-    it('should reject disallowed port 25', () => {
-      expect(UrlValidation.isSafeUrl('https://example.com:25/path')).toBe(false)
+    describe('and using custom allowed ports for development', () => {
+      const devConfig: UrlValidationConfig = { allowedPorts: ['3000', '8080'] }
+
+      it('should accept development port 3000', () => {
+        expect(UrlValidation.isSafeUrl('https://example.com:3000/path', devConfig)).toBe(true)
+      })
+
+      it('should accept development port 8080', () => {
+        expect(UrlValidation.isSafeUrl('https://example.com:8080/path', devConfig)).toBe(true)
+      })
+
+      it('should still reject non-development ports', () => {
+        expect(UrlValidation.isSafeUrl('https://example.com:22/path', devConfig)).toBe(false)
+      })
+
+      it('should still accept default ports', () => {
+        expect(UrlValidation.isSafeUrl('https://example.com:80/path', devConfig)).toBe(true)
+      })
+    })
+  })
+
+  describe('when testing redirection URL validation', () => {
+    describe('and relative redirects are not allowed (default)', () => {
+      it('should reject relative URLs for redirection', () => {
+        expect(UrlValidation.isSafeRedirectUrl('/local/path')).toBe(false)
+      })
+
+      it('should accept absolute HTTPS URLs for redirection', () => {
+        expect(UrlValidation.isSafeRedirectUrl('https://example.com/safe-path')).toBe(true)
+      })
+
+      it('should accept absolute HTTP URLs for redirection', () => {
+        expect(UrlValidation.isSafeRedirectUrl('http://example.com/safe-path')).toBe(true)
+      })
     })
 
-    it('should reject disallowed port 3389', () => {
-      expect(UrlValidation.isSafeUrl('https://example.com:3389/path')).toBe(false)
-    })
+    describe('and relative redirects are allowed', () => {
+      const config: UrlValidationConfig = { allowRelativeRedirects: true }
 
-    it('should accept allowed port 80', () => {
-      expect(UrlValidation.isSafeUrl('https://example.com:80/path')).toBe(true)
-    })
+      it('should accept relative URLs for redirection', () => {
+        expect(UrlValidation.isSafeRedirectUrl('/local/path', config)).toBe(true)
+      })
 
-    it('should accept allowed port 443', () => {
-      expect(UrlValidation.isSafeUrl('https://example.com:443/path')).toBe(true)
-    })
-
-    it('should reject non-standard port 8080', () => {
-      expect(UrlValidation.isSafeUrl('https://example.com:8080/path')).toBe(false)
-    })
-
-    it('should reject non-standard port 3000', () => {
-      expect(UrlValidation.isSafeUrl('https://example.com:3000/path')).toBe(false)
+      it('should still accept absolute URLs for redirection', () => {
+        expect(UrlValidation.isSafeRedirectUrl('https://example.com/safe-path', config)).toBe(true)
+      })
     })
   })
 
@@ -566,6 +565,10 @@ describe('when validating URLs for security', () => {
 
     it('should accept safe fragments', () => {
       expect(UrlValidation.isSafeUrl('https://example.com/path#section')).toBe(true)
+    })
+
+    it('should reject fragments with bidirectional text', () => {
+      expect(UrlValidation.isSafeUrl('https://example.com/path#\u202Eevil')).toBe(false)
     })
   })
 
@@ -592,6 +595,27 @@ describe('when validating URLs for security', () => {
 
     it('should reject double slashes in relative path', () => {
       expect(UrlValidation.isSafeUrl('/a//b')).toBe(false)
+    })
+
+    it('should reject path traversal with double dots', () => {
+      expect(UrlValidation.isSafeUrl('https://example.com/..../etc/passwd')).toBe(false)
+    })
+
+    it('should reject embedded credentials in URL', () => {
+      expect(UrlValidation.isSafeUrl('https://user:pass@example.com/path')).toBe(false)
+    })
+
+    it('should reject Unicode control characters after normalization', () => {
+      // Test that NFKC normalization doesn't escape control characters
+      // Using combining characters that normalize to control chars
+      const combiningControl = '\u0300\u0000' // Combining grave + null char
+      expect(UrlValidation.isSafeUrl(`https://example.com/path${combiningControl}`)).toBe(false)
+    })
+
+    it('should reject Unicode bidirectional text after normalization', () => {
+      // Test that NFKC normalization doesn't escape bidi characters
+      const bidiText = '\u202E\u0065\u0076\u0069\u006C' // RLO + "evil"
+      expect(UrlValidation.isSafeUrl(`https://example.com/path${bidiText}`)).toBe(false)
     })
   })
 
@@ -649,14 +673,24 @@ describe('when validating URLs for security', () => {
       expect(UrlValidation.isSafeUrl(`https://example.com/path?${params}`)).toBe(false)
     })
 
-    it('should reject oversize key', () => {
-      const longKey = 'k'.repeat(129)
-      expect(UrlValidation.isSafeUrl(`https://example.com/p?${longKey}=v`)).toBe(false)
+    it('should accept exactly 128 character key', () => {
+      const exactKey = 'k'.repeat(128)
+      expect(UrlValidation.isSafeUrl(`https://example.com/p?${exactKey}=v`)).toBe(true)
     })
 
-    it('should reject oversize value', () => {
-      const longVal = 'v'.repeat(1025)
-      expect(UrlValidation.isSafeUrl(`https://example.com/p?k=${longVal}`)).toBe(false)
+    it('should reject 129 character key', () => {
+      const oversizeKey = 'k'.repeat(129)
+      expect(UrlValidation.isSafeUrl(`https://example.com/p?${oversizeKey}=v`)).toBe(false)
+    })
+
+    it('should accept exactly 1024 character value', () => {
+      const exactValue = 'v'.repeat(1024)
+      expect(UrlValidation.isSafeUrl(`https://example.com/p?k=${exactValue}`)).toBe(true)
+    })
+
+    it('should reject 1025 character value', () => {
+      const oversizeValue = 'v'.repeat(1025)
+      expect(UrlValidation.isSafeUrl(`https://example.com/p?k=${oversizeValue}`)).toBe(false)
     })
 
     it('should reject empty parameter key', () => {
