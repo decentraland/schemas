@@ -4,6 +4,8 @@
 
 ```ts
 
+/// <reference types="node" />
+
 import Ajv from 'ajv';
 import type { Emitter } from 'mitt';
 import { ErrorObject } from 'ajv';
@@ -95,11 +97,6 @@ export { Ajv }
 //
 // @public (undocumented)
 export type AlignmentFieldType = 'Left' | 'Center' | 'Right';
-
-// Warning: (ae-missing-release-tag) "ALLOWED_PORTS" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
-//
-// @public
-export const ALLOWED_PORTS: string[];
 
 // Warning: (ae-missing-release-tag) "AnalyticsDayData" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -4961,18 +4958,20 @@ namespace Update {
 // @public
 export namespace UrlValidation {
     export function addQueryParam(baseUrl: string, key: string, value: string | number | boolean): string;
-    export function buildUrlWithParams(basePath: string, params: QueryParams): string;
-    const _isSafeUrl: KeywordDefinition;
-    const // (undocumented)
-    schema: JSONSchema<string>;
-    const // (undocumented)
-    validate: ValidateFunction<string>;
     export function getQueryParam(url: string, key: string): string | null;
     export function isSafePath(path: string): boolean;
-    export function isSafeRedirectUrl(url: string): boolean;
+    export function isSafeRedirectUrl(url: string, config?: UrlValidationConfig): boolean;
     export function isSafeString(value: string): boolean;
-    export function isSafeUrl(url: string): boolean;
+    export function isSafeUrl(url: string, config?: UrlValidationConfig): boolean;
+    export function isSafeUrlInstance(url: URL, config?: UrlValidationConfig): boolean;
     export function removeQueryParam(baseUrl: string, key: string): string;
+}
+
+// @public
+export interface UrlValidationConfig {
+    allowedPorts?: string[];
+    allowLocalhost?: boolean;
+    allowRelativeRedirects?: boolean;
 }
 
 // Warning: (ae-missing-release-tag) "USDPeggedManaTradeAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
