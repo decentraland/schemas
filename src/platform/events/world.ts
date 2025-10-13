@@ -1,3 +1,4 @@
+import { AuthChain } from '../../misc/auth-chain'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { BaseEvent, Events } from './base'
 
@@ -59,6 +60,45 @@ export type WorldsMissingResourcesEvent = BaseEvent & {
     when: number
     address: string
   }
+}
+
+export type WorldDeploymentEvent = BaseEvent & {
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.DEPLOYMENT
+  entity: {
+    entityId: string
+    authChain: AuthChain
+  }
+  contentServerUrls?: string[]
+  force?: boolean
+  animation?: string
+  lods?: string[]
+}
+
+export namespace WorldDeploymentEvent {
+  export const schema: JSONSchema<WorldDeploymentEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.DEPLOYMENT },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      entity: {
+        type: 'object',
+        properties: { entityId: { type: 'string' }, authChain: AuthChain.schema },
+        additionalProperties: true,
+        required: ['entityId', 'authChain']
+      },
+      contentServerUrls: { type: 'array', items: { type: 'string' }, nullable: true },
+      force: { type: 'boolean', nullable: true },
+      animation: { type: 'string', nullable: true },
+      lods: { type: 'array', items: { type: 'string' }, nullable: true }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'entity'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<WorldDeploymentEvent> = generateLazyValidator(schema)
 }
 
 export namespace WorldsAccessRestoredEvent {

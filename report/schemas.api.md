@@ -5314,6 +5314,31 @@ export namespace WorldConfiguration {
     validate: ValidateFunction<WorldConfiguration>;
 }
 
+// Warning: (ae-missing-release-tag) "WorldDeploymentEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorldDeploymentEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WorldDeploymentEvent = BaseEvent & {
+    type: Events.Type.WORLD;
+    subType: Events.SubType.Worlds.DEPLOYMENT;
+    entity: {
+        entityId: string;
+        authChain: AuthChain;
+    };
+    contentServerUrls?: string[];
+    force?: boolean;
+    animation?: string;
+    lods?: string[];
+};
+
+// @public (undocumented)
+export namespace WorldDeploymentEvent {
+    const // (undocumented)
+    schema: JSONSchema<WorldDeploymentEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<WorldDeploymentEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "WorldsAccessRestoredEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "WorldsAccessRestoredEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
