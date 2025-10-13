@@ -65,16 +65,14 @@ export type WorldsMissingResourcesEvent = BaseEvent & {
 export type WorldDeploymentEvent = BaseEvent & {
   type: Events.Type.WORLD
   subType: Events.SubType.Worlds.DEPLOYMENT
-  metadata: {
-    entity: {
-      entityId: string
-      authChain: AuthChain
-    }
-    contentServerUrls?: string[]
-    force?: boolean
-    animation?: string
-    lods?: string[]
+  entity: {
+    entityId: string
+    authChain: AuthChain
   }
+  contentServerUrls?: string[]
+  force?: boolean
+  animation?: string
+  lods?: string[]
 }
 
 export namespace WorldDeploymentEvent {
@@ -85,26 +83,22 @@ export namespace WorldDeploymentEvent {
       subType: { type: 'string', const: Events.SubType.Worlds.DEPLOYMENT },
       key: { type: 'string' },
       timestamp: { type: 'number', minimum: 0 },
-      metadata: {
+      entity: {
         type: 'object',
-        properties: {
-          entity: {
-            type: 'object',
-            properties: { entityId: { type: 'string' }, authChain: AuthChain.schema },
-            required: ['entityId', 'authChain'],
-            additionalProperties: true
-          },
-          contentServerUrls: { type: 'array', items: { type: 'string' }, nullable: true },
-          force: { type: 'boolean', nullable: true },
-          animation: { type: 'string', nullable: true },
-          lods: { type: 'array', items: { type: 'string' }, nullable: true }
-        },
-        required: ['entity'],
-        additionalProperties: true
-      }
+        properties: { entityId: { type: 'string' }, authChain: AuthChain.schema },
+        additionalProperties: true,
+        required: ['entityId', 'authChain']
+      },
+      contentServerUrls: { type: 'array', items: { type: 'string' }, nullable: true },
+      force: { type: 'boolean', nullable: true },
+      animation: { type: 'string', nullable: true },
+      lods: { type: 'array', items: { type: 'string' }, nullable: true }
     },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata']
+    required: ['type', 'subType', 'key', 'timestamp', 'entity'],
+    additionalProperties: false
   }
+
+  export const validate: ValidateFunction<WorldDeploymentEvent> = generateLazyValidator(schema)
 }
 
 export namespace WorldsAccessRestoredEvent {
