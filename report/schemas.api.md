@@ -617,7 +617,7 @@ export type CampaignWellKnownIssueEventMetadata = BaseEventMetadata & {
 };
 
 // @public
-export type CatalogFilters = Pick<ItemFilters, 'ids' | 'first' | 'skip' | 'category' | 'creator' | 'isSoldOut' | 'isOnSale' | 'search' | 'isWearableHead' | 'isWearableSmart' | 'isWearableAccessory' | 'isWearableAccessory' | 'wearableCategory' | 'rarities' | 'wearableGenders' | 'emoteCategory' | 'emoteGenders' | 'emotePlayMode' | 'contractAddresses' | 'itemId' | 'network' | 'minPrice' | 'maxPrice' | 'urns' | 'emoteHasGeometry' | 'emoteHasSound'> & {
+export type CatalogFilters = Pick<ItemFilters, 'ids' | 'first' | 'skip' | 'category' | 'creator' | 'isSoldOut' | 'isOnSale' | 'search' | 'isWearableHead' | 'isWearableSmart' | 'isWearableAccessory' | 'isWearableAccessory' | 'wearableCategory' | 'rarities' | 'wearableGenders' | 'emoteCategory' | 'emoteGenders' | 'emotePlayMode' | 'contractAddresses' | 'itemId' | 'network' | 'minPrice' | 'maxPrice' | 'urns' | 'emoteHasGeometry' | 'emoteHasSound' | 'emoteOutcomeType'> & {
     onlyMinting?: boolean;
     onlyListing?: boolean;
     sortBy?: CatalogSortBy;
@@ -1480,6 +1480,27 @@ export type EmoteEvents = {
         length: number;
     };
 };
+
+// Warning: (ae-missing-release-tag) "EmoteOutcomeType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "EmoteOutcomeType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum EmoteOutcomeType {
+    // (undocumented)
+    MULTIPLE_OUTCOME = "mo",
+    // (undocumented)
+    RANDOM_OUTCOME = "ro",
+    // (undocumented)
+    SIMPLE_OUTCOME = "so"
+}
+
+// @public (undocumented)
+export namespace EmoteOutcomeType {
+    const // (undocumented)
+    schema: JSONSchema<EmoteOutcomeType>;
+    const // (undocumented)
+    validate: ValidateFunction<EmoteOutcomeType>;
+}
 
 // Warning: (ae-missing-release-tag) "EmotePlayMode" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "EmotePlayMode" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -2599,6 +2620,7 @@ export type ItemFilters = {
     urns?: string[];
     emoteHasSound?: boolean;
     emoteHasGeometry?: boolean;
+    emoteOutcomeType?: EmoteOutcomeType;
 };
 
 // Warning: (ae-missing-release-tag) "ItemPublishedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -3181,6 +3203,7 @@ export type NFTFilters = {
     rentalDays?: number[];
     emoteHasSound?: boolean;
     emoteHasGeometry?: boolean;
+    emoteOutcomeType?: EmoteOutcomeType;
 } & Pick<RentalsListingsFilterBy, 'tenant'>;
 
 // Warning: (ae-missing-release-tag) "NFTSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
