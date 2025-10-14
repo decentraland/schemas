@@ -50,6 +50,11 @@ export namespace EmoteDataADR74 {
       }
     },
     required: ['category', 'tags', 'representations', 'loop'] as any[],
+    dependencies: {
+      startAnimation: ['randomizeOutcomes', 'outcomes'],
+      randomizeOutcomes: ['startAnimation', 'outcomes'],
+      outcomes: ['startAnimation', 'randomizeOutcomes']
+    },
     additionalProperties: true
   }
 
