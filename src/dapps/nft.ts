@@ -55,6 +55,7 @@ export type NFT = {
       loop: boolean
       hasSound: boolean
       hasGeometry: boolean
+      outcomeType: EmoteOutcomeType | null
     }
   }
   network: Network.ETHEREUM | Network.MATIC
@@ -282,6 +283,9 @@ export namespace NFT {
               },
               hasGeometry: {
                 type: 'boolean'
+              },
+              outcomeType: {
+                type: 'string'
               }
             },
             required: ['bodyShapes', 'category', 'description', 'rarity', 'loop'],
