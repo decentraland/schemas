@@ -285,7 +285,8 @@ export namespace NFT {
                 type: 'boolean'
               },
               outcomeType: {
-                type: 'string'
+                type: 'string',
+                nullable: true
               }
             },
             required: ['bodyShapes', 'category', 'description', 'rarity', 'loop'],
