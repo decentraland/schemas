@@ -72,7 +72,7 @@ export namespace StartAnimation {
       }
     },
     required: ['loop', ArmatureId.Armature],
-    additionalProperties: true,
+    additionalProperties: false,
     errorMessage: {
       required: {
         loop: 'startAnimation.loop is required',
