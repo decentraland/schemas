@@ -80,6 +80,8 @@ export namespace StartAnimation {
       }
     }
   }
+
+  export const validate: ValidateFunction<StartAnimation> = generateLazyValidator(schema)
 }
 
 export type OutcomeGroup = {
