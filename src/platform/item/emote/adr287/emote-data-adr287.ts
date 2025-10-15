@@ -1,5 +1,4 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../../validation'
-import { EmoteDataADR74 } from '../adr74/emote-data-adr74'
 
 export enum ArmatureId {
   Armature = 'Armature',
@@ -135,47 +134,4 @@ export namespace OutcomeGroup {
   }
 
   export const validate: ValidateFunction<OutcomeGroup> = generateLazyValidator(schema)
-}
-
-export type EmoteDataADR287 = EmoteDataADR74 & {
-  startAnimation: StartAnimation
-  randomizeOutcomes: boolean
-  outcomes: OutcomeGroup[]
-}
-
-export namespace EmoteDataADR287 {
-  export const schema: JSONSchema<EmoteDataADR287> = {
-    type: 'object',
-    properties: {
-      // Inherit all properties from EmoteDataADR74
-      ...EmoteDataADR74.schema.properties,
-      // Add ADR287-specific properties
-      startAnimation: {
-        ...StartAnimation.schema,
-        errorMessage: 'emoteDataADR287.startAnimation is required and must contain valid start animation data'
-      },
-      randomizeOutcomes: {
-        type: 'boolean',
-        errorMessage: 'emoteDataADR287.randomizeOutcomes must be a boolean'
-      },
-      outcomes: {
-        type: 'array',
-        items: OutcomeGroup.schema,
-        minItems: 1,
-        maxItems: 3,
-        errorMessage: 'emoteDataADR287.outcomes must be an array with 1-3 outcome groups'
-      }
-    },
-    required: [...EmoteDataADR74.schema.required, 'startAnimation', 'randomizeOutcomes', 'outcomes'],
-    additionalProperties: true,
-    errorMessage: {
-      required: {
-        startAnimation: 'emoteDataADR287.startAnimation is required for ADR287 emotes',
-        randomizeOutcomes: 'emoteDataADR287.randomizeOutcomes is required for ADR287 emotes',
-        outcomes: 'emoteDataADR287.outcomes is required for ADR287 emotes'
-      }
-    }
-  }
-
-  export const validate: ValidateFunction<EmoteDataADR287> = generateLazyValidator(schema)
 }

@@ -53,6 +53,7 @@ export type CatalogFilters = Pick<
   | 'urns'
   | 'emoteHasGeometry'
   | 'emoteHasSound'
+  | 'emoteOutcomeType'
 > & {
   onlyMinting?: boolean
   onlyListing?: boolean

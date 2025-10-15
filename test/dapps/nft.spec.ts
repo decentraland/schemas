@@ -198,7 +198,8 @@ describe('NFT tests', () => {
           rarity: Rarity.MYTHIC,
           loop: false,
           hasSound: false,
-          hasGeometry: false
+          hasGeometry: false,
+          outcomeType: null
         }
       },
       issuedId: '16',

@@ -1,6 +1,6 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
-import { EmoteCategory, EmotePlayMode } from '../platform'
+import { EmoteCategory, EmotePlayMode, EmoteOutcomeType } from '../platform'
 import { Network } from './network'
 import { NFT } from './nft'
 import { NFTCategory } from './nft-category'
@@ -88,6 +88,10 @@ export type ItemFilters = {
    * Returns emotes that have additional geomtry
    */
   emoteHasGeometry?: boolean
+  /**
+   * Returns emotes that have an outcome type
+   */
+  emoteOutcomeType?: EmoteOutcomeType
 }
 
 export enum ItemSortBy {
