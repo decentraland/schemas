@@ -4623,6 +4623,8 @@ export type StartAnimation = {
 export namespace StartAnimation {
     const // (undocumented)
     schema: JSONSchema<StartAnimation>;
+    const // (undocumented)
+    validate: ValidateFunction<StartAnimation>;
 }
 
 // Warning: (ae-missing-release-tag) "Store" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)

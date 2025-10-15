@@ -72,7 +72,7 @@ export namespace StartAnimation {
       }
     },
     required: ['loop', ArmatureId.Armature],
-    additionalProperties: true,
+    additionalProperties: false,
     errorMessage: {
       required: {
         loop: 'startAnimation.loop is required',
@@ -80,6 +80,8 @@ export namespace StartAnimation {
       }
     }
   }
+
+  export const validate: ValidateFunction<StartAnimation> = generateLazyValidator(schema)
 }
 
 export type OutcomeGroup = {
