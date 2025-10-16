@@ -1,6 +1,6 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
-import { BodyShape, EmoteCategory, EmotePlayMode } from '../platform'
+import { BodyShape, EmoteCategory, EmotePlayMode, EmoteOutcomeType } from '../platform'
 import { Network } from './network'
 import { NFTCategory } from './nft-category'
 import { Rarity } from './rarity'
@@ -55,6 +55,7 @@ export type NFT = {
       loop: boolean
       hasSound: boolean
       hasGeometry: boolean
+      outcomeType: EmoteOutcomeType | null
     }
   }
   network: Network.ETHEREUM | Network.MATIC
@@ -115,6 +116,10 @@ export type NFTFilters = {
    * Returns emotes that have additional geomtry
    */
   emoteHasGeometry?: boolean
+  /**
+   * Returns emotes that have an outcome type
+   */
+  emoteOutcomeType?: EmoteOutcomeType
 } & Pick<RentalsListingsFilterBy, 'tenant'>
 
 export enum NFTSortBy {
@@ -278,6 +283,10 @@ export namespace NFT {
               },
               hasGeometry: {
                 type: 'boolean'
+              },
+              outcomeType: {
+                type: 'string',
+                nullable: true
               }
             },
             required: ['bodyShapes', 'category', 'description', 'rarity', 'loop'],
