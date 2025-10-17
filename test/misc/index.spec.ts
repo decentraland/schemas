@@ -6,12 +6,8 @@ describe('sanity of generated types', () => {
   const report = readFileSync('./report/schemas.api.md').toString()
 
   it("resulting types don't include /// <reference", () => {
-    const matches = report.match(/<reference .*/g) || []
-    // Filter out expected references that are acceptable
-    const unexpectedReferences = matches.filter(
-      (match) => !match.includes('types="node"') && !match.includes('types="dom"')
-    )
-    expect(unexpectedReferences).toHaveLength(0)
+    const matches = report.match(/<reference .*/) || []
+    expect(matches).toHaveLength(0)
   })
 })
 
