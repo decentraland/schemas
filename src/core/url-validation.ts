@@ -186,7 +186,7 @@ export function validateUrl(url: string, config: UrlValidationConfig = {}): bool
   const allowedPorts = [...DEFAULT_ALLOWED_PORTS, ...mergedConfig.allowedPorts]
 
   // Check for null/undefined/empty
-  if (!url || typeof url !== 'string' || url.length === 0) {
+  if (!url || url.length === 0) {
     return false
   }
 
