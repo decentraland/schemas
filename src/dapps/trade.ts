@@ -83,6 +83,7 @@ export type Trade = {
   createdAt: number
   sent: TradeAsset[]
   received: TradeAssetWithBeneficiary[]
+  contract: string
 }
 
 export type TradeCreation = {

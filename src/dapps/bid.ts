@@ -35,11 +35,13 @@ export type LegacyBid = BaseBid & {
 
 export type ItemBid = BaseBid & {
   tradeId: string
+  tradeContractAddress: string
   itemId: string
 }
 
 export type NFTBid = BaseBid & {
   tradeId: string
+  tradeContractAddress: string
   tokenId: string
 }
 

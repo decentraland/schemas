@@ -46,6 +46,7 @@ export type Item = {
   utility?: string
   tradeId?: string
   tradeExpiresAt?: number
+  tradeContractAddress?: string
 }
 
 export type ItemFilters = {
@@ -146,6 +147,10 @@ export namespace Item {
         nullable: true
       },
       tradeId: {
+        type: 'string',
+        nullable: true
+      },
+      tradeContractAddress: {
         type: 'string',
         nullable: true
       },
