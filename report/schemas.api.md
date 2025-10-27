@@ -4884,6 +4884,7 @@ export type TradeCreation = {
     checks: TradeChecks;
     sent: TradeAsset[];
     received: TradeAssetWithBeneficiary[];
+    contract: string;
 };
 
 // Warning: (ae-missing-release-tag) "TradeExternalCheck" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)

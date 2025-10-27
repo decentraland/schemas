@@ -95,6 +95,7 @@ export type TradeCreation = {
   checks: TradeChecks
   sent: TradeAsset[]
   received: TradeAssetWithBeneficiary[]
+  contract: string
 }
 
 export type OnChainTradeAsset = {
