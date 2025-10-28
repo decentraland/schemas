@@ -13,6 +13,7 @@ export type DeploymentToSqs = {
   contentServerUrls?: string[]
   force?: boolean
   animation?: string
+  doISS?: boolean
 }
 
 /**
@@ -48,6 +49,10 @@ export namespace DeploymentToSqs {
       },
       animation: {
         type: 'string',
+        nullable: true
+      },
+      doISS: {
+        type: 'boolean',
         nullable: true
       }
     },
