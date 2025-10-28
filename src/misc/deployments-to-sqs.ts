@@ -13,6 +13,7 @@ export type DeploymentToSqs = {
   contentServerUrls?: string[]
   force?: boolean
   animation?: string
+  doISS?: boolean
 }
 
 /**
