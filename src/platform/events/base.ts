@@ -26,7 +26,8 @@ import {
   CommunityMemberRemovedEvent,
   CommunityRenamedEvent,
   CommunityRequestToJoinAcceptedEvent,
-  CommunityRequestToJoinReceivedEvent
+  CommunityRequestToJoinReceivedEvent,
+  CommunityPostAddedEvent
 } from './communities'
 import { BidReceivedEvent } from './marketplace'
 import { PhotoPrivacyChangedEvent, PhotoTakenEvent } from './camera'
@@ -319,6 +320,7 @@ export type Event =
   | CommunityRequestToJoinReceivedEvent
   | CommunityRequestToJoinAcceptedEvent
   | CommunityInviteReceivedEvent
+  | CommunityPostAddedEvent
   | PhotoTakenEvent
   | PhotoPrivacyChangedEvent
   | AuthIdentifyEvent
