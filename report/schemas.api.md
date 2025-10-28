@@ -3238,6 +3238,8 @@ export enum NotificationType {
     // (undocumented)
     COMMUNITY_MEMBER_REMOVED = "community_member_removed",
     // (undocumented)
+    COMMUNITY_POST_ADDED = "community_post_added",
+    // (undocumented)
     COMMUNITY_RENAMED = "community_renamed",
     // (undocumented)
     COMMUNITY_REQUEST_TO_JOIN_ACCEPTED = "community_request_to_join_accepted",
