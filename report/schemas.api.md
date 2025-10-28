@@ -965,6 +965,29 @@ export namespace CommunityMemberRemovedEvent {
     validate: ValidateFunction<CommunityMemberRemovedEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "CommunityPostAddedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityPostAddedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CommunityPostAddedEvent = BaseEvent & {
+    type: Events.Type.COMMUNITY;
+    subType: Events.SubType.Community.POST_ADDED;
+    metadata: {
+        communityId: string;
+        communityName: string;
+        memberAddress: EthAddress;
+        thumbnailUrl: string;
+    };
+};
+
+// @public (undocumented)
+export namespace CommunityPostAddedEvent {
+    const // (undocumented)
+    schema: JSONSchema<CommunityPostAddedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CommunityPostAddedEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "CommunityRenamedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "CommunityRenamedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1714,6 +1737,8 @@ export namespace Events {
             MEMBER_BANNED = "community-member-banned",
             // (undocumented)
             MEMBER_REMOVED = "community-member-removed",
+            // (undocumented)
+            POST_ADDED = "community-post-added",
             // (undocumented)
             RENAMED = "community-renamed",
             // (undocumented)
