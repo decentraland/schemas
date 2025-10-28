@@ -50,6 +50,10 @@ export namespace DeploymentToSqs {
       animation: {
         type: 'string',
         nullable: true
+      },
+      doISS: {
+        type: 'boolean',
+        nullable: true
       }
     },
     additionalProperties: true
