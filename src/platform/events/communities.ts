@@ -314,3 +314,43 @@ export namespace CommunityInviteReceivedEvent {
 
   export const validate: ValidateFunction<CommunityInviteReceivedEvent> = generateLazyValidator(schema)
 }
+
+export type CommunityPostAddedEvent = BaseEvent & {
+  type: Events.Type.COMMUNITY
+  subType: Events.SubType.Community.POST_ADDED
+  metadata: {
+    communityId: string
+    communityName: string
+    memberAddress: EthAddress
+    thumbnailUrl: string
+    // TODO: add post data
+  }
+}
+
+export namespace CommunityPostAddedEvent {
+  export const schema: JSONSchema<CommunityPostAddedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.COMMUNITY },
+      subType: { type: 'string', const: Events.SubType.Community.POST_ADDED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 1 },
+      metadata: {
+        type: 'object',
+        properties: {
+          communityId: { type: 'string' },
+          communityName: { type: 'string' },
+          memberAddress: { type: 'string' },
+          thumbnailUrl: { type: 'string' }
+          // TODO: add post data
+        },
+        required: ['communityId', 'communityName', 'memberAddress', 'thumbnailUrl'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<CommunityPostAddedEvent> = generateLazyValidator(schema)
+}

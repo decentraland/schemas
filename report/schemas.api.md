@@ -965,6 +965,29 @@ export namespace CommunityMemberRemovedEvent {
     validate: ValidateFunction<CommunityMemberRemovedEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "CommunityPostAddedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityPostAddedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CommunityPostAddedEvent = BaseEvent & {
+    type: Events.Type.COMMUNITY;
+    subType: Events.SubType.Community.POST_ADDED;
+    metadata: {
+        communityId: string;
+        communityName: string;
+        memberAddress: EthAddress;
+        thumbnailUrl: string;
+    };
+};
+
+// @public (undocumented)
+export namespace CommunityPostAddedEvent {
+    const // (undocumented)
+    schema: JSONSchema<CommunityPostAddedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CommunityPostAddedEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "CommunityRenamedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "CommunityRenamedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1587,7 +1610,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-type Event_2 = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | CreditsOnDemandEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | UserBannedFromSceneEvent | UserUnbannedFromSceneEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent | EventCreatedEvent | EventStartedEvent | EventStartsSoonEvent | GovernanceProposalEnactedEvent | GovernanceCoauthorRequestedEvent | GovernancePitchPassedEvent | GovernanceTenderPassedEvent | GovernanceAuthoredProposalFinishedEvent | GovernanceVotingEndedVoterEvent | GovernanceNewCommentOnProposalEvent | GovernanceNewCommentOnProjectUpdatedEvent | GovernanceWhaleVoteEvent | GovernanceVotedOnBehalfEvent | GovernanceCliffEndedEvent | WorldsPermissionGrantedEvent | WorldsPermissionRevokedEvent | WorldsAccessRestoredEvent | WorldsAccessRestrictedEvent | WorldsMissingResourcesEvent;
+type Event_2 = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | CreditsOnDemandEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | UserBannedFromSceneEvent | UserUnbannedFromSceneEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | CommunityPostAddedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent | EventCreatedEvent | EventStartedEvent | EventStartsSoonEvent | GovernanceProposalEnactedEvent | GovernanceCoauthorRequestedEvent | GovernancePitchPassedEvent | GovernanceTenderPassedEvent | GovernanceAuthoredProposalFinishedEvent | GovernanceVotingEndedVoterEvent | GovernanceNewCommentOnProposalEvent | GovernanceNewCommentOnProjectUpdatedEvent | GovernanceWhaleVoteEvent | GovernanceVotedOnBehalfEvent | GovernanceCliffEndedEvent | WorldsPermissionGrantedEvent | WorldsPermissionRevokedEvent | WorldsAccessRestoredEvent | WorldsAccessRestrictedEvent | WorldsMissingResourcesEvent;
 export { Event_2 as Event }
 
 // Warning: (ae-missing-release-tag) "EventCreatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1714,6 +1737,8 @@ export namespace Events {
             MEMBER_BANNED = "community-member-banned",
             // (undocumented)
             MEMBER_REMOVED = "community-member-removed",
+            // (undocumented)
+            POST_ADDED = "community-post-added",
             // (undocumented)
             RENAMED = "community-renamed",
             // (undocumented)
@@ -3212,6 +3237,8 @@ export enum NotificationType {
     COMMUNITY_MEMBER_BANNED = "community_member_banned",
     // (undocumented)
     COMMUNITY_MEMBER_REMOVED = "community_member_removed",
+    // (undocumented)
+    COMMUNITY_POST_ADDED = "community_post_added",
     // (undocumented)
     COMMUNITY_RENAMED = "community_renamed",
     // (undocumented)
