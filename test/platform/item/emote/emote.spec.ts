@@ -77,6 +77,7 @@ describe('Emote tests', () => {
     ...thirdPartyProps,
     emoteDataADR74
   }
+
   testTypeSignature(Emote, standardEmote)
   testTypeSignature(Emote, thirdPartyEmote)
 
@@ -241,7 +242,6 @@ describe('Emote tests', () => {
         entityHash: '52c312f5e5524739388af971cddb526c3b49ba31ec77abc07ca01f5b113f1eba'
       }
     }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { image, ...baseEmoteWithoutImage } = baseEmote
     const notThirdPartyEmote = {
       ...baseEmoteWithoutImage,
@@ -251,5 +251,166 @@ describe('Emote tests', () => {
     expectValidationFailureWithErrors(Emote.validate, notThirdPartyEmote, [
       'thirdparty properties conditions are not met'
     ])
+  })
+
+  describe('when validating dependent properties', () => {
+    const validStartAnimation = {
+      loop: true,
+      Armature: {
+        animation: 'StartAnimation'
+      }
+    }
+
+    const validOutcomes = [
+      {
+        title: 'Outcome 1',
+        loop: false,
+        clips: {
+          Armature: {
+            animation: 'Outcome1Animation'
+          }
+        }
+      }
+    ]
+
+    describe('and all three dependent properties are present', () => {
+      let emote: any
+
+      beforeEach(() => {
+        emote = {
+          ...standardEmote,
+          emoteDataADR74: {
+            ...emoteDataADR74,
+            startAnimation: validStartAnimation,
+            randomizeOutcomes: true,
+            outcomes: validOutcomes
+          }
+        }
+      })
+
+      it('should pass validation', () => {
+        expect(Emote.validate(emote)).toEqual(true)
+      })
+    })
+
+    describe('and none of the dependent properties are present', () => {
+      let emote: any
+
+      beforeEach(() => {
+        emote = {
+          ...standardEmote,
+          emoteDataADR74: {
+            ...emoteDataADR74
+          }
+        }
+      })
+
+      it('should pass validation', () => {
+        expect(Emote.validate(emote)).toEqual(true)
+      })
+    })
+
+    describe('and only one property is present', () => {
+      describe('and only startAnimation is present', () => {
+        it('should fail validation', () => {
+          expectValidationFailureWithErrors(
+            Emote.validate,
+            {
+              ...standardEmote,
+              emoteDataADR74: {
+                ...emoteDataADR74,
+                startAnimation: validStartAnimation
+              }
+            },
+            ['must have properties randomizeOutcomes, outcomes when property startAnimation is present']
+          )
+        })
+      })
+
+      describe('and only randomizeOutcomes is present', () => {
+        it('should fail validation', () => {
+          expectValidationFailureWithErrors(
+            Emote.validate,
+            {
+              ...standardEmote,
+              emoteDataADR74: {
+                ...emoteDataADR74,
+                randomizeOutcomes: true
+              }
+            },
+            ['must have properties startAnimation, outcomes when property randomizeOutcomes is present']
+          )
+        })
+      })
+
+      describe('and only outcomes is present', () => {
+        it('should fail validation', () => {
+          expectValidationFailureWithErrors(
+            Emote.validate,
+            {
+              ...standardEmote,
+              emoteDataADR74: {
+                ...emoteDataADR74,
+                outcomes: validOutcomes
+              }
+            },
+            ['must have properties startAnimation, randomizeOutcomes when property outcomes is present']
+          )
+        })
+      })
+    })
+
+    describe('and two properties are present', () => {
+      describe('and startAnimation and randomizeOutcomes are present but outcomes is missing', () => {
+        it('should fail validation', () => {
+          expectValidationFailureWithErrors(
+            Emote.validate,
+            {
+              ...standardEmote,
+              emoteDataADR74: {
+                ...emoteDataADR74,
+                startAnimation: validStartAnimation,
+                randomizeOutcomes: true
+              }
+            },
+            ['must have properties randomizeOutcomes, outcomes when property startAnimation is present']
+          )
+        })
+      })
+
+      describe('and startAnimation and outcomes are present but randomizeOutcomes is missing', () => {
+        it('should fail validation', () => {
+          expectValidationFailureWithErrors(
+            Emote.validate,
+            {
+              ...standardEmote,
+              emoteDataADR74: {
+                ...emoteDataADR74,
+                startAnimation: validStartAnimation,
+                outcomes: validOutcomes
+              }
+            },
+            ['must have properties randomizeOutcomes, outcomes when property startAnimation is present']
+          )
+        })
+      })
+
+      describe('and randomizeOutcomes and outcomes are present but startAnimation is missing', () => {
+        it('should fail validation', () => {
+          expectValidationFailureWithErrors(
+            Emote.validate,
+            {
+              ...standardEmote,
+              emoteDataADR74: {
+                ...emoteDataADR74,
+                randomizeOutcomes: true,
+                outcomes: validOutcomes
+              }
+            },
+            ['must have properties startAnimation, outcomes when property randomizeOutcomes is present']
+          )
+        })
+      })
+    })
   })
 })

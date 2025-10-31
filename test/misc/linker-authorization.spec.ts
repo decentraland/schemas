@@ -136,4 +136,21 @@ describe('when validation authorizations', () => {
       ).toBe(true)
     })
   })
+
+  describe('and the authorization has the onlyDev property set as a boolean', () => {
+    it('should return true', () => {
+      expect(
+        LinkerAuthorization.validate({
+          name: 'aName',
+          desc: 'aDesc',
+          contactInfo: {
+            name: 'aContactInfoName'
+          },
+          addresses: ['0x4730182099bc4e60075C657cCeCEc8879826bb43'],
+          plots: ['-73,50'],
+          onlyDev: true
+        })
+      ).toBe(true)
+    })
+  })
 })

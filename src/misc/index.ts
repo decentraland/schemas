@@ -42,13 +42,13 @@ export type WearableId = string // `urn:${string}`
 
 /**
  * EthAddress is a data type that describes an Ethereum address
- * @alpha
+ * @public
  */
 export type EthAddress = string // `0x${string}`
 
 /**
  * EthAddress
- * @alpha
+ * @public
  */
 export namespace EthAddress {
   export const schema: JSONSchema<EthAddress> = {

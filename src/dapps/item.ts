@@ -1,6 +1,6 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
-import { EmoteCategory, EmotePlayMode } from '../platform'
+import { EmoteCategory, EmotePlayMode, EmoteOutcomeType } from '../platform'
 import { Network } from './network'
 import { NFT } from './nft'
 import { NFTCategory } from './nft-category'
@@ -42,6 +42,11 @@ export type Item = {
   maxListingPrice?: string | null
   listings?: number | null
   owners?: number | null
+  /** A description of the utility the item has in the explorer */
+  utility?: string
+  tradeId?: string
+  tradeExpiresAt?: number
+  tradeContractAddress?: string
 }
 
 export type ItemFilters = {
@@ -84,6 +89,10 @@ export type ItemFilters = {
    * Returns emotes that have additional geomtry
    */
   emoteHasGeometry?: boolean
+  /**
+   * Returns emotes that have an outcome type
+   */
+  emoteOutcomeType?: EmoteOutcomeType
 }
 
 export enum ItemSortBy {
@@ -137,6 +146,14 @@ export namespace Item {
         type: 'string',
         nullable: true
       },
+      tradeId: {
+        type: 'string',
+        nullable: true
+      },
+      tradeContractAddress: {
+        type: 'string',
+        nullable: true
+      },
       data: NFT.schema.properties!.data,
       network: Network.schema,
       chainId: ChainId.schema,
@@ -177,6 +194,10 @@ export namespace Item {
         type: 'string',
         nullable: true
       },
+      utility: {
+        type: 'string',
+        nullable: true
+      },
       minListingPrice: {
         type: 'string',
         nullable: true
@@ -190,6 +211,10 @@ export namespace Item {
         nullable: true
       },
       owners: {
+        type: 'integer',
+        nullable: true
+      },
+      tradeExpiresAt: {
         type: 'integer',
         nullable: true
       }

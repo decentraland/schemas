@@ -1,26 +1,53 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 import { ChainId } from './chain-id'
+import { PaginatedParameters } from './common'
 import { ListingStatus } from './listing-status'
 import { Network } from './network'
 
-export type Bid = {
+export type BaseBid = {
   id: string
-  bidAddress: string
   bidder: string
+  /**
+   * When the bid is on an item, this is the address of the creator of the collection
+   * When the bid is on an NFT, this is the address of the owner of the NFT
+   */
   seller: string
   price: string
-  fingerprint: string
   status: ListingStatus
-  blockchainId: string
-  blockNumber: string
+  /** expiration date in milliseconds */
   expiresAt: number
+  /** creation date in milliseconds */
   createdAt: number
+  /** updated date in milliseconds */
   updatedAt: number
   contractAddress: string
-  tokenId: string
   network: Network.ETHEREUM | Network.MATIC
   chainId: ChainId
+  fingerprint: string
 }
+
+export type LegacyBid = BaseBid & {
+  bidAddress: string
+  blockchainId: string
+  blockNumber: string
+  tokenId: string
+}
+
+export type ItemBid = BaseBid & {
+  tradeId: string
+  tradeContractAddress: string
+  itemId: string
+}
+
+export type NFTBid = BaseBid & {
+  tradeId: string
+  tradeContractAddress: string
+  tokenId: string
+}
+
+export type BidTrade = NFTBid | ItemBid
+
+export type Bid = LegacyBid | BidTrade
 
 export enum BidSortBy {
   RECENTLY_OFFERED = 'recently_offered',
@@ -41,14 +68,23 @@ export type BidFilters = {
   network?: Network
 }
 
+export type GetBidsParameters = PaginatedParameters & {
+  bidder?: string
+  seller?: string
+  sortBy?: BidSortBy
+  contractAddress?: string
+  tokenId?: string
+  status?: ListingStatus
+  network?: Network
+  itemId?: string
+  bidAddress?: string
+}
+
 export namespace Bid {
-  export const schema: JSONSchema<Bid> = {
+  const baseBidSchema: JSONSchema<BaseBid> = {
     type: 'object',
     properties: {
       id: {
-        type: 'string'
-      },
-      bidAddress: {
         type: 'string'
       },
       bidder: {
@@ -64,16 +100,7 @@ export namespace Bid {
         type: 'string'
       },
       status: ListingStatus.schema,
-      blockchainId: {
-        type: 'string'
-      },
-      blockNumber: {
-        type: 'string'
-      },
       contractAddress: {
-        type: 'string'
-      },
-      tokenId: {
         type: 'string'
       },
       network: Network.schema,
@@ -90,21 +117,68 @@ export namespace Bid {
     },
     required: [
       'id',
-      'bidAddress',
       'bidder',
       'seller',
       'price',
       'fingerprint',
       'status',
-      'blockchainId',
-      'blockNumber',
       'contractAddress',
-      'tokenId',
       'network',
       'chainId',
       'expiresAt',
       'createdAt',
       'updatedAt'
+    ]
+  }
+
+  export const schema: JSONSchema<Bid> = {
+    type: 'object',
+    required: [],
+    oneOf: [
+      {
+        properties: {
+          ...baseBidSchema.properties,
+          tradeId: {
+            type: 'string'
+          },
+          tokenId: {
+            type: 'string'
+          }
+        },
+        required: [...baseBidSchema.required, 'tradeId', 'tokenId']
+      },
+      {
+        type: 'object',
+        properties: {
+          ...baseBidSchema.properties,
+          tradeId: {
+            type: 'string'
+          },
+          itemId: {
+            type: 'string'
+          }
+        },
+        required: [...baseBidSchema.required, 'tradeId', 'itemId']
+      },
+      {
+        type: 'object',
+        properties: {
+          ...baseBidSchema.properties,
+          bidAddress: {
+            type: 'string'
+          },
+          blockchainId: {
+            type: 'string'
+          },
+          blockNumber: {
+            type: 'string'
+          },
+          tokenId: {
+            type: 'string'
+          }
+        },
+        required: [...baseBidSchema.required, 'bidAddress', 'blockchainId', 'blockNumber', 'tokenId']
+      }
     ]
   }
 

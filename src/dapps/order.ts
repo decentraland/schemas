@@ -18,6 +18,7 @@ export type Order = {
   network: Network.ETHEREUM | Network.MATIC
   chainId: ChainId
   issuedId: string
+  tradeId?: string
 }
 
 export type OrderFilters = {
@@ -84,6 +85,10 @@ export namespace Order {
       },
       issuedId: {
         type: 'string'
+      },
+      tradeId: {
+        type: 'string',
+        nullable: true
       }
     },
     required: [

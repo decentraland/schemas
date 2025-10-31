@@ -12,6 +12,8 @@ export type DeploymentToSqs = {
   lods?: string[]
   contentServerUrls?: string[]
   force?: boolean
+  animation?: string
+  doISS?: boolean
 }
 
 /**
@@ -42,6 +44,14 @@ export namespace DeploymentToSqs {
         nullable: true
       },
       force: {
+        type: 'boolean',
+        nullable: true
+      },
+      animation: {
+        type: 'string',
+        nullable: true
+      },
+      doISS: {
         type: 'boolean',
         nullable: true
       }

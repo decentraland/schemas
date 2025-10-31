@@ -13,6 +13,11 @@ export enum PreviewMessageType {
   EMOTE_EVENT = 'emote_event'
 }
 
+export enum PreviewRenderer {
+  BABYLON = 'babylon',
+  UNITY = 'unity'
+}
+
 /** @alpha */
 export namespace PreviewMessageType {
   export const schema: JSONSchema<PreviewMessageType> = {
@@ -26,7 +31,7 @@ export namespace PreviewMessageType {
 export type PreviewMessagePayload<T extends PreviewMessageType> = T extends PreviewMessageType.READY
   ? null
   : T extends PreviewMessageType.LOAD
-  ? null
+  ? { renderer: PreviewRenderer } | null
   : T extends PreviewMessageType.ERROR
   ? { message: string }
   : T extends PreviewMessageType.UPDATE
@@ -41,6 +46,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
         | 'changeZoom'
         | 'changeCameraPosition'
         | 'panCamera'
+        | 'cleanup'
         | 'getLength'
         | 'isPlaying'
         | 'play'
@@ -50,6 +56,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
         | 'enableSound'
         | 'disableSound'
         | 'hasSound'
+        | 'setUsername'
       params: any[]
     }
   : T extends PreviewMessageType.CONTROLLER_RESPONSE
