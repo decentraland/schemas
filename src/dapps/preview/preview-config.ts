@@ -4,7 +4,16 @@ import { PreviewCamera } from './preview-camera'
 import { PreviewEmote } from './preview-emote'
 import { PreviewProjection } from './preview-projection'
 import { PreviewType } from './preview-type'
+import { SocialEmoteAnimation } from './social-emote-animation'
 import { WearableDefinition } from './wearable-definition'
+
+export enum PreviewUnityMode {
+  Authentication = 'authentication',
+  Builder = 'builder',
+  Marketplace = 'marketplace',
+  Profile = 'profile',
+  Configurator = 'configurator'
+}
 
 export type PreviewConfig = {
   item?: WearableDefinition | EmoteDefinition
@@ -43,4 +52,7 @@ export type PreviewConfig = {
   lockBeta: boolean
   lockRadius: boolean
   forceRender?: Array<string>
+  unityMode?: PreviewUnityMode
+  unity?: boolean
+  socialEmote?: SocialEmoteAnimation
 }
