@@ -2386,12 +2386,18 @@ export interface IEmoteController {
     events: Emitter<EmoteEvents>;
     // (undocumented)
     getLength(): Promise<number>;
+    // Warning: (ae-forgotten-export) The symbol "SocialEmoteAnimation" needs to be exported by the entry point index.d.ts
+    //
+    // (undocumented)
+    getSocialEmoteAnimations: () => Promise<SocialEmoteAnimation[] | null>;
     // (undocumented)
     goTo(seconds: number): Promise<void>;
     // (undocumented)
     hasSound(): Promise<boolean>;
     // (undocumented)
     isPlaying(): Promise<boolean>;
+    // (undocumented)
+    isSocialEmote(): Promise<boolean>;
     // (undocumented)
     pause(): Promise<void>;
     // (undocumented)
