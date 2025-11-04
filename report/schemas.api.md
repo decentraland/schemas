@@ -2381,6 +2381,8 @@ export interface IEmoteController {
     // (undocumented)
     disableSound(): Promise<void>;
     // (undocumented)
+    emote: EmoteDefinition | null;
+    // (undocumented)
     enableSound(): Promise<void>;
     // (undocumented)
     events: Emitter<EmoteEvents>;

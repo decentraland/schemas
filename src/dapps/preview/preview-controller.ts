@@ -2,6 +2,7 @@ import type { Emitter } from 'mitt'
 import type { Metrics } from '../../platform/item/metrics'
 import type { PreviewEmoteEventType } from './preview-emote-event-type'
 import { SocialEmoteAnimation } from './social-emote-animation'
+import { EmoteDefinition } from './emote-definition'
 
 export interface IPreviewController {
   scene: ISceneController
@@ -38,5 +39,6 @@ export interface IEmoteController {
   hasSound(): Promise<boolean>
   isSocialEmote(): Promise<boolean>
   getSocialEmoteAnimations: () => Promise<SocialEmoteAnimation[] | null>
+  emote: EmoteDefinition | null
   events: Emitter<EmoteEvents>
 }
