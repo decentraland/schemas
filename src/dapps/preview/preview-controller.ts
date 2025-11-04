@@ -1,6 +1,7 @@
 import type { Emitter } from 'mitt'
 import type { Metrics } from '../../platform/item/metrics'
 import type { PreviewEmoteEventType } from './preview-emote-event-type'
+import { SocialEmoteAnimation } from '../../platform/item/emote/adr287/emote-data-adr287'
 
 export interface IPreviewController {
   scene: ISceneController
@@ -24,6 +25,7 @@ export interface ISceneController {
   setUsername(username: string): Promise<void>
   cleanup(): Promise<void>
 }
+
 export interface IEmoteController {
   getLength(): Promise<number>
   isPlaying(): Promise<boolean>
@@ -34,5 +36,7 @@ export interface IEmoteController {
   enableSound(): Promise<void>
   disableSound(): Promise<void>
   hasSound(): Promise<boolean>
+  isSocialEmote(): Promise<boolean>
+  getSocialEmoteAnimations: () => Promise<SocialEmoteAnimation[] | null>
   events: Emitter<EmoteEvents>
 }
