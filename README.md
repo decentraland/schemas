@@ -85,7 +85,7 @@ Versions are handled manually using Github releases and semver.
 
 Main branch is automatically published to the `@next` dist tag to test integrations before final releases happen.
 
-## 🤖 AI Agent Context
+## AI Agent Context
 
 **Service Purpose:** Central TypeScript library defining data structures, types, and validators for the Decentraland ecosystem. Provides type safety and runtime validation across all Decentraland projects, ensuring consistency and preventing type-related errors.
 
