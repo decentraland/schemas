@@ -1,7 +1,7 @@
 import type { Emitter } from 'mitt'
 import type { Metrics } from '../../platform/item/metrics'
 import type { PreviewEmoteEventType } from './preview-emote-event-type'
-import { SocialEmoteAnimation } from '../../platform/item/emote/adr287/emote-data-adr287'
+import { SocialEmoteAnimation } from './social-emote-animation'
 
 export interface IPreviewController {
   scene: ISceneController

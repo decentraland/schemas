@@ -137,11 +137,3 @@ export namespace OutcomeGroup {
 
   export const validate: ValidateFunction<OutcomeGroup> = generateLazyValidator(schema)
 }
-
-export type SocialEmoteAnimation = {
-  title: string
-  loop: boolean
-  audio?: string
-} & {
-  [key in ArmatureId]?: EmoteClip
-}
