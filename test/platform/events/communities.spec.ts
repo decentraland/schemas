@@ -8,7 +8,8 @@ import {
   CommunityDeletedContentViolationEvent,
   CommunityRequestToJoinReceivedEvent,
   CommunityRequestToJoinAcceptedEvent,
-  CommunityInviteReceivedEvent
+  CommunityInviteReceivedEvent,
+  CommunityOwnershipTransferredEvent
 } from '../../../src'
 
 describe('Community Events tests', () => {
@@ -758,5 +759,27 @@ describe('Community Events tests', () => {
 
       expect(CommunityInviteReceivedEvent.validate(event)).toEqual(false)
     })
+  })
+})
+
+describe('CommunityOwnershipTransferredEvent', () => {
+  it('should pass validation with valid data', () => {
+    const event: CommunityOwnershipTransferredEvent = {
+      type: Events.Type.COMMUNITY,
+      subType: Events.SubType.Community.OWNERSHIP_TRANSFERRED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityId: 'community-123',
+        communityName: 'Test Community',
+        oldOwnerAddress: '0x1234567890123456789012345678901234567890',
+        newOwnerAddress: '0x0987654321098765432109876543210987654321',
+        thumbnailUrl: 'https://example.com/thumbnail.jpg'
+      }
+    }
+
+    expect(CommunityOwnershipTransferredEvent.validate(event)).toEqual(true)
+    expect(CommunityOwnershipTransferredEvent.validate(null)).toEqual(false)
+    expect(CommunityOwnershipTransferredEvent.validate({})).toEqual(false)
   })
 })
