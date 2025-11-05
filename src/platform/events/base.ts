@@ -27,6 +27,7 @@ import {
   CommunityRenamedEvent,
   CommunityRequestToJoinAcceptedEvent,
   CommunityRequestToJoinReceivedEvent,
+  CommunityOwnershipTransferredEvent,
   CommunityPostAddedEvent
 } from './communities'
 import { BidReceivedEvent } from './marketplace'
@@ -215,6 +216,7 @@ export namespace Events {
       REQUEST_TO_JOIN_RECEIVED = 'community-request-to-join-received',
       REQUEST_TO_JOIN_ACCEPTED = 'community-request-to-join-accepted',
       INVITE_RECEIVED = 'community-invite-received',
+      OWNERSHIP_TRANSFERRED = 'community-ownership-transferred',
       POST_ADDED = 'community-post-added'
     }
 
@@ -324,6 +326,7 @@ export type Event =
   | CommunityRequestToJoinReceivedEvent
   | CommunityRequestToJoinAcceptedEvent
   | CommunityInviteReceivedEvent
+  | CommunityOwnershipTransferredEvent
   | CommunityPostAddedEvent
   | PhotoTakenEvent
   | PhotoPrivacyChangedEvent

@@ -9,6 +9,7 @@ import {
   CommunityRequestToJoinReceivedEvent,
   CommunityRequestToJoinAcceptedEvent,
   CommunityInviteReceivedEvent,
+  CommunityOwnershipTransferredEvent,
   CommunityPostAddedEvent
 } from '../../../src'
 
@@ -761,7 +762,112 @@ describe('Community Events tests', () => {
     })
   })
 })
-describe('CommunityPostAddedEvent', () => {
+
+describe('CommunityOwnershipTransferredEvent', () => {
+  it('should pass validation with valid data', () => {
+    const event: CommunityOwnershipTransferredEvent = {
+      type: Events.Type.COMMUNITY,
+      subType: Events.SubType.Community.OWNERSHIP_TRANSFERRED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityId: 'community-123',
+        communityName: 'Test Community',
+        oldOwnerAddress: '0x1234567890123456789012345678901234567890',
+        newOwnerAddress: '0x0987654321098765432109876543210987654321',
+        thumbnailUrl: 'https://example.com/thumbnail.jpg'
+      }
+    }
+
+    expect(CommunityOwnershipTransferredEvent.validate(event)).toEqual(true)
+    expect(CommunityOwnershipTransferredEvent.validate(null)).toEqual(false)
+    expect(CommunityOwnershipTransferredEvent.validate({})).toEqual(false)
+  })
+
+  it('should fail with missing communityId', () => {
+    const event: any = {
+      type: Events.Type.COMMUNITY,
+      subType: Events.SubType.Community.OWNERSHIP_TRANSFERRED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityName: 'Test Community',
+        oldOwnerAddress: '0x1234567890123456789012345678901234567890',
+        newOwnerAddress: '0x0987654321098765432109876543210987654321',
+        thumbnailUrl: 'https://example.com/thumbnail.jpg'
+      }
+    }
+
+    expect(CommunityOwnershipTransferredEvent.validate(event)).toEqual(false)
+  })
+
+  it('should fail with missing communityName', () => {
+    const event: any = {
+      type: Events.Type.COMMUNITY,
+      subType: Events.SubType.Community.OWNERSHIP_TRANSFERRED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityId: 'community-123',
+        oldOwnerAddress: '0x1234567890123456789012345678901234567890',
+        newOwnerAddress: '0x0987654321098765432109876543210987654321',
+        thumbnailUrl: 'https://example.com/thumbnail.jpg'
+      }
+    }
+
+    expect(CommunityOwnershipTransferredEvent.validate(event)).toEqual(false)
+  })
+
+  it('should fail with missing oldOwnerAddress', () => {
+    const event: any = {
+      type: Events.Type.COMMUNITY,
+      subType: Events.SubType.Community.OWNERSHIP_TRANSFERRED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityId: 'community-123',
+        communityName: 'Test Community',
+        thumbnailUrl: 'https://example.com/thumbnail.jpg'
+      }
+    }
+
+    expect(CommunityOwnershipTransferredEvent.validate(event)).toEqual(false)
+  })
+
+  it('should fail with missing newOwnerAddress', () => {
+    const event: any = {
+      type: Events.Type.COMMUNITY,
+      subType: Events.SubType.Community.OWNERSHIP_TRANSFERRED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityId: 'community-123',
+        communityName: 'Test Community',
+        oldOwnerAddress: '0x1234567890123456789012345678901234567890',
+        thumbnailUrl: 'https://example.com/thumbnail.jpg'
+      }
+    }
+
+    expect(CommunityOwnershipTransferredEvent.validate(event)).toEqual(false)
+  })
+
+  it('should fail with missing thumbnailUrl', () => {
+    const event: any = {
+      type: Events.Type.COMMUNITY,
+      subType: Events.SubType.Community.OWNERSHIP_TRANSFERRED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityId: 'community-123',
+        communityName: 'Test Community',
+        oldOwnerAddress: '0x1234567890123456789012345678901234567890',
+        newOwnerAddress: '0x0987654321098765432109876543210987654321'
+      }
+    }
+
+    expect(CommunityOwnershipTransferredEvent.validate(event)).toEqual(false)
+  })
+
   it('should pass validation with valid data', () => {
     const event: CommunityPostAddedEvent = {
       type: Events.Type.COMMUNITY,
@@ -771,10 +877,10 @@ describe('CommunityPostAddedEvent', () => {
       metadata: {
         communityId: 'community-123',
         communityName: 'Test Community',
-        addressesToNotify: ['0x1234567890123456789012345678901234567890'],
         thumbnailUrl: 'https://example.com/thumbnail.jpg',
         postId: 'post-123',
-        authorAddress: '0x1234567890123456789012345678901234567890'
+        authorAddress: '0x1234567890123456789012345678901234567890',
+        addressesToNotify: ['0x1234567890123456789012345678901234567890']
       }
     }
 
