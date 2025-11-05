@@ -3636,7 +3636,7 @@ export type PhotoTakenEvent = BaseEvent & {
             address: string;
             isEmoting: boolean;
         }>;
-        placeId: string;
+        placeId?: string;
     };
 };
 
