@@ -45,6 +45,15 @@ export type EventStartedEvent = BaseEvent & {
   }
 }
 
+export type EventEndedEvent = BaseEvent & {
+  type: Events.Type.EVENT
+  subType: Events.SubType.Event.EVENT_ENDED
+  metadata: {
+    communityId?: string
+    totalAttendees: number
+  }
+}
+
 export namespace EventStartedEvent {
   export const schema: JSONSchema<EventStartedEvent> = {
     type: 'object',
@@ -135,4 +144,28 @@ export namespace EventCreatedEvent {
   }
 
   export const validate: ValidateFunction<EventCreatedEvent> = generateLazyValidator(schema)
+}
+
+export namespace EventEndedEvent {
+  export const schema: JSONSchema<EventEndedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.EVENT },
+      subType: { type: 'string', const: Events.SubType.Event.EVENT_ENDED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          communityId: { type: 'string', nullable: true },
+          totalAttendees: { type: 'number' }
+        },
+        required: ['totalAttendees'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+  export const validate: ValidateFunction<EventEndedEvent> = generateLazyValidator(schema)
 }

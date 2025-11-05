@@ -59,7 +59,7 @@ import {
   StreamingPlaceUpdatedEvent
 } from './streaming'
 import { AuthIdentifyEvent } from './web'
-import { EventCreatedEvent, EventStartedEvent, EventStartsSoonEvent } from './event'
+import { EventCreatedEvent, EventStartedEvent, EventStartsSoonEvent, EventEndedEvent } from './event'
 import {
   GovernanceProposalEnactedEvent,
   GovernanceCoauthorRequestedEvent,
@@ -222,7 +222,8 @@ export namespace Events {
     export enum Event {
       EVENT_CREATED = 'event-created',
       EVENT_STARTS_SOON = 'event-starts-soon',
-      EVENT_STARTED = 'event-started'
+      EVENT_STARTED = 'event-started',
+      EVENT_ENDED = 'event-ended'
     }
 
     export enum Governance {
@@ -324,6 +325,7 @@ export type Event =
   | EventCreatedEvent
   | EventStartedEvent
   | EventStartsSoonEvent
+  | EventEndedEvent
   | GovernanceProposalEnactedEvent
   | GovernanceCoauthorRequestedEvent
   | GovernancePitchPassedEvent
