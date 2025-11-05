@@ -26,7 +26,8 @@ import {
   CommunityMemberRemovedEvent,
   CommunityRenamedEvent,
   CommunityRequestToJoinAcceptedEvent,
-  CommunityRequestToJoinReceivedEvent
+  CommunityRequestToJoinReceivedEvent,
+  CommunityPostAddedEvent
 } from './communities'
 import { BidReceivedEvent } from './marketplace'
 import { PhotoPrivacyChangedEvent, PhotoTakenEvent } from './camera'
@@ -211,7 +212,8 @@ export namespace Events {
       MEMBER_REMOVED = 'community-member-removed',
       REQUEST_TO_JOIN_RECEIVED = 'community-request-to-join-received',
       REQUEST_TO_JOIN_ACCEPTED = 'community-request-to-join-accepted',
-      INVITE_RECEIVED = 'community-invite-received'
+      INVITE_RECEIVED = 'community-invite-received',
+      POST_ADDED = 'community-post-added'
     }
 
     export enum Camera {
@@ -318,6 +320,7 @@ export type Event =
   | CommunityRequestToJoinReceivedEvent
   | CommunityRequestToJoinAcceptedEvent
   | CommunityInviteReceivedEvent
+  | CommunityPostAddedEvent
   | PhotoTakenEvent
   | PhotoPrivacyChangedEvent
   | AuthIdentifyEvent
