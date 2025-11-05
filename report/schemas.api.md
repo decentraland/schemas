@@ -972,11 +972,12 @@ export namespace CommunityMemberRemovedEvent {
 export type CommunityPostAddedEvent = BaseEvent & {
     type: Events.Type.COMMUNITY;
     subType: Events.SubType.Community.POST_ADDED;
-    metadata: {
+    metadata: Audience & {
         communityId: string;
         communityName: string;
-        memberAddress: EthAddress;
         thumbnailUrl: string;
+        postId: string;
+        authorAddress: EthAddress;
     };
 };
 
@@ -5531,7 +5532,7 @@ export namespace WorldsPermissionRevokedEvent {
 // src/dapps/trade.ts:93:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/platform/events/blockchain.ts:169:3 - (ae-forgotten-export) The symbol "RentalMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/client.ts:94:3 - (ae-forgotten-export) The symbol "ClientBaseMetadata" needs to be exported by the entry point index.d.ts
-// src/platform/events/communities.ts:204:3 - (ae-forgotten-export) The symbol "Audience" needs to be exported by the entry point index.d.ts
+// src/platform/events/communities.ts:321:3 - (ae-forgotten-export) The symbol "Audience" needs to be exported by the entry point index.d.ts
 // src/platform/events/referral.ts:37:3 - (ae-forgotten-export) The symbol "ReferralMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/streaming.ts:47:3 - (ae-forgotten-export) The symbol "StreamingMetadata" needs to be exported by the entry point index.d.ts
 // src/platform/events/web.ts:16:21 - (tsdoc-escape-right-brace) The "}" character should be escaped using a backslash to avoid confusion with a TSDoc inline tag
