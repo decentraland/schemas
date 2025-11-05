@@ -56,7 +56,8 @@ import {
   StreamingKeyRevokeEvent,
   StreamingKeyExpiredEvent,
   StreamingTimeExceededEvent,
-  StreamingPlaceUpdatedEvent
+  StreamingPlaceUpdatedEvent,
+  CommunityStreamingEndedEvent
 } from './streaming'
 import { AuthIdentifyEvent } from './web'
 import { EventCreatedEvent, EventStartedEvent, EventStartsSoonEvent, EventEndedEvent } from './event'
@@ -188,7 +189,8 @@ export namespace Events {
       STREAMING_KEY_REVOKE = 'streaming-key-revoke',
       STREAMING_KEY_EXPIRED = 'streaming-key-expired',
       STREAMING_TIME_EXCEEDED = 'streaming-time-exceeded',
-      STREAMING_PLACE_UPDATED = 'streaming-place-updated'
+      STREAMING_PLACE_UPDATED = 'streaming-place-updated',
+      COMMUNITY_STREAMING_ENDED = 'community-streaming-ended'
     }
 
     export enum Comms {
@@ -300,6 +302,7 @@ export type Event =
   | StreamingKeyExpiredEvent
   | StreamingTimeExceededEvent
   | StreamingPlaceUpdatedEvent
+  | CommunityStreamingEndedEvent
   | UserJoinedRoomEvent
   | UserLeftRoomEvent
   | UserBannedFromSceneEvent
