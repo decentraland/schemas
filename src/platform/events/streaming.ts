@@ -59,6 +59,15 @@ export type StreamingPlaceUpdatedEvent = BaseEvent & {
   metadata: StreamingMetadata
 }
 
+export type CommunityStreamingEndedEvent = BaseEvent & {
+  type: Events.Type.STREAMING
+  subType: Events.SubType.Streaming.COMMUNITY_STREAMING_ENDED
+  metadata: {
+    communityId: string
+    totalParticipants: number
+  }
+}
+
 export namespace StreamingKeyResetEvent {
   export const schema: JSONSchema<StreamingKeyResetEvent> = createEventSchema(
     Events.Type.STREAMING,
@@ -102,4 +111,21 @@ export namespace StreamingPlaceUpdatedEvent {
     streamingMetadataSchema
   )
   export const validate: ValidateFunction<StreamingPlaceUpdatedEvent> = generateLazyValidator(schema)
+}
+
+export namespace CommunityStreamingEndedEvent {
+  export const schema: JSONSchema<CommunityStreamingEndedEvent> = createEventSchema(
+    Events.Type.STREAMING,
+    Events.SubType.Streaming.COMMUNITY_STREAMING_ENDED,
+    {
+      type: 'object',
+      properties: {
+        communityId: { type: 'string' },
+        totalParticipants: { type: 'number' }
+      },
+      required: ['communityId', 'totalParticipants'],
+      additionalProperties: false
+    } as JSONSchema<CommunityStreamingEndedEvent['metadata']>
+  )
+  export const validate: ValidateFunction<CommunityStreamingEndedEvent> = generateLazyValidator(schema)
 }

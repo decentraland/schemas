@@ -5,7 +5,8 @@ import {
   StreamingKeyExpiredEvent,
   StreamingTimeExceededEvent,
   StreamingPlaceUpdatedEvent,
-  Events
+  Events,
+  CommunityStreamingEndedEvent
 } from '../../../src'
 
 describe('Streaming Events tests', () => {
@@ -60,5 +61,22 @@ describe('Streaming Events tests', () => {
       expect(eventClass.validate(null)).toEqual(false)
       expect(eventClass.validate({})).toEqual(false)
     })
+  })
+
+  it('CommunityStreamingEndedEvent static tests must pass', () => {
+    const event: CommunityStreamingEndedEvent = {
+      type: Events.Type.STREAMING,
+      subType: Events.SubType.Streaming.COMMUNITY_STREAMING_ENDED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityId: 'community-123',
+        totalParticipants: 10
+      }
+    }
+
+    expect(CommunityStreamingEndedEvent.validate(event)).toEqual(true)
+    expect(CommunityStreamingEndedEvent.validate(null)).toEqual(false)
+    expect(CommunityStreamingEndedEvent.validate({})).toEqual(false)
   })
 })
