@@ -315,6 +315,47 @@ export namespace CommunityInviteReceivedEvent {
   export const validate: ValidateFunction<CommunityInviteReceivedEvent> = generateLazyValidator(schema)
 }
 
+export type CommunityPostAddedEvent = BaseEvent & {
+  type: Events.Type.COMMUNITY
+  subType: Events.SubType.Community.POST_ADDED
+  metadata: Audience & {
+    communityId: string
+    communityName: string
+    thumbnailUrl: string
+    postId: string
+    authorAddress: EthAddress
+  }
+}
+
+export namespace CommunityPostAddedEvent {
+  export const schema: JSONSchema<CommunityPostAddedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.COMMUNITY },
+      subType: { type: 'string', const: Events.SubType.Community.POST_ADDED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 1 },
+      metadata: {
+        type: 'object',
+        properties: {
+          communityId: { type: 'string' },
+          communityName: { type: 'string' },
+          thumbnailUrl: { type: 'string' },
+          postId: { type: 'string' },
+          authorAddress: { type: 'string' },
+          addressesToNotify: { type: 'array', items: { type: 'string' } }
+        },
+        required: ['addressesToNotify', 'communityId', 'communityName', 'thumbnailUrl', 'postId', 'authorAddress'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<CommunityPostAddedEvent> = generateLazyValidator(schema)
+}
+
 export type CommunityOwnershipTransferredEvent = BaseEvent & {
   type: Events.Type.COMMUNITY
   subType: Events.SubType.Community.OWNERSHIP_TRANSFERRED
