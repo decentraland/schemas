@@ -965,6 +965,30 @@ export namespace CommunityMemberRemovedEvent {
     validate: ValidateFunction<CommunityMemberRemovedEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "CommunityOwnershipTransferredEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityOwnershipTransferredEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CommunityOwnershipTransferredEvent = BaseEvent & {
+    type: Events.Type.COMMUNITY;
+    subType: Events.SubType.Community.OWNERSHIP_TRANSFERRED;
+    metadata: {
+        communityId: string;
+        communityName: string;
+        oldOwnerAddress: EthAddress;
+        newOwnerAddress: EthAddress;
+        thumbnailUrl: string;
+    };
+};
+
+// @public (undocumented)
+export namespace CommunityOwnershipTransferredEvent {
+    const // (undocumented)
+    schema: JSONSchema<CommunityOwnershipTransferredEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CommunityOwnershipTransferredEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "CommunityRenamedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "CommunityRenamedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1714,6 +1738,8 @@ export namespace Events {
             MEMBER_BANNED = "community-member-banned",
             // (undocumented)
             MEMBER_REMOVED = "community-member-removed",
+            // (undocumented)
+            OWNERSHIP_TRANSFERRED = "community-ownership-transferred",
             // (undocumented)
             RENAMED = "community-renamed",
             // (undocumented)
@@ -3212,6 +3238,8 @@ export enum NotificationType {
     COMMUNITY_MEMBER_BANNED = "community_member_banned",
     // (undocumented)
     COMMUNITY_MEMBER_REMOVED = "community_member_removed",
+    // (undocumented)
+    COMMUNITY_OWNERSHIP_TRANSFERRED = "community_ownership_transferred",
     // (undocumented)
     COMMUNITY_RENAMED = "community_renamed",
     // (undocumented)
