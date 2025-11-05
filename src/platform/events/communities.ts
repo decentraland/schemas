@@ -318,12 +318,12 @@ export namespace CommunityInviteReceivedEvent {
 export type CommunityPostAddedEvent = BaseEvent & {
   type: Events.Type.COMMUNITY
   subType: Events.SubType.Community.POST_ADDED
-  metadata: {
+  metadata: Audience & {
     communityId: string
     communityName: string
-    memberAddress: EthAddress
     thumbnailUrl: string
-    // TODO: add post data
+    postId: string
+    authorAddress: EthAddress
   }
 }
 
@@ -338,13 +338,14 @@ export namespace CommunityPostAddedEvent {
       metadata: {
         type: 'object',
         properties: {
+          addressesToNotify: { type: 'array', items: { type: 'string' } },
           communityId: { type: 'string' },
           communityName: { type: 'string' },
-          memberAddress: { type: 'string' },
-          thumbnailUrl: { type: 'string' }
-          // TODO: add post data
+          thumbnailUrl: { type: 'string' },
+          postId: { type: 'string' },
+          authorAddress: { type: 'string' }
         },
-        required: ['communityId', 'communityName', 'memberAddress', 'thumbnailUrl'],
+        required: ['addressesToNotify', 'communityId', 'communityName', 'thumbnailUrl', 'postId', 'authorAddress'],
         additionalProperties: false
       }
     },

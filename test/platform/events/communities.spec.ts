@@ -771,9 +771,10 @@ describe('CommunityPostAddedEvent', () => {
       metadata: {
         communityId: 'community-123',
         communityName: 'Test Community',
-        memberAddress: '0x1234567890123456789012345678901234567890',
-        thumbnailUrl: 'https://example.com/thumbnail.jpg'
-        // TODO: add post data
+        addressesToNotify: ['0x1234567890123456789012345678901234567890'],
+        thumbnailUrl: 'https://example.com/thumbnail.jpg',
+        postId: 'post-123',
+        authorAddress: '0x1234567890123456789012345678901234567890'
       }
     }
 
@@ -790,9 +791,8 @@ describe('CommunityPostAddedEvent', () => {
       timestamp: 1,
       metadata: {
         communityName: 'Test Community',
-        memberAddress: '0x1234567890123456789012345678901234567890',
+        addressesToNotify: ['0x1234567890123456789012345678901234567890'],
         thumbnailUrl: 'https://example.com/thumbnail.jpg'
-        // TODO: add post data
       }
     }
 
@@ -808,8 +808,9 @@ describe('CommunityPostAddedEvent', () => {
       metadata: {
         communityId: 'community-123',
         memberAddress: '0x1234567890123456789012345678901234567890',
-        thumbnailUrl: 'https://example.com/thumbnail.jpg'
-        // TODO: add post data
+        thumbnailUrl: 'https://example.com/thumbnail.jpg',
+        postId: 'post-123',
+        authorAddress: '0x1234567890123456789012345678901234567890'
       }
     }
 
@@ -826,7 +827,6 @@ describe('CommunityPostAddedEvent', () => {
         communityId: 'community-123',
         communityName: 'Test Community',
         thumbnailUrl: 'https://example.com/thumbnail.jpg'
-        // TODO: add post data
       }
     }
 
@@ -843,7 +843,6 @@ describe('CommunityPostAddedEvent', () => {
         communityId: 'community-123',
         communityName: 'Test Community',
         memberAddress: '0x1234567890123456789012345678901234567890'
-        // TODO: add post data
       }
     }
 
