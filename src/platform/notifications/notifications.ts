@@ -61,6 +61,7 @@ export enum NotificationType {
   COMMUNITY_REQUEST_TO_JOIN_RECEIVED = 'community_request_to_join_received',
   COMMUNITY_REQUEST_TO_JOIN_ACCEPTED = 'community_request_to_join_accepted',
   COMMUNITY_INVITE_RECEIVED = 'community_invite_received',
+  COMMUNITY_POST_ADDED = 'community_post_added',
   USER_BANNED_FROM_SCENE = 'user_banned_from_scene',
   USER_UNBANNED_FROM_SCENE = 'user_unbanned_from_scene'
 }
