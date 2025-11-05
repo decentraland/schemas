@@ -11,6 +11,7 @@ export type PhotoTakenEvent = BaseEvent & {
     isPublic: boolean
     photoId: string
     users: Array<{ address: string; isEmoting: boolean }>
+    placeId?: string
   }
 }
 
@@ -80,7 +81,8 @@ export namespace PhotoTakenEvent {
               required: ['address', 'isEmoting'],
               additionalProperties: false
             }
-          }
+          },
+          placeId: { type: 'string', nullable: true }
         },
         required: ['userAddress', 'realm', 'photoId', 'isPublic', 'users'],
         additionalProperties: false
