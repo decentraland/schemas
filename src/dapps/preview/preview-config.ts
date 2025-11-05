@@ -8,11 +8,11 @@ import { SocialEmoteAnimation } from './social-emote-animation'
 import { WearableDefinition } from './wearable-definition'
 
 export enum PreviewUnityMode {
-  Authentication = 'authentication',
-  Builder = 'builder',
-  Marketplace = 'marketplace',
-  Profile = 'profile',
-  Configurator = 'configurator'
+  AUTH = 'authentication',
+  BUILDER = 'builder',
+  MARKETPLACE = 'marketplace',
+  PROFILE = 'profile',
+  CONFIG = 'configurator'
 }
 
 export type PreviewConfig = {

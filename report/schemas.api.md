@@ -3915,15 +3915,15 @@ export namespace PreviewType {
 // @public (undocumented)
 export enum PreviewUnityMode {
     // (undocumented)
-    Authentication = "authentication",
+    AUTH = "authentication",
     // (undocumented)
-    Builder = "builder",
+    BUILDER = "builder",
     // (undocumented)
-    Configurator = "configurator",
+    CONFIG = "configurator",
     // (undocumented)
-    Marketplace = "marketplace",
+    MARKETPLACE = "marketplace",
     // (undocumented)
-    Profile = "profile"
+    PROFILE = "profile"
 }
 
 // @alpha
