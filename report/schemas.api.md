@@ -313,7 +313,7 @@ export type AvatarInfo = {
         slot: number;
         urn: string;
     }[];
-    snapshots: Snapshots;
+    snapshots?: Snapshots;
 };
 
 // @alpha
