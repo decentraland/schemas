@@ -83,6 +83,7 @@ import {
   WorldsAccessRestrictedEvent,
   WorldsMissingResourcesEvent
 } from './world'
+import { TransferReceivedEvent } from './transfer'
 
 export namespace Events {
   export enum Type {
@@ -103,7 +104,8 @@ export namespace Events {
     COMMUNITY = 'community',
     CAMERA = 'camera',
     EVENT = 'event',
-    GOVERNANCE = 'governance'
+    GOVERNANCE = 'governance',
+    TRANSFER = 'transfer'
   }
 
   export namespace SubType {
@@ -245,6 +247,10 @@ export namespace Events {
       VOTED_ON_BEHALF = 'governance_voted_on_behalf',
       CLIFF_ENDED = 'governance_cliff_ended'
     }
+
+    export enum Transfer {
+      TRANSFER_RECEIVED = 'transfer-received'
+    }
   }
 }
 
@@ -269,6 +275,7 @@ export type BaseEvent = {
     | Events.SubType.Event
     | Events.SubType.Governance
     | Events.SubType.Worlds
+    | Events.SubType.Transfer
   key: string
   timestamp: number
 }
@@ -351,3 +358,4 @@ export type Event =
   | WorldsAccessRestoredEvent
   | WorldsAccessRestrictedEvent
   | WorldsMissingResourcesEvent
+  | TransferReceivedEvent
