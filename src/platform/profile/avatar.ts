@@ -43,7 +43,7 @@ export type AvatarInfo = {
     slot: number
     urn: string
   }[]
-  snapshots: Snapshots
+  snapshots?: Snapshots
 }
 
 /**
@@ -102,7 +102,10 @@ export namespace AvatarInfo {
         },
         nullable: true
       },
-      snapshots: Snapshots.schema
+      snapshots: {
+        ...Snapshots.schema,
+        nullable: true
+      }
     },
     additionalProperties: true
   }
