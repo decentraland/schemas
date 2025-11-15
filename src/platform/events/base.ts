@@ -183,7 +183,8 @@ export namespace Events {
       DO_NOT_MISS_OUT_REMINDER = 'do-not-miss-out-reminder',
       USAGE_REMINDER = 'usage-reminder',
       USAGE_24_HOURS_REMINDER = 'usage-24-hours-reminder',
-      ON_DEMAND_CREDITS_GRANTED = 'on-demand-credits-granted'
+      ON_DEMAND_CREDITS_GRANTED = 'on-demand-credits-granted',
+      NEW_SEASON_REMINDER = 'new-season-reminder'
     }
 
     export enum Streaming {

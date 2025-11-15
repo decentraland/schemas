@@ -51,6 +51,7 @@ export enum NotificationType {
   CREDITS_REMINDER_USAGE = 'credits_reminder_usage',
   CREDITS_REMINDER_USAGE_24_HOURS = 'credits_reminder_usage_24_hours',
   CREDITS_REMINDER_DO_NOT_MISS_OUT = 'credits_reminder_do_not_miss_out',
+  CREDITS_NEW_SEASON_REMINDER = 'credits_new_season_reminder',
   REFERRAL_INVITED_USERS_ACCEPTED = 'referral_invited_users_accepted',
   REFERRAL_NEW_TIER_REACHED = 'referral_new_tier_reached',
   COMMUNITY_DELETED = 'community_deleted',
