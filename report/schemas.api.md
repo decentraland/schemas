@@ -3813,6 +3813,7 @@ export type PreviewConfig = {
     forceRender?: Array<string>;
     unityMode?: PreviewUnityMode;
     unity?: boolean;
+    disableLoader?: boolean;
     socialEmote?: SocialEmoteAnimation;
 };
 
@@ -3991,6 +3992,10 @@ export type PreviewOptions = {
     lockBeta?: boolean;
     lockRadius?: boolean;
     username?: string | null;
+    unityMode?: PreviewUnityMode | null;
+    unity?: boolean | null;
+    disableLoader?: boolean | null;
+    socialEmote?: SocialEmoteAnimation | null;
 };
 
 // Warning: (ae-missing-release-tag) "PreviewProjection" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
