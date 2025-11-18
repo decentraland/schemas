@@ -51,7 +51,8 @@ import {
   CreditsOnDemandEvent,
   CreditsUsageReminderEvent,
   FriendshipAcceptedEvent,
-  FriendshipRequestEvent
+  FriendshipRequestEvent,
+  CreditsNewSeasonReminderEvent
 } from './services'
 import {
   StreamingKeyResetEvent,
@@ -317,6 +318,7 @@ export type Event =
   | CreditsUsage24HoursReminderEvent
   | CreditsDoNotMissOutReminderEvent
   | CreditsClaimReminderEvent
+  | CreditsNewSeasonReminderEvent
   | ReferralInvitedUsersAcceptedEvent
   | ReferralNewTierReachedEvent
   | CommunityDeletedEvent
