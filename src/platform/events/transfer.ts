@@ -5,9 +5,8 @@ export type TransferReceivedEvent = BaseEvent & {
   type: Events.Type.TRANSFER
   subType: Events.SubType.Transfer.TRANSFER_RECEIVED
   metadata: {
-    from: string
-    to: string
-    itemName: string
+    senderAddress: string
+    address: string
   }
 }
 
@@ -22,11 +21,10 @@ export namespace TransferReceivedEvent {
       metadata: {
         type: 'object',
         properties: {
-          from: { type: 'string' },
-          to: { type: 'string' },
-          itemName: { type: 'string' }
+          senderAddress: { type: 'string' },
+          address: { type: 'string' }
         },
-        required: ['from', 'to', 'itemName'],
+        required: ['senderAddress', 'address'],
         additionalProperties: false
       }
     },
