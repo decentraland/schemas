@@ -1,9 +1,11 @@
 import { BodyShape } from '../../platform/item'
 import { EmoteWithBlobs } from './emote-with-blobs'
 import { PreviewCamera } from './preview-camera'
+import { PreviewUnityMode } from './preview-config'
 import { PreviewEmote } from './preview-emote'
 import { PreviewProjection } from './preview-projection'
 import { PreviewType } from './preview-type'
+import { SocialEmoteAnimation } from './social-emote-animation'
 import { WearableWithBlobs } from './wearable-with-blobs'
 
 /** @alpha */
@@ -53,4 +55,8 @@ export type PreviewOptions = {
   lockBeta?: boolean
   lockRadius?: boolean
   username?: string | null
+  unityMode?: PreviewUnityMode | null
+  unity?: boolean | null
+  disableLoader?: boolean | null
+  socialEmote?: SocialEmoteAnimation | null
 }

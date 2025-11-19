@@ -313,7 +313,7 @@ export type AvatarInfo = {
         slot: number;
         urn: string;
     }[];
-    snapshots: Snapshots;
+    snapshots?: Snapshots;
 };
 
 // @alpha
@@ -1300,6 +1300,29 @@ export namespace CreditsGoalCompletedEvent {
     validate: ValidateFunction<CreditsGoalCompletedEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "CreditsNewSeasonReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CreditsNewSeasonReminderEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CreditsNewSeasonReminderEvent = BaseEvent & {
+    type: Events.Type.CREDITS_SERVICE;
+    subType: Events.SubType.CreditsService.NEW_SEASON_REMINDER;
+    metadata: {
+        addresses: EthAddress[];
+        seasonName: string;
+        startDate: string;
+        endDate: string;
+    };
+};
+
+// @public (undocumented)
+export namespace CreditsNewSeasonReminderEvent {
+    const // (undocumented)
+    schema: JSONSchema<CreditsNewSeasonReminderEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CreditsNewSeasonReminderEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "CreditsOnDemandEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "CreditsOnDemandEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -1656,7 +1679,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-type Event_2 = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | CreditsOnDemandEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | CommunityStreamingEndedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | UserBannedFromSceneEvent | UserUnbannedFromSceneEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | CommunityOwnershipTransferredEvent | CommunityPostAddedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent | EventCreatedEvent | EventStartedEvent | EventStartsSoonEvent | EventEndedEvent | GovernanceProposalEnactedEvent | GovernanceCoauthorRequestedEvent | GovernancePitchPassedEvent | GovernanceTenderPassedEvent | GovernanceAuthoredProposalFinishedEvent | GovernanceVotingEndedVoterEvent | GovernanceNewCommentOnProposalEvent | GovernanceNewCommentOnProjectUpdatedEvent | GovernanceWhaleVoteEvent | GovernanceVotedOnBehalfEvent | GovernanceCliffEndedEvent | WorldsPermissionGrantedEvent | WorldsPermissionRevokedEvent | WorldsAccessRestoredEvent | WorldsAccessRestrictedEvent | WorldsMissingResourcesEvent;
+type Event_2 = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | CreditsOnDemandEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | CommunityStreamingEndedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | UserBannedFromSceneEvent | UserUnbannedFromSceneEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | CreditsNewSeasonReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | CommunityOwnershipTransferredEvent | CommunityPostAddedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent | EventCreatedEvent | EventStartedEvent | EventStartsSoonEvent | EventEndedEvent | GovernanceProposalEnactedEvent | GovernanceCoauthorRequestedEvent | GovernancePitchPassedEvent | GovernanceTenderPassedEvent | GovernanceAuthoredProposalFinishedEvent | GovernanceVotingEndedVoterEvent | GovernanceNewCommentOnProposalEvent | GovernanceNewCommentOnProjectUpdatedEvent | GovernanceWhaleVoteEvent | GovernanceVotedOnBehalfEvent | GovernanceCliffEndedEvent | WorldsPermissionGrantedEvent | WorldsPermissionRevokedEvent | WorldsAccessRestoredEvent | WorldsAccessRestrictedEvent | WorldsMissingResourcesEvent;
 export { Event_2 as Event }
 
 // Warning: (ae-missing-release-tag) "EventCreatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1825,6 +1848,8 @@ export namespace Events {
             CREDITS_GOAL_COMPLETED = "credits-goal-completed",
             // (undocumented)
             DO_NOT_MISS_OUT_REMINDER = "do-not-miss-out-reminder",
+            // (undocumented)
+            NEW_SEASON_REMINDER = "new-season-reminder",
             // (undocumented)
             ON_DEMAND_CREDITS_GRANTED = "on-demand-credits-granted",
             // (undocumented)
@@ -3331,6 +3356,8 @@ export enum NotificationType {
     // (undocumented)
     CREDITS_GOAL_COMPLETED = "credits_goal_completed",
     // (undocumented)
+    CREDITS_NEW_SEASON_REMINDER = "credits_new_season_reminder",
+    // (undocumented)
     CREDITS_ON_DEMAND_GRANTED = "credits_on_demand_granted",
     // (undocumented)
     CREDITS_REMINDER_CLAIM_CREDITS = "credits_reminder_claim_credits",
@@ -3786,6 +3813,7 @@ export type PreviewConfig = {
     forceRender?: Array<string>;
     unityMode?: PreviewUnityMode;
     unity?: boolean;
+    disableLoader?: boolean;
     socialEmote?: SocialEmoteAnimation;
 };
 
@@ -3964,6 +3992,10 @@ export type PreviewOptions = {
     lockBeta?: boolean;
     lockRadius?: boolean;
     username?: string | null;
+    unityMode?: PreviewUnityMode | null;
+    unity?: boolean | null;
+    disableLoader?: boolean | null;
+    socialEmote?: SocialEmoteAnimation | null;
 };
 
 // Warning: (ae-missing-release-tag) "PreviewProjection" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
