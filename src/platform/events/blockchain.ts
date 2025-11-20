@@ -348,3 +348,37 @@ export namespace CollectionCreatedEvent {
 
   export const validate: ValidateFunction<CollectionCreatedEvent> = generateLazyValidator(schema)
 }
+
+export type TransferReceivedEvent = BaseEvent & {
+  type: Events.Type.BLOCKCHAIN
+  subType: Events.SubType.Blockchain.TRANSFER_RECEIVED
+  metadata: {
+    senderAddress: string
+    receiverAddress: string
+  }
+}
+
+export namespace TransferReceivedEvent {
+  export const schema: JSONSchema<TransferReceivedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.BLOCKCHAIN },
+      subType: { type: 'string', const: Events.SubType.Blockchain.TRANSFER_RECEIVED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          senderAddress: { type: 'string' },
+          receiverAddress: { type: 'string' }
+        },
+        required: ['senderAddress', 'receiverAddress'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<TransferReceivedEvent> = generateLazyValidator(schema)
+}
