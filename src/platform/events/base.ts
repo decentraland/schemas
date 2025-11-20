@@ -5,7 +5,8 @@ import {
   ItemSoldEvent,
   RentalEndedEvent,
   RentalStartedEvent,
-  RoyaltiesEarnedEvent
+  RoyaltiesEarnedEvent,
+  TransferReceivedEvent
 } from './blockchain'
 import { CatalystDeploymentEvent } from './catalyst'
 import {
@@ -84,7 +85,6 @@ import {
   WorldsAccessRestrictedEvent,
   WorldsMissingResourcesEvent
 } from './world'
-import { TransferReceivedEvent } from './transfer'
 
 export namespace Events {
   export enum Type {
@@ -105,8 +105,7 @@ export namespace Events {
     COMMUNITY = 'community',
     CAMERA = 'camera',
     EVENT = 'event',
-    GOVERNANCE = 'governance',
-    TRANSFER = 'transfer'
+    GOVERNANCE = 'governance'
   }
 
   export namespace SubType {
@@ -117,7 +116,8 @@ export namespace Events {
       RENTAL_STARTED = 'land-rental-started',
       ROYALTIES_EARNED = 'royalties-earned',
       COLLECTION_CREATED = 'collection-created',
-      ITEM_PUBLISHED = 'item-published'
+      ITEM_PUBLISHED = 'item-published',
+      TRANSFER_RECEIVED = 'transfer-received'
     }
 
     export enum Marketplace {
@@ -249,10 +249,6 @@ export namespace Events {
       VOTED_ON_BEHALF = 'governance_voted_on_behalf',
       CLIFF_ENDED = 'governance_cliff_ended'
     }
-
-    export enum Transfer {
-      TRANSFER_RECEIVED = 'transfer-received'
-    }
   }
 }
 
@@ -277,7 +273,6 @@ export type BaseEvent = {
     | Events.SubType.Event
     | Events.SubType.Governance
     | Events.SubType.Worlds
-    | Events.SubType.Transfer
   key: string
   timestamp: number
 }

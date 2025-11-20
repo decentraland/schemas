@@ -393,7 +393,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community | Events.SubType.Camera | Events.SubType.Web | Events.SubType.Event | Events.SubType.Governance | Events.SubType.Worlds | Events.SubType.Transfer;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community | Events.SubType.Camera | Events.SubType.Web | Events.SubType.Event | Events.SubType.Governance | Events.SubType.Worlds;
     key: string;
     timestamp: number;
 };
@@ -1676,7 +1676,6 @@ export namespace EthAddress {
     validate: ValidateFunction<EthAddress>;
 }
 
-// Warning: (ae-forgotten-export) The symbol "TransferReceivedEvent" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -1764,7 +1763,9 @@ export namespace Events {
             // (undocumented)
             RENTAL_STARTED = "land-rental-started",
             // (undocumented)
-            ROYALTIES_EARNED = "royalties-earned"
+            ROYALTIES_EARNED = "royalties-earned",
+            // (undocumented)
+            TRANSFER_RECEIVED = "transfer-received"
         }
         // (undocumented)
         export enum Camera {
@@ -1944,11 +1945,6 @@ export namespace Events {
             STREAMING_TIME_EXCEEDED = "streaming-time-exceeded"
         }
         // (undocumented)
-        export enum Transfer {
-            // (undocumented)
-            TRANSFER_RECEIVED = "transfer-received"
-        }
-        // (undocumented)
         export enum Web {
             // (undocumented)
             AUTH_IDENTIFY = "auth-identify"
@@ -2003,8 +1999,6 @@ export namespace Events {
         SOCIAL_SERVICE = "social-service",
         // (undocumented)
         STREAMING = "streaming",
-        // (undocumented)
-        TRANSFER = "transfer",
         // (undocumented)
         WEB = "web",
         // (undocumented)
@@ -5079,6 +5073,27 @@ export enum TradeType {
     PUBLIC_ITEM_ORDER = "public_item_order",
     // (undocumented)
     PUBLIC_NFT_ORDER = "public_nft_order"
+}
+
+// Warning: (ae-missing-release-tag) "TransferReceivedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "TransferReceivedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type TransferReceivedEvent = BaseEvent & {
+    type: Events.Type.BLOCKCHAIN;
+    subType: Events.SubType.Blockchain.TRANSFER_RECEIVED;
+    metadata: {
+        senderAddress: string;
+        address: string;
+    };
+};
+
+// @public (undocumented)
+export namespace TransferReceivedEvent {
+    const // (undocumented)
+    schema: JSONSchema<TransferReceivedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<TransferReceivedEvent>;
 }
 
 // Warning: (tsdoc-missing-deprecation-message) The @deprecated block must include a deprecation message, e.g. describing the recommended alternative
