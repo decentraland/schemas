@@ -354,7 +354,7 @@ export type TransferReceivedEvent = BaseEvent & {
   subType: Events.SubType.Blockchain.TRANSFER_RECEIVED
   metadata: {
     senderAddress: string
-    address: string
+    receiverAddress: string
   }
 }
 
@@ -370,9 +370,9 @@ export namespace TransferReceivedEvent {
         type: 'object',
         properties: {
           senderAddress: { type: 'string' },
-          address: { type: 'string' }
+          receiverAddress: { type: 'string' }
         },
-        required: ['senderAddress', 'address'],
+        required: ['senderAddress', 'receiverAddress'],
         additionalProperties: false
       }
     },

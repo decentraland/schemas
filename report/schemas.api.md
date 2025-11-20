@@ -5084,7 +5084,7 @@ export type TransferReceivedEvent = BaseEvent & {
     subType: Events.SubType.Blockchain.TRANSFER_RECEIVED;
     metadata: {
         senderAddress: string;
-        address: string;
+        receiverAddress: string;
     };
 };
 
