@@ -355,8 +355,7 @@ export type TransferReceivedEvent = BaseEvent & {
   metadata: {
     senderAddress: string
     receiverAddress: string
-    rarity?: string
-    image?: string
+    tokenUri?: string
   }
 }
 
@@ -373,8 +372,7 @@ export namespace TransferReceivedEvent {
         properties: {
           senderAddress: { type: 'string' },
           receiverAddress: { type: 'string' },
-          rarity: { type: 'string', nullable: true },
-          image: { type: 'string', nullable: true }
+          tokenUri: { type: 'string', nullable: true }
         },
         required: ['senderAddress', 'receiverAddress'],
         additionalProperties: false

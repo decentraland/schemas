@@ -5085,8 +5085,7 @@ export type TransferReceivedEvent = BaseEvent & {
     metadata: {
         senderAddress: string;
         receiverAddress: string;
-        rarity?: string;
-        image?: string;
+        tokenUri?: string;
     };
 };
 
