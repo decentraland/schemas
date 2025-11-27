@@ -2017,6 +2017,7 @@ export type EventStartedEvent = BaseEvent & {
         name: string;
         image: string;
         link: string;
+        communityId: string;
         communityThumbnail?: string;
         title: string;
         description: string;
