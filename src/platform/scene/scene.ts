@@ -30,6 +30,7 @@ export type Scene = DisplayableDeployment & {
     navmapThumbnail?: string
   }
   owner?: string
+  creator?: string
   contact?: {
     name?: string
     email?: string
@@ -93,6 +94,11 @@ export namespace Scene {
       owner: {
         type: 'string',
         nullable: true
+      },
+      creator: {
+        type: 'string',
+        nullable: true,
+        description: 'Wallet address of the creator of the scene'
       },
       contact: {
         description: 'Describe different ways of contacting the land owner',
