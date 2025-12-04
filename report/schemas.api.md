@@ -4605,6 +4605,7 @@ export type Scene = DisplayableDeployment & {
         navmapThumbnail?: string;
     };
     owner?: string;
+    creator?: string;
     contact?: {
         name?: string;
         email?: string;
