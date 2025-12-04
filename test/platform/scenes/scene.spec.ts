@@ -129,4 +129,30 @@ describe('Scene tests', () => {
       ).toEqual(true)
     })
   })
+
+  describe('test creator field', () => {
+    it('should return true when creator is not defined', () => {
+      expect(Scene.validate(scene)).toEqual(true)
+    })
+
+    it('should return true when creator is null', () => {
+      expect(Scene.validate(setScene(scene, { creator: null }))).toEqual(true)
+    })
+
+    it('should return true when creator is an empty string', () => {
+      expect(Scene.validate(setScene(scene, { creator: '' }))).toEqual(true)
+    })
+
+    it('should return true when creator is a valid Ethereum address', () => {
+      expect(Scene.validate(setScene(scene, { creator: '0x71c7656ec7ab88b098defb751b7401b5f6d8976f' }))).toEqual(true)
+    })
+
+    it('should return false when creator is a whitespace string', () => {
+      expect(Scene.validate(setScene(scene, { creator: ' ' }))).toEqual(false)
+    })
+
+    it('should return false when creator is an invalid Ethereum address', () => {
+      expect(Scene.validate(setScene(scene, { creator: 'invalid-address' }))).toEqual(false)
+    })
+  })
 })
