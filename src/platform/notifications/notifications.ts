@@ -66,7 +66,8 @@ export enum NotificationType {
   COMMUNITY_POST_ADDED = 'community_post_added',
   USER_BANNED_FROM_SCENE = 'user_banned_from_scene',
   USER_UNBANNED_FROM_SCENE = 'user_unbanned_from_scene',
-  TRANSFER_RECEIVED = 'transfer_received'
+  TRANSFER_RECEIVED = 'transfer_received',
+  TIP_RECEIVED = 'tip_received'
 }
 
 /**

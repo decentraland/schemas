@@ -6,6 +6,7 @@ import {
   RentalEndedEvent,
   RentalStartedEvent,
   RoyaltiesEarnedEvent,
+  TipReceivedEvent,
   TransferReceivedEvent
 } from './blockchain'
 import { CatalystDeploymentEvent } from './catalyst'
@@ -117,7 +118,8 @@ export namespace Events {
       ROYALTIES_EARNED = 'royalties-earned',
       COLLECTION_CREATED = 'collection-created',
       ITEM_PUBLISHED = 'item-published',
-      TRANSFER_RECEIVED = 'transfer-received'
+      TRANSFER_RECEIVED = 'transfer-received',
+      TIP_RECEIVED = 'tip-received'
     }
 
     export enum Marketplace {
@@ -357,3 +359,4 @@ export type Event =
   | WorldsAccessRestrictedEvent
   | WorldsMissingResourcesEvent
   | TransferReceivedEvent
+  | TipReceivedEvent
