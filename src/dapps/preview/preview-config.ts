@@ -54,5 +54,6 @@ export type PreviewConfig = {
   forceRender?: Array<string>
   unityMode?: PreviewUnityMode
   unity?: boolean
+  disableLoader?: boolean
   socialEmote?: SocialEmoteAnimation
 }

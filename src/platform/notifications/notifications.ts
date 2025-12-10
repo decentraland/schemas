@@ -65,7 +65,8 @@ export enum NotificationType {
   COMMUNITY_OWNERSHIP_TRANSFERRED = 'community_ownership_transferred',
   COMMUNITY_POST_ADDED = 'community_post_added',
   USER_BANNED_FROM_SCENE = 'user_banned_from_scene',
-  USER_UNBANNED_FROM_SCENE = 'user_unbanned_from_scene'
+  USER_UNBANNED_FROM_SCENE = 'user_unbanned_from_scene',
+  TRANSFER_RECEIVED = 'transfer_received'
 }
 
 /**
