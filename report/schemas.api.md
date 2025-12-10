@@ -1190,9 +1190,21 @@ export enum ContractNetwork {
     // (undocumented)
     AMOY = "amoy",
     // (undocumented)
+    APE_CALDERA = "ape_caldera",
+    // (undocumented)
+    APE_MAINNET = "ape_mainnet",
+    // (undocumented)
+    BASE_MAINNET = "base_mainnet",
+    // (undocumented)
+    BASE_SEPOLIA = "base_sepolia",
+    // (undocumented)
     MAINNET = "mainnet",
     // (undocumented)
     MATIC = "matic",
+    // (undocumented)
+    MONAD_MAINNET = "monad_mainnet",
+    // (undocumented)
+    MONAD_TESTNET = "monad_testnet",
     // (undocumented)
     SEPOLIA = "sepolia"
 }
@@ -5671,12 +5683,12 @@ export namespace WorldsPermissionRevokedEvent {
 // src/platform/events/web.ts:22:14 - (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
 // src/platform/events/web.ts:22:8 - (tsdoc-undefined-tag) The TSDoc tag "@type" is not defined in this configuration
 // src/platform/item/emote/adr74/emote-data-adr74.ts:8:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "Mapping" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:253:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:253:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:266:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:267:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:267:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:267:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "Mapping" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:268:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:268:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
 // src/platform/item/third-party-props.ts:7:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
 // src/platform/item/third-party-props.ts:9:3 - (ae-incompatible-release-tags) The symbol "mappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/scene/feature-toggles.ts:11:3 - (ae-forgotten-export) The symbol "EnabledDisabled" needs to be exported by the entry point index.d.ts
