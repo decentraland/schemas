@@ -39,6 +39,7 @@ export interface IEmoteController {
   hasSound(): Promise<boolean>
   isSocialEmote(): Promise<boolean>
   getSocialEmoteAnimations: () => Promise<SocialEmoteAnimation[] | null>
+  getPlayingAnimation: () => Promise<SocialEmoteAnimation | null>
   emote: EmoteDefinition | null
   events: Emitter<EmoteEvents>
 }
