@@ -49,7 +49,9 @@ export type PreviewOptions = {
   showSceneBoundaries?: boolean
   showThumbnailBoundaries?: boolean
   peerUrl?: string | null
+  /** @deprecated Use marketplaceServerUrl instead.*/
   nftServerUrl?: string | null
+  marketplaceServerUrl?: string | null
   panning?: boolean
   lockAlpha?: boolean
   lockBeta?: boolean
