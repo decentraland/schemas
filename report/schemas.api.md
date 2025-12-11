@@ -2515,7 +2515,7 @@ export interface IEmoteController {
     // (undocumented)
     getLength(): Promise<number>;
     // (undocumented)
-    getPlayingAnimation: () => Promise<SocialEmoteAnimation | null>;
+    getPlayingSocialEmoteAnimation: () => Promise<SocialEmoteAnimation | null>;
     // Warning: (ae-forgotten-export) The symbol "SocialEmoteAnimation" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
