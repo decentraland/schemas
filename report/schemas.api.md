@@ -2526,6 +2526,8 @@ export interface IEmoteController {
     events: Emitter<EmoteEvents>;
     // (undocumented)
     getLength(): Promise<number>;
+    // (undocumented)
+    getPlayingSocialEmoteAnimation: () => Promise<SocialEmoteAnimation | null>;
     // Warning: (ae-forgotten-export) The symbol "SocialEmoteAnimation" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
@@ -4004,6 +4006,7 @@ export type PreviewOptions = {
     showThumbnailBoundaries?: boolean;
     peerUrl?: string | null;
     nftServerUrl?: string | null;
+    marketplaceServerUrl?: string | null;
     panning?: boolean;
     lockAlpha?: boolean;
     lockBeta?: boolean;
