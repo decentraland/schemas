@@ -384,3 +384,40 @@ export namespace TransferReceivedEvent {
 
   export const validate: ValidateFunction<TransferReceivedEvent> = generateLazyValidator(schema)
 }
+
+export type TipReceivedEvent = BaseEvent & {
+  type: Events.Type.BLOCKCHAIN
+  subType: Events.SubType.Blockchain.TIP_RECEIVED
+  metadata: {
+    senderAddress: string
+    receiverAddress: string
+    amount: string
+    sceneName: string
+  }
+}
+
+export namespace TipReceivedEvent {
+  export const schema: JSONSchema<TipReceivedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.BLOCKCHAIN },
+      subType: { type: 'string', const: Events.SubType.Blockchain.TIP_RECEIVED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          senderAddress: { type: 'string' },
+          receiverAddress: { type: 'string' },
+          amount: { type: 'string' },
+          sceneName: { type: 'string' }
+        },
+        required: ['senderAddress', 'receiverAddress', 'amount', 'sceneName']
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<TipReceivedEvent> = generateLazyValidator(schema)
+}
