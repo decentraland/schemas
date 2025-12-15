@@ -99,7 +99,8 @@ export namespace Scene {
         type: 'string',
         nullable: true,
         description: 'Wallet address of the creator of the scene',
-        pattern: '^(0x[a-fA-F0-9]{40})?$'
+        pattern: '^(0x[a-fA-F0-9]{40})?$',
+        errorMessage: 'Creator must be a valid wallet address'
       },
       contact: {
         description: 'Describe different ways of contacting the land owner',
