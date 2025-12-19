@@ -29,7 +29,8 @@ import {
   CommunityRequestToJoinAcceptedEvent,
   CommunityRequestToJoinReceivedEvent,
   CommunityOwnershipTransferredEvent,
-  CommunityPostAddedEvent
+  CommunityPostAddedEvent,
+  CommunityVoiceChatStartedEvent
 } from './communities'
 import { BidReceivedEvent } from './marketplace'
 import { PhotoPrivacyChangedEvent, PhotoTakenEvent } from './camera'
@@ -221,7 +222,8 @@ export namespace Events {
       REQUEST_TO_JOIN_ACCEPTED = 'community-request-to-join-accepted',
       INVITE_RECEIVED = 'community-invite-received',
       OWNERSHIP_TRANSFERRED = 'community-ownership-transferred',
-      POST_ADDED = 'community-post-added'
+      POST_ADDED = 'community-post-added',
+      VOICE_CHAT_STARTED = 'community-voice-chat-started'
     }
 
     export enum Camera {
@@ -333,6 +335,7 @@ export type Event =
   | CommunityInviteReceivedEvent
   | CommunityOwnershipTransferredEvent
   | CommunityPostAddedEvent
+  | CommunityVoiceChatStartedEvent
   | PhotoTakenEvent
   | PhotoPrivacyChangedEvent
   | AuthIdentifyEvent
