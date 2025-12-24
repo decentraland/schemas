@@ -392,7 +392,6 @@ export type TipReceivedEvent = BaseEvent & {
     senderAddress: string
     receiverAddress: string
     amount: string
-    sceneName: string
   }
 }
 
@@ -410,9 +409,8 @@ export namespace TipReceivedEvent {
           senderAddress: { type: 'string' },
           receiverAddress: { type: 'string' },
           amount: { type: 'string' },
-          sceneName: { type: 'string' }
         },
-        required: ['senderAddress', 'receiverAddress', 'amount', 'sceneName']
+        required: ['senderAddress', 'receiverAddress', 'amount']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
