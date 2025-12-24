@@ -408,7 +408,7 @@ export namespace TipReceivedEvent {
         properties: {
           senderAddress: { type: 'string' },
           receiverAddress: { type: 'string' },
-          amount: { type: 'string' },
+          amount: { type: 'string' }
         },
         required: ['senderAddress', 'receiverAddress', 'amount']
       }
