@@ -395,3 +395,40 @@ export namespace CommunityOwnershipTransferredEvent {
 
   export const validate: ValidateFunction<CommunityOwnershipTransferredEvent> = generateLazyValidator(schema)
 }
+
+export type CommunityVoiceChatStartedEvent = BaseEvent & {
+  type: Events.Type.COMMUNITY
+  subType: Events.SubType.Community.VOICE_CHAT_STARTED
+  metadata: Audience & {
+    communityId: string
+    communityName: string
+    thumbnailUrl: string
+  }
+}
+
+export namespace CommunityVoiceChatStartedEvent {
+  export const schema: JSONSchema<CommunityVoiceChatStartedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.COMMUNITY },
+      subType: { type: 'string', const: Events.SubType.Community.VOICE_CHAT_STARTED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 1 },
+      metadata: {
+        type: 'object',
+        properties: {
+          communityId: { type: 'string' },
+          communityName: { type: 'string' },
+          thumbnailUrl: { type: 'string' },
+          addressesToNotify: { type: 'array', items: { type: 'string' } }
+        },
+        required: ['communityId', 'communityName', 'thumbnailUrl', 'addressesToNotify'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<CommunityVoiceChatStartedEvent> = generateLazyValidator(schema)
+}

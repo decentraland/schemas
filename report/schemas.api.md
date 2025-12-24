@@ -1105,6 +1105,28 @@ export namespace CommunityStreamingEndedEvent {
     validate: ValidateFunction<CommunityStreamingEndedEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "CommunityVoiceChatStartedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "CommunityVoiceChatStartedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type CommunityVoiceChatStartedEvent = BaseEvent & {
+    type: Events.Type.COMMUNITY;
+    subType: Events.SubType.Community.VOICE_CHAT_STARTED;
+    metadata: Audience & {
+        communityId: string;
+        communityName: string;
+        thumbnailUrl: string;
+    };
+};
+
+// @public (undocumented)
+export namespace CommunityVoiceChatStartedEvent {
+    const // (undocumented)
+    schema: JSONSchema<CommunityVoiceChatStartedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<CommunityVoiceChatStartedEvent>;
+}
+
 // Warning: (ae-forgotten-export) The symbol "ContentfulContent" needs to be exported by the entry point index.d.ts
 // Warning: (ae-forgotten-export) The symbol "AssetFields" needs to be exported by the entry point index.d.ts
 // Warning: (ae-missing-release-tag) "ContentfulAsset" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1190,9 +1212,21 @@ export enum ContractNetwork {
     // (undocumented)
     AMOY = "amoy",
     // (undocumented)
+    APE_CALDERA = "ape_caldera",
+    // (undocumented)
+    APE_MAINNET = "ape_mainnet",
+    // (undocumented)
+    BASE_MAINNET = "base_mainnet",
+    // (undocumented)
+    BASE_SEPOLIA = "base_sepolia",
+    // (undocumented)
     MAINNET = "mainnet",
     // (undocumented)
     MATIC = "matic",
+    // (undocumented)
+    MONAD_MAINNET = "monad_mainnet",
+    // (undocumented)
+    MONAD_TESTNET = "monad_testnet",
     // (undocumented)
     SEPOLIA = "sepolia"
 }
@@ -1679,7 +1713,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-type Event_2 = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | CreditsOnDemandEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | CommunityStreamingEndedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | UserBannedFromSceneEvent | UserUnbannedFromSceneEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | CreditsNewSeasonReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | CommunityOwnershipTransferredEvent | CommunityPostAddedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent | EventCreatedEvent | EventStartedEvent | EventStartsSoonEvent | EventEndedEvent | GovernanceProposalEnactedEvent | GovernanceCoauthorRequestedEvent | GovernancePitchPassedEvent | GovernanceTenderPassedEvent | GovernanceAuthoredProposalFinishedEvent | GovernanceVotingEndedVoterEvent | GovernanceNewCommentOnProposalEvent | GovernanceNewCommentOnProjectUpdatedEvent | GovernanceWhaleVoteEvent | GovernanceVotedOnBehalfEvent | GovernanceCliffEndedEvent | WorldsPermissionGrantedEvent | WorldsPermissionRevokedEvent | WorldsAccessRestoredEvent | WorldsAccessRestrictedEvent | WorldsMissingResourcesEvent | TransferReceivedEvent;
+type Event_2 = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | CreditsOnDemandEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | CommunityStreamingEndedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | UserBannedFromSceneEvent | UserUnbannedFromSceneEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | CreditsNewSeasonReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | CommunityOwnershipTransferredEvent | CommunityPostAddedEvent | CommunityVoiceChatStartedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent | EventCreatedEvent | EventStartedEvent | EventStartsSoonEvent | EventEndedEvent | GovernanceProposalEnactedEvent | GovernanceCoauthorRequestedEvent | GovernancePitchPassedEvent | GovernanceTenderPassedEvent | GovernanceAuthoredProposalFinishedEvent | GovernanceVotingEndedVoterEvent | GovernanceNewCommentOnProposalEvent | GovernanceNewCommentOnProjectUpdatedEvent | GovernanceWhaleVoteEvent | GovernanceVotedOnBehalfEvent | GovernanceCliffEndedEvent | WorldsPermissionGrantedEvent | WorldsPermissionRevokedEvent | WorldsAccessRestoredEvent | WorldsAccessRestrictedEvent | WorldsMissingResourcesEvent | TransferReceivedEvent;
 export { Event_2 as Event }
 
 // Warning: (ae-missing-release-tag) "EventCreatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1838,7 +1872,9 @@ export namespace Events {
             // (undocumented)
             REQUEST_TO_JOIN_ACCEPTED = "community-request-to-join-accepted",
             // (undocumented)
-            REQUEST_TO_JOIN_RECEIVED = "community-request-to-join-received"
+            REQUEST_TO_JOIN_RECEIVED = "community-request-to-join-received",
+            // (undocumented)
+            VOICE_CHAT_STARTED = "community-voice-chat-started"
         }
         // (undocumented)
         export enum CreditsService {
@@ -2514,6 +2550,8 @@ export interface IEmoteController {
     events: Emitter<EmoteEvents>;
     // (undocumented)
     getLength(): Promise<number>;
+    // (undocumented)
+    getPlayingSocialEmoteAnimation: () => Promise<SocialEmoteAnimation | null>;
     // Warning: (ae-forgotten-export) The symbol "SocialEmoteAnimation" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
@@ -3329,6 +3367,12 @@ export type NotificationChannelType = {
 };
 
 // @alpha
+export enum NotificationOptOutScope {
+    // (undocumented)
+    COMMUNITY = "community"
+}
+
+// @alpha
 export enum NotificationType {
     // (undocumented)
     BADGE_GRANTED = "badge_granted",
@@ -3356,6 +3400,8 @@ export enum NotificationType {
     COMMUNITY_REQUEST_TO_JOIN_ACCEPTED = "community_request_to_join_accepted",
     // (undocumented)
     COMMUNITY_REQUEST_TO_JOIN_RECEIVED = "community_request_to_join_received",
+    // (undocumented)
+    COMMUNITY_VOICE_CHAT_STARTED = "community_voice_chat_started",
     // (undocumented)
     CREDITS_GOAL_COMPLETED = "credits_goal_completed",
     // (undocumented)
@@ -3992,6 +4038,7 @@ export type PreviewOptions = {
     showThumbnailBoundaries?: boolean;
     peerUrl?: string | null;
     nftServerUrl?: string | null;
+    marketplaceServerUrl?: string | null;
     panning?: boolean;
     lockAlpha?: boolean;
     lockBeta?: boolean;
@@ -5704,12 +5751,12 @@ export namespace WorldsPermissionRevokedEvent {
 // src/platform/events/web.ts:22:14 - (tsdoc-malformed-inline-tag) Expecting a TSDoc tag starting with "{@"
 // src/platform/events/web.ts:22:8 - (tsdoc-undefined-tag) The TSDoc tag "@type" is not defined in this configuration
 // src/platform/item/emote/adr74/emote-data-adr74.ts:8:3 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationADR74" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:251:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:252:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "Mapping" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:253:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
-// src/platform/item/linked-wearable-mappings.ts:253:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:266:3 - (ae-incompatible-release-tags) The symbol "getMappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:267:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:267:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:267:3 - (ae-incompatible-release-tags) The symbol "addMapping" is marked as @public, but its signature references "Mapping" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:268:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractNetwork" which is marked as @alpha
+// src/platform/item/linked-wearable-mappings.ts:268:3 - (ae-incompatible-release-tags) The symbol "includesNft" is marked as @public, but its signature references "ContractAddress" which is marked as @alpha
 // src/platform/item/third-party-props.ts:7:3 - (ae-incompatible-release-tags) The symbol "merkleProof" is marked as @public, but its signature references "MerkleProof" which is marked as @alpha
 // src/platform/item/third-party-props.ts:9:3 - (ae-incompatible-release-tags) The symbol "mappings" is marked as @public, but its signature references "Mappings" which is marked as @alpha
 // src/platform/scene/feature-toggles.ts:11:3 - (ae-forgotten-export) The symbol "EnabledDisabled" needs to be exported by the entry point index.d.ts

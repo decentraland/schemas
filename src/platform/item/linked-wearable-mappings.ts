@@ -24,8 +24,23 @@ export type Mapping = SingleMapping | AnyMapping | RangeMapping | MultipleMappin
  */
 export enum ContractNetwork {
   MAINNET = 'mainnet',
+  // 8453
+  BASE_MAINNET = 'base_mainnet',
+  // 84532
+  BASE_SEPOLIA = 'base_sepolia',
+  // 143
+  MONAD_MAINNET = 'monad_mainnet',
+  // 10143
+  MONAD_TESTNET = 'monad_testnet',
+  // 33139
+  APE_MAINNET = 'ape_mainnet',
+  // 33111
+  APE_CALDERA = 'ape_caldera',
+  // 137
   MATIC = 'matic',
+  // 11155111
   SEPOLIA = 'sepolia',
+  // 80002
   AMOY = 'amoy'
 }
 
