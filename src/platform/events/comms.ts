@@ -9,8 +9,21 @@ export type UserJoinedRoomEvent = BaseEvent & {
     sceneId: string
     userAddress: string
     realmName: string
+    islandName?: string
+    communityId?: string
+    voiceChatId?: string
     isWorld: boolean
+    roomType: RoomType
   }
+}
+
+export enum RoomType {
+  PRIVATE_MESSAGE = 'private-message',
+  VOICE_CHAT = 'voice-chat',
+  COMMUNITY_VOICE_CHAT = 'community-voice-chat',
+  ISLAND_CHAT = 'island-chat',
+  SCENE_ROOM = 'scene-room',
+  WORLD_ROOM = 'world-room'
 }
 
 export namespace UserJoinedRoomEvent {
@@ -28,9 +41,13 @@ export namespace UserJoinedRoomEvent {
           sceneId: { type: 'string' },
           userAddress: { type: 'string' },
           realmName: { type: 'string' },
-          isWorld: { type: 'boolean' }
+          islandName: { type: 'string', nullable: true },
+          communityId: { type: 'string', nullable: true },
+          voiceChatId: { type: 'string', nullable: true },
+          isWorld: { type: 'boolean' },
+          roomType: { type: 'string', enum: Object.values(RoomType) }
         },
-        required: ['parcel', 'sceneId', 'userAddress', 'realmName', 'isWorld']
+        required: ['parcel', 'sceneId', 'userAddress', 'realmName', 'isWorld', 'roomType']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata']
@@ -47,6 +64,10 @@ export type UserLeftRoomEvent = BaseEvent & {
     isWorld: boolean
     userAddress: string
     realmName: string
+    islandName?: string
+    communityId?: string
+    voiceChatId?: string
+    roomType: RoomType
   }
 }
 
@@ -64,9 +85,13 @@ export namespace UserLeftRoomEvent {
           isWorld: { type: 'boolean' },
           sceneId: { type: 'string', nullable: true },
           userAddress: { type: 'string' },
-          realmName: { type: 'string' }
+          realmName: { type: 'string' },
+          islandName: { type: 'string', nullable: true },
+          communityId: { type: 'string', nullable: true },
+          voiceChatId: { type: 'string', nullable: true },
+          roomType: { type: 'string', enum: Object.values(RoomType) }
         },
-        required: ['isWorld', 'userAddress', 'realmName']
+        required: ['isWorld', 'userAddress', 'realmName', 'roomType']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
