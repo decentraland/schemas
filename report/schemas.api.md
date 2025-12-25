@@ -4538,15 +4538,17 @@ export enum RoomType {
     // (undocumented)
     COMMUNITY_VOICE_CHAT = "community-voice-chat",
     // (undocumented)
-    ISLAND_CHAT = "island-chat",
+    ISLAND = "island",
     // (undocumented)
     PRIVATE_MESSAGE = "private-message",
     // (undocumented)
-    SCENE_ROOM = "scene-room",
+    SCENE = "scene",
+    // (undocumented)
+    UNKNOWN = "unknown",
     // (undocumented)
     VOICE_CHAT = "voice-chat",
     // (undocumented)
-    WORLD_ROOM = "world-room"
+    WORLD = "world"
 }
 
 // Warning: (ae-missing-release-tag) "RoyaltiesEarnedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)

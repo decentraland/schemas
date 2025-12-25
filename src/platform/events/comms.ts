@@ -21,9 +21,10 @@ export enum RoomType {
   PRIVATE_MESSAGE = 'private-message',
   VOICE_CHAT = 'voice-chat',
   COMMUNITY_VOICE_CHAT = 'community-voice-chat',
-  ISLAND_CHAT = 'island-chat',
-  SCENE_ROOM = 'scene-room',
-  WORLD_ROOM = 'world-room'
+  ISLAND = 'island',
+  SCENE = 'scene',
+  WORLD = 'world',
+  UNKNOWN = 'unknown'
 }
 
 export namespace UserJoinedRoomEvent {
