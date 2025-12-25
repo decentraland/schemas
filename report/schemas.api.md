@@ -5277,10 +5277,10 @@ export type UserLeftRoomEvent = BaseEvent & {
         isWorld: boolean;
         userAddress: string;
         realmName: string;
+        roomType: RoomType;
         islandName?: string;
         communityId?: string;
         voiceChatId?: string;
-        roomType: RoomType;
     };
 };
 
