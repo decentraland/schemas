@@ -10,7 +10,8 @@ import {
   CommunityRequestToJoinAcceptedEvent,
   CommunityInviteReceivedEvent,
   CommunityOwnershipTransferredEvent,
-  CommunityPostAddedEvent
+  CommunityPostAddedEvent,
+  CommunityVoiceChatStartedEvent
 } from '../../../src'
 
 describe('Community Events tests', () => {
@@ -953,5 +954,90 @@ describe('CommunityOwnershipTransferredEvent', () => {
     }
 
     expect(CommunityPostAddedEvent.validate(event)).toEqual(false)
+  })
+})
+
+describe('CommunityVoiceChatStartedEvent', () => {
+  it('should pass validation with valid data', () => {
+    const event: CommunityVoiceChatStartedEvent = {
+      type: Events.Type.COMMUNITY,
+      subType: Events.SubType.Community.VOICE_CHAT_STARTED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityId: 'community-123',
+        communityName: 'Test Community',
+        thumbnailUrl: 'https://example.com/thumbnail.jpg',
+        addressesToNotify: ['0x1234567890123456789012345678901234567890', '0x0987654321098765432109876543210987654321']
+      }
+    }
+
+    expect(CommunityVoiceChatStartedEvent.validate(event)).toEqual(true)
+    expect(CommunityVoiceChatStartedEvent.validate(null)).toEqual(false)
+    expect(CommunityVoiceChatStartedEvent.validate({})).toEqual(false)
+  })
+
+  it('should fail with missing communityId', () => {
+    const event: any = {
+      type: Events.Type.COMMUNITY,
+      subType: Events.SubType.Community.VOICE_CHAT_STARTED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityName: 'Test Community',
+        thumbnailUrl: 'https://example.com/thumbnail.jpg',
+        addressesToNotify: ['0x1234567890123456789012345678901234567890']
+      }
+    }
+
+    expect(CommunityVoiceChatStartedEvent.validate(event)).toEqual(false)
+  })
+
+  it('should fail with missing communityName', () => {
+    const event: any = {
+      type: Events.Type.COMMUNITY,
+      subType: Events.SubType.Community.VOICE_CHAT_STARTED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityId: 'community-123',
+        thumbnailUrl: 'https://example.com/thumbnail.jpg',
+        addressesToNotify: ['0x1234567890123456789012345678901234567890']
+      }
+    }
+
+    expect(CommunityVoiceChatStartedEvent.validate(event)).toEqual(false)
+  })
+
+  it('should fail with missing thumbnailUrl', () => {
+    const event: any = {
+      type: Events.Type.COMMUNITY,
+      subType: Events.SubType.Community.VOICE_CHAT_STARTED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityId: 'community-123',
+        communityName: 'Test Community',
+        addressesToNotify: ['0x1234567890123456789012345678901234567890']
+      }
+    }
+
+    expect(CommunityVoiceChatStartedEvent.validate(event)).toEqual(false)
+  })
+
+  it('should fail with missing addressesToNotify', () => {
+    const event: any = {
+      type: Events.Type.COMMUNITY,
+      subType: Events.SubType.Community.VOICE_CHAT_STARTED,
+      key: 'key',
+      timestamp: 1,
+      metadata: {
+        communityId: 'community-123',
+        communityName: 'Test Community',
+        thumbnailUrl: 'https://example.com/thumbnail.jpg'
+      }
+    }
+
+    expect(CommunityVoiceChatStartedEvent.validate(event)).toEqual(false)
   })
 })
