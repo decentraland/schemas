@@ -64,10 +64,10 @@ export type UserLeftRoomEvent = BaseEvent & {
     isWorld: boolean
     userAddress: string
     realmName: string
+    roomType: RoomType
     islandName?: string
     communityId?: string
     voiceChatId?: string
-    roomType: RoomType
   }
 }
 
@@ -82,14 +82,14 @@ export namespace UserLeftRoomEvent {
       metadata: {
         type: 'object',
         properties: {
-          isWorld: { type: 'boolean' },
-          sceneId: { type: 'string', nullable: true },
           userAddress: { type: 'string' },
           realmName: { type: 'string' },
+          isWorld: { type: 'boolean' },
+          roomType: { type: 'string', enum: Object.values(RoomType) },
+          sceneId: { type: 'string', nullable: true },
           islandName: { type: 'string', nullable: true },
           communityId: { type: 'string', nullable: true },
-          voiceChatId: { type: 'string', nullable: true },
-          roomType: { type: 'string', enum: Object.values(RoomType) }
+          voiceChatId: { type: 'string', nullable: true }
         },
         required: ['isWorld', 'userAddress', 'realmName', 'roomType']
       }

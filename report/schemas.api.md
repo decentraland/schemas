@@ -4531,6 +4531,24 @@ export namespace RewardInProgressEvent {
     validate: ValidateFunction<RewardInProgressEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "RoomType" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export enum RoomType {
+    // (undocumented)
+    COMMUNITY_VOICE_CHAT = "community-voice-chat",
+    // (undocumented)
+    ISLAND_CHAT = "island-chat",
+    // (undocumented)
+    PRIVATE_MESSAGE = "private-message",
+    // (undocumented)
+    SCENE_ROOM = "scene-room",
+    // (undocumented)
+    VOICE_CHAT = "voice-chat",
+    // (undocumented)
+    WORLD_ROOM = "world-room"
+}
+
 // Warning: (ae-missing-release-tag) "RoyaltiesEarnedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "RoyaltiesEarnedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -5231,7 +5249,11 @@ export type UserJoinedRoomEvent = BaseEvent & {
         sceneId: string;
         userAddress: string;
         realmName: string;
+        islandName?: string;
+        communityId?: string;
+        voiceChatId?: string;
         isWorld: boolean;
+        roomType: RoomType;
     };
 };
 
@@ -5255,6 +5277,10 @@ export type UserLeftRoomEvent = BaseEvent & {
         isWorld: boolean;
         userAddress: string;
         realmName: string;
+        islandName?: string;
+        communityId?: string;
+        voiceChatId?: string;
+        roomType: RoomType;
     };
 };
 

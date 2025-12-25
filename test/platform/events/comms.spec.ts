@@ -1,5 +1,11 @@
 import expect from 'expect'
-import { UserJoinedRoomEvent, Events, UserBannedFromSceneEvent, UserUnbannedFromSceneEvent } from '../../../src'
+import {
+  UserJoinedRoomEvent,
+  Events,
+  UserBannedFromSceneEvent,
+  UserUnbannedFromSceneEvent,
+  RoomType
+} from '../../../src'
 
 describe('Comms Events tests', () => {
   it('UserJoinedRoomEvent static tests must pass', () => {
@@ -13,7 +19,8 @@ describe('Comms Events tests', () => {
         sceneId: 'scene-id',
         userAddress: '0x123',
         realmName: 'realm-name',
-        isWorld: false
+        isWorld: false,
+        roomType: RoomType.PRIVATE_MESSAGE
       }
     }
 
