@@ -9,8 +9,22 @@ export type UserJoinedRoomEvent = BaseEvent & {
     sceneId: string
     userAddress: string
     realmName: string
+    islandName?: string
+    communityId?: string
+    voiceChatId?: string
     isWorld: boolean
+    roomType: RoomType
   }
+}
+
+export enum RoomType {
+  PRIVATE_MESSAGE = 'private-message',
+  VOICE_CHAT = 'voice-chat',
+  COMMUNITY_VOICE_CHAT = 'community-voice-chat',
+  ISLAND = 'island',
+  SCENE = 'scene',
+  WORLD = 'world',
+  UNKNOWN = 'unknown'
 }
 
 export namespace UserJoinedRoomEvent {
@@ -28,9 +42,13 @@ export namespace UserJoinedRoomEvent {
           sceneId: { type: 'string' },
           userAddress: { type: 'string' },
           realmName: { type: 'string' },
-          isWorld: { type: 'boolean' }
+          islandName: { type: 'string', nullable: true },
+          communityId: { type: 'string', nullable: true },
+          voiceChatId: { type: 'string', nullable: true },
+          isWorld: { type: 'boolean' },
+          roomType: { type: 'string', enum: Object.values(RoomType) }
         },
-        required: ['parcel', 'sceneId', 'userAddress', 'realmName', 'isWorld']
+        required: ['parcel', 'sceneId', 'userAddress', 'realmName', 'isWorld', 'roomType']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata']
@@ -47,6 +65,10 @@ export type UserLeftRoomEvent = BaseEvent & {
     isWorld: boolean
     userAddress: string
     realmName: string
+    roomType: RoomType
+    islandName?: string
+    communityId?: string
+    voiceChatId?: string
   }
 }
 
@@ -61,12 +83,16 @@ export namespace UserLeftRoomEvent {
       metadata: {
         type: 'object',
         properties: {
-          isWorld: { type: 'boolean' },
-          sceneId: { type: 'string', nullable: true },
           userAddress: { type: 'string' },
-          realmName: { type: 'string' }
+          realmName: { type: 'string' },
+          isWorld: { type: 'boolean' },
+          roomType: { type: 'string', enum: Object.values(RoomType) },
+          sceneId: { type: 'string', nullable: true },
+          islandName: { type: 'string', nullable: true },
+          communityId: { type: 'string', nullable: true },
+          voiceChatId: { type: 'string', nullable: true }
         },
-        required: ['isWorld', 'userAddress', 'realmName']
+        required: ['isWorld', 'userAddress', 'realmName', 'roomType']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
