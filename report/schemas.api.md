@@ -4167,6 +4167,8 @@ export enum ProviderType {
     // (undocumented)
     NETWORK = "network",
     // (undocumented)
+    THIRDWEB = "thirdweb",
+    // (undocumented)
     WALLET_CONNECT = "wallet_connect",
     // (undocumented)
     WALLET_CONNECT_V2 = "wallet_connect_v2",
