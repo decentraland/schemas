@@ -75,6 +75,87 @@ export type WorldDeploymentEvent = BaseEvent & {
   lods?: string[]
 }
 
+export type WorldScenesUndeploymentEvent = BaseEvent & {
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT
+  metadata: {
+    entityIds: string[]
+  }
+}
+
+export type WorldSpawnCoordinateSetEvent = BaseEvent & {
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET
+  metadata: {
+    name: string
+    oldCoordinate: {
+      x: number
+      y: number
+    } | null
+    newCoordinate: {
+      x: number
+      y: number
+    }
+  }
+}
+
+export namespace WorldSpawnCoordinateSetEvent {
+  export const schema: JSONSchema<WorldSpawnCoordinateSetEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          name: { type: 'string', pattern: '^[a-zA-Z0-9_-]+\\.dcl\\.eth|[a-zA-Z0-9_-]+\\.eth$' },
+          oldCoordinate: {
+            type: 'object',
+            properties: { x: { type: 'number' }, y: { type: 'number' } },
+            required: ['x', 'y'],
+            additionalProperties: false,
+            nullable: true
+          },
+          newCoordinate: {
+            type: 'object',
+            properties: { x: { type: 'number' }, y: { type: 'number' } },
+            required: ['x', 'y'],
+            additionalProperties: false
+          }
+        },
+        required: ['name', 'oldCoordinate', 'newCoordinate'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<WorldSpawnCoordinateSetEvent> = generateLazyValidator(schema)
+}
+
+export namespace WorldScenesUndeploymentEvent {
+  export const schema: JSONSchema<WorldScenesUndeploymentEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: { entityIds: { type: 'array', items: { type: 'string' }, minItems: 1 } },
+        required: ['entityIds'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+}
+
 export namespace WorldDeploymentEvent {
   export const schema: JSONSchema<WorldDeploymentEvent> = {
     type: 'object',
