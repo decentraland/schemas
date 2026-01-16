@@ -5729,7 +5729,11 @@ export type WorldSpawnCoordinateSetEvent = BaseEvent & {
     subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET;
     metadata: {
         name: string;
-        coordinate: {
+        oldCoordinate: {
+            x: number;
+            y: number;
+        } | null;
+        newCoordinate: {
             x: number;
             y: number;
         };
