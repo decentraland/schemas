@@ -88,7 +88,11 @@ export type WorldSpawnCoordinateSetEvent = BaseEvent & {
   subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET
   metadata: {
     name: string
-    coordinate: {
+    oldCoordinate: {
+      x: number
+      y: number
+    } | null
+    newCoordinate: {
       x: number
       y: number
     }
@@ -107,14 +111,21 @@ export namespace WorldSpawnCoordinateSetEvent {
         type: 'object',
         properties: {
           name: { type: 'string', pattern: '^[a-zA-Z0-9_-]+\\.dcl\\.eth|[a-zA-Z0-9_-]+\\.eth$' },
-          coordinate: {
+          oldCoordinate: {
+            type: 'object',
+            properties: { x: { type: 'number' }, y: { type: 'number' } },
+            required: ['x', 'y'],
+            additionalProperties: false,
+            nullable: true
+          },
+          newCoordinate: {
             type: 'object',
             properties: { x: { type: 'number' }, y: { type: 'number' } },
             required: ['x', 'y'],
             additionalProperties: false
           }
         },
-        required: ['name', 'coordinate'],
+        required: ['name', 'oldCoordinate', 'newCoordinate'],
         additionalProperties: false
       }
     },

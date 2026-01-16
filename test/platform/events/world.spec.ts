@@ -14,10 +14,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
           timestamp: 1,
           metadata: {
             name: 'my-world.dcl.eth',
-            coordinate: {
-              x: 10,
-              y: 20
-            }
+            oldCoordinate: { x: 5, y: 10 },
+            newCoordinate: { x: 10, y: 20 }
           }
         }
       })
@@ -38,10 +36,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
           timestamp: 1,
           metadata: {
             name: 'my-world.eth',
-            coordinate: {
-              x: 0,
-              y: 0
-            }
+            oldCoordinate: { x: 0, y: 0 },
+            newCoordinate: { x: 0, y: 0 }
           }
         }
       })
@@ -62,10 +58,30 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
           timestamp: 1,
           metadata: {
             name: 'test_world.dcl.eth',
-            coordinate: {
-              x: -5,
-              y: -10
-            }
+            oldCoordinate: { x: -5, y: -10 },
+            newCoordinate: { x: -15, y: -20 }
+          }
+        }
+      })
+
+      it('should return true', () => {
+        expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(true)
+      })
+    })
+
+    describe('and the oldCoordinate is null', () => {
+      let event: WorldSpawnCoordinateSetEvent
+
+      beforeEach(() => {
+        event = {
+          type: Events.Type.WORLD,
+          subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+          key: 'key',
+          timestamp: 1,
+          metadata: {
+            name: 'my-world.dcl.eth',
+            oldCoordinate: null,
+            newCoordinate: { x: 10, y: 20 }
           }
         }
       })
@@ -111,7 +127,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
   })
 
-  describe('and the coordinate is missing', () => {
+  describe('and the newCoordinate is missing', () => {
     let event: any
 
     beforeEach(() => {
@@ -121,7 +137,29 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
         key: 'key',
         timestamp: 1,
         metadata: {
-          name: 'my-world.dcl.eth'
+          name: 'my-world.dcl.eth',
+          oldCoordinate: { x: 5, y: 10 }
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and the oldCoordinate is missing', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          name: 'my-world.dcl.eth',
+          newCoordinate: { x: 10, y: 20 }
         }
       }
     })
@@ -141,10 +179,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
         key: 'key',
         timestamp: 1,
         metadata: {
-          coordinate: {
-            x: 10,
-            y: 20
-          }
+          oldCoordinate: { x: 5, y: 10 },
+          newCoordinate: { x: 10, y: 20 }
         }
       }
     })
@@ -154,7 +190,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
   })
 
-  describe('and the x coordinate is missing', () => {
+  describe('and the newCoordinate x is missing', () => {
     let event: any
 
     beforeEach(() => {
@@ -165,9 +201,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
         timestamp: 1,
         metadata: {
           name: 'my-world.dcl.eth',
-          coordinate: {
-            y: 20
-          }
+          oldCoordinate: { x: 5, y: 10 },
+          newCoordinate: { y: 20 }
         }
       }
     })
@@ -177,7 +212,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
   })
 
-  describe('and the y coordinate is missing', () => {
+  describe('and the newCoordinate y is missing', () => {
     let event: any
 
     beforeEach(() => {
@@ -188,9 +223,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
         timestamp: 1,
         metadata: {
           name: 'my-world.dcl.eth',
-          coordinate: {
-            x: 10
-          }
+          oldCoordinate: { x: 5, y: 10 },
+          newCoordinate: { x: 10 }
         }
       }
     })
@@ -211,10 +245,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
         timestamp: 1,
         metadata: {
           name: 'invalid-name',
-          coordinate: {
-            x: 10,
-            y: 20
-          }
+          oldCoordinate: { x: 5, y: 10 },
+          newCoordinate: { x: 10, y: 20 }
         }
       }
     })
@@ -235,10 +267,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
         timestamp: 1,
         metadata: {
           name: 'my-world.dcl.eth',
-          coordinate: {
-            x: 10,
-            y: 20
-          },
+          oldCoordinate: { x: 5, y: 10 },
+          newCoordinate: { x: 10, y: 20 },
           extraField: 'not-allowed'
         }
       }
@@ -249,7 +279,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
   })
 
-  describe('and the coordinate has additional properties', () => {
+  describe('and the newCoordinate has additional properties', () => {
     let event: any
 
     beforeEach(() => {
@@ -260,11 +290,30 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
         timestamp: 1,
         metadata: {
           name: 'my-world.dcl.eth',
-          coordinate: {
-            x: 10,
-            y: 20,
-            z: 30
-          }
+          oldCoordinate: { x: 5, y: 10 },
+          newCoordinate: { x: 10, y: 20, z: 30 }
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and the oldCoordinate has additional properties', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          name: 'my-world.dcl.eth',
+          oldCoordinate: { x: 5, y: 10, z: 15 },
+          newCoordinate: { x: 10, y: 20 }
         }
       }
     })
@@ -285,10 +334,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
         timestamp: -1,
         metadata: {
           name: 'my-world.dcl.eth',
-          coordinate: {
-            x: 10,
-            y: 20
-          }
+          oldCoordinate: { x: 5, y: 10 },
+          newCoordinate: { x: 10, y: 20 }
         }
       }
     })
@@ -309,10 +356,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
         timestamp: 1,
         metadata: {
           name: 'my-world.dcl.eth',
-          coordinate: {
-            x: 10,
-            y: 20
-          }
+          oldCoordinate: { x: 5, y: 10 },
+          newCoordinate: { x: 10, y: 20 }
         }
       }
     })
@@ -333,10 +378,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
         timestamp: 1,
         metadata: {
           name: 'my-world.dcl.eth',
-          coordinate: {
-            x: 10,
-            y: 20
-          }
+          oldCoordinate: { x: 5, y: 10 },
+          newCoordinate: { x: 10, y: 20 }
         }
       }
     })
