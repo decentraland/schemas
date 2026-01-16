@@ -1992,6 +1992,10 @@ export namespace Events {
             // (undocumented)
             DEPLOYMENT = "deployment",
             // (undocumented)
+            WORLD_SCENES_UNDEPLOYMENT = "world_scenes_undeployment",
+            // (undocumented)
+            WORLD_SPAWN_COORDINATE_SET = "world_spawn_coordinate_set",
+            // (undocumented)
             WORLDS_ACCESS_RESTORED = "worlds_access_restored",
             // (undocumented)
             WORLDS_ACCESS_RESTRICTED = "worlds_access_restricted",
@@ -5674,6 +5678,24 @@ export namespace WorldsAccessRestrictedEvent {
     validate: ValidateFunction<WorldsAccessRestrictedEvent>;
 }
 
+// Warning: (ae-missing-release-tag) "WorldScenesUndeploymentEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorldScenesUndeploymentEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WorldScenesUndeploymentEvent = BaseEvent & {
+    type: Events.Type.WORLD;
+    subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT;
+    metadata: {
+        entityIds: string[];
+    };
+};
+
+// @public (undocumented)
+export namespace WorldScenesUndeploymentEvent {
+    const // (undocumented)
+    schema: JSONSchema<WorldScenesUndeploymentEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "WorldsMissingResourcesEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "WorldsMissingResourcesEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -5696,6 +5718,30 @@ export namespace WorldsMissingResourcesEvent {
     schema: JSONSchema<WorldsMissingResourcesEvent>;
     const // (undocumented)
     validate: ValidateFunction<WorldsMissingResourcesEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "WorldSpawnCoordinateSetEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorldSpawnCoordinateSetEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WorldSpawnCoordinateSetEvent = BaseEvent & {
+    type: Events.Type.WORLD;
+    subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET;
+    metadata: {
+        name: string;
+        coordinate: {
+            x: number;
+            y: number;
+        };
+    };
+};
+
+// @public (undocumented)
+export namespace WorldSpawnCoordinateSetEvent {
+    const // (undocumented)
+    schema: JSONSchema<WorldSpawnCoordinateSetEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<WorldSpawnCoordinateSetEvent>;
 }
 
 // Warning: (ae-missing-release-tag) "WorldsPermissionGrantedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
