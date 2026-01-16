@@ -77,7 +77,7 @@ export type WorldDeploymentEvent = BaseEvent & {
 
 export type WorldScenesUndeploymentEvent = BaseEvent & {
   type: Events.Type.WORLD
-  subType: Events.SubType.Worlds.WORLD_SCENE_UNDEPLOYMENT
+  subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT
   metadata: {
     entityIds: string[]
   }
@@ -130,7 +130,7 @@ export namespace WorldScenesUndeploymentEvent {
     type: 'object',
     properties: {
       type: { type: 'string', const: Events.Type.WORLD },
-      subType: { type: 'string', const: Events.SubType.Worlds.WORLD_SCENE_UNDEPLOYMENT },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT },
       key: { type: 'string' },
       timestamp: { type: 'number', minimum: 0 },
       metadata: {
