@@ -1655,7 +1655,7 @@ export type Entity = {
     type: EntityType;
     pointers: string[];
     timestamp: number;
-    content: ContentMapping[];
+    content?: ContentMapping[];
     metadata?: any;
 };
 
