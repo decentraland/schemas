@@ -29,7 +29,7 @@ export type Entity = {
   type: EntityType
   pointers: string[]
   timestamp: number
-  content: ContentMapping[]
+  content?: ContentMapping[]
   metadata?: any
 }
 
@@ -43,10 +43,10 @@ export namespace Entity {
       type: { type: 'string' },
       pointers: { type: 'array', items: { type: 'string', minLength: 1 } },
       timestamp: { type: 'number', minimum: 0 },
-      content: { type: 'array', items: ContentMapping.schema },
+      content: { type: 'array', items: ContentMapping.schema, nullable: true },
       metadata: { type: 'object', nullable: true }
     },
-    required: ['version', 'id', 'type', 'pointers', 'timestamp', 'content']
+    required: ['version', 'id', 'type', 'pointers', 'timestamp']
   }
 
   export const validate: ValidateFunction<Entity> = generateLazyValidator(schema)
