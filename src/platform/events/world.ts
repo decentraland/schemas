@@ -99,6 +99,49 @@ export type WorldSpawnCoordinateSetEvent = BaseEvent & {
   }
 }
 
+export type WorldSettingsChangedEvent = BaseEvent & {
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLD_SETTINGS_CHANGED
+  metadata: {
+    title?: string
+    description?: string
+    contentRating?: string
+    skyboxTime?: number | null
+    categories?: string[]
+    singlePlayer?: boolean
+    showInPlaces?: boolean
+    thumbnailUrl?: string
+  }
+}
+
+export namespace WorldSettingsChangedEvent {
+  export const schema: JSONSchema<WorldSettingsChangedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLD_SETTINGS_CHANGED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          title: { type: 'string', nullable: true },
+          description: { type: 'string', nullable: true },
+          contentRating: { type: 'string', nullable: true },
+          skyboxTime: { type: 'number', nullable: true },
+          categories: { type: 'array', items: { type: 'string' }, nullable: true },
+          singlePlayer: { type: 'boolean', nullable: true },
+          showInPlaces: { type: 'boolean', nullable: true },
+          thumbnailUrl: { type: 'string', nullable: true }
+        },
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+}
+
 export namespace WorldSpawnCoordinateSetEvent {
   export const schema: JSONSchema<WorldSpawnCoordinateSetEvent> = {
     type: 'object',
