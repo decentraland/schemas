@@ -1994,6 +1994,8 @@ export namespace Events {
             // (undocumented)
             WORLD_SCENES_UNDEPLOYMENT = "world_scenes_undeployment",
             // (undocumented)
+            WORLD_SETTINGS_CHANGED = "world_settings_changed",
+            // (undocumented)
             WORLD_SPAWN_COORDINATE_SET = "world_spawn_coordinate_set",
             // (undocumented)
             WORLDS_ACCESS_RESTORED = "worlds_access_restored",
@@ -5694,6 +5696,31 @@ export type WorldScenesUndeploymentEvent = BaseEvent & {
 export namespace WorldScenesUndeploymentEvent {
     const // (undocumented)
     schema: JSONSchema<WorldScenesUndeploymentEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "WorldSettingsChangedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorldSettingsChangedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WorldSettingsChangedEvent = BaseEvent & {
+    type: Events.Type.WORLD;
+    subType: Events.SubType.Worlds.WORLD_SETTINGS_CHANGED;
+    metadata: {
+        title?: string;
+        description?: string;
+        contentRating?: string;
+        skyboxTime?: number | null;
+        categories?: string[];
+        singlePlayer?: boolean;
+        showInPlaces?: boolean;
+        thumbnailUrl?: string;
+    };
+};
+
+// @public (undocumented)
+export namespace WorldSettingsChangedEvent {
+    const // (undocumented)
+    schema: JSONSchema<WorldSettingsChangedEvent>;
 }
 
 // Warning: (ae-missing-release-tag) "WorldsMissingResourcesEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
