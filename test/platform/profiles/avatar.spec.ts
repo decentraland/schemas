@@ -175,4 +175,22 @@ describe('Avatar tests', () => {
       expect(Avatar.validate(avatar)).toEqual(false)
     })
   })
+
+  describe('when the avatar contains nameColor', () => {
+    it('and nameColor is a valid color', () => {
+      const avatar: Avatar = {
+        ...AVATAR,
+        nameColor: { r: 1, g: 0.5, b: 0.25, a: 1 }
+      }
+      expect(Avatar.validate(avatar)).toEqual(true)
+    })
+
+    it('and nameColor is an invalid color', () => {
+      const avatar = {
+        ...AVATAR,
+        nameColor: { r: 1.5, g: 0.5, b: 0.25, a: 1 }
+      }
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
 })

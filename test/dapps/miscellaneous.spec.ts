@@ -1,5 +1,5 @@
 import expect from 'expect'
-import { Color3, EthAddress } from '../../src'
+import { Color3, Color4, EthAddress } from '../../src'
 import { testTypeSignature } from '../test-utils'
 
 describe('EthAddress tests', () => {
@@ -27,5 +27,22 @@ describe('Color3 tests', () => {
 
   it('out of range rgb color validation result should be false', () => {
     expect(Color3.validate(invalidColor)).toBeFalsy()
+  })
+})
+
+describe('Color4 tests', () => {
+  const color = { r: 0.2, g: 0.1, b: 0.9, a: 0.5 }
+  const invalidColor = { r: 1.2, g: 1.1, b: 1.9, a: 1.5 }
+
+  testTypeSignature(Color4, color)
+
+  it('static tests must pass', () => {
+    expect(Color4.validate(color)).toEqual(true)
+    expect(Color4.validate(null)).toEqual(false)
+    expect(Color4.validate({})).toEqual(false)
+  })
+
+  it('out of range rgb color validation result should be false', () => {
+    expect(Color4.validate(invalidColor)).toBeFalsy()
   })
 })

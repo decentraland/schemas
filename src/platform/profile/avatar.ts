@@ -1,5 +1,5 @@
 import { WearableCategory } from '../item/wearable/wearable-category'
-import { Color3, EthAddress, IPFSv2, WearableId } from '../../misc'
+import { Color3, Color4, EthAddress, IPFSv2, WearableId } from '../../misc'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 /**
@@ -166,6 +166,7 @@ export namespace Link {
 export type Avatar = {
   userId: string
   name: string
+  nameColor?: Color4
   description: string
   links?: Link[]
   country?: string
@@ -209,6 +210,10 @@ export namespace Avatar {
       },
       name: {
         type: 'string'
+      },
+      nameColor: {
+        ...Color4.schema,
+        nullable: true
       },
       description: {
         type: 'string'
