@@ -262,6 +262,7 @@ export enum AuthLinkType {
 export type Avatar = {
     userId: string;
     name: string;
+    nameColor?: Color3;
     description: string;
     links?: Link[];
     country?: string;

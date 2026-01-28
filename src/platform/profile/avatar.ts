@@ -166,6 +166,7 @@ export namespace Link {
 export type Avatar = {
   userId: string
   name: string
+  nameColor?: Color3
   description: string
   links?: Link[]
   country?: string
@@ -209,6 +210,10 @@ export namespace Avatar {
       },
       name: {
         type: 'string'
+      },
+      nameColor: {
+        ...Color3.schema,
+        nullable: true
       },
       description: {
         type: 'string'
