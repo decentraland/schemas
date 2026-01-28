@@ -1,8 +1,5 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
 
-// Helper to create color component schema
-const colorChannelSchema = { type: 'number' as const, minimum: 0, maximum: 1 }
-
 /**
  * Color3 is a data type that describes a color using R, G and B components
  * @alpha
@@ -18,40 +15,26 @@ export namespace Color3 {
     type: 'object',
     required: ['r', 'g', 'b'],
     properties: {
-      r: colorChannelSchema,
-      g: colorChannelSchema,
-      b: colorChannelSchema
+      r: {
+        type: 'number',
+        minimum: 0,
+        maximum: 1
+      },
+      g: {
+        type: 'number',
+        minimum: 0,
+        maximum: 1
+      },
+      b: {
+        type: 'number',
+        minimum: 0,
+        maximum: 1
+      }
     }
   }
   const schemaValidator: ValidateFunction<Color3> = generateLazyValidator(schema)
   export const validate: ValidateFunction<Color3> = (color: any): color is Color3 => schemaValidator(color)
 }
-
-/**
- * Color4 is a data type that describes a color using R, G, B and A components
- * @alpha
- */
-export type Color4 = { r: number; g: number; b: number; a: number }
-
-/**
- * Color4
- * @alpha
- */
-export namespace Color4 {
-  export const schema: JSONSchema<Color4> = {
-    type: 'object',
-    required: ['r', 'g', 'b', 'a'],
-    properties: {
-      r: colorChannelSchema,
-      g: colorChannelSchema,
-      b: colorChannelSchema,
-      a: colorChannelSchema
-    }
-  }
-  const schemaValidator: ValidateFunction<Color4> = generateLazyValidator(schema)
-  export const validate: ValidateFunction<Color4> = (color: any): color is Color4 => schemaValidator(color)
-}
-
 /**
  * @alpha
  */

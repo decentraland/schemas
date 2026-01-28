@@ -262,7 +262,7 @@ export enum AuthLinkType {
 export type Avatar = {
     userId: string;
     name: string;
-    nameColor?: Color4;
+    nameColor?: Color3;
     description: string;
     links?: Link[];
     country?: string;
@@ -849,22 +849,6 @@ export namespace Color3 {
     schema: JSONSchema<Color3>;
     const // (undocumented)
     validate: ValidateFunction<Color3>;
-}
-
-// @alpha
-export type Color4 = {
-    r: number;
-    g: number;
-    b: number;
-    a: number;
-};
-
-// @alpha
-export namespace Color4 {
-    const // (undocumented)
-    schema: JSONSchema<Color4>;
-    const // (undocumented)
-    validate: ValidateFunction<Color4>;
 }
 
 // Warning: (ae-missing-release-tag) "CommunityDeletedContentViolationEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
