@@ -25,6 +25,7 @@ import {
   CommunityDeletedContentViolationEvent,
   CommunityInviteReceivedEvent,
   CommunityMemberBannedEvent,
+  CommunityMemberLeftEvent,
   CommunityMemberRemovedEvent,
   CommunityRenamedEvent,
   CommunityRequestToJoinAcceptedEvent,
@@ -222,6 +223,7 @@ export namespace Events {
       DELETED_CONTENT_VIOLATION = 'community-deleted-content-violation',
       RENAMED = 'community-renamed',
       MEMBER_BANNED = 'community-member-banned',
+      MEMBER_LEFT = 'community-member-left',
       MEMBER_REMOVED = 'community-member-removed',
       REQUEST_TO_JOIN_RECEIVED = 'community-request-to-join-received',
       REQUEST_TO_JOIN_ACCEPTED = 'community-request-to-join-accepted',
@@ -334,6 +336,7 @@ export type Event =
   | CommunityDeletedContentViolationEvent
   | CommunityRenamedEvent
   | CommunityMemberBannedEvent
+  | CommunityMemberLeftEvent
   | CommunityMemberRemovedEvent
   | CommunityRequestToJoinReceivedEvent
   | CommunityRequestToJoinAcceptedEvent

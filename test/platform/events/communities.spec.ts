@@ -3,6 +3,7 @@ import {
   CommunityDeletedEvent,
   CommunityRenamedEvent,
   CommunityMemberBannedEvent,
+  CommunityMemberLeftEvent,
   CommunityMemberRemovedEvent,
   Events,
   CommunityDeletedContentViolationEvent,
@@ -374,6 +375,53 @@ describe('Community Events tests', () => {
       }
 
       expect(CommunityMemberBannedEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('CommunityMemberLeftEvent', () => {
+    it('should pass validation with valid data', () => {
+      const event: CommunityMemberLeftEvent = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.MEMBER_LEFT,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'community-123',
+          memberAddress: '0x1234567890123456789012345678901234567890'
+        }
+      }
+
+      expect(CommunityMemberLeftEvent.validate(event)).toEqual(true)
+      expect(CommunityMemberLeftEvent.validate(null)).toEqual(false)
+      expect(CommunityMemberLeftEvent.validate({})).toEqual(false)
+    })
+
+    it('should fail with missing id', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.MEMBER_LEFT,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          memberAddress: '0x1234567890123456789012345678901234567890'
+        }
+      }
+
+      expect(CommunityMemberLeftEvent.validate(event)).toEqual(false)
+    })
+
+    it('should fail with missing memberAddress', () => {
+      const event: any = {
+        type: Events.Type.COMMUNITY,
+        subType: Events.SubType.Community.MEMBER_LEFT,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'community-123'
+        }
+      }
+
+      expect(CommunityMemberLeftEvent.validate(event)).toEqual(false)
     })
   })
 
