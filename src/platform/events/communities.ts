@@ -160,6 +160,40 @@ export namespace CommunityMemberBannedEvent {
   export const validate: ValidateFunction<CommunityMemberBannedEvent> = generateLazyValidator(schema)
 }
 
+export type CommunityMemberLeftEvent = BaseEvent & {
+  type: Events.Type.COMMUNITY
+  subType: Events.SubType.Community.MEMBER_LEFT
+  metadata: {
+    id: string
+    memberAddress: EthAddress
+  }
+}
+
+export namespace CommunityMemberLeftEvent {
+  export const schema: JSONSchema<CommunityMemberLeftEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.COMMUNITY },
+      subType: { type: 'string', const: Events.SubType.Community.MEMBER_LEFT },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 1 },
+      metadata: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          memberAddress: { type: 'string' }
+        },
+        required: ['id', 'memberAddress'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<CommunityMemberLeftEvent> = generateLazyValidator(schema)
+}
+
 export type CommunityMemberRemovedEvent = BaseEvent & {
   type: Events.Type.COMMUNITY
   subType: Events.SubType.Community.MEMBER_REMOVED
