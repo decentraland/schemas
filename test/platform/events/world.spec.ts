@@ -1,5 +1,10 @@
 import expect from 'expect'
-import { WorldSpawnCoordinateSetEvent, Events } from '../../../src'
+import {
+  WorldSpawnCoordinateSetEvent,
+  WorldScenesUndeploymentEvent,
+  WorldUndeploymentEvent,
+  Events
+} from '../../../src'
 
 describe('when validating the WorldSpawnCoordinateSetEvent', () => {
   describe('and the event is valid', () => {
@@ -386,6 +391,243 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     it('should return false', () => {
       expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+    })
+  })
+})
+
+describe('when validating the WorldScenesUndeploymentEvent', () => {
+  describe('and the event is valid', () => {
+    let event: WorldScenesUndeploymentEvent
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'my-world.dcl.eth',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          scenes: [
+            { entityId: 'entity-1', baseParcel: '0,0' },
+            { entityId: 'entity-2', baseParcel: '-1,2' }
+          ]
+        }
+      }
+    })
+
+    it('should return true', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(true)
+    })
+  })
+
+  describe('and the event is null', () => {
+    it('should return false', () => {
+      expect(WorldScenesUndeploymentEvent.validate(null)).toEqual(false)
+    })
+  })
+
+  describe('and the metadata is missing', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'key',
+        timestamp: 1
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and the worldName is missing', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          scenes: [{ entityId: 'entity-1', baseParcel: '0,0' }]
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and the scenes array is empty', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          scenes: []
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and a scene is missing baseParcel', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          scenes: [{ entityId: 'entity-1' }]
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and the metadata has additional properties', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          scenes: [{ entityId: 'entity-1', baseParcel: '0,0' }],
+          extraField: 'not-allowed'
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+})
+
+describe('when validating the WorldUndeploymentEvent', () => {
+  describe('and the event is valid', () => {
+    let event: WorldUndeploymentEvent
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT,
+        key: 'my-world.dcl.eth',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth'
+        }
+      }
+    })
+
+    it('should return true', () => {
+      expect(WorldUndeploymentEvent.validate(event)).toEqual(true)
+    })
+  })
+
+  describe('and the event is null', () => {
+    it('should return false', () => {
+      expect(WorldUndeploymentEvent.validate(null)).toEqual(false)
+    })
+  })
+
+  describe('and the metadata is missing', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT,
+        key: 'key',
+        timestamp: 1
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and the worldName is missing', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT,
+        key: 'key',
+        timestamp: 1,
+        metadata: {}
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and the metadata has additional properties', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          extraField: 'not-allowed'
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and the timestamp is negative', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT,
+        key: 'key',
+        timestamp: -1,
+        metadata: {
+          worldName: 'my-world.dcl.eth'
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldUndeploymentEvent.validate(event)).toEqual(false)
     })
   })
 })

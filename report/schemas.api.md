@@ -2022,6 +2022,8 @@ export namespace Events {
             // (undocumented)
             WORLD_SPAWN_COORDINATE_SET = "world_spawn_coordinate_set",
             // (undocumented)
+            WORLD_UNDEPLOYMENT = "world_undeployment",
+            // (undocumented)
             WORLDS_ACCESS_RESTORED = "worlds_access_restored",
             // (undocumented)
             WORLDS_ACCESS_RESTRICTED = "worlds_access_restricted",
@@ -5712,7 +5714,11 @@ export type WorldScenesUndeploymentEvent = BaseEvent & {
     type: Events.Type.WORLD;
     subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT;
     metadata: {
-        entityIds: string[];
+        worldName: string;
+        scenes: Array<{
+            entityId: string;
+            baseParcel: string;
+        }>;
     };
 };
 
@@ -5720,6 +5726,8 @@ export type WorldScenesUndeploymentEvent = BaseEvent & {
 export namespace WorldScenesUndeploymentEvent {
     const // (undocumented)
     schema: JSONSchema<WorldScenesUndeploymentEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<WorldScenesUndeploymentEvent>;
 }
 
 // Warning: (ae-missing-release-tag) "WorldSettingsChangedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -5847,6 +5855,26 @@ export namespace WorldsPermissionRevokedEvent {
     schema: JSONSchema<WorldsPermissionRevokedEvent>;
     const // (undocumented)
     validate: ValidateFunction<WorldsPermissionRevokedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "WorldUndeploymentEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "WorldUndeploymentEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type WorldUndeploymentEvent = BaseEvent & {
+    type: Events.Type.WORLD;
+    subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT;
+    metadata: {
+        worldName: string;
+    };
+};
+
+// @public (undocumented)
+export namespace WorldUndeploymentEvent {
+    const // (undocumented)
+    schema: JSONSchema<WorldUndeploymentEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<WorldUndeploymentEvent>;
 }
 
 // Warnings were encountered during analysis:
