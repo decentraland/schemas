@@ -79,7 +79,19 @@ export type WorldScenesUndeploymentEvent = BaseEvent & {
   type: Events.Type.WORLD
   subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT
   metadata: {
-    entityIds: string[]
+    worldName: string
+    scenes: Array<{
+      entityId: string
+      baseParcel: string
+    }>
+  }
+}
+
+export type WorldUndeploymentEvent = BaseEvent & {
+  type: Events.Type.WORLD
+  subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT
+  metadata: {
+    worldName: string
   }
 }
 
@@ -146,14 +158,55 @@ export namespace WorldScenesUndeploymentEvent {
       timestamp: { type: 'number', minimum: 0 },
       metadata: {
         type: 'object',
-        properties: { entityIds: { type: 'array', items: { type: 'string' }, minItems: 1 } },
-        required: ['entityIds'],
+        properties: {
+          worldName: { type: 'string' },
+          scenes: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                entityId: { type: 'string' },
+                baseParcel: { type: 'string' }
+              },
+              required: ['entityId', 'baseParcel'],
+              additionalProperties: false
+            },
+            minItems: 1
+          }
+        },
+        required: ['worldName', 'scenes'],
         additionalProperties: false
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
     additionalProperties: false
   }
+
+  export const validate: ValidateFunction<WorldScenesUndeploymentEvent> = generateLazyValidator(schema)
+}
+
+export namespace WorldUndeploymentEvent {
+  export const schema: JSONSchema<WorldUndeploymentEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.WORLD },
+      subType: { type: 'string', const: Events.SubType.Worlds.WORLD_UNDEPLOYMENT },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          worldName: { type: 'string' }
+        },
+        required: ['worldName'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<WorldUndeploymentEvent> = generateLazyValidator(schema)
 }
 
 export namespace WorldDeploymentEvent {

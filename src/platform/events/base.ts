@@ -139,6 +139,7 @@ export namespace Events {
     export enum Worlds {
       DEPLOYMENT = 'deployment',
       WORLD_SCENES_UNDEPLOYMENT = 'world_scenes_undeployment',
+      WORLD_UNDEPLOYMENT = 'world_undeployment',
       WORLD_SPAWN_COORDINATE_SET = 'world_spawn_coordinate_set',
       WORLDS_PERMISSION_GRANTED = 'worlds_permission_granted',
       WORLDS_PERMISSION_REVOKED = 'worlds_permission_revoked',
