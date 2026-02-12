@@ -5746,6 +5746,7 @@ export type WorldSettingsChangedEvent = BaseEvent & {
         singlePlayer?: boolean;
         showInPlaces?: boolean;
         thumbnailUrl?: string;
+        accessType?: string;
     };
 };
 

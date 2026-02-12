@@ -123,6 +123,7 @@ export type WorldSettingsChangedEvent = BaseEvent & {
     singlePlayer?: boolean
     showInPlaces?: boolean
     thumbnailUrl?: string
+    accessType?: string
   }
 }
 
@@ -144,7 +145,8 @@ export namespace WorldSettingsChangedEvent {
           categories: { type: 'array', items: { type: 'string' }, nullable: true },
           singlePlayer: { type: 'boolean', nullable: true },
           showInPlaces: { type: 'boolean', nullable: true },
-          thumbnailUrl: { type: 'string', nullable: true }
+          thumbnailUrl: { type: 'string', nullable: true },
+          accessType: { type: 'string', nullable: true }
         },
         additionalProperties: false
       }
