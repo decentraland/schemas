@@ -5738,6 +5738,7 @@ export type WorldSettingsChangedEvent = BaseEvent & {
     type: Events.Type.WORLD;
     subType: Events.SubType.Worlds.WORLD_SETTINGS_CHANGED;
     metadata: {
+        worldName: string;
         title?: string;
         description?: string;
         contentRating?: string;
