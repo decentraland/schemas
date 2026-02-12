@@ -115,6 +115,7 @@ export type WorldSettingsChangedEvent = BaseEvent & {
   type: Events.Type.WORLD
   subType: Events.SubType.Worlds.WORLD_SETTINGS_CHANGED
   metadata: {
+    worldName: string
     title?: string
     description?: string
     contentRating?: string
@@ -138,6 +139,7 @@ export namespace WorldSettingsChangedEvent {
       metadata: {
         type: 'object',
         properties: {
+          worldName: { type: 'string' },
           title: { type: 'string', nullable: true },
           description: { type: 'string', nullable: true },
           contentRating: { type: 'string', nullable: true },
@@ -148,6 +150,7 @@ export namespace WorldSettingsChangedEvent {
           thumbnailUrl: { type: 'string', nullable: true },
           accessType: { type: 'string', nullable: true }
         },
+        required: ['worldName'],
         additionalProperties: false
       }
     },
