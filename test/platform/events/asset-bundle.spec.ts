@@ -10,7 +10,9 @@ import {
 import { generateLazyValidator } from '../../../src/validation/index.js'
 
 const validateAssetBundleConversionFinishedEvent = generateLazyValidator(assetBundleConversionFinishedEventSchema)
-const validateAssetBundleConversionManuallyQueuedEvent = generateLazyValidator(assetBundleConversionManuallyQueuedEventSchema)
+const validateAssetBundleConversionManuallyQueuedEvent = generateLazyValidator(
+  assetBundleConversionManuallyQueuedEventSchema
+)
 
 describe('AssetBundleConversionFinished Events tests', () => {
   it('AssetBundleConversionFinishedEvent static tests must pass', () => {

@@ -19,7 +19,12 @@ import {
   VerticalHeightReachedEvent,
   WalkedDistanceEvent
 } from './client.js'
-import { UserJoinedRoomEvent, UserLeftRoomEvent, UserBannedFromSceneEvent, UserUnbannedFromSceneEvent } from './comms.js'
+import {
+  UserJoinedRoomEvent,
+  UserLeftRoomEvent,
+  UserBannedFromSceneEvent,
+  UserUnbannedFromSceneEvent
+} from './comms.js'
 import {
   CommunityDeletedEvent,
   CommunityDeletedContentViolationEvent,

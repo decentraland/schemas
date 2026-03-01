@@ -1,13 +1,6 @@
 import { expect } from 'expect'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../test-utils'
-import type {
-  AnyMapping,
-  Mappings,
-  MappingsHelper,
-  MultipleMapping,
-  RangeMapping,
-  SingleMapping
-} from '../../../src'
+import type { AnyMapping, Mappings, MappingsHelper, MultipleMapping, RangeMapping, SingleMapping } from '../../../src'
 import {
   ContractNetwork,
   createMappingsHelper,

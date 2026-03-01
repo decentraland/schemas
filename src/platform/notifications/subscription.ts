@@ -1,7 +1,7 @@
 import type { JSONSchema } from '../../validation/types.js'
 import { SubscriptionDetails, subscriptionDetailsSchema } from './subscription-details.js'
 import { EthAddress, ethAddressSchema } from '../../misc/index.js'
-import { Email, emailSchema } from '../../misc/email.js'
+import { emailSchema } from '../../misc/email.js'
 
 /**
  * Subscription returned by the notifications-workers

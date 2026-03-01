@@ -244,7 +244,10 @@ export const mappingsSchema: JSONSchema<Mappings> = {
 /**
  * @alpha
  */
-export const mappingsKeywordDefinitions: KeywordDefinition[] = [rangeMappingFromLteKeyword, mappingsIsMappingsValidKeyword]
+export const mappingsKeywordDefinitions: KeywordDefinition[] = [
+  rangeMappingFromLteKeyword,
+  mappingsIsMappingsValidKeyword
+]
 
 export type MappingsHelper = {
   getMappings(): Mappings

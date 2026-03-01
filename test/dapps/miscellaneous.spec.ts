@@ -1,5 +1,5 @@
 import { expect } from 'expect'
-import { type Color3, color3Schema, type EthAddress, ethAddressSchema } from '../../src'
+import { color3Schema, ethAddressSchema } from '../../src'
 import { testTypeSignature } from '../test-utils'
 import { generateLazyValidator } from '../../src/validation/index.js'
 

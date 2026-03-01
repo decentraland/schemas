@@ -17,7 +17,9 @@ import {
 } from '../../../src'
 import { generateLazyValidator } from '../../../src/validation/index.js'
 
-const validateCampaignGasPriceHigherThanExpectedEvent = generateLazyValidator(campaignGasPriceHigherThanExpectedEventSchema)
+const validateCampaignGasPriceHigherThanExpectedEvent = generateLazyValidator(
+  campaignGasPriceHigherThanExpectedEventSchema
+)
 const validateCampaignOutOfFundsEvent = generateLazyValidator(campaignOutOfFundsEventSchema)
 const validateCampaignOutOfStockEvent = generateLazyValidator(campaignOutOfStockEventSchema)
 const validateRewardAssignedEvent = generateLazyValidator(rewardAssignedEventSchema)

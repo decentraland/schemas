@@ -94,19 +94,22 @@ describe('Wearable representation tests', () => {
 
   testTypeSignature({ schema: wearableSchema, keywordDefinitions: wearableKeywordDefinitions }, wearable)
   testTypeSignature({ schema: wearableSchema, keywordDefinitions: wearableKeywordDefinitions }, thirdPartyWearable)
-  testTypeSignature({ schema: wearableSchema, keywordDefinitions: wearableKeywordDefinitions }, {
-    ...baseWearable,
-    ...thirdParty,
-    mappings: {
-      [ContractNetwork.MAINNET]: {
-        '0x1234567890123456789012345678901234567890': [
-          {
-            type: MappingType.ANY
-          }
-        ]
+  testTypeSignature(
+    { schema: wearableSchema, keywordDefinitions: wearableKeywordDefinitions },
+    {
+      ...baseWearable,
+      ...thirdParty,
+      mappings: {
+        [ContractNetwork.MAINNET]: {
+          '0x1234567890123456789012345678901234567890': [
+            {
+              type: MappingType.ANY
+            }
+          ]
+        }
       }
     }
-  })
+  )
 
   it('static base wearable must puss', () => {
     expect(

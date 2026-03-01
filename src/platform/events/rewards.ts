@@ -107,11 +107,12 @@ export const campaignOutOfFundsEventSchema: JSONSchema<CampaignOutOfFundsEvent> 
   campaignEventMetadataSchema
 )
 
-export const campaignGasPriceHigherThanExpectedEventSchema: JSONSchema<CampaignGasPriceHigherThanExpectedEvent> = createEventSchema(
-  EventType.REWARDS,
-  EventSubTypeRewards.CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED,
-  campaignEventMetadataSchema
-)
+export const campaignGasPriceHigherThanExpectedEventSchema: JSONSchema<CampaignGasPriceHigherThanExpectedEvent> =
+  createEventSchema(
+    EventType.REWARDS,
+    EventSubTypeRewards.CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED,
+    campaignEventMetadataSchema
+  )
 
 export const campaignOutOfStockEventSchema: JSONSchema<CampaignOutOfStockEvent> = createEventSchema(
   EventType.REWARDS,

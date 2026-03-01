@@ -1,9 +1,8 @@
 import { Rarity, raritySchema } from '../../dapps/rarity.js'
-import { WearableCategory, wearableCategorySchema } from '../../platform/item/wearable/wearable-category.js'
-import { WearableRepresentation, wearableRepresentationSchema } from '../../platform/item/wearable/representation.js'
+import { wearableCategorySchema } from '../../platform/item/wearable/wearable-category.js'
+import { wearableRepresentationSchema } from '../../platform/item/wearable/representation.js'
 import { Wearable } from '../../platform/item/wearable/wearable.js'
 import type { JSONSchema } from '../../validation/types.js'
-import { HideableWearableCategory } from '../../platform/index.js'
 import { hideableWearableCategorySchema } from '../../platform/item/wearable/hideable-category.js'
 
 /**

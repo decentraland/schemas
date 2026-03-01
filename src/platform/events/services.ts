@@ -1,6 +1,13 @@
 import { EthAddress } from '../../misc/index.js'
 import type { JSONSchema } from '../../validation/types.js'
-import { BaseEvent, EventType, EventSubTypeBadge, EventSubTypeAssetBundle, EventSubTypeSocialService, EventSubTypeCreditsService } from './base.js'
+import {
+  BaseEvent,
+  EventType,
+  EventSubTypeBadge,
+  EventSubTypeAssetBundle,
+  EventSubTypeSocialService,
+  EventSubTypeCreditsService
+} from './base.js'
 
 export type BadgeGrantedEvent = BaseEvent & {
   type: EventType.BADGE

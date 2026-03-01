@@ -1,7 +1,7 @@
 import type { JSONSchema, KeywordDefinition } from '../../validation/types.js'
 import { MerkleProof, merkleProofSchema } from '../merkle-tree/index.js'
 import { BaseItem } from './base-item.js'
-import { Mappings, RangeMapping, mappingsSchema } from './linked-wearable-mappings.js'
+import { Mappings, mappingsSchema } from './linked-wearable-mappings.js'
 
 export type ThirdPartyProps = {
   merkleProof: MerkleProof

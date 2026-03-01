@@ -1,5 +1,13 @@
 import { WearableCategory, wearableCategorySchema } from '../item/wearable/wearable-category.js'
-import { Color3, EthAddress, IPFSv2, WearableId, ipfsv2Schema, color3Schema, ethAddressSchema } from '../../misc/index.js'
+import {
+  Color3,
+  EthAddress,
+  IPFSv2,
+  WearableId,
+  ipfsv2Schema,
+  color3Schema,
+  ethAddressSchema
+} from '../../misc/index.js'
 import type { JSONSchema } from '../../validation/types.js'
 
 /**

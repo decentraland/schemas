@@ -5,7 +5,11 @@ import { BaseItem, baseItemProperties, isBaseAvatar, requiredBaseItemProps } fro
 import { StandardProps, standardProperties } from '../standard-props.js'
 import { isThirdParty, ThirdPartyProps, schema as thirdPartyPropsSchema } from '../third-party-props.js'
 import { HideableWearableCategory, hideableWearableCategorySchema } from './hideable-category.js'
-import { ContractNetwork, rangeMappingFromLteKeyword, mappingsIsMappingsValidKeyword } from '../linked-wearable-mappings.js'
+import {
+  ContractNetwork,
+  rangeMappingFromLteKeyword,
+  mappingsIsMappingsValidKeyword
+} from '../linked-wearable-mappings.js'
 
 /** @alpha */
 export type Wearable = BaseItem & {

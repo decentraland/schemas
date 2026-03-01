@@ -183,11 +183,8 @@ export const governanceTenderPassedEventSchema: JSONSchema<GovernanceTenderPasse
   governanceMetadataSchema
 )
 
-export const governanceAuthoredProposalFinishedEventSchema: JSONSchema<GovernanceAuthoredProposalFinishedEvent> = createEventSchema(
-  EventType.GOVERNANCE,
-  EventSubTypeGovernance.AUTHORED_PROPOSAL_FINISHED,
-  governanceMetadataSchema
-)
+export const governanceAuthoredProposalFinishedEventSchema: JSONSchema<GovernanceAuthoredProposalFinishedEvent> =
+  createEventSchema(EventType.GOVERNANCE, EventSubTypeGovernance.AUTHORED_PROPOSAL_FINISHED, governanceMetadataSchema)
 
 export const governanceVotingEndedVoterEventSchema: JSONSchema<GovernanceVotingEndedVoterEvent> = createEventSchema(
   EventType.GOVERNANCE,
@@ -195,17 +192,15 @@ export const governanceVotingEndedVoterEventSchema: JSONSchema<GovernanceVotingE
   governanceMetadataSchema
 )
 
-export const governanceNewCommentOnProposalEventSchema: JSONSchema<GovernanceNewCommentOnProposalEvent> = createEventSchema(
-  EventType.GOVERNANCE,
-  EventSubTypeGovernance.NEW_COMMENT_ON_PROPOSAL,
-  governanceMetadataSchema
-)
+export const governanceNewCommentOnProposalEventSchema: JSONSchema<GovernanceNewCommentOnProposalEvent> =
+  createEventSchema(EventType.GOVERNANCE, EventSubTypeGovernance.NEW_COMMENT_ON_PROPOSAL, governanceMetadataSchema)
 
-export const governanceNewCommentOnProjectUpdatedEventSchema: JSONSchema<GovernanceNewCommentOnProjectUpdatedEvent> = createEventSchema(
-  EventType.GOVERNANCE,
-  EventSubTypeGovernance.NEW_COMMENT_ON_PROJECT_UPDATED,
-  governanceMetadataSchema
-)
+export const governanceNewCommentOnProjectUpdatedEventSchema: JSONSchema<GovernanceNewCommentOnProjectUpdatedEvent> =
+  createEventSchema(
+    EventType.GOVERNANCE,
+    EventSubTypeGovernance.NEW_COMMENT_ON_PROJECT_UPDATED,
+    governanceMetadataSchema
+  )
 
 export const governanceWhaleVoteEventSchema: JSONSchema<GovernanceWhaleVoteEvent> = createEventSchema(
   EventType.GOVERNANCE,

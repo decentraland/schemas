@@ -1,10 +1,5 @@
 import { expect } from 'expect'
-import {
-  BidReceivedEvent,
-  EventType,
-  EventSubTypeMarketplace,
-  bidReceivedEventSchema
-} from '../../../src'
+import { BidReceivedEvent, EventType, EventSubTypeMarketplace, bidReceivedEventSchema } from '../../../src'
 import { generateLazyValidator } from '../../../src/validation/index.js'
 
 const validateBidReceivedEvent = generateLazyValidator(bidReceivedEventSchema)

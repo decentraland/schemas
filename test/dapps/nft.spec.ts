@@ -1,5 +1,15 @@
 import { expect } from 'expect'
-import { BodyShape, ChainId, Network, type NFT, nftSchema, NFTCategory, Rarity, WearableCategory, EmoteCategory } from '../../src'
+import {
+  BodyShape,
+  ChainId,
+  Network,
+  type NFT,
+  nftSchema,
+  NFTCategory,
+  Rarity,
+  WearableCategory,
+  EmoteCategory
+} from '../../src'
 import { testTypeSignature } from '../test-utils'
 import { generateLazyValidator } from '../../src/validation/index.js'
 

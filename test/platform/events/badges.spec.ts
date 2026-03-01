@@ -1,10 +1,5 @@
 import { expect } from 'expect'
-import {
-  BadgeGrantedEvent,
-  EventType,
-  EventSubTypeBadge,
-  badgeGrantedEventSchema
-} from '../../../src'
+import { BadgeGrantedEvent, EventType, EventSubTypeBadge, badgeGrantedEventSchema } from '../../../src'
 import { generateLazyValidator } from '../../../src/validation/index.js'
 
 const validateBadgeGrantedEvent = generateLazyValidator(badgeGrantedEventSchema)

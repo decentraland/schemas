@@ -1,10 +1,5 @@
 import { expect } from 'expect'
 import {
-  StreamingKeyResetEvent,
-  StreamingKeyRevokeEvent,
-  StreamingKeyExpiredEvent,
-  StreamingTimeExceededEvent,
-  StreamingPlaceUpdatedEvent,
   EventType,
   EventSubTypeStreaming,
   CommunityStreamingEndedEvent,

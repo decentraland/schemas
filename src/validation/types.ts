@@ -25,6 +25,8 @@ export interface ValidateFunction<T = unknown> {
  * This type alias exist only to avoid accidental refactors involving names of ajv
  * @public
  */
+// T is an intentional phantom type parameter for compile-time type safety
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type JSONSchema<T = unknown> = Record<string, any>
 
 /**
@@ -43,7 +45,7 @@ export type AbstractTypedSchema<T> = {
 export interface KeywordDefinition {
   keyword: string
   type?: string
-  validate?: Function
+  validate?: (...args: any[]) => boolean
   errors?: boolean
   [key: string]: any
 }
