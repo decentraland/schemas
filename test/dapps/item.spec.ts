@@ -1,6 +1,9 @@
-import expect from 'expect'
-import { BodyShape, ChainId, Item, Network, NFTCategory, Rarity, WearableCategory } from '../../src'
+import { expect } from 'expect'
+import { BodyShape, ChainId, type Item, itemSchema, Network, NFTCategory, Rarity, WearableCategory } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateItem = generateLazyValidator(itemSchema)
 
 describe('Item tests', () => {
   describe('wearable', () => {
@@ -38,12 +41,12 @@ describe('Item tests', () => {
       urn: 'urn:decentraland:matic:collections-v2:0x0699189ac32c8e404d900786317c93c23fe6f209:0'
     }
 
-    testTypeSignature(Item, wearable)
+    testTypeSignature({ schema: itemSchema }, wearable)
 
     it('static tests must pass', () => {
-      expect(Item.validate(wearable)).toEqual(true)
-      expect(Item.validate(null)).toEqual(false)
-      expect(Item.validate({})).toEqual(false)
+      expect(validateItem(wearable)).toEqual(true)
+      expect(validateItem(null)).toEqual(false)
+      expect(validateItem({})).toEqual(false)
     })
   })
 })

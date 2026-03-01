@@ -1,5 +1,5 @@
-import { JSONSchema } from '../../validation'
-import { BaseEvent } from './base'
+import type { JSONSchema } from '../../validation/types.js'
+import { BaseEvent } from './base.js'
 
 type BaseEventWithMetadata<M> = BaseEvent & {
   metadata: M

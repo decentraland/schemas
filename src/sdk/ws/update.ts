@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
+import type { JSONSchema } from '../../validation/types.js'
 
 /** @public @deprecated */
 export const UPDATE = 'update'
@@ -9,17 +9,13 @@ export type Update = {
 }
 
 /** @public @deprecated */
-export namespace Update {
-  export const schema: JSONSchema<Update> = {
-    type: 'object',
-    properties: {
-      type: {
-        type: 'string',
-        enum: [UPDATE]
-      }
-    },
-    required: ['type']
-  }
-
-  export const validate: ValidateFunction<Update> = generateLazyValidator(schema)
+export const updateSchema: JSONSchema<Update> = {
+  type: 'object',
+  properties: {
+    type: {
+      type: 'string',
+      enum: [UPDATE]
+    }
+  },
+  required: ['type']
 }

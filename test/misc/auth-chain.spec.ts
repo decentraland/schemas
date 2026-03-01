@@ -1,6 +1,10 @@
-import expect from 'expect'
-import { AuthChain, AuthLinkType } from '../../src'
+import { expect } from 'expect'
+import type { AuthChain } from '../../src'
+import { authChainSchema, AuthLinkType } from '../../src'
 import { expectValidationFailureWithErrors } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateAuthChain = generateLazyValidator(authChainSchema)
 describe('auth-chain', () => {
   it('valid with empty string signature for SIGNER', () => {
     const chain: AuthChain = [
@@ -23,7 +27,7 @@ describe('auth-chain', () => {
           '0xd73b0315dd39080d9b6d1a613a56732a75d68d2cef2a38f3b7be12bdab3c59830c92c6bdf394dcb47ba1aa736e0338cf9112c9eee59dbe4109b8af6a993b12d71b'
       }
     ]
-    expect(AuthChain.validate(chain)).toEqual(true)
+    expect(validateAuthChain(chain)).toEqual(true)
   })
 
   it('valid with no signature for SIGNER', () => {
@@ -46,10 +50,10 @@ describe('auth-chain', () => {
           '0xd73b0315dd39080d9b6d1a613a56732a75d68d2cef2a38f3b7be12bdab3c59830c92c6bdf394dcb47ba1aa736e0338cf9112c9eee59dbe4109b8af6a993b12d71b'
       }
     ]
-    expect(AuthChain.validate(chain)).toEqual(true)
+    expect(validateAuthChain(chain)).toEqual(true)
   })
   it('invalid', () => {
-    expect(AuthChain.validate([])).toEqual(false)
+    expect(validateAuthChain([])).toEqual(false)
   })
 
   it('invalid - signature must be present if type is different from SIGNER', () => {
@@ -70,7 +74,7 @@ describe('auth-chain', () => {
           '0xd73b0315dd39080d9b6d1a613a56732a75d68d2cef2a38f3b7be12bdab3c59830c92c6bdf394dcb47ba1aa736e0338cf9112c9eee59dbe4109b8af6a993b12d71b'
       }
     ]
-    expectValidationFailureWithErrors(AuthChain.validate, chain, ["must have required property 'signature'"])
+    expectValidationFailureWithErrors(validateAuthChain, chain, ["must have required property 'signature'"])
   })
 
   it(`invalid - if signature present in SIGNER, it must be ''`, () => {
@@ -94,6 +98,6 @@ describe('auth-chain', () => {
           '0xd73b0315dd39080d9b6d1a613a56732a75d68d2cef2a38f3b7be12bdab3c59830c92c6bdf394dcb47ba1aa736e0338cf9112c9eee59dbe4109b8af6a993b12d71b'
       }
     ]
-    expectValidationFailureWithErrors(AuthChain.validate, chain, ['must be equal to constant'])
+    expectValidationFailureWithErrors(validateAuthChain, chain, ['must be equal to constant'])
   })
 })

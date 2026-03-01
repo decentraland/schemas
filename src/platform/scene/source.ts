@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
+import type { JSONSchema } from '../../validation/types.js'
 
 /** @alpha */
 export type Source = {
@@ -12,55 +12,51 @@ export type Source = {
 }
 
 /** @alpha */
-export namespace Source {
-  export const schema: JSONSchema<Source> = {
-    type: 'object',
-    properties: {
-      version: {
-        type: 'number',
-        nullable: true
-      },
-      origin: {
-        type: 'string'
-      },
-      projectId: {
-        type: 'string'
-      },
-      point: {
-        type: 'object',
-        properties: {
-          x: { type: 'integer' },
-          y: { type: 'integer' }
-        },
-        nullable: true,
-        required: ['x', 'y']
-      },
-      rotation: {
-        type: 'string',
-        enum: ['north', 'east', 'south', 'west'],
-        nullable: true
-      },
-      layout: {
-        type: 'object',
-        properties: {
-          rows: {
-            type: 'integer'
-          },
-          cols: {
-            type: 'integer'
-          }
-        },
-        nullable: true,
-        required: ['rows', 'cols']
-      },
-      isEmpty: {
-        type: 'boolean',
-        nullable: true
-      }
+export const sourceSchema: JSONSchema<Source> = {
+  type: 'object',
+  properties: {
+    version: {
+      type: 'number',
+      nullable: true
     },
-    additionalProperties: true,
-    required: ['origin', 'projectId']
-  }
-
-  export const validate: ValidateFunction<Source> = generateLazyValidator(schema)
+    origin: {
+      type: 'string'
+    },
+    projectId: {
+      type: 'string'
+    },
+    point: {
+      type: 'object',
+      properties: {
+        x: { type: 'integer' },
+        y: { type: 'integer' }
+      },
+      nullable: true,
+      required: ['x', 'y']
+    },
+    rotation: {
+      type: 'string',
+      enum: ['north', 'east', 'south', 'west'],
+      nullable: true
+    },
+    layout: {
+      type: 'object',
+      properties: {
+        rows: {
+          type: 'integer'
+        },
+        cols: {
+          type: 'integer'
+        }
+      },
+      nullable: true,
+      required: ['rows', 'cols']
+    },
+    isEmpty: {
+      type: 'boolean',
+      nullable: true
+    }
+  },
+  additionalProperties: true,
+  required: ['origin', 'projectId']
 }

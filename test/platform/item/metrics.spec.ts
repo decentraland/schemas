@@ -1,6 +1,10 @@
-import expect from 'expect'
-import { Metrics } from '../../../src'
+import { expect } from 'expect'
+import type { Metrics } from '../../../src'
+import { metricsSchema } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateMetrics = generateLazyValidator(metricsSchema)
 
 describe('Metrics tests', () => {
   const metrics: Metrics = {
@@ -12,11 +16,11 @@ describe('Metrics tests', () => {
     entities: 60
   }
 
-  testTypeSignature(Metrics, metrics)
+  testTypeSignature({ schema: metricsSchema }, metrics)
 
   it('static tests must pass', () => {
-    expect(Metrics.validate(metrics)).toEqual(true)
-    expect(Metrics.validate(null)).toEqual(false)
-    expect(Metrics.validate({})).toEqual(false)
+    expect(validateMetrics(metrics)).toEqual(true)
+    expect(validateMetrics(null)).toEqual(false)
+    expect(validateMetrics({})).toEqual(false)
   })
 })

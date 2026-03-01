@@ -1,6 +1,9 @@
-import expect from 'expect'
-import { Store } from '../../src'
+import { expect } from 'expect'
+import { type Store, storeSchema } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateStore = generateLazyValidator(storeSchema)
 
 describe('Contract tests', () => {
   const store: Store = {
@@ -22,11 +25,11 @@ describe('Contract tests', () => {
     version: 1
   }
 
-  testTypeSignature(Store, store)
+  testTypeSignature({ schema: storeSchema }, store)
 
   it('static tests must pass', () => {
-    expect(Store.validate(store)).toEqual(true)
-    expect(Store.validate(null)).toEqual(false)
-    expect(Store.validate({})).toEqual(false)
+    expect(validateStore(store)).toEqual(true)
+    expect(validateStore(null)).toEqual(false)
+    expect(validateStore({})).toEqual(false)
   })
 })

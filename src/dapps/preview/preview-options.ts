@@ -1,12 +1,12 @@
-import { BodyShape } from '../../platform/item'
-import { EmoteWithBlobs } from './emote-with-blobs'
-import { PreviewCamera } from './preview-camera'
-import { PreviewUnityMode } from './preview-config'
-import { PreviewEmote } from './preview-emote'
-import { PreviewProjection } from './preview-projection'
-import { PreviewType } from './preview-type'
-import { SocialEmoteAnimation } from './social-emote-animation'
-import { WearableWithBlobs } from './wearable-with-blobs'
+import { BodyShape } from '../../platform/item/index.js'
+import { EmoteWithBlobs } from './emote-with-blobs.js'
+import { PreviewCamera } from './preview-camera.js'
+import { PreviewUnityMode } from './preview-config.js'
+import { PreviewEmote } from './preview-emote.js'
+import { PreviewProjection } from './preview-projection.js'
+import { PreviewType } from './preview-type.js'
+import { SocialEmoteAnimation } from './social-emote-animation.js'
+import { WearableWithBlobs } from './wearable-with-blobs.js'
 
 /** @alpha */
 export type PreviewOptions = {

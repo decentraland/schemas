@@ -1,20 +1,37 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import {
   BidAcceptedEvent,
   CollectionCreatedEvent,
-  Events,
+  EventType,
+  EventSubTypeBlockchain,
   ItemPublishedEvent,
   ItemSoldEvent,
   RentalEndedEvent,
   RentalStartedEvent,
-  RoyaltiesEarnedEvent
+  RoyaltiesEarnedEvent,
+  bidAcceptedEventSchema,
+  collectionCreatedEventSchema,
+  itemPublishedEventSchema,
+  itemSoldEventSchema,
+  rentalEndedEventSchema,
+  rentalStartedEventSchema,
+  royaltiesEarnedEventSchema
 } from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateBidAcceptedEvent = generateLazyValidator(bidAcceptedEventSchema)
+const validateCollectionCreatedEvent = generateLazyValidator(collectionCreatedEventSchema)
+const validateItemPublishedEvent = generateLazyValidator(itemPublishedEventSchema)
+const validateItemSoldEvent = generateLazyValidator(itemSoldEventSchema)
+const validateRentalEndedEvent = generateLazyValidator(rentalEndedEventSchema)
+const validateRentalStartedEvent = generateLazyValidator(rentalStartedEventSchema)
+const validateRoyaltiesEarnedEvent = generateLazyValidator(royaltiesEarnedEventSchema)
 
 describe('Blockchain Events tests', () => {
   it('BidAcceptedEvent static tests must pass', () => {
     const event: BidAcceptedEvent = {
-      type: Events.Type.BLOCKCHAIN,
-      subType: Events.SubType.Blockchain.BID_ACCEPTED,
+      type: EventType.BLOCKCHAIN,
+      subType: EventSubTypeBlockchain.BID_ACCEPTED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -32,15 +49,15 @@ describe('Blockchain Events tests', () => {
       }
     }
 
-    expect(BidAcceptedEvent.validate(event)).toEqual(true)
-    expect(BidAcceptedEvent.validate(null)).toEqual(false)
-    expect(BidAcceptedEvent.validate({})).toEqual(false)
+    expect(validateBidAcceptedEvent(event)).toEqual(true)
+    expect(validateBidAcceptedEvent(null)).toEqual(false)
+    expect(validateBidAcceptedEvent({})).toEqual(false)
   })
 
   it('ItemSold static tests must pass', () => {
     const event: ItemSoldEvent = {
-      type: Events.Type.BLOCKCHAIN,
-      subType: Events.SubType.Blockchain.ITEM_SOLD,
+      type: EventType.BLOCKCHAIN,
+      subType: EventSubTypeBlockchain.ITEM_SOLD,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -59,15 +76,15 @@ describe('Blockchain Events tests', () => {
       }
     }
 
-    expect(ItemSoldEvent.validate(event)).toEqual(true)
-    expect(ItemSoldEvent.validate(null)).toEqual(false)
-    expect(ItemSoldEvent.validate({})).toEqual(false)
+    expect(validateItemSoldEvent(event)).toEqual(true)
+    expect(validateItemSoldEvent(null)).toEqual(false)
+    expect(validateItemSoldEvent({})).toEqual(false)
   })
 
   it('ItemPublished static tests must pass', () => {
     const event: ItemPublishedEvent = {
-      type: Events.Type.BLOCKCHAIN,
-      subType: Events.SubType.Blockchain.ITEM_PUBLISHED,
+      type: EventType.BLOCKCHAIN,
+      subType: EventSubTypeBlockchain.ITEM_PUBLISHED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -80,15 +97,15 @@ describe('Blockchain Events tests', () => {
       }
     }
 
-    expect(ItemPublishedEvent.validate(event)).toEqual(true)
-    expect(ItemPublishedEvent.validate(null)).toEqual(false)
-    expect(ItemPublishedEvent.validate({})).toEqual(false)
+    expect(validateItemPublishedEvent(event)).toEqual(true)
+    expect(validateItemPublishedEvent(null)).toEqual(false)
+    expect(validateItemPublishedEvent({})).toEqual(false)
   })
 
   it('RentalEndedEvent static tests must pass', () => {
     const event: RentalEndedEvent = {
-      type: Events.Type.BLOCKCHAIN,
-      subType: Events.SubType.Blockchain.RENTAL_ENDED,
+      type: EventType.BLOCKCHAIN,
+      subType: EventSubTypeBlockchain.RENTAL_ENDED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -107,15 +124,15 @@ describe('Blockchain Events tests', () => {
       }
     }
 
-    expect(RentalEndedEvent.validate(event)).toEqual(true)
-    expect(RentalEndedEvent.validate(null)).toEqual(false)
-    expect(RentalEndedEvent.validate({})).toEqual(false)
+    expect(validateRentalEndedEvent(event)).toEqual(true)
+    expect(validateRentalEndedEvent(null)).toEqual(false)
+    expect(validateRentalEndedEvent({})).toEqual(false)
   })
 
   it('RentalStartedEvent static tests must pass', () => {
     const event: RentalStartedEvent = {
-      type: Events.Type.BLOCKCHAIN,
-      subType: Events.SubType.Blockchain.RENTAL_STARTED,
+      type: EventType.BLOCKCHAIN,
+      subType: EventSubTypeBlockchain.RENTAL_STARTED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -134,15 +151,15 @@ describe('Blockchain Events tests', () => {
       }
     }
 
-    expect(RentalStartedEvent.validate(event)).toEqual(true)
-    expect(RentalStartedEvent.validate(null)).toEqual(false)
-    expect(RentalStartedEvent.validate({})).toEqual(false)
+    expect(validateRentalStartedEvent(event)).toEqual(true)
+    expect(validateRentalStartedEvent(null)).toEqual(false)
+    expect(validateRentalStartedEvent({})).toEqual(false)
   })
 
   it('RoyaltiesEarnedEvent static tests must pass', () => {
     const event: RoyaltiesEarnedEvent = {
-      type: Events.Type.BLOCKCHAIN,
-      subType: Events.SubType.Blockchain.ROYALTIES_EARNED,
+      type: EventType.BLOCKCHAIN,
+      subType: EventSubTypeBlockchain.ROYALTIES_EARNED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -160,15 +177,15 @@ describe('Blockchain Events tests', () => {
       }
     }
 
-    expect(RoyaltiesEarnedEvent.validate(event)).toEqual(true)
-    expect(RoyaltiesEarnedEvent.validate(null)).toEqual(false)
-    expect(RoyaltiesEarnedEvent.validate({})).toEqual(false)
+    expect(validateRoyaltiesEarnedEvent(event)).toEqual(true)
+    expect(validateRoyaltiesEarnedEvent(null)).toEqual(false)
+    expect(validateRoyaltiesEarnedEvent({})).toEqual(false)
   })
 
   it('CollectionCreatedEvent static tests must pass', () => {
     const event: CollectionCreatedEvent = {
-      type: Events.Type.BLOCKCHAIN,
-      subType: Events.SubType.Blockchain.COLLECTION_CREATED,
+      type: EventType.BLOCKCHAIN,
+      subType: EventSubTypeBlockchain.COLLECTION_CREATED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -177,8 +194,8 @@ describe('Blockchain Events tests', () => {
       }
     }
 
-    expect(CollectionCreatedEvent.validate(event)).toEqual(true)
-    expect(CollectionCreatedEvent.validate(null)).toEqual(false)
-    expect(CollectionCreatedEvent.validate({})).toEqual(false)
+    expect(validateCollectionCreatedEvent(event)).toEqual(true)
+    expect(validateCollectionCreatedEvent(null)).toEqual(false)
+    expect(validateCollectionCreatedEvent({})).toEqual(false)
   })
 })

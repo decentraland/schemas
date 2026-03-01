@@ -1,7 +1,7 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { ChainId } from './chain-id'
-import { ListingStatus } from './listing-status'
-import { Network } from './network'
+import type { JSONSchema } from '../validation/types.js'
+import { ChainId, chainIdSchema } from './chain-id.js'
+import { ListingStatus, listingStatusSchema } from './listing-status.js'
+import { Network, networkSchema } from './network.js'
 
 export type Order = {
   id: string
@@ -45,68 +45,64 @@ export enum OrderSortBy {
   OLDEST = 'oldest'
 }
 
-export namespace Order {
-  export const schema: JSONSchema<Order> = {
-    type: 'object',
-    properties: {
-      id: {
-        type: 'string'
-      },
-      marketplaceAddress: {
-        type: 'string'
-      },
-      contractAddress: {
-        type: 'string'
-      },
-      tokenId: {
-        type: 'string'
-      },
-      owner: {
-        type: 'string'
-      },
-      buyer: {
-        type: ['string'],
-        nullable: true
-      },
-      price: {
-        type: 'string'
-      },
-      status: ListingStatus.schema,
-      network: Network.schema,
-      chainId: ChainId.schema,
-      expiresAt: {
-        type: 'integer'
-      },
-      createdAt: {
-        type: 'integer'
-      },
-      updatedAt: {
-        type: 'integer'
-      },
-      issuedId: {
-        type: 'string'
-      },
-      tradeId: {
-        type: 'string',
-        nullable: true
-      }
+export const orderSchema: JSONSchema<Order> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string'
     },
-    required: [
-      'id',
-      'marketplaceAddress',
-      'contractAddress',
-      'tokenId',
-      'owner',
-      'buyer',
-      'price',
-      'status',
-      'network',
-      'chainId',
-      'expiresAt',
-      'createdAt',
-      'updatedAt'
-    ]
-  }
-
-  export const validate: ValidateFunction<Order> = generateLazyValidator(schema)
+    marketplaceAddress: {
+      type: 'string'
+    },
+    contractAddress: {
+      type: 'string'
+    },
+    tokenId: {
+      type: 'string'
+    },
+    owner: {
+      type: 'string'
+    },
+    buyer: {
+      type: ['string'],
+      nullable: true
+    },
+    price: {
+      type: 'string'
+    },
+    status: listingStatusSchema,
+    network: networkSchema,
+    chainId: chainIdSchema,
+    expiresAt: {
+      type: 'integer'
+    },
+    createdAt: {
+      type: 'integer'
+    },
+    updatedAt: {
+      type: 'integer'
+    },
+    issuedId: {
+      type: 'string'
+    },
+    tradeId: {
+      type: 'string',
+      nullable: true
+    }
+  },
+  required: [
+    'id',
+    'marketplaceAddress',
+    'contractAddress',
+    'tokenId',
+    'owner',
+    'buyer',
+    'price',
+    'status',
+    'network',
+    'chainId',
+    'expiresAt',
+    'createdAt',
+    'updatedAt'
+  ]
 }

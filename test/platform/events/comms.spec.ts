@@ -1,17 +1,26 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import {
   UserJoinedRoomEvent,
-  Events,
+  EventType,
+  EventSubTypeComms,
   UserBannedFromSceneEvent,
   UserUnbannedFromSceneEvent,
-  RoomType
+  RoomType,
+  userBannedFromSceneEventSchema,
+  userJoinedRoomEventSchema,
+  userUnbannedFromSceneEventSchema
 } from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateUserBannedFromSceneEvent = generateLazyValidator(userBannedFromSceneEventSchema)
+const validateUserJoinedRoomEvent = generateLazyValidator(userJoinedRoomEventSchema)
+const validateUserUnbannedFromSceneEvent = generateLazyValidator(userUnbannedFromSceneEventSchema)
 
 describe('Comms Events tests', () => {
   it('UserJoinedRoomEvent static tests must pass', () => {
     const event: UserJoinedRoomEvent = {
-      type: Events.Type.COMMS,
-      subType: Events.SubType.Comms.USER_JOINED_ROOM,
+      type: EventType.COMMS,
+      subType: EventSubTypeComms.USER_JOINED_ROOM,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -24,15 +33,15 @@ describe('Comms Events tests', () => {
       }
     }
 
-    expect(UserJoinedRoomEvent.validate(event)).toEqual(true)
-    expect(UserJoinedRoomEvent.validate(null)).toEqual(false)
-    expect(UserJoinedRoomEvent.validate({})).toEqual(false)
+    expect(validateUserJoinedRoomEvent(event)).toEqual(true)
+    expect(validateUserJoinedRoomEvent(null)).toEqual(false)
+    expect(validateUserJoinedRoomEvent({})).toEqual(false)
   })
 
   it('UserJoinedRoomEvent should fail with missing required metadata fields', () => {
     const event: any = {
-      type: Events.Type.COMMS,
-      subType: Events.SubType.Comms.USER_JOINED_ROOM,
+      type: EventType.COMMS,
+      subType: EventSubTypeComms.USER_JOINED_ROOM,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -43,14 +52,14 @@ describe('Comms Events tests', () => {
       }
     }
 
-    expect(UserJoinedRoomEvent.validate(event)).toEqual(false)
+    expect(validateUserJoinedRoomEvent(event)).toEqual(false)
   })
 
   describe('UserBannedFromSceneEvent', () => {
     it('should pass validation with valid data', () => {
       const event: UserBannedFromSceneEvent = {
-        type: Events.Type.COMMS,
-        subType: Events.SubType.Comms.USER_BANNED_FROM_SCENE,
+        type: EventType.COMMS,
+        subType: EventSubTypeComms.USER_BANNED_FROM_SCENE,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -59,28 +68,28 @@ describe('Comms Events tests', () => {
         }
       }
 
-      expect(UserBannedFromSceneEvent.validate(event)).toEqual(true)
-      expect(UserBannedFromSceneEvent.validate(null)).toEqual(false)
-      expect(UserBannedFromSceneEvent.validate({})).toEqual(false)
+      expect(validateUserBannedFromSceneEvent(event)).toEqual(true)
+      expect(validateUserBannedFromSceneEvent(null)).toEqual(false)
+      expect(validateUserBannedFromSceneEvent({})).toEqual(false)
     })
 
     it('should fail with missing required metadata fields', () => {
       const event: any = {
-        type: Events.Type.COMMS,
-        subType: Events.SubType.Comms.USER_BANNED_FROM_SCENE,
+        type: EventType.COMMS,
+        subType: EventSubTypeComms.USER_BANNED_FROM_SCENE,
         key: 'key',
         timestamp: 1
       }
 
-      expect(UserBannedFromSceneEvent.validate(event)).toEqual(false)
+      expect(validateUserBannedFromSceneEvent(event)).toEqual(false)
     })
   })
 
   describe('UserUnbannedFromSceneEvent', () => {
     it('should pass validation with valid data', () => {
       const event: UserUnbannedFromSceneEvent = {
-        type: Events.Type.COMMS,
-        subType: Events.SubType.Comms.USER_UNBANNED_FROM_SCENE,
+        type: EventType.COMMS,
+        subType: EventSubTypeComms.USER_UNBANNED_FROM_SCENE,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -89,20 +98,20 @@ describe('Comms Events tests', () => {
         }
       }
 
-      expect(UserUnbannedFromSceneEvent.validate(event)).toEqual(true)
-      expect(UserUnbannedFromSceneEvent.validate(null)).toEqual(false)
-      expect(UserUnbannedFromSceneEvent.validate({})).toEqual(false)
+      expect(validateUserUnbannedFromSceneEvent(event)).toEqual(true)
+      expect(validateUserUnbannedFromSceneEvent(null)).toEqual(false)
+      expect(validateUserUnbannedFromSceneEvent({})).toEqual(false)
     })
 
     it('should fail with missing required metadata fields', () => {
       const event: any = {
-        type: Events.Type.COMMS,
-        subType: Events.SubType.Comms.USER_UNBANNED_FROM_SCENE,
+        type: EventType.COMMS,
+        subType: EventSubTypeComms.USER_UNBANNED_FROM_SCENE,
         key: 'key',
         timestamp: 1
       }
 
-      expect(UserUnbannedFromSceneEvent.validate(event)).toEqual(false)
+      expect(validateUserUnbannedFromSceneEvent(event)).toEqual(false)
     })
   })
 })

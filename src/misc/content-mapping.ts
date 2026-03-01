@@ -1,5 +1,5 @@
-import { IPFSv1, IPFSv2 } from '../misc'
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import { IPFSv1, IPFSv2, ipfsv1Schema, ipfsv2Schema } from '../misc/index.js'
+import type { JSONSchema } from '../validation/types.js'
 
 /**
  * Represents a content mapping. The Decentraland file system is
@@ -18,15 +18,11 @@ export type ContentMapping = {
 }
 
 /** @public */
-export namespace ContentMapping {
-  export const schema: JSONSchema<ContentMapping> = {
-    type: 'object',
-    properties: {
-      file: { type: 'string', minLength: 1 },
-      hash: { type: 'string', oneOf: [IPFSv1.schema, IPFSv2.schema] }
-    },
-    required: ['file', 'hash']
-  }
-
-  export const validate: ValidateFunction<ContentMapping> = generateLazyValidator(schema)
+export const contentMappingSchema: JSONSchema<ContentMapping> = {
+  type: 'object',
+  properties: {
+    file: { type: 'string', minLength: 1 },
+    hash: { type: 'string', oneOf: [ipfsv1Schema, ipfsv2Schema] }
+  },
+  required: ['file', 'hash']
 }

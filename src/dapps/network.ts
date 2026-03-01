@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import type { JSONSchema } from '../validation/types.js'
 
 /**
  * Different supported networks
@@ -17,11 +17,7 @@ export enum Network {
 /**
  * @alpha
  */
-export namespace Network {
-  export const schema: JSONSchema<Network> = {
-    type: 'string',
-    enum: Object.values(Network)
-  }
-
-  export const validate: ValidateFunction<Network> = generateLazyValidator(schema)
+export const networkSchema: JSONSchema<Network> = {
+  type: 'string',
+  enum: Object.values(Network)
 }

@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import type { JSONSchema } from '../validation/types.js'
 
 /**
  * Different supported providers
@@ -21,11 +21,7 @@ export enum ProviderType {
 /**
  * @alpha
  */
-export namespace ProviderType {
-  export const schema: JSONSchema<ProviderType> = {
-    type: 'string',
-    enum: Object.values(ProviderType)
-  }
-
-  export const validate: ValidateFunction<ProviderType> = generateLazyValidator(schema)
+export const providerTypeSchema: JSONSchema<ProviderType> = {
+  type: 'string',
+  enum: Object.values(ProviderType)
 }

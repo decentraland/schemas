@@ -1,8 +1,8 @@
 import type { Emitter } from 'mitt'
-import type { Metrics } from '../../platform/item/metrics'
-import type { PreviewEmoteEventType } from './preview-emote-event-type'
-import { SocialEmoteAnimation } from './social-emote-animation'
-import { EmoteDefinition } from './emote-definition'
+import type { Metrics } from '../../platform/item/metrics.js'
+import type { PreviewEmoteEventType } from './preview-emote-event-type.js'
+import { SocialEmoteAnimation } from './social-emote-animation.js'
+import { EmoteDefinition } from './emote-definition.js'
 
 export interface IPreviewController {
   scene: ISceneController

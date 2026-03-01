@@ -1,15 +1,11 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../validation'
+import type { JSONSchema } from '../../../validation/types.js'
 
 export enum BodyPartCategory {
   HEAD = 'head',
   HANDS = 'hands'
 }
 
-export namespace BodyPartCategory {
-  export const schema: JSONSchema<BodyPartCategory> = {
-    type: 'string',
-    enum: Object.values(BodyPartCategory)
-  }
-
-  export const validate: ValidateFunction<BodyPartCategory> = generateLazyValidator(schema)
+export const bodyPartCategorySchema: JSONSchema<BodyPartCategory> = {
+  type: 'string',
+  enum: Object.values(BodyPartCategory)
 }

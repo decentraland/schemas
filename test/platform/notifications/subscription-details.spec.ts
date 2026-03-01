@@ -1,16 +1,19 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import { testTypeSignature } from '../../test-utils'
-import { NotificationType, SubscriptionDetails } from '../../../src'
+import { NotificationType, subscriptionDetailsSchema } from '../../../src'
 import { subscriptionDetails } from './subscription.spec'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateSubscriptionDetails = generateLazyValidator(subscriptionDetailsSchema)
 
 describe('Subscription details tests', () => {
-  testTypeSignature(SubscriptionDetails, subscriptionDetails)
+  testTypeSignature({ schema: subscriptionDetailsSchema }, subscriptionDetails)
 
   it('static tests must pass', () => {
-    expect(SubscriptionDetails.validate(subscriptionDetails)).toEqual(true)
-    expect(SubscriptionDetails.validate(null)).toEqual(false)
-    expect(SubscriptionDetails.validate({})).toEqual(false)
-    expect(SubscriptionDetails.validate.errors).toEqual([
+    expect(validateSubscriptionDetails(subscriptionDetails)).toEqual(true)
+    expect(validateSubscriptionDetails(null)).toEqual(false)
+    expect(validateSubscriptionDetails({})).toEqual(false)
+    expect(validateSubscriptionDetails.errors).toEqual([
       {
         instancePath: '',
         keyword: 'required',
@@ -37,7 +40,7 @@ describe('Subscription details tests', () => {
 
   it('name, if present, must be a string', () => {
     expect(
-      SubscriptionDetails.validate({
+      validateSubscriptionDetails({
         ignore_all_email: true,
         ignore_all_in_app: false,
         message_type: {}
@@ -53,6 +56,6 @@ describe('Subscription details tests', () => {
       schemaPath: '#/properties/message_type/required'
     }))
 
-    expect(SubscriptionDetails.validate.errors).toEqual(errors)
+    expect(validateSubscriptionDetails.errors).toEqual(errors)
   })
 })

@@ -1,6 +1,9 @@
-import expect from 'expect'
-import { BodyShape, ChainId, Network, NFT, NFTCategory, Rarity, WearableCategory, EmoteCategory } from '../../src'
+import { expect } from 'expect'
+import { BodyShape, ChainId, Network, type NFT, nftSchema, NFTCategory, Rarity, WearableCategory, EmoteCategory } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateNFT = generateLazyValidator(nftSchema)
 
 describe('NFT tests', () => {
   describe('parcel', () => {
@@ -32,12 +35,12 @@ describe('NFT tests', () => {
       soldAt: 1619273260000
     }
 
-    testTypeSignature(NFT, parcel)
+    testTypeSignature({ schema: nftSchema }, parcel)
 
     it('static tests must pass', () => {
-      expect(NFT.validate(parcel)).toEqual(true)
-      expect(NFT.validate(null)).toEqual(false)
-      expect(NFT.validate({})).toEqual(false)
+      expect(validateNFT(parcel)).toEqual(true)
+      expect(validateNFT(null)).toEqual(false)
+      expect(validateNFT({})).toEqual(false)
     })
   })
 
@@ -94,12 +97,12 @@ describe('NFT tests', () => {
       soldAt: 1626246391000
     }
 
-    testTypeSignature(NFT, estate)
+    testTypeSignature({ schema: nftSchema }, estate)
 
     it('static tests must pass', () => {
-      expect(NFT.validate(estate)).toEqual(true)
-      expect(NFT.validate(null)).toEqual(false)
-      expect(NFT.validate({})).toEqual(false)
+      expect(validateNFT(estate)).toEqual(true)
+      expect(validateNFT(null)).toEqual(false)
+      expect(validateNFT({})).toEqual(false)
     })
   })
 
@@ -134,12 +137,12 @@ describe('NFT tests', () => {
       soldAt: 1626246391000
     }
 
-    testTypeSignature(NFT, wearable)
+    testTypeSignature({ schema: nftSchema }, wearable)
 
     it('static tests must pass', () => {
-      expect(NFT.validate(wearable)).toEqual(true)
-      expect(NFT.validate(null)).toEqual(false)
-      expect(NFT.validate({})).toEqual(false)
+      expect(validateNFT(wearable)).toEqual(true)
+      expect(validateNFT(null)).toEqual(false)
+      expect(validateNFT({})).toEqual(false)
     })
   })
 
@@ -169,12 +172,12 @@ describe('NFT tests', () => {
       soldAt: 1626246391000
     }
 
-    testTypeSignature(NFT, ens)
+    testTypeSignature({ schema: nftSchema }, ens)
 
     it('static tests must pass', () => {
-      expect(NFT.validate(ens)).toEqual(true)
-      expect(NFT.validate(null)).toEqual(false)
-      expect(NFT.validate({})).toEqual(false)
+      expect(validateNFT(ens)).toEqual(true)
+      expect(validateNFT(null)).toEqual(false)
+      expect(validateNFT({})).toEqual(false)
     })
   })
 
@@ -212,12 +215,12 @@ describe('NFT tests', () => {
       soldAt: 1626246391000
     }
 
-    testTypeSignature(NFT, emote)
+    testTypeSignature({ schema: nftSchema }, emote)
 
     it('static tests must pass', () => {
-      expect(NFT.validate(emote)).toEqual(true)
-      expect(NFT.validate(null)).toEqual(false)
-      expect(NFT.validate({})).toEqual(false)
+      expect(validateNFT(emote)).toEqual(true)
+      expect(validateNFT(null)).toEqual(false)
+      expect(validateNFT({})).toEqual(false)
     })
   })
 })

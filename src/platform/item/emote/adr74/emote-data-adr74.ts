@@ -1,7 +1,7 @@
-import { EmoteCategory } from '../emote-category'
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../../validation'
-import { EmoteRepresentationADR74 } from './representation-adr74'
-import { OutcomeGroup, StartAnimation } from '../adr287/emote-data-adr287'
+import { EmoteCategory, emoteCategorySchema } from '../emote-category.js'
+import type { JSONSchema } from '../../../../validation/types.js'
+import { EmoteRepresentationADR74, emoteRepresentationADR74Schema } from './representation-adr74.js'
+import { OutcomeGroup, StartAnimation, outcomeGroupSchema, startAnimationSchema } from '../adr287/emote-data-adr287.js'
 
 export type EmoteDataADR74 = {
   category: EmoteCategory
@@ -13,50 +13,46 @@ export type EmoteDataADR74 = {
   outcomes?: OutcomeGroup[]
 }
 
-export namespace EmoteDataADR74 {
-  export const schema: JSONSchema<EmoteDataADR74> = {
-    type: 'object',
-    properties: {
-      tags: {
-        type: 'array',
-        items: {
-          type: 'string',
-          minLength: 1
-        }
-      },
-      representations: {
-        type: 'array',
-        items: EmoteRepresentationADR74.schema,
-        minItems: 1
-      },
-      category: EmoteCategory.schema,
-      loop: {
-        type: 'boolean'
-      },
-      startAnimation: {
-        ...StartAnimation.schema,
-        nullable: true
-      },
-      randomizeOutcomes: {
-        type: 'boolean',
-        nullable: true
-      },
-      outcomes: {
-        type: 'array',
-        items: OutcomeGroup.schema,
-        minItems: 1,
-        maxItems: 3,
-        nullable: true
+export const emoteDataADR74Schema: JSONSchema<EmoteDataADR74> = {
+  type: 'object',
+  properties: {
+    tags: {
+      type: 'array',
+      items: {
+        type: 'string',
+        minLength: 1
       }
     },
-    required: ['category', 'tags', 'representations', 'loop'] as any[],
-    dependencies: {
-      startAnimation: ['randomizeOutcomes', 'outcomes'],
-      randomizeOutcomes: ['startAnimation', 'outcomes'],
-      outcomes: ['startAnimation', 'randomizeOutcomes']
+    representations: {
+      type: 'array',
+      items: emoteRepresentationADR74Schema,
+      minItems: 1
     },
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<EmoteDataADR74> = generateLazyValidator(schema)
+    category: emoteCategorySchema,
+    loop: {
+      type: 'boolean'
+    },
+    startAnimation: {
+      ...startAnimationSchema,
+      nullable: true
+    },
+    randomizeOutcomes: {
+      type: 'boolean',
+      nullable: true
+    },
+    outcomes: {
+      type: 'array',
+      items: outcomeGroupSchema,
+      minItems: 1,
+      maxItems: 3,
+      nullable: true
+    }
+  },
+  required: ['category', 'tags', 'representations', 'loop'] as any[],
+  dependencies: {
+    startAnimation: ['randomizeOutcomes', 'outcomes'],
+    randomizeOutcomes: ['startAnimation', 'outcomes'],
+    outcomes: ['startAnimation', 'randomizeOutcomes']
+  },
+  additionalProperties: true
 }

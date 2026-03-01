@@ -1,4 +1,5 @@
-import expect from 'expect'
+import { expect } from 'expect'
+import type { Wearable, WearableRepresentation } from '../../../../src'
 import {
   BodyPartCategory,
   BodyShape,
@@ -8,11 +9,14 @@ import {
   Locale,
   MappingType,
   Rarity,
-  Wearable,
-  WearableCategory,
-  WearableRepresentation
+  wearableSchema,
+  wearableKeywordDefinitions,
+  WearableCategory
 } from '../../../../src'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
+import { generateLazyValidator } from '../../../../src/validation/index.js'
+
+const validateWearable = generateLazyValidator(wearableSchema, wearableKeywordDefinitions)
 
 describe('Wearable representation tests', () => {
   const representation: WearableRepresentation = {
@@ -88,9 +92,9 @@ describe('Wearable representation tests', () => {
     ...thirdParty
   }
 
-  testTypeSignature(Wearable, wearable)
-  testTypeSignature(Wearable, thirdPartyWearable)
-  testTypeSignature(Wearable, {
+  testTypeSignature({ schema: wearableSchema, keywordDefinitions: wearableKeywordDefinitions }, wearable)
+  testTypeSignature({ schema: wearableSchema, keywordDefinitions: wearableKeywordDefinitions }, thirdPartyWearable)
+  testTypeSignature({ schema: wearableSchema, keywordDefinitions: wearableKeywordDefinitions }, {
     ...baseWearable,
     ...thirdParty,
     mappings: {
@@ -106,7 +110,7 @@ describe('Wearable representation tests', () => {
 
   it('static base wearable must puss', () => {
     expect(
-      Wearable.validate({
+      validateWearable({
         ...baseWearable,
         id: 'urn:decentraland:off-chain:base-avatars:basemale'
       })
@@ -114,19 +118,19 @@ describe('Wearable representation tests', () => {
   })
 
   it('static tests must pass', () => {
-    expect(Wearable.validate(wearable)).toEqual(true)
-    expect(Wearable.validate(null)).toEqual(false)
-    expect(Wearable.validate({})).toEqual(false)
+    expect(validateWearable(wearable)).toEqual(true)
+    expect(validateWearable(null)).toEqual(false)
+    expect(validateWearable({})).toEqual(false)
   })
 
   it('should validate wearable without blockVrmExport', () => {
     const wearableExport = { ...wearable }
     delete (wearableExport.data as Wearable['data']).blockVrmExport
-    expect(Wearable.validate(wearableExport)).toEqual(true)
+    expect(validateWearable(wearableExport)).toEqual(true)
   })
 
   it('static tests must return the correct errors when missing properties', () => {
-    expectValidationFailureWithErrors(Wearable.validate, {}, [
+    expectValidationFailureWithErrors(validateWearable, {}, [
       "must have required property 'id'",
       "must have required property 'description'",
       "must have required property 'name'",
@@ -138,7 +142,7 @@ describe('Wearable representation tests', () => {
 
   it('wearable with two i18n with same locale fails', () => {
     expectValidationFailureWithErrors(
-      Wearable.validate,
+      validateWearable,
       {
         ...wearable,
         i18n: [
@@ -152,7 +156,7 @@ describe('Wearable representation tests', () => {
 
   it('wearable without representation fails', () => {
     expectValidationFailureWithErrors(
-      Wearable.validate,
+      validateWearable,
       {
         ...wearable,
         data: {
@@ -165,13 +169,13 @@ describe('Wearable representation tests', () => {
   })
 
   it('wearable with merkle proof and standard fields fails', () => {
-    expectValidationFailureWithErrors(Wearable.validate, { ...baseWearable, ...standard, ...thirdParty }, [
+    expectValidationFailureWithErrors(validateWearable, { ...baseWearable, ...standard, ...thirdParty }, [
       'either standard XOR thirdparty properties conditions must be met'
     ])
   })
 
   it('wearable cannot be both standard and thirdparty', () => {
-    expectValidationFailureWithErrors(Wearable.validate, { ...baseWearable, ...standard, ...thirdParty }, [
+    expectValidationFailureWithErrors(validateWearable, { ...baseWearable, ...standard, ...thirdParty }, [
       'either standard XOR thirdparty properties conditions must be met'
     ])
   })
@@ -186,14 +190,14 @@ describe('Wearable representation tests', () => {
 
   it('group of properties must be complete, not partial', () => {
     // misses 'rarity' to complete standard properties
-    expectValidationFailureWithErrors(Wearable.validate, { ...baseWearable, collectionAddress: '0x...' }, [
+    expectValidationFailureWithErrors(validateWearable, { ...baseWearable, collectionAddress: '0x...' }, [
       'either standard XOR thirdparty properties conditions must be met'
     ])
   })
 
   it('wearable with removesDefaultHiding is valid', () => {
     expect(
-      Wearable.validate({
+      validateWearable({
         ...wearable,
         data: {
           ...wearable.data,

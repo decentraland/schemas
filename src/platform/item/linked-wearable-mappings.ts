@@ -1,5 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { FuncKeywordDefinition, KeywordDefinition } from 'ajv'
+import type { JSONSchema, KeywordDefinition } from '../../validation/types.js'
 
 /**
  * MappingType
@@ -93,174 +92,159 @@ export type MultipleMapping = {
 }
 
 /**
- * SingleMapping
  * @alpha
  */
-export namespace SingleMapping {
-  export const schema: JSONSchema<SingleMapping> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: MappingType.SINGLE },
-      id: { type: 'string', pattern: '^[0-9]+$' }
-    },
-    required: ['type', 'id'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<Mapping> = generateLazyValidator(schema)
+export const singleMappingSchema: JSONSchema<SingleMapping> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: MappingType.SINGLE },
+    id: { type: 'string', pattern: '^[0-9]+$' }
+  },
+  required: ['type', 'id'],
+  additionalProperties: false
 }
 
 /**
- * AnyMapping
  * @alpha
  */
-export namespace AnyMapping {
-  export const schema: JSONSchema<AnyMapping> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: MappingType.ANY }
-    },
-    required: ['type'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<Mapping> = generateLazyValidator(schema)
+export const anyMappingSchema: JSONSchema<AnyMapping> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: MappingType.ANY }
+  },
+  required: ['type'],
+  additionalProperties: false
 }
 
 /**
- * RangeMapping
  * @alpha
  */
-export namespace RangeMapping {
-  export const _fromLessThanOrEqualTo: KeywordDefinition = {
-    keyword: '_fromLessThanOrEqualTo',
-    validate: function validate(schema: boolean, data: any) {
-      if (!data || !data.from || !data.to) {
-        return false
-      }
+export const rangeMappingFromLteKeyword: KeywordDefinition = {
+  keyword: '_fromLessThanOrEqualTo',
+  validate: function validate(schema: boolean, data: any) {
+    if (!data || !data.from || !data.to) {
+      return false
+    }
 
-      let { to, from } = data
-      if (typeof from !== 'bigint' || typeof to !== 'bigint') {
-        from = BigInt(from)
-        to = BigInt(to)
-      }
+    let { to, from } = data
+    if (typeof from !== 'bigint' || typeof to !== 'bigint') {
+      from = BigInt(from)
+      to = BigInt(to)
+    }
 
-      return from <= to
-    },
-    errors: false
-  }
-
-  export const schema: JSONSchema<RangeMapping> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: MappingType.RANGE },
-      from: { type: 'string', pattern: '^[0-9]+$' },
-      to: { type: 'string', pattern: '^[0-9]+$' }
-    },
-    required: ['type', 'from', 'to'],
-    additionalProperties: false,
-    _fromLessThanOrEqualTo: true
-  }
-
-  export const validate: ValidateFunction<Mapping> = generateLazyValidator(schema, [_fromLessThanOrEqualTo])
+    return from <= to
+  },
+  errors: false
 }
 
 /**
- * MultipleMapping
  * @alpha
  */
-export namespace MultipleMapping {
-  export const schema: JSONSchema<MultipleMapping> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: MappingType.MULTIPLE },
-      ids: {
-        type: 'array',
-        items: {
-          type: 'string',
-          pattern: '^[0-9]+$'
-        },
-        minItems: 1,
-        uniqueItems: true
-      }
-    },
-    required: ['type', 'ids'],
-    additionalProperties: false
-  }
-  export const validate: ValidateFunction<Mapping> = generateLazyValidator(schema)
+export const rangeMappingSchema: JSONSchema<RangeMapping> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: MappingType.RANGE },
+    from: { type: 'string', pattern: '^[0-9]+$' },
+    to: { type: 'string', pattern: '^[0-9]+$' }
+  },
+  required: ['type', 'from', 'to'],
+  additionalProperties: false,
+  _fromLessThanOrEqualTo: true
 }
 
 /**
- * Mapping
  * @alpha
  */
-export namespace Mapping {
-  export const schema: JSONSchema<Mapping> = {
-    type: 'object',
-    properties: {
-      type: {
+export const multipleMappingSchema: JSONSchema<MultipleMapping> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: MappingType.MULTIPLE },
+    ids: {
+      type: 'array',
+      items: {
         type: 'string',
-        enum: Object.values(MappingType)
-      }
-    },
-    required: ['type'],
-    oneOf: [SingleMapping.schema, AnyMapping.schema, RangeMapping.schema, MultipleMapping.schema]
-  }
-
-  export const validate: ValidateFunction<Mapping> = generateLazyValidator(schema, [
-    RangeMapping._fromLessThanOrEqualTo
-  ])
+        pattern: '^[0-9]+$'
+      },
+      minItems: 1,
+      uniqueItems: true
+    }
+  },
+  required: ['type', 'ids'],
+  additionalProperties: false
 }
 
 /**
- * Mappings
  * @alpha
  */
-export namespace Mappings {
-  export const _isMappingsValid: FuncKeywordDefinition = {
-    keyword: '_isMappingsValid',
-    validate: function (_schema: boolean, data: Mappings) {
-      try {
-        createMappingsHelper(data)
-      } catch (_) {
-        return false
-      }
-      return true
-    },
-    errors: false
-  }
-
-  export const innerSchema: JSONSchema<Record<ContractAddress, Mapping[]>> = {
-    type: 'object',
-    patternProperties: {
-      '^0x[0-9a-fA-F]{40}$': {
-        type: 'array',
-        items: Mapping.schema
-      }
-    },
-    minProperties: 1,
-    required: [],
-    additionalProperties: false
-  }
-
-  const properties = Object.values(ContractNetwork).reduce((acc, network) => {
-    acc[network] = innerSchema
-    return acc
-  }, {} as any)
-
-  export const schema: JSONSchema<Mappings> = {
-    type: 'object',
-    properties,
-    minProperties: 1,
-    additionalProperties: false,
-    _isMappingsValid: true
-  }
-
-  export const validate: ValidateFunction<Mappings> = generateLazyValidator(schema, [
-    RangeMapping._fromLessThanOrEqualTo,
-    _isMappingsValid
-  ])
+export const mappingSchema: JSONSchema<Mapping> = {
+  type: 'object',
+  properties: {
+    type: {
+      type: 'string',
+      enum: Object.values(MappingType)
+    }
+  },
+  required: ['type'],
+  oneOf: [singleMappingSchema, anyMappingSchema, rangeMappingSchema, multipleMappingSchema]
 }
+
+/**
+ * @alpha
+ */
+export const mappingKeywordDefinitions: KeywordDefinition[] = [rangeMappingFromLteKeyword]
+
+/**
+ * @alpha
+ */
+export const mappingsIsMappingsValidKeyword: KeywordDefinition = {
+  keyword: '_isMappingsValid',
+  validate: function (_schema: boolean, data: Mappings) {
+    try {
+      createMappingsHelper(data)
+    } catch (_) {
+      return false
+    }
+    return true
+  },
+  errors: false
+}
+
+/**
+ * @alpha
+ */
+export const mappingsInnerSchema: JSONSchema<Record<ContractAddress, Mapping[]>> = {
+  type: 'object',
+  patternProperties: {
+    '^0x[0-9a-fA-F]{40}$': {
+      type: 'array',
+      items: mappingSchema
+    }
+  },
+  minProperties: 1,
+  required: [],
+  additionalProperties: false
+}
+
+const mappingsProperties = Object.values(ContractNetwork).reduce((acc, network) => {
+  acc[network] = mappingsInnerSchema
+  return acc
+}, {} as any)
+
+/**
+ * @alpha
+ */
+export const mappingsSchema: JSONSchema<Mappings> = {
+  type: 'object',
+  properties: mappingsProperties,
+  minProperties: 1,
+  additionalProperties: false,
+  _isMappingsValid: true
+}
+
+/**
+ * @alpha
+ */
+export const mappingsKeywordDefinitions: KeywordDefinition[] = [rangeMappingFromLteKeyword, mappingsIsMappingsValidKeyword]
 
 export type MappingsHelper = {
   getMappings(): Mappings

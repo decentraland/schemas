@@ -1,5 +1,10 @@
-import expect from 'expect'
-import { AuthLinkType, SnapshotSyncDeployment, PointerChangesSyncDeployment } from '../../src'
+import { expect } from 'expect'
+import type { SnapshotSyncDeployment, PointerChangesSyncDeployment } from '../../src'
+import { AuthLinkType, snapshotSyncDeploymentSchema, pointerChangesSyncDeploymentSchema } from '../../src'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validatePointerChangesSyncDeployment = generateLazyValidator(pointerChangesSyncDeploymentSchema)
+const validateSnapshotSyncDeployment = generateLazyValidator(snapshotSyncDeploymentSchema)
 describe('snapshot-sync-deployment', () => {
   it('valid', () => {
     const deployment: SnapshotSyncDeployment = {
@@ -28,9 +33,9 @@ describe('snapshot-sync-deployment', () => {
       entityTimestamp: 123,
       pointers: ['asd']
     }
-    expect(SnapshotSyncDeployment.validate(deployment)).toEqual(true)
+    expect(validateSnapshotSyncDeployment(deployment)).toEqual(true)
     expect(
-      SnapshotSyncDeployment.validate({
+      validateSnapshotSyncDeployment({
         authChain: [
           {
             type: AuthLinkType.SIGNER,
@@ -47,7 +52,7 @@ describe('snapshot-sync-deployment', () => {
   })
   it('invalid', () => {
     expect(
-      SnapshotSyncDeployment.validate({
+      validateSnapshotSyncDeployment({
         authChain: [],
         entityId: 'asd',
         entityType: 'scene',
@@ -56,7 +61,7 @@ describe('snapshot-sync-deployment', () => {
       } as SnapshotSyncDeployment)
     ).toEqual(false)
     expect(
-      SnapshotSyncDeployment.validate({
+      validateSnapshotSyncDeployment({
         authChain: [
           {
             type: AuthLinkType.SIGNER,
@@ -71,7 +76,7 @@ describe('snapshot-sync-deployment', () => {
       } as SnapshotSyncDeployment)
     ).toEqual(false)
     expect(
-      SnapshotSyncDeployment.validate({
+      validateSnapshotSyncDeployment({
         authChain: [
           {
             type: AuthLinkType.SIGNER,
@@ -86,7 +91,7 @@ describe('snapshot-sync-deployment', () => {
       } as SnapshotSyncDeployment)
     ).toEqual(false)
     expect(
-      SnapshotSyncDeployment.validate({
+      validateSnapshotSyncDeployment({
         authChain: [
           {
             type: AuthLinkType.SIGNER,
@@ -132,9 +137,9 @@ describe('pointer-changes-sync-deployment', () => {
       localTimestamp: 123,
       pointers: ['asd']
     }
-    expect(PointerChangesSyncDeployment.validate(deployment)).toEqual(true)
+    expect(validatePointerChangesSyncDeployment(deployment)).toEqual(true)
     expect(
-      PointerChangesSyncDeployment.validate({
+      validatePointerChangesSyncDeployment({
         authChain: [
           {
             type: AuthLinkType.SIGNER,
@@ -152,7 +157,7 @@ describe('pointer-changes-sync-deployment', () => {
   })
   it('invalid', () => {
     expect(
-      PointerChangesSyncDeployment.validate({
+      validatePointerChangesSyncDeployment({
         authChain: [],
         entityId: 'asd',
         entityType: 'scene',
@@ -162,7 +167,7 @@ describe('pointer-changes-sync-deployment', () => {
       } as PointerChangesSyncDeployment)
     ).toEqual(false)
     expect(
-      PointerChangesSyncDeployment.validate({
+      validatePointerChangesSyncDeployment({
         authChain: [
           {
             type: AuthLinkType.SIGNER,
@@ -178,7 +183,7 @@ describe('pointer-changes-sync-deployment', () => {
       } as PointerChangesSyncDeployment)
     ).toEqual(false)
     expect(
-      PointerChangesSyncDeployment.validate({
+      validatePointerChangesSyncDeployment({
         authChain: [
           {
             type: AuthLinkType.SIGNER,
@@ -194,7 +199,7 @@ describe('pointer-changes-sync-deployment', () => {
       } as PointerChangesSyncDeployment)
     ).toEqual(false)
     expect(
-      PointerChangesSyncDeployment.validate({
+      validatePointerChangesSyncDeployment({
         authChain: [
           {
             type: AuthLinkType.SIGNER,
@@ -210,7 +215,7 @@ describe('pointer-changes-sync-deployment', () => {
       } as PointerChangesSyncDeployment)
     ).toEqual(false)
     expect(
-      PointerChangesSyncDeployment.validate({
+      validatePointerChangesSyncDeployment({
         authChain: [
           {
             type: AuthLinkType.SIGNER,

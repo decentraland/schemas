@@ -1,6 +1,6 @@
-import { WearableCategory } from '../item/wearable/wearable-category'
-import { Color3, EthAddress, IPFSv2, WearableId } from '../../misc'
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
+import { WearableCategory, wearableCategorySchema } from '../item/wearable/wearable-category.js'
+import { Color3, EthAddress, IPFSv2, WearableId, ipfsv2Schema, color3Schema, ethAddressSchema } from '../../misc/index.js'
+import type { JSONSchema } from '../../validation/types.js'
 
 /**
  * Snapshots
@@ -15,16 +15,13 @@ export type Snapshots = {
  * Snapshots
  * @alpha
  */
-export namespace Snapshots {
-  export const schema: JSONSchema<Snapshots> = {
-    type: 'object',
-    required: ['face256', 'body'],
-    properties: {
-      face256: IPFSv2.schema,
-      body: IPFSv2.schema
-    }
+export const snapshotsSchema: JSONSchema<Snapshots> = {
+  type: 'object',
+  required: ['face256', 'body'],
+  properties: {
+    face256: ipfsv2Schema,
+    body: ipfsv2Schema
   }
-  export const validate: ValidateFunction<Snapshots> = generateLazyValidator(schema)
 }
 
 /**
@@ -50,66 +47,63 @@ export type AvatarInfo = {
  * AvatarInfo
  * @alpha
  */
-export namespace AvatarInfo {
-  export const schema: JSONSchema<AvatarInfo> = {
-    type: 'object',
-    required: ['bodyShape', 'eyes', 'hair', 'skin'],
-    properties: {
-      bodyShape: {
-        type: 'string'
-      },
-      eyes: {
-        type: 'object',
-        required: ['color'],
-        properties: {
-          color: Color3.schema
-        }
-      },
-      hair: {
-        type: 'object',
-        required: ['color'],
-        properties: {
-          color: Color3.schema
-        }
-      },
-      skin: {
-        type: 'object',
-        required: ['color'],
-        properties: {
-          color: Color3.schema
-        }
-      },
-      wearables: {
-        type: 'array',
-        items: {
-          type: 'string'
-        }
-      },
-      forceRender: {
-        type: 'array',
-        nullable: true,
-        items: WearableCategory.schema
-      },
-      emotes: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            slot: { type: 'number' },
-            urn: { type: 'string' }
-          },
-          required: ['slot', 'urn']
-        },
-        nullable: true
-      },
-      snapshots: {
-        ...Snapshots.schema,
-        nullable: true
+export const avatarInfoSchema: JSONSchema<AvatarInfo> = {
+  type: 'object',
+  required: ['bodyShape', 'eyes', 'hair', 'skin'],
+  properties: {
+    bodyShape: {
+      type: 'string'
+    },
+    eyes: {
+      type: 'object',
+      required: ['color'],
+      properties: {
+        color: color3Schema
       }
     },
-    additionalProperties: true
-  }
-  export const validate: ValidateFunction<AvatarInfo> = generateLazyValidator(schema)
+    hair: {
+      type: 'object',
+      required: ['color'],
+      properties: {
+        color: color3Schema
+      }
+    },
+    skin: {
+      type: 'object',
+      required: ['color'],
+      properties: {
+        color: color3Schema
+      }
+    },
+    wearables: {
+      type: 'array',
+      items: {
+        type: 'string'
+      }
+    },
+    forceRender: {
+      type: 'array',
+      nullable: true,
+      items: wearableCategorySchema
+    },
+    emotes: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          slot: { type: 'number' },
+          urn: { type: 'string' }
+        },
+        required: ['slot', 'urn']
+      },
+      nullable: true
+    },
+    snapshots: {
+      ...snapshotsSchema,
+      nullable: true
+    }
+  },
+  additionalProperties: true
 }
 
 /**
@@ -122,14 +116,10 @@ export type LinkUrl = string
  * LinkUrl
  * @alpha
  */
-export namespace LinkUrl {
-  export const schema: JSONSchema<LinkUrl> = {
-    type: 'string',
-    maxLength: 2083,
-    pattern: '^(?:https?):\\/\\/[^\\s/$.?#].[^\\s]*$'
-  }
-  const regexp = new RegExp(schema.pattern!, 'i')
-  export const validate: ValidateFunction<LinkUrl> = (url: any): url is LinkUrl => regexp.test(url)
+export const linkUrlSchema: JSONSchema<LinkUrl> = {
+  type: 'string',
+  maxLength: 2083,
+  pattern: '^(?:https?):\\/\\/[^\\s/$.?#].[^\\s]*$'
 }
 
 /**
@@ -145,16 +135,14 @@ export type Link = {
  * Link
  * @alpha
  */
-export namespace Link {
-  export const schema: JSONSchema<Link> = {
-    type: 'object',
-    required: ['title', 'url'],
-    properties: {
-      title: {
-        type: 'string'
-      },
-      url: LinkUrl.schema
-    }
+export const linkSchema: JSONSchema<Link> = {
+  type: 'object',
+  required: ['title', 'url'],
+  properties: {
+    title: {
+      type: 'string'
+    },
+    url: linkUrlSchema
   }
 }
 
@@ -200,116 +188,113 @@ export type Avatar = {
  * Avatar
  * @alpha
  */
-export namespace Avatar {
-  export const schema: JSONSchema<Avatar> = {
-    type: 'object',
-    required: ['name', 'description', 'ethAddress', 'version', 'tutorialStep', 'avatar', 'hasClaimedName'],
-    properties: {
-      userId: {
-        type: 'string'
-      },
-      name: {
-        type: 'string'
-      },
-      nameColor: {
-        ...Color3.schema,
-        nullable: true
-      },
-      description: {
-        type: 'string'
-      },
-      links: {
-        type: 'array',
-        maxItems: 5,
-        items: Link.schema,
-        nullable: true
-      },
-      country: {
-        nullable: true,
-        type: 'string'
-      },
-      employmentStatus: {
-        nullable: true,
-        type: 'string'
-      },
-      gender: {
-        nullable: true,
-        type: 'string'
-      },
-      pronouns: {
-        nullable: true,
-        type: 'string'
-      },
-      relationshipStatus: {
-        nullable: true,
-        type: 'string'
-      },
-      sexualOrientation: {
-        nullable: true,
-        type: 'string'
-      },
-      language: {
-        nullable: true,
-        type: 'string'
-      },
-      profession: {
-        nullable: true,
-        type: 'string'
-      },
-      birthdate: {
-        nullable: true,
-        type: 'number'
-      },
-      realName: {
-        nullable: true,
-        type: 'string'
-      },
-      hobbies: {
-        nullable: true,
-        type: 'string'
-      },
-      ethAddress: EthAddress.schema,
-      version: {
-        type: 'number'
-      },
-      tutorialStep: {
-        type: 'number'
-      },
-      email: {
-        type: 'string',
-        nullable: true
-      },
-      blocked: {
-        type: 'array',
-        items: {
-          type: 'string'
-        },
-        nullable: true
-      },
-      muted: {
-        type: 'array',
-        items: {
-          type: 'string'
-        },
-        nullable: true
-      },
-      interests: {
-        type: 'array',
-        items: {
-          type: 'string'
-        },
-        nullable: true
-      },
-      hasClaimedName: {
-        type: 'boolean'
-      },
-      hasConnectedWeb3: {
-        type: 'boolean',
-        nullable: true
-      },
-      avatar: AvatarInfo.schema
+export const avatarSchema: JSONSchema<Avatar> = {
+  type: 'object',
+  required: ['name', 'description', 'ethAddress', 'version', 'tutorialStep', 'avatar', 'hasClaimedName'],
+  properties: {
+    userId: {
+      type: 'string'
     },
-    additionalProperties: true
-  }
-  export const validate: ValidateFunction<Avatar> = generateLazyValidator(schema)
+    name: {
+      type: 'string'
+    },
+    nameColor: {
+      ...color3Schema,
+      nullable: true
+    },
+    description: {
+      type: 'string'
+    },
+    links: {
+      type: 'array',
+      maxItems: 5,
+      items: linkSchema,
+      nullable: true
+    },
+    country: {
+      nullable: true,
+      type: 'string'
+    },
+    employmentStatus: {
+      nullable: true,
+      type: 'string'
+    },
+    gender: {
+      nullable: true,
+      type: 'string'
+    },
+    pronouns: {
+      nullable: true,
+      type: 'string'
+    },
+    relationshipStatus: {
+      nullable: true,
+      type: 'string'
+    },
+    sexualOrientation: {
+      nullable: true,
+      type: 'string'
+    },
+    language: {
+      nullable: true,
+      type: 'string'
+    },
+    profession: {
+      nullable: true,
+      type: 'string'
+    },
+    birthdate: {
+      nullable: true,
+      type: 'number'
+    },
+    realName: {
+      nullable: true,
+      type: 'string'
+    },
+    hobbies: {
+      nullable: true,
+      type: 'string'
+    },
+    ethAddress: ethAddressSchema,
+    version: {
+      type: 'number'
+    },
+    tutorialStep: {
+      type: 'number'
+    },
+    email: {
+      type: 'string',
+      nullable: true
+    },
+    blocked: {
+      type: 'array',
+      items: {
+        type: 'string'
+      },
+      nullable: true
+    },
+    muted: {
+      type: 'array',
+      items: {
+        type: 'string'
+      },
+      nullable: true
+    },
+    interests: {
+      type: 'array',
+      items: {
+        type: 'string'
+      },
+      nullable: true
+    },
+    hasClaimedName: {
+      type: 'boolean'
+    },
+    hasConnectedWeb3: {
+      type: 'boolean',
+      nullable: true
+    },
+    avatar: avatarInfoSchema
+  },
+  additionalProperties: true
 }

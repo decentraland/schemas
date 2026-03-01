@@ -1,17 +1,21 @@
-import expect from 'expect'
-import { BodyPartCategory, HideableWearableCategory, WearableCategory } from '../../../../src'
+import { expect } from 'expect'
+import type { HideableWearableCategory } from '../../../../src'
+import { BodyPartCategory, hideableWearableCategorySchema, WearableCategory } from '../../../../src'
 import { testTypeSignature } from '../../../test-utils'
+import { generateLazyValidator } from '../../../../src/validation/index.js'
+
+const validateHideableWearableCategory = generateLazyValidator(hideableWearableCategorySchema)
 
 describe('HideableWearableCategory tests', () => {
   const hideableWearableCategories: HideableWearableCategory[] = [BodyPartCategory.HANDS, WearableCategory.EYES]
 
-  testTypeSignature(HideableWearableCategory, hideableWearableCategories[0])
-  testTypeSignature(HideableWearableCategory, hideableWearableCategories[1])
+  testTypeSignature({ schema: hideableWearableCategorySchema }, hideableWearableCategories[0])
+  testTypeSignature({ schema: hideableWearableCategorySchema }, hideableWearableCategories[1])
 
   it('static tests must pass', () => {
-    expect(HideableWearableCategory.validate(hideableWearableCategories[0])).toEqual(true)
-    expect(HideableWearableCategory.validate(hideableWearableCategories[1])).toEqual(true)
-    expect(HideableWearableCategory.validate(null)).toEqual(false)
-    expect(HideableWearableCategory.validate({})).toEqual(false)
+    expect(validateHideableWearableCategory(hideableWearableCategories[0])).toEqual(true)
+    expect(validateHideableWearableCategory(hideableWearableCategories[1])).toEqual(true)
+    expect(validateHideableWearableCategory(null)).toEqual(false)
+    expect(validateHideableWearableCategory({})).toEqual(false)
   })
 })

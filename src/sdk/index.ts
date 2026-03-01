@@ -1,2 +1,2 @@
-export * from './ws'
-export * from './project'
+export * from './ws/index.js'
+export * from './project/index.js'

@@ -1,3 +1,3 @@
-export * from './checks'
-export * from './client'
-export * from './content-types'
+export * from './checks.js'
+export * from './client.js'
+export * from './content-types.js'

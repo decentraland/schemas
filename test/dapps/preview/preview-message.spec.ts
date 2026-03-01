@@ -1,17 +1,20 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import sinon from 'sinon'
-import { PreviewMessageType, sendMessage } from '../../../src'
+import { PreviewMessageType, previewMessageTypeSchema, sendMessage } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validatePreviewMessageType = generateLazyValidator(previewMessageTypeSchema)
 
 describe('PreviewMessageType tests', () => {
   const previewMessageType: PreviewMessageType = PreviewMessageType.LOAD
 
-  testTypeSignature(PreviewMessageType, previewMessageType)
+  testTypeSignature({ schema: previewMessageTypeSchema }, previewMessageType)
 
   it('static tests must pass', () => {
-    expect(PreviewMessageType.validate(previewMessageType)).toEqual(true)
-    expect(PreviewMessageType.validate(null)).toEqual(false)
-    expect(PreviewMessageType.validate({})).toEqual(false)
+    expect(validatePreviewMessageType(previewMessageType)).toEqual(true)
+    expect(validatePreviewMessageType(null)).toEqual(false)
+    expect(validatePreviewMessageType({})).toEqual(false)
   })
 
   it('should send a LOAD message', () => {

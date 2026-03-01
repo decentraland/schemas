@@ -1,6 +1,9 @@
-import expect from 'expect'
-import { Account } from '../../src'
+import { expect } from 'expect'
+import { type Account, accountSchema } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateAccount = generateLazyValidator(accountSchema)
 
 describe('Account tests', () => {
   const account: Account = {
@@ -14,11 +17,11 @@ describe('Account tests', () => {
     collections: 1
   }
 
-  testTypeSignature(Account, account)
+  testTypeSignature({ schema: accountSchema }, account)
 
   it('static tests must pass', () => {
-    expect(Account.validate(account)).toEqual(true)
-    expect(Account.validate(null)).toEqual(false)
-    expect(Account.validate({})).toEqual(false)
+    expect(validateAccount(account)).toEqual(true)
+    expect(validateAccount(null)).toEqual(false)
+    expect(validateAccount({})).toEqual(false)
   })
 })

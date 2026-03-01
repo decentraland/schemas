@@ -1,10 +1,10 @@
-import { AuthChain } from '../../misc/auth-chain'
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { BaseEvent, Events } from './base'
+import { AuthChain, authChainSchema } from '../../misc/auth-chain.js'
+import type { JSONSchema } from '../../validation/types.js'
+import { BaseEvent, EventType, EventSubTypeWorlds } from './base.js'
 
 export type WorldsPermissionGrantedEvent = BaseEvent & {
-  type: Events.Type.WORLD
-  subType: Events.SubType.Worlds.WORLDS_PERMISSION_GRANTED
+  type: EventType.WORLD
+  subType: EventSubTypeWorlds.WORLDS_PERMISSION_GRANTED
   metadata: {
     title: string
     description: string
@@ -16,8 +16,8 @@ export type WorldsPermissionGrantedEvent = BaseEvent & {
 }
 
 export type WorldsPermissionRevokedEvent = BaseEvent & {
-  type: Events.Type.WORLD
-  subType: Events.SubType.Worlds.WORLDS_PERMISSION_REVOKED
+  type: EventType.WORLD
+  subType: EventSubTypeWorlds.WORLDS_PERMISSION_REVOKED
   metadata: {
     title: string
     description: string
@@ -29,8 +29,8 @@ export type WorldsPermissionRevokedEvent = BaseEvent & {
 }
 
 export type WorldsAccessRestrictedEvent = BaseEvent & {
-  type: Events.Type.WORLD
-  subType: Events.SubType.Worlds.WORLDS_ACCESS_RESTRICTED
+  type: EventType.WORLD
+  subType: EventSubTypeWorlds.WORLDS_ACCESS_RESTRICTED
   metadata: {
     title: string
     description: string
@@ -40,8 +40,8 @@ export type WorldsAccessRestrictedEvent = BaseEvent & {
 }
 
 export type WorldsAccessRestoredEvent = BaseEvent & {
-  type: Events.Type.WORLD
-  subType: Events.SubType.Worlds.WORLDS_ACCESS_RESTORED
+  type: EventType.WORLD
+  subType: EventSubTypeWorlds.WORLDS_ACCESS_RESTORED
   metadata: {
     title: string
     description: string
@@ -51,8 +51,8 @@ export type WorldsAccessRestoredEvent = BaseEvent & {
 }
 
 export type WorldsMissingResourcesEvent = BaseEvent & {
-  type: Events.Type.WORLD
-  subType: Events.SubType.Worlds.WORLDS_MISSING_RESOURCES
+  type: EventType.WORLD
+  subType: EventSubTypeWorlds.WORLDS_MISSING_RESOURCES
   metadata: {
     title: string
     description: string
@@ -63,8 +63,8 @@ export type WorldsMissingResourcesEvent = BaseEvent & {
 }
 
 export type WorldDeploymentEvent = BaseEvent & {
-  type: Events.Type.WORLD
-  subType: Events.SubType.Worlds.DEPLOYMENT
+  type: EventType.WORLD
+  subType: EventSubTypeWorlds.DEPLOYMENT
   entity: {
     entityId: string
     authChain: AuthChain
@@ -76,8 +76,8 @@ export type WorldDeploymentEvent = BaseEvent & {
 }
 
 export type WorldScenesUndeploymentEvent = BaseEvent & {
-  type: Events.Type.WORLD
-  subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT
+  type: EventType.WORLD
+  subType: EventSubTypeWorlds.WORLD_SCENES_UNDEPLOYMENT
   metadata: {
     worldName: string
     scenes: Array<{
@@ -88,16 +88,16 @@ export type WorldScenesUndeploymentEvent = BaseEvent & {
 }
 
 export type WorldUndeploymentEvent = BaseEvent & {
-  type: Events.Type.WORLD
-  subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT
+  type: EventType.WORLD
+  subType: EventSubTypeWorlds.WORLD_UNDEPLOYMENT
   metadata: {
     worldName: string
   }
 }
 
 export type WorldSpawnCoordinateSetEvent = BaseEvent & {
-  type: Events.Type.WORLD
-  subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET
+  type: EventType.WORLD
+  subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET
   metadata: {
     name: string
     oldCoordinate: {
@@ -112,8 +112,8 @@ export type WorldSpawnCoordinateSetEvent = BaseEvent & {
 }
 
 export type WorldSettingsChangedEvent = BaseEvent & {
-  type: Events.Type.WORLD
-  subType: Events.SubType.Worlds.WORLD_SETTINGS_CHANGED
+  type: EventType.WORLD
+  subType: EventSubTypeWorlds.WORLD_SETTINGS_CHANGED
   metadata: {
     worldName: string
     title?: string
@@ -128,297 +128,259 @@ export type WorldSettingsChangedEvent = BaseEvent & {
   }
 }
 
-export namespace WorldSettingsChangedEvent {
-  export const schema: JSONSchema<WorldSettingsChangedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.WORLD },
-      subType: { type: 'string', const: Events.SubType.Worlds.WORLD_SETTINGS_CHANGED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          worldName: { type: 'string' },
-          title: { type: 'string', nullable: true },
-          description: { type: 'string', nullable: true },
-          contentRating: { type: 'string', nullable: true },
-          skyboxTime: { type: 'number', nullable: true },
-          categories: { type: 'array', items: { type: 'string' }, nullable: true },
-          singlePlayer: { type: 'boolean', nullable: true },
-          showInPlaces: { type: 'boolean', nullable: true },
-          thumbnailUrl: { type: 'string', nullable: true },
-          accessType: { type: 'string', nullable: true }
-        },
-        required: ['worldName'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-}
-
-export namespace WorldSpawnCoordinateSetEvent {
-  export const schema: JSONSchema<WorldSpawnCoordinateSetEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.WORLD },
-      subType: { type: 'string', const: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          name: { type: 'string', pattern: '^[a-zA-Z0-9_-]+\\.dcl\\.eth|[a-zA-Z0-9_-]+\\.eth$' },
-          oldCoordinate: {
-            type: 'object',
-            properties: { x: { type: 'number' }, y: { type: 'number' } },
-            required: ['x', 'y'],
-            additionalProperties: false,
-            nullable: true
-          },
-          newCoordinate: {
-            type: 'object',
-            properties: { x: { type: 'number' }, y: { type: 'number' } },
-            required: ['x', 'y'],
-            additionalProperties: false
-          }
-        },
-        required: ['name', 'oldCoordinate', 'newCoordinate'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<WorldSpawnCoordinateSetEvent> = generateLazyValidator(schema)
-}
-
-export namespace WorldScenesUndeploymentEvent {
-  export const schema: JSONSchema<WorldScenesUndeploymentEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.WORLD },
-      subType: { type: 'string', const: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          worldName: { type: 'string' },
-          scenes: {
-            type: 'array',
-            items: {
-              type: 'object',
-              properties: {
-                entityId: { type: 'string' },
-                baseParcel: { type: 'string' }
-              },
-              required: ['entityId', 'baseParcel'],
-              additionalProperties: false
-            },
-            minItems: 1
-          }
-        },
-        required: ['worldName', 'scenes'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<WorldScenesUndeploymentEvent> = generateLazyValidator(schema)
-}
-
-export namespace WorldUndeploymentEvent {
-  export const schema: JSONSchema<WorldUndeploymentEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.WORLD },
-      subType: { type: 'string', const: Events.SubType.Worlds.WORLD_UNDEPLOYMENT },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          worldName: { type: 'string' }
-        },
-        required: ['worldName'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<WorldUndeploymentEvent> = generateLazyValidator(schema)
-}
-
-export namespace WorldDeploymentEvent {
-  export const schema: JSONSchema<WorldDeploymentEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.WORLD },
-      subType: { type: 'string', const: Events.SubType.Worlds.DEPLOYMENT },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      entity: {
-        type: 'object',
-        properties: { entityId: { type: 'string' }, authChain: AuthChain.schema },
-        additionalProperties: true,
-        required: ['entityId', 'authChain']
+export const worldSettingsChangedEventSchema: JSONSchema<WorldSettingsChangedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.WORLD },
+    subType: { type: 'string', const: EventSubTypeWorlds.WORLD_SETTINGS_CHANGED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        worldName: { type: 'string' },
+        title: { type: 'string', nullable: true },
+        description: { type: 'string', nullable: true },
+        contentRating: { type: 'string', nullable: true },
+        skyboxTime: { type: 'number', nullable: true },
+        categories: { type: 'array', items: { type: 'string' }, nullable: true },
+        singlePlayer: { type: 'boolean', nullable: true },
+        showInPlaces: { type: 'boolean', nullable: true },
+        thumbnailUrl: { type: 'string', nullable: true },
+        accessType: { type: 'string', nullable: true }
       },
-      contentServerUrls: { type: 'array', items: { type: 'string' }, nullable: true },
-      force: { type: 'boolean', nullable: true },
-      animation: { type: 'string', nullable: true },
-      lods: { type: 'array', items: { type: 'string' }, nullable: true }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'entity'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<WorldDeploymentEvent> = generateLazyValidator(schema)
+      required: ['worldName'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
-export namespace WorldsAccessRestoredEvent {
-  export const schema: JSONSchema<WorldsAccessRestoredEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.WORLD },
-      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_ACCESS_RESTORED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          title: { type: 'string' },
-          description: { type: 'string' },
-          url: { type: 'string' },
-          attendee: { type: 'string' }
+export const worldSpawnCoordinateSetEventSchema: JSONSchema<WorldSpawnCoordinateSetEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.WORLD },
+    subType: { type: 'string', const: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        name: { type: 'string', pattern: '^[a-zA-Z0-9_-]+\\.dcl\\.eth|[a-zA-Z0-9_-]+\\.eth$' },
+        oldCoordinate: {
+          type: 'object',
+          properties: { x: { type: 'number' }, y: { type: 'number' } },
+          required: ['x', 'y'],
+          additionalProperties: false,
+          nullable: true
         },
-        required: ['title', 'description', 'url', 'attendee'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<WorldsAccessRestoredEvent> = generateLazyValidator(schema)
+        newCoordinate: {
+          type: 'object',
+          properties: { x: { type: 'number' }, y: { type: 'number' } },
+          required: ['x', 'y'],
+          additionalProperties: false
+        }
+      },
+      required: ['name', 'oldCoordinate', 'newCoordinate'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
-export namespace WorldsPermissionRevokedEvent {
-  export const schema: JSONSchema<WorldsPermissionRevokedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.WORLD },
-      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_PERMISSION_REVOKED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          title: { type: 'string' },
-          description: { type: 'string' },
-          world: { type: 'string' },
-          permissions: { type: 'array', items: { type: 'string' } },
-          url: { type: 'string' },
-          address: { type: 'string' }
-        },
-        required: ['title', 'description', 'world', 'permissions', 'url', 'address'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<WorldsPermissionRevokedEvent> = generateLazyValidator(schema)
+export const worldScenesUndeploymentEventSchema: JSONSchema<WorldScenesUndeploymentEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.WORLD },
+    subType: { type: 'string', const: EventSubTypeWorlds.WORLD_SCENES_UNDEPLOYMENT },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        worldName: { type: 'string' },
+        scenes: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              entityId: { type: 'string' },
+              baseParcel: { type: 'string' }
+            },
+            required: ['entityId', 'baseParcel'],
+            additionalProperties: false
+          },
+          minItems: 1
+        }
+      },
+      required: ['worldName', 'scenes'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
-export namespace WorldsPermissionGrantedEvent {
-  export const schema: JSONSchema<WorldsPermissionGrantedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.WORLD },
-      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_PERMISSION_GRANTED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          title: { type: 'string' },
-          description: { type: 'string' },
-          world: { type: 'string' },
-          permissions: { type: 'array', items: { type: 'string' } },
-          url: { type: 'string' },
-          address: { type: 'string' }
-        },
-        required: ['title', 'description', 'world', 'permissions', 'url', 'address'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<WorldsPermissionGrantedEvent> = generateLazyValidator(schema)
+export const worldUndeploymentEventSchema: JSONSchema<WorldUndeploymentEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.WORLD },
+    subType: { type: 'string', const: EventSubTypeWorlds.WORLD_UNDEPLOYMENT },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        worldName: { type: 'string' }
+      },
+      required: ['worldName'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
-export namespace WorldsAccessRestrictedEvent {
-  export const schema: JSONSchema<WorldsAccessRestrictedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.WORLD },
-      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_ACCESS_RESTRICTED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          title: { type: 'string' },
-          description: { type: 'string' },
-          when: { type: 'number' },
-          address: { type: 'string' }
-        },
-        required: ['title', 'description', 'when', 'address'],
-        additionalProperties: false
-      }
+export const worldDeploymentEventSchema: JSONSchema<WorldDeploymentEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.WORLD },
+    subType: { type: 'string', const: EventSubTypeWorlds.DEPLOYMENT },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    entity: {
+      type: 'object',
+      properties: { entityId: { type: 'string' }, authChain: authChainSchema },
+      additionalProperties: true,
+      required: ['entityId', 'authChain']
     },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<WorldsAccessRestrictedEvent> = generateLazyValidator(schema)
+    contentServerUrls: { type: 'array', items: { type: 'string' }, nullable: true },
+    force: { type: 'boolean', nullable: true },
+    animation: { type: 'string', nullable: true },
+    lods: { type: 'array', items: { type: 'string' }, nullable: true }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'entity'],
+  additionalProperties: false
 }
 
-export namespace WorldsMissingResourcesEvent {
-  export const schema: JSONSchema<WorldsMissingResourcesEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.WORLD },
-      subType: { type: 'string', const: Events.SubType.Worlds.WORLDS_MISSING_RESOURCES },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          title: { type: 'string' },
-          description: { type: 'string' },
-          url: { type: 'string' },
-          when: { type: 'number' },
-          address: { type: 'string' }
-        },
-        required: ['title', 'description', 'url', 'when', 'address'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
+export const worldsAccessRestoredEventSchema: JSONSchema<WorldsAccessRestoredEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.WORLD },
+    subType: { type: 'string', const: EventSubTypeWorlds.WORLDS_ACCESS_RESTORED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        description: { type: 'string' },
+        url: { type: 'string' },
+        attendee: { type: 'string' }
+      },
+      required: ['title', 'description', 'url', 'attendee'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
+}
 
-  export const validate: ValidateFunction<WorldsMissingResourcesEvent> = generateLazyValidator(schema)
+export const worldsPermissionRevokedEventSchema: JSONSchema<WorldsPermissionRevokedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.WORLD },
+    subType: { type: 'string', const: EventSubTypeWorlds.WORLDS_PERMISSION_REVOKED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        description: { type: 'string' },
+        world: { type: 'string' },
+        permissions: { type: 'array', items: { type: 'string' } },
+        url: { type: 'string' },
+        address: { type: 'string' }
+      },
+      required: ['title', 'description', 'world', 'permissions', 'url', 'address'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
+}
+
+export const worldsPermissionGrantedEventSchema: JSONSchema<WorldsPermissionGrantedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.WORLD },
+    subType: { type: 'string', const: EventSubTypeWorlds.WORLDS_PERMISSION_GRANTED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        description: { type: 'string' },
+        world: { type: 'string' },
+        permissions: { type: 'array', items: { type: 'string' } },
+        url: { type: 'string' },
+        address: { type: 'string' }
+      },
+      required: ['title', 'description', 'world', 'permissions', 'url', 'address'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
+}
+
+export const worldsAccessRestrictedEventSchema: JSONSchema<WorldsAccessRestrictedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.WORLD },
+    subType: { type: 'string', const: EventSubTypeWorlds.WORLDS_ACCESS_RESTRICTED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        description: { type: 'string' },
+        when: { type: 'number' },
+        address: { type: 'string' }
+      },
+      required: ['title', 'description', 'when', 'address'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
+}
+
+export const worldsMissingResourcesEventSchema: JSONSchema<WorldsMissingResourcesEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.WORLD },
+    subType: { type: 'string', const: EventSubTypeWorlds.WORLDS_MISSING_RESOURCES },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        description: { type: 'string' },
+        url: { type: 'string' },
+        when: { type: 'number' },
+        address: { type: 'string' }
+      },
+      required: ['title', 'description', 'url', 'when', 'address'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }

@@ -1,6 +1,10 @@
-import expect from 'expect'
-import { BodyShape, WearableRepresentation } from '../../../../src'
+import { expect } from 'expect'
+import type { WearableRepresentation } from '../../../../src'
+import { BodyShape, wearableRepresentationSchema } from '../../../../src'
 import { testTypeSignature } from '../../../test-utils'
+import { generateLazyValidator } from '../../../../src/validation/index.js'
+
+const validateWearableRepresentation = generateLazyValidator(wearableRepresentationSchema)
 
 describe('Wearable representation tests', () => {
   const representation: WearableRepresentation = {
@@ -11,17 +15,17 @@ describe('Wearable representation tests', () => {
     overrideReplaces: []
   }
 
-  testTypeSignature(WearableRepresentation, representation)
+  testTypeSignature({ schema: wearableRepresentationSchema }, representation)
 
   it('static tests must pass', () => {
-    expect(WearableRepresentation.validate(representation)).toEqual(true)
-    expect(WearableRepresentation.validate(null)).toEqual(false)
-    expect(WearableRepresentation.validate({})).toEqual(false)
+    expect(validateWearableRepresentation(representation)).toEqual(true)
+    expect(validateWearableRepresentation(null)).toEqual(false)
+    expect(validateWearableRepresentation({})).toEqual(false)
   })
 
   it('representation without body shape fails', () => {
     expect(
-      WearableRepresentation.validate({
+      validateWearableRepresentation({
         ...representation,
         bodyShapes: []
       })
@@ -30,7 +34,7 @@ describe('Wearable representation tests', () => {
 
   it('representation with repeated body shapes fails', () => {
     expect(
-      WearableRepresentation.validate({
+      validateWearableRepresentation({
         ...representation,
         bodyShapes: [BodyShape.FEMALE, BodyShape.FEMALE]
       })
@@ -39,7 +43,7 @@ describe('Wearable representation tests', () => {
 
   it('representation without content fails', () => {
     expect(
-      WearableRepresentation.validate({
+      validateWearableRepresentation({
         ...representation,
         contents: []
       })
@@ -48,7 +52,7 @@ describe('Wearable representation tests', () => {
 
   it('representation with repeated content fails', () => {
     expect(
-      WearableRepresentation.validate({
+      validateWearableRepresentation({
         ...representation,
         contents: ['file1', 'file1']
       })
@@ -57,7 +61,7 @@ describe('Wearable representation tests', () => {
 
   it('main file not in contents fails', () => {
     expect(
-      WearableRepresentation.validate({
+      validateWearableRepresentation({
         ...representation,
         mainFile: 'file1',
         contents: ['file2', 'file3']

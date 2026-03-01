@@ -1,6 +1,10 @@
-import expect from 'expect'
-import { Source } from '../../../src'
+import { expect } from 'expect'
+import type { Source } from '../../../src'
+import { sourceSchema } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateSource = generateLazyValidator(sourceSchema)
 
 describe('Source tests', () => {
   const source: Source = {
@@ -13,17 +17,17 @@ describe('Source tests', () => {
     isEmpty: false
   }
 
-  testTypeSignature(Source, source)
+  testTypeSignature({ schema: sourceSchema }, source)
 
   it('static tests must pass', () => {
-    expect(Source.validate(source)).toEqual(true)
-    expect(Source.validate(null)).toEqual(false)
-    expect(Source.validate({})).toEqual(false)
+    expect(validateSource(source)).toEqual(true)
+    expect(validateSource(null)).toEqual(false)
+    expect(validateSource({})).toEqual(false)
   })
 
   it('non-integer number fails on point', () => {
     expect(
-      Source.validate({
+      validateSource({
         ...source,
         point: {
           x: 1.1,
@@ -35,7 +39,7 @@ describe('Source tests', () => {
 
   it('non-integer number fails on layout', () => {
     expect(
-      Source.validate({
+      validateSource({
         ...source,
         layout: {
           rows: 1.1,
@@ -47,7 +51,7 @@ describe('Source tests', () => {
 
   it('invalid string on rotation fails', () => {
     expect(
-      Source.validate({
+      validateSource({
         ...source,
         rotation: 'invalid'
       })

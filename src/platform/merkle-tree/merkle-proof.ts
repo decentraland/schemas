@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
+import type { JSONSchema } from '../../validation/types.js'
 
 /**
  * Merkle Proof
@@ -15,32 +15,28 @@ export type MerkleProof = {
  * Merkle Proof
  * @alpha
  */
-export namespace MerkleProof {
-  export const schema: JSONSchema<MerkleProof> = {
-    type: 'object',
-    properties: {
-      proof: {
-        type: 'array',
-        items: {
-          type: 'string'
-        }
-      },
-      index: {
-        type: 'number'
-      },
-      hashingKeys: {
-        type: 'array',
-        items: {
-          type: 'string'
-        }
-      },
-      entityHash: {
+export const merkleProofSchema: JSONSchema<MerkleProof> = {
+  type: 'object',
+  properties: {
+    proof: {
+      type: 'array',
+      items: {
         type: 'string'
       }
     },
-    required: ['entityHash', 'hashingKeys', 'index', 'proof'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<MerkleProof> = generateLazyValidator(schema)
+    index: {
+      type: 'number'
+    },
+    hashingKeys: {
+      type: 'array',
+      items: {
+        type: 'string'
+      }
+    },
+    entityHash: {
+      type: 'string'
+    }
+  },
+  required: ['entityHash', 'hashingKeys', 'index', 'proof'],
+  additionalProperties: true
 }

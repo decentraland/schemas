@@ -1,10 +1,14 @@
-import expect from 'expect'
-import { Entity } from '../../src'
+import { expect } from 'expect'
+import type { Entity } from '../../src'
+import { entitySchema } from '../../src'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateEntity = generateLazyValidator(entitySchema)
 
 describe('Entity', () => {
   it('sanity', () => {
     expect(
-      Entity.validate({
+      validateEntity({
         content: [],
         id: 'QmUsqJaHc5HQaBrojhBdjF4fr5MQc6CqhwZjqwhVRftNAo',
         pointers: ['asd'],
@@ -15,7 +19,7 @@ describe('Entity', () => {
       } as Entity)
     ).toEqual(true)
     expect(
-      Entity.validate({
+      validateEntity({
         content: [],
         id: 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5q',
         pointers: ['asd'],
@@ -26,7 +30,7 @@ describe('Entity', () => {
       } as Entity)
     ).toEqual(true)
     expect(
-      Entity.validate({
+      validateEntity({
         content: [],
         id: 'QmUsqJaHc5HQaBrojhBdjF4fr5MQc6CqhwZjqwhVRftNAo-invalid',
         pointers: ['asd'],

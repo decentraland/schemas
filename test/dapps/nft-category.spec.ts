@@ -1,15 +1,18 @@
-import expect from 'expect'
-import { NFTCategory } from '../../src'
+import { expect } from 'expect'
+import { NFTCategory, nftCategorySchema } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateNFTCategory = generateLazyValidator(nftCategorySchema)
 
 describe('NFTCategory tests', () => {
   const nftCategory: NFTCategory = NFTCategory.PARCEL
 
-  testTypeSignature(NFTCategory, nftCategory)
+  testTypeSignature({ schema: nftCategorySchema }, nftCategory)
 
   it('static tests must pass', () => {
-    expect(NFTCategory.validate(nftCategory)).toEqual(true)
-    expect(NFTCategory.validate(null)).toEqual(false)
-    expect(NFTCategory.validate({})).toEqual(false)
+    expect(validateNFTCategory(nftCategory)).toEqual(true)
+    expect(validateNFTCategory(null)).toEqual(false)
+    expect(validateNFTCategory({})).toEqual(false)
   })
 })

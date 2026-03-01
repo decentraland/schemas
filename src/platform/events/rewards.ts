@@ -1,7 +1,7 @@
-import { EthAddress } from '../../misc'
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { BaseEvent, Events } from './base'
-import { createEventSchema } from './utils'
+import { EthAddress } from '../../misc/index.js'
+import type { JSONSchema } from '../../validation/types.js'
+import { BaseEvent, EventType, EventSubTypeRewards } from './base.js'
+import { createEventSchema } from './utils.js'
 
 type BaseEventMetadata = {
   title: string
@@ -24,38 +24,38 @@ export type CampaignWellKnownIssueEventMetadata = BaseEventMetadata & {
 }
 
 export type RewardInProgressEvent = BaseEvent & {
-  type: Events.Type.REWARDS
-  subType: Events.SubType.Rewards.REWARD_IN_PROGRESS
+  type: EventType.REWARDS
+  subType: EventSubTypeRewards.REWARD_IN_PROGRESS
   metadata: RewardEventMetadata
 }
 
 export type RewardAssignedEvent = BaseEvent & {
-  type: Events.Type.REWARDS
-  subType: Events.SubType.Rewards.REWARD_ASSIGNED
+  type: EventType.REWARDS
+  subType: EventSubTypeRewards.REWARD_ASSIGNED
   metadata: RewardEventMetadata
 }
 
 export type CampaignOutOfFundsEvent = BaseEvent & {
-  type: Events.Type.REWARDS
-  subType: Events.SubType.Rewards.CAMPAIGN_OUT_OF_FUNDS
+  type: EventType.REWARDS
+  subType: EventSubTypeRewards.CAMPAIGN_OUT_OF_FUNDS
   metadata: CampaignWellKnownIssueEventMetadata
 }
 
 export type CampaignGasPriceHigherThanExpectedEvent = BaseEvent & {
-  type: Events.Type.REWARDS
-  subType: Events.SubType.Rewards.CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED
+  type: EventType.REWARDS
+  subType: EventSubTypeRewards.CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED
   metadata: CampaignWellKnownIssueEventMetadata
 }
 
 export type CampaignOutOfStockEvent = BaseEvent & {
-  type: Events.Type.REWARDS
-  subType: Events.SubType.Rewards.CAMPAIGN_OUT_OF_STOCK
+  type: EventType.REWARDS
+  subType: EventSubTypeRewards.CAMPAIGN_OUT_OF_STOCK
   metadata: CampaignWellKnownIssueEventMetadata
 }
 
 export type RewardDelayedEvent = BaseEvent & {
-  type: Events.Type.REWARDS
-  subType: Events.SubType.Rewards.REWARD_DELAYED
+  type: EventType.REWARDS
+  subType: EventSubTypeRewards.REWARD_DELAYED
   metadata: RewardEventMetadata
 }
 
@@ -89,56 +89,38 @@ const campaignEventMetadataSchema: JSONSchema<CampaignWellKnownIssueEventMetadat
   additionalProperties: false
 }
 
-export namespace RewardInProgressEvent {
-  export const schema: JSONSchema<RewardInProgressEvent> = createEventSchema(
-    Events.Type.REWARDS,
-    Events.SubType.Rewards.REWARD_IN_PROGRESS,
-    rewardEventMetadataSchema
-  )
-  export const validate: ValidateFunction<RewardInProgressEvent> = generateLazyValidator(schema)
-}
+export const rewardInProgressEventSchema: JSONSchema<RewardInProgressEvent> = createEventSchema(
+  EventType.REWARDS,
+  EventSubTypeRewards.REWARD_IN_PROGRESS,
+  rewardEventMetadataSchema
+)
 
-export namespace RewardAssignedEvent {
-  export const schema: JSONSchema<RewardAssignedEvent> = createEventSchema(
-    Events.Type.REWARDS,
-    Events.SubType.Rewards.REWARD_ASSIGNED,
-    rewardEventMetadataSchema
-  )
-  export const validate: ValidateFunction<RewardAssignedEvent> = generateLazyValidator(schema)
-}
+export const rewardAssignedEventSchema: JSONSchema<RewardAssignedEvent> = createEventSchema(
+  EventType.REWARDS,
+  EventSubTypeRewards.REWARD_ASSIGNED,
+  rewardEventMetadataSchema
+)
 
-export namespace CampaignOutOfFundsEvent {
-  export const schema: JSONSchema<CampaignOutOfFundsEvent> = createEventSchema(
-    Events.Type.REWARDS,
-    Events.SubType.Rewards.CAMPAIGN_OUT_OF_FUNDS,
-    campaignEventMetadataSchema
-  )
-  export const validate: ValidateFunction<CampaignOutOfFundsEvent> = generateLazyValidator(schema)
-}
+export const campaignOutOfFundsEventSchema: JSONSchema<CampaignOutOfFundsEvent> = createEventSchema(
+  EventType.REWARDS,
+  EventSubTypeRewards.CAMPAIGN_OUT_OF_FUNDS,
+  campaignEventMetadataSchema
+)
 
-export namespace CampaignGasPriceHigherThanExpectedEvent {
-  export const schema: JSONSchema<CampaignGasPriceHigherThanExpectedEvent> = createEventSchema(
-    Events.Type.REWARDS,
-    Events.SubType.Rewards.CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED,
-    campaignEventMetadataSchema
-  )
-  export const validate: ValidateFunction<CampaignGasPriceHigherThanExpectedEvent> = generateLazyValidator(schema)
-}
+export const campaignGasPriceHigherThanExpectedEventSchema: JSONSchema<CampaignGasPriceHigherThanExpectedEvent> = createEventSchema(
+  EventType.REWARDS,
+  EventSubTypeRewards.CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED,
+  campaignEventMetadataSchema
+)
 
-export namespace CampaignOutOfStockEvent {
-  export const schema: JSONSchema<CampaignOutOfStockEvent> = createEventSchema(
-    Events.Type.REWARDS,
-    Events.SubType.Rewards.CAMPAIGN_OUT_OF_STOCK,
-    campaignEventMetadataSchema
-  )
-  export const validate: ValidateFunction<CampaignOutOfStockEvent> = generateLazyValidator(schema)
-}
+export const campaignOutOfStockEventSchema: JSONSchema<CampaignOutOfStockEvent> = createEventSchema(
+  EventType.REWARDS,
+  EventSubTypeRewards.CAMPAIGN_OUT_OF_STOCK,
+  campaignEventMetadataSchema
+)
 
-export namespace RewardDelayedEvent {
-  export const schema: JSONSchema<RewardDelayedEvent> = createEventSchema(
-    Events.Type.REWARDS,
-    Events.SubType.Rewards.REWARD_DELAYED,
-    rewardEventMetadataSchema
-  )
-  export const validate: ValidateFunction<RewardDelayedEvent> = generateLazyValidator(schema)
-}
+export const rewardDelayedEventSchema: JSONSchema<RewardDelayedEvent> = createEventSchema(
+  EventType.REWARDS,
+  EventSubTypeRewards.REWARD_DELAYED,
+  rewardEventMetadataSchema
+)

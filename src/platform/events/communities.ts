@@ -1,14 +1,14 @@
-import { EthAddress } from '../../misc'
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { BaseEvent, Events } from './base'
+import { EthAddress } from '../../misc/index.js'
+import type { JSONSchema } from '../../validation/types.js'
+import { BaseEvent, EventType, EventSubTypeCommunity } from './base.js'
 
 type Audience = {
   addressesToNotify: EthAddress[]
 }
 
 export type CommunityDeletedEvent = BaseEvent & {
-  type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.DELETED
+  type: EventType.COMMUNITY
+  subType: EventSubTypeCommunity.DELETED
   metadata: {
     id: string
     name: string
@@ -17,36 +17,32 @@ export type CommunityDeletedEvent = BaseEvent & {
   }
 }
 
-export namespace CommunityDeletedEvent {
-  export const schema: JSONSchema<CommunityDeletedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.DELETED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 1 },
-      metadata: {
-        type: 'object',
-        properties: {
-          id: { type: 'string' },
-          name: { type: 'string' },
-          memberAddresses: { type: 'array', items: { type: 'string' } },
-          thumbnailUrl: { type: 'string' }
-        },
-        required: ['id', 'name', 'memberAddresses', 'thumbnailUrl'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CommunityDeletedEvent> = generateLazyValidator(schema)
+export const communityDeletedEventSchema: JSONSchema<CommunityDeletedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMUNITY },
+    subType: { type: 'string', const: EventSubTypeCommunity.DELETED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 1 },
+    metadata: {
+      type: 'object',
+      properties: {
+        id: { type: 'string' },
+        name: { type: 'string' },
+        memberAddresses: { type: 'array', items: { type: 'string' } },
+        thumbnailUrl: { type: 'string' }
+      },
+      required: ['id', 'name', 'memberAddresses', 'thumbnailUrl'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type CommunityDeletedContentViolationEvent = BaseEvent & {
-  type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.DELETED_CONTENT_VIOLATION
+  type: EventType.COMMUNITY
+  subType: EventSubTypeCommunity.DELETED_CONTENT_VIOLATION
   metadata: {
     id: string
     name: string
@@ -55,36 +51,32 @@ export type CommunityDeletedContentViolationEvent = BaseEvent & {
   }
 }
 
-export namespace CommunityDeletedContentViolationEvent {
-  export const schema: JSONSchema<CommunityDeletedContentViolationEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.DELETED_CONTENT_VIOLATION },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 1 },
-      metadata: {
-        type: 'object',
-        properties: {
-          id: { type: 'string' },
-          name: { type: 'string' },
-          ownerAddress: { type: 'string' },
-          thumbnailUrl: { type: 'string' }
-        },
-        required: ['id', 'name', 'ownerAddress', 'thumbnailUrl'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CommunityDeletedContentViolationEvent> = generateLazyValidator(schema)
+export const communityDeletedContentViolationEventSchema: JSONSchema<CommunityDeletedContentViolationEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMUNITY },
+    subType: { type: 'string', const: EventSubTypeCommunity.DELETED_CONTENT_VIOLATION },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 1 },
+    metadata: {
+      type: 'object',
+      properties: {
+        id: { type: 'string' },
+        name: { type: 'string' },
+        ownerAddress: { type: 'string' },
+        thumbnailUrl: { type: 'string' }
+      },
+      required: ['id', 'name', 'ownerAddress', 'thumbnailUrl'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type CommunityRenamedEvent = BaseEvent & {
-  type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.RENAMED
+  type: EventType.COMMUNITY
+  subType: EventSubTypeCommunity.RENAMED
   metadata: {
     id: string
     oldName: string
@@ -94,37 +86,33 @@ export type CommunityRenamedEvent = BaseEvent & {
   }
 }
 
-export namespace CommunityRenamedEvent {
-  export const schema: JSONSchema<CommunityRenamedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.RENAMED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 1 },
-      metadata: {
-        type: 'object',
-        properties: {
-          id: { type: 'string' },
-          oldName: { type: 'string' },
-          newName: { type: 'string' },
-          memberAddresses: { type: 'array', items: { type: 'string' } },
-          thumbnailUrl: { type: 'string' }
-        },
-        required: ['id', 'oldName', 'newName', 'memberAddresses', 'thumbnailUrl'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CommunityRenamedEvent> = generateLazyValidator(schema)
+export const communityRenamedEventSchema: JSONSchema<CommunityRenamedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMUNITY },
+    subType: { type: 'string', const: EventSubTypeCommunity.RENAMED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 1 },
+    metadata: {
+      type: 'object',
+      properties: {
+        id: { type: 'string' },
+        oldName: { type: 'string' },
+        newName: { type: 'string' },
+        memberAddresses: { type: 'array', items: { type: 'string' } },
+        thumbnailUrl: { type: 'string' }
+      },
+      required: ['id', 'oldName', 'newName', 'memberAddresses', 'thumbnailUrl'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type CommunityMemberBannedEvent = BaseEvent & {
-  type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.MEMBER_BANNED
+  type: EventType.COMMUNITY
+  subType: EventSubTypeCommunity.MEMBER_BANNED
   metadata: {
     id: string
     name: string
@@ -133,70 +121,62 @@ export type CommunityMemberBannedEvent = BaseEvent & {
   }
 }
 
-export namespace CommunityMemberBannedEvent {
-  export const schema: JSONSchema<CommunityMemberBannedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.MEMBER_BANNED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 1 },
-      metadata: {
-        type: 'object',
-        properties: {
-          id: { type: 'string' },
-          name: { type: 'string' },
-          memberAddress: { type: 'string' },
-          thumbnailUrl: { type: 'string' }
-        },
-        required: ['id', 'name', 'memberAddress', 'thumbnailUrl'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CommunityMemberBannedEvent> = generateLazyValidator(schema)
+export const communityMemberBannedEventSchema: JSONSchema<CommunityMemberBannedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMUNITY },
+    subType: { type: 'string', const: EventSubTypeCommunity.MEMBER_BANNED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 1 },
+    metadata: {
+      type: 'object',
+      properties: {
+        id: { type: 'string' },
+        name: { type: 'string' },
+        memberAddress: { type: 'string' },
+        thumbnailUrl: { type: 'string' }
+      },
+      required: ['id', 'name', 'memberAddress', 'thumbnailUrl'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type CommunityMemberLeftEvent = BaseEvent & {
-  type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.MEMBER_LEFT
+  type: EventType.COMMUNITY
+  subType: EventSubTypeCommunity.MEMBER_LEFT
   metadata: {
     id: string
     memberAddress: EthAddress
   }
 }
 
-export namespace CommunityMemberLeftEvent {
-  export const schema: JSONSchema<CommunityMemberLeftEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.MEMBER_LEFT },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 1 },
-      metadata: {
-        type: 'object',
-        properties: {
-          id: { type: 'string' },
-          memberAddress: { type: 'string' }
-        },
-        required: ['id', 'memberAddress'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CommunityMemberLeftEvent> = generateLazyValidator(schema)
+export const communityMemberLeftEventSchema: JSONSchema<CommunityMemberLeftEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMUNITY },
+    subType: { type: 'string', const: EventSubTypeCommunity.MEMBER_LEFT },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 1 },
+    metadata: {
+      type: 'object',
+      properties: {
+        id: { type: 'string' },
+        memberAddress: { type: 'string' }
+      },
+      required: ['id', 'memberAddress'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type CommunityMemberRemovedEvent = BaseEvent & {
-  type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.MEMBER_REMOVED
+  type: EventType.COMMUNITY
+  subType: EventSubTypeCommunity.MEMBER_REMOVED
   metadata: {
     id: string
     name: string
@@ -205,36 +185,32 @@ export type CommunityMemberRemovedEvent = BaseEvent & {
   }
 }
 
-export namespace CommunityMemberRemovedEvent {
-  export const schema: JSONSchema<CommunityMemberRemovedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.MEMBER_REMOVED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 1 },
-      metadata: {
-        type: 'object',
-        properties: {
-          id: { type: 'string' },
-          name: { type: 'string' },
-          memberAddress: { type: 'string' },
-          thumbnailUrl: { type: 'string' }
-        },
-        required: ['id', 'name', 'memberAddress', 'thumbnailUrl'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CommunityMemberRemovedEvent> = generateLazyValidator(schema)
+export const communityMemberRemovedEventSchema: JSONSchema<CommunityMemberRemovedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMUNITY },
+    subType: { type: 'string', const: EventSubTypeCommunity.MEMBER_REMOVED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 1 },
+    metadata: {
+      type: 'object',
+      properties: {
+        id: { type: 'string' },
+        name: { type: 'string' },
+        memberAddress: { type: 'string' },
+        thumbnailUrl: { type: 'string' }
+      },
+      required: ['id', 'name', 'memberAddress', 'thumbnailUrl'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type CommunityRequestToJoinReceivedEvent = BaseEvent & {
-  type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED
+  type: EventType.COMMUNITY
+  subType: EventSubTypeCommunity.REQUEST_TO_JOIN_RECEIVED
   metadata: Audience & {
     communityId: string
     communityName: string
@@ -244,38 +220,34 @@ export type CommunityRequestToJoinReceivedEvent = BaseEvent & {
   }
 }
 
-export namespace CommunityRequestToJoinReceivedEvent {
-  export const schema: JSONSchema<CommunityRequestToJoinReceivedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.REQUEST_TO_JOIN_RECEIVED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 1 },
-      metadata: {
-        type: 'object',
-        properties: {
-          communityId: { type: 'string' },
-          communityName: { type: 'string' },
-          memberAddress: { type: 'string' },
-          memberName: { type: 'string' },
-          thumbnailUrl: { type: 'string' },
-          addressesToNotify: { type: 'array', items: { type: 'string' } }
-        },
-        required: ['communityId', 'communityName', 'memberAddress', 'memberName', 'thumbnailUrl', 'addressesToNotify'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CommunityRequestToJoinReceivedEvent> = generateLazyValidator(schema)
+export const communityRequestToJoinReceivedEventSchema: JSONSchema<CommunityRequestToJoinReceivedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMUNITY },
+    subType: { type: 'string', const: EventSubTypeCommunity.REQUEST_TO_JOIN_RECEIVED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 1 },
+    metadata: {
+      type: 'object',
+      properties: {
+        communityId: { type: 'string' },
+        communityName: { type: 'string' },
+        memberAddress: { type: 'string' },
+        memberName: { type: 'string' },
+        thumbnailUrl: { type: 'string' },
+        addressesToNotify: { type: 'array', items: { type: 'string' } }
+      },
+      required: ['communityId', 'communityName', 'memberAddress', 'memberName', 'thumbnailUrl', 'addressesToNotify'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type CommunityRequestToJoinAcceptedEvent = BaseEvent & {
-  type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.REQUEST_TO_JOIN_ACCEPTED
+  type: EventType.COMMUNITY
+  subType: EventSubTypeCommunity.REQUEST_TO_JOIN_ACCEPTED
   metadata: {
     communityId: string
     communityName: string
@@ -284,36 +256,32 @@ export type CommunityRequestToJoinAcceptedEvent = BaseEvent & {
   }
 }
 
-export namespace CommunityRequestToJoinAcceptedEvent {
-  export const schema: JSONSchema<CommunityRequestToJoinAcceptedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.REQUEST_TO_JOIN_ACCEPTED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 1 },
-      metadata: {
-        type: 'object',
-        properties: {
-          communityId: { type: 'string' },
-          communityName: { type: 'string' },
-          memberAddress: { type: 'string' },
-          thumbnailUrl: { type: 'string' }
-        },
-        required: ['communityId', 'communityName', 'memberAddress', 'thumbnailUrl'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CommunityRequestToJoinAcceptedEvent> = generateLazyValidator(schema)
+export const communityRequestToJoinAcceptedEventSchema: JSONSchema<CommunityRequestToJoinAcceptedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMUNITY },
+    subType: { type: 'string', const: EventSubTypeCommunity.REQUEST_TO_JOIN_ACCEPTED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 1 },
+    metadata: {
+      type: 'object',
+      properties: {
+        communityId: { type: 'string' },
+        communityName: { type: 'string' },
+        memberAddress: { type: 'string' },
+        thumbnailUrl: { type: 'string' }
+      },
+      required: ['communityId', 'communityName', 'memberAddress', 'thumbnailUrl'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type CommunityInviteReceivedEvent = BaseEvent & {
-  type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.INVITE_RECEIVED
+  type: EventType.COMMUNITY
+  subType: EventSubTypeCommunity.INVITE_RECEIVED
   metadata: {
     communityId: string
     communityName: string
@@ -322,36 +290,32 @@ export type CommunityInviteReceivedEvent = BaseEvent & {
   }
 }
 
-export namespace CommunityInviteReceivedEvent {
-  export const schema: JSONSchema<CommunityInviteReceivedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.INVITE_RECEIVED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 1 },
-      metadata: {
-        type: 'object',
-        properties: {
-          communityId: { type: 'string' },
-          communityName: { type: 'string' },
-          memberAddress: { type: 'string' },
-          thumbnailUrl: { type: 'string' }
-        },
-        required: ['communityId', 'communityName', 'memberAddress', 'thumbnailUrl'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CommunityInviteReceivedEvent> = generateLazyValidator(schema)
+export const communityInviteReceivedEventSchema: JSONSchema<CommunityInviteReceivedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMUNITY },
+    subType: { type: 'string', const: EventSubTypeCommunity.INVITE_RECEIVED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 1 },
+    metadata: {
+      type: 'object',
+      properties: {
+        communityId: { type: 'string' },
+        communityName: { type: 'string' },
+        memberAddress: { type: 'string' },
+        thumbnailUrl: { type: 'string' }
+      },
+      required: ['communityId', 'communityName', 'memberAddress', 'thumbnailUrl'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type CommunityPostAddedEvent = BaseEvent & {
-  type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.POST_ADDED
+  type: EventType.COMMUNITY
+  subType: EventSubTypeCommunity.POST_ADDED
   metadata: Audience & {
     communityId: string
     communityName: string
@@ -361,38 +325,34 @@ export type CommunityPostAddedEvent = BaseEvent & {
   }
 }
 
-export namespace CommunityPostAddedEvent {
-  export const schema: JSONSchema<CommunityPostAddedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.POST_ADDED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 1 },
-      metadata: {
-        type: 'object',
-        properties: {
-          communityId: { type: 'string' },
-          communityName: { type: 'string' },
-          thumbnailUrl: { type: 'string' },
-          postId: { type: 'string' },
-          authorAddress: { type: 'string' },
-          addressesToNotify: { type: 'array', items: { type: 'string' } }
-        },
-        required: ['addressesToNotify', 'communityId', 'communityName', 'thumbnailUrl', 'postId', 'authorAddress'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CommunityPostAddedEvent> = generateLazyValidator(schema)
+export const communityPostAddedEventSchema: JSONSchema<CommunityPostAddedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMUNITY },
+    subType: { type: 'string', const: EventSubTypeCommunity.POST_ADDED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 1 },
+    metadata: {
+      type: 'object',
+      properties: {
+        communityId: { type: 'string' },
+        communityName: { type: 'string' },
+        thumbnailUrl: { type: 'string' },
+        postId: { type: 'string' },
+        authorAddress: { type: 'string' },
+        addressesToNotify: { type: 'array', items: { type: 'string' } }
+      },
+      required: ['addressesToNotify', 'communityId', 'communityName', 'thumbnailUrl', 'postId', 'authorAddress'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type CommunityOwnershipTransferredEvent = BaseEvent & {
-  type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.OWNERSHIP_TRANSFERRED
+  type: EventType.COMMUNITY
+  subType: EventSubTypeCommunity.OWNERSHIP_TRANSFERRED
   metadata: {
     communityId: string
     communityName: string
@@ -402,37 +362,33 @@ export type CommunityOwnershipTransferredEvent = BaseEvent & {
   }
 }
 
-export namespace CommunityOwnershipTransferredEvent {
-  export const schema: JSONSchema<CommunityOwnershipTransferredEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.OWNERSHIP_TRANSFERRED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 1 },
-      metadata: {
-        type: 'object',
-        properties: {
-          communityId: { type: 'string' },
-          communityName: { type: 'string' },
-          oldOwnerAddress: { type: 'string' },
-          newOwnerAddress: { type: 'string' },
-          thumbnailUrl: { type: 'string' }
-        },
-        required: ['communityId', 'communityName', 'oldOwnerAddress', 'newOwnerAddress', 'thumbnailUrl'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CommunityOwnershipTransferredEvent> = generateLazyValidator(schema)
+export const communityOwnershipTransferredEventSchema: JSONSchema<CommunityOwnershipTransferredEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMUNITY },
+    subType: { type: 'string', const: EventSubTypeCommunity.OWNERSHIP_TRANSFERRED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 1 },
+    metadata: {
+      type: 'object',
+      properties: {
+        communityId: { type: 'string' },
+        communityName: { type: 'string' },
+        oldOwnerAddress: { type: 'string' },
+        newOwnerAddress: { type: 'string' },
+        thumbnailUrl: { type: 'string' }
+      },
+      required: ['communityId', 'communityName', 'oldOwnerAddress', 'newOwnerAddress', 'thumbnailUrl'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type CommunityVoiceChatStartedEvent = BaseEvent & {
-  type: Events.Type.COMMUNITY
-  subType: Events.SubType.Community.VOICE_CHAT_STARTED
+  type: EventType.COMMUNITY
+  subType: EventSubTypeCommunity.VOICE_CHAT_STARTED
   metadata: Audience & {
     communityId: string
     communityName: string
@@ -440,29 +396,25 @@ export type CommunityVoiceChatStartedEvent = BaseEvent & {
   }
 }
 
-export namespace CommunityVoiceChatStartedEvent {
-  export const schema: JSONSchema<CommunityVoiceChatStartedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMUNITY },
-      subType: { type: 'string', const: Events.SubType.Community.VOICE_CHAT_STARTED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 1 },
-      metadata: {
-        type: 'object',
-        properties: {
-          communityId: { type: 'string' },
-          communityName: { type: 'string' },
-          thumbnailUrl: { type: 'string' },
-          addressesToNotify: { type: 'array', items: { type: 'string' } }
-        },
-        required: ['communityId', 'communityName', 'thumbnailUrl', 'addressesToNotify'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CommunityVoiceChatStartedEvent> = generateLazyValidator(schema)
+export const communityVoiceChatStartedEventSchema: JSONSchema<CommunityVoiceChatStartedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMUNITY },
+    subType: { type: 'string', const: EventSubTypeCommunity.VOICE_CHAT_STARTED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 1 },
+    metadata: {
+      type: 'object',
+      properties: {
+        communityId: { type: 'string' },
+        communityName: { type: 'string' },
+        thumbnailUrl: { type: 'string' },
+        addressesToNotify: { type: 'array', items: { type: 'string' } }
+      },
+      required: ['communityId', 'communityName', 'thumbnailUrl', 'addressesToNotify'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }

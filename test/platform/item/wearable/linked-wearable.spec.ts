@@ -1,4 +1,5 @@
-import expect from 'expect'
+import { expect } from 'expect'
+import type { ThirdPartyProps, WearableRepresentation } from '../../../../src'
 import {
   BodyPartCategory,
   BodyShape,
@@ -6,12 +7,14 @@ import {
   isThirdParty,
   Locale,
   MappingType,
-  ThirdPartyProps,
-  Wearable,
-  WearableCategory,
-  WearableRepresentation
+  wearableSchema,
+  wearableKeywordDefinitions,
+  WearableCategory
 } from '../../../../src'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
+import { generateLazyValidator } from '../../../../src/validation/index.js'
+
+const validateWearable = generateLazyValidator(wearableSchema, wearableKeywordDefinitions)
 
 describe('Linked wearables tests', () => {
   const representation: WearableRepresentation = {
@@ -88,11 +91,11 @@ describe('Linked wearables tests', () => {
 
   const linkedWearable = { ...baseWearable, ...thirdParty }
 
-  testTypeSignature(Wearable, linkedWearable)
+  testTypeSignature({ schema: wearableSchema, keywordDefinitions: wearableKeywordDefinitions }, linkedWearable)
 
   it('static base wearable must pass', () => {
     expect(
-      Wearable.validate({
+      validateWearable({
         ...baseWearable,
         id: 'urn:decentraland:off-chain:base-avatars:basemale'
       })
@@ -100,13 +103,13 @@ describe('Linked wearables tests', () => {
   })
 
   it('static tests must pass', () => {
-    expect(Wearable.validate(linkedWearable)).toEqual(true)
-    expect(Wearable.validate(null)).toEqual(false)
-    expect(Wearable.validate({})).toEqual(false)
+    expect(validateWearable(linkedWearable)).toEqual(true)
+    expect(validateWearable(null)).toEqual(false)
+    expect(validateWearable({})).toEqual(false)
   })
 
   it('static tests must return the correct errors when missing properties', () => {
-    expectValidationFailureWithErrors(Wearable.validate, {}, [
+    expectValidationFailureWithErrors(validateWearable, {}, [
       "must have required property 'id'",
       "must have required property 'description'",
       "must have required property 'name'",
@@ -122,7 +125,7 @@ describe('Linked wearables tests', () => {
 
   it('wearable with invalid mappings fails', () => {
     expectValidationFailureWithErrors(
-      Wearable.validate,
+      validateWearable,
       {
         ...linkedWearable,
         mappings: {

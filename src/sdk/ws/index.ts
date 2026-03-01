@@ -1,8 +1,8 @@
-import { SCENE_UPDATE, SceneUpdate } from './scene-update'
-import { UPDATE, Update } from './update'
+import { SCENE_UPDATE, SceneUpdate } from './scene-update.js'
+import { UPDATE, Update } from './update.js'
 
-export * from './scene-update'
-export * from './update'
+export * from './scene-update.js'
+export * from './update.js'
 
 /** @public */
 export type Actions = typeof SCENE_UPDATE | typeof UPDATE

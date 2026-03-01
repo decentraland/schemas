@@ -1,5 +1,9 @@
-import expect from 'expect'
-import { AuthLinkType, DeploymentWithAuthChain } from '../../src'
+import { expect } from 'expect'
+import type { DeploymentWithAuthChain } from '../../src'
+import { AuthLinkType, deploymentWithAuthChainSchema } from '../../src'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateDeploymentWithAuthChain = generateLazyValidator(deploymentWithAuthChainSchema)
 describe('deployment-with-auth-chain', () => {
   it('valid', () => {
     const chain: DeploymentWithAuthChain = {
@@ -28,9 +32,9 @@ describe('deployment-with-auth-chain', () => {
       localTimestamp: 123,
       pointers: ['asd']
     }
-    expect(DeploymentWithAuthChain.validate(chain)).toEqual(true)
+    expect(validateDeploymentWithAuthChain(chain)).toEqual(true)
     expect(
-      DeploymentWithAuthChain.validate({
+      validateDeploymentWithAuthChain({
         authChain: [
           {
             type: AuthLinkType.SIGNER,
@@ -47,7 +51,7 @@ describe('deployment-with-auth-chain', () => {
   })
   it('invalid', () => {
     expect(
-      DeploymentWithAuthChain.validate({
+      validateDeploymentWithAuthChain({
         authChain: [],
         entityId: 'asd',
         entityType: 'scene',
@@ -56,7 +60,7 @@ describe('deployment-with-auth-chain', () => {
       } as DeploymentWithAuthChain)
     ).toEqual(false)
     expect(
-      DeploymentWithAuthChain.validate({
+      validateDeploymentWithAuthChain({
         authChain: [
           {
             type: AuthLinkType.SIGNER,
@@ -71,7 +75,7 @@ describe('deployment-with-auth-chain', () => {
       } as DeploymentWithAuthChain)
     ).toEqual(false)
     expect(
-      DeploymentWithAuthChain.validate({
+      validateDeploymentWithAuthChain({
         authChain: [
           {
             type: AuthLinkType.SIGNER,

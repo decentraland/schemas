@@ -1,4 +1,4 @@
-import { JSONSchema, ValidateFunction, generateLazyValidator } from '../validation'
+import type { JSONSchema } from '../validation/types.js'
 
 /**
  * Represents a Linker-Server Authorization.
@@ -19,35 +19,31 @@ export type LinkerAuthorization = {
   plots: string[]
 }
 
-export namespace LinkerAuthorization {
-  export const schema: JSONSchema<LinkerAuthorization> = {
-    type: 'object',
-    properties: {
-      name: { type: 'string' },
-      desc: { type: 'string' },
-      startDate: { type: 'string', nullable: true },
-      endDate: { type: 'string', nullable: true },
-      contactInfo: {
-        type: 'object',
-        properties: {
-          name: { type: 'string' }
-        },
-        required: ['name']
+export const linkerAuthorizationSchema: JSONSchema<LinkerAuthorization> = {
+  type: 'object',
+  properties: {
+    name: { type: 'string' },
+    desc: { type: 'string' },
+    startDate: { type: 'string', nullable: true },
+    endDate: { type: 'string', nullable: true },
+    contactInfo: {
+      type: 'object',
+      properties: {
+        name: { type: 'string' }
       },
-      onlyDev: { type: 'boolean', nullable: true },
-      addresses: {
-        type: 'array',
-        items: { type: 'string' },
-        minItems: 1
-      },
-      plots: {
-        type: 'array',
-        items: { type: 'string' },
-        minItems: 1
-      }
+      required: ['name']
     },
-    required: ['name', 'desc', 'contactInfo', 'addresses', 'plots']
-  }
-
-  export const validate: ValidateFunction<LinkerAuthorization> = generateLazyValidator(schema)
+    onlyDev: { type: 'boolean', nullable: true },
+    addresses: {
+      type: 'array',
+      items: { type: 'string' },
+      minItems: 1
+    },
+    plots: {
+      type: 'array',
+      items: { type: 'string' },
+      minItems: 1
+    }
+  },
+  required: ['name', 'desc', 'contactInfo', 'addresses', 'plots']
 }

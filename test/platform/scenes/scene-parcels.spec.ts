@@ -1,6 +1,10 @@
-import expect from 'expect'
-import { SceneParcels } from '../../../src'
+import { expect } from 'expect'
+import type { SceneParcels } from '../../../src'
+import { sceneParcelsSchema } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateSceneParcels = generateLazyValidator(sceneParcelsSchema)
 
 describe('Scene parcels tests', () => {
   const parcels: SceneParcels = {
@@ -8,23 +12,23 @@ describe('Scene parcels tests', () => {
     parcels: ['0,0', '1,0']
   }
 
-  testTypeSignature(SceneParcels, parcels)
+  testTypeSignature({ schema: sceneParcelsSchema }, parcels)
 
   it('static tests must pass', () => {
-    expect(SceneParcels.validate(parcels)).toEqual(true)
-    expect(SceneParcels.validate(null)).toEqual(false)
-    expect(SceneParcels.validate({})).toEqual(false)
+    expect(validateSceneParcels(parcels)).toEqual(true)
+    expect(validateSceneParcels(null)).toEqual(false)
+    expect(validateSceneParcels({})).toEqual(false)
   })
 
   it('non-parcel string fails', () => {
-    expect(SceneParcels.validate({ base: '1-1', parcels: ['1-1'] })).toEqual(false)
+    expect(validateSceneParcels({ base: '1-1', parcels: ['1-1'] })).toEqual(false)
   })
 
   it('when base is not in parcels fails', () => {
-    expect(SceneParcels.validate({ ...parcels, base: ['2,0'] })).toEqual(false)
+    expect(validateSceneParcels({ ...parcels, base: ['2,0'] })).toEqual(false)
   })
 
   it('empty parcels fails', () => {
-    expect(SceneParcels.validate({ ...parcels, parcels: [] })).toEqual(false)
+    expect(validateSceneParcels({ ...parcels, parcels: [] })).toEqual(false)
   })
 })

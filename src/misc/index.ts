@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import type { JSONSchema } from '../validation/types.js'
 
 /**
  * Color3 is a data type that describes a color using R, G and B components
@@ -10,31 +10,28 @@ export type Color3 = { r: number; g: number; b: number }
  * Color3
  * @alpha
  */
-export namespace Color3 {
-  export const schema: JSONSchema<Color3> = {
-    type: 'object',
-    required: ['r', 'g', 'b'],
-    properties: {
-      r: {
-        type: 'number',
-        minimum: 0,
-        maximum: 1
-      },
-      g: {
-        type: 'number',
-        minimum: 0,
-        maximum: 1
-      },
-      b: {
-        type: 'number',
-        minimum: 0,
-        maximum: 1
-      }
+export const color3Schema: JSONSchema<Color3> = {
+  type: 'object',
+  required: ['r', 'g', 'b'],
+  properties: {
+    r: {
+      type: 'number',
+      minimum: 0,
+      maximum: 1
+    },
+    g: {
+      type: 'number',
+      minimum: 0,
+      maximum: 1
+    },
+    b: {
+      type: 'number',
+      minimum: 0,
+      maximum: 1
     }
   }
-  const schemaValidator: ValidateFunction<Color3> = generateLazyValidator(schema)
-  export const validate: ValidateFunction<Color3> = (color: any): color is Color3 => schemaValidator(color)
 }
+
 /**
  * @alpha
  */
@@ -50,14 +47,9 @@ export type EthAddress = string // `0x${string}`
  * EthAddress
  * @public
  */
-export namespace EthAddress {
-  export const schema: JSONSchema<EthAddress> = {
-    type: 'string',
-    pattern: '^0x[a-fA-F0-9]{40}$'
-  }
-  const regexp = new RegExp(schema.pattern!)
-  export const validate: ValidateFunction<EthAddress> = (ethAddress: any): ethAddress is EthAddress =>
-    regexp.test(ethAddress)
+export const ethAddressSchema: JSONSchema<EthAddress> = {
+  type: 'string',
+  pattern: '^0x[a-fA-F0-9]{40}$'
 }
 
 /**
@@ -70,13 +62,9 @@ export type IPFSv2 = string
  * IPFSv2
  * @public
  */
-export namespace IPFSv2 {
-  export const schema: JSONSchema<IPFSv2> = {
-    type: 'string',
-    pattern: '^(ba)[a-zA-Z0-9]{57}$'
-  }
-  const regexp = new RegExp(schema.pattern!)
-  export const validate: ValidateFunction<IPFSv2> = (hash: any): hash is IPFSv2 => regexp.test(hash)
+export const ipfsv2Schema: JSONSchema<IPFSv2> = {
+  type: 'string',
+  pattern: '^(ba)[a-zA-Z0-9]{57}$'
 }
 
 /**
@@ -88,11 +76,7 @@ export type IPFSv1 = string
  * IPFSv1
  * @public
  */
-export namespace IPFSv1 {
-  export const schema: JSONSchema<IPFSv1> = {
-    type: 'string',
-    pattern: '^(Qm)[a-zA-Z0-9]{44}$'
-  }
-  const regexp = new RegExp(schema.pattern!)
-  export const validate: ValidateFunction<IPFSv1> = (hash: any): hash is IPFSv1 => regexp.test(hash)
+export const ipfsv1Schema: JSONSchema<IPFSv1> = {
+  type: 'string',
+  pattern: '^(Qm)[a-zA-Z0-9]{44}$'
 }

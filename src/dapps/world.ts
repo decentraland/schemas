@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import type { JSONSchema } from '../validation/types.js'
 
 /**
  * World Range
@@ -71,43 +71,39 @@ export function isInsideWorldLimits(x: number, y: number) {
 /**
  * @alpha
  */
-export namespace World {
-  export const schema: JSONSchema<World> = {
-    type: 'object',
-    required: ['validWorldRanges'],
-    properties: {
-      validWorldRanges: {
-        type: 'array',
-        default: [
-          {
-            xMin: -150,
-            yMin: -150,
-            xMax: 150,
-            yMax: 150
-          }
-        ],
-        items: {
-          type: 'object',
-          required: ['xMin', 'yMin', 'xMax', 'yMax'],
-          properties: {
-            xMin: {
-              type: 'integer'
-            },
-            yMin: {
-              type: 'integer'
-            },
-            xMax: {
-              type: 'integer'
-            },
-            yMax: {
-              type: 'integer'
-            }
+export const worldSchema: JSONSchema<World> = {
+  type: 'object',
+  required: ['validWorldRanges'],
+  properties: {
+    validWorldRanges: {
+      type: 'array',
+      default: [
+        {
+          xMin: -150,
+          yMin: -150,
+          xMax: 150,
+          yMax: 150
+        }
+      ],
+      items: {
+        type: 'object',
+        required: ['xMin', 'yMin', 'xMax', 'yMax'],
+        properties: {
+          xMin: {
+            type: 'integer'
+          },
+          yMin: {
+            type: 'integer'
+          },
+          xMax: {
+            type: 'integer'
+          },
+          yMax: {
+            type: 'integer'
           }
         }
       }
-    },
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<World> = generateLazyValidator(schema)
+    }
+  },
+  additionalProperties: false
 }

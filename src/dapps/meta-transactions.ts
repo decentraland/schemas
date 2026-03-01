@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import type { JSONSchema } from '../validation/types.js'
 
 /**
  * Meta-transaction to be relayed
@@ -12,21 +12,17 @@ export type MetaTransaction = {
 /**
  * @alpha
  */
-export namespace MetaTransaction {
-  export const schema: JSONSchema<MetaTransaction> = {
-    type: 'object',
-    properties: {
-      from: { type: 'string' },
-      params: {
-        type: 'array',
-        items: [{ type: 'string' }, { type: 'string' }],
-        additionalItems: false,
-        minItems: 2
-      }
-    },
-    additionalProperties: false,
-    required: ['from', 'params']
-  }
-
-  export const validate: ValidateFunction<MetaTransaction> = generateLazyValidator(schema)
+export const metaTransactionSchema: JSONSchema<MetaTransaction> = {
+  type: 'object',
+  properties: {
+    from: { type: 'string' },
+    params: {
+      type: 'array',
+      items: [{ type: 'string' }, { type: 'string' }],
+      additionalItems: false,
+      minItems: 2
+    }
+  },
+  additionalProperties: false,
+  required: ['from', 'params']
 }

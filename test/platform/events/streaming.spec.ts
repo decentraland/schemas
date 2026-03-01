@@ -1,47 +1,58 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import {
   StreamingKeyResetEvent,
   StreamingKeyRevokeEvent,
   StreamingKeyExpiredEvent,
   StreamingTimeExceededEvent,
   StreamingPlaceUpdatedEvent,
-  Events,
-  CommunityStreamingEndedEvent
+  EventType,
+  EventSubTypeStreaming,
+  CommunityStreamingEndedEvent,
+  streamingKeyResetEventSchema,
+  streamingKeyRevokeEventSchema,
+  streamingKeyExpiredEventSchema,
+  streamingTimeExceededEventSchema,
+  streamingPlaceUpdatedEventSchema,
+  communityStreamingEndedEventSchema
 } from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateCommunityStreamingEndedEvent = generateLazyValidator(communityStreamingEndedEventSchema)
 
 describe('Streaming Events tests', () => {
   const testCases = [
     {
       name: 'StreamingKeyResetEvent',
-      eventClass: StreamingKeyResetEvent,
-      subType: Events.SubType.Streaming.STREAMING_KEY_RESET
+      eventSchema: streamingKeyResetEventSchema,
+      subType: EventSubTypeStreaming.STREAMING_KEY_RESET
     },
     {
       name: 'StreamingKeyRevokeEvent',
-      eventClass: StreamingKeyRevokeEvent,
-      subType: Events.SubType.Streaming.STREAMING_KEY_REVOKE
+      eventSchema: streamingKeyRevokeEventSchema,
+      subType: EventSubTypeStreaming.STREAMING_KEY_REVOKE
     },
     {
       name: 'StreamingKeyExpiredEvent',
-      eventClass: StreamingKeyExpiredEvent,
-      subType: Events.SubType.Streaming.STREAMING_KEY_EXPIRED
+      eventSchema: streamingKeyExpiredEventSchema,
+      subType: EventSubTypeStreaming.STREAMING_KEY_EXPIRED
     },
     {
       name: 'StreamingTimeExceededEvent',
-      eventClass: StreamingTimeExceededEvent,
-      subType: Events.SubType.Streaming.STREAMING_TIME_EXCEEDED
+      eventSchema: streamingTimeExceededEventSchema,
+      subType: EventSubTypeStreaming.STREAMING_TIME_EXCEEDED
     },
     {
       name: 'StreamingPlaceUpdatedEvent',
-      eventClass: StreamingPlaceUpdatedEvent,
-      subType: Events.SubType.Streaming.STREAMING_PLACE_UPDATED
+      eventSchema: streamingPlaceUpdatedEventSchema,
+      subType: EventSubTypeStreaming.STREAMING_PLACE_UPDATED
     }
   ]
 
-  testCases.forEach(({ name, eventClass, subType }) => {
+  testCases.forEach(({ name, eventSchema, subType }) => {
     it(`${name} static tests must pass`, () => {
+      const validate = generateLazyValidator(eventSchema)
       const event = {
-        type: Events.Type.STREAMING,
+        type: EventType.STREAMING,
         subType,
         key: 'key',
         timestamp: 1,
@@ -57,16 +68,16 @@ describe('Streaming Events tests', () => {
         }
       }
 
-      expect(eventClass.validate(event)).toEqual(true)
-      expect(eventClass.validate(null)).toEqual(false)
-      expect(eventClass.validate({})).toEqual(false)
+      expect(validate(event)).toEqual(true)
+      expect(validate(null)).toEqual(false)
+      expect(validate({})).toEqual(false)
     })
   })
 
   it('CommunityStreamingEndedEvent static tests must pass', () => {
     const event: CommunityStreamingEndedEvent = {
-      type: Events.Type.STREAMING,
-      subType: Events.SubType.Streaming.COMMUNITY_STREAMING_ENDED,
+      type: EventType.STREAMING,
+      subType: EventSubTypeStreaming.COMMUNITY_STREAMING_ENDED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -75,8 +86,8 @@ describe('Streaming Events tests', () => {
       }
     }
 
-    expect(CommunityStreamingEndedEvent.validate(event)).toEqual(true)
-    expect(CommunityStreamingEndedEvent.validate(null)).toEqual(false)
-    expect(CommunityStreamingEndedEvent.validate({})).toEqual(false)
+    expect(validateCommunityStreamingEndedEvent(event)).toEqual(true)
+    expect(validateCommunityStreamingEndedEvent(null)).toEqual(false)
+    expect(validateCommunityStreamingEndedEvent({})).toEqual(false)
   })
 })

@@ -1,6 +1,6 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { BaseEvent, Events } from './base'
-import { createEventSchema } from './utils'
+import type { JSONSchema } from '../../validation/types.js'
+import { BaseEvent, EventType, EventSubTypeReferral } from './base.js'
+import { createEventSchema } from './utils.js'
 
 type ReferralMetadata = {
   title: string
@@ -32,31 +32,25 @@ const referralMetadataSchema: JSONSchema<ReferralMetadata> = {
 }
 
 export type ReferralInvitedUsersAcceptedEvent = BaseEvent & {
-  type: Events.Type.REFERRAL
-  subType: Events.SubType.Referral.REFERRAL_INVITED_USERS_ACCEPTED
+  type: EventType.REFERRAL
+  subType: EventSubTypeReferral.REFERRAL_INVITED_USERS_ACCEPTED
   metadata: ReferralMetadata
 }
 
 export type ReferralNewTierReachedEvent = BaseEvent & {
-  type: Events.Type.REFERRAL
-  subType: Events.SubType.Referral.REFERRAL_NEW_TIER_REACHED
+  type: EventType.REFERRAL
+  subType: EventSubTypeReferral.REFERRAL_NEW_TIER_REACHED
   metadata: ReferralMetadata
 }
 
-export namespace ReferralInvitedUsersAcceptedEvent {
-  export const schema: JSONSchema<ReferralInvitedUsersAcceptedEvent> = createEventSchema(
-    Events.Type.REFERRAL,
-    Events.SubType.Referral.REFERRAL_INVITED_USERS_ACCEPTED,
-    referralMetadataSchema
-  )
-  export const validate: ValidateFunction<ReferralInvitedUsersAcceptedEvent> = generateLazyValidator(schema)
-}
+export const referralInvitedUsersAcceptedEventSchema: JSONSchema<ReferralInvitedUsersAcceptedEvent> = createEventSchema(
+  EventType.REFERRAL,
+  EventSubTypeReferral.REFERRAL_INVITED_USERS_ACCEPTED,
+  referralMetadataSchema
+)
 
-export namespace ReferralNewTierReachedEvent {
-  export const schema: JSONSchema<ReferralNewTierReachedEvent> = createEventSchema(
-    Events.Type.REFERRAL,
-    Events.SubType.Referral.REFERRAL_NEW_TIER_REACHED,
-    referralMetadataSchema
-  )
-  export const validate: ValidateFunction<ReferralNewTierReachedEvent> = generateLazyValidator(schema)
-}
+export const referralNewTierReachedEventSchema: JSONSchema<ReferralNewTierReachedEvent> = createEventSchema(
+  EventType.REFERRAL,
+  EventSubTypeReferral.REFERRAL_NEW_TIER_REACHED,
+  referralMetadataSchema
+)

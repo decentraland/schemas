@@ -73,13 +73,13 @@ type ContentfulResponse<T extends LocalizedFields> = {
   }
 }
 
-export {
+export { ContentfulLocale }
+export type {
   AlignmentFieldType,
   FileType,
   LocalizedFields,
   ContentfulEntry,
   ContentfulAsset,
-  ContentfulLocale,
   LocalizedField,
   SysLink,
   LocalizedFieldType,

@@ -1,5 +1,5 @@
-require:
-  - 'test/index'
+node-option:
+  - 'import=tsx'
 reporter:
   - 'spec'
 watch-files:

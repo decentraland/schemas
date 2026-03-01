@@ -1,10 +1,10 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { BaseEvent, Events } from './base'
-import { createEventSchema } from './utils'
+import type { JSONSchema } from '../../validation/types.js'
+import { BaseEvent, EventType, EventSubTypeGovernance } from './base.js'
+import { createEventSchema } from './utils.js'
 
 export type GovernanceProposalEnactedEvent = BaseEvent & {
-  type: Events.Type.GOVERNANCE
-  subType: Events.SubType.Governance.PROPOSAL_ENACTED
+  type: EventType.GOVERNANCE
+  subType: EventSubTypeGovernance.PROPOSAL_ENACTED
   metadata: {
     proposalId: string
     proposalTitle: string
@@ -16,8 +16,8 @@ export type GovernanceProposalEnactedEvent = BaseEvent & {
 }
 
 export type GovernanceCoauthorRequestedEvent = BaseEvent & {
-  type: Events.Type.GOVERNANCE
-  subType: Events.SubType.Governance.COAUTHOR_REQUESTED
+  type: EventType.GOVERNANCE
+  subType: EventSubTypeGovernance.COAUTHOR_REQUESTED
   metadata: {
     proposalId: string
     proposalTitle: string
@@ -29,8 +29,8 @@ export type GovernanceCoauthorRequestedEvent = BaseEvent & {
 }
 
 export type GovernancePitchPassedEvent = BaseEvent & {
-  type: Events.Type.GOVERNANCE
-  subType: Events.SubType.Governance.PITCH_PASSED
+  type: EventType.GOVERNANCE
+  subType: EventSubTypeGovernance.PITCH_PASSED
   metadata: {
     proposalId: string
     proposalTitle: string
@@ -42,8 +42,8 @@ export type GovernancePitchPassedEvent = BaseEvent & {
 }
 
 export type GovernanceTenderPassedEvent = BaseEvent & {
-  type: Events.Type.GOVERNANCE
-  subType: Events.SubType.Governance.TENDER_PASSED
+  type: EventType.GOVERNANCE
+  subType: EventSubTypeGovernance.TENDER_PASSED
   metadata: {
     proposalId: string
     proposalTitle: string
@@ -55,8 +55,8 @@ export type GovernanceTenderPassedEvent = BaseEvent & {
 }
 
 export type GovernanceAuthoredProposalFinishedEvent = BaseEvent & {
-  type: Events.Type.GOVERNANCE
-  subType: Events.SubType.Governance.AUTHORED_PROPOSAL_FINISHED
+  type: EventType.GOVERNANCE
+  subType: EventSubTypeGovernance.AUTHORED_PROPOSAL_FINISHED
   metadata: {
     proposalId: string
     proposalTitle: string
@@ -68,8 +68,8 @@ export type GovernanceAuthoredProposalFinishedEvent = BaseEvent & {
 }
 
 export type GovernanceVotingEndedVoterEvent = BaseEvent & {
-  type: Events.Type.GOVERNANCE
-  subType: Events.SubType.Governance.VOTING_ENDED_VOTER
+  type: EventType.GOVERNANCE
+  subType: EventSubTypeGovernance.VOTING_ENDED_VOTER
   metadata: {
     proposalId: string
     proposalTitle: string
@@ -81,8 +81,8 @@ export type GovernanceVotingEndedVoterEvent = BaseEvent & {
 }
 
 export type GovernanceNewCommentOnProposalEvent = BaseEvent & {
-  type: Events.Type.GOVERNANCE
-  subType: Events.SubType.Governance.NEW_COMMENT_ON_PROPOSAL
+  type: EventType.GOVERNANCE
+  subType: EventSubTypeGovernance.NEW_COMMENT_ON_PROPOSAL
   metadata: {
     proposalId: string
     proposalTitle: string
@@ -94,8 +94,8 @@ export type GovernanceNewCommentOnProposalEvent = BaseEvent & {
 }
 
 export type GovernanceNewCommentOnProjectUpdatedEvent = BaseEvent & {
-  type: Events.Type.GOVERNANCE
-  subType: Events.SubType.Governance.NEW_COMMENT_ON_PROJECT_UPDATED
+  type: EventType.GOVERNANCE
+  subType: EventSubTypeGovernance.NEW_COMMENT_ON_PROJECT_UPDATED
   metadata: {
     proposalId: string
     proposalTitle: string
@@ -107,8 +107,8 @@ export type GovernanceNewCommentOnProjectUpdatedEvent = BaseEvent & {
 }
 
 export type GovernanceWhaleVoteEvent = BaseEvent & {
-  type: Events.Type.GOVERNANCE
-  subType: Events.SubType.Governance.WHALE_VOTE
+  type: EventType.GOVERNANCE
+  subType: EventSubTypeGovernance.WHALE_VOTE
   metadata: {
     proposalId: string
     proposalTitle: string
@@ -120,8 +120,8 @@ export type GovernanceWhaleVoteEvent = BaseEvent & {
 }
 
 export type GovernanceVotedOnBehalfEvent = BaseEvent & {
-  type: Events.Type.GOVERNANCE
-  subType: Events.SubType.Governance.VOTED_ON_BEHALF
+  type: EventType.GOVERNANCE
+  subType: EventSubTypeGovernance.VOTED_ON_BEHALF
   metadata: {
     proposalId: string
     proposalTitle: string
@@ -133,8 +133,8 @@ export type GovernanceVotedOnBehalfEvent = BaseEvent & {
 }
 
 export type GovernanceCliffEndedEvent = BaseEvent & {
-  type: Events.Type.GOVERNANCE
-  subType: Events.SubType.Governance.CLIFF_ENDED
+  type: EventType.GOVERNANCE
+  subType: EventSubTypeGovernance.CLIFF_ENDED
   metadata: {
     proposalId: string
     proposalTitle: string
@@ -159,101 +159,68 @@ const governanceMetadataSchema: JSONSchema<GovernanceProposalEnactedEvent['metad
   additionalProperties: false
 }
 
-export namespace GovernanceProposalEnactedEvent {
-  export const schema: JSONSchema<GovernanceProposalEnactedEvent> = createEventSchema(
-    Events.Type.GOVERNANCE,
-    Events.SubType.Governance.PROPOSAL_ENACTED,
-    governanceMetadataSchema
-  )
-  export const validate: ValidateFunction<GovernanceProposalEnactedEvent> = generateLazyValidator(schema)
-}
+export const governanceProposalEnactedEventSchema: JSONSchema<GovernanceProposalEnactedEvent> = createEventSchema(
+  EventType.GOVERNANCE,
+  EventSubTypeGovernance.PROPOSAL_ENACTED,
+  governanceMetadataSchema
+)
 
-export namespace GovernanceCoauthorRequestedEvent {
-  export const schema: JSONSchema<GovernanceCoauthorRequestedEvent> = createEventSchema(
-    Events.Type.GOVERNANCE,
-    Events.SubType.Governance.COAUTHOR_REQUESTED,
-    governanceMetadataSchema
-  )
-  export const validate: ValidateFunction<GovernanceCoauthorRequestedEvent> = generateLazyValidator(schema)
-}
+export const governanceCoauthorRequestedEventSchema: JSONSchema<GovernanceCoauthorRequestedEvent> = createEventSchema(
+  EventType.GOVERNANCE,
+  EventSubTypeGovernance.COAUTHOR_REQUESTED,
+  governanceMetadataSchema
+)
 
-export namespace GovernancePitchPassedEvent {
-  export const schema: JSONSchema<GovernancePitchPassedEvent> = createEventSchema(
-    Events.Type.GOVERNANCE,
-    Events.SubType.Governance.PITCH_PASSED,
-    governanceMetadataSchema
-  )
-  export const validate: ValidateFunction<GovernancePitchPassedEvent> = generateLazyValidator(schema)
-}
+export const governancePitchPassedEventSchema: JSONSchema<GovernancePitchPassedEvent> = createEventSchema(
+  EventType.GOVERNANCE,
+  EventSubTypeGovernance.PITCH_PASSED,
+  governanceMetadataSchema
+)
 
-export namespace GovernanceTenderPassedEvent {
-  export const schema: JSONSchema<GovernanceTenderPassedEvent> = createEventSchema(
-    Events.Type.GOVERNANCE,
-    Events.SubType.Governance.TENDER_PASSED,
-    governanceMetadataSchema
-  )
-  export const validate: ValidateFunction<GovernanceTenderPassedEvent> = generateLazyValidator(schema)
-}
+export const governanceTenderPassedEventSchema: JSONSchema<GovernanceTenderPassedEvent> = createEventSchema(
+  EventType.GOVERNANCE,
+  EventSubTypeGovernance.TENDER_PASSED,
+  governanceMetadataSchema
+)
 
-export namespace GovernanceAuthoredProposalFinishedEvent {
-  export const schema: JSONSchema<GovernanceAuthoredProposalFinishedEvent> = createEventSchema(
-    Events.Type.GOVERNANCE,
-    Events.SubType.Governance.AUTHORED_PROPOSAL_FINISHED,
-    governanceMetadataSchema
-  )
-  export const validate: ValidateFunction<GovernanceAuthoredProposalFinishedEvent> = generateLazyValidator(schema)
-}
+export const governanceAuthoredProposalFinishedEventSchema: JSONSchema<GovernanceAuthoredProposalFinishedEvent> = createEventSchema(
+  EventType.GOVERNANCE,
+  EventSubTypeGovernance.AUTHORED_PROPOSAL_FINISHED,
+  governanceMetadataSchema
+)
 
-export namespace GovernanceVotingEndedVoterEvent {
-  export const schema: JSONSchema<GovernanceVotingEndedVoterEvent> = createEventSchema(
-    Events.Type.GOVERNANCE,
-    Events.SubType.Governance.VOTING_ENDED_VOTER,
-    governanceMetadataSchema
-  )
-  export const validate: ValidateFunction<GovernanceVotingEndedVoterEvent> = generateLazyValidator(schema)
-}
+export const governanceVotingEndedVoterEventSchema: JSONSchema<GovernanceVotingEndedVoterEvent> = createEventSchema(
+  EventType.GOVERNANCE,
+  EventSubTypeGovernance.VOTING_ENDED_VOTER,
+  governanceMetadataSchema
+)
 
-export namespace GovernanceNewCommentOnProposalEvent {
-  export const schema: JSONSchema<GovernanceNewCommentOnProposalEvent> = createEventSchema(
-    Events.Type.GOVERNANCE,
-    Events.SubType.Governance.NEW_COMMENT_ON_PROPOSAL,
-    governanceMetadataSchema
-  )
-  export const validate: ValidateFunction<GovernanceNewCommentOnProposalEvent> = generateLazyValidator(schema)
-}
+export const governanceNewCommentOnProposalEventSchema: JSONSchema<GovernanceNewCommentOnProposalEvent> = createEventSchema(
+  EventType.GOVERNANCE,
+  EventSubTypeGovernance.NEW_COMMENT_ON_PROPOSAL,
+  governanceMetadataSchema
+)
 
-export namespace GovernanceNewCommentOnProjectUpdatedEvent {
-  export const schema: JSONSchema<GovernanceNewCommentOnProjectUpdatedEvent> = createEventSchema(
-    Events.Type.GOVERNANCE,
-    Events.SubType.Governance.NEW_COMMENT_ON_PROJECT_UPDATED,
-    governanceMetadataSchema
-  )
-  export const validate: ValidateFunction<GovernanceNewCommentOnProjectUpdatedEvent> = generateLazyValidator(schema)
-}
+export const governanceNewCommentOnProjectUpdatedEventSchema: JSONSchema<GovernanceNewCommentOnProjectUpdatedEvent> = createEventSchema(
+  EventType.GOVERNANCE,
+  EventSubTypeGovernance.NEW_COMMENT_ON_PROJECT_UPDATED,
+  governanceMetadataSchema
+)
 
-export namespace GovernanceWhaleVoteEvent {
-  export const schema: JSONSchema<GovernanceWhaleVoteEvent> = createEventSchema(
-    Events.Type.GOVERNANCE,
-    Events.SubType.Governance.WHALE_VOTE,
-    governanceMetadataSchema
-  )
-  export const validate: ValidateFunction<GovernanceWhaleVoteEvent> = generateLazyValidator(schema)
-}
+export const governanceWhaleVoteEventSchema: JSONSchema<GovernanceWhaleVoteEvent> = createEventSchema(
+  EventType.GOVERNANCE,
+  EventSubTypeGovernance.WHALE_VOTE,
+  governanceMetadataSchema
+)
 
-export namespace GovernanceVotedOnBehalfEvent {
-  export const schema: JSONSchema<GovernanceVotedOnBehalfEvent> = createEventSchema(
-    Events.Type.GOVERNANCE,
-    Events.SubType.Governance.VOTED_ON_BEHALF,
-    governanceMetadataSchema
-  )
-  export const validate: ValidateFunction<GovernanceVotedOnBehalfEvent> = generateLazyValidator(schema)
-}
+export const governanceVotedOnBehalfEventSchema: JSONSchema<GovernanceVotedOnBehalfEvent> = createEventSchema(
+  EventType.GOVERNANCE,
+  EventSubTypeGovernance.VOTED_ON_BEHALF,
+  governanceMetadataSchema
+)
 
-export namespace GovernanceCliffEndedEvent {
-  export const schema: JSONSchema<GovernanceCliffEndedEvent> = createEventSchema(
-    Events.Type.GOVERNANCE,
-    Events.SubType.Governance.CLIFF_ENDED,
-    governanceMetadataSchema
-  )
-  export const validate: ValidateFunction<GovernanceCliffEndedEvent> = generateLazyValidator(schema)
-}
+export const governanceCliffEndedEventSchema: JSONSchema<GovernanceCliffEndedEvent> = createEventSchema(
+  EventType.GOVERNANCE,
+  EventSubTypeGovernance.CLIFF_ENDED,
+  governanceMetadataSchema
+)

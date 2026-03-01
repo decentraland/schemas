@@ -1,6 +1,6 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { BaseEvent, Events } from './base'
-import { createEventSchema } from './utils'
+import type { JSONSchema } from '../../validation/types.js'
+import { BaseEvent, EventType, EventSubTypeStreaming } from './base.js'
+import { createEventSchema } from './utils.js'
 
 type StreamingMetadata = {
   title: string
@@ -30,102 +30,84 @@ const streamingMetadataSchema: JSONSchema<StreamingMetadata> = {
 }
 
 export type StreamingKeyResetEvent = BaseEvent & {
-  type: Events.Type.STREAMING
-  subType: Events.SubType.Streaming.STREAMING_KEY_RESET
+  type: EventType.STREAMING
+  subType: EventSubTypeStreaming.STREAMING_KEY_RESET
   metadata: StreamingMetadata
 }
 
 export type StreamingKeyRevokeEvent = BaseEvent & {
-  type: Events.Type.STREAMING
-  subType: Events.SubType.Streaming.STREAMING_KEY_REVOKE
+  type: EventType.STREAMING
+  subType: EventSubTypeStreaming.STREAMING_KEY_REVOKE
   metadata: StreamingMetadata
 }
 
 export type StreamingKeyExpiredEvent = BaseEvent & {
-  type: Events.Type.STREAMING
-  subType: Events.SubType.Streaming.STREAMING_KEY_EXPIRED
+  type: EventType.STREAMING
+  subType: EventSubTypeStreaming.STREAMING_KEY_EXPIRED
   metadata: StreamingMetadata
 }
 
 export type StreamingTimeExceededEvent = BaseEvent & {
-  type: Events.Type.STREAMING
-  subType: Events.SubType.Streaming.STREAMING_TIME_EXCEEDED
+  type: EventType.STREAMING
+  subType: EventSubTypeStreaming.STREAMING_TIME_EXCEEDED
   metadata: StreamingMetadata
 }
 
 export type StreamingPlaceUpdatedEvent = BaseEvent & {
-  type: Events.Type.STREAMING
-  subType: Events.SubType.Streaming.STREAMING_PLACE_UPDATED
+  type: EventType.STREAMING
+  subType: EventSubTypeStreaming.STREAMING_PLACE_UPDATED
   metadata: StreamingMetadata
 }
 
 export type CommunityStreamingEndedEvent = BaseEvent & {
-  type: Events.Type.STREAMING
-  subType: Events.SubType.Streaming.COMMUNITY_STREAMING_ENDED
+  type: EventType.STREAMING
+  subType: EventSubTypeStreaming.COMMUNITY_STREAMING_ENDED
   metadata: {
     communityId: string
     totalParticipants: number
   }
 }
 
-export namespace StreamingKeyResetEvent {
-  export const schema: JSONSchema<StreamingKeyResetEvent> = createEventSchema(
-    Events.Type.STREAMING,
-    Events.SubType.Streaming.STREAMING_KEY_RESET,
-    streamingMetadataSchema
-  )
-  export const validate: ValidateFunction<StreamingKeyResetEvent> = generateLazyValidator(schema)
-}
+export const streamingKeyResetEventSchema: JSONSchema<StreamingKeyResetEvent> = createEventSchema(
+  EventType.STREAMING,
+  EventSubTypeStreaming.STREAMING_KEY_RESET,
+  streamingMetadataSchema
+)
 
-export namespace StreamingKeyRevokeEvent {
-  export const schema: JSONSchema<StreamingKeyRevokeEvent> = createEventSchema(
-    Events.Type.STREAMING,
-    Events.SubType.Streaming.STREAMING_KEY_REVOKE,
-    streamingMetadataSchema
-  )
-  export const validate: ValidateFunction<StreamingKeyRevokeEvent> = generateLazyValidator(schema)
-}
+export const streamingKeyRevokeEventSchema: JSONSchema<StreamingKeyRevokeEvent> = createEventSchema(
+  EventType.STREAMING,
+  EventSubTypeStreaming.STREAMING_KEY_REVOKE,
+  streamingMetadataSchema
+)
 
-export namespace StreamingKeyExpiredEvent {
-  export const schema: JSONSchema<StreamingKeyExpiredEvent> = createEventSchema(
-    Events.Type.STREAMING,
-    Events.SubType.Streaming.STREAMING_KEY_EXPIRED,
-    streamingMetadataSchema
-  )
-  export const validate: ValidateFunction<StreamingKeyExpiredEvent> = generateLazyValidator(schema)
-}
+export const streamingKeyExpiredEventSchema: JSONSchema<StreamingKeyExpiredEvent> = createEventSchema(
+  EventType.STREAMING,
+  EventSubTypeStreaming.STREAMING_KEY_EXPIRED,
+  streamingMetadataSchema
+)
 
-export namespace StreamingTimeExceededEvent {
-  export const schema: JSONSchema<StreamingTimeExceededEvent> = createEventSchema(
-    Events.Type.STREAMING,
-    Events.SubType.Streaming.STREAMING_TIME_EXCEEDED,
-    streamingMetadataSchema
-  )
-  export const validate: ValidateFunction<StreamingTimeExceededEvent> = generateLazyValidator(schema)
-}
+export const streamingTimeExceededEventSchema: JSONSchema<StreamingTimeExceededEvent> = createEventSchema(
+  EventType.STREAMING,
+  EventSubTypeStreaming.STREAMING_TIME_EXCEEDED,
+  streamingMetadataSchema
+)
 
-export namespace StreamingPlaceUpdatedEvent {
-  export const schema: JSONSchema<StreamingPlaceUpdatedEvent> = createEventSchema(
-    Events.Type.STREAMING,
-    Events.SubType.Streaming.STREAMING_PLACE_UPDATED,
-    streamingMetadataSchema
-  )
-  export const validate: ValidateFunction<StreamingPlaceUpdatedEvent> = generateLazyValidator(schema)
-}
+export const streamingPlaceUpdatedEventSchema: JSONSchema<StreamingPlaceUpdatedEvent> = createEventSchema(
+  EventType.STREAMING,
+  EventSubTypeStreaming.STREAMING_PLACE_UPDATED,
+  streamingMetadataSchema
+)
 
-export namespace CommunityStreamingEndedEvent {
-  export const schema: JSONSchema<CommunityStreamingEndedEvent> = createEventSchema(
-    Events.Type.STREAMING,
-    Events.SubType.Streaming.COMMUNITY_STREAMING_ENDED,
-    {
-      type: 'object',
-      properties: {
-        communityId: { type: 'string' },
-        totalParticipants: { type: 'number' }
-      },
-      required: ['communityId', 'totalParticipants'],
-      additionalProperties: false
-    } as JSONSchema<CommunityStreamingEndedEvent['metadata']>
-  )
-  export const validate: ValidateFunction<CommunityStreamingEndedEvent> = generateLazyValidator(schema)
-}
+export const communityStreamingEndedEventSchema: JSONSchema<CommunityStreamingEndedEvent> = createEventSchema(
+  EventType.STREAMING,
+  EventSubTypeStreaming.COMMUNITY_STREAMING_ENDED,
+  {
+    type: 'object',
+    properties: {
+      communityId: { type: 'string' },
+      totalParticipants: { type: 'number' }
+    },
+    required: ['communityId', 'totalParticipants'],
+    additionalProperties: false
+  } as JSONSchema<CommunityStreamingEndedEvent['metadata']>
+)

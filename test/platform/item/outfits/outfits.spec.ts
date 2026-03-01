@@ -1,6 +1,10 @@
-import expect from 'expect'
-import { Outfits, WearableCategory } from '../../../../src'
+import { expect } from 'expect'
+import type { Outfits } from '../../../../src'
+import { outfitsSchema, WearableCategory } from '../../../../src'
 import { testTypeSignature } from '../../../test-utils'
+import { generateLazyValidator } from '../../../../src/validation/index.js'
+
+const validateOutfits = generateLazyValidator(outfitsSchema)
 
 const OUTFITS: Outfits = {
   outfits: [
@@ -28,31 +32,31 @@ const OUTFITS: Outfits = {
 }
 
 it('outfits is valid', () => {
-  testTypeSignature(Outfits, OUTFITS)
-  expect(Outfits.validate(OUTFITS)).toEqual(true)
+  testTypeSignature({ schema: outfitsSchema }, OUTFITS)
+  expect(validateOutfits(OUTFITS)).toEqual(true)
 })
 
 it('outfits with forceRender is valid', () => {
   OUTFITS.outfits[0].outfit.forceRender = [WearableCategory.EYEBROWS]
-  testTypeSignature(Outfits, OUTFITS)
-  expect(Outfits.validate(OUTFITS)).toEqual(true)
+  testTypeSignature({ schema: outfitsSchema }, OUTFITS)
+  expect(validateOutfits(OUTFITS)).toEqual(true)
 })
 
 it('null outfits is invalid', () => {
-  expect(Outfits.validate(null)).toEqual(false)
+  expect(validateOutfits(null)).toEqual(false)
 })
 
 it('empty object outfits is invalid', () => {
-  expect(Outfits.validate({})).toEqual(false)
+  expect(validateOutfits({})).toEqual(false)
 })
 
 it('empty object outfits is invalid', () => {
-  expect(Outfits.validate({})).toEqual(false)
+  expect(validateOutfits({})).toEqual(false)
 })
 
 it('outfits without outfits is valid', () => {
   expect(
-    Outfits.validate({
+    validateOutfits({
       outfits: [],
       namesForExtraSlots: []
     })
@@ -68,7 +72,7 @@ it('outfit without bodyShape is invalid', () => {
     wearables: outfit.wearables
   }
   expect(
-    Outfits.validate({
+    validateOutfits({
       outfits: [{ slot: 1, outfit: outfitWithoutBodyShape }]
     })
   ).toEqual(false)
@@ -83,7 +87,7 @@ it('outfit without eyes is invalid', () => {
     wearables: outfit.wearables
   }
   expect(
-    Outfits.validate({
+    validateOutfits({
       outfits: [{ slot: 1, outfit: outfitWithoutEyes }]
     })
   ).toEqual(false)
@@ -98,7 +102,7 @@ it('outfit without hair is invalid', () => {
     wearables: outfit.wearables
   }
   expect(
-    Outfits.validate({
+    validateOutfits({
       outfits: [{ slot: 1, outfit: outfitWithoutHair }]
     })
   ).toEqual(false)
@@ -113,7 +117,7 @@ it('outfit without skin is invalid', () => {
     wearables: outfit.wearables
   }
   expect(
-    Outfits.validate({
+    validateOutfits({
       outfits: [{ slot: 1, outfit: outfitWithoutSkin }]
     })
   ).toEqual(false)
@@ -128,7 +132,7 @@ it('outfit without wearables is invalid', () => {
     skin: outfit.skin
   }
   expect(
-    Outfits.validate({
+    validateOutfits({
       outfits: [{ slot: 1, outfit: outfitWithoutWearables }]
     })
   ).toEqual(false)
@@ -140,5 +144,5 @@ it('outfit with repeated names is invalid', () => {
     outfits: OUTFITS.outfits,
     namesForExtraSlots: [someName, someName]
   }
-  expect(Outfits.validate(outfits)).toEqual(false)
+  expect(validateOutfits(outfits)).toEqual(false)
 })

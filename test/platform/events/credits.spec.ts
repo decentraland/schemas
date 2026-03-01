@@ -1,4 +1,4 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import {
   CreditsClaimReminderEvent,
   CreditsCompleteGoalsReminderEvent,
@@ -6,15 +6,30 @@ import {
   CreditsGoalCompletedEvent,
   CreditsUsage24HoursReminderEvent,
   CreditsUsageReminderEvent,
-  Events
+  EventType,
+  EventSubTypeCreditsService,
+  creditsClaimReminderEventSchema,
+  creditsCompleteGoalsReminderEventSchema,
+  creditsDoNotMissOutReminderEventSchema,
+  creditsGoalCompletedEventSchema,
+  creditsUsage24HoursReminderEventSchema,
+  creditsUsageReminderEventSchema
 } from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateCreditsClaimReminderEvent = generateLazyValidator(creditsClaimReminderEventSchema)
+const validateCreditsCompleteGoalsReminderEvent = generateLazyValidator(creditsCompleteGoalsReminderEventSchema)
+const validateCreditsDoNotMissOutReminderEvent = generateLazyValidator(creditsDoNotMissOutReminderEventSchema)
+const validateCreditsGoalCompletedEvent = generateLazyValidator(creditsGoalCompletedEventSchema)
+const validateCreditsUsage24HoursReminderEvent = generateLazyValidator(creditsUsage24HoursReminderEventSchema)
+const validateCreditsUsageReminderEvent = generateLazyValidator(creditsUsageReminderEventSchema)
 
 describe('Credits Events tests', () => {
   describe('CreditsGoalCompletedEvent', () => {
     it('should pass validation with valid data', () => {
       const event: CreditsGoalCompletedEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.CREDITS_GOAL_COMPLETED,
         key: 'goal-completion-123',
         timestamp: 1710234567890,
         metadata: {
@@ -26,15 +41,15 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsGoalCompletedEvent.validate(event)).toEqual(true)
-      expect(CreditsGoalCompletedEvent.validate(null)).toEqual(false)
-      expect(CreditsGoalCompletedEvent.validate({})).toEqual(false)
+      expect(validateCreditsGoalCompletedEvent(event)).toEqual(true)
+      expect(validateCreditsGoalCompletedEvent(null)).toEqual(false)
+      expect(validateCreditsGoalCompletedEvent({})).toEqual(false)
     })
 
     it('should fail with invalid creditsObtained', () => {
       const event: CreditsGoalCompletedEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.CREDITS_GOAL_COMPLETED,
         key: 'goal-completion-123',
         timestamp: 1710234567890,
         metadata: {
@@ -46,13 +61,13 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsGoalCompletedEvent.validate(event)).toEqual(false)
+      expect(validateCreditsGoalCompletedEvent(event)).toEqual(false)
     })
 
     it('should fail with invalid seasonId', () => {
       const event: CreditsGoalCompletedEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.CREDITS_GOAL_COMPLETED,
         key: 'goal-completion-123',
         timestamp: 1710234567890,
         metadata: {
@@ -64,13 +79,13 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsGoalCompletedEvent.validate(event)).toEqual(false)
+      expect(validateCreditsGoalCompletedEvent(event)).toEqual(false)
     })
 
     it('should fail with invalid weekNumber', () => {
       const event: CreditsGoalCompletedEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.CREDITS_GOAL_COMPLETED,
         key: 'goal-completion-123',
         timestamp: 1710234567890,
         metadata: {
@@ -82,13 +97,13 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsGoalCompletedEvent.validate(event)).toEqual(false)
+      expect(validateCreditsGoalCompletedEvent(event)).toEqual(false)
     })
 
     it('should fail with missing address', () => {
       const event: any = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.CREDITS_GOAL_COMPLETED,
         key: 'goal-completion-123',
         timestamp: 1710234567890,
         metadata: {
@@ -100,15 +115,15 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsGoalCompletedEvent.validate(event)).toEqual(false)
+      expect(validateCreditsGoalCompletedEvent(event)).toEqual(false)
     })
   })
 
   describe('CreditsCompleteGoalsReminderEvent', () => {
     it('should pass validation with valid data', () => {
       const event: CreditsCompleteGoalsReminderEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.COMPLETE_GOALS_REMINDER,
         key: 'complete-goals-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -119,15 +134,15 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsCompleteGoalsReminderEvent.validate(event)).toEqual(true)
-      expect(CreditsCompleteGoalsReminderEvent.validate(null)).toEqual(false)
-      expect(CreditsCompleteGoalsReminderEvent.validate({})).toEqual(false)
+      expect(validateCreditsCompleteGoalsReminderEvent(event)).toEqual(true)
+      expect(validateCreditsCompleteGoalsReminderEvent(null)).toEqual(false)
+      expect(validateCreditsCompleteGoalsReminderEvent({})).toEqual(false)
     })
 
     it('should fail with invalid seasonId', () => {
       const event: CreditsCompleteGoalsReminderEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.COMPLETE_GOALS_REMINDER,
         key: 'complete-goals-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -138,13 +153,13 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsCompleteGoalsReminderEvent.validate(event)).toEqual(false)
+      expect(validateCreditsCompleteGoalsReminderEvent(event)).toEqual(false)
     })
 
     it('should fail with invalid weekNumber', () => {
       const event: CreditsCompleteGoalsReminderEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.COMPLETE_GOALS_REMINDER,
         key: 'complete-goals-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -155,13 +170,13 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsCompleteGoalsReminderEvent.validate(event)).toEqual(false)
+      expect(validateCreditsCompleteGoalsReminderEvent(event)).toEqual(false)
     })
 
     it('should fail with empty pendingGoalIds', () => {
       const event: any = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.COMPLETE_GOALS_REMINDER,
         key: 'complete-goals-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -172,13 +187,13 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsCompleteGoalsReminderEvent.validate(event)).toEqual(false)
+      expect(validateCreditsCompleteGoalsReminderEvent(event)).toEqual(false)
     })
 
     it('should fail with missing address', () => {
       const event: any = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.COMPLETE_GOALS_REMINDER,
         key: 'complete-goals-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -189,15 +204,15 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsCompleteGoalsReminderEvent.validate(event)).toEqual(false)
+      expect(validateCreditsCompleteGoalsReminderEvent(event)).toEqual(false)
     })
   })
 
   describe('CreditsClaimReminderEvent', () => {
     it('should pass validation with valid data', () => {
       const event: CreditsClaimReminderEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.CLAIM_CREDITS_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.CLAIM_CREDITS_REMINDER,
         key: 'claim-credits-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -207,15 +222,15 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsClaimReminderEvent.validate(event)).toEqual(true)
-      expect(CreditsClaimReminderEvent.validate(null)).toEqual(false)
-      expect(CreditsClaimReminderEvent.validate({})).toEqual(false)
+      expect(validateCreditsClaimReminderEvent(event)).toEqual(true)
+      expect(validateCreditsClaimReminderEvent(null)).toEqual(false)
+      expect(validateCreditsClaimReminderEvent({})).toEqual(false)
     })
 
     it('should fail with invalid seasonId', () => {
       const event: CreditsClaimReminderEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.CLAIM_CREDITS_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.CLAIM_CREDITS_REMINDER,
         key: 'claim-credits-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -225,13 +240,13 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsClaimReminderEvent.validate(event)).toEqual(false)
+      expect(validateCreditsClaimReminderEvent(event)).toEqual(false)
     })
 
     it('should fail with invalid weekNumber', () => {
       const event: CreditsClaimReminderEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.CLAIM_CREDITS_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.CLAIM_CREDITS_REMINDER,
         key: 'claim-credits-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -241,13 +256,13 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsClaimReminderEvent.validate(event)).toEqual(false)
+      expect(validateCreditsClaimReminderEvent(event)).toEqual(false)
     })
 
     it('should fail with missing address', () => {
       const event: any = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.CLAIM_CREDITS_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.CLAIM_CREDITS_REMINDER,
         key: 'claim-credits-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -257,15 +272,15 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsClaimReminderEvent.validate(event)).toEqual(false)
+      expect(validateCreditsClaimReminderEvent(event)).toEqual(false)
     })
   })
 
   describe('CreditsUsageReminderEvent', () => {
     it('should pass validation with valid data', () => {
       const event: CreditsUsageReminderEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.USAGE_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.USAGE_REMINDER,
         key: 'usage-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -276,15 +291,15 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsUsageReminderEvent.validate(event)).toEqual(true)
-      expect(CreditsUsageReminderEvent.validate(null)).toEqual(false)
-      expect(CreditsUsageReminderEvent.validate({})).toEqual(false)
+      expect(validateCreditsUsageReminderEvent(event)).toEqual(true)
+      expect(validateCreditsUsageReminderEvent(null)).toEqual(false)
+      expect(validateCreditsUsageReminderEvent({})).toEqual(false)
     })
 
     it('should fail with invalid creditsAmount', () => {
       const event: CreditsUsageReminderEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.USAGE_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.USAGE_REMINDER,
         key: 'usage-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -295,13 +310,13 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsUsageReminderEvent.validate(event)).toEqual(false)
+      expect(validateCreditsUsageReminderEvent(event)).toEqual(false)
     })
 
     it('should fail with missing address', () => {
       const event: any = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.USAGE_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.USAGE_REMINDER,
         key: 'usage-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -312,15 +327,15 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsUsageReminderEvent.validate(event)).toEqual(false)
+      expect(validateCreditsUsageReminderEvent(event)).toEqual(false)
     })
   })
 
   describe('CreditsUsage24HoursReminderEvent', () => {
     it('should pass validation with valid data', () => {
       const event: CreditsUsage24HoursReminderEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.USAGE_24_HOURS_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.USAGE_24_HOURS_REMINDER,
         key: 'usage-24-hours-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -330,15 +345,15 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsUsage24HoursReminderEvent.validate(event)).toEqual(true)
-      expect(CreditsUsage24HoursReminderEvent.validate(null)).toEqual(false)
-      expect(CreditsUsage24HoursReminderEvent.validate({})).toEqual(false)
+      expect(validateCreditsUsage24HoursReminderEvent(event)).toEqual(true)
+      expect(validateCreditsUsage24HoursReminderEvent(null)).toEqual(false)
+      expect(validateCreditsUsage24HoursReminderEvent({})).toEqual(false)
     })
 
     it('should fail with invalid creditsAmount', () => {
       const event: CreditsUsage24HoursReminderEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.USAGE_24_HOURS_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.USAGE_24_HOURS_REMINDER,
         key: 'usage-24-hours-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -348,13 +363,13 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsUsage24HoursReminderEvent.validate(event)).toEqual(false)
+      expect(validateCreditsUsage24HoursReminderEvent(event)).toEqual(false)
     })
 
     it('should fail with missing address', () => {
       const event: any = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.USAGE_24_HOURS_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.USAGE_24_HOURS_REMINDER,
         key: 'usage-24-hours-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -364,15 +379,15 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsUsage24HoursReminderEvent.validate(event)).toEqual(false)
+      expect(validateCreditsUsage24HoursReminderEvent(event)).toEqual(false)
     })
   })
 
   describe('CreditsDoNotMissOutReminderEvent', () => {
     it('should pass validation with valid data', () => {
       const event: CreditsDoNotMissOutReminderEvent = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.DO_NOT_MISS_OUT_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.DO_NOT_MISS_OUT_REMINDER,
         key: 'do-not-miss-out-reminder-123',
         timestamp: 1710234567890,
         metadata: {
@@ -380,22 +395,22 @@ describe('Credits Events tests', () => {
         }
       }
 
-      expect(CreditsDoNotMissOutReminderEvent.validate(event)).toEqual(true)
-      expect(CreditsDoNotMissOutReminderEvent.validate(null)).toEqual(false)
-      expect(CreditsDoNotMissOutReminderEvent.validate({})).toEqual(false)
+      expect(validateCreditsDoNotMissOutReminderEvent(event)).toEqual(true)
+      expect(validateCreditsDoNotMissOutReminderEvent(null)).toEqual(false)
+      expect(validateCreditsDoNotMissOutReminderEvent({})).toEqual(false)
     })
 
     it('should fail with missing address', () => {
       const event: any = {
-        type: Events.Type.CREDITS_SERVICE,
-        subType: Events.SubType.CreditsService.DO_NOT_MISS_OUT_REMINDER,
+        type: EventType.CREDITS_SERVICE,
+        subType: EventSubTypeCreditsService.DO_NOT_MISS_OUT_REMINDER,
         key: 'do-not-miss-out-reminder-123',
         timestamp: 1710234567890,
         metadata: {}
         // address missing
       }
 
-      expect(CreditsDoNotMissOutReminderEvent.validate(event)).toEqual(false)
+      expect(validateCreditsDoNotMissOutReminderEvent(event)).toEqual(false)
     })
   })
 })

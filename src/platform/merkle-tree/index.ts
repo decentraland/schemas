@@ -1,1 +1,1 @@
-export * from './merkle-proof'
+export * from './merkle-proof.js'

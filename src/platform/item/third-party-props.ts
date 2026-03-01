@@ -1,7 +1,7 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { MerkleProof } from '../merkle-tree'
-import { BaseItem } from './base-item'
-import { Mappings, RangeMapping } from './linked-wearable-mappings'
+import type { JSONSchema, KeywordDefinition } from '../../validation/types.js'
+import { MerkleProof, merkleProofSchema } from '../merkle-tree/index.js'
+import { BaseItem } from './base-item.js'
+import { Mappings, RangeMapping, mappingsSchema } from './linked-wearable-mappings.js'
 
 export type ThirdPartyProps = {
   merkleProof: MerkleProof
@@ -12,7 +12,7 @@ export type ThirdPartyProps = {
 export const schema: JSONSchema<ThirdPartyProps> = {
   type: 'object',
   properties: {
-    merkleProof: MerkleProof.schema,
+    merkleProof: merkleProofSchema,
     content: {
       type: 'object',
       nullable: false,
@@ -21,14 +21,14 @@ export const schema: JSONSchema<ThirdPartyProps> = {
     },
     mappings: {
       nullable: true,
-      ...Mappings.schema
+      ...mappingsSchema
     }
   },
   required: ['merkleProof', 'content'],
   _containsHashingKeys: true
 }
 
-const _containsHashingKeys = {
+export const _containsHashingKeys: KeywordDefinition = {
   keyword: '_containsHashingKeys',
   validate: function (schema: boolean, data: any) {
     const itemAsThirdParty = data as ThirdPartyProps
@@ -40,12 +40,11 @@ const _containsHashingKeys = {
   errors: false
 }
 
-const validate: ValidateFunction<ThirdPartyProps> = generateLazyValidator(schema, [
-  _containsHashingKeys,
-  RangeMapping._fromLessThanOrEqualTo,
-  Mappings._isMappingsValid
-])
-
 export function isThirdParty<T extends BaseItem>(item: T): item is T & ThirdPartyProps {
-  return validate(item)
+  const data = item as any
+  if (!data || !data.merkleProof || !data.content) return false
+  if (data.merkleProof.hashingKeys) {
+    return data.merkleProof.hashingKeys.every((key: string) => data.hasOwnProperty(key))
+  }
+  return false
 }

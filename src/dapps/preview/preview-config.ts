@@ -1,11 +1,11 @@
-import { BodyShape } from '../../platform/item'
-import { EmoteDefinition } from './emote-definition'
-import { PreviewCamera } from './preview-camera'
-import { PreviewEmote } from './preview-emote'
-import { PreviewProjection } from './preview-projection'
-import { PreviewType } from './preview-type'
-import { SocialEmoteAnimation } from './social-emote-animation'
-import { WearableDefinition } from './wearable-definition'
+import { BodyShape } from '../../platform/item/index.js'
+import { EmoteDefinition } from './emote-definition.js'
+import { PreviewCamera } from './preview-camera.js'
+import { PreviewEmote } from './preview-emote.js'
+import { PreviewProjection } from './preview-projection.js'
+import { PreviewType } from './preview-type.js'
+import { SocialEmoteAnimation } from './social-emote-animation.js'
+import { WearableDefinition } from './wearable-definition.js'
 
 export enum PreviewUnityMode {
   AUTH = 'authentication',

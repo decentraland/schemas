@@ -1,6 +1,9 @@
-import { MerkleProof } from '../../../src'
+import { merkleProofSchema } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
-import expect from 'expect'
+import { expect } from 'expect'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateMerkleProof = generateLazyValidator(merkleProofSchema)
 
 const MERKLE_TREE = {
   index: 61575,
@@ -40,11 +43,11 @@ const MERKLE_TREE = {
 }
 
 describe('Merkle proof tests', () => {
-  testTypeSignature(MerkleProof, MERKLE_TREE)
+  testTypeSignature({ schema: merkleProofSchema }, MERKLE_TREE)
 
   it('static tests must pass', () => {
-    expect(MerkleProof.validate(MERKLE_TREE)).toEqual(true)
-    expect(MerkleProof.validate(null)).toEqual(false)
-    expect(MerkleProof.validate({})).toEqual(false)
+    expect(validateMerkleProof(MERKLE_TREE)).toEqual(true)
+    expect(validateMerkleProof(null)).toEqual(false)
+    expect(validateMerkleProof({})).toEqual(false)
   })
 })

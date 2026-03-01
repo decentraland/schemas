@@ -1,7 +1,7 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { SubscriptionDetails } from './subscription-details'
-import { EthAddress } from '../../misc'
-import { Email } from '../../misc/email'
+import type { JSONSchema } from '../../validation/types.js'
+import { SubscriptionDetails, subscriptionDetailsSchema } from './subscription-details.js'
+import { EthAddress, ethAddressSchema } from '../../misc/index.js'
+import { Email, emailSchema } from '../../misc/email.js'
 
 /**
  * Subscription returned by the notifications-workers
@@ -17,16 +17,12 @@ export type Subscription = {
  * Subscription schema and validator function
  * @alpha
  */
-export namespace Subscription {
-  export const schema: JSONSchema<Subscription> = {
-    type: 'object',
-    required: ['address', 'details'],
-    properties: {
-      address: EthAddress.schema,
-      email: { ...Email.schema, nullable: true },
-      details: SubscriptionDetails.schema
-    }
+export const subscriptionSchema: JSONSchema<Subscription> = {
+  type: 'object',
+  required: ['address', 'details'],
+  properties: {
+    address: ethAddressSchema,
+    email: { ...emailSchema, nullable: true },
+    details: subscriptionDetailsSchema
   }
-
-  export const validate: ValidateFunction<Subscription> = generateLazyValidator(schema)
 }

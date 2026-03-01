@@ -1,6 +1,9 @@
-import expect from 'expect'
-import { ChainId, Collection, Network } from '../../src'
+import { expect } from 'expect'
+import { ChainId, type Collection, collectionSchema, Network } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateCollection = generateLazyValidator(collectionSchema)
 
 describe('Collection tests', () => {
   describe('collection', () => {
@@ -19,12 +22,12 @@ describe('Collection tests', () => {
       firstListedAt: null
     }
 
-    testTypeSignature(Collection, collection)
+    testTypeSignature({ schema: collectionSchema }, collection)
 
     it('static tests must pass', () => {
-      expect(Collection.validate(collection)).toEqual(true)
-      expect(Collection.validate(null)).toEqual(false)
-      expect(Collection.validate({})).toEqual(false)
+      expect(validateCollection(collection)).toEqual(true)
+      expect(validateCollection(null)).toEqual(false)
+      expect(validateCollection({})).toEqual(false)
     })
   })
 })

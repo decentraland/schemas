@@ -1,6 +1,6 @@
-import { IPFSv1, IPFSv2 } from '../misc'
-import { ContentMapping } from '../misc/content-mapping'
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import { IPFSv1, IPFSv2, ipfsv1Schema, ipfsv2Schema } from '../misc/index.js'
+import { ContentMapping, contentMappingSchema } from '../misc/content-mapping.js'
+import type { JSONSchema } from '../validation/types.js'
 
 /**
  * Non-exhaustive list of EntityTypes.
@@ -34,20 +34,16 @@ export type Entity = {
 }
 
 /** @public */
-export namespace Entity {
-  export const schema: JSONSchema<Entity> = {
-    type: 'object',
-    properties: {
-      version: { type: 'string', enum: ['v3'] },
-      id: { type: 'string', oneOf: [IPFSv1.schema, IPFSv2.schema] },
-      type: { type: 'string' },
-      pointers: { type: 'array', items: { type: 'string', minLength: 1 } },
-      timestamp: { type: 'number', minimum: 0 },
-      content: { type: 'array', items: ContentMapping.schema },
-      metadata: { type: 'object', nullable: true }
-    },
-    required: ['version', 'id', 'type', 'pointers', 'timestamp', 'content']
-  }
-
-  export const validate: ValidateFunction<Entity> = generateLazyValidator(schema)
+export const entitySchema: JSONSchema<Entity> = {
+  type: 'object',
+  properties: {
+    version: { type: 'string', enum: ['v3'] },
+    id: { type: 'string', oneOf: [ipfsv1Schema, ipfsv2Schema] },
+    type: { type: 'string' },
+    pointers: { type: 'array', items: { type: 'string', minLength: 1 } },
+    timestamp: { type: 'number', minimum: 0 },
+    content: { type: 'array', items: contentMappingSchema },
+    metadata: { type: 'object', nullable: true }
+  },
+  required: ['version', 'id', 'type', 'pointers', 'timestamp', 'content']
 }

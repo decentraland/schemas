@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import type { JSONSchema } from '../validation/types.js'
 
 export enum ListingStatus {
   OPEN = 'open',
@@ -6,11 +6,7 @@ export enum ListingStatus {
   CANCELLED = 'cancelled'
 }
 
-export namespace ListingStatus {
-  export const schema: JSONSchema<ListingStatus> = {
-    type: 'string',
-    enum: Object.values(ListingStatus)
-  }
-
-  export const validate: ValidateFunction<ListingStatus> = generateLazyValidator(schema)
+export const listingStatusSchema: JSONSchema<ListingStatus> = {
+  type: 'string',
+  enum: Object.values(ListingStatus)
 }

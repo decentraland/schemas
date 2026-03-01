@@ -1,11 +1,22 @@
-import expect from 'expect'
-import { AssetBundleConversionFinishedEvent, AssetBundleConversionManuallyQueuedEvent, Events } from '../../../src'
+import { expect } from 'expect'
+import {
+  AssetBundleConversionFinishedEvent,
+  AssetBundleConversionManuallyQueuedEvent,
+  EventType,
+  EventSubTypeAssetBundle,
+  assetBundleConversionFinishedEventSchema,
+  assetBundleConversionManuallyQueuedEventSchema
+} from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateAssetBundleConversionFinishedEvent = generateLazyValidator(assetBundleConversionFinishedEventSchema)
+const validateAssetBundleConversionManuallyQueuedEvent = generateLazyValidator(assetBundleConversionManuallyQueuedEventSchema)
 
 describe('AssetBundleConversionFinished Events tests', () => {
   it('AssetBundleConversionFinishedEvent static tests must pass', () => {
     const event: AssetBundleConversionFinishedEvent = {
-      type: Events.Type.ASSET_BUNDLE,
-      subType: Events.SubType.AssetBundle.CONVERTED,
+      type: EventType.ASSET_BUNDLE,
+      subType: EventSubTypeAssetBundle.CONVERTED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -18,17 +29,17 @@ describe('AssetBundleConversionFinished Events tests', () => {
       }
     }
 
-    expect(AssetBundleConversionFinishedEvent.validate(event)).toEqual(true)
-    expect(AssetBundleConversionFinishedEvent.validate(null)).toEqual(false)
-    expect(AssetBundleConversionFinishedEvent.validate({})).toEqual(false)
+    expect(validateAssetBundleConversionFinishedEvent(event)).toEqual(true)
+    expect(validateAssetBundleConversionFinishedEvent(null)).toEqual(false)
+    expect(validateAssetBundleConversionFinishedEvent({})).toEqual(false)
   })
 })
 
 describe('AssetBundleConversionManuallyQueued Events tests', () => {
   it('AssetBundleConversionManuallyQueuedEvent static tests must pass', () => {
     const event: AssetBundleConversionManuallyQueuedEvent = {
-      type: Events.Type.ASSET_BUNDLE,
-      subType: Events.SubType.AssetBundle.MANUALLY_QUEUED,
+      type: EventType.ASSET_BUNDLE,
+      subType: EventSubTypeAssetBundle.MANUALLY_QUEUED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -40,8 +51,8 @@ describe('AssetBundleConversionManuallyQueued Events tests', () => {
       }
     }
 
-    expect(AssetBundleConversionManuallyQueuedEvent.validate(event)).toEqual(true)
-    expect(AssetBundleConversionManuallyQueuedEvent.validate(null)).toEqual(false)
-    expect(AssetBundleConversionManuallyQueuedEvent.validate({})).toEqual(false)
+    expect(validateAssetBundleConversionManuallyQueuedEvent(event)).toEqual(true)
+    expect(validateAssetBundleConversionManuallyQueuedEvent(null)).toEqual(false)
+    expect(validateAssetBundleConversionManuallyQueuedEvent({})).toEqual(false)
   })
 })

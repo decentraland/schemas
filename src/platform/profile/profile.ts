@@ -1,5 +1,5 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { Avatar } from './avatar'
+import type { JSONSchema } from '../../validation/types.js'
+import { Avatar, avatarSchema } from './avatar.js'
 
 /**
  * Profile containing one or multiple avatars
@@ -13,17 +13,14 @@ export type Profile = {
  * Profile
  * @alpha
  */
-export namespace Profile {
-  export const schema: JSONSchema<Profile> = {
-    type: 'object',
-    required: ['avatars'],
-    properties: {
-      avatars: {
-        type: 'array',
-        items: Avatar.schema
-      }
-    },
-    additionalProperties: true
-  }
-  export const validate: ValidateFunction<Profile> = generateLazyValidator(schema)
+export const profileSchema: JSONSchema<Profile> = {
+  type: 'object',
+  required: ['avatars'],
+  properties: {
+    avatars: {
+      type: 'array',
+      items: avatarSchema
+    }
+  },
+  additionalProperties: true
 }

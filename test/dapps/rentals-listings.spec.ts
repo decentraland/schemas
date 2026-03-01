@@ -1,7 +1,10 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import { ChainId } from '../../src'
 import { Network } from '../../src/dapps/network'
-import { RentalListingCreation } from '../../src/dapps/rentals-listings'
+import { type RentalListingCreation, rentalListingCreationSchema } from '../../src/dapps/rentals-listings'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateRentalListingCreation = generateLazyValidator(rentalListingCreationSchema)
 
 describe('Rental listings creation tests', () => {
   let baseRentalListingCreation: RentalListingCreation
@@ -29,7 +32,7 @@ describe('Rental listings creation tests', () => {
 
   it('should return as invalid a creation rental listing with an invalid network', () => {
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         network: 'A non existent network'
       })
@@ -38,7 +41,7 @@ describe('Rental listings creation tests', () => {
 
   it('should return as invalid a creation rental listing with an invalid chain id', () => {
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         chainId: 3242342
       })
@@ -47,7 +50,7 @@ describe('Rental listings creation tests', () => {
 
   it('should return as invalid a creation rental listing with an empty signature', () => {
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         signature: ''
       })
@@ -56,7 +59,7 @@ describe('Rental listings creation tests', () => {
 
   it('should return as invalid a creation rental listing with an empty token id', () => {
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         tokenId: ''
       })
@@ -65,19 +68,19 @@ describe('Rental listings creation tests', () => {
 
   it('should return as invalid a creation rental listing with an array of nonces with length lower than 3', () => {
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         nonces: []
       })
     ).toBe(false)
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         nonces: ['']
       })
     ).toBe(false)
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         nonces: ['', '']
       })
@@ -86,7 +89,7 @@ describe('Rental listings creation tests', () => {
 
   it('should return as invalid a creation rental listing with a contract address that is not an address', () => {
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         contractAddress: '0x0'
       })
@@ -95,7 +98,7 @@ describe('Rental listings creation tests', () => {
 
   it('should return as invalid a creation rental listing with a rental contract address that is not an address', () => {
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         rentalContractAddress: '0x0'
       })
@@ -104,7 +107,7 @@ describe('Rental listings creation tests', () => {
 
   it('should return as invalid a creation rental listing with an empty array of periods', () => {
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         periods: []
       })
@@ -113,7 +116,7 @@ describe('Rental listings creation tests', () => {
 
   it('should return as invalid a creation rental listing with an array of period where one has an amount of min days less than 0', () => {
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         periods: [{ minDays: -2, maxDays: 20, price: '10000' }]
       })
@@ -122,7 +125,7 @@ describe('Rental listings creation tests', () => {
 
   it('should return as invalid a creation rental listing with an array of period where one has an amount of max days less than 0', () => {
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         periods: [{ minDays: 20, maxDays: -2, price: '10000' }]
       })
@@ -131,7 +134,7 @@ describe('Rental listings creation tests', () => {
 
   it('should return as invalid a creation rental listing with an array of period where one has an invalid price', () => {
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         periods: [{ minDays: 20, maxDays: 20, price: 'price' }]
       })
@@ -140,7 +143,7 @@ describe('Rental listings creation tests', () => {
 
   it('should return as invalid a creation rental listing with an array of period with length greater than 100', () => {
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         ...baseRentalListingCreation,
         periods: Array.from({ length: 10 }, (_, i) => ({
           minDays: 20,
@@ -160,13 +163,13 @@ describe('Rental listings creation tests', () => {
     const { tokenId, ...rentalListingCreationWithoutTokenId } = rentalListingCreation
 
     expect(
-      RentalListingCreation.validate({
+      validateRentalListingCreation({
         rentalListingCreationWithoutTokenId
       })
     ).toBe(false)
   })
 
   it('should return as valid a creation rental listing that has all properties correctly set', () => {
-    expect(RentalListingCreation.validate(baseRentalListingCreation)).toBe(true)
+    expect(validateRentalListingCreation(baseRentalListingCreation)).toBe(true)
   })
 })

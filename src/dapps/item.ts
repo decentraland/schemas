@@ -1,12 +1,12 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { ChainId } from './chain-id'
-import { EmoteCategory, EmotePlayMode, EmoteOutcomeType } from '../platform'
-import { Network } from './network'
-import { NFT } from './nft'
-import { NFTCategory } from './nft-category'
-import { Rarity } from './rarity'
-import { WearableCategory } from '../platform/item/wearable/wearable-category'
-import { GenderFilterOption, WearableGender } from './wearable-gender'
+import type { JSONSchema } from '../validation/types.js'
+import { ChainId, chainIdSchema } from './chain-id.js'
+import { EmoteCategory, EmotePlayMode, EmoteOutcomeType } from '../platform/index.js'
+import { Network, networkSchema } from './network.js'
+import { NFT, nftSchema } from './nft.js'
+import { NFTCategory, nftCategorySchema } from './nft-category.js'
+import { Rarity } from './rarity.js'
+import { WearableCategory } from '../platform/item/wearable/wearable-category.js'
+import { GenderFilterOption, WearableGender } from './wearable-gender.js'
 
 export type Item = {
   id: string
@@ -104,142 +104,138 @@ export enum ItemSortBy {
   CHEAPEST = 'cheapest'
 }
 
-export namespace Item {
-  export const schema: JSONSchema<Item> = {
-    type: 'object',
-    properties: {
-      id: {
-        type: 'string'
-      },
-      name: {
-        type: 'string'
-      },
-      thumbnail: {
-        type: 'string'
-      },
-      url: {
-        type: 'string'
-      },
-      category: NFTCategory.schema,
-      contractAddress: {
-        type: 'string'
-      },
-      itemId: {
-        type: 'string'
-      },
-      rarity: {
-        type: 'string'
-      },
-      price: {
-        type: 'string'
-      },
-      available: {
-        type: 'integer'
-      },
-      isOnSale: {
-        type: 'boolean'
-      },
-      creator: {
-        type: 'string'
-      },
-      beneficiary: {
-        type: 'string',
-        nullable: true
-      },
-      tradeId: {
-        type: 'string',
-        nullable: true
-      },
-      tradeContractAddress: {
-        type: 'string',
-        nullable: true
-      },
-      data: NFT.schema.properties!.data,
-      network: Network.schema,
-      chainId: ChainId.schema,
-      urn: {
-        type: 'string'
-      },
-      createdAt: {
-        type: 'integer'
-      },
-      updatedAt: {
-        type: 'integer'
-      },
-      reviewedAt: {
-        type: 'integer'
-      },
-      soldAt: {
-        type: 'integer'
-      },
-      firstListedAt: {
-        type: 'integer',
-        nullable: true
-      },
-      picks: {
-        type: 'object',
-        properties: {
-          pickedByUser: {
-            type: 'boolean',
-            nullable: true
-          },
-          count: {
-            type: 'integer'
-          }
-        },
-        required: ['count'],
-        nullable: true
-      },
-      minPrice: {
-        type: 'string',
-        nullable: true
-      },
-      utility: {
-        type: 'string',
-        nullable: true
-      },
-      minListingPrice: {
-        type: 'string',
-        nullable: true
-      },
-      maxListingPrice: {
-        type: 'string',
-        nullable: true
-      },
-      listings: {
-        type: 'integer',
-        nullable: true
-      },
-      owners: {
-        type: 'integer',
-        nullable: true
-      },
-      tradeExpiresAt: {
-        type: 'integer',
-        nullable: true
-      }
+export const itemSchema: JSONSchema<Item> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string'
     },
-    required: [
-      'id',
-      'name',
-      'thumbnail',
-      'url',
-      'category',
-      'contractAddress',
-      'itemId',
-      'rarity',
-      'price',
-      'available',
-      'isOnSale',
-      'creator',
-      'data',
-      'network',
-      'chainId',
-      'createdAt',
-      'updatedAt',
-      'soldAt'
-    ]
-  }
-
-  export const validate: ValidateFunction<Item> = generateLazyValidator(schema)
+    name: {
+      type: 'string'
+    },
+    thumbnail: {
+      type: 'string'
+    },
+    url: {
+      type: 'string'
+    },
+    category: nftCategorySchema,
+    contractAddress: {
+      type: 'string'
+    },
+    itemId: {
+      type: 'string'
+    },
+    rarity: {
+      type: 'string'
+    },
+    price: {
+      type: 'string'
+    },
+    available: {
+      type: 'integer'
+    },
+    isOnSale: {
+      type: 'boolean'
+    },
+    creator: {
+      type: 'string'
+    },
+    beneficiary: {
+      type: 'string',
+      nullable: true
+    },
+    tradeId: {
+      type: 'string',
+      nullable: true
+    },
+    tradeContractAddress: {
+      type: 'string',
+      nullable: true
+    },
+    data: nftSchema.properties!.data,
+    network: networkSchema,
+    chainId: chainIdSchema,
+    urn: {
+      type: 'string'
+    },
+    createdAt: {
+      type: 'integer'
+    },
+    updatedAt: {
+      type: 'integer'
+    },
+    reviewedAt: {
+      type: 'integer'
+    },
+    soldAt: {
+      type: 'integer'
+    },
+    firstListedAt: {
+      type: 'integer',
+      nullable: true
+    },
+    picks: {
+      type: 'object',
+      properties: {
+        pickedByUser: {
+          type: 'boolean',
+          nullable: true
+        },
+        count: {
+          type: 'integer'
+        }
+      },
+      required: ['count'],
+      nullable: true
+    },
+    minPrice: {
+      type: 'string',
+      nullable: true
+    },
+    utility: {
+      type: 'string',
+      nullable: true
+    },
+    minListingPrice: {
+      type: 'string',
+      nullable: true
+    },
+    maxListingPrice: {
+      type: 'string',
+      nullable: true
+    },
+    listings: {
+      type: 'integer',
+      nullable: true
+    },
+    owners: {
+      type: 'integer',
+      nullable: true
+    },
+    tradeExpiresAt: {
+      type: 'integer',
+      nullable: true
+    }
+  },
+  required: [
+    'id',
+    'name',
+    'thumbnail',
+    'url',
+    'category',
+    'contractAddress',
+    'itemId',
+    'rarity',
+    'price',
+    'available',
+    'isOnSale',
+    'creator',
+    'data',
+    'network',
+    'chainId',
+    'createdAt',
+    'updatedAt',
+    'soldAt'
+  ]
 }

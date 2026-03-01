@@ -1,6 +1,6 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { ChainId } from './chain-id'
-import { Network } from './network'
+import type { JSONSchema } from '../validation/types.js'
+import { ChainId, chainIdSchema } from './chain-id.js'
+import { Network, networkSchema } from './network.js'
 
 export type Mint = {
   id: string
@@ -37,59 +37,55 @@ export type MintFilters = {
   network?: Network
 }
 
-export namespace Mint {
-  export const schema: JSONSchema<Mint> = {
-    type: 'object',
-    properties: {
-      id: {
-        type: 'string'
-      },
-      creator: {
-        type: 'string'
-      },
-      beneficiary: {
-        type: 'string'
-      },
-      minter: {
-        type: 'string'
-      },
-      price: {
-        type: 'string',
-        nullable: true
-      },
-      contractAddress: {
-        type: 'string'
-      },
-      tokenId: {
-        type: 'string'
-      },
-      itemId: {
-        type: 'string'
-      },
-      issuedId: {
-        type: 'string'
-      },
-      timestamp: {
-        type: 'integer'
-      },
-      network: Network.schema,
-      chainId: ChainId.schema
+export const mintSchema: JSONSchema<Mint> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string'
     },
-    required: [
-      'id',
-      'creator',
-      'beneficiary',
-      'minter',
-      'itemId',
-      'tokenId',
-      'issuedId',
-      'contractAddress',
-      'price',
-      'timestamp',
-      'network',
-      'chainId'
-    ]
-  }
-
-  export const validate: ValidateFunction<Mint> = generateLazyValidator(schema)
+    creator: {
+      type: 'string'
+    },
+    beneficiary: {
+      type: 'string'
+    },
+    minter: {
+      type: 'string'
+    },
+    price: {
+      type: 'string',
+      nullable: true
+    },
+    contractAddress: {
+      type: 'string'
+    },
+    tokenId: {
+      type: 'string'
+    },
+    itemId: {
+      type: 'string'
+    },
+    issuedId: {
+      type: 'string'
+    },
+    timestamp: {
+      type: 'integer'
+    },
+    network: networkSchema,
+    chainId: chainIdSchema
+  },
+  required: [
+    'id',
+    'creator',
+    'beneficiary',
+    'minter',
+    'itemId',
+    'tokenId',
+    'issuedId',
+    'contractAddress',
+    'price',
+    'timestamp',
+    'network',
+    'chainId'
+  ]
 }

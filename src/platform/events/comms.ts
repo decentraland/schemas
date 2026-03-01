@@ -1,9 +1,9 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { BaseEvent, Events } from './base'
+import type { JSONSchema } from '../../validation/types.js'
+import { BaseEvent, EventType, EventSubTypeComms } from './base.js'
 
 export type UserJoinedRoomEvent = BaseEvent & {
-  type: Events.Type.COMMS
-  subType: Events.SubType.Comms.USER_JOINED_ROOM
+  type: EventType.COMMS
+  subType: EventSubTypeComms.USER_JOINED_ROOM
   metadata: {
     parcel: string
     sceneId: string
@@ -27,39 +27,35 @@ export enum RoomType {
   UNKNOWN = 'unknown'
 }
 
-export namespace UserJoinedRoomEvent {
-  export const schema: JSONSchema<UserJoinedRoomEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMS },
-      subType: { type: 'string', const: Events.SubType.Comms.USER_JOINED_ROOM },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          parcel: { type: 'string' },
-          sceneId: { type: 'string' },
-          userAddress: { type: 'string' },
-          realmName: { type: 'string' },
-          islandName: { type: 'string', nullable: true },
-          communityId: { type: 'string', nullable: true },
-          voiceChatId: { type: 'string', nullable: true },
-          isWorld: { type: 'boolean' },
-          roomType: { type: 'string', enum: Object.values(RoomType) }
-        },
-        required: ['parcel', 'sceneId', 'userAddress', 'realmName', 'isWorld', 'roomType']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata']
-  }
-
-  export const validate = generateLazyValidator(schema)
+export const userJoinedRoomEventSchema: JSONSchema<UserJoinedRoomEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMS },
+    subType: { type: 'string', const: EventSubTypeComms.USER_JOINED_ROOM },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        parcel: { type: 'string' },
+        sceneId: { type: 'string' },
+        userAddress: { type: 'string' },
+        realmName: { type: 'string' },
+        islandName: { type: 'string', nullable: true },
+        communityId: { type: 'string', nullable: true },
+        voiceChatId: { type: 'string', nullable: true },
+        isWorld: { type: 'boolean' },
+        roomType: { type: 'string', enum: Object.values(RoomType) }
+      },
+      required: ['parcel', 'sceneId', 'userAddress', 'realmName', 'isWorld', 'roomType']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata']
 }
 
 export type UserLeftRoomEvent = BaseEvent & {
-  type: Events.Type.COMMS
-  subType: Events.SubType.Comms.USER_LEFT_ROOM
+  type: EventType.COMMS
+  subType: EventSubTypeComms.USER_LEFT_ROOM
   metadata: {
     sceneId?: string
     isWorld: boolean
@@ -72,98 +68,86 @@ export type UserLeftRoomEvent = BaseEvent & {
   }
 }
 
-export namespace UserLeftRoomEvent {
-  export const schema: JSONSchema<UserLeftRoomEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMS },
-      subType: { type: 'string', const: Events.SubType.Comms.USER_LEFT_ROOM },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          userAddress: { type: 'string' },
-          realmName: { type: 'string' },
-          isWorld: { type: 'boolean' },
-          roomType: { type: 'string', enum: Object.values(RoomType) },
-          sceneId: { type: 'string', nullable: true },
-          islandName: { type: 'string', nullable: true },
-          communityId: { type: 'string', nullable: true },
-          voiceChatId: { type: 'string', nullable: true }
-        },
-        required: ['isWorld', 'userAddress', 'realmName', 'roomType']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<UserLeftRoomEvent> = generateLazyValidator(schema)
+export const userLeftRoomEventSchema: JSONSchema<UserLeftRoomEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMS },
+    subType: { type: 'string', const: EventSubTypeComms.USER_LEFT_ROOM },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        userAddress: { type: 'string' },
+        realmName: { type: 'string' },
+        isWorld: { type: 'boolean' },
+        roomType: { type: 'string', enum: Object.values(RoomType) },
+        sceneId: { type: 'string', nullable: true },
+        islandName: { type: 'string', nullable: true },
+        communityId: { type: 'string', nullable: true },
+        voiceChatId: { type: 'string', nullable: true }
+      },
+      required: ['isWorld', 'userAddress', 'realmName', 'roomType']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type UserBannedFromSceneEvent = BaseEvent & {
-  type: Events.Type.COMMS
-  subType: Events.SubType.Comms.USER_BANNED_FROM_SCENE
+  type: EventType.COMMS
+  subType: EventSubTypeComms.USER_BANNED_FROM_SCENE
   metadata: {
     placeTitle: string
     userAddress: string
   }
 }
 
-export namespace UserBannedFromSceneEvent {
-  export const schema: JSONSchema<UserBannedFromSceneEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMS },
-      subType: { type: 'string', const: Events.SubType.Comms.USER_BANNED_FROM_SCENE },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          placeTitle: { type: 'string' },
-          userAddress: { type: 'string' }
-        },
-        required: ['placeTitle', 'userAddress']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<UserBannedFromSceneEvent> = generateLazyValidator(schema)
+export const userBannedFromSceneEventSchema: JSONSchema<UserBannedFromSceneEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMS },
+    subType: { type: 'string', const: EventSubTypeComms.USER_BANNED_FROM_SCENE },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        placeTitle: { type: 'string' },
+        userAddress: { type: 'string' }
+      },
+      required: ['placeTitle', 'userAddress']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type UserUnbannedFromSceneEvent = BaseEvent & {
-  type: Events.Type.COMMS
-  subType: Events.SubType.Comms.USER_UNBANNED_FROM_SCENE
+  type: EventType.COMMS
+  subType: EventSubTypeComms.USER_UNBANNED_FROM_SCENE
   metadata: {
     placeTitle: string
     userAddress: string
   }
 }
 
-export namespace UserUnbannedFromSceneEvent {
-  export const schema: JSONSchema<UserUnbannedFromSceneEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.COMMS },
-      subType: { type: 'string', const: Events.SubType.Comms.USER_UNBANNED_FROM_SCENE },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          placeTitle: { type: 'string' },
-          userAddress: { type: 'string' }
-        },
-        required: ['placeTitle', 'userAddress']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<UserUnbannedFromSceneEvent> = generateLazyValidator(schema)
+export const userUnbannedFromSceneEventSchema: JSONSchema<UserUnbannedFromSceneEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.COMMS },
+    subType: { type: 'string', const: EventSubTypeComms.USER_UNBANNED_FROM_SCENE },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        placeTitle: { type: 'string' },
+        userAddress: { type: 'string' }
+      },
+      required: ['placeTitle', 'userAddress']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }

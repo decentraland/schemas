@@ -1,5 +1,5 @@
-import { ChainId } from './chain-id'
-import { Network } from './network'
+import { ChainId } from './chain-id.js'
+import { Network } from './network.js'
 
 export enum TradeType {
   BID = 'bid',

@@ -1,7 +1,19 @@
-import expect from 'expect'
-import { Rarity, EmoteCategory } from '../../../../src'
-import { Locale, BodyShape, Emote, EmoteRepresentationADR74, isStandard, isThirdParty } from '../../../../src'
+import { expect } from 'expect'
+import type { EmoteRepresentationADR74 } from '../../../../src'
+import {
+  Rarity,
+  EmoteCategory,
+  Locale,
+  BodyShape,
+  emoteSchema,
+  emoteKeywordDefinitions,
+  isStandard,
+  isThirdParty
+} from '../../../../src'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../../test-utils'
+import { generateLazyValidator } from '../../../../src/validation/index.js'
+
+const validateEmote = generateLazyValidator(emoteSchema, emoteKeywordDefinitions)
 
 describe('Emote tests', () => {
   const representation: EmoteRepresentationADR74 = {
@@ -78,18 +90,18 @@ describe('Emote tests', () => {
     emoteDataADR74
   }
 
-  testTypeSignature(Emote, standardEmote)
-  testTypeSignature(Emote, thirdPartyEmote)
+  testTypeSignature({ schema: emoteSchema, keywordDefinitions: emoteKeywordDefinitions }, standardEmote)
+  testTypeSignature({ schema: emoteSchema, keywordDefinitions: emoteKeywordDefinitions }, thirdPartyEmote)
 
   it('static tests must pass', () => {
-    expect(Emote.validate(standardEmote)).toEqual(true)
-    expect(Emote.validate(thirdPartyEmote)).toEqual(true)
-    expect(Emote.validate(null)).toEqual(false)
-    expect(Emote.validate({})).toEqual(false)
+    expect(validateEmote(standardEmote)).toEqual(true)
+    expect(validateEmote(thirdPartyEmote)).toEqual(true)
+    expect(validateEmote(null)).toEqual(false)
+    expect(validateEmote({})).toEqual(false)
   })
 
   it('static tests must return the correct errors when missing properties', () => {
-    expectValidationFailureWithErrors(Emote.validate, {}, [
+    expectValidationFailureWithErrors(validateEmote, {}, [
       "must have required property 'id'",
       "must have required property 'description'",
       "must have required property 'name'",
@@ -102,7 +114,7 @@ describe('Emote tests', () => {
 
   it('emote with two i18n with same locale fails', () => {
     expectValidationFailureWithErrors(
-      Emote.validate,
+      validateEmote,
       {
         ...standardEmote,
         i18n: [
@@ -116,7 +128,7 @@ describe('Emote tests', () => {
 
   it('emote without representation fails', () => {
     expectValidationFailureWithErrors(
-      Emote.validate,
+      validateEmote,
       {
         ...standardEmote,
         emoteDataADR74: {
@@ -130,7 +142,7 @@ describe('Emote tests', () => {
 
   it('emote with merkle proof and standard fields fails', () => {
     expectValidationFailureWithErrors(
-      Emote.validate,
+      validateEmote,
       {
         ...baseEmote,
         ...standardProps,
@@ -148,7 +160,7 @@ describe('Emote tests', () => {
 
   it('emote should be standard and/or thirdparty', () => {
     expectValidationFailureWithErrors(
-      Emote.validate,
+      validateEmote,
       {
         ...baseEmote,
         emoteDataADR74
@@ -173,7 +185,7 @@ describe('Emote tests', () => {
   it('group of properties must be complete, not partial', () => {
     // misses 'rarity' to complete standard properties
     expectValidationFailureWithErrors(
-      Emote.validate,
+      validateEmote,
       {
         ...baseEmote,
         collectionAddress: '0x...',
@@ -218,7 +230,7 @@ describe('Emote tests', () => {
       ...notValidThirdPartyProps,
       emoteDataADR74
     }
-    expectValidationFailureWithErrors(Emote.validate, notThirdPartyEmote, [
+    expectValidationFailureWithErrors(validateEmote, notThirdPartyEmote, [
       'standard properties conditions are not met',
       'thirdparty properties conditions are not met',
       'emote should have either standard or thirdparty properties',
@@ -248,7 +260,7 @@ describe('Emote tests', () => {
       ...thirdPartyPropsMissingImage,
       emoteDataADR74
     }
-    expectValidationFailureWithErrors(Emote.validate, notThirdPartyEmote, [
+    expectValidationFailureWithErrors(validateEmote, notThirdPartyEmote, [
       'thirdparty properties conditions are not met'
     ])
   })
@@ -289,7 +301,7 @@ describe('Emote tests', () => {
       })
 
       it('should pass validation', () => {
-        expect(Emote.validate(emote)).toEqual(true)
+        expect(validateEmote(emote)).toEqual(true)
       })
     })
 
@@ -306,7 +318,7 @@ describe('Emote tests', () => {
       })
 
       it('should pass validation', () => {
-        expect(Emote.validate(emote)).toEqual(true)
+        expect(validateEmote(emote)).toEqual(true)
       })
     })
 
@@ -314,7 +326,7 @@ describe('Emote tests', () => {
       describe('and only startAnimation is present', () => {
         it('should fail validation', () => {
           expectValidationFailureWithErrors(
-            Emote.validate,
+            validateEmote,
             {
               ...standardEmote,
               emoteDataADR74: {
@@ -330,7 +342,7 @@ describe('Emote tests', () => {
       describe('and only randomizeOutcomes is present', () => {
         it('should fail validation', () => {
           expectValidationFailureWithErrors(
-            Emote.validate,
+            validateEmote,
             {
               ...standardEmote,
               emoteDataADR74: {
@@ -346,7 +358,7 @@ describe('Emote tests', () => {
       describe('and only outcomes is present', () => {
         it('should fail validation', () => {
           expectValidationFailureWithErrors(
-            Emote.validate,
+            validateEmote,
             {
               ...standardEmote,
               emoteDataADR74: {
@@ -364,7 +376,7 @@ describe('Emote tests', () => {
       describe('and startAnimation and randomizeOutcomes are present but outcomes is missing', () => {
         it('should fail validation', () => {
           expectValidationFailureWithErrors(
-            Emote.validate,
+            validateEmote,
             {
               ...standardEmote,
               emoteDataADR74: {
@@ -381,7 +393,7 @@ describe('Emote tests', () => {
       describe('and startAnimation and outcomes are present but randomizeOutcomes is missing', () => {
         it('should fail validation', () => {
           expectValidationFailureWithErrors(
-            Emote.validate,
+            validateEmote,
             {
               ...standardEmote,
               emoteDataADR74: {
@@ -398,7 +410,7 @@ describe('Emote tests', () => {
       describe('and randomizeOutcomes and outcomes are present but startAnimation is missing', () => {
         it('should fail validation', () => {
           expectValidationFailureWithErrors(
-            Emote.validate,
+            validateEmote,
             {
               ...standardEmote,
               emoteDataADR74: {

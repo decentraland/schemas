@@ -1,4 +1,4 @@
-import { ItemFilters } from './item'
+import { ItemFilters } from './item.js'
 
 /**
  * All the possible sort options for the Marketplace's catalog.

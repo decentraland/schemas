@@ -1,6 +1,23 @@
-import expect from 'expect'
-import { Parcel, PARCEL_LIMITS } from '../../src/core/parcel-validation'
+import { expect } from 'expect'
+import type { Parcel } from '../../src/core/parcel-validation'
+import {
+  parcelSchema,
+  parcelIsInLimitsKeyword,
+  parcelKeywordDefinitions,
+  parcelToString,
+  stringToParcel,
+  isParcelInStandardBounds,
+  isExceptionParcel,
+  isParcelInBounds,
+  isParcelValid,
+  isParcelStringValid,
+  isParcelValidString,
+  PARCEL_LIMITS
+} from '../../src/core/parcel-validation'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateParcel = generateLazyValidator(parcelSchema, [parcelIsInLimitsKeyword])
 
 describe('Parcel tests', () => {
   const validParcel: Parcel = { x: 10, y: 20 }
@@ -9,105 +26,105 @@ describe('Parcel tests', () => {
   const boundaryParcel: Parcel = { x: 150, y: 150 }
   const northernExceptionParcel: Parcel = { x: 62, y: 151 }
 
-  testTypeSignature(Parcel, validParcel)
+  testTypeSignature({ schema: parcelSchema, keywordDefinitions: parcelKeywordDefinitions }, validParcel)
 
   describe('Schema validation', () => {
     it('validates correct Parcel objects', () => {
-      expect(Parcel.validate(validParcel)).toEqual(true)
+      expect(validateParcel(validParcel)).toEqual(true)
     })
 
     it('fails on invalid Parcel objects', () => {
-      expect(Parcel.validate({ x: '10', y: 20 })).toEqual(false)
-      expect(Parcel.validate({ x: 10 })).toEqual(false)
-      expect(Parcel.validate({ y: 20 })).toEqual(false)
-      expect(Parcel.validate(null)).toEqual(false)
-      expect(Parcel.validate({})).toEqual(false)
+      expect(validateParcel({ x: '10', y: 20 })).toEqual(false)
+      expect(validateParcel({ x: 10 })).toEqual(false)
+      expect(validateParcel({ y: 20 })).toEqual(false)
+      expect(validateParcel(null)).toEqual(false)
+      expect(validateParcel({})).toEqual(false)
     })
 
     it('fails with correct error messages', () => {
       // Verificamos que la validación falle
-      expect(Parcel.validate({})).toEqual(false)
+      expect(validateParcel({})).toEqual(false)
 
       // Verificamos que la validación falle para datos de tipo incorrecto
-      expect(Parcel.validate({ x: 'invalid', y: 10 })).toEqual(false)
+      expect(validateParcel({ x: 'invalid', y: 10 })).toEqual(false)
     })
   })
 
   describe('String conversion functions', () => {
     it('converts Parcel to string correctly', () => {
-      expect(Parcel.parcelToString(validParcel)).toEqual('10,20')
-      expect(Parcel.parcelToString({ x: -5, y: -10 })).toEqual('-5,-10')
-      expect(Parcel.parcelToString({ x: 0, y: 0 })).toEqual('0,0')
+      expect(parcelToString(validParcel)).toEqual('10,20')
+      expect(parcelToString({ x: -5, y: -10 })).toEqual('-5,-10')
+      expect(parcelToString({ x: 0, y: 0 })).toEqual('0,0')
     })
 
     it('converts string to Parcel correctly', () => {
-      expect(Parcel.stringToParcel('10,20')).toEqual({ x: 10, y: 20 })
-      expect(Parcel.stringToParcel('-5,-10')).toEqual({ x: -5, y: -10 })
-      expect(Parcel.stringToParcel('0,0')).toEqual({ x: 0, y: 0 })
+      expect(stringToParcel('10,20')).toEqual({ x: 10, y: 20 })
+      expect(stringToParcel('-5,-10')).toEqual({ x: -5, y: -10 })
+      expect(stringToParcel('0,0')).toEqual({ x: 0, y: 0 })
     })
 
     it('returns null for invalid Parcel strings', () => {
-      expect(Parcel.stringToParcel('invalid')).toEqual(null)
-      expect(Parcel.stringToParcel('10,abc')).toEqual(null)
-      expect(Parcel.stringToParcel('10,20,30')).toEqual(null)
-      expect(Parcel.stringToParcel('')).toEqual(null)
+      expect(stringToParcel('invalid')).toEqual(null)
+      expect(stringToParcel('10,abc')).toEqual(null)
+      expect(stringToParcel('10,20,30')).toEqual(null)
+      expect(stringToParcel('')).toEqual(null)
     })
   })
 
   describe('Bounds validation', () => {
     it('validates parcels within standard bounds', () => {
-      expect(Parcel.isInStandardBounds(validParcel)).toEqual(true)
-      expect(Parcel.isInStandardBounds(boundaryParcel)).toEqual(true)
-      expect(Parcel.isInStandardBounds({ x: -150, y: -150 })).toEqual(true)
+      expect(isParcelInStandardBounds(validParcel)).toEqual(true)
+      expect(isParcelInStandardBounds(boundaryParcel)).toEqual(true)
+      expect(isParcelInStandardBounds({ x: -150, y: -150 })).toEqual(true)
     })
 
     it('identifies parcels outside standard bounds', () => {
-      expect(Parcel.isInStandardBounds(invalidParcel)).toEqual(false)
-      expect(Parcel.isInStandardBounds(exceptionParcel)).toEqual(false)
-      expect(Parcel.isInStandardBounds(northernExceptionParcel)).toEqual(false)
-      expect(Parcel.isInStandardBounds({ x: -151, y: 0 })).toEqual(false)
-      expect(Parcel.isInStandardBounds({ x: 0, y: 151 })).toEqual(false)
+      expect(isParcelInStandardBounds(invalidParcel)).toEqual(false)
+      expect(isParcelInStandardBounds(exceptionParcel)).toEqual(false)
+      expect(isParcelInStandardBounds(northernExceptionParcel)).toEqual(false)
+      expect(isParcelInStandardBounds({ x: -151, y: 0 })).toEqual(false)
+      expect(isParcelInStandardBounds({ x: 0, y: 151 })).toEqual(false)
     })
 
     it('identifies exception parcels correctly', () => {
-      expect(Parcel.isExceptionParcel(exceptionParcel)).toEqual(true)
-      expect(Parcel.isExceptionParcel(northernExceptionParcel)).toEqual(true)
-      expect(Parcel.isExceptionParcel(validParcel)).toEqual(false)
-      expect(Parcel.isExceptionParcel(invalidParcel)).toEqual(false)
+      expect(isExceptionParcel(exceptionParcel)).toEqual(true)
+      expect(isExceptionParcel(northernExceptionParcel)).toEqual(true)
+      expect(isExceptionParcel(validParcel)).toEqual(false)
+      expect(isExceptionParcel(invalidParcel)).toEqual(false)
     })
 
     it('validates bounds including exceptions', () => {
-      expect(Parcel.isInBounds(validParcel)).toEqual(true)
-      expect(Parcel.isInBounds(boundaryParcel)).toEqual(true)
-      expect(Parcel.isInBounds(exceptionParcel)).toEqual(true)
-      expect(Parcel.isInBounds(northernExceptionParcel)).toEqual(true)
-      expect(Parcel.isInBounds(invalidParcel)).toEqual(false)
+      expect(isParcelInBounds(validParcel)).toEqual(true)
+      expect(isParcelInBounds(boundaryParcel)).toEqual(true)
+      expect(isParcelInBounds(exceptionParcel)).toEqual(true)
+      expect(isParcelInBounds(northernExceptionParcel)).toEqual(true)
+      expect(isParcelInBounds(invalidParcel)).toEqual(false)
     })
   })
 
   describe('String validation functions', () => {
     it('validates parcel strings with correct format', () => {
-      expect(Parcel.isParcelStringValid('10,20')).toEqual(true)
-      expect(Parcel.isParcelStringValid('-5,-10')).toEqual(true)
-      expect(Parcel.isParcelStringValid('invalid')).toEqual(false)
+      expect(isParcelStringValid('10,20')).toEqual(true)
+      expect(isParcelStringValid('-5,-10')).toEqual(true)
+      expect(isParcelStringValid('invalid')).toEqual(false)
     })
 
     it('validates parcel strings completely', () => {
-      expect(Parcel.isValidString('10,20')).toEqual(true)
-      expect(Parcel.isValidString('151,100')).toEqual(true)
-      expect(Parcel.isValidString('62,151')).toEqual(true)
-      expect(Parcel.isValidString('200,200')).toEqual(false)
-      expect(Parcel.isValidString('invalid')).toEqual(false)
+      expect(isParcelValidString('10,20')).toEqual(true)
+      expect(isParcelValidString('151,100')).toEqual(true)
+      expect(isParcelValidString('62,151')).toEqual(true)
+      expect(isParcelValidString('200,200')).toEqual(false)
+      expect(isParcelValidString('invalid')).toEqual(false)
     })
   })
 
   describe('Complete validation functions', () => {
     it('validates parcels correctly', () => {
-      expect(Parcel.isValid(validParcel)).toEqual(true)
-      expect(Parcel.isValid(boundaryParcel)).toEqual(true)
-      expect(Parcel.isValid(exceptionParcel)).toEqual(true)
-      expect(Parcel.isValid(northernExceptionParcel)).toEqual(true)
-      expect(Parcel.isValid(invalidParcel)).toEqual(false)
+      expect(isParcelValid(validParcel)).toEqual(true)
+      expect(isParcelValid(boundaryParcel)).toEqual(true)
+      expect(isParcelValid(exceptionParcel)).toEqual(true)
+      expect(isParcelValid(northernExceptionParcel)).toEqual(true)
+      expect(isParcelValid(invalidParcel)).toEqual(false)
     })
   })
 

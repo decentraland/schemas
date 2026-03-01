@@ -1,13 +1,20 @@
-import * as sdk from './sdk'
+import * as sdk from './sdk/index.js'
 
-// export the utils
-export * from './validation'
-export * from './dapps'
-export * from './platform'
-export * from './misc'
-export * from './misc/linker-authorization'
-export * from './misc/auth-chain'
-export * from './misc/content-mapping'
-export * from './misc/email'
-export * from './core'
+export * from './dapps/index.js'
+export * from './platform/index.js'
+export * from './misc/index.js'
+export * from './misc/linker-authorization.js'
+export * from './misc/auth-chain.js'
+export * from './misc/content-mapping.js'
+export * from './misc/email.js'
+export * from './core/index.js'
 export { sdk }
+
+// Re-export validation types (not runtime) for convenience
+export type {
+  ValidateFunction,
+  JSONSchema,
+  AbstractTypedSchema,
+  KeywordDefinition,
+  ValidationError
+} from './validation/types.js'

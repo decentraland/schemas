@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
+import type { JSONSchema } from '../../validation/types.js'
 
 /** @alpha */
 export enum Locale {
@@ -7,11 +7,7 @@ export enum Locale {
 }
 
 /** @alpha */
-export namespace Locale {
-  export const schema: JSONSchema<Locale> = {
-    type: 'string',
-    enum: Object.values(Locale)
-  }
-
-  export const validate: ValidateFunction<Locale> = generateLazyValidator(schema)
+export const localeSchema: JSONSchema<Locale> = {
+  type: 'string',
+  enum: Object.values(Locale)
 }

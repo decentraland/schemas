@@ -1,24 +1,31 @@
-import expect from 'expect'
-import { ReferralInvitedUsersAcceptedEvent, ReferralNewTierReachedEvent, Events } from '../../../src'
+import { expect } from 'expect'
+import {
+  EventType,
+  EventSubTypeReferral,
+  referralInvitedUsersAcceptedEventSchema,
+  referralNewTierReachedEventSchema
+} from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
 
-describe('Streaming Events tests', () => {
+describe('Referral Events tests', () => {
   const testCases = [
     {
       name: 'ReferralInvitedUsersAcceptedEvent',
-      eventClass: ReferralInvitedUsersAcceptedEvent,
-      subType: Events.SubType.Referral.REFERRAL_INVITED_USERS_ACCEPTED
+      eventSchema: referralInvitedUsersAcceptedEventSchema,
+      subType: EventSubTypeReferral.REFERRAL_INVITED_USERS_ACCEPTED
     },
     {
       name: 'ReferralNewTierReachedEvent',
-      eventClass: ReferralNewTierReachedEvent,
-      subType: Events.SubType.Referral.REFERRAL_NEW_TIER_REACHED
+      eventSchema: referralNewTierReachedEventSchema,
+      subType: EventSubTypeReferral.REFERRAL_NEW_TIER_REACHED
     }
   ]
 
-  testCases.forEach(({ name, eventClass, subType }) => {
+  testCases.forEach(({ name, eventSchema, subType }) => {
     it(`${name} static tests must pass`, () => {
+      const validate = generateLazyValidator(eventSchema)
       const event = {
-        type: Events.Type.REFERRAL,
+        type: EventType.REFERRAL,
         subType,
         key: 'key',
         timestamp: 1,
@@ -34,9 +41,9 @@ describe('Streaming Events tests', () => {
         }
       }
 
-      expect(eventClass.validate(event)).toEqual(true)
-      expect(eventClass.validate(null)).toEqual(false)
-      expect(eventClass.validate({})).toEqual(false)
+      expect(validate(event)).toEqual(true)
+      expect(validate(null)).toEqual(false)
+      expect(validate({})).toEqual(false)
     })
   })
 })

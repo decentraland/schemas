@@ -1,6 +1,9 @@
-import expect from 'expect'
-import { ChainId, Mint, Network } from '../../src'
+import { expect } from 'expect'
+import { ChainId, type Mint, mintSchema, Network } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateMint = generateLazyValidator(mintSchema)
 
 describe('Mint tests', () => {
   describe('mint', () => {
@@ -19,12 +22,12 @@ describe('Mint tests', () => {
       chainId: ChainId.MATIC_MAINNET
     }
 
-    testTypeSignature(Mint, mint)
+    testTypeSignature({ schema: mintSchema }, mint)
 
     it('static tests must pass', () => {
-      expect(Mint.validate(mint)).toEqual(true)
-      expect(Mint.validate(null)).toEqual(false)
-      expect(Mint.validate({})).toEqual(false)
+      expect(validateMint(mint)).toEqual(true)
+      expect(validateMint(null)).toEqual(false)
+      expect(validateMint({})).toEqual(false)
     })
   })
 })

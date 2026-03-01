@@ -1,28 +1,31 @@
-import expect from 'expect'
-import { Rarity } from '../../src'
+import { expect } from 'expect'
+import { Rarity, raritySchema, getRarityMaxSupply, getRarityColor, getRarityGradient } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateRarity = generateLazyValidator(raritySchema)
 
 describe('Rarity tests', () => {
   const mythic: Rarity = Rarity.MYTHIC
 
-  testTypeSignature(Rarity, mythic)
+  testTypeSignature({ schema: raritySchema }, mythic)
 
   it('static tests must pass', () => {
-    expect(Rarity.validate(mythic)).toEqual(true)
-    expect(Rarity.validate(null)).toEqual(false)
-    expect(Rarity.validate({})).toEqual(false)
+    expect(validateRarity(mythic)).toEqual(true)
+    expect(validateRarity(null)).toEqual(false)
+    expect(validateRarity({})).toEqual(false)
   })
 
   it('should return max supply', () => {
-    expect(Rarity.getMaxSupply(mythic)).toEqual(10)
+    expect(getRarityMaxSupply(mythic)).toEqual(10)
   })
 
   it('should return color', () => {
-    expect(Rarity.getColor(mythic)).toEqual('#FF63E1')
+    expect(getRarityColor(mythic)).toEqual('#FF63E1')
   })
 
   it('should return gradient', () => {
-    const gradient = Rarity.getGradient(mythic)
+    const gradient = getRarityGradient(mythic)
     expect(gradient.length).toBe(2)
     expect(gradient[0]).toEqual('#FB7DE3')
     expect(gradient[1]).toEqual('#FF63E1')
