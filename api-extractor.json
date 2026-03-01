@@ -77,17 +77,27 @@
     "tsconfigFilePath": "<projectFolder>/tsconfig.json",
     /**
      * Provides a compiler configuration that will be used instead of reading the tsconfig.json file from disk.
-     * The object must conform to the TypeScript tsconfig schema:
      *
-     * http://json.schemastore.org/tsconfig
-     *
-     * If omitted, then the tsconfig.json file will be read from the "projectFolder".
-     *
-     * DEFAULT VALUE: no overrideTsconfig section
+     * api-extractor 7.34.x does not recognize "moduleResolution": "bundler", so we override it here
+     * with "node16" which is functionally equivalent for .d.ts analysis. The project's tsconfig.json
+     * keeps "bundler" for actual development.
      */
-    // "overrideTsconfig": {
-    //   . . .
-    // }
+    "overrideTsconfig": {
+      "compilerOptions": {
+        "module": "es2022",
+        "moduleResolution": "node16",
+        "target": "es2022",
+        "outDir": "dist",
+        "declaration": true,
+        "declarationMap": true,
+        "stripInternal": true,
+        "esModuleInterop": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "lib": ["ES2022"]
+      },
+      "include": ["src"]
+    },
     /**
      * This option causes the compiler to be invoked with the --skipLibCheck option. This option is not recommended
      * and may cause API Extractor to produce incomplete or incorrect declarations, but it may be required when
