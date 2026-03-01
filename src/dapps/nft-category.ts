@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import type { JSONSchema } from '../validation/types.js'
 
 export enum NFTCategory {
   PARCEL = 'parcel',
@@ -8,11 +8,7 @@ export enum NFTCategory {
   EMOTE = 'emote'
 }
 
-export namespace NFTCategory {
-  export const schema: JSONSchema<NFTCategory> = {
-    type: 'string',
-    enum: Object.values(NFTCategory)
-  }
-
-  export const validate: ValidateFunction<NFTCategory> = generateLazyValidator(schema)
+export const nftCategorySchema: JSONSchema<NFTCategory> = {
+  type: 'string',
+  enum: Object.values(NFTCategory)
 }

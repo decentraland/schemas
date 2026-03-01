@@ -1,11 +1,14 @@
-import expect from 'expect'
-import { BadgeGrantedEvent, Events } from '../../../src'
+import { expect } from 'expect'
+import { BadgeGrantedEvent, EventType, EventSubTypeBadge, badgeGrantedEventSchema } from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateBadgeGrantedEvent = generateLazyValidator(badgeGrantedEventSchema)
 
 describe('Badge Events tests', () => {
   it('BadgeGrantedEvent static tests must pass', () => {
     const event: BadgeGrantedEvent = {
-      type: Events.Type.BADGE,
-      subType: Events.SubType.Badge.GRANTED,
+      type: EventType.BADGE,
+      subType: EventSubTypeBadge.GRANTED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -16,15 +19,15 @@ describe('Badge Events tests', () => {
       }
     }
 
-    expect(BadgeGrantedEvent.validate(event)).toEqual(true)
-    expect(BadgeGrantedEvent.validate(null)).toEqual(false)
-    expect(BadgeGrantedEvent.validate({})).toEqual(false)
+    expect(validateBadgeGrantedEvent(event)).toEqual(true)
+    expect(validateBadgeGrantedEvent(null)).toEqual(false)
+    expect(validateBadgeGrantedEvent({})).toEqual(false)
   })
 
   it('BadgeGrantedEvent with tier badge id static tests must pass', () => {
     const event: BadgeGrantedEvent = {
-      type: Events.Type.BADGE,
-      subType: Events.SubType.Badge.GRANTED,
+      type: EventType.BADGE,
+      subType: EventSubTypeBadge.GRANTED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -36,8 +39,8 @@ describe('Badge Events tests', () => {
       }
     }
 
-    expect(BadgeGrantedEvent.validate(event)).toEqual(true)
-    expect(BadgeGrantedEvent.validate(null)).toEqual(false)
-    expect(BadgeGrantedEvent.validate({})).toEqual(false)
+    expect(validateBadgeGrantedEvent(event)).toEqual(true)
+    expect(validateBadgeGrantedEvent(null)).toEqual(false)
+    expect(validateBadgeGrantedEvent({})).toEqual(false)
   })
 })

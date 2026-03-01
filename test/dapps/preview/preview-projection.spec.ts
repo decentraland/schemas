@@ -1,15 +1,18 @@
-import expect from 'expect'
-import { PreviewProjection } from '../../../src'
+import { expect } from 'expect'
+import { PreviewProjection, previewProjectionSchema } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validatePreviewProjection = generateLazyValidator(previewProjectionSchema)
 
 describe('PreviewProjection tests', () => {
   const previewProjection: PreviewProjection = PreviewProjection.PERSPECTIVE
 
-  testTypeSignature(PreviewProjection, previewProjection)
+  testTypeSignature({ schema: previewProjectionSchema }, previewProjection)
 
   it('static tests must pass', () => {
-    expect(PreviewProjection.validate(previewProjection)).toEqual(true)
-    expect(PreviewProjection.validate(null)).toEqual(false)
-    expect(PreviewProjection.validate({})).toEqual(false)
+    expect(validatePreviewProjection(previewProjection)).toEqual(true)
+    expect(validatePreviewProjection(null)).toEqual(false)
+    expect(validatePreviewProjection({})).toEqual(false)
   })
 })

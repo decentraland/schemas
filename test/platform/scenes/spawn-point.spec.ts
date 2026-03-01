@@ -1,6 +1,10 @@
-import expect from 'expect'
-import { SpawnPoint } from '../../../src'
+import { expect } from 'expect'
+import type { SpawnPoint } from '../../../src'
+import { spawnPointSchema } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateSpawnPoint = generateLazyValidator(spawnPointSchema)
 
 describe('Spawn point tests', () => {
   const spawnPoint: SpawnPoint = {
@@ -18,17 +22,17 @@ describe('Spawn point tests', () => {
     }
   }
 
-  testTypeSignature(SpawnPoint, spawnPoint)
+  testTypeSignature({ schema: spawnPointSchema }, spawnPoint)
 
   it('static tests must pass', () => {
-    expect(SpawnPoint.validate(spawnPoint)).toEqual(true)
-    expect(SpawnPoint.validate(null)).toEqual(false)
-    expect(SpawnPoint.validate({})).toEqual(false)
+    expect(validateSpawnPoint(spawnPoint)).toEqual(true)
+    expect(validateSpawnPoint(null)).toEqual(false)
+    expect(validateSpawnPoint({})).toEqual(false)
   })
 
   it('position with empty array fails', () => {
     expect(
-      SpawnPoint.validate({
+      validateSpawnPoint({
         ...spawnPoint,
         position: {
           ...spawnPoint.position,
@@ -40,7 +44,7 @@ describe('Spawn point tests', () => {
 
   it('position with combination of array and number fails', () => {
     expect(
-      SpawnPoint.validate({
+      validateSpawnPoint({
         ...spawnPoint,
         position: {
           ...spawnPoint.position,
@@ -52,7 +56,7 @@ describe('Spawn point tests', () => {
 
   it('position with string only numbers works', () => {
     expect(
-      SpawnPoint.validate({
+      validateSpawnPoint({
         ...spawnPoint,
         position: {
           x: 1,

@@ -1,6 +1,9 @@
-import expect from 'expect'
-import { ChainId, Contract, Network, NFTCategory } from '../../src'
+import { expect } from 'expect'
+import { ChainId, type Contract, contractSchema, Network, NFTCategory } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateContract = generateLazyValidator(contractSchema)
 
 describe('Contract tests', () => {
   const contract: Contract = {
@@ -11,11 +14,11 @@ describe('Contract tests', () => {
     chainId: ChainId.MATIC_MAINNET
   }
 
-  testTypeSignature(Contract, contract)
+  testTypeSignature({ schema: contractSchema }, contract)
 
   it('static tests must pass', () => {
-    expect(Contract.validate(contract)).toEqual(true)
-    expect(Contract.validate(null)).toEqual(false)
-    expect(Contract.validate({})).toEqual(false)
+    expect(validateContract(contract)).toEqual(true)
+    expect(validateContract(null)).toEqual(false)
+    expect(validateContract({})).toEqual(false)
   })
 })

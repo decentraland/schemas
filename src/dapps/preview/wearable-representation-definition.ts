@@ -1,4 +1,4 @@
-import { WearableRepresentation } from '../../platform/item/wearable'
+import { WearableRepresentation } from '../../platform/item/wearable/index.js'
 
 /** @alpha */
 export type WearableRepresentationDefinition = Omit<WearableRepresentation, 'contents'> & {

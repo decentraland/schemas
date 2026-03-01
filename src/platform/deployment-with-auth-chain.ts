@@ -1,5 +1,5 @@
-import { AuthChain } from '../misc/auth-chain'
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import { AuthChain, authChainSchema } from '../misc/auth-chain.js'
+import type { JSONSchema } from '../validation/types.js'
 
 /**
  * This type describes the minimum deployment + AuthChain needed to synchronize
@@ -18,18 +18,14 @@ export type DeploymentWithAuthChain = {
  * @public
  * @deprecated use SyncDeployment instead
  */
-export namespace DeploymentWithAuthChain {
-  export const schema: JSONSchema<DeploymentWithAuthChain> = {
-    type: 'object',
-    properties: {
-      entityId: { type: 'string' },
-      entityType: { type: 'string' },
-      pointers: { type: 'array', items: { type: 'string' }, minItems: 1 },
-      localTimestamp: { type: 'number', minimum: 0 },
-      authChain: AuthChain.schema
-    },
-    required: ['entityId', 'entityType', 'pointers', 'localTimestamp', 'authChain']
-  }
-
-  export const validate: ValidateFunction<DeploymentWithAuthChain> = generateLazyValidator(schema)
+export const deploymentWithAuthChainSchema: JSONSchema<DeploymentWithAuthChain> = {
+  type: 'object',
+  properties: {
+    entityId: { type: 'string' },
+    entityType: { type: 'string' },
+    pointers: { type: 'array', items: { type: 'string' }, minItems: 1 },
+    localTimestamp: { type: 'number', minimum: 0 },
+    authChain: authChainSchema
+  },
+  required: ['entityId', 'entityType', 'pointers', 'localTimestamp', 'authChain']
 }

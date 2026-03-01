@@ -1,9 +1,9 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { BaseEvent, Events } from './base'
+import type { JSONSchema } from '../../validation/types.js'
+import { BaseEvent, EventType, EventSubTypeCamera } from './base.js'
 
 export type PhotoTakenEvent = BaseEvent & {
-  type: Events.Type.CAMERA
-  subType: Events.SubType.Camera.PHOTO_TAKEN
+  type: EventType.CAMERA
+  subType: EventSubTypeCamera.PHOTO_TAKEN
   metadata: {
     sceneId: string
     realm: string
@@ -16,8 +16,8 @@ export type PhotoTakenEvent = BaseEvent & {
 }
 
 export type PhotoPrivacyChangedEvent = BaseEvent & {
-  type: Events.Type.CAMERA
-  subType: Events.SubType.Camera.PHOTO_PRIVACY_CHANGED
+  type: EventType.CAMERA
+  subType: EventSubTypeCamera.PHOTO_PRIVACY_CHANGED
   metadata: {
     userAddress: string
     photoId: string
@@ -25,72 +25,64 @@ export type PhotoPrivacyChangedEvent = BaseEvent & {
   }
 }
 
-export namespace PhotoPrivacyChangedEvent {
-  export const schema: JSONSchema<PhotoPrivacyChangedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.CAMERA },
-      subType: { type: 'string', const: Events.SubType.Camera.PHOTO_PRIVACY_CHANGED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          userAddress: { type: 'string' },
-          photoId: { type: 'string' },
-          isPublic: { type: 'boolean' }
-        },
-        required: ['userAddress', 'photoId', 'isPublic']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<PhotoPrivacyChangedEvent> = generateLazyValidator(schema)
+export const photoPrivacyChangedEventSchema: JSONSchema<PhotoPrivacyChangedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.CAMERA },
+    subType: { type: 'string', const: EventSubTypeCamera.PHOTO_PRIVACY_CHANGED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        userAddress: { type: 'string' },
+        photoId: { type: 'string' },
+        isPublic: { type: 'boolean' }
+      },
+      required: ['userAddress', 'photoId', 'isPublic']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
-export namespace PhotoTakenEvent {
-  export const schema: JSONSchema<PhotoTakenEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.CAMERA },
-      subType: { type: 'string', const: Events.SubType.Camera.PHOTO_TAKEN },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          sceneId: { type: 'string' },
-          userAddress: { type: 'string' },
-          realm: { type: 'string' },
-          photoId: { type: 'string' },
-          isPublic: { type: 'boolean' },
-          users: {
-            type: 'array',
-            items: {
-              type: 'object',
-              properties: {
-                address: {
-                  type: 'string'
-                },
-                isEmoting: {
-                  type: 'boolean'
-                }
+export const photoTakenEventSchema: JSONSchema<PhotoTakenEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.CAMERA },
+    subType: { type: 'string', const: EventSubTypeCamera.PHOTO_TAKEN },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        sceneId: { type: 'string' },
+        userAddress: { type: 'string' },
+        realm: { type: 'string' },
+        photoId: { type: 'string' },
+        isPublic: { type: 'boolean' },
+        users: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              address: {
+                type: 'string'
               },
-              required: ['address', 'isEmoting'],
-              additionalProperties: false
-            }
-          },
-          placeId: { type: 'string', nullable: true }
+              isEmoting: {
+                type: 'boolean'
+              }
+            },
+            required: ['address', 'isEmoting'],
+            additionalProperties: false
+          }
         },
-        required: ['userAddress', 'realm', 'photoId', 'isPublic', 'users'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<PhotoTakenEvent> = generateLazyValidator(schema)
+        placeId: { type: 'string', nullable: true }
+      },
+      required: ['userAddress', 'realm', 'photoId', 'isPublic', 'users'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }

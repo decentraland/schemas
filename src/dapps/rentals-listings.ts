@@ -1,8 +1,7 @@
-import { JSONSchemaType } from 'ajv'
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { ChainId } from './chain-id'
-import { Network } from './network'
-import { NFTCategory } from './nft-category'
+import type { JSONSchema } from '../validation/types.js'
+import { ChainId, chainIdSchema } from './chain-id.js'
+import { Network, networkSchema } from './network.js'
+import { NFTCategory } from './nft-category.js'
 
 /**
  * All the possible rental statuses.
@@ -208,64 +207,57 @@ export type PeriodCreation = {
   pricePerDay: string
 }
 
-export namespace PeriodCreation {
-  export const schema: JSONSchemaType<PeriodCreation> = {
-    type: 'object',
-    properties: {
-      minDays: { type: 'integer', minimum: 0, maximum: 2147483647 },
-      maxDays: { type: 'integer', minimum: 0, maximum: 2147483647 },
-      pricePerDay: { type: 'string', pattern: '^[0-9]+$' }
-    },
-    additionalProperties: false,
-    required: ['minDays', 'maxDays', 'pricePerDay']
-  }
-
-  export const validate: ValidateFunction<PeriodCreation> = generateLazyValidator(schema)
+export const periodCreationSchema: JSONSchema<PeriodCreation> = {
+  type: 'object',
+  properties: {
+    minDays: { type: 'integer', minimum: 0, maximum: 2147483647 },
+    maxDays: { type: 'integer', minimum: 0, maximum: 2147483647 },
+    pricePerDay: { type: 'string', pattern: '^[0-9]+$' }
+  },
+  additionalProperties: false,
+  required: ['minDays', 'maxDays', 'pricePerDay']
 }
 
-export namespace RentalListingCreation {
-  export const schema: JSONSchema<RentalListingCreation> = {
-    type: 'object',
-    properties: {
-      network: Network.schema as JSONSchemaType<Network>,
-      chainId: ChainId.schema as JSONSchemaType<ChainId>,
-      expiration: { type: 'number', minimum: 0 },
-      signature: { type: 'string', minLength: 1 },
-      tokenId: { type: 'string', minLength: 1 },
-      nonces: {
-        type: 'array',
-        minItems: 3,
-        maxItems: 3,
-        items: {
-          minLength: 1,
-          type: 'string',
-          pattern: '^[0-9]+$'
-        }
-      },
-      contractAddress: { type: 'string', pattern: '^0x[a-fA-F0-9]{40}$' },
-      rentalContractAddress: { type: 'string', pattern: '^0x[a-fA-F0-9]{40}$' },
-      periods: {
-        type: 'array',
-        minItems: 1,
-        maxItems: 100,
-        uniqueItems: true,
-        items: PeriodCreation.schema
-      },
-      target: { type: 'string', pattern: '^0x[a-fA-F0-9]{40}$' }
+export const rentalListingCreationSchema: JSONSchema<RentalListingCreation> = {
+  type: 'object',
+  properties: {
+    network: networkSchema as JSONSchema<Network>,
+    chainId: chainIdSchema as JSONSchema<ChainId>,
+    expiration: { type: 'number', minimum: 0 },
+    signature: { type: 'string', minLength: 1 },
+    tokenId: { type: 'string', minLength: 1 },
+    nonces: {
+      type: 'array',
+      minItems: 3,
+      maxItems: 3,
+      items: {
+        minLength: 1,
+        type: 'string',
+        pattern: '^[0-9]+$'
+      }
     },
-    additionalProperties: false,
-    required: [
-      'network',
-      'chainId',
-      'expiration',
-      'signature',
-      'nonces',
-      'tokenId',
-      'contractAddress',
-      'rentalContractAddress',
-      'periods',
-      'target'
-    ]
-  }
-  export const validate: ValidateFunction<RentalListingCreation> = generateLazyValidator(schema)
+    contractAddress: { type: 'string', pattern: '^0x[a-fA-F0-9]{40}$' },
+    rentalContractAddress: { type: 'string', pattern: '^0x[a-fA-F0-9]{40}$' },
+    periods: {
+      type: 'array',
+      minItems: 1,
+      maxItems: 100,
+      uniqueItems: true,
+      items: periodCreationSchema
+    },
+    target: { type: 'string', pattern: '^0x[a-fA-F0-9]{40}$' }
+  },
+  additionalProperties: false,
+  required: [
+    'network',
+    'chainId',
+    'expiration',
+    'signature',
+    'nonces',
+    'tokenId',
+    'contractAddress',
+    'rentalContractAddress',
+    'periods',
+    'target'
+  ]
 }

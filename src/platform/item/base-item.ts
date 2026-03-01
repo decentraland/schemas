@@ -1,7 +1,7 @@
-import { DisplayableDeployment } from '../shared/displayable'
-import { I18N } from './i18n'
-import { Metrics } from './metrics'
-import { displayableProperties } from '../shared/displayable'
+import { DisplayableDeployment } from '../shared/displayable.js'
+import { I18N, i18nSchema } from './i18n.js'
+import { Metrics, metricsSchema } from './metrics.js'
+import { displayableProperties } from '../shared/displayable.js'
 
 /**
  * @public
@@ -32,7 +32,7 @@ export const baseItemProperties = {
   },
   i18n: {
     type: 'array',
-    items: I18N.schema,
+    items: i18nSchema,
     minItems: 1,
     uniqueItemProperties: ['code'],
     errorMessage: '${0#} array should not have duplicates for "code"'
@@ -44,7 +44,7 @@ export const baseItemProperties = {
     type: 'string'
   },
   metrics: {
-    ...Metrics.schema,
+    ...metricsSchema,
     nullable: true
   }
 } as const

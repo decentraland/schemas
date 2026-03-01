@@ -1,7 +1,12 @@
-import expect from 'expect'
-import { AuthChain, AuthLinkType } from '../../src'
-import { DeploymentToSqs } from '../../src/misc/deployments-to-sqs'
+import { expect } from 'expect'
+import type { AuthChain } from '../../src'
+import { AuthLinkType } from '../../src'
+import type { DeploymentToSqs } from '../../src/misc/deployments-to-sqs'
+import { deploymentToSqsSchema } from '../../src/misc/deployments-to-sqs'
 import { expectValidationFailureWithErrors } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateDeploymentToSqs = generateLazyValidator(deploymentToSqsSchema)
 
 const chain: AuthChain = [
   {
@@ -33,7 +38,7 @@ describe('deployments-to-sqs', () => {
       },
       contentServerUrls: []
     }
-    expect(DeploymentToSqs.validate(deploymentToSqs)).toEqual(true)
+    expect(validateDeploymentToSqs(deploymentToSqs)).toEqual(true)
   })
 
   it('valid with contentServerUrls', () => {
@@ -44,7 +49,7 @@ describe('deployments-to-sqs', () => {
       },
       contentServerUrls: ['https://peer.decentraland.org']
     }
-    expect(DeploymentToSqs.validate(deploymentToSqs)).toEqual(true)
+    expect(validateDeploymentToSqs(deploymentToSqs)).toEqual(true)
   })
 
   it('valid with extra properties', () => {
@@ -57,7 +62,7 @@ describe('deployments-to-sqs', () => {
       },
       contentServerUrls: ['https://peer.decentraland.org']
     }
-    expect(DeploymentToSqs.validate(deploymentToSqs)).toEqual(true)
+    expect(validateDeploymentToSqs(deploymentToSqs)).toEqual(true)
   })
 
   it('valid if no contentServerUrls', () => {
@@ -67,7 +72,7 @@ describe('deployments-to-sqs', () => {
         authChain: chain
       }
     }
-    expect(DeploymentToSqs.validate(deploymentToSqs)).toEqual(true)
+    expect(validateDeploymentToSqs(deploymentToSqs)).toEqual(true)
   })
 
   it('invalid if no entityId', () => {
@@ -77,7 +82,7 @@ describe('deployments-to-sqs', () => {
       },
       contentServerUrls: ['https://peer.decentraland.org']
     }
-    expectValidationFailureWithErrors(DeploymentToSqs.validate, deploymentToSqs, [
+    expectValidationFailureWithErrors(validateDeploymentToSqs, deploymentToSqs, [
       "must have required property 'entityId'"
     ])
   })
@@ -89,7 +94,7 @@ describe('deployments-to-sqs', () => {
       },
       contentServerUrls: ['https://peer.decentraland.org']
     }
-    expectValidationFailureWithErrors(DeploymentToSqs.validate, deploymentToSqs, [
+    expectValidationFailureWithErrors(validateDeploymentToSqs, deploymentToSqs, [
       "must have required property 'authChain'"
     ])
   })
@@ -102,6 +107,6 @@ describe('deployments-to-sqs', () => {
       },
       lods: ['https://cdn.test/file1.pbx', 'https://cdn.test/file2.pbx']
     }
-    expect(DeploymentToSqs.validate(deploymentToSqs)).toEqual(true)
+    expect(validateDeploymentToSqs(deploymentToSqs)).toEqual(true)
   })
 })

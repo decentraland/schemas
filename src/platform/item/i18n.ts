@@ -1,5 +1,5 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { Locale } from './locale'
+import type { JSONSchema } from '../../validation/types.js'
+import { Locale, localeSchema } from './locale.js'
 
 /** @alpha */
 export type I18N = {
@@ -8,18 +8,14 @@ export type I18N = {
 }
 
 /** @alpha */
-export namespace I18N {
-  export const schema: JSONSchema<I18N> = {
-    type: 'object',
-    properties: {
-      code: Locale.schema,
-      text: {
-        type: 'string'
-      }
-    },
-    additionalProperties: true,
-    required: ['code', 'text']
-  }
-
-  export const validate: ValidateFunction<I18N> = generateLazyValidator(schema)
+export const i18nSchema: JSONSchema<I18N> = {
+  type: 'object',
+  properties: {
+    code: localeSchema,
+    text: {
+      type: 'string'
+    }
+  },
+  additionalProperties: true,
+  required: ['code', 'text']
 }

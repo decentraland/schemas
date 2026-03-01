@@ -1,4 +1,4 @@
-import { JSONSchema, generateLazyValidator, ValidateFunction } from '../../validation'
+import type { JSONSchema } from '../../validation/types.js'
 
 export enum PreviewCamera {
   STATIC = 'static',
@@ -6,11 +6,7 @@ export enum PreviewCamera {
 }
 
 /** @alpha */
-export namespace PreviewCamera {
-  export const schema: JSONSchema<PreviewCamera> = {
-    type: 'string',
-    enum: Object.values(PreviewCamera)
-  }
-
-  export const validate: ValidateFunction<PreviewCamera> = generateLazyValidator(schema)
+export const previewCameraSchema: JSONSchema<PreviewCamera> = {
+  type: 'string',
+  enum: Object.values(PreviewCamera)
 }

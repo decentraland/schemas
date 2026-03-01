@@ -1,7 +1,7 @@
-import { JSONSchema, generateLazyValidator, ValidateFunction } from '../../validation'
-import { PreviewEmoteEventType } from './preview-emote-event-type'
-import { EmoteEventPayload } from './preview-emote-event-payload'
-import { PreviewOptions } from './preview-options'
+import type { JSONSchema } from '../../validation/types.js'
+import { PreviewEmoteEventType } from './preview-emote-event-type.js'
+import { EmoteEventPayload } from './preview-emote-event-payload.js'
+import { PreviewOptions } from './preview-options.js'
 
 export enum PreviewMessageType {
   READY = 'ready',
@@ -19,13 +19,9 @@ export enum PreviewRenderer {
 }
 
 /** @alpha */
-export namespace PreviewMessageType {
-  export const schema: JSONSchema<PreviewMessageType> = {
-    type: 'string',
-    enum: Object.values(PreviewMessageType)
-  }
-
-  export const validate: ValidateFunction<PreviewMessageType> = generateLazyValidator(schema)
+export const previewMessageTypeSchema: JSONSchema<PreviewMessageType> = {
+  type: 'string',
+  enum: Object.values(PreviewMessageType)
 }
 
 export type PreviewMessagePayload<T extends PreviewMessageType> = T extends PreviewMessageType.READY

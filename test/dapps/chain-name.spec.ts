@@ -1,16 +1,19 @@
-import expect from 'expect'
-import { ChainId, ChainName, getChainId } from '../../src'
+import { expect } from 'expect'
+import { ChainId, ChainName, chainNameSchema, getChainId } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateChainName = generateLazyValidator(chainNameSchema)
 
 describe('ChainName tests', () => {
   const chainName: ChainName = ChainName.ETHEREUM_KOVAN
 
-  testTypeSignature(ChainName, chainName)
+  testTypeSignature({ schema: chainNameSchema }, chainName)
 
   it('static tests must pass', () => {
-    expect(ChainName.validate(chainName)).toEqual(true)
-    expect(ChainName.validate(null)).toEqual(false)
-    expect(ChainName.validate({})).toEqual(false)
+    expect(validateChainName(chainName)).toEqual(true)
+    expect(validateChainName(null)).toEqual(false)
+    expect(validateChainName({})).toEqual(false)
   })
 
   it('Should get a valid chain id', () => {

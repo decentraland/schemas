@@ -1,4 +1,4 @@
-import { AlignmentFieldType, LocalizedField, SysLink } from './client'
+import type { AlignmentFieldType, LocalizedField, SysLink } from './client.js'
 
 type MarketingAdminFields = {
   name: LocalizedField<string>
@@ -37,4 +37,4 @@ type BannerFields = {
   logo?: LocalizedField<SysLink<'Asset'>>
 }
 
-export { MarketingAdminFields, CampaignFields, BannerFields }
+export type { MarketingAdminFields, CampaignFields, BannerFields }

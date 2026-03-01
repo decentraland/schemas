@@ -1,7 +1,7 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { ChainId } from './chain-id'
-import { Network } from './network'
-import { NFTCategory } from './nft-category'
+import type { JSONSchema } from '../validation/types.js'
+import { ChainId, chainIdSchema } from './chain-id.js'
+import { Network, networkSchema } from './network.js'
+import { NFTCategory, nftCategorySchema } from './nft-category.js'
 
 export type Contract = {
   name: string
@@ -20,22 +20,18 @@ export enum ContractSortBy {
   NAME = 'name'
 }
 
-export namespace Contract {
-  export const schema: JSONSchema<Contract> = {
-    type: 'object',
-    properties: {
-      name: {
-        type: 'string'
-      },
-      address: {
-        type: 'string'
-      },
-      category: NFTCategory.schema,
-      network: Network.schema,
-      chainId: ChainId.schema
+export const contractSchema: JSONSchema<Contract> = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string'
     },
-    required: ['name', 'address', 'category', 'network', 'chainId']
-  }
-
-  export const validate: ValidateFunction<Contract> = generateLazyValidator(schema)
+    address: {
+      type: 'string'
+    },
+    category: nftCategorySchema,
+    network: networkSchema,
+    chainId: chainIdSchema
+  },
+  required: ['name', 'address', 'category', 'network', 'chainId']
 }

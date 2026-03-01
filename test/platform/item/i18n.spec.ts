@@ -1,6 +1,10 @@
-import expect from 'expect'
-import { I18N, Locale } from '../../../src'
+import { expect } from 'expect'
+import type { I18N } from '../../../src'
+import { i18nSchema, Locale } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateI18N = generateLazyValidator(i18nSchema)
 
 describe('I18N tests', () => {
   const i18n: I18N = {
@@ -8,11 +12,11 @@ describe('I18N tests', () => {
     text: 'some text'
   }
 
-  testTypeSignature(I18N, i18n)
+  testTypeSignature({ schema: i18nSchema }, i18n)
 
   it('static tests must pass', () => {
-    expect(I18N.validate(i18n)).toEqual(true)
-    expect(I18N.validate(null)).toEqual(false)
-    expect(I18N.validate({})).toEqual(false)
+    expect(validateI18N(i18n)).toEqual(true)
+    expect(validateI18N(null)).toEqual(false)
+    expect(validateI18N({})).toEqual(false)
   })
 })

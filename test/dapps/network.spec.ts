@@ -1,15 +1,18 @@
-import expect from 'expect'
-import { Network } from '../../src'
+import { expect } from 'expect'
+import { Network, networkSchema } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateNetwork = generateLazyValidator(networkSchema)
 
 describe('Network tests', () => {
   const network: Network = Network.ETHEREUM
 
-  testTypeSignature(Network, network)
+  testTypeSignature({ schema: networkSchema }, network)
 
   it('static tests must pass', () => {
-    expect(Network.validate(network)).toEqual(true)
-    expect(Network.validate(null)).toEqual(false)
-    expect(Network.validate({})).toEqual(false)
+    expect(validateNetwork(network)).toEqual(true)
+    expect(validateNetwork(null)).toEqual(false)
+    expect(validateNetwork({})).toEqual(false)
   })
 })

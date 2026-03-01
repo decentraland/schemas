@@ -1,6 +1,6 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../validation'
-import { BodyShape } from '../body-shape'
-import { HideableWearableCategory } from './hideable-category'
+import type { JSONSchema } from '../../../validation/types.js'
+import { BodyShape, bodyShapeSchema } from '../body-shape.js'
+import { HideableWearableCategory, hideableWearableCategorySchema } from './hideable-category.js'
 
 /** @alpha */
 export type WearableRepresentation = {
@@ -12,42 +12,38 @@ export type WearableRepresentation = {
 }
 
 /** @alpha */
-export namespace WearableRepresentation {
-  export const schema: JSONSchema<WearableRepresentation> = {
-    type: 'object',
-    properties: {
-      bodyShapes: {
-        type: 'array',
-        items: BodyShape.schema,
-        minItems: 1,
-        uniqueItems: true
+export const wearableRepresentationSchema: JSONSchema<WearableRepresentation> = {
+  type: 'object',
+  properties: {
+    bodyShapes: {
+      type: 'array',
+      items: bodyShapeSchema,
+      minItems: 1,
+      uniqueItems: true
+    },
+    mainFile: {
+      type: 'string',
+      minLength: 1
+    },
+    contents: {
+      type: 'array',
+      items: {
+        type: 'string'
       },
-      mainFile: {
-        type: 'string',
-        minLength: 1
-      },
-      contents: {
-        type: 'array',
-        items: {
-          type: 'string'
-        },
-        minItems: 1,
-        uniqueItems: true,
-        contains: {
-          const: { $data: '2/mainFile' }
-        }
-      },
-      overrideHides: {
-        type: 'array',
-        items: HideableWearableCategory.schema
-      },
-      overrideReplaces: {
-        type: 'array',
-        items: HideableWearableCategory.schema
+      minItems: 1,
+      uniqueItems: true,
+      contains: {
+        const: { $data: '2/mainFile' }
       }
     },
-    required: ['bodyShapes', 'mainFile', 'contents', 'overrideHides', 'overrideReplaces']
-  }
-
-  export const validate: ValidateFunction<WearableRepresentation> = generateLazyValidator(schema)
+    overrideHides: {
+      type: 'array',
+      items: hideableWearableCategorySchema
+    },
+    overrideReplaces: {
+      type: 'array',
+      items: hideableWearableCategorySchema
+    }
+  },
+  required: ['bodyShapes', 'mainFile', 'contents', 'overrideHides', 'overrideReplaces']
 }

@@ -1,10 +1,19 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import {
   WorldSpawnCoordinateSetEvent,
   WorldScenesUndeploymentEvent,
   WorldUndeploymentEvent,
-  Events
+  EventType,
+  EventSubTypeWorlds,
+  worldScenesUndeploymentEventSchema,
+  worldSpawnCoordinateSetEventSchema,
+  worldUndeploymentEventSchema
 } from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateWorldScenesUndeploymentEvent = generateLazyValidator(worldScenesUndeploymentEventSchema)
+const validateWorldSpawnCoordinateSetEvent = generateLazyValidator(worldSpawnCoordinateSetEventSchema)
+const validateWorldUndeploymentEvent = generateLazyValidator(worldUndeploymentEventSchema)
 
 describe('when validating the WorldSpawnCoordinateSetEvent', () => {
   describe('and the event is valid', () => {
@@ -13,8 +22,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
       beforeEach(() => {
         event = {
-          type: Events.Type.WORLD,
-          subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+          type: EventType.WORLD,
+          subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
           key: 'key',
           timestamp: 1,
           metadata: {
@@ -26,7 +35,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
       })
 
       it('should return true', () => {
-        expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(true)
+        expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(true)
       })
     })
 
@@ -35,8 +44,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
       beforeEach(() => {
         event = {
-          type: Events.Type.WORLD,
-          subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+          type: EventType.WORLD,
+          subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
           key: 'key',
           timestamp: 1,
           metadata: {
@@ -48,7 +57,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
       })
 
       it('should return true', () => {
-        expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(true)
+        expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(true)
       })
     })
 
@@ -57,8 +66,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
       beforeEach(() => {
         event = {
-          type: Events.Type.WORLD,
-          subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+          type: EventType.WORLD,
+          subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
           key: 'key',
           timestamp: 1,
           metadata: {
@@ -70,7 +79,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
       })
 
       it('should return true', () => {
-        expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(true)
+        expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(true)
       })
     })
 
@@ -79,8 +88,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
       beforeEach(() => {
         event = {
-          type: Events.Type.WORLD,
-          subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+          type: EventType.WORLD,
+          subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
           key: 'key',
           timestamp: 1,
           metadata: {
@@ -92,14 +101,14 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
       })
 
       it('should return true', () => {
-        expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(true)
+        expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(true)
       })
     })
   })
 
   describe('and the event is null', () => {
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(null)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(null)).toEqual(false)
     })
   })
 
@@ -111,7 +120,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -120,15 +129,15 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
         key: 'key',
         timestamp: 1
       }
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -137,8 +146,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -149,7 +158,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -158,8 +167,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -170,7 +179,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -179,8 +188,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -191,7 +200,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -200,8 +209,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -213,7 +222,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -222,8 +231,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -235,7 +244,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -244,8 +253,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -257,7 +266,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -266,8 +275,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -280,7 +289,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -289,8 +298,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -302,7 +311,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -311,8 +320,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -324,7 +333,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -333,8 +342,8 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
         key: 'key',
         timestamp: -1,
         metadata: {
@@ -346,7 +355,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -356,7 +365,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     beforeEach(() => {
       event = {
         type: 'invalid-type',
-        subType: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET,
+        subType: EventSubTypeWorlds.WORLD_SPAWN_COORDINATE_SET,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -368,7 +377,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 
@@ -377,7 +386,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
+        type: EventType.WORLD,
         subType: 'invalid-subtype',
         key: 'key',
         timestamp: 1,
@@ -390,7 +399,7 @@ describe('when validating the WorldSpawnCoordinateSetEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldSpawnCoordinateSetEvent.validate(event)).toEqual(false)
+      expect(validateWorldSpawnCoordinateSetEvent(event)).toEqual(false)
     })
   })
 })
@@ -401,8 +410,8 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SCENES_UNDEPLOYMENT,
         key: 'my-world.dcl.eth',
         timestamp: 1,
         metadata: {
@@ -416,13 +425,13 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
     })
 
     it('should return true', () => {
-      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(true)
+      expect(validateWorldScenesUndeploymentEvent(event)).toEqual(true)
     })
   })
 
   describe('and the event is null', () => {
     it('should return false', () => {
-      expect(WorldScenesUndeploymentEvent.validate(null)).toEqual(false)
+      expect(validateWorldScenesUndeploymentEvent(null)).toEqual(false)
     })
   })
 
@@ -431,15 +440,15 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SCENES_UNDEPLOYMENT,
         key: 'key',
         timestamp: 1
       }
     })
 
     it('should return false', () => {
-      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+      expect(validateWorldScenesUndeploymentEvent(event)).toEqual(false)
     })
   })
 
@@ -448,8 +457,8 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SCENES_UNDEPLOYMENT,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -459,7 +468,7 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+      expect(validateWorldScenesUndeploymentEvent(event)).toEqual(false)
     })
   })
 
@@ -468,8 +477,8 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SCENES_UNDEPLOYMENT,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -480,7 +489,7 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+      expect(validateWorldScenesUndeploymentEvent(event)).toEqual(false)
     })
   })
 
@@ -489,8 +498,8 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SCENES_UNDEPLOYMENT,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -501,7 +510,7 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+      expect(validateWorldScenesUndeploymentEvent(event)).toEqual(false)
     })
   })
 
@@ -510,8 +519,8 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_SCENES_UNDEPLOYMENT,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -523,7 +532,7 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+      expect(validateWorldScenesUndeploymentEvent(event)).toEqual(false)
     })
   })
 })
@@ -534,8 +543,8 @@ describe('when validating the WorldUndeploymentEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_UNDEPLOYMENT,
         key: 'my-world.dcl.eth',
         timestamp: 1,
         metadata: {
@@ -545,13 +554,13 @@ describe('when validating the WorldUndeploymentEvent', () => {
     })
 
     it('should return true', () => {
-      expect(WorldUndeploymentEvent.validate(event)).toEqual(true)
+      expect(validateWorldUndeploymentEvent(event)).toEqual(true)
     })
   })
 
   describe('and the event is null', () => {
     it('should return false', () => {
-      expect(WorldUndeploymentEvent.validate(null)).toEqual(false)
+      expect(validateWorldUndeploymentEvent(null)).toEqual(false)
     })
   })
 
@@ -560,15 +569,15 @@ describe('when validating the WorldUndeploymentEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_UNDEPLOYMENT,
         key: 'key',
         timestamp: 1
       }
     })
 
     it('should return false', () => {
-      expect(WorldUndeploymentEvent.validate(event)).toEqual(false)
+      expect(validateWorldUndeploymentEvent(event)).toEqual(false)
     })
   })
 
@@ -577,8 +586,8 @@ describe('when validating the WorldUndeploymentEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_UNDEPLOYMENT,
         key: 'key',
         timestamp: 1,
         metadata: {}
@@ -586,7 +595,7 @@ describe('when validating the WorldUndeploymentEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldUndeploymentEvent.validate(event)).toEqual(false)
+      expect(validateWorldUndeploymentEvent(event)).toEqual(false)
     })
   })
 
@@ -595,8 +604,8 @@ describe('when validating the WorldUndeploymentEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_UNDEPLOYMENT,
         key: 'key',
         timestamp: 1,
         metadata: {
@@ -607,7 +616,7 @@ describe('when validating the WorldUndeploymentEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldUndeploymentEvent.validate(event)).toEqual(false)
+      expect(validateWorldUndeploymentEvent(event)).toEqual(false)
     })
   })
 
@@ -616,8 +625,8 @@ describe('when validating the WorldUndeploymentEvent', () => {
 
     beforeEach(() => {
       event = {
-        type: Events.Type.WORLD,
-        subType: Events.SubType.Worlds.WORLD_UNDEPLOYMENT,
+        type: EventType.WORLD,
+        subType: EventSubTypeWorlds.WORLD_UNDEPLOYMENT,
         key: 'key',
         timestamp: -1,
         metadata: {
@@ -627,7 +636,7 @@ describe('when validating the WorldUndeploymentEvent', () => {
     })
 
     it('should return false', () => {
-      expect(WorldUndeploymentEvent.validate(event)).toEqual(false)
+      expect(validateWorldUndeploymentEvent(event)).toEqual(false)
     })
   })
 })

@@ -1,15 +1,18 @@
-import expect from 'expect'
-import { Locale } from '../../../src'
+import { expect } from 'expect'
+import { Locale, localeSchema } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateLocale = generateLazyValidator(localeSchema)
 
 describe('Locale tests', () => {
   const locale: Locale = Locale.EN
 
-  testTypeSignature(Locale, locale)
+  testTypeSignature({ schema: localeSchema }, locale)
 
   it('static tests must pass', () => {
-    expect(Locale.validate(locale)).toEqual(true)
-    expect(Locale.validate(null)).toEqual(false)
-    expect(Locale.validate({})).toEqual(false)
+    expect(validateLocale(locale)).toEqual(true)
+    expect(validateLocale(null)).toEqual(false)
+    expect(validateLocale({})).toEqual(false)
   })
 })

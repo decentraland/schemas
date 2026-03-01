@@ -1,5 +1,5 @@
-import { Wearable } from '../../platform/item/wearable'
-import { WearableRepresentationDefinition } from './wearable-representation-definition'
+import { Wearable } from '../../platform/item/wearable/index.js'
+import { WearableRepresentationDefinition } from './wearable-representation-definition.js'
 
 /** @alpha */
 export type WearableDefinition = Omit<Wearable, 'data'> & {

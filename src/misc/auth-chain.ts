@@ -1,4 +1,4 @@
-import { JSONSchema, generateLazyValidator, ValidateFunction } from '../validation'
+import type { JSONSchema } from '../validation/types.js'
 
 /**
  * @public
@@ -31,37 +31,33 @@ export enum AuthLinkType {
 /**
  * @public
  */
-export namespace AuthLink {
-  export const schema: JSONSchema<AuthLink> = {
-    type: 'object',
-    properties: {
-      type: {
-        type: 'string',
-        enum: Object.values(AuthLinkType)
+export const authLinkSchema: JSONSchema<AuthLink> = {
+  type: 'object',
+  properties: {
+    type: {
+      type: 'string',
+      enum: Object.values(AuthLinkType)
+    },
+    payload: { type: 'string' },
+    signature: { type: 'string', nullable: true }
+  },
+  required: ['payload', 'type'],
+  if: {
+    properties: { type: { not: { const: AuthLinkType.SIGNER } } }
+  },
+  then: {
+    required: ['signature']
+  },
+  else: {
+    // type = 'SIGNER' => signature = '' | null
+    oneOf: [
+      {
+        properties: { signature: { type: 'string', const: '' } },
+        required: ['signature']
       },
-      payload: { type: 'string' },
-      signature: { type: 'string', nullable: true }
-    },
-    required: ['payload', 'type'],
-    if: {
-      properties: { type: { not: { const: AuthLinkType.SIGNER } } }
-    },
-    then: {
-      required: ['signature']
-    },
-    else: {
-      // type = 'SIGNER' => signature = '' | null
-      oneOf: [
-        {
-          properties: { signature: { type: 'string', const: '' } },
-          required: ['signature']
-        },
-        { properties: { signature: { type: 'null' } } }
-      ]
-    }
+      { properties: { signature: { type: 'null' } } }
+    ]
   }
-
-  export const validate: ValidateFunction<AuthLink> = generateLazyValidator(schema)
 }
 
 /**
@@ -73,12 +69,8 @@ export namespace AuthLink {
 export type AuthChain = AuthLink[]
 
 /** @public */
-export namespace AuthChain {
-  export const schema: JSONSchema<AuthChain> = {
-    type: 'array',
-    items: AuthLink.schema,
-    minItems: 1
-  }
-
-  export const validate: ValidateFunction<AuthChain> = generateLazyValidator(schema)
+export const authChainSchema: JSONSchema<AuthChain> = {
+  type: 'array',
+  items: authLinkSchema,
+  minItems: 1
 }

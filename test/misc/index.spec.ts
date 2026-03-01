@@ -1,6 +1,11 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import { readFileSync } from 'fs'
-import { EthAddress, IPFSv2, Color3 } from '../../src/misc'
+import { color3Schema, ethAddressSchema, ipfsv2Schema } from '../../src/misc'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateColor3 = generateLazyValidator(color3Schema)
+const validateEthAddress = generateLazyValidator(ethAddressSchema)
+const validateIPFSv2 = generateLazyValidator(ipfsv2Schema)
 
 describe('sanity of generated types', () => {
   const report = readFileSync('./report/schemas.api.md').toString()
@@ -13,27 +18,27 @@ describe('sanity of generated types', () => {
 
 describe('Misc tests', () => {
   it('EthAddress static tests must pass', () => {
-    expect(EthAddress.validate('0x00000000000000000000000000000000000000000')).toEqual(false)
-    expect(EthAddress.validate('0x0000000000000000000000000000000000000000')).toEqual(true)
-    expect(EthAddress.validate('0x000000000000000000000000000000000000000')).toEqual(false)
-    expect(EthAddress.validate(null)).toEqual(false)
-    expect(EthAddress.validate({})).toEqual(false)
+    expect(validateEthAddress('0x00000000000000000000000000000000000000000')).toEqual(false)
+    expect(validateEthAddress('0x0000000000000000000000000000000000000000')).toEqual(true)
+    expect(validateEthAddress('0x000000000000000000000000000000000000000')).toEqual(false)
+    expect(validateEthAddress(null)).toEqual(false)
+    expect(validateEthAddress({})).toEqual(false)
   })
   it('IPFSv2 static tests must pass', () => {
-    expect(IPFSv2.validate('ba0000000000000000000000000000000000000000000000000000000000')).toEqual(false)
-    expect(IPFSv2.validate('ba000000000000000000000000000000000000000000000000000000000')).toEqual(true)
-    expect(IPFSv2.validate('00000000000000000000000000000000000000000000000000000000000')).toEqual(false)
-    expect(IPFSv2.validate('ab00000000000000000000000000000000000000000000000000000000')).toEqual(false)
-    expect(IPFSv2.validate(null)).toEqual(false)
-    expect(IPFSv2.validate({})).toEqual(false)
+    expect(validateIPFSv2('ba0000000000000000000000000000000000000000000000000000000000')).toEqual(false)
+    expect(validateIPFSv2('ba000000000000000000000000000000000000000000000000000000000')).toEqual(true)
+    expect(validateIPFSv2('00000000000000000000000000000000000000000000000000000000000')).toEqual(false)
+    expect(validateIPFSv2('ab00000000000000000000000000000000000000000000000000000000')).toEqual(false)
+    expect(validateIPFSv2(null)).toEqual(false)
+    expect(validateIPFSv2({})).toEqual(false)
   })
   it('Color3 static tests must pass', () => {
-    expect(Color3.validate('rgb(255,255,255)')).toEqual(false)
-    expect(Color3.validate(null)).toEqual(false)
-    expect(Color3.validate({})).toEqual(false)
-    expect(Color3.validate({ r: -1, g: -1, b: -1 })).toEqual(false)
-    expect(Color3.validate({ r: 0, g: 0, b: 0 })).toEqual(true)
-    expect(Color3.validate({ r: 1, g: 1, b: 1 })).toEqual(true)
-    expect(Color3.validate({ r: 2, g: 2, b: 2 })).toEqual(false)
+    expect(validateColor3('rgb(255,255,255)')).toEqual(false)
+    expect(validateColor3(null)).toEqual(false)
+    expect(validateColor3({})).toEqual(false)
+    expect(validateColor3({ r: -1, g: -1, b: -1 })).toEqual(false)
+    expect(validateColor3({ r: 0, g: 0, b: 0 })).toEqual(true)
+    expect(validateColor3({ r: 1, g: 1, b: 1 })).toEqual(true)
+    expect(validateColor3({ r: 2, g: 2, b: 2 })).toEqual(false)
   })
 })

@@ -1,5 +1,5 @@
-import { JSONSchema, generateLazyValidator, ValidateFunction } from '../validation'
-import { AuthChain } from './auth-chain'
+import type { JSONSchema } from '../validation/types.js'
+import { AuthChain, authChainSchema } from './auth-chain.js'
 
 export type CatalystDeployment = {
   entity: {
@@ -10,25 +10,21 @@ export type CatalystDeployment = {
   }
 }
 
-export namespace CatalystDeployment {
-  export const schema: JSONSchema<CatalystDeployment> = {
-    type: 'object',
-    required: ['entity'],
-    properties: {
-      entity: {
-        type: 'object',
-        required: ['entityId', 'entityType', 'authChain'],
-        properties: {
-          entityId: { type: 'string' },
-          entityType: { type: 'string' },
-          authChain: AuthChain.schema,
-          metadata: { type: 'object', additionalProperties: true, nullable: true }
-        },
-        additionalProperties: true
-      }
-    },
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<CatalystDeployment> = generateLazyValidator(schema)
+export const catalystDeploymentSchema: JSONSchema<CatalystDeployment> = {
+  type: 'object',
+  required: ['entity'],
+  properties: {
+    entity: {
+      type: 'object',
+      required: ['entityId', 'entityType', 'authChain'],
+      properties: {
+        entityId: { type: 'string' },
+        entityType: { type: 'string' },
+        authChain: authChainSchema,
+        metadata: { type: 'object', additionalProperties: true, nullable: true }
+      },
+      additionalProperties: true
+    }
+  },
+  additionalProperties: true
 }

@@ -1,6 +1,10 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import { testTypeSignature } from '../../test-utils'
-import { NotificationChannelType, NotificationType, Subscription, SubscriptionDetails } from '../../../src'
+import type { SubscriptionDetails } from '../../../src'
+import { NotificationChannelType, NotificationType, subscriptionSchema } from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateSubscription = generateLazyValidator(subscriptionSchema)
 
 const messageTypes = Object.values(NotificationType).reduce((properties, notificationType) => {
   properties[notificationType] = { email: true, in_app: true }
@@ -20,13 +24,13 @@ const subscription = {
 }
 
 describe('Subscription tests', () => {
-  testTypeSignature(Subscription, subscription)
+  testTypeSignature({ schema: subscriptionSchema }, subscription)
 
   it('static tests must pass', () => {
-    expect(Subscription.validate(subscription)).toBeTruthy()
-    expect(Subscription.validate(null)).toBeFalsy()
-    expect(Subscription.validate({})).toBeFalsy()
-    expect(Subscription.validate.errors).toEqual([
+    expect(validateSubscription(subscription)).toBeTruthy()
+    expect(validateSubscription(null)).toBeFalsy()
+    expect(validateSubscription({})).toBeFalsy()
+    expect(validateSubscription.errors).toEqual([
       {
         instancePath: '',
         keyword: 'required',
@@ -46,12 +50,12 @@ describe('Subscription tests', () => {
 
   it('address must be present and be an ethereum address', () => {
     expect(
-      Subscription.validate({
+      validateSubscription({
         address: '0x13a',
         details: subscriptionDetails
       })
     ).toBeFalsy()
-    expect(Subscription.validate.errors).toMatchObject([
+    expect(validateSubscription.errors).toMatchObject([
       {
         instancePath: '/address',
         keyword: 'pattern',
@@ -66,13 +70,13 @@ describe('Subscription tests', () => {
 
   it('email, if present, must be a valid email address', () => {
     expect(
-      Subscription.validate({
+      validateSubscription({
         address: '0x13a088C9ae5028C55F8E1cd5A13dc8134b062d50',
         email: 'not-an-email',
         details: subscriptionDetails
       })
     ).toBeFalsy()
-    expect(Subscription.validate.errors).toMatchObject([
+    expect(validateSubscription.errors).toMatchObject([
       {
         instancePath: '/email',
         keyword: 'pattern',

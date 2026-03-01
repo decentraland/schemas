@@ -1,2 +1,2 @@
-export * from './avatar'
-export * from './profile'
+export * from './avatar.js'
+export * from './profile.js'

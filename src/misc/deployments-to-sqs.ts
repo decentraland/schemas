@@ -1,5 +1,5 @@
-import { JSONSchema, generateLazyValidator, ValidateFunction } from '../validation'
-import { AuthChain } from './auth-chain'
+import type { JSONSchema } from '../validation/types.js'
+import { AuthChain, authChainSchema } from './auth-chain.js'
 
 /**
  * @public
@@ -19,45 +19,41 @@ export type DeploymentToSqs = {
 /**
  * @public
  */
-export namespace DeploymentToSqs {
-  export const schema: JSONSchema<DeploymentToSqs> = {
-    type: 'object',
-    required: ['entity'],
-    properties: {
-      entity: {
-        type: 'object',
-        required: ['entityId', 'authChain'],
-        properties: {
-          entityId: { type: 'string' },
-          authChain: AuthChain.schema
-        },
-        additionalProperties: true
+export const deploymentToSqsSchema: JSONSchema<DeploymentToSqs> = {
+  type: 'object',
+  required: ['entity'],
+  properties: {
+    entity: {
+      type: 'object',
+      required: ['entityId', 'authChain'],
+      properties: {
+        entityId: { type: 'string' },
+        authChain: authChainSchema
       },
-      lods: {
-        type: 'array',
-        items: { type: 'string' },
-        nullable: true
-      },
-      contentServerUrls: {
-        type: 'array',
-        items: { type: 'string' },
-        nullable: true
-      },
-      force: {
-        type: 'boolean',
-        nullable: true
-      },
-      animation: {
-        type: 'string',
-        nullable: true
-      },
-      doISS: {
-        type: 'boolean',
-        nullable: true
-      }
+      additionalProperties: true
     },
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<DeploymentToSqs> = generateLazyValidator(schema)
+    lods: {
+      type: 'array',
+      items: { type: 'string' },
+      nullable: true
+    },
+    contentServerUrls: {
+      type: 'array',
+      items: { type: 'string' },
+      nullable: true
+    },
+    force: {
+      type: 'boolean',
+      nullable: true
+    },
+    animation: {
+      type: 'string',
+      nullable: true
+    },
+    doISS: {
+      type: 'boolean',
+      nullable: true
+    }
+  },
+  additionalProperties: true
 }

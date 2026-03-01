@@ -1,5 +1,5 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { NotificationChannelType, NotificationType } from './notifications'
+import type { JSONSchema } from '../../validation/types.js'
+import { NotificationChannelType, NotificationType } from './notifications.js'
 
 /**
  * Subscription details returned by the notifications-workers
@@ -36,25 +36,21 @@ const messageTypeProperties = Object.values(NotificationType).reduce((properties
  * Subscription details
  * @alpha
  */
-export namespace SubscriptionDetails {
-  export const schema: JSONSchema<SubscriptionDetails> = {
-    type: 'object',
-    required: ['ignore_all_email', 'ignore_all_in_app', 'message_type'],
-    properties: {
-      ignore_all_email: {
-        type: 'boolean'
-      },
-      ignore_all_in_app: {
-        type: 'boolean'
-      },
-      message_type: {
-        type: 'object',
-        required: Object.values(NotificationType), // All enum values are required
-        additionalProperties: false, // No other properties are allowed
-        properties: messageTypeProperties
-      }
+export const subscriptionDetailsSchema: JSONSchema<SubscriptionDetails> = {
+  type: 'object',
+  required: ['ignore_all_email', 'ignore_all_in_app', 'message_type'],
+  properties: {
+    ignore_all_email: {
+      type: 'boolean'
+    },
+    ignore_all_in_app: {
+      type: 'boolean'
+    },
+    message_type: {
+      type: 'object',
+      required: Object.values(NotificationType), // All enum values are required
+      additionalProperties: false, // No other properties are allowed
+      properties: messageTypeProperties
     }
   }
-
-  export const validate: ValidateFunction<SubscriptionDetails> = generateLazyValidator(schema)
 }

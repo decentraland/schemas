@@ -1,4 +1,4 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import { validateUrl, validateUrlInstance, UrlValidationConfig } from '../../src/core/url-validation'
 
 describe('when validating URLs for security', () => {

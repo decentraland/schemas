@@ -1,17 +1,19 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../test-utils'
+import type { AnyMapping, Mappings, MappingsHelper, MultipleMapping, RangeMapping, SingleMapping } from '../../../src'
 import {
-  AnyMapping,
   ContractNetwork,
   createMappingsHelper,
-  Mapping,
-  Mappings,
-  MappingsHelper,
-  MappingType,
-  MultipleMapping,
-  RangeMapping,
-  SingleMapping
+  mappingSchema,
+  mappingKeywordDefinitions,
+  mappingsSchema,
+  mappingsKeywordDefinitions,
+  MappingType
 } from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateMapping = generateLazyValidator(mappingSchema, mappingKeywordDefinitions)
+const validateMappings = generateLazyValidator(mappingsSchema, mappingsKeywordDefinitions)
 
 const mappings: Mappings = {
   [ContractNetwork.MATIC]: {
@@ -44,14 +46,14 @@ const rangeMapping: RangeMapping = {
 }
 
 describe('Third Party Mappings tests', () => {
-  testTypeSignature(Mappings, mappings)
+  testTypeSignature({ schema: mappingsSchema, keywordDefinitions: mappingsKeywordDefinitions }, mappings)
 
   it('static tests must pass', () => {
-    expect(Mappings.validate(mappings)).toEqual(true)
-    expect(Mappings.validate(null)).toEqual(false)
-    expectValidationFailureWithErrors(Mappings.validate, {}, ['must NOT have fewer than 1 properties'])
+    expect(validateMappings(mappings)).toEqual(true)
+    expect(validateMappings(null)).toEqual(false)
+    expectValidationFailureWithErrors(validateMappings, {}, ['must NOT have fewer than 1 properties'])
     expectValidationFailureWithErrors(
-      Mappings.validate,
+      validateMappings,
       {
         amoy: {
           '0x1d9fb685c257E74f869BA302e260C0b68f5eBB37': [
@@ -66,18 +68,18 @@ describe('Third Party Mappings tests', () => {
 })
 
 describe('Third Party tests - each individual mapping type', () => {
-  testTypeSignature(Mapping, singleMapping)
+  testTypeSignature({ schema: mappingSchema, keywordDefinitions: mappingKeywordDefinitions }, singleMapping)
 
   it('static tests must pass', () => {
-    expect(Mapping.validate(singleMapping)).toEqual(true)
-    expect(Mapping.validate(null)).toEqual(false)
-    expect(Mapping.validate({})).toEqual(false)
+    expect(validateMapping(singleMapping)).toEqual(true)
+    expect(validateMapping(null)).toEqual(false)
+    expect(validateMapping({})).toEqual(false)
   })
 
   describe('no extra properties allowed', () => {
     const testFn = ({ mapping, expected }: { mapping: any; expected: boolean }) =>
       function () {
-        expect(Mapping.validate({ ...mapping, extra: 'extra' })).toEqual(expected)
+        expect(validateMapping({ ...mapping, extra: 'extra' })).toEqual(expected)
       }
 
     it('for type: single', testFn({ mapping: singleMapping, expected: false }))
@@ -87,16 +89,16 @@ describe('Third Party tests - each individual mapping type', () => {
   })
 
   it('static tests must return the correct errors when missing properties', () => {
-    expect(Mapping.validate({})).toEqual(false)
-    expect(Mapping.validate({ type: MappingType.SINGLE })).toEqual(false)
-    expect(Mapping.validate({ type: MappingType.MULTIPLE })).toEqual(false)
-    expect(Mapping.validate({ type: MappingType.RANGE })).toEqual(false)
-    expect(Mapping.validate({ type: MappingType.ANY })).toEqual(true)
+    expect(validateMapping({})).toEqual(false)
+    expect(validateMapping({ type: MappingType.SINGLE })).toEqual(false)
+    expect(validateMapping({ type: MappingType.MULTIPLE })).toEqual(false)
+    expect(validateMapping({ type: MappingType.RANGE })).toEqual(false)
+    expect(validateMapping({ type: MappingType.ANY })).toEqual(true)
   })
 
   it('range mapping with from greater than to fails validation', () => {
     expect(
-      Mapping.validate({
+      validateMapping({
         type: MappingType.RANGE,
         from: '11',
         to: '1'
@@ -106,7 +108,7 @@ describe('Third Party tests - each individual mapping type', () => {
 
   it('multiple mapping with duplicate ids fails validation', () => {
     expect(
-      Mapping.validate({
+      validateMapping({
         type: MappingType.MULTIPLE,
         ids: ['1', '3', '1']
       })

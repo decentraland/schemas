@@ -1,5 +1,5 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { ChainId } from './chain-id'
+import type { JSONSchema } from '../validation/types.js'
+import { ChainId } from './chain-id.js'
 
 /**
  * Different supported chain names
@@ -64,11 +64,7 @@ export function getChainId(chainName: ChainName): ChainId | null {
 /**
  * @alpha
  */
-export namespace ChainName {
-  export const schema: JSONSchema<ChainName> = {
-    type: 'string',
-    enum: Object.values(ChainName)
-  }
-
-  export const validate: ValidateFunction<ChainName> = generateLazyValidator(schema)
+export const chainNameSchema: JSONSchema<ChainName> = {
+  type: 'string',
+  enum: Object.values(ChainName)
 }

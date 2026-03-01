@@ -1,6 +1,6 @@
-import { EthAddress } from '../../misc'
-import { AuthChain } from '../../misc/auth-chain'
-import { BaseEvent, Events } from './base'
+import { EthAddress } from '../../misc/index.js'
+import { AuthChain } from '../../misc/auth-chain.js'
+import { BaseEvent, EventType, EventSubTypeClient } from './base.js'
 
 type ClientBaseMetadata = {
   authChain: AuthChain
@@ -27,8 +27,8 @@ type ClientBaseMetadata = {
 }
 
 export type MoveToParcelEvent = BaseEvent & {
-  type: Events.Type.CLIENT
-  subType: Events.SubType.Client.MOVE_TO_PARCEL
+  type: EventType.CLIENT
+  subType: EventSubTypeClient.MOVE_TO_PARCEL
   metadata: ClientBaseMetadata & {
     parcel: {
       isEmptyParcel: boolean
@@ -40,8 +40,8 @@ export type MoveToParcelEvent = BaseEvent & {
 }
 
 export type UsedEmoteEvent = BaseEvent & {
-  type: Events.Type.CLIENT
-  subType: Events.SubType.Client.USED_EMOTE
+  type: EventType.CLIENT
+  subType: EventSubTypeClient.USED_EMOTE
   metadata: ClientBaseMetadata & {
     emote: {
       emoteIndex: number
@@ -53,8 +53,8 @@ export type UsedEmoteEvent = BaseEvent & {
 }
 
 export type PassportOpenedEvent = BaseEvent & {
-  type: Events.Type.CLIENT
-  subType: Events.SubType.Client.PASSPORT_OPENED
+  type: EventType.CLIENT
+  subType: EventSubTypeClient.PASSPORT_OPENED
   metadata: ClientBaseMetadata & {
     passport: {
       receiver: EthAddress
@@ -63,8 +63,8 @@ export type PassportOpenedEvent = BaseEvent & {
 }
 
 export type WalkedDistanceEvent = BaseEvent & {
-  type: Events.Type.CLIENT
-  subType: Events.SubType.Client.WALKED_DISTANCE
+  type: EventType.CLIENT
+  subType: EventSubTypeClient.WALKED_DISTANCE
   metadata: ClientBaseMetadata & {
     distance: number
     stepCount: number
@@ -72,16 +72,16 @@ export type WalkedDistanceEvent = BaseEvent & {
 }
 
 export type VerticalHeightReachedEvent = BaseEvent & {
-  type: Events.Type.CLIENT
-  subType: Events.SubType.Client.VERTICAL_HEIGHT_REACHED
+  type: EventType.CLIENT
+  subType: EventSubTypeClient.VERTICAL_HEIGHT_REACHED
   metadata: ClientBaseMetadata & {
     height: number
   }
 }
 
 export type LoggedInEvent = BaseEvent & {
-  type: Events.Type.CLIENT
-  subType: Events.SubType.Client.LOGGED_IN
+  type: EventType.CLIENT
+  subType: EventSubTypeClient.LOGGED_IN
   metadata: ClientBaseMetadata & {
     realm: string
     contextRuntime: string
@@ -89,8 +89,8 @@ export type LoggedInEvent = BaseEvent & {
 }
 
 export type LoggedInCachedEvent = BaseEvent & {
-  type: Events.Type.CLIENT
-  subType: Events.SubType.Client.LOGGED_IN_CACHED
+  type: EventType.CLIENT
+  subType: EventSubTypeClient.LOGGED_IN_CACHED
   metadata: ClientBaseMetadata & {
     realm: string
     contextRuntime: string

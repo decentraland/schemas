@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../validation'
+import type { JSONSchema } from '../../../validation/types.js'
 
 export enum WearableCategory {
   EYEBROWS = 'eyebrows',
@@ -21,11 +21,7 @@ export enum WearableCategory {
   HANDS_WEAR = 'hands_wear'
 }
 
-export namespace WearableCategory {
-  export const schema: JSONSchema<WearableCategory> = {
-    type: 'string',
-    enum: Object.values(WearableCategory)
-  }
-
-  export const validate: ValidateFunction<WearableCategory> = generateLazyValidator(schema)
+export const wearableCategorySchema: JSONSchema<WearableCategory> = {
+  type: 'string',
+  enum: Object.values(WearableCategory)
 }

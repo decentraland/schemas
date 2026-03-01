@@ -1,5 +1,5 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { BaseEvent, Events } from './base'
+import type { JSONSchema } from '../../validation/types.js'
+import { BaseEvent, EventType, EventSubTypeBlockchain } from './base.js'
 
 export type BidEventMetadata = {
   address: string
@@ -16,47 +16,43 @@ export type BidEventMetadata = {
 }
 
 export type BidAcceptedEvent = BaseEvent & {
-  type: Events.Type.BLOCKCHAIN
-  subType: Events.SubType.Blockchain.BID_ACCEPTED
+  type: EventType.BLOCKCHAIN
+  subType: EventSubTypeBlockchain.BID_ACCEPTED
   metadata: BidEventMetadata
 }
 
-export namespace BidAcceptedEvent {
-  export const schema: JSONSchema<BidAcceptedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.BLOCKCHAIN },
-      subType: { type: 'string', const: Events.SubType.Blockchain.BID_ACCEPTED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          address: { type: 'string' },
-          image: { type: 'string' },
-          seller: { type: 'string' },
-          category: { type: 'string' },
-          rarity: { type: 'string', nullable: true },
-          link: { type: 'string' },
-          nftName: { type: 'string', nullable: true },
-          price: { type: 'string' },
-          title: { type: 'string' },
-          description: { type: 'string' },
-          network: { type: 'string' }
-        },
-        required: ['address', 'image', 'seller', 'category', 'link', 'price', 'title', 'network']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<BidAcceptedEvent> = generateLazyValidator(schema)
+export const bidAcceptedEventSchema: JSONSchema<BidAcceptedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.BLOCKCHAIN },
+    subType: { type: 'string', const: EventSubTypeBlockchain.BID_ACCEPTED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        address: { type: 'string' },
+        image: { type: 'string' },
+        seller: { type: 'string' },
+        category: { type: 'string' },
+        rarity: { type: 'string', nullable: true },
+        link: { type: 'string' },
+        nftName: { type: 'string', nullable: true },
+        price: { type: 'string' },
+        title: { type: 'string' },
+        description: { type: 'string' },
+        network: { type: 'string' }
+      },
+      required: ['address', 'image', 'seller', 'category', 'link', 'price', 'title', 'network']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type ItemSoldEvent = BaseEvent & {
-  type: Events.Type.BLOCKCHAIN
-  subType: Events.SubType.Blockchain.ITEM_SOLD
+  type: EventType.BLOCKCHAIN
+  subType: EventSubTypeBlockchain.ITEM_SOLD
   metadata: {
     address: string
     image: string
@@ -74,8 +70,8 @@ export type ItemSoldEvent = BaseEvent & {
 }
 
 export type ItemPublishedEvent = BaseEvent & {
-  type: Events.Type.BLOCKCHAIN
-  subType: Events.SubType.Blockchain.ITEM_PUBLISHED
+  type: EventType.BLOCKCHAIN
+  subType: EventSubTypeBlockchain.ITEM_PUBLISHED
   metadata: {
     creator: string
     category: string
@@ -86,66 +82,58 @@ export type ItemPublishedEvent = BaseEvent & {
   }
 }
 
-export namespace ItemSoldEvent {
-  export const schema: JSONSchema<ItemSoldEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.BLOCKCHAIN },
-      subType: { type: 'string', const: Events.SubType.Blockchain.ITEM_SOLD },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          address: { type: 'string' },
-          image: { type: 'string' },
-          buyer: { type: 'string' },
-          seller: { type: 'string' },
-          category: { type: 'string' },
-          rarity: { type: 'string', nullable: true },
-          link: { type: 'string' },
-          nftName: { type: 'string', nullable: true },
-          tokenId: { type: 'string' },
-          network: { type: 'string' },
-          title: { type: 'string' },
-          description: { type: 'string' }
-        },
-        required: ['address', 'image', 'seller', 'category', 'link', 'network', 'title', 'description']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<ItemSoldEvent> = generateLazyValidator(schema)
+export const itemSoldEventSchema: JSONSchema<ItemSoldEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.BLOCKCHAIN },
+    subType: { type: 'string', const: EventSubTypeBlockchain.ITEM_SOLD },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        address: { type: 'string' },
+        image: { type: 'string' },
+        buyer: { type: 'string' },
+        seller: { type: 'string' },
+        category: { type: 'string' },
+        rarity: { type: 'string', nullable: true },
+        link: { type: 'string' },
+        nftName: { type: 'string', nullable: true },
+        tokenId: { type: 'string' },
+        network: { type: 'string' },
+        title: { type: 'string' },
+        description: { type: 'string' }
+      },
+      required: ['address', 'image', 'seller', 'category', 'link', 'network', 'title', 'description']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
-export namespace ItemPublishedEvent {
-  export const schema: JSONSchema<ItemPublishedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.BLOCKCHAIN },
-      subType: { type: 'string', const: Events.SubType.Blockchain.ITEM_PUBLISHED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          creator: { type: 'string' },
-          category: { type: 'string' },
-          rarity: { type: 'string', nullable: true },
-          itemId: { type: 'string' },
-          network: { type: 'string' },
-          urn: { type: 'string' }
-        },
-        required: ['creator', 'category', 'itemId', 'network', 'urn']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<ItemPublishedEvent> = generateLazyValidator(schema)
+export const itemPublishedEventSchema: JSONSchema<ItemPublishedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.BLOCKCHAIN },
+    subType: { type: 'string', const: EventSubTypeBlockchain.ITEM_PUBLISHED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        creator: { type: 'string' },
+        category: { type: 'string' },
+        rarity: { type: 'string', nullable: true },
+        itemId: { type: 'string' },
+        network: { type: 'string' },
+        urn: { type: 'string' }
+      },
+      required: ['creator', 'category', 'itemId', 'network', 'urn']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 type RentalMetadata = {
@@ -164,110 +152,102 @@ type RentalMetadata = {
 }
 
 export type RentalEndedEvent = BaseEvent & {
-  type: Events.Type.BLOCKCHAIN
-  subType: Events.SubType.Blockchain.RENTAL_ENDED
+  type: EventType.BLOCKCHAIN
+  subType: EventSubTypeBlockchain.RENTAL_ENDED
   metadata: RentalMetadata
 }
 
-export namespace RentalEndedEvent {
-  export const schema: JSONSchema<RentalEndedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.BLOCKCHAIN },
-      subType: { type: 'string', const: Events.SubType.Blockchain.RENTAL_ENDED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          address: { type: 'string' },
-          contract: { type: 'string' },
-          land: { type: 'string', nullable: true },
-          lessor: { type: 'string' },
-          tenant: { type: 'string' },
-          operator: { type: 'string' },
-          startedAt: { type: 'string' },
-          endedAt: { type: 'string' },
-          tokenId: { type: 'string' },
-          link: { type: 'string' },
-          title: { type: 'string' },
-          description: { type: 'string', nullable: true }
-        },
-        required: [
-          'address',
-          'contract',
-          'lessor',
-          'tenant',
-          'operator',
-          'startedAt',
-          'endedAt',
-          'tokenId',
-          'link',
-          'title'
-        ]
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<RentalEndedEvent> = generateLazyValidator(schema)
+export const rentalEndedEventSchema: JSONSchema<RentalEndedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.BLOCKCHAIN },
+    subType: { type: 'string', const: EventSubTypeBlockchain.RENTAL_ENDED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        address: { type: 'string' },
+        contract: { type: 'string' },
+        land: { type: 'string', nullable: true },
+        lessor: { type: 'string' },
+        tenant: { type: 'string' },
+        operator: { type: 'string' },
+        startedAt: { type: 'string' },
+        endedAt: { type: 'string' },
+        tokenId: { type: 'string' },
+        link: { type: 'string' },
+        title: { type: 'string' },
+        description: { type: 'string', nullable: true }
+      },
+      required: [
+        'address',
+        'contract',
+        'lessor',
+        'tenant',
+        'operator',
+        'startedAt',
+        'endedAt',
+        'tokenId',
+        'link',
+        'title'
+      ]
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type RentalStartedEvent = BaseEvent & {
-  type: Events.Type.BLOCKCHAIN
-  subType: Events.SubType.Blockchain.RENTAL_STARTED
+  type: EventType.BLOCKCHAIN
+  subType: EventSubTypeBlockchain.RENTAL_STARTED
   metadata: RentalMetadata
 }
 
-export namespace RentalStartedEvent {
-  export const schema: JSONSchema<RentalStartedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.BLOCKCHAIN },
-      subType: { type: 'string', const: Events.SubType.Blockchain.RENTAL_STARTED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          address: { type: 'string' },
-          contract: { type: 'string' },
-          land: { type: 'string', nullable: true },
-          lessor: { type: 'string' },
-          tenant: { type: 'string' },
-          operator: { type: 'string' },
-          startedAt: { type: 'string' },
-          endedAt: { type: 'string' },
-          tokenId: { type: 'string' },
-          link: { type: 'string' },
-          title: { type: 'string' },
-          description: { type: 'string', nullable: true }
-        },
-        required: [
-          'address',
-          'contract',
-          'lessor',
-          'tenant',
-          'operator',
-          'startedAt',
-          'endedAt',
-          'tokenId',
-          'link',
-          'title'
-        ]
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<RentalStartedEvent> = generateLazyValidator(schema)
+export const rentalStartedEventSchema: JSONSchema<RentalStartedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.BLOCKCHAIN },
+    subType: { type: 'string', const: EventSubTypeBlockchain.RENTAL_STARTED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        address: { type: 'string' },
+        contract: { type: 'string' },
+        land: { type: 'string', nullable: true },
+        lessor: { type: 'string' },
+        tenant: { type: 'string' },
+        operator: { type: 'string' },
+        startedAt: { type: 'string' },
+        endedAt: { type: 'string' },
+        tokenId: { type: 'string' },
+        link: { type: 'string' },
+        title: { type: 'string' },
+        description: { type: 'string', nullable: true }
+      },
+      required: [
+        'address',
+        'contract',
+        'lessor',
+        'tenant',
+        'operator',
+        'startedAt',
+        'endedAt',
+        'tokenId',
+        'link',
+        'title'
+      ]
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type RoyaltiesEarnedEvent = BaseEvent & {
-  type: Events.Type.BLOCKCHAIN
-  subType: Events.SubType.Blockchain.ROYALTIES_EARNED
+  type: EventType.BLOCKCHAIN
+  subType: EventSubTypeBlockchain.ROYALTIES_EARNED
   metadata: {
     address: string
     image: string
@@ -283,75 +263,67 @@ export type RoyaltiesEarnedEvent = BaseEvent & {
   }
 }
 
-export namespace RoyaltiesEarnedEvent {
-  export const schema: JSONSchema<RoyaltiesEarnedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.BLOCKCHAIN },
-      subType: { type: 'string', const: Events.SubType.Blockchain.ROYALTIES_EARNED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          address: { type: 'string' },
-          image: { type: 'string' },
-          category: { type: 'string' },
-          rarity: { type: 'string', nullable: true },
-          link: { type: 'string' },
-          nftName: { type: 'string', nullable: true },
-          royaltiesCut: { type: 'string' },
-          royaltiesCollector: { type: 'string' },
-          network: { type: 'string' },
-          title: { type: 'string' },
-          description: { type: 'string', nullable: true }
-        },
-        required: ['address', 'image', 'category', 'link', 'royaltiesCut', 'royaltiesCollector', 'network', 'title']
-      }
-    },
-    required: ['type', 'subType', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<RoyaltiesEarnedEvent> = generateLazyValidator(schema)
+export const royaltiesEarnedEventSchema: JSONSchema<RoyaltiesEarnedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.BLOCKCHAIN },
+    subType: { type: 'string', const: EventSubTypeBlockchain.ROYALTIES_EARNED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        address: { type: 'string' },
+        image: { type: 'string' },
+        category: { type: 'string' },
+        rarity: { type: 'string', nullable: true },
+        link: { type: 'string' },
+        nftName: { type: 'string', nullable: true },
+        royaltiesCut: { type: 'string' },
+        royaltiesCollector: { type: 'string' },
+        network: { type: 'string' },
+        title: { type: 'string' },
+        description: { type: 'string', nullable: true }
+      },
+      required: ['address', 'image', 'category', 'link', 'royaltiesCut', 'royaltiesCollector', 'network', 'title']
+    }
+  },
+  required: ['type', 'subType', 'metadata'],
+  additionalProperties: false
 }
 
 export type CollectionCreatedEvent = BaseEvent & {
-  type: Events.Type.BLOCKCHAIN
-  subType: Events.SubType.Blockchain.COLLECTION_CREATED
+  type: EventType.BLOCKCHAIN
+  subType: EventSubTypeBlockchain.COLLECTION_CREATED
   metadata: {
     creator: string
     name: string
   }
 }
 
-export namespace CollectionCreatedEvent {
-  export const schema: JSONSchema<CollectionCreatedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.BLOCKCHAIN },
-      subType: { type: 'string', const: Events.SubType.Blockchain.COLLECTION_CREATED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          creator: { type: 'string' },
-          name: { type: 'string' }
-        },
-        required: ['creator', 'name']
-      }
-    },
-    required: ['type', 'subType', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<CollectionCreatedEvent> = generateLazyValidator(schema)
+export const collectionCreatedEventSchema: JSONSchema<CollectionCreatedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.BLOCKCHAIN },
+    subType: { type: 'string', const: EventSubTypeBlockchain.COLLECTION_CREATED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        creator: { type: 'string' },
+        name: { type: 'string' }
+      },
+      required: ['creator', 'name']
+    }
+  },
+  required: ['type', 'subType', 'metadata'],
+  additionalProperties: false
 }
 
 export type TransferReceivedEvent = BaseEvent & {
-  type: Events.Type.BLOCKCHAIN
-  subType: Events.SubType.Blockchain.TRANSFER_RECEIVED
+  type: EventType.BLOCKCHAIN
+  subType: EventSubTypeBlockchain.TRANSFER_RECEIVED
   metadata: {
     senderAddress: string
     receiverAddress: string
@@ -359,35 +331,31 @@ export type TransferReceivedEvent = BaseEvent & {
   }
 }
 
-export namespace TransferReceivedEvent {
-  export const schema: JSONSchema<TransferReceivedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.BLOCKCHAIN },
-      subType: { type: 'string', const: Events.SubType.Blockchain.TRANSFER_RECEIVED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          senderAddress: { type: 'string' },
-          receiverAddress: { type: 'string' },
-          tokenUri: { type: 'string', nullable: true }
-        },
-        required: ['senderAddress', 'receiverAddress'],
-        additionalProperties: false
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<TransferReceivedEvent> = generateLazyValidator(schema)
+export const transferReceivedEventSchema: JSONSchema<TransferReceivedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.BLOCKCHAIN },
+    subType: { type: 'string', const: EventSubTypeBlockchain.TRANSFER_RECEIVED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        senderAddress: { type: 'string' },
+        receiverAddress: { type: 'string' },
+        tokenUri: { type: 'string', nullable: true }
+      },
+      required: ['senderAddress', 'receiverAddress'],
+      additionalProperties: false
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }
 
 export type TipReceivedEvent = BaseEvent & {
-  type: Events.Type.BLOCKCHAIN
-  subType: Events.SubType.Blockchain.TIP_RECEIVED
+  type: EventType.BLOCKCHAIN
+  subType: EventSubTypeBlockchain.TIP_RECEIVED
   metadata: {
     senderAddress: string
     receiverAddress: string
@@ -395,27 +363,23 @@ export type TipReceivedEvent = BaseEvent & {
   }
 }
 
-export namespace TipReceivedEvent {
-  export const schema: JSONSchema<TipReceivedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.BLOCKCHAIN },
-      subType: { type: 'string', const: Events.SubType.Blockchain.TIP_RECEIVED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          senderAddress: { type: 'string' },
-          receiverAddress: { type: 'string' },
-          amount: { type: 'string' }
-        },
-        required: ['senderAddress', 'receiverAddress', 'amount']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: false
-  }
-
-  export const validate: ValidateFunction<TipReceivedEvent> = generateLazyValidator(schema)
+export const tipReceivedEventSchema: JSONSchema<TipReceivedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.BLOCKCHAIN },
+    subType: { type: 'string', const: EventSubTypeBlockchain.TIP_RECEIVED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        senderAddress: { type: 'string' },
+        receiverAddress: { type: 'string' },
+        amount: { type: 'string' }
+      },
+      required: ['senderAddress', 'receiverAddress', 'amount']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: false
 }

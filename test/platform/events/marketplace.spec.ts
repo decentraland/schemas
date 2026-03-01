@@ -1,11 +1,14 @@
-import expect from 'expect'
-import { BidReceivedEvent, Events } from '../../../src'
+import { expect } from 'expect'
+import { BidReceivedEvent, EventType, EventSubTypeMarketplace, bidReceivedEventSchema } from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateBidReceivedEvent = generateLazyValidator(bidReceivedEventSchema)
 
 describe('Marketplace Events tests', () => {
   it('BidReceivedEvent static tests must pass', () => {
     const event: BidReceivedEvent = {
-      type: Events.Type.MARKETPLACE,
-      subType: Events.SubType.Marketplace.BID_RECEIVED,
+      type: EventType.MARKETPLACE,
+      subType: EventSubTypeMarketplace.BID_RECEIVED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -23,8 +26,8 @@ describe('Marketplace Events tests', () => {
       }
     }
 
-    expect(BidReceivedEvent.validate(event)).toEqual(true)
-    expect(BidReceivedEvent.validate(null)).toEqual(false)
-    expect(BidReceivedEvent.validate({})).toEqual(false)
+    expect(validateBidReceivedEvent(event)).toEqual(true)
+    expect(validateBidReceivedEvent(null)).toEqual(false)
+    expect(validateBidReceivedEvent({})).toEqual(false)
   })
 })

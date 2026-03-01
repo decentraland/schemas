@@ -1,6 +1,6 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { ChainId } from './chain-id'
-import { Network } from './network'
+import type { JSONSchema } from '../validation/types.js'
+import { ChainId, chainIdSchema } from './chain-id.js'
+import { Network, networkSchema } from './network.js'
 
 export type Collection = {
   urn: string
@@ -39,58 +39,54 @@ export type CollectionFilters = {
   network?: Network
 }
 
-export namespace Collection {
-  export const schema: JSONSchema<Collection> = {
-    type: 'object',
-    properties: {
-      urn: {
-        type: 'string'
-      },
-      creator: {
-        type: 'string'
-      },
-      name: {
-        type: 'string'
-      },
-      contractAddress: {
-        type: 'string'
-      },
-      size: {
-        type: 'integer'
-      },
-      isOnSale: {
-        type: 'boolean'
-      },
-      createdAt: {
-        type: 'integer'
-      },
-      updatedAt: {
-        type: 'integer'
-      },
-      reviewedAt: {
-        type: 'integer'
-      },
-      network: Network.schema,
-      chainId: ChainId.schema,
-      firstListedAt: {
-        type: 'integer',
-        nullable: true
-      }
+export const collectionSchema: JSONSchema<Collection> = {
+  type: 'object',
+  properties: {
+    urn: {
+      type: 'string'
     },
-    required: [
-      'urn',
-      'creator',
-      'name',
-      'contractAddress',
-      'isOnSale',
-      'size',
-      'createdAt',
-      'updatedAt',
-      'reviewedAt',
-      'network',
-      'chainId'
-    ]
-  }
-
-  export const validate: ValidateFunction<Collection> = generateLazyValidator(schema)
+    creator: {
+      type: 'string'
+    },
+    name: {
+      type: 'string'
+    },
+    contractAddress: {
+      type: 'string'
+    },
+    size: {
+      type: 'integer'
+    },
+    isOnSale: {
+      type: 'boolean'
+    },
+    createdAt: {
+      type: 'integer'
+    },
+    updatedAt: {
+      type: 'integer'
+    },
+    reviewedAt: {
+      type: 'integer'
+    },
+    network: networkSchema,
+    chainId: chainIdSchema,
+    firstListedAt: {
+      type: 'integer',
+      nullable: true
+    }
+  },
+  required: [
+    'urn',
+    'creator',
+    'name',
+    'contractAddress',
+    'isOnSale',
+    'size',
+    'createdAt',
+    'updatedAt',
+    'reviewedAt',
+    'network',
+    'chainId'
+  ]
 }

@@ -1,15 +1,18 @@
-import expect from 'expect'
-import { ListingStatus } from '../../src'
+import { expect } from 'expect'
+import { ListingStatus, listingStatusSchema } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateListingStatus = generateLazyValidator(listingStatusSchema)
 
 describe('ListingStatus tests', () => {
   const listingStatus: ListingStatus = ListingStatus.OPEN
 
-  testTypeSignature(ListingStatus, listingStatus)
+  testTypeSignature({ schema: listingStatusSchema }, listingStatus)
 
   it('static tests must pass', () => {
-    expect(ListingStatus.validate(listingStatus)).toEqual(true)
-    expect(ListingStatus.validate(null)).toEqual(false)
-    expect(ListingStatus.validate({})).toEqual(false)
+    expect(validateListingStatus(listingStatus)).toEqual(true)
+    expect(validateListingStatus(null)).toEqual(false)
+    expect(validateListingStatus({})).toEqual(false)
   })
 })

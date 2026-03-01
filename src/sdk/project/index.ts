@@ -1,2 +1,2 @@
-export * from './type'
-export * from './wearable-json'
+export * from './type.js'
+export * from './wearable-json.js'

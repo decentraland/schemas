@@ -1,6 +1,10 @@
-import expect from 'expect'
-import { BodyShape, EmoteRepresentationADR74 } from '../../../../../src/platform/item'
+import { expect } from 'expect'
+import type { EmoteRepresentationADR74 } from '../../../../../src/platform/item'
+import { BodyShape, emoteRepresentationADR74Schema } from '../../../../../src/platform/item'
 import { expectValidationFailureWithErrors, testTypeSignature } from '../../../../test-utils'
+import { generateLazyValidator } from '../../../../../src/validation/index.js'
+
+const validateEmoteRepresentationADR74 = generateLazyValidator(emoteRepresentationADR74Schema)
 
 describe('Emote representation tests', () => {
   const representation: EmoteRepresentationADR74 = {
@@ -9,17 +13,17 @@ describe('Emote representation tests', () => {
     contents: ['file1', 'file2']
   }
 
-  testTypeSignature(EmoteRepresentationADR74, representation)
+  testTypeSignature({ schema: emoteRepresentationADR74Schema }, representation)
 
   it('static tests must pass', () => {
-    expect(EmoteRepresentationADR74.validate(representation)).toEqual(true)
-    expect(EmoteRepresentationADR74.validate(null)).toEqual(false)
-    expect(EmoteRepresentationADR74.validate({})).toEqual(false)
+    expect(validateEmoteRepresentationADR74(representation)).toEqual(true)
+    expect(validateEmoteRepresentationADR74(null)).toEqual(false)
+    expect(validateEmoteRepresentationADR74({})).toEqual(false)
   })
 
   it('representation without body shape fails', () => {
     expectValidationFailureWithErrors(
-      EmoteRepresentationADR74.validate,
+      validateEmoteRepresentationADR74,
       {
         ...representation,
         bodyShapes: []
@@ -30,7 +34,7 @@ describe('Emote representation tests', () => {
 
   it('representation with repeated body shapes fails', () => {
     expectValidationFailureWithErrors(
-      EmoteRepresentationADR74.validate,
+      validateEmoteRepresentationADR74,
       {
         ...representation,
         bodyShapes: [BodyShape.FEMALE, BodyShape.FEMALE]
@@ -41,7 +45,7 @@ describe('Emote representation tests', () => {
 
   it('representation without content fails', () => {
     expectValidationFailureWithErrors(
-      EmoteRepresentationADR74.validate,
+      validateEmoteRepresentationADR74,
       {
         ...representation,
         contents: []
@@ -52,7 +56,7 @@ describe('Emote representation tests', () => {
 
   it('representation with repeated content fails', () => {
     expectValidationFailureWithErrors(
-      EmoteRepresentationADR74.validate,
+      validateEmoteRepresentationADR74,
       {
         ...representation,
         contents: ['file1', 'file1']
@@ -63,7 +67,7 @@ describe('Emote representation tests', () => {
 
   it('main file not in contents fails', () => {
     expectValidationFailureWithErrors(
-      EmoteRepresentationADR74.validate,
+      validateEmoteRepresentationADR74,
       {
         ...representation,
         mainFile: 'file1',

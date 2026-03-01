@@ -1,6 +1,9 @@
-import expect from 'expect'
-import { Bid, ChainId, ListingStatus, Network } from '../../src'
+import { expect } from 'expect'
+import { type Bid, bidSchema, ChainId, ListingStatus, Network } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateBid = generateLazyValidator(bidSchema)
 
 describe('Bid tests', () => {
   const bid: Bid = {
@@ -22,11 +25,11 @@ describe('Bid tests', () => {
     updatedAt: 1626316584000
   }
 
-  testTypeSignature(Bid, bid)
+  testTypeSignature({ schema: bidSchema }, bid)
 
   it('static tests must pass', () => {
-    expect(Bid.validate(bid)).toEqual(true)
-    expect(Bid.validate(null)).toEqual(false)
-    expect(Bid.validate({})).toEqual(false)
+    expect(validateBid(bid)).toEqual(true)
+    expect(validateBid(null)).toEqual(false)
+    expect(validateBid({})).toEqual(false)
   })
 })

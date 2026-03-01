@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
+import type { JSONSchema } from '../validation/types.js'
 
 export type Store = {
   id: string // urn
@@ -15,55 +15,51 @@ export type Store = {
   version: number
 }
 
-export namespace Store {
-  export const schema: JSONSchema<Store> = {
-    type: 'object',
-    properties: {
-      id: {
-        type: 'string'
-      },
-      version: {
-        type: 'number'
-      },
-      owner: {
-        type: 'string'
-      },
-      description: {
-        type: 'string'
-      },
-      links: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            name: {
-              type: 'string'
-            },
-            url: {
-              type: 'string'
-            }
+export const storeSchema: JSONSchema<Store> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string'
+    },
+    version: {
+      type: 'number'
+    },
+    owner: {
+      type: 'string'
+    },
+    description: {
+      type: 'string'
+    },
+    links: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          name: {
+            type: 'string'
           },
-          required: ['name', 'url']
-        }
-      },
-      images: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            name: {
-              type: 'string'
-            },
-            file: {
-              type: 'string'
-            }
-          },
-          required: ['name', 'file']
-        }
+          url: {
+            type: 'string'
+          }
+        },
+        required: ['name', 'url']
       }
     },
-    required: ['id', 'version', 'owner', 'description', 'links', 'images']
-  }
-
-  export const validate: ValidateFunction<Store> = generateLazyValidator(schema)
+    images: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          name: {
+            type: 'string'
+          },
+          file: {
+            type: 'string'
+          }
+        },
+        required: ['name', 'file']
+      }
+    }
+  },
+  required: ['id', 'version', 'owner', 'description', 'links', 'images']
 }

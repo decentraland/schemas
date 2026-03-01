@@ -1,6 +1,9 @@
-import expect from 'expect'
-import { ChainId, Sale, Network, SaleType } from '../../src'
+import { expect } from 'expect'
+import { ChainId, type Sale, saleSchema, Network, SaleType } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateSale = generateLazyValidator(saleSchema)
 
 describe('Sale tests', () => {
   describe('sale', () => {
@@ -19,12 +22,12 @@ describe('Sale tests', () => {
       chainId: ChainId.MATIC_MAINNET
     }
 
-    testTypeSignature(Sale, sale)
+    testTypeSignature({ schema: saleSchema }, sale)
 
     it('static tests must pass', () => {
-      expect(Sale.validate(sale)).toEqual(true)
-      expect(Sale.validate(null)).toEqual(false)
-      expect(Sale.validate({})).toEqual(false)
+      expect(validateSale(sale)).toEqual(true)
+      expect(validateSale(null)).toEqual(false)
+      expect(validateSale({})).toEqual(false)
     })
   })
 })

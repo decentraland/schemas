@@ -1,6 +1,5 @@
-import { Rarity } from '../../dapps/rarity'
-import { BaseItem } from './base-item'
-import { generateLazyValidator, ValidateFunction, JSONSchema } from '../../validation'
+import { Rarity, raritySchema } from '../../dapps/rarity.js'
+import { BaseItem } from './base-item.js'
 
 export type StandardProps = {
   collectionAddress: string
@@ -12,19 +11,11 @@ export const standardProperties = {
     type: 'string',
     nullable: false
   },
-  rarity: Rarity.schema
+  rarity: raritySchema
 } as const
 
-const schema: JSONSchema<StandardProps> = {
-  type: 'object',
-  properties: {
-    ...standardProperties
-  },
-  required: ['collectionAddress', 'rarity']
-}
-
-const validate: ValidateFunction<StandardProps> = generateLazyValidator(schema)
-
 export function isStandard<T extends BaseItem>(item: T): item is T & StandardProps {
-  return validate(item)
+  const data = item as any
+  if (!data) return false
+  return typeof data.collectionAddress === 'string' && Object.values(Rarity).includes(data.rarity)
 }

@@ -1,1 +1,1 @@
-export * from './outfits'
+export * from './outfits.js'

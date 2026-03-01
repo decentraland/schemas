@@ -1,8 +1,8 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { ChainId } from './chain-id'
-import { SaleType } from './sale-type'
-import { Network } from './network'
-import { NFTCategory } from './nft-category'
+import type { JSONSchema } from '../validation/types.js'
+import { ChainId, chainIdSchema } from './chain-id.js'
+import { SaleType, saleTypeSchema } from './sale-type.js'
+import { Network, networkSchema } from './network.js'
+import { NFTCategory } from './nft-category.js'
 
 export type Sale = {
   id: string
@@ -42,55 +42,51 @@ export type SaleFilters = {
   network?: Network
 }
 
-export namespace Sale {
-  export const schema: JSONSchema<Sale> = {
-    type: 'object',
-    properties: {
-      id: {
-        type: 'string'
-      },
-      type: SaleType.schema,
-      buyer: {
-        type: 'string'
-      },
-      seller: {
-        type: 'string'
-      },
-      price: {
-        type: 'string'
-      },
-      contractAddress: {
-        type: 'string'
-      },
-      tokenId: {
-        type: 'string'
-      },
-      itemId: {
-        type: 'string'
-      },
-      txHash: {
-        type: 'string'
-      },
-      timestamp: {
-        type: 'integer'
-      },
-      network: Network.schema,
-      chainId: ChainId.schema
+export const saleSchema: JSONSchema<Sale> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string'
     },
-    required: [
-      'id',
-      'buyer',
-      'seller',
-      'itemId',
-      'tokenId',
-      'price',
-      'contractAddress',
-      'timestamp',
-      'txHash',
-      'network',
-      'chainId'
-    ]
-  }
-
-  export const validate: ValidateFunction<Sale> = generateLazyValidator(schema)
+    type: saleTypeSchema,
+    buyer: {
+      type: 'string'
+    },
+    seller: {
+      type: 'string'
+    },
+    price: {
+      type: 'string'
+    },
+    contractAddress: {
+      type: 'string'
+    },
+    tokenId: {
+      type: 'string'
+    },
+    itemId: {
+      type: 'string'
+    },
+    txHash: {
+      type: 'string'
+    },
+    timestamp: {
+      type: 'integer'
+    },
+    network: networkSchema,
+    chainId: chainIdSchema
+  },
+  required: [
+    'id',
+    'buyer',
+    'seller',
+    'itemId',
+    'tokenId',
+    'price',
+    'contractAddress',
+    'timestamp',
+    'txHash',
+    'network',
+    'chainId'
+  ]
 }

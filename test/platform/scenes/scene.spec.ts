@@ -1,7 +1,11 @@
-import expect from 'expect'
-import { Scene } from '../../../src'
+import { expect } from 'expect'
+import type { Scene } from '../../../src'
+import { sceneSchema } from '../../../src'
 import { RequiredPermission } from '../../../src/platform/scene/scene'
 import { testTypeSignature } from '../../test-utils'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateScene = generateLazyValidator(sceneSchema)
 
 const setScene = (scene: Scene, props: any): Scene => ({ ...scene, ...props })
 
@@ -14,17 +18,17 @@ describe('Scene tests', () => {
     }
   }
 
-  testTypeSignature(Scene, scene)
+  testTypeSignature({ schema: sceneSchema }, scene)
 
   it('static tests must pass', () => {
-    expect(Scene.validate(scene)).toEqual(true)
-    expect(Scene.validate(null)).toEqual(false)
-    expect(Scene.validate({})).toEqual(false)
+    expect(validateScene(scene)).toEqual(true)
+    expect(validateScene(null)).toEqual(false)
+    expect(validateScene({})).toEqual(false)
   })
 
   it('when main is an empty text, fails', () => {
     expect(
-      Scene.validate({
+      validateScene({
         ...scene,
         main: ''
       })
@@ -33,7 +37,7 @@ describe('Scene tests', () => {
 
   it('empty tag fails', () => {
     expect(
-      Scene.validate({
+      validateScene({
         ...scene,
         tags: ['']
       })
@@ -41,9 +45,9 @@ describe('Scene tests', () => {
   })
 
   it('test isPortableExperience field', () => {
-    expect(Scene.validate(setScene(scene, { isPortableExperience: true }))).toEqual(true)
-    expect(Scene.validate(setScene(scene, { isPortableExperience: false }))).toEqual(true)
-    expect(Scene.validate(setScene(scene, { isPortableExperience: 'false' }))).toEqual(false)
+    expect(validateScene(setScene(scene, { isPortableExperience: true }))).toEqual(true)
+    expect(validateScene(setScene(scene, { isPortableExperience: false }))).toEqual(true)
+    expect(validateScene(setScene(scene, { isPortableExperience: 'false' }))).toEqual(false)
   })
 
   describe('test requiredPermissions field', () => {
@@ -51,7 +55,7 @@ describe('Scene tests', () => {
     const anotherRequiredPermission = RequiredPermission.USE_WEB3_API
 
     const validateRequiredPermissions = (requiredPermissions?: (RequiredPermission | string | number)[]) =>
-      Scene.validate(setScene(scene, { requiredPermissions }))
+      validateScene(setScene(scene, { requiredPermissions }))
 
     it('should return true when the required permissions are not defined', () => {
       expect(validateRequiredPermissions()).toEqual(true)
@@ -87,7 +91,7 @@ describe('Scene tests', () => {
 
     it('should return false if the ALLOW_MEDIA_HOSTNAMES is one of the required permissions and the allowedMediaHostnames is null', () => {
       expect(
-        Scene.validate(
+        validateScene(
           setScene(scene, {
             requiredPermissions: [RequiredPermission.ALLOW_MEDIA_HOSTNAMES],
             allowedMediaHostnames: null
@@ -98,7 +102,7 @@ describe('Scene tests', () => {
 
     it('should return false if the ALLOW_MEDIA_HOSTNAMES is one of the required permissions and the allowedMediaHostnames is an empty array', () => {
       expect(
-        Scene.validate(
+        validateScene(
           setScene(scene, {
             requiredPermissions: [RequiredPermission.ALLOW_MEDIA_HOSTNAMES],
             allowedMediaHostnames: []
@@ -109,7 +113,7 @@ describe('Scene tests', () => {
 
     it('should return false if the ALLOW_MEDIA_HOSTNAMES is not one of the required permissions and the allowedMediaHostnames is not empty or null', () => {
       expect(
-        Scene.validate(
+        validateScene(
           setScene(scene, {
             requiredPermissions: [RequiredPermission.USE_WEB3_API],
             allowedMediaHostnames: ['example.xyz']
@@ -120,7 +124,7 @@ describe('Scene tests', () => {
 
     it('should return true if the ALLOW_MEDIA_HOSTNAMES is one of the required permissions and the allowedMediaHostnames property is correctly set', () => {
       expect(
-        Scene.validate(
+        validateScene(
           setScene(scene, {
             requiredPermissions: [RequiredPermission.ALLOW_MEDIA_HOSTNAMES],
             allowedMediaHostnames: ['example.xyz']
@@ -132,27 +136,27 @@ describe('Scene tests', () => {
 
   describe('test creator field', () => {
     it('should return true when creator is not defined', () => {
-      expect(Scene.validate(scene)).toEqual(true)
+      expect(validateScene(scene)).toEqual(true)
     })
 
     it('should return true when creator is null', () => {
-      expect(Scene.validate(setScene(scene, { creator: null }))).toEqual(true)
+      expect(validateScene(setScene(scene, { creator: null }))).toEqual(true)
     })
 
     it('should return true when creator is an empty string', () => {
-      expect(Scene.validate(setScene(scene, { creator: '' }))).toEqual(true)
+      expect(validateScene(setScene(scene, { creator: '' }))).toEqual(true)
     })
 
     it('should return true when creator is a valid Ethereum address', () => {
-      expect(Scene.validate(setScene(scene, { creator: '0x71c7656ec7ab88b098defb751b7401b5f6d8976f' }))).toEqual(true)
+      expect(validateScene(setScene(scene, { creator: '0x71c7656ec7ab88b098defb751b7401b5f6d8976f' }))).toEqual(true)
     })
 
     it('should return false when creator is a whitespace string', () => {
-      expect(Scene.validate(setScene(scene, { creator: ' ' }))).toEqual(false)
+      expect(validateScene(setScene(scene, { creator: ' ' }))).toEqual(false)
     })
 
     it('should return false when creator is an invalid Ethereum address', () => {
-      expect(Scene.validate(setScene(scene, { creator: 'invalid-address' }))).toEqual(false)
+      expect(validateScene(setScene(scene, { creator: 'invalid-address' }))).toEqual(false)
     })
   })
 })

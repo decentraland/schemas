@@ -1,8 +1,8 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { ChainId } from './chain-id'
-import { PaginatedParameters } from './common'
-import { ListingStatus } from './listing-status'
-import { Network } from './network'
+import type { JSONSchema } from '../validation/types.js'
+import { ChainId, chainIdSchema } from './chain-id.js'
+import { PaginatedParameters } from './common.js'
+import { ListingStatus, listingStatusSchema } from './listing-status.js'
+import { Network, networkSchema } from './network.js'
 
 export type BaseBid = {
   id: string
@@ -80,107 +80,103 @@ export type GetBidsParameters = PaginatedParameters & {
   bidAddress?: string
 }
 
-export namespace Bid {
-  const baseBidSchema: JSONSchema<BaseBid> = {
-    type: 'object',
-    properties: {
-      id: {
-        type: 'string'
-      },
-      bidder: {
-        type: 'string'
-      },
-      seller: {
-        type: 'string'
-      },
-      price: {
-        type: 'string'
-      },
-      fingerprint: {
-        type: 'string'
-      },
-      status: ListingStatus.schema,
-      contractAddress: {
-        type: 'string'
-      },
-      network: Network.schema,
-      chainId: ChainId.schema,
-      expiresAt: {
-        type: 'integer'
-      },
-      createdAt: {
-        type: 'integer'
-      },
-      updatedAt: {
-        type: 'integer'
-      }
+const baseBidSchema: JSONSchema<BaseBid> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string'
     },
-    required: [
-      'id',
-      'bidder',
-      'seller',
-      'price',
-      'fingerprint',
-      'status',
-      'contractAddress',
-      'network',
-      'chainId',
-      'expiresAt',
-      'createdAt',
-      'updatedAt'
-    ]
-  }
+    bidder: {
+      type: 'string'
+    },
+    seller: {
+      type: 'string'
+    },
+    price: {
+      type: 'string'
+    },
+    fingerprint: {
+      type: 'string'
+    },
+    status: listingStatusSchema,
+    contractAddress: {
+      type: 'string'
+    },
+    network: networkSchema,
+    chainId: chainIdSchema,
+    expiresAt: {
+      type: 'integer'
+    },
+    createdAt: {
+      type: 'integer'
+    },
+    updatedAt: {
+      type: 'integer'
+    }
+  },
+  required: [
+    'id',
+    'bidder',
+    'seller',
+    'price',
+    'fingerprint',
+    'status',
+    'contractAddress',
+    'network',
+    'chainId',
+    'expiresAt',
+    'createdAt',
+    'updatedAt'
+  ]
+}
 
-  export const schema: JSONSchema<Bid> = {
-    type: 'object',
-    required: [],
-    oneOf: [
-      {
-        properties: {
-          ...baseBidSchema.properties,
-          tradeId: {
-            type: 'string'
-          },
-          tokenId: {
-            type: 'string'
-          }
+export const bidSchema: JSONSchema<Bid> = {
+  type: 'object',
+  required: [],
+  oneOf: [
+    {
+      properties: {
+        ...baseBidSchema.properties,
+        tradeId: {
+          type: 'string'
         },
-        required: [...baseBidSchema.required, 'tradeId', 'tokenId']
+        tokenId: {
+          type: 'string'
+        }
       },
-      {
-        type: 'object',
-        properties: {
-          ...baseBidSchema.properties,
-          tradeId: {
-            type: 'string'
-          },
-          itemId: {
-            type: 'string'
-          }
+      required: [...baseBidSchema.required, 'tradeId', 'tokenId']
+    },
+    {
+      type: 'object',
+      properties: {
+        ...baseBidSchema.properties,
+        tradeId: {
+          type: 'string'
         },
-        required: [...baseBidSchema.required, 'tradeId', 'itemId']
+        itemId: {
+          type: 'string'
+        }
       },
-      {
-        type: 'object',
-        properties: {
-          ...baseBidSchema.properties,
-          bidAddress: {
-            type: 'string'
-          },
-          blockchainId: {
-            type: 'string'
-          },
-          blockNumber: {
-            type: 'string'
-          },
-          tokenId: {
-            type: 'string'
-          }
+      required: [...baseBidSchema.required, 'tradeId', 'itemId']
+    },
+    {
+      type: 'object',
+      properties: {
+        ...baseBidSchema.properties,
+        bidAddress: {
+          type: 'string'
         },
-        required: [...baseBidSchema.required, 'bidAddress', 'blockchainId', 'blockNumber', 'tokenId']
-      }
-    ]
-  }
-
-  export const validate: ValidateFunction<Bid> = generateLazyValidator(schema)
+        blockchainId: {
+          type: 'string'
+        },
+        blockNumber: {
+          type: 'string'
+        },
+        tokenId: {
+          type: 'string'
+        }
+      },
+      required: [...baseBidSchema.required, 'bidAddress', 'blockchainId', 'blockNumber', 'tokenId']
+    }
+  ]
 }

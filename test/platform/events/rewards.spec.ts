@@ -1,19 +1,36 @@
-import expect from 'expect'
+import { expect } from 'expect'
 import {
   CampaignOutOfFundsEvent,
   CampaignGasPriceHigherThanExpectedEvent,
   CampaignOutOfStockEvent,
-  Events,
+  EventType,
+  EventSubTypeRewards,
   RewardAssignedEvent,
   RewardDelayedEvent,
-  RewardInProgressEvent
+  RewardInProgressEvent,
+  campaignGasPriceHigherThanExpectedEventSchema,
+  campaignOutOfFundsEventSchema,
+  campaignOutOfStockEventSchema,
+  rewardAssignedEventSchema,
+  rewardDelayedEventSchema,
+  rewardInProgressEventSchema
 } from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateCampaignGasPriceHigherThanExpectedEvent = generateLazyValidator(
+  campaignGasPriceHigherThanExpectedEventSchema
+)
+const validateCampaignOutOfFundsEvent = generateLazyValidator(campaignOutOfFundsEventSchema)
+const validateCampaignOutOfStockEvent = generateLazyValidator(campaignOutOfStockEventSchema)
+const validateRewardAssignedEvent = generateLazyValidator(rewardAssignedEventSchema)
+const validateRewardDelayedEvent = generateLazyValidator(rewardDelayedEventSchema)
+const validateRewardInProgressEvent = generateLazyValidator(rewardInProgressEventSchema)
 
 describe('Rewards Events tests', () => {
   it('RewardAssignedEvent static tests must pass', () => {
     const event: RewardAssignedEvent = {
-      type: Events.Type.REWARDS,
-      subType: Events.SubType.Rewards.REWARD_ASSIGNED,
+      type: EventType.REWARDS,
+      subType: EventSubTypeRewards.REWARD_ASSIGNED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -28,15 +45,15 @@ describe('Rewards Events tests', () => {
       }
     }
 
-    expect(RewardAssignedEvent.validate(event)).toEqual(true)
-    expect(RewardAssignedEvent.validate(null)).toEqual(false)
-    expect(RewardAssignedEvent.validate({})).toEqual(false)
+    expect(validateRewardAssignedEvent(event)).toEqual(true)
+    expect(validateRewardAssignedEvent(null)).toEqual(false)
+    expect(validateRewardAssignedEvent({})).toEqual(false)
   })
 
   it('RewardInProgressEvent static tests must pass', () => {
     const event: RewardInProgressEvent = {
-      type: Events.Type.REWARDS,
-      subType: Events.SubType.Rewards.REWARD_IN_PROGRESS,
+      type: EventType.REWARDS,
+      subType: EventSubTypeRewards.REWARD_IN_PROGRESS,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -51,15 +68,15 @@ describe('Rewards Events tests', () => {
       }
     }
 
-    expect(RewardInProgressEvent.validate(event)).toEqual(true)
-    expect(RewardInProgressEvent.validate(null)).toEqual(false)
-    expect(RewardInProgressEvent.validate({})).toEqual(false)
+    expect(validateRewardInProgressEvent(event)).toEqual(true)
+    expect(validateRewardInProgressEvent(null)).toEqual(false)
+    expect(validateRewardInProgressEvent({})).toEqual(false)
   })
 
   it('CampaignOutOfFundsEvent static tests must pass', () => {
     const event: CampaignOutOfFundsEvent = {
-      type: Events.Type.REWARDS,
-      subType: Events.SubType.Rewards.CAMPAIGN_OUT_OF_FUNDS,
+      type: EventType.REWARDS,
+      subType: EventSubTypeRewards.CAMPAIGN_OUT_OF_FUNDS,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -72,15 +89,15 @@ describe('Rewards Events tests', () => {
       }
     }
 
-    expect(CampaignOutOfFundsEvent.validate(event)).toEqual(true)
-    expect(CampaignOutOfFundsEvent.validate(null)).toEqual(false)
-    expect(CampaignOutOfFundsEvent.validate({})).toEqual(false)
+    expect(validateCampaignOutOfFundsEvent(event)).toEqual(true)
+    expect(validateCampaignOutOfFundsEvent(null)).toEqual(false)
+    expect(validateCampaignOutOfFundsEvent({})).toEqual(false)
   })
 
   it('CampaignGasPriceHigherThanExpectedEvent static tests must pass', () => {
     const event: CampaignGasPriceHigherThanExpectedEvent = {
-      type: Events.Type.REWARDS,
-      subType: Events.SubType.Rewards.CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED,
+      type: EventType.REWARDS,
+      subType: EventSubTypeRewards.CAMPAIGN_GAS_PRICE_HIGHER_THAN_EXPECTED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -93,15 +110,15 @@ describe('Rewards Events tests', () => {
       }
     }
 
-    expect(CampaignGasPriceHigherThanExpectedEvent.validate(event)).toEqual(true)
-    expect(CampaignGasPriceHigherThanExpectedEvent.validate(null)).toEqual(false)
-    expect(CampaignGasPriceHigherThanExpectedEvent.validate({})).toEqual(false)
+    expect(validateCampaignGasPriceHigherThanExpectedEvent(event)).toEqual(true)
+    expect(validateCampaignGasPriceHigherThanExpectedEvent(null)).toEqual(false)
+    expect(validateCampaignGasPriceHigherThanExpectedEvent({})).toEqual(false)
   })
 
   it('CampaignOutOfStockEvent static tests must pass', () => {
     const event: CampaignOutOfStockEvent = {
-      type: Events.Type.REWARDS,
-      subType: Events.SubType.Rewards.CAMPAIGN_OUT_OF_STOCK,
+      type: EventType.REWARDS,
+      subType: EventSubTypeRewards.CAMPAIGN_OUT_OF_STOCK,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -114,15 +131,15 @@ describe('Rewards Events tests', () => {
       }
     }
 
-    expect(CampaignOutOfStockEvent.validate(event)).toEqual(true)
-    expect(CampaignOutOfStockEvent.validate(null)).toEqual(false)
-    expect(CampaignOutOfStockEvent.validate({})).toEqual(false)
+    expect(validateCampaignOutOfStockEvent(event)).toEqual(true)
+    expect(validateCampaignOutOfStockEvent(null)).toEqual(false)
+    expect(validateCampaignOutOfStockEvent({})).toEqual(false)
   })
 
   it('RewardDelayedEvent static tests must pass', () => {
     const event: RewardDelayedEvent = {
-      type: Events.Type.REWARDS,
-      subType: Events.SubType.Rewards.REWARD_DELAYED,
+      type: EventType.REWARDS,
+      subType: EventSubTypeRewards.REWARD_DELAYED,
       key: 'key',
       timestamp: 1,
       metadata: {
@@ -137,8 +154,8 @@ describe('Rewards Events tests', () => {
       }
     }
 
-    expect(RewardDelayedEvent.validate(event)).toEqual(true)
-    expect(RewardDelayedEvent.validate(null)).toEqual(false)
-    expect(RewardDelayedEvent.validate({})).toEqual(false)
+    expect(validateRewardDelayedEvent(event)).toEqual(true)
+    expect(validateRewardDelayedEvent(null)).toEqual(false)
+    expect(validateRewardDelayedEvent({})).toEqual(false)
   })
 })

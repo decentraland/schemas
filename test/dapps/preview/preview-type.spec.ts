@@ -1,15 +1,18 @@
-import expect from 'expect'
-import { PreviewType } from '../../../src'
+import { expect } from 'expect'
+import { PreviewType, previewTypeSchema } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validatePreviewType = generateLazyValidator(previewTypeSchema)
 
 describe('PreviewType tests', () => {
   const previewType: PreviewType = PreviewType.AVATAR
 
-  testTypeSignature(PreviewType, previewType)
+  testTypeSignature({ schema: previewTypeSchema }, previewType)
 
   it('static tests must pass', () => {
-    expect(PreviewType.validate(previewType)).toEqual(true)
-    expect(PreviewType.validate(null)).toEqual(false)
-    expect(PreviewType.validate({})).toEqual(false)
+    expect(validatePreviewType(previewType)).toEqual(true)
+    expect(validatePreviewType(null)).toEqual(false)
+    expect(validatePreviewType({})).toEqual(false)
   })
 })

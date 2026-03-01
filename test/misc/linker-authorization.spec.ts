@@ -1,11 +1,14 @@
-import expect from 'expect'
-import { LinkerAuthorization } from '../../src'
+import { expect } from 'expect'
+import { linkerAuthorizationSchema } from '../../src'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateLinkerAuthorization = generateLazyValidator(linkerAuthorizationSchema)
 
 describe('when validation authorizations', () => {
   describe('and the authorization does not include a name', () => {
     it('should return false', () => {
       expect(
-        LinkerAuthorization.validate({
+        validateLinkerAuthorization({
           desc: 'aDesc',
           contactInfo: {
             name: 'aContactInfoName'
@@ -20,7 +23,7 @@ describe('when validation authorizations', () => {
   describe('and the authorization does not include a description', () => {
     it('should return false', () => {
       expect(
-        LinkerAuthorization.validate({
+        validateLinkerAuthorization({
           name: 'aName',
           contactInfo: {
             name: 'aContactInfoName'
@@ -35,7 +38,7 @@ describe('when validation authorizations', () => {
   describe('and the authorization does not include the contact information', () => {
     it('should return false', () => {
       expect(
-        LinkerAuthorization.validate({
+        validateLinkerAuthorization({
           name: 'aName',
           desc: 'aDesc',
           addresses: ['0x4730182099bc4e60075C657cCeCEc8879826bb43'],
@@ -48,7 +51,7 @@ describe('when validation authorizations', () => {
   describe('and the authorization contains an empty contact information', () => {
     it('should return false', () => {
       expect(
-        LinkerAuthorization.validate({
+        validateLinkerAuthorization({
           name: 'aName',
           desc: 'aDesc',
           contactInfo: {},
@@ -62,7 +65,7 @@ describe('when validation authorizations', () => {
   describe('and the authorization does not include the addresses', () => {
     it('should return false', () => {
       expect(
-        LinkerAuthorization.validate({
+        validateLinkerAuthorization({
           name: 'aName',
           desc: 'aDesc',
           contactInfo: {
@@ -77,7 +80,7 @@ describe('when validation authorizations', () => {
   describe('and the authorization contains an empty list of addresses', () => {
     it('should return false', () => {
       expect(
-        LinkerAuthorization.validate({
+        validateLinkerAuthorization({
           name: 'aName',
           desc: 'aDesc',
           contactInfo: {
@@ -93,7 +96,7 @@ describe('when validation authorizations', () => {
   describe('and the authorization does not include the plots', () => {
     it('should return false', () => {
       expect(
-        LinkerAuthorization.validate({
+        validateLinkerAuthorization({
           name: 'aName',
           desc: 'aDesc',
           contactInfo: {
@@ -108,7 +111,7 @@ describe('when validation authorizations', () => {
   describe('and the authorization contains an empty list of plots', () => {
     it('should return false', () => {
       expect(
-        LinkerAuthorization.validate({
+        validateLinkerAuthorization({
           name: 'aName',
           desc: 'aDesc',
           contactInfo: {
@@ -124,7 +127,7 @@ describe('when validation authorizations', () => {
   describe('and the authorization is formatted accordingly', () => {
     it('should return true', () => {
       expect(
-        LinkerAuthorization.validate({
+        validateLinkerAuthorization({
           name: 'aName',
           desc: 'aDesc',
           contactInfo: {
@@ -140,7 +143,7 @@ describe('when validation authorizations', () => {
   describe('and the authorization has the onlyDev property set as a boolean', () => {
     it('should return true', () => {
       expect(
-        LinkerAuthorization.validate({
+        validateLinkerAuthorization({
           name: 'aName',
           desc: 'aDesc',
           contactInfo: {

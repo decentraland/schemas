@@ -1,15 +1,18 @@
-import expect from 'expect'
-import { PreviewEmoteEventType } from '../../../src'
+import { expect } from 'expect'
+import { PreviewEmoteEventType, previewEmoteEventTypeSchema } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validatePreviewEmoteEventType = generateLazyValidator(previewEmoteEventTypeSchema)
 
 describe('PreviewEmoteEvents tests', () => {
   const previewEmoteEvent: PreviewEmoteEventType = PreviewEmoteEventType.ANIMATION_PLAY
 
-  testTypeSignature(PreviewEmoteEventType, previewEmoteEvent)
+  testTypeSignature({ schema: previewEmoteEventTypeSchema }, previewEmoteEvent)
 
   it('static tests must pass', () => {
-    expect(PreviewEmoteEventType.validate(previewEmoteEvent)).toEqual(true)
-    expect(PreviewEmoteEventType.validate(null)).toEqual(false)
-    expect(PreviewEmoteEventType.validate({})).toEqual(false)
+    expect(validatePreviewEmoteEventType(previewEmoteEvent)).toEqual(true)
+    expect(validatePreviewEmoteEventType(null)).toEqual(false)
+    expect(validatePreviewEmoteEventType({})).toEqual(false)
   })
 })

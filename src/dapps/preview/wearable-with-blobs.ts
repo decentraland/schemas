@@ -1,5 +1,5 @@
-import { WearableRepresentationWithBlobs } from './wearable-representation-with-blobs'
-import { WearableDefinition } from './wearable-definition'
+import { WearableRepresentationWithBlobs } from './wearable-representation-with-blobs.js'
+import { WearableDefinition } from './wearable-definition.js'
 
 /** @alpha */
 export type WearableWithBlobs = Omit<WearableDefinition, 'data'> & {

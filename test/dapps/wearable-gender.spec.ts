@@ -1,15 +1,18 @@
-import expect from 'expect'
-import { WearableGender } from '../../src'
+import { expect } from 'expect'
+import { WearableGender, wearableGenderSchema } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateWearableGender = generateLazyValidator(wearableGenderSchema)
 
 describe('WearableGender tests', () => {
   const wearableGender: WearableGender = WearableGender.MALE
 
-  testTypeSignature(WearableGender, wearableGender)
+  testTypeSignature({ schema: wearableGenderSchema }, wearableGender)
 
   it('static tests must pass', () => {
-    expect(WearableGender.validate(wearableGender)).toEqual(true)
-    expect(WearableGender.validate(null)).toEqual(false)
-    expect(WearableGender.validate({})).toEqual(false)
+    expect(validateWearableGender(wearableGender)).toEqual(true)
+    expect(validateWearableGender(null)).toEqual(false)
+    expect(validateWearableGender({})).toEqual(false)
   })
 })

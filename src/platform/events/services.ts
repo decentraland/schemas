@@ -1,10 +1,17 @@
-import { EthAddress } from '../../misc'
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
-import { BaseEvent, Events } from './base'
+import { EthAddress } from '../../misc/index.js'
+import type { JSONSchema } from '../../validation/types.js'
+import {
+  BaseEvent,
+  EventType,
+  EventSubTypeBadge,
+  EventSubTypeAssetBundle,
+  EventSubTypeSocialService,
+  EventSubTypeCreditsService
+} from './base.js'
 
 export type BadgeGrantedEvent = BaseEvent & {
-  type: Events.Type.BADGE
-  subType: Events.SubType.Badge.GRANTED
+  type: EventType.BADGE
+  subType: EventSubTypeBadge.GRANTED
   metadata: {
     badgeId: string
     badgeName: string
@@ -14,36 +21,32 @@ export type BadgeGrantedEvent = BaseEvent & {
   }
 }
 
-export namespace BadgeGrantedEvent {
-  export const schema: JSONSchema<BadgeGrantedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.BADGE },
-      subType: { type: 'string', const: Events.SubType.Badge.GRANTED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          badgeId: { type: 'string' },
-          badgeTierName: { type: 'string', nullable: true },
-          badgeName: { type: 'string' },
-          badgeImageUrl: { type: 'string' },
-          address: { type: 'string' }
-        },
-        required: ['badgeId', 'badgeName', 'badgeImageUrl', 'address']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<BadgeGrantedEvent> = generateLazyValidator(schema)
+export const badgeGrantedEventSchema: JSONSchema<BadgeGrantedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.BADGE },
+    subType: { type: 'string', const: EventSubTypeBadge.GRANTED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        badgeId: { type: 'string' },
+        badgeTierName: { type: 'string', nullable: true },
+        badgeName: { type: 'string' },
+        badgeImageUrl: { type: 'string' },
+        address: { type: 'string' }
+      },
+      required: ['badgeId', 'badgeName', 'badgeImageUrl', 'address']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type AssetBundleConversionFinishedEvent = BaseEvent & {
-  type: Events.Type.ASSET_BUNDLE
-  subType: Events.SubType.AssetBundle.CONVERTED
+  type: EventType.ASSET_BUNDLE
+  subType: EventSubTypeAssetBundle.CONVERTED
   metadata: {
     entityId: string
     platform: 'windows' | 'mac' | 'webgl'
@@ -54,37 +57,33 @@ export type AssetBundleConversionFinishedEvent = BaseEvent & {
   }
 }
 
-export namespace AssetBundleConversionFinishedEvent {
-  export const schema: JSONSchema<AssetBundleConversionFinishedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.ASSET_BUNDLE },
-      subType: { type: 'string', const: Events.SubType.AssetBundle.CONVERTED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          entityId: { type: 'string' },
-          platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] },
-          statusCode: { type: 'number' },
-          isLods: { type: 'boolean' },
-          isWorld: { type: 'boolean' },
-          version: { type: 'string' }
-        },
-        required: ['entityId', 'platform', 'statusCode', 'isLods', 'isWorld', 'version']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<AssetBundleConversionFinishedEvent> = generateLazyValidator(schema)
+export const assetBundleConversionFinishedEventSchema: JSONSchema<AssetBundleConversionFinishedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.ASSET_BUNDLE },
+    subType: { type: 'string', const: EventSubTypeAssetBundle.CONVERTED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        entityId: { type: 'string' },
+        platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] },
+        statusCode: { type: 'number' },
+        isLods: { type: 'boolean' },
+        isWorld: { type: 'boolean' },
+        version: { type: 'string' }
+      },
+      required: ['entityId', 'platform', 'statusCode', 'isLods', 'isWorld', 'version']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type AssetBundleConversionManuallyQueuedEvent = BaseEvent & {
-  type: Events.Type.ASSET_BUNDLE
-  subType: Events.SubType.AssetBundle.MANUALLY_QUEUED
+  type: EventType.ASSET_BUNDLE
+  subType: EventSubTypeAssetBundle.MANUALLY_QUEUED
   metadata: {
     entityId: string
     platform: 'windows' | 'mac' | 'webgl'
@@ -94,36 +93,32 @@ export type AssetBundleConversionManuallyQueuedEvent = BaseEvent & {
   }
 }
 
-export namespace AssetBundleConversionManuallyQueuedEvent {
-  export const schema: JSONSchema<AssetBundleConversionManuallyQueuedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.ASSET_BUNDLE },
-      subType: { type: 'string', const: Events.SubType.AssetBundle.MANUALLY_QUEUED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          entityId: { type: 'string' },
-          platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] },
-          isLods: { type: 'boolean' },
-          isPriority: { type: 'boolean' },
-          version: { type: 'string' }
-        },
-        required: ['entityId', 'platform', 'isLods']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<AssetBundleConversionManuallyQueuedEvent> = generateLazyValidator(schema)
+export const assetBundleConversionManuallyQueuedEventSchema: JSONSchema<AssetBundleConversionManuallyQueuedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.ASSET_BUNDLE },
+    subType: { type: 'string', const: EventSubTypeAssetBundle.MANUALLY_QUEUED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        entityId: { type: 'string' },
+        platform: { type: 'string', enum: ['windows', 'mac', 'webgl'] },
+        isLods: { type: 'boolean' },
+        isPriority: { type: 'boolean' },
+        version: { type: 'string' }
+      },
+      required: ['entityId', 'platform', 'isLods']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type FriendshipRequestEvent = BaseEvent & {
-  type: Events.Type.SOCIAL_SERVICE
-  subType: Events.SubType.SocialService.FRIENDSHIP_REQUEST
+  type: EventType.SOCIAL_SERVICE
+  subType: EventSubTypeSocialService.FRIENDSHIP_REQUEST
   metadata: {
     requestId: string
     sender: {
@@ -141,53 +136,49 @@ export type FriendshipRequestEvent = BaseEvent & {
     message?: string
   }
 }
-export namespace FriendshipRequestEvent {
-  export const schema: JSONSchema<FriendshipRequestEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.SOCIAL_SERVICE },
-      subType: { type: 'string', const: Events.SubType.SocialService.FRIENDSHIP_REQUEST },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          requestId: { type: 'string' },
-          sender: {
-            type: 'object',
-            properties: {
-              address: { type: 'string' },
-              name: { type: 'string' },
-              profileImageUrl: { type: 'string' },
-              hasClaimedName: { type: 'boolean' }
-            },
-            required: ['address', 'name', 'profileImageUrl', 'hasClaimedName']
+export const friendshipRequestEventSchema: JSONSchema<FriendshipRequestEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.SOCIAL_SERVICE },
+    subType: { type: 'string', const: EventSubTypeSocialService.FRIENDSHIP_REQUEST },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        requestId: { type: 'string' },
+        sender: {
+          type: 'object',
+          properties: {
+            address: { type: 'string' },
+            name: { type: 'string' },
+            profileImageUrl: { type: 'string' },
+            hasClaimedName: { type: 'boolean' }
           },
-          receiver: {
-            type: 'object',
-            properties: {
-              address: { type: 'string' },
-              name: { type: 'string' },
-              profileImageUrl: { type: 'string' },
-              hasClaimedName: { type: 'boolean' }
-            },
-            required: ['address', 'name', 'profileImageUrl', 'hasClaimedName']
-          },
-          message: { type: 'string', nullable: true }
+          required: ['address', 'name', 'profileImageUrl', 'hasClaimedName']
         },
-        required: ['requestId', 'sender', 'receiver']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<FriendshipRequestEvent> = generateLazyValidator(schema)
+        receiver: {
+          type: 'object',
+          properties: {
+            address: { type: 'string' },
+            name: { type: 'string' },
+            profileImageUrl: { type: 'string' },
+            hasClaimedName: { type: 'boolean' }
+          },
+          required: ['address', 'name', 'profileImageUrl', 'hasClaimedName']
+        },
+        message: { type: 'string', nullable: true }
+      },
+      required: ['requestId', 'sender', 'receiver']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type FriendshipAcceptedEvent = BaseEvent & {
-  type: Events.Type.SOCIAL_SERVICE
-  subType: Events.SubType.SocialService.FRIENDSHIP_ACCEPTED
+  type: EventType.SOCIAL_SERVICE
+  subType: EventSubTypeSocialService.FRIENDSHIP_ACCEPTED
   metadata: {
     requestId: string
     sender: {
@@ -205,52 +196,48 @@ export type FriendshipAcceptedEvent = BaseEvent & {
   }
 }
 
-export namespace FriendshipAcceptedEvent {
-  export const schema: JSONSchema<FriendshipAcceptedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.SOCIAL_SERVICE },
-      subType: { type: 'string', const: Events.SubType.SocialService.FRIENDSHIP_ACCEPTED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          requestId: { type: 'string' },
-          sender: {
-            type: 'object',
-            properties: {
-              address: { type: 'string' },
-              name: { type: 'string' },
-              profileImageUrl: { type: 'string' },
-              hasClaimedName: { type: 'boolean' }
-            },
-            required: ['address', 'name', 'profileImageUrl', 'hasClaimedName']
+export const friendshipAcceptedEventSchema: JSONSchema<FriendshipAcceptedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.SOCIAL_SERVICE },
+    subType: { type: 'string', const: EventSubTypeSocialService.FRIENDSHIP_ACCEPTED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        requestId: { type: 'string' },
+        sender: {
+          type: 'object',
+          properties: {
+            address: { type: 'string' },
+            name: { type: 'string' },
+            profileImageUrl: { type: 'string' },
+            hasClaimedName: { type: 'boolean' }
           },
-          receiver: {
-            type: 'object',
-            properties: {
-              address: { type: 'string' },
-              name: { type: 'string' },
-              profileImageUrl: { type: 'string' },
-              hasClaimedName: { type: 'boolean' }
-            },
-            required: ['address', 'name', 'profileImageUrl', 'hasClaimedName']
-          }
+          required: ['address', 'name', 'profileImageUrl', 'hasClaimedName']
         },
-        required: ['requestId', 'sender', 'receiver']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<FriendshipAcceptedEvent> = generateLazyValidator(schema)
+        receiver: {
+          type: 'object',
+          properties: {
+            address: { type: 'string' },
+            name: { type: 'string' },
+            profileImageUrl: { type: 'string' },
+            hasClaimedName: { type: 'boolean' }
+          },
+          required: ['address', 'name', 'profileImageUrl', 'hasClaimedName']
+        }
+      },
+      required: ['requestId', 'sender', 'receiver']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type CreditsOnDemandEvent = BaseEvent & {
-  type: Events.Type.CREDITS_SERVICE
-  subType: Events.SubType.CreditsService.ON_DEMAND_CREDITS_GRANTED
+  type: EventType.CREDITS_SERVICE
+  subType: EventSubTypeCreditsService.ON_DEMAND_CREDITS_GRANTED
   metadata: {
     creditsGranted: number
     address: EthAddress
@@ -258,34 +245,30 @@ export type CreditsOnDemandEvent = BaseEvent & {
   }
 }
 
-export namespace CreditsOnDemandEvent {
-  export const schema: JSONSchema<CreditsOnDemandEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
-      subType: { type: 'string', const: Events.SubType.CreditsService.ON_DEMAND_CREDITS_GRANTED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          creditsGranted: { type: 'number', minimum: 1 },
-          address: { type: 'string' },
-          granterAddress: { type: 'string' }
-        },
-        required: ['creditsGranted', 'address', 'granterAddress']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<CreditsOnDemandEvent> = generateLazyValidator(schema)
+export const creditsOnDemandEventSchema: JSONSchema<CreditsOnDemandEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.CREDITS_SERVICE },
+    subType: { type: 'string', const: EventSubTypeCreditsService.ON_DEMAND_CREDITS_GRANTED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        creditsGranted: { type: 'number', minimum: 1 },
+        address: { type: 'string' },
+        granterAddress: { type: 'string' }
+      },
+      required: ['creditsGranted', 'address', 'granterAddress']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type CreditsGoalCompletedEvent = BaseEvent & {
-  type: Events.Type.CREDITS_SERVICE
-  subType: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED
+  type: EventType.CREDITS_SERVICE
+  subType: EventSubTypeCreditsService.CREDITS_GOAL_COMPLETED
   metadata: {
     goalId: string
     creditsObtained: number
@@ -295,36 +278,32 @@ export type CreditsGoalCompletedEvent = BaseEvent & {
   }
 }
 
-export namespace CreditsGoalCompletedEvent {
-  export const schema: JSONSchema<CreditsGoalCompletedEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
-      subType: { type: 'string', const: Events.SubType.CreditsService.CREDITS_GOAL_COMPLETED },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          goalId: { type: 'string' },
-          creditsObtained: { type: 'number', minimum: 0 },
-          seasonId: { type: 'number', minimum: 1 },
-          weekNumber: { type: 'number', minimum: 1 },
-          address: { type: 'string' }
-        },
-        required: ['goalId', 'creditsObtained', 'seasonId', 'weekNumber', 'address']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<CreditsGoalCompletedEvent> = generateLazyValidator(schema)
+export const creditsGoalCompletedEventSchema: JSONSchema<CreditsGoalCompletedEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.CREDITS_SERVICE },
+    subType: { type: 'string', const: EventSubTypeCreditsService.CREDITS_GOAL_COMPLETED },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        goalId: { type: 'string' },
+        creditsObtained: { type: 'number', minimum: 0 },
+        seasonId: { type: 'number', minimum: 1 },
+        weekNumber: { type: 'number', minimum: 1 },
+        address: { type: 'string' }
+      },
+      required: ['goalId', 'creditsObtained', 'seasonId', 'weekNumber', 'address']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type CreditsCompleteGoalsReminderEvent = BaseEvent & {
-  type: Events.Type.CREDITS_SERVICE
-  subType: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER
+  type: EventType.CREDITS_SERVICE
+  subType: EventSubTypeCreditsService.COMPLETE_GOALS_REMINDER
   metadata: {
     address: EthAddress
     seasonId: number
@@ -333,35 +312,31 @@ export type CreditsCompleteGoalsReminderEvent = BaseEvent & {
   }
 }
 
-export namespace CreditsCompleteGoalsReminderEvent {
-  export const schema: JSONSchema<CreditsCompleteGoalsReminderEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
-      subType: { type: 'string', const: Events.SubType.CreditsService.COMPLETE_GOALS_REMINDER },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          address: { type: 'string' },
-          seasonId: { type: 'number', minimum: 1 },
-          weekNumber: { type: 'number', minimum: 1 },
-          pendingGoalIds: { type: 'array', items: { type: 'string' }, minItems: 1 }
-        },
-        required: ['address', 'seasonId', 'weekNumber', 'pendingGoalIds']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<CreditsCompleteGoalsReminderEvent> = generateLazyValidator(schema)
+export const creditsCompleteGoalsReminderEventSchema: JSONSchema<CreditsCompleteGoalsReminderEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.CREDITS_SERVICE },
+    subType: { type: 'string', const: EventSubTypeCreditsService.COMPLETE_GOALS_REMINDER },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        address: { type: 'string' },
+        seasonId: { type: 'number', minimum: 1 },
+        weekNumber: { type: 'number', minimum: 1 },
+        pendingGoalIds: { type: 'array', items: { type: 'string' }, minItems: 1 }
+      },
+      required: ['address', 'seasonId', 'weekNumber', 'pendingGoalIds']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type CreditsUsageReminderEvent = BaseEvent & {
-  type: Events.Type.CREDITS_SERVICE
-  subType: Events.SubType.CreditsService.USAGE_REMINDER
+  type: EventType.CREDITS_SERVICE
+  subType: EventSubTypeCreditsService.USAGE_REMINDER
   metadata: {
     address: EthAddress
     creditsAmount: number
@@ -370,35 +345,31 @@ export type CreditsUsageReminderEvent = BaseEvent & {
   }
 }
 
-export namespace CreditsUsageReminderEvent {
-  export const schema: JSONSchema<CreditsUsageReminderEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
-      subType: { type: 'string', const: Events.SubType.CreditsService.USAGE_REMINDER },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          address: { type: 'string' },
-          creditsAmount: { type: 'number', minimum: 1 },
-          expirationDate: { type: 'string' },
-          expirationDay: { type: 'string' }
-        },
-        required: ['address', 'creditsAmount', 'expirationDate', 'expirationDay']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<CreditsUsageReminderEvent> = generateLazyValidator(schema)
+export const creditsUsageReminderEventSchema: JSONSchema<CreditsUsageReminderEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.CREDITS_SERVICE },
+    subType: { type: 'string', const: EventSubTypeCreditsService.USAGE_REMINDER },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        address: { type: 'string' },
+        creditsAmount: { type: 'number', minimum: 1 },
+        expirationDate: { type: 'string' },
+        expirationDay: { type: 'string' }
+      },
+      required: ['address', 'creditsAmount', 'expirationDate', 'expirationDay']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type CreditsNewSeasonReminderEvent = BaseEvent & {
-  type: Events.Type.CREDITS_SERVICE
-  subType: Events.SubType.CreditsService.NEW_SEASON_REMINDER
+  type: EventType.CREDITS_SERVICE
+  subType: EventSubTypeCreditsService.NEW_SEASON_REMINDER
   metadata: {
     addresses: EthAddress[]
     seasonName: string
@@ -407,35 +378,31 @@ export type CreditsNewSeasonReminderEvent = BaseEvent & {
   }
 }
 
-export namespace CreditsNewSeasonReminderEvent {
-  export const schema: JSONSchema<CreditsNewSeasonReminderEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
-      subType: { type: 'string', const: Events.SubType.CreditsService.NEW_SEASON_REMINDER },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          addresses: { type: 'array', items: { type: 'string' } },
-          seasonName: { type: 'string' },
-          startDate: { type: 'string' },
-          endDate: { type: 'string' }
-        },
-        required: ['addresses', 'seasonName', 'startDate', 'endDate']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<CreditsNewSeasonReminderEvent> = generateLazyValidator(schema)
+export const creditsNewSeasonReminderEventSchema: JSONSchema<CreditsNewSeasonReminderEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.CREDITS_SERVICE },
+    subType: { type: 'string', const: EventSubTypeCreditsService.NEW_SEASON_REMINDER },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        addresses: { type: 'array', items: { type: 'string' } },
+        seasonName: { type: 'string' },
+        startDate: { type: 'string' },
+        endDate: { type: 'string' }
+      },
+      required: ['addresses', 'seasonName', 'startDate', 'endDate']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type CreditsUsage24HoursReminderEvent = BaseEvent & {
-  type: Events.Type.CREDITS_SERVICE
-  subType: Events.SubType.CreditsService.USAGE_24_HOURS_REMINDER
+  type: EventType.CREDITS_SERVICE
+  subType: EventSubTypeCreditsService.USAGE_24_HOURS_REMINDER
   metadata: {
     address: EthAddress
     creditsAmount: number
@@ -443,65 +410,57 @@ export type CreditsUsage24HoursReminderEvent = BaseEvent & {
   }
 }
 
-export namespace CreditsUsage24HoursReminderEvent {
-  export const schema: JSONSchema<CreditsUsage24HoursReminderEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
-      subType: { type: 'string', const: Events.SubType.CreditsService.USAGE_24_HOURS_REMINDER },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          address: { type: 'string' },
-          creditsAmount: { type: 'number', minimum: 1 },
-          expirationDate: { type: 'string' }
-        },
-        required: ['address', 'creditsAmount', 'expirationDate']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<CreditsUsage24HoursReminderEvent> = generateLazyValidator(schema)
+export const creditsUsage24HoursReminderEventSchema: JSONSchema<CreditsUsage24HoursReminderEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.CREDITS_SERVICE },
+    subType: { type: 'string', const: EventSubTypeCreditsService.USAGE_24_HOURS_REMINDER },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        address: { type: 'string' },
+        creditsAmount: { type: 'number', minimum: 1 },
+        expirationDate: { type: 'string' }
+      },
+      required: ['address', 'creditsAmount', 'expirationDate']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type CreditsDoNotMissOutReminderEvent = BaseEvent & {
-  type: Events.Type.CREDITS_SERVICE
-  subType: Events.SubType.CreditsService.DO_NOT_MISS_OUT_REMINDER
+  type: EventType.CREDITS_SERVICE
+  subType: EventSubTypeCreditsService.DO_NOT_MISS_OUT_REMINDER
   metadata: {
     address: EthAddress
   }
 }
 
-export namespace CreditsDoNotMissOutReminderEvent {
-  export const schema: JSONSchema<CreditsDoNotMissOutReminderEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
-      subType: { type: 'string', const: Events.SubType.CreditsService.DO_NOT_MISS_OUT_REMINDER },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          address: { type: 'string' }
-        },
-        required: ['address']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<CreditsDoNotMissOutReminderEvent> = generateLazyValidator(schema)
+export const creditsDoNotMissOutReminderEventSchema: JSONSchema<CreditsDoNotMissOutReminderEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.CREDITS_SERVICE },
+    subType: { type: 'string', const: EventSubTypeCreditsService.DO_NOT_MISS_OUT_REMINDER },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        address: { type: 'string' }
+      },
+      required: ['address']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }
 
 export type CreditsClaimReminderEvent = BaseEvent & {
-  type: Events.Type.CREDITS_SERVICE
-  subType: Events.SubType.CreditsService.CLAIM_CREDITS_REMINDER
+  type: EventType.CREDITS_SERVICE
+  subType: EventSubTypeCreditsService.CLAIM_CREDITS_REMINDER
   metadata: {
     address: EthAddress
     seasonId: number
@@ -509,27 +468,23 @@ export type CreditsClaimReminderEvent = BaseEvent & {
   }
 }
 
-export namespace CreditsClaimReminderEvent {
-  export const schema: JSONSchema<CreditsClaimReminderEvent> = {
-    type: 'object',
-    properties: {
-      type: { type: 'string', const: Events.Type.CREDITS_SERVICE },
-      subType: { type: 'string', const: Events.SubType.CreditsService.CLAIM_CREDITS_REMINDER },
-      key: { type: 'string' },
-      timestamp: { type: 'number', minimum: 0 },
-      metadata: {
-        type: 'object',
-        properties: {
-          address: { type: 'string' },
-          seasonId: { type: 'number', minimum: 1 },
-          weekNumber: { type: 'number', minimum: 1 }
-        },
-        required: ['address', 'seasonId', 'weekNumber']
-      }
-    },
-    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
-    additionalProperties: true
-  }
-
-  export const validate: ValidateFunction<CreditsClaimReminderEvent> = generateLazyValidator(schema)
+export const creditsClaimReminderEventSchema: JSONSchema<CreditsClaimReminderEvent> = {
+  type: 'object',
+  properties: {
+    type: { type: 'string', const: EventType.CREDITS_SERVICE },
+    subType: { type: 'string', const: EventSubTypeCreditsService.CLAIM_CREDITS_REMINDER },
+    key: { type: 'string' },
+    timestamp: { type: 'number', minimum: 0 },
+    metadata: {
+      type: 'object',
+      properties: {
+        address: { type: 'string' },
+        seasonId: { type: 'number', minimum: 1 },
+        weekNumber: { type: 'number', minimum: 1 }
+      },
+      required: ['address', 'seasonId', 'weekNumber']
+    }
+  },
+  required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+  additionalProperties: true
 }

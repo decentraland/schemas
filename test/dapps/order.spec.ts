@@ -1,6 +1,9 @@
-import expect from 'expect'
-import { ChainId, ListingStatus, Network, Order } from '../../src'
+import { expect } from 'expect'
+import { ChainId, ListingStatus, Network, type Order, orderSchema } from '../../src'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateOrder = generateLazyValidator(orderSchema)
 
 describe('Order tests', () => {
   const order: Order = {
@@ -20,11 +23,11 @@ describe('Order tests', () => {
     issuedId: '1'
   }
 
-  testTypeSignature(Order, order)
+  testTypeSignature({ schema: orderSchema }, order)
 
   it('static tests must pass', () => {
-    expect(Order.validate(order)).toEqual(true)
-    expect(Order.validate(null)).toEqual(false)
-    expect(Order.validate({})).toEqual(false)
+    expect(validateOrder(order)).toEqual(true)
+    expect(validateOrder(null)).toEqual(false)
+    expect(validateOrder({})).toEqual(false)
   })
 })

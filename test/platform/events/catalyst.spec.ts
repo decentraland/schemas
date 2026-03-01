@@ -1,5 +1,16 @@
-import expect from 'expect'
-import { AuthChain, AuthLinkType, CatalystDeploymentEvent, Entity, Events } from '../../../src'
+import { expect } from 'expect'
+import {
+  AuthChain,
+  AuthLinkType,
+  CatalystDeploymentEvent,
+  Entity,
+  EventType,
+  EventSubTypeCatalystDeployment,
+  catalystDeploymentEventSchema
+} from '../../../src'
+import { generateLazyValidator } from '../../../src/validation/index.js'
+
+const validateCatalystDeploymentEvent = generateLazyValidator(catalystDeploymentEventSchema)
 
 describe('Catalyst Events tests', () => {
   const chain: AuthChain = [
@@ -25,8 +36,8 @@ describe('Catalyst Events tests', () => {
 
   it('CatalystDeploymentEvent static tests must pass', () => {
     const event: CatalystDeploymentEvent = {
-      type: Events.Type.CATALYST_DEPLOYMENT,
-      subType: Events.SubType.CatalystDeployment.SCENE,
+      type: EventType.CATALYST_DEPLOYMENT,
+      subType: EventSubTypeCatalystDeployment.SCENE,
       key: 'key',
       timestamp: 1,
       entity: {
@@ -41,8 +52,8 @@ describe('Catalyst Events tests', () => {
       authChain: chain
     }
 
-    expect(CatalystDeploymentEvent.validate(event)).toEqual(true)
-    expect(CatalystDeploymentEvent.validate(null)).toEqual(false)
-    expect(CatalystDeploymentEvent.validate({})).toEqual(false)
+    expect(validateCatalystDeploymentEvent(event)).toEqual(true)
+    expect(validateCatalystDeploymentEvent(null)).toEqual(false)
+    expect(validateCatalystDeploymentEvent({})).toEqual(false)
   })
 })

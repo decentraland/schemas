@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
+import type { JSONSchema } from '../../validation/types.js'
 
 export enum PreviewEmoteEventType {
   ANIMATION_PLAY = 'animation_play',
@@ -9,11 +9,7 @@ export enum PreviewEmoteEventType {
 }
 
 /** @alpha */
-export namespace PreviewEmoteEventType {
-  export const schema: JSONSchema<PreviewEmoteEventType> = {
-    type: 'string',
-    enum: Object.values(PreviewEmoteEventType)
-  }
-
-  export const validate: ValidateFunction<PreviewEmoteEventType> = generateLazyValidator(schema)
+export const previewEmoteEventTypeSchema: JSONSchema<PreviewEmoteEventType> = {
+  type: 'string',
+  enum: Object.values(PreviewEmoteEventType)
 }

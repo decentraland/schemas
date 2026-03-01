@@ -1,17 +1,20 @@
-import expect from 'expect'
-import { ChainId, ChainName, getChainName, getURNProtocol, Network } from '../../src'
+import { expect } from 'expect'
+import { ChainId, chainIdSchema, ChainName, getChainName, getURNProtocol, Network } from '../../src'
 import { getNetwork, getNetworkMapping } from '../../src/dapps/chain-id'
 import { testTypeSignature } from '../test-utils'
+import { generateLazyValidator } from '../../src/validation/index.js'
+
+const validateChainId = generateLazyValidator(chainIdSchema)
 
 describe('ChainId tests', () => {
   const chainId: ChainId = ChainId.ETHEREUM_KOVAN
 
-  testTypeSignature(ChainId, chainId)
+  testTypeSignature({ schema: chainIdSchema }, chainId)
 
   it('static tests must pass', () => {
-    expect(ChainId.validate(chainId)).toEqual(true)
-    expect(ChainId.validate(null)).toEqual(false)
-    expect(ChainId.validate({})).toEqual(false)
+    expect(validateChainId(chainId)).toEqual(true)
+    expect(validateChainId(null)).toEqual(false)
+    expect(validateChainId({})).toEqual(false)
   })
 
   it('Should get a valid chain name', () => {

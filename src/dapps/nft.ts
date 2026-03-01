@@ -1,12 +1,14 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { ChainId } from './chain-id'
-import { BodyShape, EmoteCategory, EmotePlayMode, EmoteOutcomeType } from '../platform'
-import { Network } from './network'
-import { NFTCategory } from './nft-category'
-import { Rarity } from './rarity'
-import { WearableCategory } from '../platform/item/wearable/wearable-category'
-import { GenderFilterOption, WearableGender } from './wearable-gender'
-import { RentalsListingsFilterBy } from './rentals-listings'
+import type { JSONSchema } from '../validation/types.js'
+import { ChainId, chainIdSchema } from './chain-id.js'
+import { BodyShape, EmoteCategory, EmotePlayMode, EmoteOutcomeType } from '../platform/index.js'
+import { bodyShapeSchema } from '../platform/item/body-shape.js'
+import { emoteCategorySchema } from '../platform/item/emote/emote-category.js'
+import { Network, networkSchema } from './network.js'
+import { NFTCategory, nftCategorySchema } from './nft-category.js'
+import { Rarity, raritySchema } from './rarity.js'
+import { WearableCategory, wearableCategorySchema } from '../platform/item/wearable/wearable-category.js'
+import { GenderFilterOption, WearableGender } from './wearable-gender.js'
+import { RentalsListingsFilterBy } from './rentals-listings.js'
 
 export type NFT = {
   id: string
@@ -134,213 +136,209 @@ export enum NFTSortBy {
   MIN_RENTAL_PRICE = 'min_rental_price'
 }
 
-export namespace NFT {
-  export const schema: JSONSchema<NFT> = {
-    type: 'object',
-    properties: {
-      id: {
-        type: 'string'
-      },
-      tokenId: {
-        type: 'string'
-      },
-      contractAddress: {
-        type: 'string'
-      },
-      activeOrderId: {
-        type: 'string',
-        nullable: true
-      },
-      utility: {
-        type: 'string',
-        nullable: true
-      },
-      openRentalId: {
-        type: 'string',
-        nullable: true
-      },
-      owner: {
-        type: 'string'
-      },
-      name: {
-        type: 'string'
-      },
-      image: {
-        type: 'string'
-      },
-      url: {
-        type: 'string'
-      },
-      data: {
-        type: 'object',
-        nullable: false,
-        properties: {
-          parcel: {
-            type: 'object',
-            properties: {
-              description: {
-                type: ['string'],
-                nullable: true
+export const nftSchema: JSONSchema<NFT> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string'
+    },
+    tokenId: {
+      type: 'string'
+    },
+    contractAddress: {
+      type: 'string'
+    },
+    activeOrderId: {
+      type: 'string',
+      nullable: true
+    },
+    utility: {
+      type: 'string',
+      nullable: true
+    },
+    openRentalId: {
+      type: 'string',
+      nullable: true
+    },
+    owner: {
+      type: 'string'
+    },
+    name: {
+      type: 'string'
+    },
+    image: {
+      type: 'string'
+    },
+    url: {
+      type: 'string'
+    },
+    data: {
+      type: 'object',
+      nullable: false,
+      properties: {
+        parcel: {
+          type: 'object',
+          properties: {
+            description: {
+              type: ['string'],
+              nullable: true
+            },
+            x: {
+              type: 'string'
+            },
+            y: {
+              type: 'string'
+            },
+            estate: {
+              type: 'object',
+              properties: {
+                tokenId: {
+                  type: 'string'
+                },
+                name: {
+                  type: 'string'
+                }
               },
-              x: {
-                type: 'string'
-              },
-              y: {
-                type: 'string'
-              },
-              estate: {
+              required: ['tokenId', 'name'],
+              nullable: true
+            }
+          },
+          required: ['description', 'x', 'y', 'estate'],
+          nullable: true
+        },
+        estate: {
+          type: 'object',
+          properties: {
+            description: {
+              type: ['string'],
+              nullable: true
+            },
+            size: {
+              type: 'integer'
+            },
+            parcels: {
+              type: 'array',
+              items: {
                 type: 'object',
                 properties: {
-                  tokenId: {
-                    type: 'string'
+                  x: {
+                    type: 'number'
                   },
-                  name: {
-                    type: 'string'
+                  y: {
+                    type: 'number'
                   }
                 },
-                required: ['tokenId', 'name'],
-                nullable: true
+                required: ['x', 'y']
               }
-            },
-            required: ['description', 'x', 'y', 'estate'],
-            nullable: true
+            }
           },
-          estate: {
-            type: 'object',
-            properties: {
-              description: {
-                type: ['string'],
-                nullable: true
-              },
-              size: {
-                type: 'integer'
-              },
-              parcels: {
-                type: 'array',
-                items: {
-                  type: 'object',
-                  properties: {
-                    x: {
-                      type: 'number'
-                    },
-                    y: {
-                      type: 'number'
-                    }
-                  },
-                  required: ['x', 'y']
-                }
-              }
-            },
-            required: ['description', 'size', 'parcels'],
-            nullable: true
-          },
-          wearable: {
-            type: 'object',
-            properties: {
-              bodyShapes: {
-                type: 'array',
-                items: BodyShape.schema
-              },
-              category: WearableCategory.schema,
-              description: {
-                type: 'string'
-              },
-              rarity: Rarity.schema,
-              isSmart: {
-                type: 'boolean'
-              }
-            },
-            required: ['bodyShapes', 'category', 'description', 'rarity', 'isSmart'],
-            nullable: true
-          },
-          ens: {
-            type: 'object',
-            properties: {
-              subdomain: {
-                type: 'string'
-              }
-            },
-            required: ['subdomain'],
-            nullable: true
-          },
-          emote: {
-            type: 'object',
-            properties: {
-              bodyShapes: {
-                type: 'array',
-                items: BodyShape.schema
-              },
-              category: EmoteCategory.schema,
-              description: {
-                type: 'string'
-              },
-              rarity: Rarity.schema,
-              loop: {
-                type: 'boolean'
-              },
-              hasSound: {
-                type: 'boolean'
-              },
-              hasGeometry: {
-                type: 'boolean'
-              },
-              outcomeType: {
-                type: 'string',
-                nullable: true
-              }
-            },
-            required: ['bodyShapes', 'category', 'description', 'rarity', 'loop'],
-            nullable: true
-          }
+          required: ['description', 'size', 'parcels'],
+          nullable: true
         },
-        required: []
+        wearable: {
+          type: 'object',
+          properties: {
+            bodyShapes: {
+              type: 'array',
+              items: bodyShapeSchema
+            },
+            category: wearableCategorySchema,
+            description: {
+              type: 'string'
+            },
+            rarity: raritySchema,
+            isSmart: {
+              type: 'boolean'
+            }
+          },
+          required: ['bodyShapes', 'category', 'description', 'rarity', 'isSmart'],
+          nullable: true
+        },
+        ens: {
+          type: 'object',
+          properties: {
+            subdomain: {
+              type: 'string'
+            }
+          },
+          required: ['subdomain'],
+          nullable: true
+        },
+        emote: {
+          type: 'object',
+          properties: {
+            bodyShapes: {
+              type: 'array',
+              items: bodyShapeSchema
+            },
+            category: emoteCategorySchema,
+            description: {
+              type: 'string'
+            },
+            rarity: raritySchema,
+            loop: {
+              type: 'boolean'
+            },
+            hasSound: {
+              type: 'boolean'
+            },
+            hasGeometry: {
+              type: 'boolean'
+            },
+            outcomeType: {
+              type: 'string',
+              nullable: true
+            }
+          },
+          required: ['bodyShapes', 'category', 'description', 'rarity', 'loop'],
+          nullable: true
+        }
       },
-      issuedId: {
-        type: 'string',
-        nullable: true
-      },
-      itemId: {
-        type: 'string',
-        nullable: true
-      },
-      category: NFTCategory.schema,
-      network: Network.schema,
-      chainId: ChainId.schema,
-      createdAt: {
-        type: 'integer'
-      },
-      updatedAt: {
-        type: 'integer'
-      },
-      soldAt: {
-        type: 'integer'
-      },
-      urn: {
-        type: 'string',
-        nullable: true
-      }
+      required: []
     },
-    required: [
-      'id',
-      'tokenId',
-      'contractAddress',
-      'activeOrderId',
-      'openRentalId',
-      'owner',
-      'name',
-      'image',
-      'url',
-      'data',
-      'issuedId',
-      'itemId',
-      'category',
-      'network',
-      'chainId',
-      'createdAt',
-      'updatedAt',
-      'soldAt'
-    ]
-  }
-
-  export const validate: ValidateFunction<NFT> = generateLazyValidator(schema)
+    issuedId: {
+      type: 'string',
+      nullable: true
+    },
+    itemId: {
+      type: 'string',
+      nullable: true
+    },
+    category: nftCategorySchema,
+    network: networkSchema,
+    chainId: chainIdSchema,
+    createdAt: {
+      type: 'integer'
+    },
+    updatedAt: {
+      type: 'integer'
+    },
+    soldAt: {
+      type: 'integer'
+    },
+    urn: {
+      type: 'string',
+      nullable: true
+    }
+  },
+  required: [
+    'id',
+    'tokenId',
+    'contractAddress',
+    'activeOrderId',
+    'openRentalId',
+    'owner',
+    'name',
+    'image',
+    'url',
+    'data',
+    'issuedId',
+    'itemId',
+    'category',
+    'network',
+    'chainId',
+    'createdAt',
+    'updatedAt',
+    'soldAt'
+  ]
 }

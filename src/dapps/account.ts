@@ -1,5 +1,5 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { Network } from './network'
+import type { JSONSchema } from '../validation/types.js'
+import { Network } from './network.js'
 
 export type Account = {
   id: string
@@ -30,37 +30,33 @@ export type AccountFilters = {
   network?: Network
 }
 
-export namespace Account {
-  export const schema: JSONSchema<Account> = {
-    type: 'object',
-    properties: {
-      id: {
-        type: 'string'
-      },
-      address: {
-        type: 'string'
-      },
-      sales: {
-        type: 'integer'
-      },
-      purchases: {
-        type: 'integer'
-      },
-      spent: {
-        type: 'string'
-      },
-      earned: {
-        type: 'string'
-      },
-      royalties: {
-        type: 'string'
-      },
-      collections: {
-        type: 'number'
-      }
+export const accountSchema: JSONSchema<Account> = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string'
     },
-    required: ['id', 'address', 'sales', 'purchases', 'spent', 'earned', 'royalties', 'collections']
-  }
-
-  export const validate: ValidateFunction<Account> = generateLazyValidator(schema)
+    address: {
+      type: 'string'
+    },
+    sales: {
+      type: 'integer'
+    },
+    purchases: {
+      type: 'integer'
+    },
+    spent: {
+      type: 'string'
+    },
+    earned: {
+      type: 'string'
+    },
+    royalties: {
+      type: 'string'
+    },
+    collections: {
+      type: 'number'
+    }
+  },
+  required: ['id', 'address', 'sales', 'purchases', 'spent', 'earned', 'royalties', 'collections']
 }

@@ -1,22 +1,24 @@
-import expect from 'expect'
-import { AbstractTypedSchema, ValidateFunction, validateType } from '../src'
+import { expect } from 'expect'
+import type { JSONSchema, ValidateFunction, KeywordDefinition } from '../src/validation/types.js'
+import { generateLazyValidator } from '../src/validation/index.js'
 
-export function testTypeSignature<T>(theType: AbstractTypedSchema<T>, exampleValue: T) {
+export function testTypeSignature<T>(
+  theType: { schema: JSONSchema<T>; keywordDefinitions?: KeywordDefinition[] },
+  exampleValue: T
+) {
   describe(`verifies that the shape of the type conforms the spec`, () => {
+    const validate = generateLazyValidator(theType.schema, theType.keywordDefinitions)
+
     it('type has a "schema" object', () => {
       expect(typeof theType.schema).toEqual('object')
     })
-    it('type has a "validate" function', () => {
-      expect(typeof theType.validate).toEqual('function')
-    })
     it('evaluate a valid example', () => {
-      expect(theType.validate(exampleValue)).toEqual(true)
-      expect(validateType(theType, exampleValue)).toEqual(true)
+      expect(validate(exampleValue)).toEqual(true)
     })
     it('evaluate an invalid example', () => {
       // I hope this is enough of a bad example, don't do this at home
       expect(
-        theType.validate({
+        validate({
           [Math.random()]: Math.random(),
           [Math.random() + 'asd']: null,
           [Math.random() + 'asd']: { a: null }

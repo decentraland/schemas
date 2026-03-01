@@ -1,4 +1,4 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../../validation'
+import type { JSONSchema } from '../../../validation/types.js'
 
 export enum EmoteCategory {
   DANCE = 'dance',
@@ -11,11 +11,7 @@ export enum EmoteCategory {
   MISCELLANEOUS = 'miscellaneous'
 }
 
-export namespace EmoteCategory {
-  export const schema: JSONSchema<EmoteCategory> = {
-    type: 'string',
-    enum: Object.values(EmoteCategory)
-  }
-
-  export const validate: ValidateFunction<EmoteCategory> = generateLazyValidator(schema)
+export const emoteCategorySchema: JSONSchema<EmoteCategory> = {
+  type: 'string',
+  enum: Object.values(EmoteCategory)
 }

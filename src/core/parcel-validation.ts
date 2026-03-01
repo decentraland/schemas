@@ -1,6 +1,5 @@
-import { generateLazyValidator, JSONSchema, ValidateFunction } from '../validation'
-import { isInExceptionBlock } from './parcel-exceptions'
-import { KeywordDefinition } from 'ajv'
+import type { JSONSchema, KeywordDefinition } from '../validation/types.js'
+import { isInExceptionBlock } from './parcel-exceptions.js'
 
 /**
  * Represents a parcel with X and Y coordinates
@@ -20,103 +19,109 @@ export const PARCEL_LIMITS = {
 }
 
 /**
- * Namespace with utilities to validate parcels
+ * Custom validation to check if coordinates are within limits
  * @public
  */
-export namespace Parcel {
-  /**
-   * Custom validation to check if coordinates are within limits
-   */
-  export const _isInLimits: KeywordDefinition = {
-    keyword: '_isInLimits',
-    validate: function validate(schema: boolean, data: Parcel) {
-      if (!data || typeof data.x !== 'number' || typeof data.y !== 'number') {
-        return false
-      }
+export const parcelIsInLimitsKeyword: KeywordDefinition = {
+  keyword: '_isInLimits',
+  validate: function validate(schema: boolean, data: Parcel) {
+    if (!data || typeof data.x !== 'number' || typeof data.y !== 'number') {
+      return false
+    }
 
-      return isInStandardBounds(data) || isInExceptionBlock(data.x, data.y)
+    return isParcelInStandardBounds(data) || isInExceptionBlock(data.x, data.y)
+  },
+  errors: false
+}
+
+/** @public */
+export const parcelKeywordDefinitions: KeywordDefinition[] = [parcelIsInLimitsKeyword]
+
+/** @public */
+export const parcelSchema = {
+  type: 'object',
+  required: ['x', 'y'],
+  properties: {
+    x: {
+      type: 'number'
     },
-    errors: false
+    y: {
+      type: 'number'
+    }
+  },
+  _isInLimits: true,
+  additionalProperties: false
+} as JSONSchema<Parcel>
+
+/** Converts coordinates to string in "x,y" format */
+export function parcelToString({ x, y }: Parcel): string {
+  return `${x},${y}`
+}
+
+/** Converts a string in "x,y" format to a Parcel object */
+export function stringToParcel(position: string): Parcel | null {
+  const match = position.match(/^(-?\d+),(-?\d+)$/)
+  if (!match) return null
+
+  const [, xStr, yStr] = match
+  const x = parseInt(xStr, 10)
+  const y = parseInt(yStr, 10)
+
+  return { x, y }
+}
+
+/**
+ * Checks if a parcel is within the standard bounds
+ * @public
+ */
+export function isParcelInStandardBounds(parcel: Parcel): boolean {
+  const { x, y } = parcel
+  return x >= PARCEL_LIMITS.minX && x <= PARCEL_LIMITS.maxX && y >= PARCEL_LIMITS.minY && y <= PARCEL_LIMITS.maxY
+}
+
+/**
+ * Checks if a parcel is a known exception
+ * @public
+ */
+export function isExceptionParcel(parcel: Parcel): boolean {
+  return isInExceptionBlock(parcel.x, parcel.y)
+}
+
+/**
+ * Checks if a parcel is within bounds or is a valid exception
+ * @public
+ */
+export function isParcelInBounds(parcel: Parcel): boolean {
+  return isParcelInStandardBounds(parcel) || isExceptionParcel(parcel)
+}
+
+/**
+ * Validates if a parcel is valid (within bounds or is an exception)
+ * @public
+ */
+export function isParcelValid(parcel: Parcel): boolean {
+  if (!parcel || typeof parcel.x !== 'number' || typeof parcel.y !== 'number') {
+    return false
   }
+  return isParcelInBounds(parcel)
+}
 
-  export const schema = {
-    type: 'object',
-    required: ['x', 'y'],
-    properties: {
-      x: {
-        type: 'number'
-      },
-      y: {
-        type: 'number'
-      }
-    },
-    _isInLimits: true,
-    additionalProperties: false
-  } as JSONSchema<Parcel>
+/**
+ * Validates if a string in "x,y" format represents a valid parcel
+ * @public
+ */
+export function isParcelStringValid(parcelString: string): boolean {
+  const parcel = stringToParcel(parcelString)
+  if (!parcel) return false
+  return isParcelValid(parcel)
+}
 
-  export const validate: ValidateFunction<Parcel> = generateLazyValidator(schema, [_isInLimits])
-
-  // Converts coordinates to string in "x,y" format
-  export function parcelToString({ x, y }: Parcel): string {
-    return `${x},${y}`
-  }
-
-  // Converts a string in "x,y" format to a Parcel object
-  export function stringToParcel(position: string): Parcel | null {
-    const match = position.match(/^(-?\d+),(-?\d+)$/)
-    if (!match) return null
-
-    const [, xStr, yStr] = match
-    const x = parseInt(xStr, 10)
-    const y = parseInt(yStr, 10)
-
-    return { x, y }
-  }
-
-  /**
-   * Validates if a string in "x,y" format represents a valid parcel
-   */
-  export function isParcelStringValid(parcelString: string): boolean {
-    const parcel = stringToParcel(parcelString)
-    if (!parcel) return false
-    return validate(parcel)
-  }
-
-  /**
-   * Checks if a parcel is within the standard bounds
-   */
-  export function isInStandardBounds(parcel: Parcel): boolean {
-    const { x, y } = parcel
-    return x >= PARCEL_LIMITS.minX && x <= PARCEL_LIMITS.maxX && y >= PARCEL_LIMITS.minY && y <= PARCEL_LIMITS.maxY
-  }
-
-  /**
-   * Checks if a parcel is a known exception
-   */
-  export function isExceptionParcel(parcel: Parcel): boolean {
-    return isInExceptionBlock(parcel.x, parcel.y)
-  }
-
-  /**
-   * Checks if a parcel is within bounds or is a valid exception
-   */
-  export function isInBounds(parcel: Parcel): boolean {
-    return isInStandardBounds(parcel) || isExceptionParcel(parcel)
-  }
-
-  /**
-   * Validates if a parcel is valid (satisfies the schema and is within bounds or is an exception)
-   */
-  export function isValid(parcel: Parcel): boolean {
-    return validate(parcel)
-  }
-
-  /**
-   * Validates if a parcel in string format is valid
-   */
-  export function isValidString(parcelString: string): boolean {
-    const parcel = stringToParcel(parcelString)
-    if (!parcel) return false
-    return validate(parcel)
-  }
+/**
+ * Validates if a parcel in string format is valid
+ * @public
+ */
+export function isParcelValidString(parcelString: string): boolean {
+  const parcel = stringToParcel(parcelString)
+  if (!parcel) return false
+  return isParcelValid(parcel)
 }

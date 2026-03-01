@@ -1,5 +1,5 @@
-import { EthAddress } from '../../misc'
-import { BaseEvent, Events } from './base'
+import { EthAddress } from '../../misc/index.js'
+import { BaseEvent, EventType, EventSubTypeWeb } from './base.js'
 
 export type WebBaseMetadata = {
   userAgent: string
@@ -26,8 +26,8 @@ export type WebBaseMetadata = {
 }
 
 export type AuthIdentifyEvent = BaseEvent & {
-  type: Events.Type.WEB
-  subType: Events.SubType.Web.AUTH_IDENTIFY
+  type: EventType.WEB
+  subType: EventSubTypeWeb.AUTH_IDENTIFY
   metadata: WebBaseMetadata & {
     ethAddress: EthAddress
   }
