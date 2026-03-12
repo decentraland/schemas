@@ -394,7 +394,7 @@ export type BaseBid = {
 // @public (undocumented)
 export type BaseEvent = {
     type: Events.Type;
-    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community | Events.SubType.Camera | Events.SubType.Web | Events.SubType.Event | Events.SubType.Governance | Events.SubType.Worlds;
+    subType: Events.SubType.Blockchain | Events.SubType.CatalystDeployment | Events.SubType.Client | Events.SubType.Marketplace | Events.SubType.Rewards | Events.SubType.Badge | Events.SubType.AssetBundle | Events.SubType.SocialService | Events.SubType.CreditsService | Events.SubType.Streaming | Events.SubType.Comms | Events.SubType.Referral | Events.SubType.Community | Events.SubType.Camera | Events.SubType.Web | Events.SubType.Event | Events.SubType.Governance | Events.SubType.Worlds | Events.SubType.Moderation;
     key: string;
     timestamp: number;
 };
@@ -1735,7 +1735,7 @@ export namespace EthAddress {
 // Warning: (ae-missing-release-tag) "Event" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
-type Event_2 = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | CreditsOnDemandEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | CommunityStreamingEndedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | UserBannedFromSceneEvent | UserUnbannedFromSceneEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | CreditsNewSeasonReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberLeftEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | CommunityOwnershipTransferredEvent | CommunityPostAddedEvent | CommunityVoiceChatStartedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent | EventCreatedEvent | EventStartedEvent | EventStartsSoonEvent | EventEndedEvent | GovernanceProposalEnactedEvent | GovernanceCoauthorRequestedEvent | GovernancePitchPassedEvent | GovernanceTenderPassedEvent | GovernanceAuthoredProposalFinishedEvent | GovernanceVotingEndedVoterEvent | GovernanceNewCommentOnProposalEvent | GovernanceNewCommentOnProjectUpdatedEvent | GovernanceWhaleVoteEvent | GovernanceVotedOnBehalfEvent | GovernanceCliffEndedEvent | WorldsPermissionGrantedEvent | WorldsPermissionRevokedEvent | WorldsAccessRestoredEvent | WorldsAccessRestrictedEvent | WorldsMissingResourcesEvent | TransferReceivedEvent | TipReceivedEvent;
+type Event_2 = BadgeGrantedEvent | BidAcceptedEvent | BidReceivedEvent | CampaignGasPriceHigherThanExpectedEvent | CampaignOutOfFundsEvent | CampaignOutOfStockEvent | CatalystDeploymentEvent | CollectionCreatedEvent | FriendshipRequestEvent | FriendshipAcceptedEvent | ItemPublishedEvent | ItemSoldEvent | LoggedInEvent | LoggedInCachedEvent | MoveToParcelEvent | PassportOpenedEvent | RentalEndedEvent | RentalStartedEvent | RewardAssignedEvent | RewardDelayedEvent | RewardInProgressEvent | RoyaltiesEarnedEvent | UsedEmoteEvent | VerticalHeightReachedEvent | WalkedDistanceEvent | CreditsGoalCompletedEvent | CreditsOnDemandEvent | StreamingKeyResetEvent | StreamingKeyRevokeEvent | StreamingKeyExpiredEvent | StreamingTimeExceededEvent | StreamingPlaceUpdatedEvent | CommunityStreamingEndedEvent | UserJoinedRoomEvent | UserLeftRoomEvent | UserBannedFromSceneEvent | UserUnbannedFromSceneEvent | CreditsCompleteGoalsReminderEvent | CreditsUsageReminderEvent | CreditsUsage24HoursReminderEvent | CreditsDoNotMissOutReminderEvent | CreditsClaimReminderEvent | CreditsNewSeasonReminderEvent | ReferralInvitedUsersAcceptedEvent | ReferralNewTierReachedEvent | CommunityDeletedEvent | CommunityDeletedContentViolationEvent | CommunityRenamedEvent | CommunityMemberBannedEvent | CommunityMemberLeftEvent | CommunityMemberRemovedEvent | CommunityRequestToJoinReceivedEvent | CommunityRequestToJoinAcceptedEvent | CommunityInviteReceivedEvent | CommunityOwnershipTransferredEvent | CommunityPostAddedEvent | CommunityVoiceChatStartedEvent | PhotoTakenEvent | PhotoPrivacyChangedEvent | AuthIdentifyEvent | EventCreatedEvent | EventStartedEvent | EventStartsSoonEvent | EventEndedEvent | GovernanceProposalEnactedEvent | GovernanceCoauthorRequestedEvent | GovernancePitchPassedEvent | GovernanceTenderPassedEvent | GovernanceAuthoredProposalFinishedEvent | GovernanceVotingEndedVoterEvent | GovernanceNewCommentOnProposalEvent | GovernanceNewCommentOnProjectUpdatedEvent | GovernanceWhaleVoteEvent | GovernanceVotedOnBehalfEvent | GovernanceCliffEndedEvent | WorldsPermissionGrantedEvent | WorldsPermissionRevokedEvent | WorldsAccessRestoredEvent | WorldsAccessRestrictedEvent | WorldsMissingResourcesEvent | TransferReceivedEvent | TipReceivedEvent | UserBanCreatedEvent | UserWarningCreatedEvent;
 export { Event_2 as Event }
 
 // Warning: (ae-missing-release-tag) "EventCreatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -1963,6 +1963,13 @@ export namespace Events {
             BID_RECEIVED = "bid-received"
         }
         // (undocumented)
+        export enum Moderation {
+            // (undocumented)
+            USER_BAN_CREATED = "user-ban-created",
+            // (undocumented)
+            USER_WARNING_CREATED = "user-warning-created"
+        }
+        // (undocumented)
         export enum Referral {
             // (undocumented)
             REFERRAL_INVITED_USERS_ACCEPTED = "referral-invited-users-accepted",
@@ -2061,6 +2068,8 @@ export namespace Events {
         GOVERNANCE = "governance",
         // (undocumented)
         MARKETPLACE = "marketplace",
+        // (undocumented)
+        MODERATION = "moderation",
         // (undocumented)
         REFERRAL = "referral",
         // (undocumented)
@@ -3410,6 +3419,10 @@ export enum NotificationOptOutScope {
 export enum NotificationType {
     // (undocumented)
     BADGE_GRANTED = "badge_granted",
+    // (undocumented)
+    BAN_WARNING = "ban_warning",
+    // (undocumented)
+    BANNED = "banned",
     // (undocumented)
     BID_ACCEPTED = "bid_accepted",
     // (undocumented)
@@ -5278,6 +5291,32 @@ export type UsedEmoteEvent = BaseEvent & {
     };
 };
 
+// Warning: (ae-missing-release-tag) "UserBanCreatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "UserBanCreatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type UserBanCreatedEvent = BaseEvent & {
+    type: Events.Type.MODERATION;
+    subType: Events.SubType.Moderation.USER_BAN_CREATED;
+    metadata: {
+        id: string;
+        bannedAddress: string;
+        bannedBy: string;
+        reason: string;
+        bannedAt: number;
+        expiresAt: number | null;
+        customMessage?: string;
+    };
+};
+
+// @public (undocumented)
+export namespace UserBanCreatedEvent {
+    const // (undocumented)
+    schema: JSONSchema<UserBanCreatedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<UserBanCreatedEvent>;
+}
+
 // Warning: (ae-missing-release-tag) "UserBannedFromSceneEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 // Warning: (ae-missing-release-tag) "UserBannedFromSceneEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -5373,6 +5412,30 @@ export namespace UserUnbannedFromSceneEvent {
     schema: JSONSchema<UserUnbannedFromSceneEvent>;
     const // (undocumented)
     validate: ValidateFunction<UserUnbannedFromSceneEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "UserWarningCreatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "UserWarningCreatedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type UserWarningCreatedEvent = BaseEvent & {
+    type: Events.Type.MODERATION;
+    subType: Events.SubType.Moderation.USER_WARNING_CREATED;
+    metadata: {
+        id: string;
+        warnedAddress: string;
+        warnedBy: string;
+        reason: string;
+        customMessage?: string;
+    };
+};
+
+// @public (undocumented)
+export namespace UserWarningCreatedEvent {
+    const // (undocumented)
+    schema: JSONSchema<UserWarningCreatedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<UserWarningCreatedEvent>;
 }
 
 // @public
