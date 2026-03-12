@@ -54,7 +54,8 @@ export type UserWarningCreatedEvent = BaseEvent & {
     warnedAddress: string
     warnedBy: string
     reason: string
-    customMessage?: string
+    /** Unix timestamp (ms) when the warning was created. */
+    warnedAt: number
   }
 }
 
@@ -73,9 +74,9 @@ export namespace UserWarningCreatedEvent {
           warnedAddress: { type: 'string' },
           warnedBy: { type: 'string' },
           reason: { type: 'string' },
-          customMessage: { type: 'string', nullable: true }
+          warnedAt: { type: 'number', minimum: 0 }
         },
-        required: ['id', 'warnedAddress', 'warnedBy', 'reason']
+        required: ['id', 'warnedAddress', 'warnedBy', 'reason', 'warnedAt']
       }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],

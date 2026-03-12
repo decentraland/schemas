@@ -5426,7 +5426,7 @@ export type UserWarningCreatedEvent = BaseEvent & {
         warnedAddress: string;
         warnedBy: string;
         reason: string;
-        customMessage?: string;
+        warnedAt: number;
     };
 };
 

@@ -195,30 +195,7 @@ describe('when validating UserWarningCreatedEvent', () => {
           warnedAddress: '0xwarned',
           warnedBy: '0xmoderator',
           reason: 'inappropriate language',
-          customMessage: 'Please follow community guidelines.'
-        }
-      }
-    })
-
-    it('should pass validation', () => {
-      expect(UserWarningCreatedEvent.validate(event)).toEqual(true)
-    })
-  })
-
-  describe('and customMessage is omitted', () => {
-    let event: UserWarningCreatedEvent
-
-    beforeEach(() => {
-      event = {
-        type: Events.Type.MODERATION,
-        subType: Events.SubType.Moderation.USER_WARNING_CREATED,
-        key: 'key',
-        timestamp: 1,
-        metadata: {
-          id: 'warn-456',
-          warnedAddress: '0xwarned',
-          warnedBy: '0xmoderator',
-          reason: 'inappropriate language'
+          warnedAt: 1710000000000
         }
       }
     })
@@ -252,7 +229,8 @@ describe('when validating UserWarningCreatedEvent', () => {
         metadata: {
           warnedAddress: '0xwarned',
           warnedBy: '0xmoderator',
-          reason: 'spam'
+          reason: 'spam',
+          warnedAt: 1710000000000
         }
       }
     })
@@ -273,6 +251,30 @@ describe('when validating UserWarningCreatedEvent', () => {
         timestamp: 1,
         metadata: {
           id: 'warn-123',
+          warnedBy: '0xmoderator',
+          reason: 'spam',
+          warnedAt: 1710000000000
+        }
+      }
+    })
+
+    it('should fail validation', () => {
+      expect(UserWarningCreatedEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and warnedAt is missing from metadata', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.MODERATION,
+        subType: Events.SubType.Moderation.USER_WARNING_CREATED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'warn-123',
+          warnedAddress: '0xwarned',
           warnedBy: '0xmoderator',
           reason: 'spam'
         }
