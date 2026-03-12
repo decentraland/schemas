@@ -88,6 +88,7 @@ import {
   WorldsAccessRestrictedEvent,
   WorldsMissingResourcesEvent
 } from './world'
+import { UserBanCreatedEvent, UserWarningCreatedEvent } from './moderation'
 
 export namespace Events {
   export enum Type {
@@ -108,7 +109,8 @@ export namespace Events {
     COMMUNITY = 'community',
     CAMERA = 'camera',
     EVENT = 'event',
-    GOVERNANCE = 'governance'
+    GOVERNANCE = 'governance',
+    MODERATION = 'moderation'
   }
 
   export namespace SubType {
@@ -259,6 +261,11 @@ export namespace Events {
       VOTED_ON_BEHALF = 'governance_voted_on_behalf',
       CLIFF_ENDED = 'governance_cliff_ended'
     }
+
+    export enum Moderation {
+      USER_BAN_CREATED = 'user-ban-created',
+      USER_WARNING_CREATED = 'user-warning-created'
+    }
   }
 }
 
@@ -283,6 +290,7 @@ export type BaseEvent = {
     | Events.SubType.Event
     | Events.SubType.Governance
     | Events.SubType.Worlds
+    | Events.SubType.Moderation
   key: string
   timestamp: number
 }
@@ -370,3 +378,5 @@ export type Event =
   | WorldsMissingResourcesEvent
   | TransferReceivedEvent
   | TipReceivedEvent
+  | UserBanCreatedEvent
+  | UserWarningCreatedEvent
