@@ -264,6 +264,7 @@ export namespace Events {
 
     export enum Moderation {
       USER_BAN_CREATED = 'user-ban-created',
+      USER_BAN_LIFTED = 'user-ban-lifted',
       USER_WARNING_CREATED = 'user-warning-created'
     }
   }

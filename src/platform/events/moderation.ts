@@ -46,6 +46,44 @@ export namespace UserBanCreatedEvent {
   export const validate: ValidateFunction<UserBanCreatedEvent> = generateLazyValidator(schema)
 }
 
+export type UserBanLiftedEvent = BaseEvent & {
+  type: Events.Type.MODERATION
+  subType: Events.SubType.Moderation.USER_BAN_LIFTED
+  metadata: {
+    id: string
+    bannedAddress: string
+    liftedBy: string
+    /** Unix timestamp (ms) when the ban was lifted. */
+    liftedAt: number
+  }
+}
+
+export namespace UserBanLiftedEvent {
+  export const schema: JSONSchema<UserBanLiftedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.MODERATION },
+      subType: { type: 'string', const: Events.SubType.Moderation.USER_BAN_LIFTED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          id: { type: 'string' },
+          bannedAddress: { type: 'string' },
+          liftedBy: { type: 'string' },
+          liftedAt: { type: 'number', minimum: 0 }
+        },
+        required: ['id', 'bannedAddress', 'liftedBy', 'liftedAt']
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<UserBanLiftedEvent> = generateLazyValidator(schema)
+}
+
 export type UserWarningCreatedEvent = BaseEvent & {
   type: Events.Type.MODERATION
   subType: Events.SubType.Moderation.USER_WARNING_CREATED

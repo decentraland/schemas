@@ -1,5 +1,5 @@
 import expect from 'expect'
-import { Events, UserBanCreatedEvent, UserWarningCreatedEvent } from '../../../src'
+import { Events, UserBanCreatedEvent, UserBanLiftedEvent, UserWarningCreatedEvent } from '../../../src'
 
 describe('when validating UserBanCreatedEvent', () => {
   describe('and all required fields are present with a temporary ban', () => {
@@ -300,6 +300,148 @@ describe('when validating UserWarningCreatedEvent', () => {
 
     it('should fail validation', () => {
       expect(UserWarningCreatedEvent.validate(event)).toEqual(false)
+    })
+  })
+})
+
+describe('when validating UserBanLiftedEvent', () => {
+  describe('and all required fields are present', () => {
+    let event: UserBanLiftedEvent
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.MODERATION,
+        subType: Events.SubType.Moderation.USER_BAN_LIFTED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'ban-123',
+          bannedAddress: '0xbanned',
+          liftedBy: '0xmoderator',
+          liftedAt: 1710000000000
+        }
+      }
+    })
+
+    it('should pass validation', () => {
+      expect(UserBanLiftedEvent.validate(event)).toEqual(true)
+    })
+  })
+
+  describe('and the input is null', () => {
+    it('should fail validation', () => {
+      expect(UserBanLiftedEvent.validate(null)).toEqual(false)
+    })
+  })
+
+  describe('and the input is an empty object', () => {
+    it('should fail validation', () => {
+      expect(UserBanLiftedEvent.validate({})).toEqual(false)
+    })
+  })
+
+  describe('and id is missing from metadata', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.MODERATION,
+        subType: Events.SubType.Moderation.USER_BAN_LIFTED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          bannedAddress: '0xbanned',
+          liftedBy: '0xmoderator',
+          liftedAt: 1710000000000
+        }
+      }
+    })
+
+    it('should fail validation', () => {
+      expect(UserBanLiftedEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and bannedAddress is missing from metadata', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.MODERATION,
+        subType: Events.SubType.Moderation.USER_BAN_LIFTED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'ban-123',
+          liftedBy: '0xmoderator',
+          liftedAt: 1710000000000
+        }
+      }
+    })
+
+    it('should fail validation', () => {
+      expect(UserBanLiftedEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and liftedBy is missing from metadata', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.MODERATION,
+        subType: Events.SubType.Moderation.USER_BAN_LIFTED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'ban-123',
+          bannedAddress: '0xbanned',
+          liftedAt: 1710000000000
+        }
+      }
+    })
+
+    it('should fail validation', () => {
+      expect(UserBanLiftedEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and liftedAt is missing from metadata', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.MODERATION,
+        subType: Events.SubType.Moderation.USER_BAN_LIFTED,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          id: 'ban-123',
+          bannedAddress: '0xbanned',
+          liftedBy: '0xmoderator'
+        }
+      }
+    })
+
+    it('should fail validation', () => {
+      expect(UserBanLiftedEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and metadata is missing entirely', () => {
+    let event: any
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.MODERATION,
+        subType: Events.SubType.Moderation.USER_BAN_LIFTED,
+        key: 'key',
+        timestamp: 1
+      }
+    })
+
+    it('should fail validation', () => {
+      expect(UserBanLiftedEvent.validate(event)).toEqual(false)
     })
   })
 })

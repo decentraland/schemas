@@ -1967,6 +1967,8 @@ export namespace Events {
             // (undocumented)
             USER_BAN_CREATED = "user-ban-created",
             // (undocumented)
+            USER_BAN_LIFTED = "user-ban-lifted",
+            // (undocumented)
             USER_WARNING_CREATED = "user-warning-created"
         }
         // (undocumented)
@@ -5315,6 +5317,29 @@ export namespace UserBanCreatedEvent {
     schema: JSONSchema<UserBanCreatedEvent>;
     const // (undocumented)
     validate: ValidateFunction<UserBanCreatedEvent>;
+}
+
+// Warning: (ae-missing-release-tag) "UserBanLiftedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-missing-release-tag) "UserBanLiftedEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export type UserBanLiftedEvent = BaseEvent & {
+    type: Events.Type.MODERATION;
+    subType: Events.SubType.Moderation.USER_BAN_LIFTED;
+    metadata: {
+        id: string;
+        bannedAddress: string;
+        liftedBy: string;
+        liftedAt: number;
+    };
+};
+
+// @public (undocumented)
+export namespace UserBanLiftedEvent {
+    const // (undocumented)
+    schema: JSONSchema<UserBanLiftedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<UserBanLiftedEvent>;
 }
 
 // Warning: (ae-missing-release-tag) "UserBannedFromSceneEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
