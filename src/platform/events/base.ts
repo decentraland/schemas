@@ -88,7 +88,7 @@ import {
   WorldsAccessRestrictedEvent,
   WorldsMissingResourcesEvent
 } from './world'
-import { UserBanCreatedEvent, UserWarningCreatedEvent } from './moderation'
+import { UserBanCreatedEvent, UserBanLiftedEvent, UserWarningCreatedEvent } from './moderation'
 
 export namespace Events {
   export enum Type {
@@ -380,4 +380,5 @@ export type Event =
   | TransferReceivedEvent
   | TipReceivedEvent
   | UserBanCreatedEvent
+  | UserBanLiftedEvent
   | UserWarningCreatedEvent
