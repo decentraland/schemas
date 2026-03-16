@@ -12,7 +12,8 @@ export enum PreviewUnityMode {
   BUILDER = 'builder',
   MARKETPLACE = 'marketplace',
   PROFILE = 'profile',
-  CONFIG = 'configurator'
+  CONFIG = 'configurator',
+  JESUS = 'jesus'
 }
 
 export type PreviewConfig = {

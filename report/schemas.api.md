@@ -4144,6 +4144,8 @@ export enum PreviewUnityMode {
     // (undocumented)
     CONFIG = "configurator",
     // (undocumented)
+    JESUS = "jesus",
+    // (undocumented)
     MARKETPLACE = "marketplace",
     // (undocumented)
     PROFILE = "profile"
@@ -5908,10 +5910,10 @@ export namespace WorldUndeploymentEvent {
 // src/dapps/order.ts:19:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
 // src/dapps/order.ts:34:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/preview/emote-definition.ts:6:5 - (ae-incompatible-release-tags) The symbol "representations" is marked as @public, but its signature references "EmoteRepresentationDefinition" which is marked as @alpha
-// src/dapps/preview/preview-config.ts:19:3 - (ae-incompatible-release-tags) The symbol "item" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
-// src/dapps/preview/preview-config.ts:20:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
-// src/dapps/preview/preview-config.ts:21:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
-// src/dapps/preview/preview-config.ts:26:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
+// src/dapps/preview/preview-config.ts:20:3 - (ae-incompatible-release-tags) The symbol "item" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
+// src/dapps/preview/preview-config.ts:21:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
+// src/dapps/preview/preview-config.ts:22:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
+// src/dapps/preview/preview-config.ts:27:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
 // src/dapps/preview/preview-message.ts:38:7 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
 // src/dapps/preview/preview-message.ts:77:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
 // src/dapps/rentals-listings.ts:85:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
