@@ -70,7 +70,8 @@ export enum NotificationType {
   TRANSFER_RECEIVED = 'transfer_received',
   TIP_RECEIVED = 'tip_received',
   BANNED = 'banned',
-  BAN_WARNING = 'ban_warning'
+  BAN_WARNING = 'ban_warning',
+  BAN_LIFTED = 'ban_lifted'
 }
 
 /**

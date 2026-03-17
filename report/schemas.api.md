@@ -3422,6 +3422,8 @@ export enum NotificationType {
     // (undocumented)
     BADGE_GRANTED = "badge_granted",
     // (undocumented)
+    BAN_LIFTED = "ban_lifted",
+    // (undocumented)
     BAN_WARNING = "ban_warning",
     // (undocumented)
     BANNED = "banned",
