@@ -3,10 +3,12 @@ import type { Metrics } from '../../platform/item/metrics'
 import type { PreviewEmoteEventType } from './preview-emote-event-type'
 import { SocialEmoteAnimation } from './social-emote-animation'
 import { EmoteDefinition } from './emote-definition'
+import { SpringBoneParams } from './spring-bone-params'
 
 export interface IPreviewController {
   scene: ISceneController
   emote: IEmoteController
+  physics: IPhysicsController
 }
 
 export type EmoteEvents = {
@@ -42,4 +44,8 @@ export interface IEmoteController {
   getPlayingSocialEmoteAnimation: () => Promise<SocialEmoteAnimation | null>
   emote: EmoteDefinition | null
   events: Emitter<EmoteEvents>
+}
+
+export interface IPhysicsController {
+  setSpringBonesParams(itemHash: string, params: SpringBoneParams[]): Promise<void>
 }
