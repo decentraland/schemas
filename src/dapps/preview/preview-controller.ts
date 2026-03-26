@@ -47,5 +47,5 @@ export interface IEmoteController {
 }
 
 export interface IPhysicsController {
-  setSpringBonesParams(itemHash: string, params: SpringBoneParams[]): Promise<void>
+  setSpringBonesParams(itemHash: string, params: Record<string, SpringBoneParams>): Promise<void>
 }
