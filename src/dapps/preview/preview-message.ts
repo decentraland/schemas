@@ -39,7 +39,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
   : T extends PreviewMessageType.CONTROLLER_REQUEST
   ? {
       id: string
-      namespace: 'scene' | 'emote'
+      namespace: 'scene' | 'emote' | 'physics'
       method:
         | 'getScreenshot'
         | 'getMetrics'
@@ -57,6 +57,7 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
         | 'disableSound'
         | 'hasSound'
         | 'setUsername'
+        | 'setSpringBonesParams'
       params: any[]
     }
   : T extends PreviewMessageType.CONTROLLER_RESPONSE

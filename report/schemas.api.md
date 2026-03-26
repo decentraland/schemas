@@ -2639,12 +2639,24 @@ export namespace IPFSv2 {
     validate: ValidateFunction<IPFSv2>;
 }
 
+// Warning: (ae-missing-release-tag) "IPhysicsController" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+//
+// @public (undocumented)
+export interface IPhysicsController {
+    // Warning: (ae-incompatible-release-tags) The symbol "setSpringBonesParams" is marked as @public, but its signature references "SpringBoneParams" which is marked as @alpha
+    //
+    // (undocumented)
+    setSpringBonesParams(itemHash: string, params: Record<string, SpringBoneParams>): Promise<void>;
+}
+
 // Warning: (ae-missing-release-tag) "IPreviewController" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
 export interface IPreviewController {
     // (undocumented)
     emote: IEmoteController;
+    // (undocumented)
+    physics: IPhysicsController;
     // (undocumented)
     scene: ISceneController;
 }
@@ -4004,8 +4016,8 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
     options: PreviewOptions;
 } : T extends PreviewMessageType.CONTROLLER_REQUEST ? {
     id: string;
-    namespace: 'scene' | 'emote';
-    method: 'getScreenshot' | 'getMetrics' | 'changeZoom' | 'changeCameraPosition' | 'panCamera' | 'cleanup' | 'getLength' | 'isPlaying' | 'play' | 'pause' | 'stop' | 'goTo' | 'enableSound' | 'disableSound' | 'hasSound' | 'setUsername';
+    namespace: 'scene' | 'emote' | 'physics';
+    method: 'getScreenshot' | 'getMetrics' | 'changeZoom' | 'changeCameraPosition' | 'panCamera' | 'cleanup' | 'getLength' | 'isPlaying' | 'play' | 'pause' | 'stop' | 'goTo' | 'enableSound' | 'disableSound' | 'hasSound' | 'setUsername' | 'setSpringBonesParams';
     params: any[];
 } : T extends PreviewMessageType.CONTROLLER_RESPONSE ? {
     id: string;
@@ -4894,6 +4906,23 @@ export namespace SpawnPoint {
     schema: JSONSchema<SpawnPoint>;
     const // (undocumented)
     validate: ValidateFunction<SpawnPoint>;
+}
+
+// @alpha (undocumented)
+export type SpringBoneParams = {
+    stiffness: number;
+    gravityPower: number;
+    gravityDir: [number, number, number];
+    dragForce: number;
+    center?: number;
+};
+
+// @alpha (undocumented)
+export namespace SpringBoneParams {
+    const // (undocumented)
+    schema: JSONSchema<SpringBoneParams>;
+    const // (undocumented)
+    validate: ValidateFunction<SpringBoneParams>;
 }
 
 // Warning: (ae-missing-release-tag) "StandardProps" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -6005,7 +6034,7 @@ export namespace WorldUndeploymentEvent {
 // src/dapps/preview/preview-config.ts:22:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:27:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
 // src/dapps/preview/preview-message.ts:38:7 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:77:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
+// src/dapps/preview/preview-message.ts:78:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
 // src/dapps/rentals-listings.ts:85:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/rentals-listings.ts:126:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/rentals-listings.ts:128:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
