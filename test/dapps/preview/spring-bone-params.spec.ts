@@ -7,7 +7,7 @@ describe('SpringBoneParams tests', () => {
     stiffness: 1.5,
     gravityPower: 3.0,
     gravityDir: [0, -1, 0],
-    dragForce: 0.4
+    drag: 0.4
   }
 
   testTypeSignature(SpringBoneParams, springBoneParams)
@@ -19,11 +19,15 @@ describe('SpringBoneParams tests', () => {
   })
 
   it('validates with optional center field', () => {
-    expect(SpringBoneParams.validate({ ...springBoneParams, center: 5 })).toEqual(true)
+    expect(SpringBoneParams.validate({ ...springBoneParams, center: 'Avatar_Hips' })).toEqual(true)
   })
 
   it('validates without optional center field', () => {
     expect(SpringBoneParams.validate({ ...springBoneParams })).toEqual(true)
+  })
+
+  it('rejects center with wrong type', () => {
+    expect(SpringBoneParams.validate({ ...springBoneParams, center: 5 })).toEqual(false)
   })
 
   it('rejects stiffness out of range', () => {
@@ -36,9 +40,9 @@ describe('SpringBoneParams tests', () => {
     expect(SpringBoneParams.validate({ ...springBoneParams, gravityPower: -0.1 })).toEqual(false)
   })
 
-  it('rejects dragForce out of range', () => {
-    expect(SpringBoneParams.validate({ ...springBoneParams, dragForce: 1.1 })).toEqual(false)
-    expect(SpringBoneParams.validate({ ...springBoneParams, dragForce: -0.01 })).toEqual(false)
+  it('rejects drag out of range', () => {
+    expect(SpringBoneParams.validate({ ...springBoneParams, drag: 1.1 })).toEqual(false)
+    expect(SpringBoneParams.validate({ ...springBoneParams, drag: -0.01 })).toEqual(false)
   })
 
   it('rejects gravityDir with wrong length', () => {

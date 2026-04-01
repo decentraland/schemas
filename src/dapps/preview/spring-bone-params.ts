@@ -5,8 +5,8 @@ export type SpringBoneParams = {
   stiffness: number
   gravityPower: number
   gravityDir: [number, number, number]
-  dragForce: number
-  center?: number
+  drag: number
+  center?: string
 }
 
 /** @alpha */
@@ -22,10 +22,10 @@ export namespace SpringBoneParams {
         minItems: 3,
         maxItems: 3
       },
-      dragForce: { type: 'number', minimum: 0, maximum: 1 },
-      center: { type: 'integer', minimum: 0, nullable: true }
+      drag: { type: 'number', minimum: 0, maximum: 1 },
+      center: { type: 'string', nullable: true }
     },
-    required: ['stiffness', 'gravityPower', 'gravityDir', 'dragForce']
+    required: ['stiffness', 'gravityPower', 'gravityDir', 'drag']
   }
 
   export const validate: ValidateFunction<SpringBoneParams> = generateLazyValidator(schema)

@@ -4913,8 +4913,8 @@ export type SpringBoneParams = {
     stiffness: number;
     gravityPower: number;
     gravityDir: [number, number, number];
-    dragForce: number;
-    center?: number;
+    drag: number;
+    center?: string;
 };
 
 // @alpha (undocumented)
