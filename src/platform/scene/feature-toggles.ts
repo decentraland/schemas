@@ -10,6 +10,7 @@ export const portableExperiencesToggles: PortableExperiencesToggles[] = [...togg
 export type FeatureToggles = {
   voiceChat?: EnabledDisabled
   portableExperiences?: EnabledDisabled | PortableExperiencesToggles
+  nearbyVoiceChat?: EnabledDisabled
 }
 
 /** @alpha */
@@ -27,6 +28,12 @@ export namespace FeatureToggles {
         enum: portableExperiencesToggles,
         nullable: true,
         errorMessage: `valid options are ${portableExperiencesToggles.join(', ')}`
+      },
+      nearbyVoiceChat: {
+        type: 'string',
+        enum: toggles,
+        nullable: true,
+        errorMessage: `valid options are ${toggles.join(', ')}`
       }
     },
     errorMessage: `valid options are ${toggles.join(', ')}`,
