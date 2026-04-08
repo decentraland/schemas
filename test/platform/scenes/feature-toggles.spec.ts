@@ -4,7 +4,8 @@ import { FeatureToggles } from '../../../src'
 describe('Feature toggles tests', () => {
   const toggles: FeatureToggles = {
     voiceChat: 'disabled',
-    portableExperiences: 'hideUi'
+    portableExperiences: 'hideUi',
+    nearbyVoiceChat: 'disabled'
   }
 
   it('type has a "schema" object', () => {
@@ -53,6 +54,25 @@ describe('Feature toggles tests', () => {
       {
         instancePath: '/portableExperiences',
         message: 'valid options are enabled, disabled, hideUi'
+      }
+    ])
+  })
+
+  it('nearbyVoiceChat with valid values passes', () => {
+    expect(FeatureToggles.validate({ nearbyVoiceChat: 'enabled' })).toEqual(true)
+    expect(FeatureToggles.validate({ nearbyVoiceChat: 'disabled' })).toEqual(true)
+  })
+
+  it('nearbyVoiceChat with invalid value fails', () => {
+    expect(FeatureToggles.validate({ nearbyVoiceChat: 'not-valid' })).toEqual(false)
+  })
+
+  it('nearbyVoiceChat error message', () => {
+    expect(FeatureToggles.validate({ nearbyVoiceChat: 'not-valid' })).toEqual(false)
+    expect(FeatureToggles.validate.errors).toMatchObject([
+      {
+        instancePath: '/nearbyVoiceChat',
+        message: 'valid options are enabled, disabled'
       }
     ])
   })
