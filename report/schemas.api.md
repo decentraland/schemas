@@ -2145,6 +2145,7 @@ export namespace EventStartsSoonEvent {
 export type FeatureToggles = {
     voiceChat?: EnabledDisabled;
     portableExperiences?: EnabledDisabled | PortableExperiencesToggles;
+    nearbyVoiceChat?: EnabledDisabled;
 };
 
 // @alpha (undocumented)
