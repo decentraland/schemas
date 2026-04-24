@@ -4926,6 +4926,20 @@ export namespace SpringBoneParams {
     validate: ValidateFunction<SpringBoneParams>;
 }
 
+// @alpha (undocumented)
+export type SpringBonesData = {
+    version: number;
+    models: Record<string, Record<string, SpringBoneParams>>;
+};
+
+// @alpha (undocumented)
+export namespace SpringBonesData {
+    const // (undocumented)
+    schema: JSONSchema<SpringBonesData>;
+    const // (undocumented)
+    validate: ValidateFunction<SpringBonesData>;
+}
+
 // Warning: (ae-missing-release-tag) "StandardProps" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
 // @public (undocumented)
@@ -5556,6 +5570,7 @@ export type Wearable = BaseItem & {
         removesDefaultHiding?: HideableWearableCategory[];
         blockVrmExport?: boolean;
         outlineCompatible?: boolean;
+        springBones?: SpringBonesData | null;
     };
 } & (StandardProps | ThirdPartyProps);
 

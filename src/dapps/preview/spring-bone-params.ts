@@ -47,8 +47,10 @@ export namespace SpringBonesData {
         type: 'object',
         additionalProperties: {
           type: 'object',
-          additionalProperties: SpringBoneParams.schema
-        }
+          additionalProperties: SpringBoneParams.schema,
+          required: []
+        },
+        required: []
       }
     },
     required: ['version', 'models'],
