@@ -4916,6 +4916,7 @@ export type SpringBoneParams = {
     gravityDir: [number, number, number];
     drag: number;
     center?: string;
+    isRoot?: boolean;
 };
 
 // @alpha (undocumented)

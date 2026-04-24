@@ -30,6 +30,19 @@ describe('SpringBoneParams tests', () => {
     expect(SpringBoneParams.validate({ ...springBoneParams, center: 5 })).toEqual(false)
   })
 
+  it('validates with optional isRoot field', () => {
+    expect(SpringBoneParams.validate({ ...springBoneParams, isRoot: true })).toEqual(true)
+    expect(SpringBoneParams.validate({ ...springBoneParams, isRoot: false })).toEqual(true)
+  })
+
+  it('validates without optional isRoot field', () => {
+    expect(SpringBoneParams.validate({ ...springBoneParams })).toEqual(true)
+  })
+
+  it('rejects isRoot with wrong type', () => {
+    expect(SpringBoneParams.validate({ ...springBoneParams, isRoot: 'yes' })).toEqual(false)
+  })
+
   it('rejects stiffness out of range', () => {
     expect(SpringBoneParams.validate({ ...springBoneParams, stiffness: 6 })).toEqual(false)
     expect(SpringBoneParams.validate({ ...springBoneParams, stiffness: -1 })).toEqual(false)

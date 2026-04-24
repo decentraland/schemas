@@ -7,6 +7,7 @@ export type SpringBoneParams = {
   gravityDir: [number, number, number]
   drag: number
   center?: string
+  isRoot?: boolean
 }
 
 /** @alpha */
@@ -23,7 +24,8 @@ export namespace SpringBoneParams {
         maxItems: 3
       },
       drag: { type: 'number', minimum: 0, maximum: 1 },
-      center: { type: 'string', nullable: true }
+      center: { type: 'string', nullable: true },
+      isRoot: { type: 'boolean', nullable: true }
     },
     required: ['stiffness', 'gravityPower', 'gravityDir', 'drag']
   }
