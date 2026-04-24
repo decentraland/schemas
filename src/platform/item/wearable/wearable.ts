@@ -6,6 +6,7 @@ import { StandardProps, standardProperties } from '../standard-props'
 import { isThirdParty, ThirdPartyProps, schema as thirdPartyPropsSchema } from '../third-party-props'
 import { HideableWearableCategory } from './hideable-category'
 import { Mappings, RangeMapping } from '../linked-wearable-mappings'
+import { SpringBonesData } from '../../../dapps/preview/spring-bone-params'
 
 /** @alpha */
 export type Wearable = BaseItem & {
@@ -18,6 +19,7 @@ export type Wearable = BaseItem & {
     removesDefaultHiding?: HideableWearableCategory[]
     blockVrmExport?: boolean
     outlineCompatible?: boolean
+    springBones?: SpringBonesData | null
   }
 } & (StandardProps | ThirdPartyProps)
 
@@ -64,6 +66,10 @@ export namespace Wearable {
           },
           outlineCompatible: {
             type: 'boolean',
+            nullable: true
+          },
+          springBones: {
+            ...SpringBonesData.schema,
             nullable: true
           }
         },

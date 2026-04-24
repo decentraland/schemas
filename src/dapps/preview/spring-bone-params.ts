@@ -30,3 +30,30 @@ export namespace SpringBoneParams {
 
   export const validate: ValidateFunction<SpringBoneParams> = generateLazyValidator(schema)
 }
+
+/** @alpha */
+export type SpringBonesData = {
+  version: number
+  models: Record<string, Record<string, SpringBoneParams>>
+}
+
+/** @alpha */
+export namespace SpringBonesData {
+  export const schema: JSONSchema<SpringBonesData> = {
+    type: 'object',
+    properties: {
+      version: { type: 'integer' },
+      models: {
+        type: 'object',
+        additionalProperties: {
+          type: 'object',
+          additionalProperties: SpringBoneParams.schema
+        }
+      }
+    },
+    required: ['version', 'models'],
+    additionalProperties: false
+  }
+
+  export const validate: ValidateFunction<SpringBonesData> = generateLazyValidator(schema)
+}

@@ -4,6 +4,7 @@ import { WearableRepresentation } from '../../platform/item/wearable/representat
 import { Wearable } from '../../platform/item/wearable/wearable'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { HideableWearableCategory } from '../../platform'
+import { SpringBonesData } from '../../dapps/preview/spring-bone-params'
 
 /**
  * @alpha
@@ -64,6 +65,10 @@ export namespace WearableJson {
           },
           outlineCompatible: {
             type: 'boolean',
+            nullable: true
+          },
+          springBones: {
+            ...SpringBonesData.schema,
             nullable: true
           }
         },
