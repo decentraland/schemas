@@ -33,7 +33,36 @@ export namespace SpringBoneParams {
   export const validate: ValidateFunction<SpringBoneParams> = generateLazyValidator(schema)
 }
 
-/** @alpha */
+/**
+ * Spring bone parameters for a wearable's GLB models.
+ *
+ * `models` is keyed by GLB content hash (the value found in WearableEntity.content[mainFile]).
+ * Hash-keying means a single GLB shared across multiple body-shape representations resolves
+ * to one entry, and entries are stable across path renames.
+ *
+ * - Outer key: GLB content hash.
+ * - Inner key: spring bone name as it appears in the GLB.
+ *
+ * Example:
+ * ```
+ * {
+ *   version: 1,
+ *   models: {
+ *     "bafkreialsvt77jvpy673cnugp5ggnxfaalfncufweayuk3jbxskh3pelkm": {
+ *       "Hair_springBone_L": {
+ *         stiffness: 2,
+ *         gravityPower: 0.8,
+ *         gravityDir: [0, -1, 0],
+ *         drag: 0.3,
+ *         center: "Avatar_Hips",
+ *         isRoot: true
+ *       }
+ *     }
+ *   }
+ * }
+ * ```
+ * @alpha
+ */
 export type SpringBonesData = {
   version: number
   models: Record<string, Record<string, SpringBoneParams>>

@@ -4927,7 +4927,7 @@ export namespace SpringBoneParams {
     validate: ValidateFunction<SpringBoneParams>;
 }
 
-// @alpha (undocumented)
+// @alpha
 export type SpringBonesData = {
     version: number;
     models: Record<string, Record<string, SpringBoneParams>>;
