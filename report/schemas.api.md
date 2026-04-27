@@ -2647,7 +2647,7 @@ export interface IPhysicsController {
     // Warning: (ae-incompatible-release-tags) The symbol "setSpringBonesParams" is marked as @public, but its signature references "SpringBoneParams" which is marked as @alpha
     //
     // (undocumented)
-    setSpringBonesParams(itemHash: string, params: Record<string, SpringBoneParams>): Promise<void>;
+    setSpringBonesParams(itemId: string, params: Record<string, SpringBoneParams>): Promise<void>;
 }
 
 // Warning: (ae-missing-release-tag) "IPreviewController" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -4916,6 +4916,7 @@ export type SpringBoneParams = {
     gravityDir: [number, number, number];
     drag: number;
     center?: string;
+    isRoot?: boolean;
 };
 
 // @alpha (undocumented)
@@ -4924,6 +4925,20 @@ export namespace SpringBoneParams {
     schema: JSONSchema<SpringBoneParams>;
     const // (undocumented)
     validate: ValidateFunction<SpringBoneParams>;
+}
+
+// @alpha
+export type SpringBonesData = {
+    version: number;
+    models: Record<string, Record<string, SpringBoneParams>>;
+};
+
+// @alpha (undocumented)
+export namespace SpringBonesData {
+    const // (undocumented)
+    schema: JSONSchema<SpringBonesData>;
+    const // (undocumented)
+    validate: ValidateFunction<SpringBonesData>;
 }
 
 // Warning: (ae-missing-release-tag) "StandardProps" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
@@ -5556,6 +5571,7 @@ export type Wearable = BaseItem & {
         removesDefaultHiding?: HideableWearableCategory[];
         blockVrmExport?: boolean;
         outlineCompatible?: boolean;
+        springBones?: SpringBonesData | null;
     };
 } & (StandardProps | ThirdPartyProps);
 

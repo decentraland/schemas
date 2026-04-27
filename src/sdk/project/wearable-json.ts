@@ -1,5 +1,6 @@
 import { Rarity } from '../../dapps/rarity'
 import { WearableCategory } from '../../platform/item/wearable/wearable-category'
+import { SpringBonesData } from '../../platform/item/wearable/spring-bones'
 import { WearableRepresentation } from '../../platform/item/wearable/representation'
 import { Wearable } from '../../platform/item/wearable/wearable'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
@@ -64,6 +65,10 @@ export namespace WearableJson {
           },
           outlineCompatible: {
             type: 'boolean',
+            nullable: true
+          },
+          springBones: {
+            ...SpringBonesData.schema,
             nullable: true
           }
         },
