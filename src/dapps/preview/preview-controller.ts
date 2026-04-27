@@ -1,9 +1,9 @@
 import type { Emitter } from 'mitt'
 import type { Metrics } from '../../platform/item/metrics'
+import { SpringBoneParams } from '../../platform/item/wearable/spring-bones'
 import type { PreviewEmoteEventType } from './preview-emote-event-type'
 import { SocialEmoteAnimation } from './social-emote-animation'
 import { EmoteDefinition } from './emote-definition'
-import { SpringBoneParams } from './spring-bone-params'
 
 export interface IPreviewController {
   scene: ISceneController

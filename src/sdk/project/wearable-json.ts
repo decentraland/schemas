@@ -1,10 +1,10 @@
 import { Rarity } from '../../dapps/rarity'
 import { WearableCategory } from '../../platform/item/wearable/wearable-category'
+import { SpringBonesData } from '../../platform/item/wearable/spring-bones'
 import { WearableRepresentation } from '../../platform/item/wearable/representation'
 import { Wearable } from '../../platform/item/wearable/wearable'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { HideableWearableCategory } from '../../platform'
-import { SpringBonesData } from '../../dapps/preview/spring-bone-params'
 
 /**
  * @alpha

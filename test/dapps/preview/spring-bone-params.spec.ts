@@ -1,11 +1,11 @@
 import expect from 'expect'
-import { SpringBoneParams } from '../../../src'
+import { SpringBoneParams, SpringBonesData } from '../../../src'
 import { testTypeSignature } from '../../test-utils'
 
 describe('SpringBoneParams tests', () => {
   const springBoneParams: SpringBoneParams = {
     stiffness: 1.5,
-    gravityPower: 3.0,
+    gravityPower: 1.5,
     gravityDir: [0, -1, 0],
     drag: 0.4
   }
@@ -65,5 +65,57 @@ describe('SpringBoneParams tests', () => {
 
   it('rejects missing required fields', () => {
     expect(SpringBoneParams.validate({ stiffness: 1, gravityPower: 1, gravityDir: [0, -1, 0] })).toEqual(false)
+  })
+})
+
+describe('SpringBonesData tests', () => {
+  const springBoneParams: SpringBoneParams = {
+    stiffness: 1.5,
+    gravityPower: 1.5,
+    gravityDir: [0, -1, 0],
+    drag: 0.4
+  }
+
+  const springBonesData: SpringBonesData = {
+    version: 1,
+    models: {
+      someHash: { boneA: springBoneParams }
+    }
+  }
+
+  testTypeSignature(SpringBonesData, springBonesData)
+
+  it('validates a well-formed SpringBonesData', () => {
+    expect(SpringBonesData.validate(springBonesData)).toEqual(true)
+  })
+
+  it('validates with empty models map', () => {
+    expect(SpringBonesData.validate({ version: 1, models: {} })).toEqual(true)
+  })
+
+  it('rejects unsupported version', () => {
+    expect(SpringBonesData.validate({ ...springBonesData, version: 2 })).toEqual(false)
+    expect(SpringBonesData.validate({ ...springBonesData, version: 0 })).toEqual(false)
+  })
+
+  it('rejects missing version', () => {
+    expect(SpringBonesData.validate({ models: springBonesData.models })).toEqual(false)
+  })
+
+  it('rejects missing models', () => {
+    expect(SpringBonesData.validate({ version: 1 })).toEqual(false)
+  })
+
+  it('rejects invalid bone params inside models', () => {
+    expect(
+      SpringBonesData.validate({
+        version: 1,
+        models: { someHash: { bone: { ...springBoneParams, stiffness: 99 } } }
+      })
+    ).toEqual(false)
+  })
+
+  it('rejects additional top-level properties', () => {
+    expect(SpringBonesData.validate({ ...springBonesData, extra: true })).toEqual(false)
   })
 })

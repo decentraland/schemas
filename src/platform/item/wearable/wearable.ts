@@ -6,7 +6,7 @@ import { StandardProps, standardProperties } from '../standard-props'
 import { isThirdParty, ThirdPartyProps, schema as thirdPartyPropsSchema } from '../third-party-props'
 import { HideableWearableCategory } from './hideable-category'
 import { Mappings, RangeMapping } from '../linked-wearable-mappings'
-import { SpringBonesData } from '../../../dapps/preview/spring-bone-params'
+import { SpringBonesData } from './spring-bones'
 
 /** @alpha */
 export type Wearable = BaseItem & {

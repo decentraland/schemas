@@ -202,4 +202,67 @@ describe('Wearable representation tests', () => {
       })
     ).toEqual(true)
   })
+
+  describe('springBones', () => {
+    const springBones = {
+      version: 1,
+      models: {
+        bafkreialsvt77jvpy673cnugp5ggnxfaalfncufweayuk3jbxskh3pelkm: {
+          Hair_springBone_L: {
+            stiffness: 2,
+            gravityPower: 0.8,
+            gravityDir: [0, -1, 0] as [number, number, number],
+            drag: 0.3,
+            center: 'Avatar_Hips',
+            isRoot: true
+          }
+        }
+      }
+    }
+
+    it('wearable with springBones is valid', () => {
+      expect(Wearable.validate({ ...wearable, data: { ...wearable.data, springBones } })).toEqual(true)
+    })
+
+    it('wearable with springBones set to null is valid', () => {
+      expect(Wearable.validate({ ...wearable, data: { ...wearable.data, springBones: null } })).toEqual(true)
+    })
+
+    it('wearable with empty springBones models is valid', () => {
+      expect(
+        Wearable.validate({ ...wearable, data: { ...wearable.data, springBones: { version: 1, models: {} } } })
+      ).toEqual(true)
+    })
+
+    it('wearable with springBones unsupported version fails', () => {
+      expect(
+        Wearable.validate({ ...wearable, data: { ...wearable.data, springBones: { ...springBones, version: 2 } } })
+      ).toEqual(false)
+    })
+
+    it('wearable with springBones missing version fails', () => {
+      expect(
+        Wearable.validate({ ...wearable, data: { ...wearable.data, springBones: { models: springBones.models } } })
+      ).toEqual(false)
+    })
+
+    it('wearable with invalid bone params fails', () => {
+      expect(
+        Wearable.validate({
+          ...wearable,
+          data: {
+            ...wearable.data,
+            springBones: {
+              version: 1,
+              models: {
+                someHash: {
+                  bone: { stiffness: 2, gravityPower: 0.1, gravityDir: [100, -100, 100], drag: 0.1 }
+                }
+              }
+            }
+          }
+        })
+      ).toEqual(false)
+    })
+  })
 })
