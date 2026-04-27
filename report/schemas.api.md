@@ -2647,7 +2647,7 @@ export interface IPhysicsController {
     // Warning: (ae-incompatible-release-tags) The symbol "setSpringBonesParams" is marked as @public, but its signature references "SpringBoneParams" which is marked as @alpha
     //
     // (undocumented)
-    setSpringBonesParams(itemHash: string, params: Record<string, SpringBoneParams>): Promise<void>;
+    setSpringBonesParams(itemId: string, params: Record<string, SpringBoneParams>): Promise<void>;
 }
 
 // Warning: (ae-missing-release-tag) "IPreviewController" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
