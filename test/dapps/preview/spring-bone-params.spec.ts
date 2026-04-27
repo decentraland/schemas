@@ -59,8 +59,17 @@ describe('SpringBoneParams tests', () => {
   })
 
   it('rejects gravityDir with wrong length', () => {
-    expect(SpringBoneParams.validate({ ...springBoneParams, gravityDir: [0, -1] as any })).toEqual(false)
-    expect(SpringBoneParams.validate({ ...springBoneParams, gravityDir: [0, -1, 0, 0] as any })).toEqual(false)
+    expect(SpringBoneParams.validate({ ...springBoneParams, gravityDir: [0, -1] })).toEqual(false)
+    expect(SpringBoneParams.validate({ ...springBoneParams, gravityDir: [0, -1, 0, 0] })).toEqual(false)
+  })
+
+  it('rejects gravityDir with non-number elements', () => {
+    expect(SpringBoneParams.validate({ ...springBoneParams, gravityDir: [0, 'down', 0] })).toEqual(false)
+  })
+
+  it('rejects gravityDir with out-of-range elements', () => {
+    expect(SpringBoneParams.validate({ ...springBoneParams, gravityDir: [0, -11, 0] })).toEqual(false)
+    expect(SpringBoneParams.validate({ ...springBoneParams, gravityDir: [0, 0, 15] })).toEqual(false)
   })
 
   it('rejects missing required fields', () => {
