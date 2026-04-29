@@ -9,6 +9,8 @@ export enum NotificationType {
   EVENTS_STARTED = 'events_started',
   EVENTS_STARTS_SOON = 'events_starts_soon',
   EVENT_CREATED = 'event_created',
+  EVENT_APPROVED = 'event_approved',
+  EVENT_REJECTED = 'event_rejected',
   GOVERNANCE_ANNOUNCEMENT = 'governance_announcement',
   GOVERNANCE_AUTHORED_PROPOSAL_FINISHED = 'governance_authored_proposal_finished',
   GOVERNANCE_COAUTHOR_REQUESTED = 'governance_coauthor_requested',
