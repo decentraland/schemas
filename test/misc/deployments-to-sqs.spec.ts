@@ -1,5 +1,5 @@
 import expect from 'expect'
-import { AuthChain, AuthLinkType } from '../../src'
+import { AuthChain, AuthLinkType, EntityType } from '../../src'
 import { DeploymentToSqs } from '../../src/misc/deployments-to-sqs'
 import { expectValidationFailureWithErrors } from '../test-utils'
 
@@ -29,6 +29,8 @@ describe('deployments-to-sqs', () => {
     const deploymentToSqs: DeploymentToSqs = {
       entity: {
         entityId: 'baz',
+        entityType: EntityType.SCENE,
+        pointers: ['0,0'],
         authChain: chain
       },
       contentServerUrls: []
@@ -40,6 +42,8 @@ describe('deployments-to-sqs', () => {
     const deploymentToSqs: DeploymentToSqs = {
       entity: {
         entityId: 'baz',
+        entityType: EntityType.SCENE,
+        pointers: ['0,0'],
         authChain: chain
       },
       contentServerUrls: ['https://peer.decentraland.org']
@@ -51,7 +55,8 @@ describe('deployments-to-sqs', () => {
     const deploymentToSqs = {
       entity: {
         entityId: 'baz',
-        entityType: 'scene',
+        entityType: EntityType.SCENE,
+        pointers: ['0,0'],
         metadata: {},
         authChain: chain
       },
@@ -60,10 +65,36 @@ describe('deployments-to-sqs', () => {
     expect(DeploymentToSqs.validate(deploymentToSqs)).toEqual(true)
   })
 
+  it('valid with wearable entity and urn pointer', () => {
+    const deploymentToSqs: DeploymentToSqs = {
+      entity: {
+        entityId: 'baz',
+        entityType: EntityType.WEARABLE,
+        pointers: ['urn:decentraland:matic:collections-v2:0x1234567890abcdef1234567890abcdef12345678:0'],
+        authChain: chain
+      }
+    }
+    expect(DeploymentToSqs.validate(deploymentToSqs)).toEqual(true)
+  })
+
+  it('valid with emote entity and urn pointer', () => {
+    const deploymentToSqs: DeploymentToSqs = {
+      entity: {
+        entityId: 'baz',
+        entityType: EntityType.EMOTE,
+        pointers: ['urn:decentraland:matic:collections-v2:0x1234567890abcdef1234567890abcdef12345678:1'],
+        authChain: chain
+      }
+    }
+    expect(DeploymentToSqs.validate(deploymentToSqs)).toEqual(true)
+  })
+
   it('valid if no contentServerUrls', () => {
     const deploymentToSqs = {
       entity: {
         entityId: 'someId',
+        entityType: EntityType.SCENE,
+        pointers: ['0,0'],
         authChain: chain
       }
     }
@@ -73,6 +104,8 @@ describe('deployments-to-sqs', () => {
   it('invalid if no entityId', () => {
     const deploymentToSqs = {
       entity: {
+        entityType: EntityType.SCENE,
+        pointers: ['0,0'],
         authChain: chain
       },
       contentServerUrls: ['https://peer.decentraland.org']
@@ -85,7 +118,9 @@ describe('deployments-to-sqs', () => {
   it('invalid if no authChain', () => {
     const deploymentToSqs = {
       entity: {
-        entityId: 'someId'
+        entityId: 'someId',
+        entityType: EntityType.SCENE,
+        pointers: ['0,0']
       },
       contentServerUrls: ['https://peer.decentraland.org']
     }
@@ -94,10 +129,64 @@ describe('deployments-to-sqs', () => {
     ])
   })
 
+  it('invalid if no entityType', () => {
+    const deploymentToSqs = {
+      entity: {
+        entityId: 'someId',
+        pointers: ['0,0'],
+        authChain: chain
+      }
+    }
+    expectValidationFailureWithErrors(DeploymentToSqs.validate, deploymentToSqs, [
+      "must have required property 'entityType'"
+    ])
+  })
+
+  it('invalid if entityType is not a known value', () => {
+    const deploymentToSqs = {
+      entity: {
+        entityId: 'someId',
+        entityType: 'not-a-real-type',
+        pointers: ['0,0'],
+        authChain: chain
+      }
+    }
+    expectValidationFailureWithErrors(DeploymentToSqs.validate, deploymentToSqs, [
+      'must be equal to one of the allowed values'
+    ])
+  })
+
+  it('invalid if no pointers', () => {
+    const deploymentToSqs = {
+      entity: {
+        entityId: 'someId',
+        entityType: EntityType.SCENE,
+        authChain: chain
+      }
+    }
+    expectValidationFailureWithErrors(DeploymentToSqs.validate, deploymentToSqs, [
+      "must have required property 'pointers'"
+    ])
+  })
+
+  it('invalid if pointers is empty', () => {
+    const deploymentToSqs = {
+      entity: {
+        entityId: 'someId',
+        entityType: EntityType.SCENE,
+        pointers: [],
+        authChain: chain
+      }
+    }
+    expectValidationFailureWithErrors(DeploymentToSqs.validate, deploymentToSqs, ['must NOT have fewer than 1 items'])
+  })
+
   it('valid with lods', () => {
     const deploymentToSqs: DeploymentToSqs = {
       entity: {
         entityId: 'baz',
+        entityType: EntityType.SCENE,
+        pointers: ['0,0'],
         authChain: chain
       },
       lods: ['https://cdn.test/file1.pbx', 'https://cdn.test/file2.pbx']

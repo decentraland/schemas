@@ -1,4 +1,5 @@
 import { JSONSchema, generateLazyValidator, ValidateFunction } from '../validation'
+import { EntityType } from '../platform/entity'
 import { AuthChain } from './auth-chain'
 
 /**
@@ -7,6 +8,8 @@ import { AuthChain } from './auth-chain'
 export type DeploymentToSqs = {
   entity: {
     entityId: string
+    entityType: EntityType
+    pointers: string[]
     authChain: AuthChain
   }
   lods?: string[]
@@ -26,9 +29,11 @@ export namespace DeploymentToSqs {
     properties: {
       entity: {
         type: 'object',
-        required: ['entityId', 'authChain'],
+        required: ['entityId', 'entityType', 'pointers', 'authChain'],
         properties: {
           entityId: { type: 'string' },
+          entityType: { type: 'string', enum: Object.values(EntityType) },
+          pointers: { type: 'array', items: { type: 'string', minLength: 1 }, minItems: 1 },
           authChain: AuthChain.schema
         },
         additionalProperties: true
