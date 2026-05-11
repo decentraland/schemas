@@ -62,7 +62,6 @@ export type EventApprovedEvent = BaseEvent & {
     host: string
     title: string
     description: string
-    name: string
     image: string
     link: string
   }
@@ -75,7 +74,6 @@ export type EventRejectedEvent = BaseEvent & {
     host: string
     title: string
     description: string
-    name: string
     image: string
     reason: string
   }
@@ -212,11 +210,10 @@ export namespace EventApprovedEvent {
           host: { type: 'string' },
           title: { type: 'string' },
           description: { type: 'string' },
-          name: { type: 'string' },
           image: { type: 'string' },
           link: { type: 'string' }
         },
-        required: ['host', 'name', 'image', 'link'],
+        required: ['host', 'title', 'image', 'link'],
         additionalProperties: false
       }
     },
@@ -240,11 +237,10 @@ export namespace EventRejectedEvent {
           host: { type: 'string' },
           title: { type: 'string' },
           description: { type: 'string' },
-          name: { type: 'string' },
           image: { type: 'string' },
           reason: { type: 'string' }
         },
-        required: ['host', 'name', 'image', 'reason'],
+        required: ['host', 'title', 'image', 'reason'],
         additionalProperties: false
       }
     },
