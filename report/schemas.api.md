@@ -1749,7 +1749,6 @@ export type EventApprovedEvent = BaseEvent & {
         host: string;
         title: string;
         description: string;
-        name: string;
         image: string;
         link: string;
     };
@@ -1822,7 +1821,6 @@ export type EventRejectedEvent = BaseEvent & {
         host: string;
         title: string;
         description: string;
-        name: string;
         image: string;
         reason: string;
     };
