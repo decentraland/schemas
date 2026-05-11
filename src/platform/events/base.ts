@@ -67,7 +67,14 @@ import {
   CommunityStreamingEndedEvent
 } from './streaming'
 import { AuthIdentifyEvent } from './web'
-import { EventCreatedEvent, EventStartedEvent, EventStartsSoonEvent, EventEndedEvent } from './event'
+import {
+  EventCreatedEvent,
+  EventStartedEvent,
+  EventStartsSoonEvent,
+  EventEndedEvent,
+  EventApprovedEvent,
+  EventRejectedEvent
+} from './event'
 import {
   GovernanceProposalEnactedEvent,
   GovernanceCoauthorRequestedEvent,
@@ -245,7 +252,9 @@ export namespace Events {
       EVENT_CREATED = 'event-created',
       EVENT_STARTS_SOON = 'event-starts-soon',
       EVENT_STARTED = 'event-started',
-      EVENT_ENDED = 'event-ended'
+      EVENT_ENDED = 'event-ended',
+      EVENT_APPROVED = 'event-approved',
+      EVENT_REJECTED = 'event-rejected'
     }
 
     export enum Governance {
@@ -361,6 +370,8 @@ export type Event =
   | EventStartedEvent
   | EventStartsSoonEvent
   | EventEndedEvent
+  | EventApprovedEvent
+  | EventRejectedEvent
   | GovernanceProposalEnactedEvent
   | GovernanceCoauthorRequestedEvent
   | GovernancePitchPassedEvent

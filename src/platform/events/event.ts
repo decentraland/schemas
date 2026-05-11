@@ -55,6 +55,32 @@ export type EventEndedEvent = BaseEvent & {
   }
 }
 
+export type EventApprovedEvent = BaseEvent & {
+  type: Events.Type.EVENT
+  subType: Events.SubType.Event.EVENT_APPROVED
+  metadata: {
+    host: string
+    title: string
+    description: string
+    name: string
+    image: string
+    link: string
+  }
+}
+
+export type EventRejectedEvent = BaseEvent & {
+  type: Events.Type.EVENT
+  subType: Events.SubType.Event.EVENT_REJECTED
+  metadata: {
+    host: string
+    title: string
+    description: string
+    name: string
+    image: string
+    reason: string
+  }
+}
+
 export namespace EventStartedEvent {
   export const schema: JSONSchema<EventStartedEvent> = {
     type: 'object',
@@ -170,4 +196,60 @@ export namespace EventEndedEvent {
     additionalProperties: false
   }
   export const validate: ValidateFunction<EventEndedEvent> = generateLazyValidator(schema)
+}
+
+export namespace EventApprovedEvent {
+  export const schema: JSONSchema<EventApprovedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.EVENT },
+      subType: { type: 'string', const: Events.SubType.Event.EVENT_APPROVED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          host: { type: 'string' },
+          title: { type: 'string' },
+          description: { type: 'string' },
+          name: { type: 'string' },
+          image: { type: 'string' },
+          link: { type: 'string' }
+        },
+        required: ['host', 'name', 'image', 'link'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+  export const validate: ValidateFunction<EventApprovedEvent> = generateLazyValidator(schema)
+}
+
+export namespace EventRejectedEvent {
+  export const schema: JSONSchema<EventRejectedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.EVENT },
+      subType: { type: 'string', const: Events.SubType.Event.EVENT_REJECTED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          host: { type: 'string' },
+          title: { type: 'string' },
+          description: { type: 'string' },
+          name: { type: 'string' },
+          image: { type: 'string' },
+          reason: { type: 'string' }
+        },
+        required: ['host', 'name', 'image', 'reason'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+  export const validate: ValidateFunction<EventRejectedEvent> = generateLazyValidator(schema)
 }
