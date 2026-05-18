@@ -37,7 +37,7 @@ jobs:
         run: cp temp/schemas.api.md report/schemas.api.md && git diff
 
       - name: Publish
-        uses: menduz/oddish-action@master
+        uses: decentraland/oddish-action@914e7c59e93e708152aa703c50196740c0526c1d # @master
         with:
           access: public
         env:
