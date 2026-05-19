@@ -34,7 +34,10 @@ describe('ChainId tests', () => {
       [Network.BSC]: ChainId.BSC_MAINNET,
       [Network.ARBITRUM]: ChainId.ARBITRUM_MAINNET,
       [Network.OPTIMISM]: ChainId.OPTIMISM_MAINNET,
-      [Network.FANTOM]: ChainId.FANTOM_MAINNET
+      [Network.FANTOM]: ChainId.FANTOM_MAINNET,
+      [Network.APE]: ChainId.APE_MAINNET,
+      [Network.BASE]: ChainId.BASE_MAINNET,
+      [Network.MONAD]: ChainId.MONAD_MAINNET
     })
   })
 
