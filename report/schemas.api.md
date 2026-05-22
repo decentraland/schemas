@@ -2728,6 +2728,8 @@ export interface ISceneController {
     changeZoom(zoom: number): Promise<void>;
     // (undocumented)
     cleanup(): Promise<void>;
+    // (undocumented)
+    exportVRM(): Promise<void>;
     // Warning: (ae-incompatible-release-tags) The symbol "getMetrics" is marked as @public, but its signature references "Metrics" which is marked as @alpha
     //
     // (undocumented)
@@ -4072,11 +4074,13 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
 } : T extends PreviewMessageType.UPDATE ? {
     options: PreviewOptions;
 } : T extends PreviewMessageType.CONTROLLER_REQUEST ? {
-    id: string;
-    namespace: 'scene' | 'emote' | 'physics';
-    method: 'getScreenshot' | 'getMetrics' | 'changeZoom' | 'changeCameraPosition' | 'panCamera' | 'cleanup' | 'getLength' | 'isPlaying' | 'play' | 'pause' | 'stop' | 'goTo' | 'enableSound' | 'disableSound' | 'hasSound' | 'setUsername' | 'setSpringBonesParams';
-    params: any[];
-} : T extends PreviewMessageType.CONTROLLER_RESPONSE ? {
+    [K in keyof IPreviewController]: {
+        id: string;
+        namespace: K;
+        method: keyof IPreviewController[K];
+        params: any[];
+    };
+}[keyof IPreviewController] : T extends PreviewMessageType.CONTROLLER_RESPONSE ? {
     id: string;
     ok: true;
     result: any;
@@ -6106,8 +6110,8 @@ export namespace WorldUndeploymentEvent {
 // src/dapps/preview/preview-config.ts:21:3 - (ae-incompatible-release-tags) The symbol "wearables" is marked as @public, but its signature references "WearableDefinition" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:22:3 - (ae-incompatible-release-tags) The symbol "bodyShape" is marked as @public, but its signature references "BodyShape" which is marked as @alpha
 // src/dapps/preview/preview-config.ts:27:3 - (ae-incompatible-release-tags) The symbol "type" is marked as @public, but its signature references "PreviewType" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:38:7 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
-// src/dapps/preview/preview-message.ts:78:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
+// src/dapps/preview/preview-message.ts:39:7 - (ae-incompatible-release-tags) The symbol "options" is marked as @public, but its signature references "PreviewOptions" which is marked as @alpha
+// src/dapps/preview/preview-message.ts:64:7 - (ae-forgotten-export) The symbol "EmoteEventPayload" needs to be exported by the entry point index.d.ts
 // src/dapps/rentals-listings.ts:85:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/rentals-listings.ts:126:3 - (ae-incompatible-release-tags) The symbol "network" is marked as @public, but its signature references "Network" which is marked as @alpha
 // src/dapps/rentals-listings.ts:128:3 - (ae-incompatible-release-tags) The symbol "chainId" is marked as @public, but its signature references "ChainId" which is marked as @alpha
