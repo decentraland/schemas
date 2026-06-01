@@ -1,17 +1,30 @@
-name: build and publish
+name: Build and Publish
 
 on:
+  push:
+    branches:
+      - master
+      - main
+    tags:
+      - '*'
+  release:
+    types:
+      - created
   pull_request:
 
 jobs:
-  check_and_build:
+  build-and-publish:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
     outputs:
-      s3_bucket_key: ${{ steps.publish_package.outputs.s3-bucket-key }}
+      s3_bucket_key: ${{ steps.publish_snapshot.outputs.s3-bucket-key }}
     steps:
       - uses: actions/checkout@v4
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
       - name: install
         run: npm ci
       - name: build
@@ -22,9 +35,15 @@ jobs:
         run: npm run lint
       - name: check-api
         run: npm run check-api
-      - name: publish packages
+      - name: print diff if failed
+        if: ${{ failure() }}
+        run: cp temp/schemas.api.md report/schemas.api.md && git diff
+
+      ## snapshot publish for pull requests (npm + s3, then notify gitlab for CDN propagation)
+      - name: publish snapshot packages
+        if: ${{ github.event_name == 'pull_request' }}
         uses: decentraland/oddish-action@914e7c59e93e708152aa703c50196740c0526c1d # @master
-        id: publish_package
+        id: publish_snapshot
         with:
           registry-url: 'https://registry.npmjs.org'
           access: public
@@ -45,8 +64,17 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}
 
+      ## release publish for master/main pushes, tags and releases (npm)
+      - name: publish packages
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: decentraland/oddish-action@914e7c59e93e708152aa703c50196740c0526c1d # @master
+        with:
+          access: public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
   notify_deployment:
-    needs: [check_and_build]
+    needs: [build-and-publish]
     if: ${{ github.event.pull_request.number && !startsWith(github.head_ref, 'dependabot/') }}
     runs-on: ubuntu-latest
     name: Deployment Notification
@@ -61,7 +89,7 @@ jobs:
 
       - name: Generate S3 URL
         id: url-generator
-        run: echo "body=${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.check_and_build.outputs.s3_bucket_key }}" >> $GITHUB_OUTPUT
+        run: echo "body=${{ secrets.SDK_TEAM_S3_BASE_URL }}/${{ needs.build-and-publish.outputs.s3_bucket_key }}" >> $GITHUB_OUTPUT
 
       - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v4
