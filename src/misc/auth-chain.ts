@@ -39,8 +39,8 @@ export namespace AuthLink {
         type: 'string',
         enum: Object.values(AuthLinkType)
       },
-      payload: { type: 'string' },
-      signature: { type: 'string', nullable: true }
+      payload: { type: 'string', maxLength: 100000 },
+      signature: { type: 'string', nullable: true, maxLength: 100000 }
     },
     required: ['payload', 'type'],
     if: {
@@ -77,7 +77,8 @@ export namespace AuthChain {
   export const schema: JSONSchema<AuthChain> = {
     type: 'array',
     items: AuthLink.schema,
-    minItems: 1
+    minItems: 1,
+    maxItems: 10
   }
 
   export const validate: ValidateFunction<AuthChain> = generateLazyValidator(schema)
