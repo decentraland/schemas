@@ -79,6 +79,18 @@ export type EventRejectedEvent = BaseEvent & {
   }
 }
 
+export type EventDeletedEvent = BaseEvent & {
+  type: Events.Type.EVENT
+  subType: Events.SubType.Event.EVENT_DELETED
+  metadata: {
+    host: string
+    title: string
+    description: string
+    image: string
+    reason?: string
+  }
+}
+
 export namespace EventStartedEvent {
   export const schema: JSONSchema<EventStartedEvent> = {
     type: 'object',
@@ -248,4 +260,31 @@ export namespace EventRejectedEvent {
     additionalProperties: false
   }
   export const validate: ValidateFunction<EventRejectedEvent> = generateLazyValidator(schema)
+}
+
+export namespace EventDeletedEvent {
+  export const schema: JSONSchema<EventDeletedEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.EVENT },
+      subType: { type: 'string', const: Events.SubType.Event.EVENT_DELETED },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          host: { type: 'string' },
+          title: { type: 'string' },
+          description: { type: 'string' },
+          image: { type: 'string' },
+          reason: { type: 'string', nullable: true }
+        },
+        required: ['host', 'title', 'image'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+  export const validate: ValidateFunction<EventDeletedEvent> = generateLazyValidator(schema)
 }
