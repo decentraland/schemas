@@ -20,9 +20,9 @@ jobs:
     outputs:
       s3_bucket_key: ${{ steps.publish_snapshot.outputs.s3-bucket-key }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Use Node.js 24
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24
       - name: install
@@ -42,7 +42,7 @@ jobs:
       ## snapshot publish for pull requests (npm + s3, then notify gitlab for CDN propagation)
       - name: publish snapshot packages
         if: ${{ github.event_name == 'pull_request' }}
-        uses: decentraland/oddish-action@914e7c59e93e708152aa703c50196740c0526c1d # @master
+        uses: decentraland/oddish-action@0074f2d535c43b5c83f136525304a6277166d77f # @master
         id: publish_snapshot
         with:
           registry-url: 'https://registry.npmjs.org'
@@ -59,7 +59,6 @@ jobs:
           gitlab-token: ${{ secrets.GITLAB_TOKEN }}
           gitlab-pipeline-url: ${{ secrets.GITLAB_URL }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           AWS_DEFAULT_REGION: us-east-1
           AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}
@@ -67,11 +66,9 @@ jobs:
       ## release publish for master/main pushes, tags and releases (npm)
       - name: publish packages
         if: ${{ github.event_name != 'pull_request' }}
-        uses: decentraland/oddish-action@914e7c59e93e708152aa703c50196740c0526c1d # @master
+        uses: decentraland/oddish-action@0074f2d535c43b5c83f136525304a6277166d77f # @master
         with:
           access: public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   notify_deployment:
     needs: [build-and-publish]
