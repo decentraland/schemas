@@ -5866,8 +5866,10 @@ export type WorldDeploymentEvent = BaseEvent & {
     subType: Events.SubType.Worlds.DEPLOYMENT;
     entity: {
         entityId: string;
+        pointers: string[];
         authChain: AuthChain;
     };
+    worldName: string;
     contentServerUrls?: string[];
     force?: boolean;
     animation?: string;
