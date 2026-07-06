@@ -44,6 +44,7 @@ export type Scene = DisplayableDeployment & {
   featureToggles?: FeatureToggles
   worldConfiguration?: WorldConfiguration
   allowedMediaHostnames?: string[]
+  landscapeTerrain?: boolean
 }
 
 /** @alpha */
@@ -153,6 +154,12 @@ export namespace Scene {
         items: {
           type: 'string'
         },
+        nullable: true
+      },
+      landscapeTerrain: {
+        description:
+          'Set to false to disable the auto-generated landscape terrain around the scene (applies only to Worlds with single-scene setups). Default: true (terrain shown)',
+        type: 'boolean',
         nullable: true
       }
     },
