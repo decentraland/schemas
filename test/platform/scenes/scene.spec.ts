@@ -139,6 +139,10 @@ describe('Scene tests', () => {
       expect(Scene.validate(setScene(scene, { landscapeTerrain: false }))).toEqual(true)
     })
 
+    it('should return true when landscapeTerrain is true', () => {
+      expect(Scene.validate(setScene(scene, { landscapeTerrain: true }))).toEqual(true)
+    })
+
     it('should return false when landscapeTerrain is not a boolean', () => {
       expect(Scene.validate(setScene(scene, { landscapeTerrain: 'no' }))).toEqual(false)
     })
