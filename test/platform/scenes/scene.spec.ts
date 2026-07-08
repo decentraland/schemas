@@ -130,6 +130,24 @@ describe('Scene tests', () => {
     })
   })
 
+  describe('test landscapeTerrain field', () => {
+    it('should return true when landscapeTerrain is not defined', () => {
+      expect(Scene.validate(scene)).toEqual(true)
+    })
+
+    it('should return true when landscapeTerrain is false', () => {
+      expect(Scene.validate(setScene(scene, { landscapeTerrain: false }))).toEqual(true)
+    })
+
+    it('should return true when landscapeTerrain is true', () => {
+      expect(Scene.validate(setScene(scene, { landscapeTerrain: true }))).toEqual(true)
+    })
+
+    it('should return false when landscapeTerrain is not a boolean', () => {
+      expect(Scene.validate(setScene(scene, { landscapeTerrain: 'no' }))).toEqual(false)
+    })
+  })
+
   describe('test creator field', () => {
     it('should return true when creator is not defined', () => {
       expect(Scene.validate(scene)).toEqual(true)

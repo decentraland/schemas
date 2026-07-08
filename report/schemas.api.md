@@ -4840,6 +4840,7 @@ export type Scene = DisplayableDeployment & {
     featureToggles?: FeatureToggles;
     worldConfiguration?: WorldConfiguration;
     allowedMediaHostnames?: string[];
+    landscapeTerrain?: boolean;
 };
 
 // @alpha (undocumented)
