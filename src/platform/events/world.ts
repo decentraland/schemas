@@ -67,8 +67,10 @@ export type WorldDeploymentEvent = BaseEvent & {
   subType: Events.SubType.Worlds.DEPLOYMENT
   entity: {
     entityId: string
+    pointers: string[]
     authChain: AuthChain
   }
+  worldName: string
   contentServerUrls?: string[]
   force?: boolean
   animation?: string
@@ -267,16 +269,21 @@ export namespace WorldDeploymentEvent {
       timestamp: { type: 'number', minimum: 0 },
       entity: {
         type: 'object',
-        properties: { entityId: { type: 'string' }, authChain: AuthChain.schema },
+        properties: {
+          entityId: { type: 'string' },
+          pointers: { type: 'array', items: { type: 'string', minLength: 1 }, minItems: 1 },
+          authChain: AuthChain.schema
+        },
         additionalProperties: true,
-        required: ['entityId', 'authChain']
+        required: ['entityId', 'pointers', 'authChain']
       },
+      worldName: { type: 'string' },
       contentServerUrls: { type: 'array', items: { type: 'string' }, nullable: true },
       force: { type: 'boolean', nullable: true },
       animation: { type: 'string', nullable: true },
       lods: { type: 'array', items: { type: 'string' }, nullable: true }
     },
-    required: ['type', 'subType', 'key', 'timestamp', 'entity'],
+    required: ['type', 'subType', 'key', 'timestamp', 'entity', 'worldName'],
     additionalProperties: false
   }
 
