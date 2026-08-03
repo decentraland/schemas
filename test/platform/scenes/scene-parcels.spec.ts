@@ -51,4 +51,19 @@ describe('Scene parcels tests', () => {
       expect(SceneParcels.validate(duplicatedParcels)).toEqual(false)
     })
   })
+
+  describe('when a scene declares more than one thousand unique canonical parcels', () => {
+    let largeScene: SceneParcels
+
+    beforeEach(() => {
+      largeScene = {
+        base: '0,0',
+        parcels: Array.from({ length: 1001 }, (_, index) => `${index},0`)
+      }
+    })
+
+    it('should not impose a shared-schema parcel count limit', () => {
+      expect(SceneParcels.validate(largeScene)).toEqual(true)
+    })
+  })
 })

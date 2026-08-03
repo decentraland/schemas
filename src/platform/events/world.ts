@@ -11,11 +11,7 @@ const WORLD_NAME_SCHEMA = {
 }
 const EVENT_KEY_SCHEMA = { type: 'string' as const, minLength: 1, maxLength: 2048 }
 const ENTITY_ID_SCHEMA = { type: 'string' as const, oneOf: [IPFSv1.schema, IPFSv2.schema] }
-const PARCEL_SCHEMA = {
-  type: 'string' as const,
-  maxLength: 32,
-  pattern: '^(?:0|-?[1-9][0-9]*),(?:0|-?[1-9][0-9]*)$'
-}
+const PARCEL_SCHEMA = { type: 'string' as const, pattern: '^(?:0|-?[1-9][0-9]*),(?:0|-?[1-9][0-9]*)$' }
 
 export type WorldsPermissionGrantedEvent = BaseEvent & {
   type: Events.Type.WORLD
@@ -155,8 +151,8 @@ export namespace WorldSettingsChangedEvent {
         type: 'object',
         properties: {
           worldName: WORLD_NAME_SCHEMA,
-          title: { type: 'string', maxLength: 200, nullable: true },
-          description: { type: 'string', maxLength: 5000, nullable: true },
+          title: { type: 'string', nullable: true },
+          description: { type: 'string', nullable: true },
           contentRating: { type: 'string', maxLength: 64, nullable: true },
           skyboxTime: { type: 'number', nullable: true },
           categories: {
@@ -243,7 +239,6 @@ export namespace WorldScenesUndeploymentEvent {
               additionalProperties: false
             },
             minItems: 1,
-            maxItems: 1000,
             uniqueItems: true
           }
         },
@@ -322,12 +317,10 @@ export namespace WorldDeploymentEvent {
         nullable: true
       },
       force: { type: 'boolean', nullable: true },
-      animation: { type: 'string', maxLength: 2048, nullable: true },
+      animation: { type: 'string', nullable: true },
       lods: {
         type: 'array',
-        items: ENTITY_ID_SCHEMA,
-        maxItems: 100,
-        uniqueItems: true,
+        items: { type: 'string' },
         nullable: true
       }
     },

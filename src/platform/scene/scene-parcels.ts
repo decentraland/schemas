@@ -1,7 +1,6 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 const PARCEL_COORDINATE_PATTERN = '^(?:0|-?[1-9][0-9]*),(?:0|-?[1-9][0-9]*)$'
-const MAX_SCENE_PARCELS = 1000
 
 /** @alpha */
 export type SceneParcels = {
@@ -18,18 +17,15 @@ export namespace SceneParcels {
     properties: {
       base: {
         type: 'string',
-        maxLength: 32,
         pattern: PARCEL_COORDINATE_PATTERN
       },
       parcels: {
         type: 'array',
         items: {
           type: 'string',
-          maxLength: 32,
           pattern: PARCEL_COORDINATE_PATTERN
         },
         minItems: 1,
-        maxItems: MAX_SCENE_PARCELS,
         uniqueItems: true
       }
     },

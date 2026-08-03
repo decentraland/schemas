@@ -4,6 +4,7 @@ import {
   WorldScenesUndeploymentEvent,
   WorldUndeploymentEvent,
   WorldDeploymentEvent,
+  WorldSettingsChangedEvent,
   AuthLinkType,
   Events
 } from '../../../src'
@@ -431,6 +432,30 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
     })
   })
 
+  describe('and the event contains more than one thousand unique scenes', () => {
+    let event: WorldScenesUndeploymentEvent
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'my-world.dcl.eth',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          scenes: Array.from({ length: 1001 }, (_, index) => ({
+            entityId: `ba${index.toString().padStart(57, 'a')}`,
+            baseParcel: `${index},0`
+          }))
+        }
+      }
+    })
+
+    it('should not impose an event scene count limit', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(true)
+    })
+  })
+
   describe('and two entries reuse the same entity identity', () => {
     let event: WorldScenesUndeploymentEvent
 
@@ -619,6 +644,39 @@ describe('when validating the WorldDeploymentEvent', () => {
     it('should return false', () => {
       expect(WorldDeploymentEvent.validate(event)).toEqual(false)
     })
+  })
+
+  describe('and animation and LOD values use their existing unrestricted string shape', () => {
+    beforeEach(() => {
+      event.animation = 'a'.repeat(2049)
+      event.lods = Array.from({ length: 101 }, (_, index) => `lod-${index}`)
+    })
+
+    it('should preserve compatibility with existing event consumers', () => {
+      expect(WorldDeploymentEvent.validate(event)).toEqual(true)
+    })
+  })
+})
+
+describe('when validating the WorldSettingsChangedEvent', () => {
+  let event: WorldSettingsChangedEvent
+
+  beforeEach(() => {
+    event = {
+      type: Events.Type.WORLD,
+      subType: Events.SubType.Worlds.WORLD_SETTINGS_CHANGED,
+      key: 'my-world.dcl.eth',
+      timestamp: 1,
+      metadata: {
+        worldName: 'my-world.dcl.eth',
+        title: 't'.repeat(201),
+        description: 'd'.repeat(5001)
+      }
+    }
+  })
+
+  it('should not introduce title or description limits without a domain contract', () => {
+    expect(WorldSettingsChangedEvent.validate(event)).toEqual(true)
   })
 })
 

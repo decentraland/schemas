@@ -43,8 +43,7 @@ export namespace Entity {
       type: { type: 'string' },
       pointers: {
         type: 'array',
-        items: { type: 'string', minLength: 1, maxLength: 2048 },
-        maxItems: 1000,
+        items: { type: 'string', minLength: 1 },
         uniqueItems: true
       },
       timestamp: { type: 'number', minimum: 0 },
