@@ -5978,6 +5978,8 @@ export type WorldSettingsChangedEvent = BaseEvent & {
 export namespace WorldSettingsChangedEvent {
     const // (undocumented)
     schema: JSONSchema<WorldSettingsChangedEvent>;
+    const // (undocumented)
+    validate: ValidateFunction<WorldSettingsChangedEvent>;
 }
 
 // Warning: (ae-missing-release-tag) "WorldsMissingResourcesEvent" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
