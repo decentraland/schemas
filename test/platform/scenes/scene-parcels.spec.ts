@@ -27,4 +27,28 @@ describe('Scene parcels tests', () => {
   it('empty parcels fails', () => {
     expect(SceneParcels.validate({ ...parcels, parcels: [] })).toEqual(false)
   })
+
+  describe('when parcel coordinates have non-canonical aliases', () => {
+    let aliasedParcels: SceneParcels
+
+    beforeEach(() => {
+      aliasedParcels = { base: '0,0', parcels: ['0,0', '00,0'] }
+    })
+
+    it('should reject the aliased coordinates', () => {
+      expect(SceneParcels.validate(aliasedParcels)).toEqual(false)
+    })
+  })
+
+  describe('when parcel coordinates are duplicated', () => {
+    let duplicatedParcels: SceneParcels
+
+    beforeEach(() => {
+      duplicatedParcels = { base: '0,0', parcels: ['0,0', '0,0'] }
+    })
+
+    it('should reject the duplicated coordinates', () => {
+      expect(SceneParcels.validate(duplicatedParcels)).toEqual(false)
+    })
+  })
 })

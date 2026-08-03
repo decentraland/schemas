@@ -173,4 +173,16 @@ describe('Scene tests', () => {
       expect(Scene.validate(setScene(scene, { creator: 'invalid-address' }))).toEqual(false)
     })
   })
+
+  describe('when the scene base is outside its parcels', () => {
+    let sceneWithUnrelatedBase: Scene
+
+    beforeEach(() => {
+      sceneWithUnrelatedBase = setScene(scene, { scene: { base: '1,1', parcels: ['0,0'] } })
+    })
+
+    it('should reject the scene metadata', () => {
+      expect(Scene.validate(sceneWithUnrelatedBase)).toEqual(false)
+    })
+  })
 })

@@ -1,6 +1,21 @@
 import { AuthChain } from '../../misc/auth-chain'
+import { IPFSv1, IPFSv2 } from '../../misc'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { BaseEvent, Events } from './base'
+
+const WORLD_NAME_SCHEMA = {
+  type: 'string' as const,
+  minLength: 5,
+  maxLength: 255,
+  pattern: '^[a-zA-Z0-9_-]+(?:\\.dcl)?\\.eth$'
+}
+const EVENT_KEY_SCHEMA = { type: 'string' as const, minLength: 1, maxLength: 2048 }
+const ENTITY_ID_SCHEMA = { type: 'string' as const, oneOf: [IPFSv1.schema, IPFSv2.schema] }
+const PARCEL_SCHEMA = {
+  type: 'string' as const,
+  maxLength: 32,
+  pattern: '^(?:0|-?[1-9][0-9]*),(?:0|-?[1-9][0-9]*)$'
+}
 
 export type WorldsPermissionGrantedEvent = BaseEvent & {
   type: Events.Type.WORLD
@@ -134,21 +149,27 @@ export namespace WorldSettingsChangedEvent {
     properties: {
       type: { type: 'string', const: Events.Type.WORLD },
       subType: { type: 'string', const: Events.SubType.Worlds.WORLD_SETTINGS_CHANGED },
-      key: { type: 'string' },
+      key: EVENT_KEY_SCHEMA,
       timestamp: { type: 'number', minimum: 0 },
       metadata: {
         type: 'object',
         properties: {
-          worldName: { type: 'string' },
-          title: { type: 'string', nullable: true },
-          description: { type: 'string', nullable: true },
-          contentRating: { type: 'string', nullable: true },
+          worldName: WORLD_NAME_SCHEMA,
+          title: { type: 'string', maxLength: 200, nullable: true },
+          description: { type: 'string', maxLength: 5000, nullable: true },
+          contentRating: { type: 'string', maxLength: 64, nullable: true },
           skyboxTime: { type: 'number', nullable: true },
-          categories: { type: 'array', items: { type: 'string' }, nullable: true },
+          categories: {
+            type: 'array',
+            items: { type: 'string', minLength: 1, maxLength: 64 },
+            maxItems: 50,
+            uniqueItems: true,
+            nullable: true
+          },
           singlePlayer: { type: 'boolean', nullable: true },
           showInPlaces: { type: 'boolean', nullable: true },
-          thumbnailUrl: { type: 'string', nullable: true },
-          accessType: { type: 'string', nullable: true }
+          thumbnailUrl: { type: 'string', maxLength: 2048, pattern: '^https?://', nullable: true },
+          accessType: { type: 'string', maxLength: 64, nullable: true }
         },
         required: ['worldName'],
         additionalProperties: false
@@ -157,6 +178,8 @@ export namespace WorldSettingsChangedEvent {
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
     additionalProperties: false
   }
+
+  export const validate = generateLazyValidator(schema)
 }
 
 export namespace WorldSpawnCoordinateSetEvent {
@@ -165,12 +188,12 @@ export namespace WorldSpawnCoordinateSetEvent {
     properties: {
       type: { type: 'string', const: Events.Type.WORLD },
       subType: { type: 'string', const: Events.SubType.Worlds.WORLD_SPAWN_COORDINATE_SET },
-      key: { type: 'string' },
+      key: EVENT_KEY_SCHEMA,
       timestamp: { type: 'number', minimum: 0 },
       metadata: {
         type: 'object',
         properties: {
-          name: { type: 'string', pattern: '^[a-zA-Z0-9_-]+\\.dcl\\.eth|[a-zA-Z0-9_-]+\\.eth$' },
+          name: WORLD_NAME_SCHEMA,
           oldCoordinate: {
             type: 'object',
             properties: { x: { type: 'number' }, y: { type: 'number' } },
@@ -202,24 +225,26 @@ export namespace WorldScenesUndeploymentEvent {
     properties: {
       type: { type: 'string', const: Events.Type.WORLD },
       subType: { type: 'string', const: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT },
-      key: { type: 'string' },
+      key: EVENT_KEY_SCHEMA,
       timestamp: { type: 'number', minimum: 0 },
       metadata: {
         type: 'object',
         properties: {
-          worldName: { type: 'string' },
+          worldName: WORLD_NAME_SCHEMA,
           scenes: {
             type: 'array',
             items: {
               type: 'object',
               properties: {
-                entityId: { type: 'string' },
-                baseParcel: { type: 'string' }
+                entityId: ENTITY_ID_SCHEMA,
+                baseParcel: PARCEL_SCHEMA
               },
               required: ['entityId', 'baseParcel'],
               additionalProperties: false
             },
-            minItems: 1
+            minItems: 1,
+            maxItems: 1000,
+            uniqueItems: true
           }
         },
         required: ['worldName', 'scenes'],
@@ -230,7 +255,24 @@ export namespace WorldScenesUndeploymentEvent {
     additionalProperties: false
   }
 
-  export const validate: ValidateFunction<WorldScenesUndeploymentEvent> = generateLazyValidator(schema)
+  const schemaValidator: ValidateFunction<WorldScenesUndeploymentEvent> = generateLazyValidator(schema)
+  export const validate: ValidateFunction<WorldScenesUndeploymentEvent> = (
+    event: unknown
+  ): event is WorldScenesUndeploymentEvent => {
+    if (!schemaValidator(event)) {
+      return false
+    }
+
+    const entityIds = event.metadata.scenes.map((scene) => scene.entityId)
+    const baseParcels = event.metadata.scenes.map((scene) => scene.baseParcel)
+    return new Set(entityIds).size === entityIds.length && new Set(baseParcels).size === baseParcels.length
+  }
+
+  Object.defineProperty(validate, 'errors', {
+    get() {
+      return schemaValidator.errors
+    }
+  })
 }
 
 export namespace WorldUndeploymentEvent {
@@ -239,12 +281,12 @@ export namespace WorldUndeploymentEvent {
     properties: {
       type: { type: 'string', const: Events.Type.WORLD },
       subType: { type: 'string', const: Events.SubType.Worlds.WORLD_UNDEPLOYMENT },
-      key: { type: 'string' },
+      key: EVENT_KEY_SCHEMA,
       timestamp: { type: 'number', minimum: 0 },
       metadata: {
         type: 'object',
         properties: {
-          worldName: { type: 'string' }
+          worldName: WORLD_NAME_SCHEMA
         },
         required: ['worldName'],
         additionalProperties: false
@@ -263,18 +305,31 @@ export namespace WorldDeploymentEvent {
     properties: {
       type: { type: 'string', const: Events.Type.WORLD },
       subType: { type: 'string', const: Events.SubType.Worlds.DEPLOYMENT },
-      key: { type: 'string' },
+      key: EVENT_KEY_SCHEMA,
       timestamp: { type: 'number', minimum: 0 },
       entity: {
         type: 'object',
-        properties: { entityId: { type: 'string' }, authChain: AuthChain.schema },
-        additionalProperties: true,
+        properties: { entityId: ENTITY_ID_SCHEMA, authChain: AuthChain.schema },
+        additionalProperties: false,
         required: ['entityId', 'authChain']
       },
-      contentServerUrls: { type: 'array', items: { type: 'string' }, nullable: true },
+      contentServerUrls: {
+        type: 'array',
+        items: { type: 'string', minLength: 1, maxLength: 2048, pattern: '^https?://' },
+        minItems: 1,
+        maxItems: 10,
+        uniqueItems: true,
+        nullable: true
+      },
       force: { type: 'boolean', nullable: true },
-      animation: { type: 'string', nullable: true },
-      lods: { type: 'array', items: { type: 'string' }, nullable: true }
+      animation: { type: 'string', maxLength: 2048, nullable: true },
+      lods: {
+        type: 'array',
+        items: ENTITY_ID_SCHEMA,
+        maxItems: 100,
+        uniqueItems: true,
+        nullable: true
+      }
     },
     required: ['type', 'subType', 'key', 'timestamp', 'entity'],
     additionalProperties: false

@@ -3,8 +3,13 @@ import {
   WorldSpawnCoordinateSetEvent,
   WorldScenesUndeploymentEvent,
   WorldUndeploymentEvent,
+  WorldDeploymentEvent,
+  AuthLinkType,
   Events
 } from '../../../src'
+
+const ENTITY_ID = 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5q'
+const ANOTHER_ENTITY_ID = 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5r'
 
 describe('when validating the WorldSpawnCoordinateSetEvent', () => {
   describe('and the event is valid', () => {
@@ -408,8 +413,8 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
         metadata: {
           worldName: 'my-world.dcl.eth',
           scenes: [
-            { entityId: 'entity-1', baseParcel: '0,0' },
-            { entityId: 'entity-2', baseParcel: '-1,2' }
+            { entityId: ENTITY_ID, baseParcel: '0,0' },
+            { entityId: ANOTHER_ENTITY_ID, baseParcel: '-1,2' }
           ]
         }
       }
@@ -423,6 +428,51 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
   describe('and the event is null', () => {
     it('should return false', () => {
       expect(WorldScenesUndeploymentEvent.validate(null)).toEqual(false)
+    })
+  })
+
+  describe('and two entries reuse the same entity identity', () => {
+    let event: WorldScenesUndeploymentEvent
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'my-world.dcl.eth',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          scenes: [
+            { entityId: ENTITY_ID, baseParcel: '0,0' },
+            { entityId: ENTITY_ID, baseParcel: '1,0' }
+          ]
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and a base parcel is not canonical', () => {
+    let event: WorldScenesUndeploymentEvent
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'my-world.dcl.eth',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          scenes: [{ entityId: ENTITY_ID, baseParcel: '00,0' }]
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
     })
   })
 
@@ -524,6 +574,50 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
 
     it('should return false', () => {
       expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+})
+
+describe('when validating the WorldDeploymentEvent', () => {
+  let event: WorldDeploymentEvent
+
+  beforeEach(() => {
+    event = {
+      type: Events.Type.WORLD,
+      subType: Events.SubType.Worlds.DEPLOYMENT,
+      key: ENTITY_ID,
+      timestamp: 1,
+      entity: {
+        entityId: ENTITY_ID,
+        authChain: [{ type: AuthLinkType.SIGNER, payload: '0x0000000000000000000000000000000000000000' }]
+      },
+      contentServerUrls: ['https://worlds-content-server.decentraland.org']
+    }
+  })
+
+  describe('and the event contains a bounded HTTPS content server URL', () => {
+    it('should return true', () => {
+      expect(WorldDeploymentEvent.validate(event)).toEqual(true)
+    })
+  })
+
+  describe('and the content server entry is not a URL', () => {
+    beforeEach(() => {
+      event.contentServerUrls = ['not-a-url']
+    })
+
+    it('should return false', () => {
+      expect(WorldDeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and the entity contains undeclared properties', () => {
+    beforeEach(() => {
+      ;(event.entity as any).unexpected = true
+    })
+
+    it('should return false', () => {
+      expect(WorldDeploymentEvent.validate(event)).toEqual(false)
     })
   })
 })

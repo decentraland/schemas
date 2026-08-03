@@ -41,7 +41,12 @@ export namespace Entity {
       version: { type: 'string', enum: ['v3'] },
       id: { type: 'string', oneOf: [IPFSv1.schema, IPFSv2.schema] },
       type: { type: 'string' },
-      pointers: { type: 'array', items: { type: 'string', minLength: 1 } },
+      pointers: {
+        type: 'array',
+        items: { type: 'string', minLength: 1, maxLength: 2048 },
+        maxItems: 1000,
+        uniqueItems: true
+      },
       timestamp: { type: 'number', minimum: 0 },
       content: { type: 'array', items: ContentMapping.schema },
       metadata: { type: 'object', nullable: true }
