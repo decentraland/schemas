@@ -1,5 +1,15 @@
 import expect from 'expect'
-import { AbstractTypedSchema, ValidateFunction, validateType } from '../src'
+import Ajv from 'ajv'
+import ajvErrors from 'ajv-errors'
+import ajvKeywords from 'ajv-keywords'
+import { AbstractTypedSchema, JSONSchema, ValidateFunction, validateType } from '../src'
+
+export function compileExportedSchema<T>(schema: JSONSchema<T>): ValidateFunction<T> {
+  const ajv = new Ajv({ $data: true, allErrors: true })
+  ajvKeywords(ajv)
+  ajvErrors(ajv, { singleError: true })
+  return ajv.compile(schema)
+}
 
 export function testTypeSignature<T>(theType: AbstractTypedSchema<T>, exampleValue: T) {
   describe(`verifies that the shape of the type conforms the spec`, () => {

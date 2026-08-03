@@ -1,6 +1,6 @@
 import expect from 'expect'
-import { SceneParcels } from '../../../src'
-import { testTypeSignature } from '../../test-utils'
+import { SceneParcels, ValidateFunction } from '../../../src'
+import { compileExportedSchema, testTypeSignature } from '../../test-utils'
 
 describe('Scene parcels tests', () => {
   const parcels: SceneParcels = {
@@ -49,6 +49,34 @@ describe('Scene parcels tests', () => {
 
     it('should reject the duplicated coordinates', () => {
       expect(SceneParcels.validate(duplicatedParcels)).toEqual(false)
+    })
+  })
+
+  describe('when the base is outside the declared parcels', () => {
+    let invalidScene: SceneParcels
+    let directSchemaValidator: ValidateFunction<SceneParcels>
+
+    beforeEach(() => {
+      invalidScene = { base: '1,1', parcels: ['0,0'] }
+      directSchemaValidator = compileExportedSchema(SceneParcels.schema)
+    })
+
+    it('should reject the value through the authoritative validator', () => {
+      expect(SceneParcels.validate(invalidScene)).toEqual(false)
+    })
+
+    it('should reject the value when compiling the exported schema directly', () => {
+      expect(directSchemaValidator(invalidScene)).toEqual(false)
+    })
+
+    it('should expose the AJV contains error', () => {
+      SceneParcels.validate(invalidScene)
+
+      expect(SceneParcels.validate.errors?.map((error) => error.keyword)).toContain('contains')
+    })
+
+    it('should preserve schemaValidator as a compatibility alias', () => {
+      expect(SceneParcels.schemaValidator).toBe(SceneParcels.validate)
     })
   })
 

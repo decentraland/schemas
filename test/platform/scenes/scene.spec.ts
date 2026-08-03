@@ -1,7 +1,7 @@
 import expect from 'expect'
-import { Scene } from '../../../src'
+import { Scene, ValidateFunction } from '../../../src'
 import { RequiredPermission } from '../../../src/platform/scene/scene'
-import { testTypeSignature } from '../../test-utils'
+import { compileExportedSchema, testTypeSignature } from '../../test-utils'
 
 const setScene = (scene: Scene, props: any): Scene => ({ ...scene, ...props })
 
@@ -176,13 +176,25 @@ describe('Scene tests', () => {
 
   describe('when the scene base is outside its parcels', () => {
     let sceneWithUnrelatedBase: Scene
+    let directSchemaValidator: ValidateFunction<Scene>
 
     beforeEach(() => {
       sceneWithUnrelatedBase = setScene(scene, { scene: { base: '1,1', parcels: ['0,0'] } })
+      directSchemaValidator = compileExportedSchema(Scene.schema)
     })
 
     it('should reject the scene metadata', () => {
       expect(Scene.validate(sceneWithUnrelatedBase)).toEqual(false)
+    })
+
+    it('should reject the scene metadata when compiling the exported schema directly', () => {
+      expect(directSchemaValidator(sceneWithUnrelatedBase)).toEqual(false)
+    })
+
+    it('should expose the nested AJV contains error', () => {
+      Scene.validate(sceneWithUnrelatedBase)
+
+      expect(Scene.validate.errors?.map((error) => error.keyword)).toContain('contains')
     })
   })
 })

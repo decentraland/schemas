@@ -239,7 +239,8 @@ export namespace WorldScenesUndeploymentEvent {
               additionalProperties: false
             },
             minItems: 1,
-            uniqueItems: true
+            uniqueItems: true,
+            uniqueItemProperties: ['entityId', 'baseParcel']
           }
         },
         required: ['worldName', 'scenes'],
@@ -250,24 +251,7 @@ export namespace WorldScenesUndeploymentEvent {
     additionalProperties: false
   }
 
-  const schemaValidator: ValidateFunction<WorldScenesUndeploymentEvent> = generateLazyValidator(schema)
-  export const validate: ValidateFunction<WorldScenesUndeploymentEvent> = (
-    event: unknown
-  ): event is WorldScenesUndeploymentEvent => {
-    if (!schemaValidator(event)) {
-      return false
-    }
-
-    const entityIds = event.metadata.scenes.map((scene) => scene.entityId)
-    const baseParcels = event.metadata.scenes.map((scene) => scene.baseParcel)
-    return new Set(entityIds).size === entityIds.length && new Set(baseParcels).size === baseParcels.length
-  }
-
-  Object.defineProperty(validate, 'errors', {
-    get() {
-      return schemaValidator.errors
-    }
-  })
+  export const validate: ValidateFunction<WorldScenesUndeploymentEvent> = generateLazyValidator(schema)
 }
 
 export namespace WorldUndeploymentEvent {

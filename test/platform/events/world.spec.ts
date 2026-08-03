@@ -6,8 +6,10 @@ import {
   WorldDeploymentEvent,
   WorldSettingsChangedEvent,
   AuthLinkType,
-  Events
+  Events,
+  ValidateFunction
 } from '../../../src'
+import { compileExportedSchema } from '../../test-utils'
 
 const ENTITY_ID = 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5q'
 const ANOTHER_ENTITY_ID = 'bafybeiasb5vpmaounyilfuxbd3lryvosl4yefqrfahsb2esg46q6tu6y5r'
@@ -458,6 +460,7 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
 
   describe('and two entries reuse the same entity identity', () => {
     let event: WorldScenesUndeploymentEvent
+    let directSchemaValidator: ValidateFunction<WorldScenesUndeploymentEvent>
 
     beforeEach(() => {
       event = {
@@ -473,10 +476,61 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
           ]
         }
       }
+      directSchemaValidator = compileExportedSchema(WorldScenesUndeploymentEvent.schema)
     })
 
     it('should return false', () => {
       expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+    })
+
+    it('should be rejected when compiling the exported schema directly', () => {
+      expect(directSchemaValidator(event)).toEqual(false)
+    })
+
+    it('should expose the AJV unique-property error', () => {
+      WorldScenesUndeploymentEvent.validate(event)
+
+      expect(WorldScenesUndeploymentEvent.validate.errors?.map((error) => error.keyword)).toContain(
+        'uniqueItemProperties'
+      )
+    })
+  })
+
+  describe('and two entries reuse the same base parcel', () => {
+    let event: WorldScenesUndeploymentEvent
+    let directSchemaValidator: ValidateFunction<WorldScenesUndeploymentEvent>
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'my-world.dcl.eth',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          scenes: [
+            { entityId: ENTITY_ID, baseParcel: '0,0' },
+            { entityId: ANOTHER_ENTITY_ID, baseParcel: '0,0' }
+          ]
+        }
+      }
+      directSchemaValidator = compileExportedSchema(WorldScenesUndeploymentEvent.schema)
+    })
+
+    it('should be rejected by the authoritative validator', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+    })
+
+    it('should be rejected when compiling the exported schema directly', () => {
+      expect(directSchemaValidator(event)).toEqual(false)
+    })
+
+    it('should expose the AJV unique-property error', () => {
+      WorldScenesUndeploymentEvent.validate(event)
+
+      expect(WorldScenesUndeploymentEvent.validate.errors?.map((error) => error.keyword)).toContain(
+        'uniqueItemProperties'
+      )
     })
   })
 
