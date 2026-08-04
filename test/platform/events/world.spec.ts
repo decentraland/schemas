@@ -4,7 +4,6 @@ import {
   WorldScenesUndeploymentEvent,
   WorldUndeploymentEvent,
   WorldDeploymentEvent,
-  WorldSettingsChangedEvent,
   AuthLinkType,
   Events,
   ValidateFunction
@@ -729,32 +728,6 @@ describe('when validating the WorldDeploymentEvent', () => {
     it('should preserve compatibility with existing event consumers', () => {
       expect(WorldDeploymentEvent.validate(event)).toEqual(true)
     })
-  })
-})
-
-describe('when validating the WorldSettingsChangedEvent', () => {
-  let event: WorldSettingsChangedEvent
-
-  beforeEach(() => {
-    event = {
-      type: Events.Type.WORLD,
-      subType: Events.SubType.Worlds.WORLD_SETTINGS_CHANGED,
-      key: 'my-world.dcl.eth',
-      timestamp: 1,
-      metadata: {
-        worldName: 'world',
-        title: 't'.repeat(201),
-        description: 'd'.repeat(5001),
-        contentRating: 'r'.repeat(65),
-        categories: Array.from({ length: 51 }, () => 'category'.repeat(10)),
-        thumbnailUrl: 'not-a-url',
-        accessType: 'a'.repeat(65)
-      }
-    }
-  })
-
-  it('should not introduce settings limits without a domain contract', () => {
-    expect(WorldSettingsChangedEvent.validate(event)).toEqual(true)
   })
 })
 

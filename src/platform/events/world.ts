@@ -159,8 +159,6 @@ export namespace WorldSettingsChangedEvent {
     required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
     additionalProperties: false
   }
-
-  export const validate = generateLazyValidator(schema)
 }
 
 export namespace WorldSpawnCoordinateSetEvent {
