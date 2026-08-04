@@ -203,13 +203,5 @@ export namespace Scene {
     }
   }
 
-  const schemaValidator: ValidateFunction<Scene> = generateLazyValidator(schema)
-  export const validate: ValidateFunction<Scene> = (scene: any): scene is Scene =>
-    schemaValidator(scene) && SceneParcels.validate(scene.scene)
-
-  Object.defineProperty(validate, 'errors', {
-    get() {
-      return schemaValidator.errors ?? SceneParcels.validate.errors
-    }
-  })
+  export const validate: ValidateFunction<Scene> = generateLazyValidator(schema)
 }

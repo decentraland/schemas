@@ -664,17 +664,17 @@ describe('when validating the WorldDeploymentEvent', () => {
     event = {
       type: Events.Type.WORLD,
       subType: Events.SubType.Worlds.DEPLOYMENT,
-      key: ENTITY_ID,
+      key: '',
       timestamp: 1,
       entity: {
-        entityId: ENTITY_ID,
+        entityId: 'entity-id',
         authChain: [{ type: AuthLinkType.SIGNER, payload: '0x0000000000000000000000000000000000000000' }]
       },
       contentServerUrls: ['https://worlds-content-server.decentraland.org']
     }
   })
 
-  describe('and the event contains a bounded HTTPS content server URL', () => {
+  describe('and the event uses its existing public contract', () => {
     it('should return true', () => {
       expect(WorldDeploymentEvent.validate(event)).toEqual(true)
     })
@@ -685,8 +685,28 @@ describe('when validating the WorldDeploymentEvent', () => {
       event.contentServerUrls = ['not-a-url']
     })
 
-    it('should return false', () => {
-      expect(WorldDeploymentEvent.validate(event)).toEqual(false)
+    it('should preserve compatibility with existing string values', () => {
+      expect(WorldDeploymentEvent.validate(event)).toEqual(true)
+    })
+  })
+
+  describe('and the content server list is empty', () => {
+    beforeEach(() => {
+      event.contentServerUrls = []
+    })
+
+    it('should preserve compatibility with existing empty lists', () => {
+      expect(WorldDeploymentEvent.validate(event)).toEqual(true)
+    })
+  })
+
+  describe('and the content server list has repeated values beyond the removed limit', () => {
+    beforeEach(() => {
+      event.contentServerUrls = Array.from({ length: 11 }, () => 'content-server')
+    })
+
+    it('should preserve compatibility with the existing unrestricted list', () => {
+      expect(WorldDeploymentEvent.validate(event)).toEqual(true)
     })
   })
 
@@ -695,8 +715,8 @@ describe('when validating the WorldDeploymentEvent', () => {
       ;(event.entity as any).unexpected = true
     })
 
-    it('should return false', () => {
-      expect(WorldDeploymentEvent.validate(event)).toEqual(false)
+    it('should preserve entity extension fields', () => {
+      expect(WorldDeploymentEvent.validate(event)).toEqual(true)
     })
   })
 
@@ -722,14 +742,18 @@ describe('when validating the WorldSettingsChangedEvent', () => {
       key: 'my-world.dcl.eth',
       timestamp: 1,
       metadata: {
-        worldName: 'my-world.dcl.eth',
+        worldName: 'world',
         title: 't'.repeat(201),
-        description: 'd'.repeat(5001)
+        description: 'd'.repeat(5001),
+        contentRating: 'r'.repeat(65),
+        categories: Array.from({ length: 51 }, () => 'category'.repeat(10)),
+        thumbnailUrl: 'not-a-url',
+        accessType: 'a'.repeat(65)
       }
     }
   })
 
-  it('should not introduce title or description limits without a domain contract', () => {
+  it('should not introduce settings limits without a domain contract', () => {
     expect(WorldSettingsChangedEvent.validate(event)).toEqual(true)
   })
 })
