@@ -1,5 +1,7 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
+const PARCEL_COORDINATE_PATTERN = '^(?:0|-?[1-9][0-9]*),(?:0|-?[1-9][0-9]*)$'
+
 /** @alpha */
 export type SceneParcels = {
   base: string
@@ -15,15 +17,19 @@ export namespace SceneParcels {
     properties: {
       base: {
         type: 'string',
-        pattern: '^-?[0-9]+,-?[0-9]+$'
+        pattern: PARCEL_COORDINATE_PATTERN
       },
       parcels: {
         type: 'array',
         items: {
           type: 'string',
-          pattern: '^-?[0-9]+,-?[0-9]+$'
+          pattern: PARCEL_COORDINATE_PATTERN
         },
-        minItems: 1
+        minItems: 1,
+        uniqueItems: true,
+        contains: {
+          const: { $data: '2/base' }
+        }
       }
     },
     additionalProperties: true,
@@ -31,6 +37,5 @@ export namespace SceneParcels {
   }
 
   export const schemaValidator: ValidateFunction<SceneParcels> = generateLazyValidator(schema)
-  export const validate: ValidateFunction<SceneParcels> = (sceneParcels: any): sceneParcels is SceneParcels =>
-    schemaValidator(sceneParcels) && sceneParcels.parcels.includes(sceneParcels.base)
+  export const validate: ValidateFunction<SceneParcels> = schemaValidator
 }

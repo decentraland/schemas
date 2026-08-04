@@ -2,6 +2,8 @@ import { AuthChain } from '../../misc/auth-chain'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { BaseEvent, Events } from './base'
 
+const PARCEL_SCHEMA = { type: 'string' as const, pattern: '^(?:0|-?[1-9][0-9]*),(?:0|-?[1-9][0-9]*)$' }
+
 export type WorldsPermissionGrantedEvent = BaseEvent & {
   type: Events.Type.WORLD
   subType: Events.SubType.Worlds.WORLDS_PERMISSION_GRANTED
@@ -214,12 +216,13 @@ export namespace WorldScenesUndeploymentEvent {
               type: 'object',
               properties: {
                 entityId: { type: 'string' },
-                baseParcel: { type: 'string' }
+                baseParcel: PARCEL_SCHEMA
               },
               required: ['entityId', 'baseParcel'],
               additionalProperties: false
             },
-            minItems: 1
+            minItems: 1,
+            uniqueItemProperties: ['entityId', 'baseParcel']
           }
         },
         required: ['worldName', 'scenes'],
