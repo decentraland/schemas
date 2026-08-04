@@ -77,4 +77,30 @@ describe('Entity', () => {
       expect(Entity.validate(entity)).toEqual(true)
     })
   })
+
+  describe('when an entity has duplicated pointers', () => {
+    let entity: Entity
+
+    beforeEach(() => {
+      entity = {
+        content: [],
+        id: 'QmUsqJaHc5HQaBrojhBdjF4fr5MQc6CqhwZjqwhVRftNAo',
+        pointers: ['pointer', 'pointer'],
+        timestamp: 1,
+        type: EntityType.SCENE,
+        metadata: {},
+        version: 'v3'
+      }
+    })
+
+    it('should reject the entity', () => {
+      expect(Entity.validate(entity)).toEqual(false)
+    })
+
+    it('should expose the AJV unique-items error', () => {
+      Entity.validate(entity)
+
+      expect(Entity.validate.errors?.map((error) => error.keyword)).toContain('uniqueItems')
+    })
+  })
 })

@@ -222,7 +222,6 @@ export namespace WorldScenesUndeploymentEvent {
               additionalProperties: false
             },
             minItems: 1,
-            uniqueItems: true,
             uniqueItemProperties: ['entityId', 'baseParcel']
           }
         },
