@@ -11,7 +11,10 @@ export enum Network {
   BSC = 'BINANCE SMART CHAIN',
   OPTIMISM = 'OPTIMISM',
   ARBITRUM = 'ARBITRUM',
-  FANTOM = 'FANTOM'
+  FANTOM = 'FANTOM',
+  APE = 'APE',
+  BASE = 'BASE',
+  MONAD = 'MONAD'
 }
 
 /**
