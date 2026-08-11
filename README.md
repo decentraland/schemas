@@ -84,3 +84,7 @@ To generate the file before submitting a PR, run `npm run refresh-api`. This is 
 Versions are handled manually using Github releases and semver.
 
 Main branch is automatically published to the `@next` dist tag to test integrations before final releases happen.
+
+## AI Agent Context
+
+For detailed AI Agent context, see [docs/ai-agent-context.md](docs/ai-agent-context.md).
