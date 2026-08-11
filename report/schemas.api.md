@@ -5941,6 +5941,7 @@ export type WorldScenesUndeploymentEvent = BaseEvent & {
         scenes: Array<{
             entityId: string;
             baseParcel: string;
+            parcels?: string[] | null;
         }>;
     };
 };
