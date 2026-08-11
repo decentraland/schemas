@@ -427,6 +427,93 @@ describe('when validating the WorldScenesUndeploymentEvent', () => {
     })
   })
 
+  describe('and the event includes the undeployed scene footprints', () => {
+    let event: WorldScenesUndeploymentEvent
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'my-world.dcl.eth',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          scenes: [
+            { entityId: ENTITY_ID, baseParcel: '0,0', parcels: ['0,0', '1,0'] },
+            { entityId: ANOTHER_ENTITY_ID, baseParcel: '-1,2', parcels: ['-1,2'] }
+          ]
+        }
+      }
+    })
+
+    it('should return true', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(true)
+    })
+  })
+
+  describe('and an included scene footprint is empty', () => {
+    let event: WorldScenesUndeploymentEvent
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'my-world.dcl.eth',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          scenes: [{ entityId: ENTITY_ID, baseParcel: '0,0', parcels: [] }]
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and an included scene footprint repeats a parcel', () => {
+    let event: WorldScenesUndeploymentEvent
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'my-world.dcl.eth',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          scenes: [{ entityId: ENTITY_ID, baseParcel: '0,0', parcels: ['0,0', '0,0'] }]
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+
+  describe('and an included scene footprint contains a non-canonical parcel', () => {
+    let event: WorldScenesUndeploymentEvent
+
+    beforeEach(() => {
+      event = {
+        type: Events.Type.WORLD,
+        subType: Events.SubType.Worlds.WORLD_SCENES_UNDEPLOYMENT,
+        key: 'my-world.dcl.eth',
+        timestamp: 1,
+        metadata: {
+          worldName: 'my-world.dcl.eth',
+          scenes: [{ entityId: ENTITY_ID, baseParcel: '0,0', parcels: ['00,0'] }]
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(WorldScenesUndeploymentEvent.validate(event)).toEqual(false)
+    })
+  })
+
   describe('and the event is null', () => {
     it('should return false', () => {
       expect(WorldScenesUndeploymentEvent.validate(null)).toEqual(false)

@@ -85,6 +85,7 @@ export type WorldScenesUndeploymentEvent = BaseEvent & {
     scenes: Array<{
       entityId: string
       baseParcel: string
+      parcels?: string[] | null
     }>
   }
 }
@@ -216,7 +217,14 @@ export namespace WorldScenesUndeploymentEvent {
               type: 'object',
               properties: {
                 entityId: { type: 'string' },
-                baseParcel: PARCEL_SCHEMA
+                baseParcel: PARCEL_SCHEMA,
+                parcels: {
+                  type: 'array',
+                  items: PARCEL_SCHEMA,
+                  minItems: 1,
+                  uniqueItems: true,
+                  nullable: true
+                }
               },
               required: ['entityId', 'baseParcel'],
               additionalProperties: false
