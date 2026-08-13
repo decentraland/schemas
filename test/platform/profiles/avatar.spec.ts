@@ -193,4 +193,97 @@ describe('Avatar tests', () => {
       expect(Avatar.validate(avatar)).toEqual(false)
     })
   })
+
+  describe('when the avatar has a description at the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, description: 'x'.repeat(10000) }
+    })
+
+    it('should return true', () => {
+      expect(Avatar.validate(avatar)).toEqual(true)
+    })
+  })
+
+  describe('when the avatar has a description over the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, description: 'x'.repeat(10001) }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has a name over the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, name: 'x'.repeat(257) }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has a blocked entry over the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, blocked: ['x'.repeat(129)] }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has a large but individually bounded blocked list', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, blocked: Array.from({ length: 5000 }, () => '0x' + 'a'.repeat(40)) }
+    })
+
+    it('should return true because the list length is bounded by the entity size cap instead', () => {
+      expect(Avatar.validate(avatar)).toEqual(true)
+    })
+  })
+
+  describe('when the avatar has more wearables than the maximum allowed', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = {
+        ...AVATAR,
+        avatar: {
+          ...AVATAR_INFO,
+          wearables: Array.from({ length: 201 }, (_, i) => `urn:decentraland:off-chain:base-avatars:w${i}`)
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has a wearable urn over the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = {
+        ...AVATAR,
+        avatar: { ...AVATAR_INFO, wearables: ['urn:decentraland:off-chain:base-avatars:' + 'w'.repeat(256)] }
+      }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
 })
