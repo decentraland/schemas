@@ -230,11 +230,11 @@ describe('Avatar tests', () => {
     })
   })
 
-  describe('when the avatar has a blocked entry over the maximum length', () => {
+  describe('when the avatar has a blocked entry longer than an ethereum address', () => {
     let avatar: Avatar
 
     beforeEach(() => {
-      avatar = { ...AVATAR, blocked: ['x'.repeat(129)] }
+      avatar = { ...AVATAR, blocked: ['0x' + 'a'.repeat(41)] }
     })
 
     it('should return false', () => {
@@ -242,14 +242,62 @@ describe('Avatar tests', () => {
     })
   })
 
-  describe('when the avatar has a large but individually bounded blocked list', () => {
+  describe('when the avatar has a blocked list at the maximum length', () => {
     let avatar: Avatar
 
     beforeEach(() => {
       avatar = { ...AVATAR, blocked: Array.from({ length: 5000 }, () => '0x' + 'a'.repeat(40)) }
     })
 
-    it('should return true because the list length is bounded by the entity size cap instead', () => {
+    it('should return true', () => {
+      expect(Avatar.validate(avatar)).toEqual(true)
+    })
+  })
+
+  describe('when the avatar has a blocked list over the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, blocked: Array.from({ length: 5001 }, () => '0x' + 'a'.repeat(40)) }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has a muted list over the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, muted: Array.from({ length: 5001 }, () => '0x' + 'a'.repeat(40)) }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has a userId that is not an ethereum address', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, userId: 'not-an-address' }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has an empty userId as the default profiles do', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, userId: '' }
+    })
+
+    it('should return true', () => {
       expect(Avatar.validate(avatar)).toEqual(true)
     })
   })

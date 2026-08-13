@@ -1,7 +1,7 @@
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 import { Avatar } from './avatar'
 
-const MAX_AVATARS = 10
+const MAX_AVATARS = 1
 
 /**
  * Profile containing one or multiple avatars
@@ -22,7 +22,7 @@ export namespace Profile {
     properties: {
       avatars: {
         type: 'array',
-        // Deployed profiles carry a single avatar; the bound is headroom, not the expected shape.
+        // Deployed profiles carry exactly one avatar; consumers only ever read `avatars[0]`.
         maxItems: MAX_AVATARS,
         items: Avatar.schema
       }

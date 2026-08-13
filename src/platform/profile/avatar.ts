@@ -27,9 +27,20 @@ const DESCRIPTION_MAX_LENGTH = 10000
 const SHORT_TEXT_MAX_LENGTH = 256
 /** The longest address an RFC 5321 mailbox may hold. */
 const EMAIL_MAX_LENGTH = 320
-/** A user id, in practice an ethereum address. */
-const USER_ID_MAX_LENGTH = 128
-/** One entry of `blocked`, `muted` or `interests`. */
+/**
+ * A user id is an ethereum address. The pattern also accepts the empty string, which is what the
+ * deployed `defaultN` profiles carry, so constraining the field does not reject them.
+ */
+const USER_ID_PATTERN = '^(0x[a-fA-F0-9]{40})?$'
+/** `blocked` and `muted` hold user ids, so an entry is at most an address. */
+const ETH_ADDRESS_MAX_LENGTH = 42
+/**
+ * `blocked` and `muted` grow with ordinary use, so this is set far above any observed list rather
+ * than at the tightest workable value: no profile in a sample of recent deployments held a single
+ * entry in either.
+ */
+const MAX_BLOCKED_OR_MUTED = 5000
+/** One entry of `interests`. */
 const LIST_ENTRY_MAX_LENGTH = 128
 const MAX_INTERESTS = 100
 
@@ -244,7 +255,7 @@ export namespace Avatar {
     properties: {
       userId: {
         type: 'string',
-        maxLength: USER_ID_MAX_LENGTH
+        pattern: USER_ID_PATTERN
       },
       name: {
         type: 'string',
@@ -330,21 +341,21 @@ export namespace Avatar {
         nullable: true,
         maxLength: EMAIL_MAX_LENGTH
       },
-      // No maxItems on blocked/muted: the lists grow with ordinary use and the safe bound
-      // depends on production data. Each entry is bounded, so the entity size cap covers them.
       blocked: {
         type: 'array',
+        maxItems: MAX_BLOCKED_OR_MUTED,
         items: {
           type: 'string',
-          maxLength: LIST_ENTRY_MAX_LENGTH
+          maxLength: ETH_ADDRESS_MAX_LENGTH
         },
         nullable: true
       },
       muted: {
         type: 'array',
+        maxItems: MAX_BLOCKED_OR_MUTED,
         items: {
           type: 'string',
-          maxLength: LIST_ENTRY_MAX_LENGTH
+          maxLength: ETH_ADDRESS_MAX_LENGTH
         },
         nullable: true
       },
