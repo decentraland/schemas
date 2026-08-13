@@ -193,4 +193,145 @@ describe('Avatar tests', () => {
       expect(Avatar.validate(avatar)).toEqual(false)
     })
   })
+
+  describe('when the avatar has a description at the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, description: 'x'.repeat(10000) }
+    })
+
+    it('should return true', () => {
+      expect(Avatar.validate(avatar)).toEqual(true)
+    })
+  })
+
+  describe('when the avatar has a description over the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, description: 'x'.repeat(10001) }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has a name over the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, name: 'x'.repeat(257) }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has a blocked entry longer than an ethereum address', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, blocked: ['0x' + 'a'.repeat(41)] }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has a blocked list at the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, blocked: Array.from({ length: 5000 }, () => '0x' + 'a'.repeat(40)) }
+    })
+
+    it('should return true', () => {
+      expect(Avatar.validate(avatar)).toEqual(true)
+    })
+  })
+
+  describe('when the avatar has a blocked list over the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, blocked: Array.from({ length: 5001 }, () => '0x' + 'a'.repeat(40)) }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has a muted list over the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, muted: Array.from({ length: 5001 }, () => '0x' + 'a'.repeat(40)) }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has a userId that is not an ethereum address', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, userId: 'not-an-address' }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has an empty userId as the default profiles do', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = { ...AVATAR, userId: '' }
+    })
+
+    it('should return true', () => {
+      expect(Avatar.validate(avatar)).toEqual(true)
+    })
+  })
+
+  describe('when the avatar has more wearables than the maximum allowed', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = {
+        ...AVATAR,
+        avatar: {
+          ...AVATAR_INFO,
+          wearables: Array.from({ length: 201 }, (_, i) => `urn:decentraland:off-chain:base-avatars:w${i}`)
+        }
+      }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
+
+  describe('when the avatar has a wearable urn over the maximum length', () => {
+    let avatar: Avatar
+
+    beforeEach(() => {
+      avatar = {
+        ...AVATAR,
+        avatar: { ...AVATAR_INFO, wearables: ['urn:decentraland:off-chain:base-avatars:' + 'w'.repeat(256)] }
+      }
+    })
+
+    it('should return false', () => {
+      expect(Avatar.validate(avatar)).toEqual(false)
+    })
+  })
 })
