@@ -162,6 +162,13 @@ describe('Emote tests', () => {
     )
   })
 
+  it('emote without standard props passes when it belongs to an off-chain base collection', () => {
+    const offChainEmote = (id: string) => ({ ...baseEmote, id, emoteDataADR74 })
+    expect(Emote.validate(offChainEmote('urn:decentraland:off-chain:base-emotes:wave'))).toEqual(true)
+    expect(Emote.validate(offChainEmote('urn:decentraland:off-chain:base-scene-emotes:sittingChair2'))).toEqual(true)
+    expect(Emote.validate(offChainEmote('urn:decentraland:off-chain:other-collection:wave'))).toEqual(false)
+  })
+
   it('emote with standard props is standard', () => {
     expect(isStandard(standardEmote)).toBeTruthy()
   })

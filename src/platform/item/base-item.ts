@@ -69,5 +69,6 @@ export function isBaseEmote(item: BaseItem): boolean {
   }
 
   const urnParts = item.id.split(':')
-  return urnParts.length === 5 && urnParts[1] === 'decentraland' && urnParts[3] === 'base-emotes'
+  const isBaseCollection = urnParts[3] === 'base-emotes' || urnParts[3] === 'base-scene-emotes'
+  return urnParts.length === 5 && urnParts[1] === 'decentraland' && isBaseCollection
 }
