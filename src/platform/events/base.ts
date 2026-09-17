@@ -74,7 +74,8 @@ import {
   EventEndedEvent,
   EventApprovedEvent,
   EventRejectedEvent,
-  EventDeletedEvent
+  EventDeletedEvent,
+  EventExpiringSoonEvent
 } from './event'
 import {
   GovernanceProposalEnactedEvent,
@@ -256,7 +257,8 @@ export namespace Events {
       EVENT_ENDED = 'event-ended',
       EVENT_APPROVED = 'event-approved',
       EVENT_REJECTED = 'event-rejected',
-      EVENT_DELETED = 'event-deleted'
+      EVENT_DELETED = 'event-deleted',
+      EVENT_EXPIRING_SOON = 'event-expiring-soon'
     }
 
     export enum Governance {
@@ -375,6 +377,7 @@ export type Event =
   | EventApprovedEvent
   | EventRejectedEvent
   | EventDeletedEvent
+  | EventExpiringSoonEvent
   | GovernanceProposalEnactedEvent
   | GovernanceCoauthorRequestedEvent
   | GovernancePitchPassedEvent

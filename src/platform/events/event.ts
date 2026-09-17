@@ -91,6 +91,19 @@ export type EventDeletedEvent = BaseEvent & {
   }
 }
 
+export type EventExpiringSoonEvent = BaseEvent & {
+  type: Events.Type.EVENT
+  subType: Events.SubType.Event.EVENT_EXPIRING_SOON
+  metadata: {
+    host: string
+    title: string
+    description: string
+    image: string
+    link: string
+    expiresAt: string
+  }
+}
+
 export namespace EventStartedEvent {
   export const schema: JSONSchema<EventStartedEvent> = {
     type: 'object',
@@ -287,4 +300,32 @@ export namespace EventDeletedEvent {
     additionalProperties: false
   }
   export const validate: ValidateFunction<EventDeletedEvent> = generateLazyValidator(schema)
+}
+
+export namespace EventExpiringSoonEvent {
+  export const schema: JSONSchema<EventExpiringSoonEvent> = {
+    type: 'object',
+    properties: {
+      type: { type: 'string', const: Events.Type.EVENT },
+      subType: { type: 'string', const: Events.SubType.Event.EVENT_EXPIRING_SOON },
+      key: { type: 'string' },
+      timestamp: { type: 'number', minimum: 0 },
+      metadata: {
+        type: 'object',
+        properties: {
+          host: { type: 'string' },
+          title: { type: 'string' },
+          description: { type: 'string' },
+          image: { type: 'string' },
+          link: { type: 'string' },
+          expiresAt: { type: 'string' }
+        },
+        required: ['host', 'title', 'image', 'link', 'expiresAt'],
+        additionalProperties: false
+      }
+    },
+    required: ['type', 'subType', 'key', 'timestamp', 'metadata'],
+    additionalProperties: false
+  }
+  export const validate: ValidateFunction<EventExpiringSoonEvent> = generateLazyValidator(schema)
 }
