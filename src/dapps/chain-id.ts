@@ -21,7 +21,13 @@ export enum ChainId {
   OPTIMISM_MAINNET = 10,
   ARBITRUM_MAINNET = 42161,
   FANTOM_MAINNET = 250,
-  AVALANCHE_MAINNET = 43114
+  AVALANCHE_MAINNET = 43114,
+  APE_MAINNET = 33139,
+  APE_CALDERA = 33111,
+  BASE_MAINNET = 8453,
+  BASE_SEPOLIA = 84532,
+  MONAD_MAINNET = 143,
+  MONAD_TESTNET = 10143
 }
 
 /**
@@ -104,7 +110,10 @@ export function getNetworkMapping(chainId: ChainId): Record<Network, ChainId> {
     [Network.OPTIMISM]: ChainId.OPTIMISM_MAINNET,
     [Network.ARBITRUM]: ChainId.ARBITRUM_MAINNET,
     [Network.FANTOM]: ChainId.FANTOM_MAINNET,
-    [Network.AVALANCHE]: ChainId.AVALANCHE_MAINNET
+    [Network.AVALANCHE]: ChainId.AVALANCHE_MAINNET,
+    [Network.APE]: ChainId.APE_MAINNET,
+    [Network.BASE]: ChainId.BASE_MAINNET,
+    [Network.MONAD]: ChainId.MONAD_MAINNET
   }
   switch (chainId) {
     case ChainId.ETHEREUM_MAINNET:
@@ -197,6 +206,15 @@ export function getNetwork(chainId: ChainId): Network {
       return Network.FANTOM
     case ChainId.AVALANCHE_MAINNET:
       return Network.AVALANCHE
+    case ChainId.APE_MAINNET:
+    case ChainId.APE_CALDERA:
+      return Network.APE
+    case ChainId.BASE_MAINNET:
+    case ChainId.BASE_SEPOLIA:
+      return Network.BASE
+    case ChainId.MONAD_MAINNET:
+    case ChainId.MONAD_TESTNET:
+      return Network.MONAD
   }
 }
 

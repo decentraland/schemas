@@ -1,6 +1,7 @@
 export { PaginatedResponse, PaginatedParameters } from './common'
 export { Account, AccountFilters, AccountSortBy } from './account'
 export { ChainId, getChainName, getURNProtocol } from './chain-id'
+export { contractNetworkToChainId } from './contract-network-chain-id'
 export { ChainName, getChainId } from './chain-name'
 export { Collection, CollectionFilters, CollectionSortBy } from './collection'
 export { Contract, ContractFilters, ContractSortBy } from './contract'

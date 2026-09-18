@@ -671,9 +671,17 @@ export namespace CatalystDeploymentEvent {
 // @alpha
 export enum ChainId {
     // (undocumented)
+    APE_CALDERA = 33111,
+    // (undocumented)
+    APE_MAINNET = 33139,
+    // (undocumented)
     ARBITRUM_MAINNET = 42161,
     // (undocumented)
     AVALANCHE_MAINNET = 43114,
+    // (undocumented)
+    BASE_MAINNET = 8453,
+    // (undocumented)
+    BASE_SEPOLIA = 84532,
     // (undocumented)
     BSC_MAINNET = 56,
     // (undocumented)
@@ -696,6 +704,10 @@ export enum ChainId {
     MATIC_MAINNET = 137,
     // (undocumented)
     MATIC_MUMBAI = 80001,
+    // (undocumented)
+    MONAD_MAINNET = 143,
+    // (undocumented)
+    MONAD_TESTNET = 10143,
     // (undocumented)
     OPTIMISM_MAINNET = 10
 }
@@ -1252,6 +1264,9 @@ export enum ContractNetwork {
     // (undocumented)
     SEPOLIA = "sepolia"
 }
+
+// @alpha
+export const contractNetworkToChainId: Record<ContractNetwork, ChainId>;
 
 // Warning: (ae-missing-release-tag) "ContractSortBy" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
 //
@@ -3300,9 +3315,13 @@ export namespace MultipleMapping {
 // @alpha
 export enum Network {
     // (undocumented)
+    APE = "APE",
+    // (undocumented)
     ARBITRUM = "ARBITRUM",
     // (undocumented)
     AVALANCHE = "AVALANCHE",
+    // (undocumented)
+    BASE = "BASE",
     // (undocumented)
     BSC = "BINANCE SMART CHAIN",
     // (undocumented)
@@ -3311,6 +3330,8 @@ export enum Network {
     FANTOM = "FANTOM",
     // (undocumented)
     MATIC = "MATIC",
+    // (undocumented)
+    MONAD = "MONAD",
     // (undocumented)
     OPTIMISM = "OPTIMISM"
 }
