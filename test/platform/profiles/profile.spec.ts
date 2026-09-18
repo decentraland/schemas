@@ -23,3 +23,15 @@ describe('Profile tests', () => {
     expect(validate.errors![0].message).toEqual("must have required property 'avatars'")
   })
 })
+
+describe('when the profile has more than one avatar', () => {
+  let profile: Profile
+
+  beforeEach(() => {
+    profile = { avatars: [AVATAR, AVATAR] }
+  })
+
+  it('should return false', () => {
+    expect(Profile.validate(profile)).toEqual(false)
+  })
+})

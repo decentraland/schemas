@@ -3,6 +3,48 @@ import { Color3, EthAddress, IPFSv2, WearableId } from '../../misc'
 import { generateLazyValidator, JSONSchema, ValidateFunction } from '../../validation'
 
 /**
+ * Bounds for the free-form avatar properties.
+ *
+ * A profile's metadata was previously unbounded in every direction: no string had a maximum
+ * length and no array had a maximum length either, so a single entry could carry megabytes.
+ * These limits are applied to already-deployed profiles whenever a node re-validates historical
+ * content, so each one is set well above the largest value real profiles are expected to hold
+ * rather than at the tightest value that would work.
+ */
+/** Longest accepted URN. The longest linked-wearable form is comfortably under this. */
+const URN_MAX_LENGTH = 256
+/** Equipped wearables, one per category, plus generous headroom. */
+const MAX_WEARABLES = 200
+/** `forceRender` holds wearable categories, so it is already bounded by that enum. */
+const MAX_FORCE_RENDER = 32
+/** Emote slots are validated to 0-9 elsewhere; this only bounds the array itself. */
+const MAX_EMOTES = 100
+/** A display name, not prose. */
+const NAME_MAX_LENGTH = 256
+/** A user-written bio. */
+const DESCRIPTION_MAX_LENGTH = 10000
+/** Short free-form profile fields such as `country`, `pronouns` or `profession`. */
+const SHORT_TEXT_MAX_LENGTH = 256
+/** The longest address an RFC 5321 mailbox may hold. */
+const EMAIL_MAX_LENGTH = 320
+/**
+ * A user id is an ethereum address. The pattern also accepts the empty string, which is what the
+ * deployed `defaultN` profiles carry, so constraining the field does not reject them.
+ */
+const USER_ID_PATTERN = '^(0x[a-fA-F0-9]{40})?$'
+/** `blocked` and `muted` hold user ids, so an entry is at most an address. */
+const ETH_ADDRESS_MAX_LENGTH = 42
+/**
+ * `blocked` and `muted` grow with ordinary use, so this is set far above any observed list rather
+ * than at the tightest workable value: no profile in a sample of recent deployments held a single
+ * entry in either.
+ */
+const MAX_BLOCKED_OR_MUTED = 5000
+/** One entry of `interests`. */
+const LIST_ENTRY_MAX_LENGTH = 128
+const MAX_INTERESTS = 100
+
+/**
  * Snapshots
  * @alpha
  */
@@ -56,7 +98,8 @@ export namespace AvatarInfo {
     required: ['bodyShape', 'eyes', 'hair', 'skin'],
     properties: {
       bodyShape: {
-        type: 'string'
+        type: 'string',
+        maxLength: URN_MAX_LENGTH
       },
       eyes: {
         type: 'object',
@@ -81,22 +124,26 @@ export namespace AvatarInfo {
       },
       wearables: {
         type: 'array',
+        maxItems: MAX_WEARABLES,
         items: {
-          type: 'string'
+          type: 'string',
+          maxLength: URN_MAX_LENGTH
         }
       },
       forceRender: {
         type: 'array',
         nullable: true,
+        maxItems: MAX_FORCE_RENDER,
         items: WearableCategory.schema
       },
       emotes: {
         type: 'array',
+        maxItems: MAX_EMOTES,
         items: {
           type: 'object',
           properties: {
             slot: { type: 'number' },
-            urn: { type: 'string' }
+            urn: { type: 'string', maxLength: URN_MAX_LENGTH }
           },
           required: ['slot', 'urn']
         },
@@ -151,7 +198,8 @@ export namespace Link {
     required: ['title', 'url'],
     properties: {
       title: {
-        type: 'string'
+        type: 'string',
+        maxLength: SHORT_TEXT_MAX_LENGTH
       },
       url: LinkUrl.schema
     }
@@ -206,17 +254,20 @@ export namespace Avatar {
     required: ['name', 'description', 'ethAddress', 'version', 'tutorialStep', 'avatar', 'hasClaimedName'],
     properties: {
       userId: {
-        type: 'string'
+        type: 'string',
+        pattern: USER_ID_PATTERN
       },
       name: {
-        type: 'string'
+        type: 'string',
+        maxLength: NAME_MAX_LENGTH
       },
       nameColor: {
         ...Color3.schema,
         nullable: true
       },
       description: {
-        type: 'string'
+        type: 'string',
+        maxLength: DESCRIPTION_MAX_LENGTH
       },
       links: {
         type: 'array',
@@ -226,35 +277,43 @@ export namespace Avatar {
       },
       country: {
         nullable: true,
-        type: 'string'
+        type: 'string',
+        maxLength: SHORT_TEXT_MAX_LENGTH
       },
       employmentStatus: {
         nullable: true,
-        type: 'string'
+        type: 'string',
+        maxLength: SHORT_TEXT_MAX_LENGTH
       },
       gender: {
         nullable: true,
-        type: 'string'
+        type: 'string',
+        maxLength: SHORT_TEXT_MAX_LENGTH
       },
       pronouns: {
         nullable: true,
-        type: 'string'
+        type: 'string',
+        maxLength: SHORT_TEXT_MAX_LENGTH
       },
       relationshipStatus: {
         nullable: true,
-        type: 'string'
+        type: 'string',
+        maxLength: SHORT_TEXT_MAX_LENGTH
       },
       sexualOrientation: {
         nullable: true,
-        type: 'string'
+        type: 'string',
+        maxLength: SHORT_TEXT_MAX_LENGTH
       },
       language: {
         nullable: true,
-        type: 'string'
+        type: 'string',
+        maxLength: SHORT_TEXT_MAX_LENGTH
       },
       profession: {
         nullable: true,
-        type: 'string'
+        type: 'string',
+        maxLength: SHORT_TEXT_MAX_LENGTH
       },
       birthdate: {
         nullable: true,
@@ -262,11 +321,13 @@ export namespace Avatar {
       },
       realName: {
         nullable: true,
-        type: 'string'
+        type: 'string',
+        maxLength: SHORT_TEXT_MAX_LENGTH
       },
       hobbies: {
         nullable: true,
-        type: 'string'
+        type: 'string',
+        maxLength: SHORT_TEXT_MAX_LENGTH
       },
       ethAddress: EthAddress.schema,
       version: {
@@ -277,26 +338,33 @@ export namespace Avatar {
       },
       email: {
         type: 'string',
-        nullable: true
+        nullable: true,
+        maxLength: EMAIL_MAX_LENGTH
       },
       blocked: {
         type: 'array',
+        maxItems: MAX_BLOCKED_OR_MUTED,
         items: {
-          type: 'string'
+          type: 'string',
+          maxLength: ETH_ADDRESS_MAX_LENGTH
         },
         nullable: true
       },
       muted: {
         type: 'array',
+        maxItems: MAX_BLOCKED_OR_MUTED,
         items: {
-          type: 'string'
+          type: 'string',
+          maxLength: ETH_ADDRESS_MAX_LENGTH
         },
         nullable: true
       },
       interests: {
         type: 'array',
+        maxItems: MAX_INTERESTS,
         items: {
-          type: 'string'
+          type: 'string',
+          maxLength: LIST_ENTRY_MAX_LENGTH
         },
         nullable: true
       },
