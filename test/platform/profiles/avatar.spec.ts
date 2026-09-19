@@ -36,7 +36,7 @@ export const AVATAR: Avatar = {
     },
     {
       title: 'Discord',
-      url: 'https://discord.gg/decentraland'
+      url: 'https://discord.gg/n4kzQvgux7'
     },
     {
       title: 'Handle',
