@@ -84,8 +84,10 @@ export type Trade = {
   sent: TradeAsset[]
   received: TradeAssetWithBeneficiary[]
   contract: string
-  /** true when the marketplace contract that settles this listing is paused; purchases revert until it's unpaused */
-  paused?: boolean
+  /**
+   * true when the marketplace contract that settles this trade is paused; settlement reverts until it's unpaused. Undefined means not paused or unknown
+   */
+  isPaused?: boolean
 }
 
 export type TradeCreation = {
