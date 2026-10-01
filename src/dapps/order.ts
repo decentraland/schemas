@@ -19,6 +19,8 @@ export type Order = {
   chainId: ChainId
   issuedId: string
   tradeId?: string
+  /** true when the marketplace contract that settles this listing is paused; purchases revert until it's unpaused */
+  paused?: boolean
 }
 
 export type OrderFilters = {
@@ -88,6 +90,10 @@ export namespace Order {
       },
       tradeId: {
         type: 'string',
+        nullable: true
+      },
+      paused: {
+        type: 'boolean',
         nullable: true
       }
     },

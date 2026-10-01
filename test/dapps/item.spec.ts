@@ -45,5 +45,14 @@ describe('Item tests', () => {
       expect(Item.validate(null)).toEqual(false)
       expect(Item.validate({})).toEqual(false)
     })
+
+    it('should accept a boolean paused flag', () => {
+      expect(Item.validate({ ...wearable, paused: true })).toEqual(true)
+      expect(Item.validate({ ...wearable, paused: false })).toEqual(true)
+    })
+
+    it('should reject a non-boolean paused flag', () => {
+      expect(Item.validate({ ...wearable, paused: 'yes' })).toEqual(false)
+    })
   })
 })

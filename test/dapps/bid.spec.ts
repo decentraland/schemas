@@ -29,4 +29,13 @@ describe('Bid tests', () => {
     expect(Bid.validate(null)).toEqual(false)
     expect(Bid.validate({})).toEqual(false)
   })
+
+  it('should accept a boolean paused flag', () => {
+    expect(Bid.validate({ ...bid, paused: true })).toEqual(true)
+    expect(Bid.validate({ ...bid, paused: false })).toEqual(true)
+  })
+
+  it('should reject a non-boolean paused flag', () => {
+    expect(Bid.validate({ ...bid, paused: 'yes' })).toEqual(false)
+  })
 })
