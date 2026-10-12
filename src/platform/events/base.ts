@@ -34,7 +34,7 @@ import {
   CommunityPostAddedEvent,
   CommunityVoiceChatStartedEvent
 } from './communities'
-import { BidReceivedEvent } from './marketplace'
+import { BidReceivedEvent, ItemDiscountedEvent } from './marketplace'
 import { PhotoPrivacyChangedEvent, PhotoTakenEvent } from './camera'
 import { ReferralInvitedUsersAcceptedEvent, ReferralNewTierReachedEvent } from './referral'
 import {
@@ -135,7 +135,8 @@ export namespace Events {
     }
 
     export enum Marketplace {
-      BID_RECEIVED = 'bid-received'
+      BID_RECEIVED = 'bid-received',
+      ITEM_DISCOUNTED = 'item-discounted'
     }
 
     export enum CatalystDeployment {
@@ -318,6 +319,7 @@ export type Event =
   | CollectionCreatedEvent
   | FriendshipRequestEvent
   | FriendshipAcceptedEvent
+  | ItemDiscountedEvent
   | ItemPublishedEvent
   | ItemSoldEvent
   | LoggedInEvent
