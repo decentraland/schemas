@@ -21,6 +21,7 @@ export type EmoteEvents = {
 
 export interface ISceneController {
   getScreenshot(width: number, height: number): Promise<string>
+  exportVRM(): Promise<void>
   getMetrics(): Promise<Metrics>
   changeZoom(zoom: number): Promise<void>
   panCamera(offset: { x?: number; y?: number; z?: number }): Promise<void>
