@@ -1,5 +1,5 @@
 import expect from 'expect'
-import { AuthChain, AuthLinkType } from '../../src'
+import { AuthChain, AuthLink, AuthLinkType } from '../../src'
 import { expectValidationFailureWithErrors } from '../test-utils'
 describe('auth-chain', () => {
   it('valid with empty string signature for SIGNER', () => {
@@ -96,4 +96,44 @@ describe('auth-chain', () => {
     ]
     expectValidationFailureWithErrors(AuthChain.validate, chain, ['must be equal to constant'])
   })
+
+  for (const type of [AuthLinkType.ECDSA_PERSONAL_SCOPED_EPHEMERAL, AuthLinkType.ECDSA_EIP_1654_SCOPED_EPHEMERAL]) {
+    describe(`when validating a ${type} link`, () => {
+      let link: AuthLink
+      let chain: AuthChain
+
+      beforeEach(() => {
+        link = {
+          type,
+          // Payloads are opaque strings here; scoped grammar and grants are checked by the cryptographic verifier.
+          payload:
+            'Decentraland Scoped Login\nEphemeral: 0x1111111111111111111111111111111111111111\nExpiration: 2026-10-29T00:00:00.000Z\nAllow: insights:logs-read',
+          signature: '0x1234'
+        }
+        chain = [
+          { type: AuthLinkType.SIGNER, payload: '0x2222222222222222222222222222222222222222' },
+          link,
+          { type: AuthLinkType.ECDSA_PERSONAL_SIGNED_ENTITY, payload: 'request', signature: '0x5678' }
+        ]
+      })
+
+      it('should accept the scoped link structure', () => {
+        expect(AuthLink.validate(link)).toEqual(true)
+      })
+
+      it('should accept a chain containing the scoped link', () => {
+        expect(AuthChain.validate(chain)).toEqual(true)
+      })
+
+      describe('and the signature is missing', () => {
+        beforeEach(() => {
+          delete link.signature
+        })
+
+        it('should reject the chain', () => {
+          expectValidationFailureWithErrors(AuthChain.validate, chain, ["must have required property 'signature'"])
+        })
+      })
+    })
+  }
 })
