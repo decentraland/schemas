@@ -17,6 +17,10 @@ export enum AuthLinkType {
   'SIGNER' = 'SIGNER',
   'ECDSA_PERSONAL_EPHEMERAL' = 'ECDSA_EPHEMERAL',
   'ECDSA_PERSONAL_SIGNED_ENTITY' = 'ECDSA_SIGNED_ENTITY',
+  /** Scoped delegation under ADR-162. Requires scoped-aware cryptographic validation and authorization. */
+  'ECDSA_PERSONAL_SCOPED_EPHEMERAL' = 'ECDSA_SCOPED_EPHEMERAL',
+  /** Contract-wallet scoped delegation under ADR-162 (EIP-1654). */
+  'ECDSA_EIP_1654_SCOPED_EPHEMERAL' = 'ECDSA_EIP_1654_SCOPED_EPHEMERAL',
   /**
    * See https://github.com/ethereum/EIPs/issues/1654
    */
