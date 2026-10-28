@@ -7,6 +7,22 @@ Install it with:
 npm i @dcl/schemas
 ```
 
+## Scoped auth-chain adoption (ADR-162)
+
+`AuthLink` and `AuthChain` recognize `ECDSA_SCOPED_EPHEMERAL` and
+`ECDSA_EIP_1654_SCOPED_EPHEMERAL`. This validates the link structure only; consumers
+must still verify signatures and authorize the service, operation, and resource
+using a scoped-aware verifier.
+
+After upgrading, chains with these types pass the schema enum check. Services
+that do not accept scoped logins, including Catalyst and Worlds deployments using
+such verifiers, reject them later during cryptographic validation instead. The
+error message therefore changes from a schema enum error to a verifier error.
+
+Once this schemas version is released, core-libs can adopt these enum members and
+replace its temporary `ScopedAuthLinkType` definitions and casts. Consumers should
+upgrade both schemas and scoped-aware authorization before accepting scoped logins.
+
 ## Design Guidelines
 
 - Prevent type problems across projects
