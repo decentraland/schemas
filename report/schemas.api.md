@@ -4658,6 +4658,8 @@ export enum RequiredPermission {
     // (undocumented)
     OPEN_EXTERNAL_LINK = "OPEN_EXTERNAL_LINK",
     // (undocumented)
+    SPAWN_PORTABLE_EXPERIENCE = "SPAWN_PORTABLE_EXPERIENCE",
+    // (undocumented)
     USE_FETCH = "USE_FETCH",
     // (undocumented)
     USE_WEB3_API = "USE_WEB3_API",
