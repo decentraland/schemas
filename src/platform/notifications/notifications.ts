@@ -12,6 +12,7 @@ export enum NotificationType {
   EVENT_APPROVED = 'event_approved',
   EVENT_REJECTED = 'event_rejected',
   EVENT_DELETED = 'event_deleted',
+  EVENT_EXPIRING_SOON = 'event_expiring_soon',
   GOVERNANCE_ANNOUNCEMENT = 'governance_announcement',
   GOVERNANCE_AUTHORED_PROPOSAL_FINISHED = 'governance_authored_proposal_finished',
   GOVERNANCE_COAUTHOR_REQUESTED = 'governance_coauthor_requested',
