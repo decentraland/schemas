@@ -5559,6 +5559,7 @@ export type UserJoinedRoomEvent = BaseEvent & {
         voiceChatId?: string;
         isWorld: boolean;
         roomType: RoomType;
+        sessionId?: string;
     };
 };
 
@@ -5586,6 +5587,7 @@ export type UserLeftRoomEvent = BaseEvent & {
         islandName?: string;
         communityId?: string;
         voiceChatId?: string;
+        sessionId?: string;
     };
 };
 

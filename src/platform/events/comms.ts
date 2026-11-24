@@ -14,6 +14,8 @@ export type UserJoinedRoomEvent = BaseEvent & {
     voiceChatId?: string
     isWorld: boolean
     roomType: RoomType
+    /** LiveKit participant SID shared by the join and leave of a single connection. */
+    sessionId?: string
   }
 }
 
@@ -46,7 +48,8 @@ export namespace UserJoinedRoomEvent {
           communityId: { type: 'string', nullable: true },
           voiceChatId: { type: 'string', nullable: true },
           isWorld: { type: 'boolean' },
-          roomType: { type: 'string', enum: Object.values(RoomType) }
+          roomType: { type: 'string', enum: Object.values(RoomType) },
+          sessionId: { type: 'string', nullable: true, minLength: 1 }
         },
         required: ['parcel', 'sceneId', 'userAddress', 'realmName', 'isWorld', 'roomType']
       }
@@ -69,6 +72,8 @@ export type UserLeftRoomEvent = BaseEvent & {
     islandName?: string
     communityId?: string
     voiceChatId?: string
+    /** LiveKit participant SID shared by the join and leave of a single connection. */
+    sessionId?: string
   }
 }
 
@@ -90,7 +95,8 @@ export namespace UserLeftRoomEvent {
           sceneId: { type: 'string', nullable: true },
           islandName: { type: 'string', nullable: true },
           communityId: { type: 'string', nullable: true },
-          voiceChatId: { type: 'string', nullable: true }
+          voiceChatId: { type: 'string', nullable: true },
+          sessionId: { type: 'string', nullable: true, minLength: 1 }
         },
         required: ['isWorld', 'userAddress', 'realmName', 'roomType']
       }

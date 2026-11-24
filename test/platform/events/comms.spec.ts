@@ -1,6 +1,7 @@
 import expect from 'expect'
 import {
   UserJoinedRoomEvent,
+  UserLeftRoomEvent,
   Events,
   UserBannedFromSceneEvent,
   UserUnbannedFromSceneEvent,
@@ -25,6 +26,10 @@ describe('Comms Events tests', () => {
     }
 
     expect(UserJoinedRoomEvent.validate(event)).toEqual(true)
+    expect(
+      UserJoinedRoomEvent.validate({ ...event, metadata: { ...event.metadata, sessionId: 'PA_room_session' } })
+    ).toEqual(true)
+    expect(UserJoinedRoomEvent.validate({ ...event, metadata: { ...event.metadata, sessionId: '' } })).toEqual(false)
     expect(UserJoinedRoomEvent.validate(null)).toEqual(false)
     expect(UserJoinedRoomEvent.validate({})).toEqual(false)
   })
@@ -44,6 +49,30 @@ describe('Comms Events tests', () => {
     }
 
     expect(UserJoinedRoomEvent.validate(event)).toEqual(false)
+  })
+
+  describe('UserLeftRoomEvent', () => {
+    it('should validate both legacy leaves and leaves with a session ID', () => {
+      const event: UserLeftRoomEvent = {
+        type: Events.Type.COMMS,
+        subType: Events.SubType.Comms.USER_LEFT_ROOM,
+        key: 'key',
+        timestamp: 1,
+        metadata: {
+          sceneId: 'scene-id',
+          userAddress: '0x123',
+          realmName: 'realm-name',
+          isWorld: false,
+          roomType: RoomType.SCENE
+        }
+      }
+
+      expect(UserLeftRoomEvent.validate(event)).toEqual(true)
+      expect(
+        UserLeftRoomEvent.validate({ ...event, metadata: { ...event.metadata, sessionId: 'PA_room_session' } })
+      ).toEqual(true)
+      expect(UserLeftRoomEvent.validate({ ...event, metadata: { ...event.metadata, sessionId: 1 } })).toEqual(false)
+    })
   })
 
   describe('UserBannedFromSceneEvent', () => {
