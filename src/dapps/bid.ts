@@ -24,6 +24,10 @@ export type BaseBid = {
   network: Network.ETHEREUM | Network.MATIC
   chainId: ChainId
   fingerprint: string
+  /**
+   * true when the marketplace contract the bid was signed on is paused; accepting it reverts until it's unpaused. Undefined means not paused or unknown
+   */
+  isPaused?: boolean
 }
 
 export type LegacyBid = BaseBid & {
@@ -113,6 +117,10 @@ export namespace Bid {
       },
       updatedAt: {
         type: 'integer'
+      },
+      isPaused: {
+        type: 'boolean',
+        nullable: true
       }
     },
     required: [

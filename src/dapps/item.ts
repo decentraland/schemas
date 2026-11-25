@@ -47,6 +47,10 @@ export type Item = {
   tradeId?: string
   tradeExpiresAt?: number
   tradeContractAddress?: string
+  /**
+   * true when the marketplace contract that settles this listing is paused; buying it reverts until it's unpaused. Undefined means not paused or unknown
+   */
+  isPaused?: boolean
 }
 
 export type ItemFilters = {
@@ -216,6 +220,10 @@ export namespace Item {
       },
       tradeExpiresAt: {
         type: 'integer',
+        nullable: true
+      },
+      isPaused: {
+        type: 'boolean',
         nullable: true
       }
     },

@@ -27,4 +27,13 @@ describe('Order tests', () => {
     expect(Order.validate(null)).toEqual(false)
     expect(Order.validate({})).toEqual(false)
   })
+
+  it('should accept a boolean isPaused flag', () => {
+    expect(Order.validate({ ...order, isPaused: true })).toEqual(true)
+    expect(Order.validate({ ...order, isPaused: false })).toEqual(true)
+  })
+
+  it('should reject a non-boolean isPaused flag', () => {
+    expect(Order.validate({ ...order, isPaused: 'yes' })).toEqual(false)
+  })
 })
