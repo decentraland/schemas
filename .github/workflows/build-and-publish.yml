@@ -63,9 +63,30 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.SDK_TEAM_AWS_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.SDK_TEAM_AWS_SECRET }}
 
+      ## check if version already exists on npm to avoid duplicate publish errors
+      - name: check if version already published
+        id: version_check
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            VERSION="${{ github.event.release.tag_name }}"
+          elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            VERSION="${{ github.ref_name }}"
+          else
+            VERSION=$(node -p "require('./package.json').version")
+          fi
+          PACKAGE_NAME=$(node -p "require('./package.json').name")
+          if npm view "${PACKAGE_NAME}@${VERSION}" version 2>/dev/null; then
+            echo "${PACKAGE_NAME}@${VERSION} already exists on npm, skipping publish"
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "${PACKAGE_NAME}@${VERSION} not found on npm, proceeding with publish"
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
       ## release publish for master/main pushes, tags and releases (npm)
       - name: publish packages
-        if: ${{ github.event_name != 'pull_request' }}
+        if: ${{ github.event_name != 'pull_request' && steps.version_check.outputs.exists != 'true' }}
         uses: decentraland/oddish-action@0074f2d535c43b5c83f136525304a6277166d77f # @master
         with:
           access: public
