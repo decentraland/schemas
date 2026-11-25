@@ -1,3 +1,4 @@
+import { IPreviewController } from '../..'
 import { JSONSchema, generateLazyValidator, ValidateFunction } from '../../validation'
 import { PreviewEmoteEventType } from './preview-emote-event-type'
 import { EmoteEventPayload } from './preview-emote-event-payload'
@@ -38,28 +39,13 @@ export type PreviewMessagePayload<T extends PreviewMessageType> = T extends Prev
   ? { options: PreviewOptions }
   : T extends PreviewMessageType.CONTROLLER_REQUEST
   ? {
-      id: string
-      namespace: 'scene' | 'emote' | 'physics'
-      method:
-        | 'getScreenshot'
-        | 'getMetrics'
-        | 'changeZoom'
-        | 'changeCameraPosition'
-        | 'panCamera'
-        | 'cleanup'
-        | 'getLength'
-        | 'isPlaying'
-        | 'play'
-        | 'pause'
-        | 'stop'
-        | 'goTo'
-        | 'enableSound'
-        | 'disableSound'
-        | 'hasSound'
-        | 'setUsername'
-        | 'setSpringBonesParams'
-      params: any[]
-    }
+      [K in keyof IPreviewController]: {
+        id: string
+        namespace: K
+        method: keyof IPreviewController[K]
+        params: any[]
+      }
+    }[keyof IPreviewController]
   : T extends PreviewMessageType.CONTROLLER_RESPONSE
   ?
       | {
