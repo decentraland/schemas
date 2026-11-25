@@ -56,3 +56,37 @@ describe('Subscription details tests', () => {
     expect(SubscriptionDetails.validate.errors).toEqual(errors)
   })
 })
+
+describe('when validating subscription details that include the first wear and land transfer notification types', () => {
+  let details: SubscriptionDetails
+
+  beforeEach(() => {
+    details = {
+      ...subscriptionDetails,
+      message_type: {
+        ...subscriptionDetails.message_type,
+        [NotificationType.FRIEND_FIRST_WEAR]: { email: false, in_app: true },
+        [NotificationType.LAND_TRANSFER_RECEIVED]: { email: false, in_app: true }
+      }
+    }
+  })
+
+  it('should accept them as known message types', () => {
+    expect(SubscriptionDetails.validate(details)).toEqual(true)
+  })
+})
+
+describe('when validating subscription details that include an unknown notification type', () => {
+  let details: unknown
+
+  beforeEach(() => {
+    details = {
+      ...subscriptionDetails,
+      message_type: { ...subscriptionDetails.message_type, unknown_type: { email: false, in_app: true } }
+    }
+  })
+
+  it('should reject the unknown message type', () => {
+    expect(SubscriptionDetails.validate(details)).toEqual(false)
+  })
+})

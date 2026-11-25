@@ -3616,6 +3616,8 @@ export enum NotificationType {
     // (undocumented)
     EVENTS_STARTS_SOON = "events_starts_soon",
     // (undocumented)
+    FRIEND_FIRST_WEAR = "friend_first_wear",
+    // (undocumented)
     GOVERNANCE_ANNOUNCEMENT = "governance_announcement",
     // (undocumented)
     GOVERNANCE_AUTHORED_PROPOSAL_FINISHED = "governance_authored_proposal_finished",
@@ -3649,6 +3651,8 @@ export enum NotificationType {
     LAND_RENTAL_ENDED = "rental_ended",
     // (undocumented)
     LAND_RENTED = "rental_started",
+    // (undocumented)
+    LAND_TRANSFER_RECEIVED = "land_transfer_received",
     // (undocumented)
     REFERRAL_INVITED_USERS_ACCEPTED = "referral_invited_users_accepted",
     // (undocumented)
